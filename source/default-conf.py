@@ -70,7 +70,7 @@ extlinks = {
     'influxdb-docs'   : ('https://docs.influxdata.com/influxdb/v2.4/%s', None),
     'eks-docs'        : ('https://docs.aws.amazon.com/eks/latest/userguide/%s', None),
     'minio-web'       : ('https://min.io/%s?ref=docs', None),
-    'minio-docs'      : ('https://docs.min.io/community/minio-object-store/%s?ref=docs-internal', None),
+    'minio-docs'      : ('https://getbuckit.github.io/docs/%s', None),
     'minio-blog'      : ('https://blog.min.io/%s?ref=docs', None),
     'gke-docs'        : ('https://cloud.google.com/kubernetes-engine/docs/%s', None),
     'gcp-docs'        : ('https://cloud.google.com/compute/docs/%s', None),
@@ -145,7 +145,7 @@ autoyaml_level = 5
 #
 html_theme = 'alabaster'
 
-html_favicon = '_static/favicon.png'
+html_favicon = '_static/favicon.svg'
 
 html_sidebars = {
     '**' : [
@@ -180,11 +180,11 @@ html_baseurl = 'https://buckit.github.io/docs/'
 # -- Project information -----------------------------------------------------
 
 
-project = 'Documentation for MinIO Object Storage' 
-copyright = '2020-Present, MinIO, Inc. '
-author = 'MinIO Documentation Team'
-html_title = 'MinIO Object Storage (AGPLv3)'
-html_short_title = 'MinIO Object Storage'
+project = 'Documentation for Buckit Object Storage'
+copyright = '2020-Present, Buckit, Inc. '
+author = 'Buckit Documentation Team'
+html_title = 'Buckit Object Storage (AGPLv3)'
+html_short_title = 'Buckit Object Storage'
 
 html_permalinks_icon = ''
 

@@ -37,8 +37,4 @@ body {
     overflow-x: hidden;
     font-variant-ligatures: none;
 
-    @include breakpoint-min(breakpoints(xl)) {
-        background: url(../img/bg.png) no-repeat top 5rem right;
-        background-size: 120px;
-    }
 }

@@ -308,11 +308,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
  
     for ( i = 0; i < list.length; i++) {
       const page_title = list[i].childNodes[0].innerHTML;
-      if (page_title === "Install and Deploy MinIO" || page_title === "Deploy the MinIO Operator") {
-        // First persona is not listed in the design, so commenting it for now. 
+      if (page_title === "Install and Deploy Buckit" || page_title === "Deploy the Buckit Operator") {
+        // First persona is not listed in the design, so commenting it for now.
         //list[i].insertAdjacentElement('beforebegin',operationPersona);
       }
-      else if (page_title === "MinIO Console") {
+      else if (page_title === "Buckit Console") {
         list[i].insertAdjacentElement('beforebegin',administrationPersona);
       }
       else if (page_title === "Software Development Kits (SDK)") {

@@ -8,11 +8,11 @@
 
 :root {
   --table-border-color: #e6e6e6;
-  --minio-red: rgb(199, 46, 73);
-  --minio-midnight: #012b35;
-  --minio-nautical: #00303f;
-  --minio-meridian: #132742;
-  --minio-glacier: #edf7f7;
+  --minio-red: #D97706;
+  --minio-midnight: #0F172A;
+  --minio-nautical: #1E1B4B;
+  --minio-meridian: #1E293B;
+  --minio-glacier: #FFFBEB;
 
 }
 
