@@ -346,4 +346,23 @@ nav.navigation {
    z-index: 1;
 }
 
+/* Hide search (not functional on static GitHub Pages) */
+#search,
+.search-toggle,
+.search-toggle--keyboard {
+   display: none !important;
+}
+
+/* Hide Documentation heading to reduce gap */
+.header__title {
+   display: none !important;
+}
+
+/* Logo: override default width (6.25rem) which clips the Buckit logo */
+.header__logo > svg {
+   color: var(--logo-fill-color, #D97706);
+   width: auto !important;
+   height: 36px;
+}
+
 /* Admonition CSS TODO*/

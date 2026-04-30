@@ -40,7 +40,7 @@ MinIO automatically determines the default :ref:`erasure coding <minio-erasure-c
 You can configure the per-object :term:`parity` setting when you set up the cluster *or* let MinIO select the default (``EC:4`` for production-grade clusters).
 
 Parity controls the relationship between object availability and storage on disk. 
-Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
+Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
 
 While you can change erasure parity settings at any time, objects written with a given parity do **not** automatically update to the new parity settings.
 

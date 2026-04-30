@@ -1,0 +1,27 @@
+/* Buckit overrides */
+
+/* Logo: override default width and prevent clipping */
+.header__logo {
+   overflow: visible !important;
+}
+.header__logo > svg {
+   color: var(--logo-fill-color, #D97706);
+   width: auto !important;
+   height: 44px;
+   overflow: visible !important;
+}
+.header, .header__inner {
+   overflow: visible !important;
+}
+
+/* Hide search (not functional on static GitHub Pages) */
+#search,
+.search-toggle,
+.search-toggle--keyboard {
+   display: none !important;
+}
+
+/* Hide Documentation heading to reduce gap */
+.header__title {
+   display: none !important;
+}

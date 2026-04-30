@@ -91,7 +91,7 @@ Deployment Must Have Sufficient Storage
 The decommissioning process migrates objects from the target pool to other pools in the deployment. 
 The total available storage on the deployment *must* exceed the total storage of the decommissioned pool.
 
-Use the `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ to determine the usable storage capacity.
+Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ to determine the usable storage capacity.
 Then reduce that by the size of the objects already on the deployment.
 
 For example, consider a deployment with the following distribution of used and free storage:

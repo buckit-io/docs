@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erasure Code Calculator - Buckit Object Storage</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F172A;
+    --bg-card: #1E293B;
+    --bg-input: #0F172A;
+    --accent: #F59E0B;
+    --accent-hover: #D97706;
+    --text: #E2E8F0;
+    --text-muted: #94A3B8;
+    --text-dim: #64748B;
+    --border: #334155;
+    --success: #4CCB92;
+    --danger: #EF4444;
+    --font: 'Montserrat', 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+
+  .page-header .container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .page-header svg { height: 44px; width: auto; overflow: visible; }
+  .page-header, .page-header .container { overflow: visible; }
+
+  .page-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 48px 0 32px;
+  }
+
+  .hero h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .hero h2 span { color: var(--accent); }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .calculator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-bottom: 64px;
+  }
+
+  @media (max-width: 768px) {
+    .calculator { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .form-group label .tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid var(--text-dim);
+    font-size: 10px;
+    color: var(--text-dim);
+    cursor: help;
+    position: relative;
+  }
+
+  .tooltip-icon:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: normal;
+    width: 260px;
+    z-index: 10;
+    line-height: 1.4;
+  }
+
+  input[type="number"], select {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="number"]:focus, select:focus {
+    border-color: var(--accent);
+  }
+
+  select { cursor: pointer; }
+
+  .input-with-unit {
+    display: flex;
+    gap: 8px;
+  }
+
+  .input-with-unit input { flex: 1; }
+  .input-with-unit select { width: 90px; flex-shrink: 0; }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 8px;
+  }
+
+  .toggle-row {
+    cursor: pointer;
+  }
+
+  .toggle-row span:last-child {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .toggle {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .toggle input { opacity: 0; width: 0; height: 0; }
+
+  .toggle .slider {
+    position: absolute;
+    inset: 0;
+    background: var(--border);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .toggle .slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+
+  .toggle input:checked + .slider { background: var(--accent); }
+  .toggle input:checked + .slider::before { transform: translateX(18px); }
+
+  /* Results */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .result-item {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .result-item.highlight {
+    border-color: var(--accent);
+    background: rgba(245, 158, 11, 0.06);
+    grid-column: 1 / -1;
+  }
+
+  .result-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .result-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .result-value.accent { color: var(--accent); }
+
+  .result-value .unit {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+
+  .result-value.small {
+    font-size: 18px;
+  }
+
+  .tolerance-section {
+    margin-top: 20px;
+  }
+
+  .tolerance-section h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .tolerance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .tolerance-item {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .tolerance-item .tol-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--success);
+  }
+
+  .tolerance-item .tol-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .tolerance-item .tol-detail {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .command-section {
+    margin-top: 20px;
+  }
+
+  .command-section h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .command-box {
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Geist Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: var(--success);
+    word-break: break-all;
+    line-height: 1.5;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .command-box:hover::after {
+    content: 'Click to copy';
+    position: absolute;
+    top: -28px;
+    right: 8px;
+    background: #000;
+    color: #fff;
+    font-family: var(--font);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .error-msg {
+    color: var(--danger);
+    font-size: 13px;
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+    display: none;
+  }
+
+  .info-section {
+    margin-top: 32px;
+    grid-column: 1 / -1;
+  }
+
+  .info-section .card {
+    background: rgba(245, 158, 11, 0.04);
+    border-color: rgba(245, 158, 11, 0.15);
+  }
+
+  .info-section h3 { margin-bottom: 16px; }
+
+  .info-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-section code {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  .ec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .ec-table th, .ec-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ec-table th {
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+  }
+
+  .ec-table td { color: var(--text-muted); }
+  .ec-table tr.active td { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="container">
+    <svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50, 60) scale(0.22) translate(-512, -420) rotate(-8, 512, 420)">
+        <path fill="#FFFFFF" d="M698.416138,501.385345 C688.411438,513.680542 676.680115,523.467224 663.491333,531.479309 C659.147705,534.117981 659.576294,538.194885 659.493774,542.029602 C659.216919,554.889282 654.619812,566.145325 646.798706,576.041748 C634.337769,591.809021 618.099548,602.777222 600.046692,611.110718 C573.469788,623.379211 545.360840,629.592834 516.303955,632.475647 C482.980988,635.781799 450.146851,633.330872 417.764679,625.271118 C391.647980,618.770630 367.195709,608.454651 346.489716,590.684326 C332.196106,578.417236 321.479523,563.898926 319.105286,544.564941 C318.356201,538.465027 318.138031,532.295532 317.789154,526.151489 C316.374268,501.234650 315.050629,476.312561 313.602966,451.397644 C311.991089,423.656647 310.355835,395.916534 308.593018,368.184814 C306.767151,339.461517 304.836609,310.744446 302.837128,282.032654 C301.385437,261.187286 311.829407,246.797501 328.058319,235.783768 C349.777039,221.044403 374.329559,213.187927 399.694305,207.749283 C431.544250,200.920059 463.832672,197.875626 496.386047,198.776398 C542.219727,200.044678 587.379578,205.500793 629.861023,224.241913 C645.352051,231.075912 659.812927,239.728088 669.463440,254.420456 C677.658752,266.897339 679.132690,279.761414 671.153564,292.917999 C669.607544,295.467285 669.865723,296.895538 671.776855,299.328796 C682.303284,312.731201 695.196411,324.183563 703.321106,339.599243 C713.787109,359.457123 720.434021,380.185638 722.521423,402.613434 C724.449890,423.332581 721.076782,443.027985 713.812439,462.265656 C712.723572,465.149139 712.277893,467.841309 713.014282,470.976868 C714.076538,475.500061 713.008484,479.885986 710.669861,483.946198 C707.167603,490.026459 703.217529,495.786316 698.416138,501.385345 M566.396912,605.819519 C580.250122,601.881226 593.411438,596.319702 605.792236,588.950134 C618.244324,581.538147 629.374634,572.662476 637.097839,560.125610 C638.809875,557.346558 640.595276,554.511780 640.322693,551.077637 C638.509705,549.855957 636.929565,550.607422 635.331909,550.971863 C626.735718,552.933167 618.179504,555.207153 609.362610,555.887756 C599.918701,556.616821 590.282104,557.938904 581.638123,552.450195 C578.177246,550.252686 574.510437,548.957703 570.532959,548.282593 C543.094910,543.625610 518.235657,533.162781 496.227325,515.913269 C464.427948,490.989716 444.105286,458.910034 435.472900,419.483643 C434.185944,413.605865 432.689850,408.067627 429.637756,402.717133 C424.281433,393.327301 426.129913,381.002747 433.187012,372.831604 C440.305450,364.589355 451.932068,361.335571 462.279022,364.690155 C476.818665,369.404053 484.489410,384.097321 479.912384,398.975494 C478.612488,403.200958 477.618439,407.242004 478.796753,411.643677 C492.009552,461.001862 523.299988,491.919861 572.985352,504.134613 C576.368591,504.966309 579.552856,504.929474 582.595032,503.014862 C587.844482,499.710999 593.680237,499.085754 599.763733,498.564270 C615.572021,497.209015 630.511414,492.979370 643.490173,483.267639 C645.687622,481.623352 646.694824,479.809937 646.778931,477.018555 C646.994446,469.866150 647.485291,462.720215 647.957275,455.577728 C649.515259,432.003815 651.113342,408.432587 652.696594,384.860352 C653.621887,371.083038 654.576294,357.307587 655.461426,343.527710 C655.880188,337.009247 656.167236,330.482300 656.554016,323.203156 C649.824890,326.137604 644.122559,328.812958 638.280945,331.138306 C615.721497,340.118652 592.266174,345.396118 568.214539,348.560150 C545.024109,351.610931 521.766296,352.413422 498.433136,352.295685 C496.583923,352.286346 494.792847,352.114532 493.073395,351.331757 C489.475372,349.693787 487.524078,346.924500 488.070435,343.008057 C488.584686,339.321838 490.488770,336.371552 494.524994,335.687805 C497.309906,335.216095 500.141876,334.885376 502.963135,334.786957 C521.947327,334.124817 540.802124,332.242126 559.452087,328.623169 C583.207764,324.013458 606.514404,317.942413 628.343628,307.091095 C637.532837,302.523102 645.995117,297.022644 653.027649,289.493835 C660.784058,281.190155 661.553101,273.965820 655.843628,264.107910 C653.115784,259.398071 649.168152,255.834656 644.953125,252.526871 C635.956360,245.466537 625.717346,240.889160 615.215393,236.446884 C583.409729,222.993179 549.833252,218.469650 515.888367,216.614807 C491.299896,215.271225 466.610077,215.646866 442.002777,218.189011 C416.061279,220.868973 390.618225,225.652939 366.236115,235.043472 C352.371216,240.383408 338.848480,246.603836 328.284912,257.570923 C322.827759,263.236542 318.645782,269.737122 319.517395,278.030121 C321.588654,297.736450 322.070251,317.536072 323.334991,337.288696 C324.121735,349.575195 324.761627,361.871033 325.532532,374.158630 C326.771942,393.915222 328.124390,413.664825 329.315308,433.424286 C330.126038,446.875519 330.672333,460.342651 331.462067,473.795319 C332.690186,494.714478 334.211731,515.618347 335.225067,536.547241 C335.647308,545.267090 337.795715,553.246826 342.239929,560.695190 C349.924957,573.575317 361.598450,582.091370 374.070984,589.667969 C403.459961,607.520813 436.142212,614.275452 469.788879,616.458862 C502.213318,618.563049 534.323547,615.481750 566.396912,605.819519 M690.662720,433.226196 C697.500793,401.826355 684.931152,362.367371 671.649048,348.122528 C669.126404,389.205505 666.619995,430.024414 664.077759,471.426666 C667.674072,470.107544 668.520142,467.776276 669.953308,466.017181 C672.887146,462.415955 674.924622,457.708923 679.193420,455.678558 C684.896973,452.965851 686.838135,448.133911 688.371521,442.780029 C689.195679,439.902405 689.844971,436.974670 690.662720,433.226196 M686.141296,472.608337 C685.457520,473.550873 684.763245,474.485992 684.091431,475.436981 C663.789429,504.176605 636.057983,519.765137 600.994934,522.335388 C596.920776,522.634094 592.534058,522.617859 591.720886,527.844360 C591.186829,531.277283 595.030273,533.355225 601.554260,532.761536 C618.588745,531.211304 635.031738,527.392883 650.315430,519.332092 C668.550964,509.714447 683.243225,496.297363 694.329102,478.912659 C696.342285,475.755463 696.903076,472.084320 694.213257,469.726135 C691.510864,467.356903 688.729431,469.826233 686.141296,472.608337 M468.779510,391.135925 C468.787567,390.137360 468.874023,389.132202 468.790771,388.141296 C468.292847,382.214935 465.010803,378.118866 459.678253,376.087280 C454.235413,374.013702 449.168762,375.382294 445.073212,379.634430 C441.094482,383.765350 439.320465,388.502960 441.361847,394.205688 C443.501526,400.183167 449.093079,403.896759 455.713318,403.691284 C462.030243,403.495209 466.552002,399.410309 468.779510,391.135925z" />
+        <path fill="#FFFFFF" d="M502.156433,318.387878 C465.284424,319.374573 429.197052,316.918335 393.711121,308.342987 C379.575989,304.927185 365.976959,300.090698 353.907501,291.590118 C337.422485,279.979645 336.573608,263.866913 351.981354,250.967453 C363.821198,241.055054 378.236847,236.760483 392.724548,232.881653 C417.243042,226.317215 442.328613,223.804184 467.634186,222.552673 C494.990662,221.199692 522.210571,222.432739 549.320679,225.805466 C570.820740,228.480270 591.948975,233.017746 611.957214,241.756424 C617.478333,244.167801 622.690430,247.149811 627.447327,250.803467 C641.625488,261.693329 641.647766,278.924896 627.472168,289.731506 C614.622986,299.526886 599.627502,304.563416 584.185669,308.286469 C557.401855,314.744232 530.166870,317.820160 502.156433,318.387878 M396.002441,291.416473 C420.300629,297.564758 444.988281,300.962830 470.030304,301.716095 C494.867096,302.463226 519.672485,302.023865 544.341064,298.710358 C564.166748,296.047363 583.859192,292.687073 602.447327,284.848694 C608.430237,282.325836 614.309875,279.500122 618.649963,274.381561 C621.559753,270.949829 621.168274,267.690247 617.940491,264.723022 C614.597900,261.650238 610.730164,259.318115 606.619629,257.480133 C590.248474,250.160034 573.004395,245.900681 555.325500,243.337128 C526.082886,239.096725 496.709137,237.727737 467.176147,239.183823 C443.019012,240.374847 419.082458,242.916412 395.680725,249.276764 C383.922943,252.472427 372.324677,256.132141 362.515289,263.798096 C360.197113,265.609741 357.888641,267.530487 358.640015,270.834442 C361.012787,271.954224 362.226044,268.306213 364.393951,270.057343 C362.316864,277.317017 362.437195,277.625946 370.044647,281.675049 C378.025116,285.922699 386.534027,288.797913 396.002441,291.416473z" />
+        <ellipse cx="502" cy="275" rx="120" ry="38" fill="#F59E0B" />
+      </g>
+      <text x="130" y="52" text-anchor="start" font-family="'Montserrat', 'IBM Plex Sans', 'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="10" dominant-baseline="central">
+        <tspan fill="#FFFFFF">BUCK</tspan><tspan fill="#F59E0B">IT</tspan>
+      </text>
+      <text x="132" y="115" text-anchor="start" font-family="'Montserrat', 'IBM Plex Sans', 'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="600" fill="rgba(255,255,255,0.5)" letter-spacing="3">Object Storage</text>
+    </svg>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h2>Erasure Code <span>Calculator</span></h2>
+    <p>Plan your Buckit deployment by configuring servers, drives, and erasure code parity to find the right balance between storage efficiency and data resilience.</p>
+  </div>
+
+  <div class="calculator">
+    <!-- Input Card -->
+    <div class="card">
+      <h3>Configuration</h3>
+
+      <label class="toggle-row" for="rackHA">
+        <div class="toggle">
+          <input type="checkbox" id="rackHA" onchange="onConfigChange()">
+          <span class="slider"></span>
+        </div>
+        <span>Multi-rack deployment with rack-level HA</span>
+      </label>
+
+      <div class="form-group" id="racksGroup" style="display:none;">
+        <label>Number of Racks
+          <span class="tooltip-icon" data-tip="Total number of racks in your deployment. For rack-level HA, data is distributed across racks.">?</span>
+        </label>
+        <input type="number" id="racks" value="1" min="1" max="100" onchange="onConfigChange()" oninput="onConfigChange()">
+      </div>
+
+      <div class="form-group">
+        <label id="serversLabel">Number of Servers
+          <span class="tooltip-icon" data-tip="Total number of servers (nodes) in your deployment. Each server should have identical drive configurations.">?</span>
+        </label>
+        <input type="number" id="servers" value="4" min="1" max="100" onchange="onConfigChange()" oninput="onConfigChange()">
+      </div>
+
+      <div class="form-group">
+        <label>Drives per Server
+          <span class="tooltip-icon" data-tip="Number of drives on each server dedicated to Buckit storage. All drives should be the same capacity.">?</span>
+        </label>
+        <input type="number" id="drives" value="4" min="1" max="100" onchange="onConfigChange()" oninput="onConfigChange()">
+      </div>
+
+      <div class="form-group">
+        <label>Drive Capacity
+          <span class="tooltip-icon" data-tip="The usable capacity of each individual drive.">?</span>
+        </label>
+        <div class="input-with-unit">
+          <input type="number" id="driveCapacity" value="1" min="1" step="1" onchange="onConfigChange()" oninput="onConfigChange()">
+          <select id="driveUnit" onchange="onConfigChange()">
+            <option value="1099511627776" selected>TiB</option>
+            <option value="1073741824">GiB</option>
+            <option value="1000000000000">TB</option>
+            <option value="1000000000">GB</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Erasure Stripe Size (K+M)
+          <span class="tooltip-icon" data-tip="Buckit splits each object into K data blocks and M parity blocks. The stripe size S = K + M. Valid sizes are 4 to 16.">?</span>
+        </label>
+        <select id="stripeSize" onchange="onStripeChange()"></select>
+      </div>
+
+      <div class="form-group">
+        <label>Erasure Code Parity (M)
+          <span class="tooltip-icon" data-tip="Higher parity (M) increases data resilience and availability at the cost of storage efficiency. Lower parity increases efficiency but reduces fault tolerance.">?</span>
+        </label>
+        <select id="parity" onchange="onParityChange()"></select>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card">
+      <h3>Results</h3>
+
+      <div class="results-grid">
+        <div class="result-item highlight">
+          <div class="result-label">Usable Capacity</div>
+          <div class="result-value accent" id="usableCapacity">--</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Raw Capacity</div>
+          <div class="result-value" id="rawCapacity">--</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Storage Efficiency</div>
+          <div class="result-value accent" id="storageEfficiency">--</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Total Servers</div>
+          <div class="result-value small" id="totalServers">--</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Total Drives</div>
+          <div class="result-value small" id="totalDrives">--</div>
+        </div>
+      </div>
+
+      <div class="tolerance-section">
+        <h4>Failure Tolerance</h4>
+        <div class="tolerance-grid">
+          <div class="tolerance-item" id="rackTolBox" style="display:none;">
+            <div class="tol-value" id="rackTolerance">0</div>
+            <div class="tol-label">Rack(s)</div>
+          </div>
+          <div class="tolerance-item">
+            <div class="tol-value" id="serverTolerance">0</div>
+            <div class="tol-label">Server(s)</div>
+            <div class="tol-detail" id="serverToleranceDetail"></div>
+          </div>
+          <div class="tolerance-item">
+            <div class="tol-value" id="driveTolerance">0</div>
+            <div class="tol-label">Drive(s)</div>
+            <div class="tol-detail" id="driveToleranceDetail"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="command-section">
+        <h4>Startup Command</h4>
+        <div class="command-box" id="commandLine" onclick="copyCommand()">
+          minio server /mnt/drive{1...4}
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="card">
+        <h3>How Erasure Coding Works</h3>
+        <p>
+          Buckit uses erasure coding to protect data against drive and server failures.
+          Each object is split into <code>K</code> data blocks and <code>M</code> parity blocks,
+          forming an erasure set of size <code>N = K + M</code> (the stripe size).
+        </p>
+        <p>
+          <strong>Storage Efficiency</strong> = <code>K / (K + M)</code> = <code>(N - M) / N</code>.
+          For example, with a stripe size of 16 and parity 4: efficiency = 12/16 = 75%.
+        </p>
+        <p>
+          <strong>Read Quorum</strong> requires <code>K</code> blocks (data shards).
+          <strong>Write Quorum</strong> requires <code>K + 1</code> blocks when <code>M = N/2</code>
+          to prevent split-brain scenarios, otherwise <code>K</code> blocks.
+        </p>
+        <p>
+          The system can tolerate up to <code>M</code> simultaneous drive failures
+          while maintaining full read and write capability.
+        </p>
+
+        <table class="ec-table" id="ecTable">
+          <thead>
+            <tr>
+              <th>Parity (M)</th>
+              <th>Data Blocks (K)</th>
+              <th>Efficiency</th>
+              <th>Drive Tolerance</th>
+            </tr>
+          </thead>
+          <tbody id="ecTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Supported erasure set sizes: 4..16
+const VALID_SET_SIZES = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+function getInputs() {
+  const rackHA = document.getElementById('rackHA').checked;
+  const racks = rackHA ? Math.max(1, parseInt(document.getElementById('racks').value) || 1) : 1;
+  const servers = Math.max(1, parseInt(document.getElementById('servers').value) || 1);
+  const drivesPerServer = Math.max(1, parseInt(document.getElementById('drives').value) || 1);
+  const driveCapacity = Math.max(1, parseFloat(document.getElementById('driveCapacity').value) || 1);
+  const driveUnit = parseInt(document.getElementById('driveUnit').value);
+
+  const totalServers = racks * servers;
+  const totalDrives = totalServers * drivesPerServer;
+  const rawBytes = totalDrives * driveCapacity * driveUnit;
+
+  return { rackHA, racks, servers, drivesPerServer, totalServers, totalDrives, driveCapacity, driveUnit, rawBytes };
+}
+
+function getValidStripeSizes(totalDrives) {
+  const sizes = [];
+  for (const s of VALID_SET_SIZES) {
+    if (totalDrives >= s && totalDrives % s === 0) {
+      sizes.push(s);
+    }
+  }
+  // If no valid set size divides evenly, find the largest valid set size <= totalDrives
+  if (sizes.length === 0) {
+    for (let i = VALID_SET_SIZES.length - 1; i >= 0; i--) {
+      if (totalDrives >= VALID_SET_SIZES[i]) {
+        sizes.push(VALID_SET_SIZES[i]);
+        break;
+      }
+    }
+  }
+  return sizes.sort((a, b) => b - a);
+}
+
+function getParityOptions(stripeSize) {
+  const maxParity = Math.floor(stripeSize / 2);
+  const options = [];
+  for (let m = maxParity; m >= 1; m--) {
+    options.push(m);
+  }
+  return options;
+}
+
+function formatBytes(bytes) {
+  if (bytes <= 0) return '0 B';
+  const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB'];
+  let i = 0;
+  let val = bytes;
+  while (val >= 1024 && i < units.length - 1) {
+    val /= 1024;
+    i++;
+  }
+  return val % 1 === 0
+    ? val.toFixed(0) + '<span class="unit">' + units[i] + '</span>'
+    : val.toFixed(1) + '<span class="unit">' + units[i] + '</span>';
+}
+
+function populateStripeSizes() {
+  const { totalDrives } = getInputs();
+  const select = document.getElementById('stripeSize');
+  const prev = select.value;
+  const sizes = getValidStripeSizes(totalDrives);
+
+  select.innerHTML = '';
+  sizes.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    select.appendChild(opt);
+  });
+
+  // Restore previous selection if still valid
+  if (sizes.includes(parseInt(prev))) {
+    select.value = prev;
+  }
+}
+
+function populateParityOptions() {
+  const stripeSize = parseInt(document.getElementById('stripeSize').value) || 4;
+  const select = document.getElementById('parity');
+  const prev = select.value;
+  const options = getParityOptions(stripeSize);
+
+  select.innerHTML = '';
+  options.forEach(m => {
+    const k = stripeSize - m;
+    const eff = Math.round((k / stripeSize) * 100);
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = `EC:${m}  (${eff}% efficiency)`;
+    select.appendChild(opt);
+  });
+
+  // Default to EC:4 or nearest, restore previous if valid
+  if (options.includes(parseInt(prev))) {
+    select.value = prev;
+  } else if (options.includes(4)) {
+    select.value = '4';
+  }
+}
+
+function computeCommand(rackHA, racks, servers, drivesPerServer) {
+  const totalServers = racks * servers;
+  let cmd = 'minio server';
+
+  if (totalServers === 1 && drivesPerServer === 1) {
+    cmd += ' /mnt/drive1';
+  } else if (totalServers === 1) {
+    cmd += ` /mnt/drive{1...${drivesPerServer}}`;
+  } else if (rackHA && racks > 1) {
+    const rackPart = racks > 1 ? `rack{1...${racks}}.` : '';
+    const nodePart = servers > 1 ? `node{1...${servers}}` : 'node1';
+    const drivePart = drivesPerServer > 1 ? `/mnt/drive{1...${drivesPerServer}}` : '/mnt/drive1';
+    cmd += ` https://${rackPart}${nodePart}.example.net${drivePart}`;
+  } else {
+    const nodePart = totalServers > 1 ? `node{1...${totalServers}}` : 'node1';
+    const drivePart = drivesPerServer > 1 ? `/mnt/drive{1...${drivesPerServer}}` : '/mnt/drive1';
+    cmd += ` https://${nodePart}.example.net${drivePart}`;
+  }
+
+  return cmd;
+}
+
+function calculate() {
+  const { rackHA, racks, servers, drivesPerServer, totalServers, totalDrives, rawBytes } = getInputs();
+  const stripeSize = parseInt(document.getElementById('stripeSize').value) || 4;
+  const parity = parseInt(document.getElementById('parity').value) || 2;
+  const errorEl = document.getElementById('errorMsg');
+
+  if (totalDrives < 4) {
+    errorEl.textContent = 'Minimum 4 drives required for erasure coding.';
+    errorEl.style.display = 'block';
+    return;
+  }
+  errorEl.style.display = 'none';
+
+  const K = stripeSize - parity;
+  const efficiency = K / stripeSize;
+  const usableBytes = Math.floor(rawBytes * efficiency);
+
+  // Number of erasure sets
+  const numSets = Math.floor(totalDrives / stripeSize);
+
+  // Drive tolerance per stripe = M (parity)
+  // Total drive tolerance = M * numSets (one can fail per set simultaneously)
+  const driveTolPerStripe = parity;
+  const driveTolTotal = parity * numSets;
+
+  // Server tolerance: each server contributes drivesPerServerPerSet drives to each erasure set.
+  // Per-stripe: how many servers feeding ONE set can fail = floor(parity / drivesPerServerPerSet),
+  //   but when drivesPerServerPerSet < 1, each set draws from stripeSize distinct servers,
+  //   so per-stripe tolerance = parity (each failed server removes only 1 drive from the set).
+  // Total: across all sets, how many distinct servers can fail system-wide.
+  let serverTolPerStripe = 0;
+  let serverTolTotal = 0;
+  if (totalServers > 1 && drivesPerServer > 0) {
+    const drivesPerServerPerSet = (drivesPerServer * stripeSize) / totalDrives;
+    if (drivesPerServerPerSet >= 1) {
+      // Each server puts multiple drives in each set
+      serverTolPerStripe = Math.floor(parity / drivesPerServerPerSet);
+      serverTolTotal = serverTolPerStripe;
+    } else {
+      // Each server contributes <1 drive per set (sets draw from many servers)
+      // Per stripe: losing 1 server removes 1 drive from affected sets → can lose up to parity servers per set
+      serverTolPerStripe = parity;
+      // Total: servers are spread across sets, so more can fail globally
+      serverTolTotal = Math.floor(parity / drivesPerServerPerSet);
+    }
+    serverTolPerStripe = Math.min(serverTolPerStripe, totalServers - 1);
+    serverTolTotal = Math.min(serverTolTotal, totalServers - 1);
+  }
+
+  // Rack tolerance: similar logic but per-rack
+  let rackTol = 0;
+  if (rackHA && racks > 1) {
+    const drivesPerRack = servers * drivesPerServer;
+    const drivesPerRackPerSet = (drivesPerRack * stripeSize) / totalDrives;
+    if (drivesPerRackPerSet > 0) {
+      rackTol = Math.floor(parity / drivesPerRackPerSet);
+    }
+    rackTol = Math.min(rackTol, racks - 1);
+  }
+
+  // Update UI
+  document.getElementById('usableCapacity').innerHTML = formatBytes(usableBytes);
+  document.getElementById('rawCapacity').innerHTML = formatBytes(rawBytes);
+  document.getElementById('storageEfficiency').innerHTML = Math.round(efficiency * 100) + '<span class="unit">%</span>';
+  document.getElementById('totalServers').textContent = totalServers;
+  document.getElementById('totalDrives').textContent = totalDrives;
+  document.getElementById('driveTolerance').textContent = driveTolTotal;
+  document.getElementById('driveToleranceDetail').textContent = numSets > 1
+    ? `${driveTolPerStripe} per stripe × ${numSets} stripes`
+    : `${driveTolPerStripe} per stripe`;
+  document.getElementById('serverTolerance').textContent = serverTolTotal;
+  document.getElementById('serverToleranceDetail').textContent =
+    (serverTolPerStripe !== serverTolTotal && numSets > 1)
+      ? `${serverTolPerStripe} per stripe × ${Math.ceil(serverTolTotal / serverTolPerStripe)} sets`
+      : (numSets > 1 ? `${serverTolPerStripe} per stripe` : '');
+  document.getElementById('rackTolerance').textContent = rackTol;
+
+  // Command line
+  document.getElementById('commandLine').textContent = computeCommand(rackHA, racks, servers, drivesPerServer);
+
+  // Update EC table
+  updateECTable(stripeSize, parity);
+}
+
+function updateECTable(stripeSize, activeParity) {
+  const tbody = document.getElementById('ecTableBody');
+  tbody.innerHTML = '';
+  const parities = getParityOptions(stripeSize);
+
+  parities.forEach(m => {
+    const k = stripeSize - m;
+    const eff = Math.round((k / stripeSize) * 100);
+    const tr = document.createElement('tr');
+    if (m === activeParity) tr.className = 'active';
+    tr.innerHTML = `<td>EC:${m}</td><td>${k}</td><td>${eff}%</td><td>${m} drive(s)</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function onConfigChange() {
+  const rackHA = document.getElementById('rackHA').checked;
+  document.getElementById('racksGroup').style.display = rackHA ? 'block' : 'none';
+  document.getElementById('serversLabel').textContent = rackHA ? 'Servers per Rack' : 'Number of Servers';
+
+  const rackTolBox = document.getElementById('rackTolBox');
+  rackTolBox.style.display = rackHA ? 'block' : 'none';
+
+  // Update tolerance grid columns
+  const tolGrid = document.querySelector('.tolerance-grid');
+  tolGrid.style.gridTemplateColumns = rackHA ? '1fr 1fr 1fr' : '1fr 1fr';
+
+  populateStripeSizes();
+  populateParityOptions();
+  calculate();
+}
+
+function onStripeChange() {
+  populateParityOptions();
+  calculate();
+}
+
+function onParityChange() {
+  calculate();
+}
+
+function copyCommand() {
+  const text = document.getElementById('commandLine').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const el = document.getElementById('commandLine');
+    const orig = el.style.borderColor;
+    el.style.borderColor = 'var(--success)';
+    setTimeout(() => { el.style.borderColor = orig; }, 800);
+  });
+}
+
+// Initialize
+onConfigChange();
+</script>
+</body>
+</html>

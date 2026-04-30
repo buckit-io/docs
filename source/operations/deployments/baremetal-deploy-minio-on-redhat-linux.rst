@@ -44,7 +44,7 @@ MinIO automatically determines the default :ref:`erasure coding <minio-erasure-c
 You can configure the per-object :term:`parity` setting when you set up the cluster *or* let MinIO select the default (``EC:4`` for production-grade clusters).
 
 Parity controls the relationship between object availability and storage on disk. 
-Use the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
+Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
 
 While you can change erasure parity settings at any time, objects written with a given parity do **not** automatically update to the new parity settings.
 
@@ -57,7 +57,7 @@ Performing :ref:`server pool expansion <expand-minio-distributed>` more frequent
 For example, consider an application suite expected to produce at least 100 TiB of data per year and a 3 year target before expansion.
 By ensuring the deployment has ~500TiB of usable storage up front, the cluster can safely meet the 70% threshold with additional buffer for growth in data storage output per year.
 
-Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in planning capacity around specific erasure code settings.
+Consider using the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in planning capacity around specific erasure code settings.
 
 Procedure
 ---------

@@ -117,8 +117,8 @@ deployment. This requirement ensures the new server pool can satisfy the
 expected :abbr:`SLA (Service Level Agreement)` of the deployment.
 
 You can use the 
-`MinIO Erasure Code Calculator 
-<https://min.io/product/erasure-code-calculator?ref=docs>`__ to check the
+`Erasure Code Calculator
+</docs/_static/ec-calculator.html>`__ to check the
 :guilabel:`Erasure Code Stripe Size (K+M)` of your new pool. If the highest
 listed value is at least ``2 x EC:N``, the pool supports the deployment's
 erasure parity settings.
@@ -195,7 +195,7 @@ The deployment has ~500TiB of usable storage in the initial server pool, such th
 The new server pool should **ideally** meet at minimum 500TiB of additional storage to allow for a similar lifespan before further expansion.
 
 Since MinIO :ref:`erasure coding <minio-erasure-coding>` requires some storage for parity, the total **raw** storage must exceed the planned **usable** capacity. 
-Consider using the MinIO `Erasure Code Calculator <https://min.io/product/erasure-code-calculator>`__ for guidance in planning capacity around specific erasure code settings.
+Consider using the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in planning capacity around specific erasure code settings.
 
 Recommended Operating Systems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
