@@ -35,9 +35,7 @@ jobs:
           node-version: 20
 
       - name: Install npm dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          working-directory: ./
+        run: npm install
 
       - name: Build docs
         run: |
