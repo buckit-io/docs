@@ -1,27 +1,100 @@
 /* Buckit overrides */
 
-/* Logo: override default width and prevent clipping */
+/* ── Header: always dark, matching buckit.io ───────────────────────────── */
+.header {
+   background: #1e2038 !important;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+   overflow: visible !important;
+}
+.header__inner {
+   overflow: visible !important;
+   min-height: 4rem !important;   /* 64px = h-16, matching the main website */
+   max-height: 4rem !important;
+}
+
+/* ── Logo ──────────────────────────────────────────────────────────────── */
 .header__logo {
    overflow: visible !important;
 }
 .header__logo > svg {
-   color: var(--logo-fill-color, #D97706);
+   color: #ffffff;
    width: auto !important;
-   height: 44px;
-   overflow: visible !important;
-}
-.header, .header__inner {
+   height: 36px !important;
    overflow: visible !important;
 }
 
-/* Hide search (not functional on static GitHub Pages) */
+/* ── Override compiled absolute-position on header__actions ───────────── */
+/* The compiled CSS has position:absolute;bottom:2.5rem for the old tall
+   header layout. Reset to flex-child so it flows normally in the header. */
+:root:not(.read-mode) .header__actions {
+   position: static !important;
+   bottom: auto !important;
+   right: auto !important;
+   margin-left: auto;
+}
+
+/* ── Header actions (GitHub, dark-mode toggle) ─────────────────────────── */
+.header__actions {
+   gap: 0.5rem !important;
+}
+.header__actions a,
+.header__actions button {
+   font-size: 0.875rem;
+   color: #a1a1aa !important;
+   text-decoration: none;
+   display: inline-flex;
+   align-items: center;
+   gap: 0.375rem;
+   padding: 0.375rem 0.625rem;
+   border-radius: 0.375rem;
+   transition: color 0.15s, background 0.15s;
+   background: transparent !important;
+   border-color: transparent !important;
+}
+.header__actions a:hover,
+.header__actions button:hover {
+   color: #ffffff !important;
+   background: rgba(255, 255, 255, 0.06) !important;
+}
+/* ── Dark-mode toggle ─────────────────────────────────────────────────── */
+/* The button has [moon SVG][sun SVG][text node], so compiled :last-child
+   targets the text node, not the sun SVG — both icons show simultaneously.
+   Fix by targeting nth-child and collapsing the label text. */
+#dark-mode-toggle {
+   font-size: 0 !important;
+   width: 2.25rem !important;
+   height: 2.25rem !important;
+   padding: 0 !important;
+   display: grid !important;
+   place-items: center !important;
+   position: relative !important;
+}
+#dark-mode-toggle svg {
+   position: absolute !important;
+   width: 1.1rem !important;
+   height: 1.1rem !important;
+   fill: currentColor !important;
+   opacity: 1;
+   transition: opacity 0.2s;
+}
+/* sun (2nd SVG) hidden by default; shown when dark mode is active */
+#dark-mode-toggle svg:nth-child(2) { opacity: 0; }
+#dark-mode-toggle.active svg:nth-child(1) { opacity: 0; }
+#dark-mode-toggle.active svg:nth-child(2) { opacity: 1; }
+
+/* ── Hide search (not functional on static GitHub Pages) ─────────────── */
 #search,
 .search-toggle,
 .search-toggle--keyboard {
    display: none !important;
 }
 
-/* Hide Documentation heading to reduce gap */
+/* ── Hide Documentation heading to reduce gap ────────────────────────── */
 .header__title {
    display: none !important;
+}
+
+/* ── Sidebar background matches dark page in dark-mode ───────────────── */
+:root.dark-mode div.sidebar {
+   background-color: var(--sidebar-bg);
 }

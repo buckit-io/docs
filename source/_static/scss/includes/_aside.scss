@@ -8,7 +8,7 @@ div.sidebar {
     width: $sidebar-width;
     position: sticky;
     top: 0;
-    background-color: $white;
+    background-color: var(--sidebar-bg);
     transition: opacity 400ms, transform 300ms;
     padding-top: var(--content-padding);
     overflow-y: auto;

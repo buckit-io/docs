@@ -5,18 +5,18 @@ $theme-properties: (
     --body-bg: $white $dark-0,
 
     // Text
-    --link-color: #006DA0 #85B3EE,
-    --link-hover-color: #015378 #99c0f4,
+    --link-color: $accent-strong $accent,
+    --link-hover-color: #047857 $accent-hover,
     --text-color: $black $text-dark-color,
-    --text-muted-color: #5c5c5c #697995,
-    --headings-color: $black #E3EEEF,
+    --text-muted-color: #5c5c5c #a1a1aa,
+    --headings-color: $black $headings-dark-color,
 
     // Theme
     --theme-light-bg: $light-100 $dark-200,
     --theme-light-hover-bg: $light-200 $dark-300,
 
     // Header
-    --header-bg: $header-light-bg $dark-0,
+    --header-bg: $header-light-bg $dark-100,
     --logo-fill-color: $theme-red $white,
     --header-actions-icon-bg: $white $dark-0,
     --header-actions-icon-border-color: transparent $dark-300,
@@ -36,9 +36,9 @@ $theme-properties: (
     --content-nav-active-border-color: $black $dark-500,
     --content-nav-sub-bg: $white $dark-500,
     --content-nav-sub-color: $black $dark-0,
-    --content-nav-sub-active-border-color: $theme-red $dark-0,
-    --content-nav-sub-hover-color: $theme-red $dark-300,
-    --content-nav-sub-active-color: $theme-red $dark-0,
+    --content-nav-sub-active-border-color: $accent-strong $accent,
+    --content-nav-sub-hover-color: $accent-strong $accent-hover,
+    --content-nav-sub-active-color: $accent-strong $accent,
     --content-nav-icon-filter: none (invert(100%) sepia(12%) saturate(777%) hue-rotate(181deg) brightness(100%) contrast(85%)),
     --content-nav-arrow-color: $black #697995,
 
@@ -50,8 +50,8 @@ $theme-properties: (
     --sidebar-scrollbar-hover-bg: darken($light-100, 12%) lighten($dark-100, 7%),
 
     // Docs nav
-    --docs-nav-active-color: $theme-red $headings-dark-color,
-    --docs-nav-active-code-bg: #fef3c7 $dark-0,
+    --docs-nav-active-color: $accent-strong $accent,
+    --docs-nav-active-code-bg: $accent-light $accent-light,
     --docs-nav-group-border-color: $light-300 $dark-300,
 
     // Scrollbar
@@ -72,7 +72,7 @@ $theme-properties: (
     --pre-scrollbar-hover-bg: darken($light-300, 12%) darken($dark-500, 14%),
 
     // Tab
-    --tab-active-border-color: $theme-red $dark-500,
+    --tab-active-border-color: $accent-strong $accent,
     --tab-border-color: $light-300 $dark-200,
 
     // TOC
@@ -88,8 +88,8 @@ $theme-properties: (
     --nav-toggle-hover-border-color: $white $dark-500,
     --nav-top-border-color: rgba(255, 255, 255, 0.2) $dark-200,
     --nav-dropdown-bg: $white $dark-100,
-    --nav-download-border-color: $theme-red $dark-500,
-    --nav-download-hover-bg: $theme-red $dark-200,
+    --nav-download-border-color: $accent-strong $accent,
+    --nav-download-hover-bg: $accent-light $accent-light,
 
     // Icon
     --icon-sidebar-toggle-hover-bg: rgba($white, 0.1) $dark-200,

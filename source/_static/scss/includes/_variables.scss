@@ -1,7 +1,7 @@
 // Colors
 $white: #ffffff;
 $black: #000000;
-$theme-red: #D97706;
+$theme-red: #F59E0B; // brand amber (variable name kept for back-compat)
 
 // Gray shades light
 $light-100: #f3f4f6;
@@ -10,13 +10,20 @@ $light-300: #d1d5db;
 $light-400: #9ca3af;
 $light-500: #6b7280;
 
-// Gray shades dark
-$dark-0: #19202A;
-$dark-100: #212936;
-$dark-200: #273140;
-$dark-300: #2E394A;
-$dark-400: #59667A;
-$dark-500: #8A93A4;
+// Gray shades dark — Buckit navy palette (matches buckit.io marketing site)
+$dark-0: #17182d;   // surface
+$dark-100: #1e2038; // elevated
+$dark-200: #252742; // muted
+$dark-300: #3f4159; // border-strong
+$dark-400: #59667A; // mid border / icon stroke
+$dark-500: #8A93A4; // muted slate
+
+// Brand accents (from xdevbase-nx design tokens)
+$accent: #34d399;        // emerald — primary accent
+$accent-hover: #6ee7b7;  // emerald hover
+$accent-strong: #059669; // accessible emerald for light backgrounds
+$accent-light: rgba(52, 211, 153, 0.12);
+$brand-amber: #F59E0B;   // amber — brand highlight
 
 // Theme color palette
 $tertiary: #8C8C8C;
@@ -44,8 +51,8 @@ $body-font-size: 1.125rem;
 $body-line-height: 1.6;
 
 // Text
-$text-dark-color: #A2ADC0;
-$headings-dark-color: #E3EEEF;
+$text-dark-color: #c5cad6;     // body text on navy
+$headings-dark-color: #f4f4f5; // headings on navy
 
 // Font size
 $font-size-xs: 12px;

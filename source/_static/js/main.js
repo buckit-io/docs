@@ -121,20 +121,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // --------------------------------------------------
   // Dark mode
   // --------------------------------------------------
-  /* (function () {
+  (function () {
     const darkModeEl = document.getElementById("dark-mode-toggle");
+    if (!darkModeEl) return;
 
-    darkModeEl.addEventListener("click", (event) => {
-      document.documentElement.classList.toggle("dark-mode");
+    // Reflect the current theme (set pre-paint in head.html) on the toggle.
+    if (document.documentElement.classList.contains("dark-mode")) {
+      darkModeEl.classList.add("active");
+    }
 
-      if (document.documentElement.classList.contains("dark-mode")) {
-        localStorage.setItem("dark-mode", "true");
-      } else {
-        localStorage.setItem("dark-mode", "false");
-      }
+    darkModeEl.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark-mode");
+      darkModeEl.classList.toggle("active", isDark);
+      localStorage.setItem("dark-mode", isDark ? "true" : "false");
     });
   })();
- */
 
   // --------------------------------------------------
   // TOC, External Links
