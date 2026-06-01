@@ -141,8 +141,19 @@ Documentation
 
 The :guilabel:`Documentation` tab opens this documentation site in a separate browser window or tab.
 
+Available Tasks
+---------------
+
+Once logged in to the MinIO Console, users can perform many kinds of tasks.
+
+- :ref:`Manage objects <minio-console-managing-objects>` by browsing existing objects, uploading objects, or modifying bucket settings.
+- :ref:`Review or modify identity and security <minio-console-security-access>` with access keys, policies, and Identity Provider settings.
+- :ref:`Monitor the health and activities <minio-console-managing-deployment>` with metrics and notifications.
+
 .. toctree::
    :titlesonly:
    :hidden:
 
+   /administration/console/managing-deployment
    /administration/console/managing-objects
+   /administration/console/security-and-access
