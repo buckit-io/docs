@@ -10,7 +10,7 @@ Security Checklist
    :local:
    :depth: 2
 
-Use the following checklist when planning the security configuration for a production, distributed MinIO deployment.
+Use the following checklist when planning the security configuration for a production, distributed Buckit deployment.
 
 Required Steps
 --------------
@@ -20,59 +20,16 @@ Required Steps
    :width: 100%
 
    * - :octicon:`circle`
-     - Define group policies either on MinIO or the selected 3rd party Identity Provider (LDAP/Active Directory or OpenID)
+     - Define group policies either on Buckit or the selected 3rd party Identity Provider (LDAP/Active Directory or OpenID)
 
    * - :octicon:`circle`
-     - Define individual access policies on MinIO or the selected 3rd party Identity Provider
+     - Define individual access policies on Buckit or the selected 3rd party Identity Provider
 
    * - :octicon:`circle`
-     - (For Kubernetes deployments only) Configure the tenant(s) to use the selected 3rd party Identity Provider
+     - Grant firewall access for TCP traffic to the Buckit Server S3 API Listen Port (Default: ``9000``).
 
    * - :octicon:`circle`
-     - Grant firewall access for TCP traffic to the MinIO Server S3 API Listen Port (Default: ``9000``).
-
-   * - :octicon:`circle`
-     - Grant firewall access for TCP traffic to the :ref:`MinIO Server Console Listen Port <minio-console-port-assignment>` (Recommended Default: ``9090``).
-
-
-:ref:`Encryption-at-Rest <minio-sse>`
--------------------------------------
-
-MinIO supports the following external KMS providers through Key Encryption Service (KES):
-
-- :ref:`HashiCorp Vault Root KMS <minio-sse-vault>`
-- :ref:`AWS Root KMS <minio-sse-aws>`
-- :ref:`Google Cloud Platform Secret Manager Root KMS <minio-sse-gcp>`
-- :ref:`Azure Key Vault Root KMS <minio-sse-azure>`
-
-.. list-table::
-   :widths: auto
-   :width: 100%
-
-   * - :octicon:`circle`
-     - Download and install the MinIO Key Encryption Service (KES)
-
-   * - :octicon:`circle`
-     - Enable TLS
-
-   * - :octicon:`circle`
-     - Generate private and public keys for KES
-
-   * - :octicon:`circle`
-     - Generate private and public keys for MinIO
-
-   * - :octicon:`circle`
-     - Create a KES configuration file and start the service
-
-   * - :octicon:`circle`
-     - Generate an external key for the key management service (KMS)
-
-   * - :octicon:`circle`
-     - Connect MinIO to the KES
-
-   * - :octicon:`circle`
-     - Enable server side encryption
-
+     - Grant firewall access for TCP traffic to the :ref:`Buckit Server Console Listen Port <minio-console-port-assignment>` (Recommended Default: ``9090``).
 
 :ref:`Encryption-in-Transit ("In flight") <minio-tls>`
 ------------------------------------------------------
@@ -85,16 +42,13 @@ MinIO supports the following external KMS providers through Key Encryption Servi
      - :ref:`Enable TLS <minio-tls>`
 
    * - :octicon:`circle`
-     - Add separate certificates and keys for each internal and external domain that accesses MinIO
+     - Add separate certificates and keys for each internal and external domain that accesses Buckit
 
    * - :octicon:`circle`
      - Generate public and private TLS keys using a supported cipher for TLS 1.3 or TLS 1.2
 
    * - :octicon:`circle`
      - Configure trusted Certificate Authority (CA) store(s)
-
-   * - :octicon:`circle`
-     - Expose your Kubernetes service, such as with NGINX
 
    * - :octicon:`circle`
      - (Optional) Validate certificates, such as with https://www.sslchecker.com/certdecoder

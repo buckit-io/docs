@@ -95,7 +95,7 @@ Enable
 
       .. mc-conf:: notify_postgres
 
-      The top-level configuration key for defining an PostgreSQL service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an PostgreSQL service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an PostgreSQL service endpoint. 
       The following arguments are *required* for each target: 
@@ -134,7 +134,7 @@ Connection String
          :delimiter: " "
 
 Specify the `URI connection string <https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING>`__ of the PostgreSQL service endpoint. 
-MinIO supports ``key=value`` format for the PostgreSQL connection string. 
+Buckit supports ``key=value`` format for the PostgreSQL connection string. 
 For example:
 
 ``"host=https://postgresql.example.com port=5432 ..."``
@@ -163,7 +163,7 @@ Table
       .. mc-conf:: notify_postgres table
          :delimiter: " "
 
-Specify the name of the PostgreSQL table to which MinIO publishes event notifications.
+Specify the name of the PostgreSQL table to which Buckit publishes event notifications.
 
 Format
 ~~~~~~
@@ -184,15 +184,15 @@ Format
          :delimiter: " "
       
 Specify the format of event data written to the PostgreSQL service endpoint.
-MinIO supports the following values:
+Buckit supports the following values:
 
 ``namespace``
-   For each bucket event, MinIO creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
+   For each bucket event, Buckit creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
    Additional updates to that object modify the existing table entry for that object. 
    Similarly, deleting the object also deletes the corresponding table entry.
    
 ``access``
-   For each bucket event, MinIO creates a JSON document with the event details and appends it to the table with a PostgreSQL-generated random ID. 
+   For each bucket event, Buckit creates a JSON document with the event details and appends it to the table with a PostgreSQL-generated random ID. 
    Additional updates to an object result in new index entries,    and existing entries remain unmodified.
 
 Max Open Connections
@@ -235,9 +235,9 @@ Queue Directory
       .. mc-conf:: notify_postgres queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the PostgreSQL server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the PostgreSQL server/broker is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

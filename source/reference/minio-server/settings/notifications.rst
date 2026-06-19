@@ -11,7 +11,7 @@ Bucket Notifications Settings
    :local:
    :depth: 2
 
-This page covers settings that control behavior related to :ref:`MinIO bucket notifications <minio-bucket-notifications>`. 
+This page covers settings that control behavior related to :ref:`Buckit bucket notifications <minio-bucket-notifications>`. 
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -46,7 +46,7 @@ Supported Notification Targets
 ------------------------------
 
 Notifications require a target to receive the events.
-MinIO supports a variety of possible targets.
+Buckit supports a variety of possible targets.
 Settings for each target type have their own pages.
 Select the appropriate link below for the type of target you use for notifications.
 

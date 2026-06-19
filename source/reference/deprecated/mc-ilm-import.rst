@@ -23,7 +23,7 @@ Syntax
 .. start-mc-ilm-import-desc
 
 The :mc:`mc ilm import` command imports an object lifecycle management
-configuration and applies it to a MinIO bucket.
+configuration and applies it to a Buckit bucket.
 
 .. end-mc-ilm-import-desc
 
@@ -62,7 +62,7 @@ Parameters
 
 .. mc-cmd:: ALIAS
    
-   *Required* The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   *Required* The :ref:`alias <alias>` and full path to the bucket on the Buckit
    deployment into which to import object lifecycle management rules. For
    example:
 
@@ -104,7 +104,7 @@ Import the Bucket Lifecycle Management Configuration
 
          mc ilm import ALIAS < file.json
 
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
+      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit 
         deployment and the bucket into which to import object lifecycle
         management rules:
 

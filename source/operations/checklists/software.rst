@@ -10,9 +10,9 @@ Software Checklist
    :local:
    :depth: 2
 
-Use the following checklist when planning the software configuration for a production, distributed MinIO deployment.
+Use the following checklist when planning the software configuration for a production, distributed Buckit deployment.
 
-MinIO Pre-requisites
+Buckit Pre-requisites
 --------------------
 
 .. list-table::
@@ -30,9 +30,9 @@ MinIO Pre-requisites
 
    * - :octicon:`circle`
      - Disable system services that index, scan, or audit the filesystem, system-level calls, or kernel-level calls.
-       These services can reduce performance due to resource contention or interception of MinIO operations.
+       These services can reduce performance due to resource contention or interception of Buckit operations.
 
-       MinIO strongly recommends uninstalling or disabling the following services on hosts running MinIO:
+       Buckit strongly recommends uninstalling or disabling the following services on hosts running Buckit:
 
        - ``mlocate`` or ``plocate``
        - ``updatedb``
@@ -40,35 +40,28 @@ MinIO Pre-requisites
        - Crowdstrike Falcon
        - Antivirus software (``clamav``)
       
-       The above list represents the most common services or softwares known to cause performance or behavioral issues with high performance systems like MinIO.
-       Consider removing or disabling any other service or software which functions similarly to those listed above on MinIO hosts.
+       The above list represents the most common services or softwares known to cause performance or behavioral issues with high performance systems like Buckit.
+       Consider removing or disabling any other service or software which functions similarly to those listed above on Buckit hosts.
 
-       Alternatively, configure these services to ignore or exclude the MinIO Server process and *all* drives or drive paths accessed by MinIO.
+       Alternatively, configure these services to ignore or exclude the Buckit Server process and *all* drives or drive paths accessed by Buckit.
 
    * - :octicon:`circle` 
      - System administrator access to the remote servers
 
    * - :octicon:`circle`
-     - A management tool for distributed systems, such as Ansible, Terraform, or Kubernetes for orchestrated environments.
-       Kubernetes infrastructures should use the MinIO Operator for best results.
+     - (optional) Load balancer to handle routing of requests (for example, `NGINX <https://www.nginx.com/>`__)
 
    * - :octicon:`circle`
-     - Load balancer to handle routing of requests (for example, `NGINX <https://www.nginx.com/>`__)
+     - (optional) :ref:`Prometheus <minio-metrics-collect-using-prometheus>` or a Prometheus-compatible setup for monitoring and metrics
 
    * - :octicon:`circle`
-     - :ref:`Prometheus <minio-metrics-collect-using-prometheus>` or a Prometheus-compatible setup for monitoring and metrics
-
-   * - :octicon:`circle`
-     - :ref:`Grafana configured <minio-grafana>` for dashboards 
-
-   * - :octicon:`circle` 
-     - (optional) :mc:`mc` installed on the local host system
+     - (optional) :ref:`Grafana configured <minio-grafana>` for dashboards 
 
 
-MinIO Install
+Buckit Install
 -------------
 
-Install a matching version of MinIO across all nodes in the deployment.
+Install a matching version of Buckit across all nodes in the deployment.
 
 Post Install Tasks
 ------------------
@@ -78,7 +71,7 @@ Post Install Tasks
    :width: 100%
 
    * - :octicon:`circle` 
-     - (optional) Create an :mc:`mc alias` for each server with :mc:`mc alias set` from your local machine for command line access to work with the MinIO deployment from a local machine
+     - (optional) Create an :mc:`mc alias` for each server with :mc:`mc alias set` from your local machine for command line access to work with the Buckit deployment from a local machine
 
    * - :octicon:`circle`
      - Configure :ref:`Bucket replication <minio-bucket-replication-requirements>` to duplicate contents of a bucket to another bucket location
@@ -104,5 +97,5 @@ Post Install Tasks
    :width: 100%
 
    * - :octicon:`circle`
-     - | Authenticate to MinIO with :ref:`Security Token Service (STS) <minio-security-token-service>`
-       | Enabling this requires MinIO support.
+     - | Authenticate to Buckit with :ref:`Security Token Service (STS) <minio-security-token-service>`
+       | Enabling this requires Buckit support.

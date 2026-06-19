@@ -10,7 +10,7 @@ Thresholds and Limits
    :local:
    :depth: 2
 
-This page reflects limits and thresholds that apply to MinIO.
+This page reflects limits and thresholds that apply to Buckit.
 
 Refer to the :ref:`hardware <minio-hardware-checklist>` and :ref:`software <minio-software-checklists>` for related recommendations and requirements.
 
@@ -100,7 +100,7 @@ Object Name Limitations
 Filesystem and Operating System Restrictions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Object Names in MinIO are restricted primarily by the local operating system and filesystem.
+Object Names in Buckit are restricted primarily by the local operating system and filesystem.
 Windows and some other operating systems restrict file systems with certain special characters, such as ``^``, ``*``, ``|``, ``\``, ``/``, ``&``, ``"``, or ``;``.
 
 This list is not exhaustive and may not apply to your operating system and filesystem combination.
@@ -109,14 +109,14 @@ On Unix-like operating systems, objects with a path name of ``.``, ``..``, or ``
 
 Consult your operating system vendor or filesystem documentation for a comprehensive list for your situation.
 
-MinIO recommends using a Linux operating system with an XFS based filesystem for production workloads.
+Buckit recommends using a Linux operating system with an XFS based filesystem for production workloads.
 
 Conflicting Objects
 ~~~~~~~~~~~~~~~~~~~
 
 Applications must assign non-conflicting, unique keys for all objects.
 This includes avoiding creating objects where the name can collide with that of a parent or sibling object.
-MinIO returns an empty set for LIST operations at the location of the collision.
+Buckit returns an empty set for LIST operations at the location of the collision.
 
 For example, the following operations create a namespace conflicts
 

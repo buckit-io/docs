@@ -10,7 +10,7 @@ Software Development Kits (SDK)
    :local:
    :depth: 1
 
-MinIO publishes the following Software Development Kits (SDK):
+Buckit publishes the following Software Development Kits (SDK):
 
 - :ref:`Go <go-sdk>`
 - :ref:`Python <python-sdk>`
@@ -193,7 +193,7 @@ C++
 
 GitHub: `minio/minio-cpp <https://github.com/minio/minio-cpp>`__
 
-Reference: `MinIO C++ SDK Reference <https://minio-cpp.min.io/>`__
+Reference: `Buckit C++ SDK Reference <https://minio-cpp.min.io/>`__
 
 Install
   - ``vcpkg``
@@ -228,7 +228,7 @@ GitHub: `minio/minio-rs <https://github.com/minio/minio-rs>`__
 Latest Version
   |rust-sdk-version|
 
-Reference: `MinIO Rust SDK Reference <https://docs.rs/minio/latest/minio/>`__
+Reference: `Buckit Rust SDK Reference <https://docs.rs/minio/latest/minio/>`__
 
 Quickstart Guide: :doc:`/developers/rust/minio-rust`
 

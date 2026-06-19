@@ -8,7 +8,7 @@ Integrations
    :local:
    :depth: 2
 
-The following pages provide integration guides between MinIO and select third-party software.
+The following pages provide integration guides between Buckit and select third-party software.
 The guides on this page were previously hosted under the :guilabel:`Cookbook` heading of our legacy documentation.
 
 All provided guides assume familiarity with the third-party integration software, and do not replace the official documentation for that software.

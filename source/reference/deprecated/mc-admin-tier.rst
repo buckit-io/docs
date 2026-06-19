@@ -20,13 +20,13 @@ Description
 .. start-mc-admin-tier-desc
 
 The :mc:`mc admin tier` command configures a remote supported S3-compatible
-service for supporting MinIO 
+service for supporting Buckit 
 :ref:`Lifecycle Management: Object Transition ("Tiering")
 <minio-lifecycle-management-expiration>`. 
 
 .. end-mc-admin-tier-desc
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -46,13 +46,13 @@ as a remote target for object tiering:
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to to the bucket or buckets 
+Buckit requires the following permissions scoped to to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
 - :policy-action:`s3:GetLifecycleConfiguration`
 
-MinIO also requires the following administrative permissions on the cluster
+Buckit also requires the following administrative permissions on the cluster
 in which you are creating remote tiers for object transition lifecycle
 management rules:
 
@@ -70,7 +70,7 @@ Transition Permissions
 ++++++++++++++++++++++
 
 Object transition lifecycle management rules require additional permissions
-on the remote storage tier. Specifically, MinIO requires the remote
+on the remote storage tier. Specifically, Buckit requires the remote
 tier credentials provide read, write, list, and delete permissions.
 
 For example, if the remote storage tier implements AWS IAM policy-based
@@ -81,10 +81,10 @@ for transitioning objects into and out of the remote tier:
    :language: json
    :class: copyable
 
-Modify the ``Resource`` for the bucket into which MinIO tiers objects.
+Modify the ``Resource`` for the bucket into which Buckit tiers objects.
 
 Defer to the documentation for the supported tiering targets for more complete
-information on configuring users and permissions to support MinIO tiering:
+information on configuring users and permissions to support Buckit tiering:
 
 - :aws-docs:`Amazon S3 Permissions <service-authorization/latest/reference/list_amazons3.html#amazons3-actions-as-permissions>`
 - `Google Cloud Storage Access Control <https://cloud.google.com/storage/docs/access-control>`__
@@ -97,12 +97,12 @@ Syntax
 .. mc-cmd:: add
    :fullpath:
 
-   Creates a new remote storage tier for transitioning objects using MinIO
+   Creates a new remote storage tier for transitioning objects using Buckit
    lifecycle management rules. 
    
    .. important::
 
-      MinIO does not support removing remote storage tiers. Ensure the 
+      Buckit does not support removing remote storage tiers. Ensure the 
       storage backend supports the intended workload *prior* to 
       adding it as a remote tier target. 
    
@@ -119,7 +119,7 @@ Syntax
 
       *Required*
 
-      The Cloud Service Provider storage backend ("Tier") to which MinIO
+      The Cloud Service Provider storage backend ("Tier") to which Buckit
       transitions objects. Specify *one* of the following supported values:
 
       .. list-table::
@@ -128,7 +128,7 @@ Syntax
          :widths: 30 70
 
          * - ``s3``
-           - Use AWS S3 *or* a remote MinIO deployment as the storage
+           - Use AWS S3 *or* a remote Buckit deployment as the storage
              backend for the new Tier.
 
              Requires specifying the following additional options:
@@ -157,7 +157,7 @@ Syntax
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment on which
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment on which
       the command creates the new remote tier.
       
    .. mc-cmd:: TIER_NAME
@@ -165,7 +165,7 @@ Syntax
       *Required*
 
       The name to associate with the new remote tier. The name *must*
-      be unique across all configured tiers on the MinIO cluster.
+      be unique across all configured tiers on the Buckit cluster.
 
       You **must** specify the tier in all-caps, e.g. ``WARM_TIER``.
    
@@ -212,7 +212,7 @@ Syntax
       Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
-      MinIO does *not* support changing the account name associated to an Azure
+      Buckit does *not* support changing the account name associated to an Azure
       remote tier. Azure storage backends are tied to the account, such that
       changing the account would change the storage backend and prevent access
       to any objects transitioned to the original account/backend.
@@ -246,7 +246,7 @@ Syntax
 
       *Required*
       
-      The bucket on the remote tier to which MinIO transitions objects.
+      The bucket on the remote tier to which Buckit transitions objects.
 
    .. mc-cmd:: --prefix
       
@@ -254,7 +254,7 @@ Syntax
       *Optional*
       
       The prefix path for the specified :mc-cmd:`~mc admin tier add --bucket`
-      to which MinIO transitions objects.
+      to which Buckit transitions objects.
 
       Omit this field to transition objects into the bucket root.
 
@@ -264,7 +264,7 @@ Syntax
       *Optional*
 
       The AWS storage class to use for objects transitioned by 
-      MinIO. MinIO supports only the following storage classes:
+      Buckit. Buckit supports only the following storage classes:
 
       - ``STANDARD``
       - ``REDUCED_REDUNDANCY``
@@ -288,8 +288,8 @@ Syntax
 .. mc-cmd:: edit
    :fullpath:
 
-   Modify or remove a remote storage tier from a MinIO cluster. Remote
-   storage tiers support transitioning objects using MinIO lifecycle
+   Modify or remove a remote storage tier from a Buckit cluster. Remote
+   storage tiers support transitioning objects using Buckit lifecycle
    management rules.
 
    The command has the following syntax:
@@ -305,7 +305,7 @@ Syntax
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment.
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment.
 
    .. mc-cmd:: TIER_NAME
 
@@ -369,8 +369,8 @@ Syntax
 .. mc-cmd:: ls
    :fullpath:
 
-   List all remote storage tiers on a MinIO cluster. Remote storage tiers
-   support transitioning objects using MinIO lifecycle management rules.
+   List all remote storage tiers on a Buckit cluster. Remote storage tiers
+   support transitioning objects using Buckit lifecycle management rules.
 
    The command has the following syntax:
 
@@ -385,4 +385,4 @@ Syntax
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment.
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment.

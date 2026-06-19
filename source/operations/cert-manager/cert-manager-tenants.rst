@@ -24,7 +24,7 @@ Prerequisites
 - `kustomize <https://kustomize.io/>`__ installed
 - ``kubectl`` access to your ``k8s`` cluster
 - Completed the steps to :ref:`set up cert-manager <minio-setup-certmanager>`
-- The MinIO Operator installed and :ref:`set up for cert-manager <minio-certmanager-operator>`.
+- The Buckit Operator installed and :ref:`set up for cert-manager <minio-certmanager-operator>`.
 
 1) Create the tenant namespace CA Issuer
 ----------------------------------------
@@ -112,7 +112,7 @@ The ``Issuer`` issues the certificates within the tenant namespace.
 3) Create a certificate for the tenant
 --------------------------------------
 
-Request that cert-manager issue a new TLS server certificate for MinIO.
+Request that cert-manager issue a new TLS server certificate for Buckit.
 The certificate must be valid for the following DNS domains:
 
 - ``minio.<namespace>``
@@ -226,16 +226,16 @@ The following YAML ``spec`` provides a baseline configuration meeting these requ
          type: cert-manager.io/v1
    ...
 
-5) Trust the tenant's CA in MinIO Operator
+5) Trust the tenant's CA in Buckit Operator
 ------------------------------------------
 
-The MinIO Operator does not trust the tenant's CA by default.
+The Buckit Operator does not trust the tenant's CA by default.
 To trust the tenant's CA, you must pass the certificate to the Operator as a secret.
 
 To do this, create a secret with the prefix ``operator-ca-tls-`` followed by a unique identifier in the `minio-operator` namespace.
 
-MinIO Operator mounts and trusts **all** certificates issued by the provided Certificate Authorities. 
-This is required because the MinIO Operator performs health checks using the ``/minio/health/cluster`` endpoint.
+Buckit Operator mounts and trusts **all** certificates issued by the provided Certificate Authorities. 
+This is required because the Buckit Operator performs health checks using the ``/minio/health/cluster`` endpoint.
 
 Create ``operator-ca-tls-tenant-1`` secret
 ++++++++++++++++++++++++++++++++++++++++++

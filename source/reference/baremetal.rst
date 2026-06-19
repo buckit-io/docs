@@ -1,15 +1,14 @@
-===================
-Baremetal Reference
-===================
+=========
+Reference
+=========
 
 .. default-domain:: minio
 
-This page acts as an index for MinIO Baremetal references.
+This page acts as an index for Buckit Baremetal references.
 
 .. toctree::
    :titlesonly:
 
-   /reference/minio-mc
-   /reference/minio-mc-admin
+   /reference/bm-cli
+   /reference/bm-admin
    /reference/minio-server/minio-server
-   /reference/minio-mc-deprecated

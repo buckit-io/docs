@@ -23,7 +23,7 @@ Syntax
 .. start-mc-ilm-export-desc
 
 The :mc:`mc ilm export` command exports the object lifecycle management
-configuration for a MinIO bucket.
+configuration for a Buckit bucket.
 
 .. end-mc-ilm-export-desc
 
@@ -63,7 +63,7 @@ Parameters
 
 .. mc-cmd:: ALIAS
    
-   *Required* The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   *Required* The :ref:`alias <alias>` and full path to the bucket on the Buckit
    deployment for which to export object lifecycle management rules. For
    example:
 
@@ -103,7 +103,7 @@ Export the Bucket Lifecycle Management Configuration
 
          mc ilm export ALIAS > file.json
 
-      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO 
+      - Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit 
         deployment and the bucket for which to export object lifecycle
         management rules:
 

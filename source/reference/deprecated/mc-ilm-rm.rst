@@ -24,7 +24,7 @@ Syntax
 .. start-mc-ilm-rm-desc
 
 The :mc:`mc ilm rm` command removes an object lifecycle management rule from a 
-MinIO Bucket.
+Buckit Bucket.
 
 .. end-mc-ilm-rm-desc
 
@@ -35,7 +35,7 @@ The :mc:`mc ilm remove` command has equivalent functionality to :mc:`mc ilm rm`.
    .. tab-item:: EXAMPLE
 
       The following command removes a single lifecycle management rule from
-      the ``mydata`` bucket on the ``myminio`` MinIO deployment:
+      the ``mydata`` bucket on the ``myminio`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -62,7 +62,7 @@ Parameters
 
 .. mc-cmd:: ALIAS
    
-   *Required* The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   *Required* The :ref:`alias <alias>` and full path to the bucket on the Buckit
    deployment to which to remove the object lifecycle management rule. For
    example:
 

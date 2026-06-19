@@ -1,7 +1,7 @@
 :orphan:
 
 ================================
-Upgrade Legacy MinIO Operators
+Upgrade Legacy Buckit Operators
 ================================
 
 .. default-domain:: minio
@@ -11,7 +11,7 @@ Upgrade Legacy MinIO Operators
    :depth: 1
 
 
-MinIO supports the following upgrade paths for older versions of the MinIO Operator:
+Buckit supports the following upgrade paths for older versions of the Buckit Operator:
 
 .. list-table::
    :header-rows: 1
@@ -43,7 +43,7 @@ After upgrading to 5.0.15, see :ref:`minio-k8s-upgrade-minio-operator` to upgrad
 
 .. _minio-k8s-upgrade-minio-operator-to-5.0.15:
 
-Upgrade MinIO Operator 4.5.8 and Later to 5.0.15
+Upgrade Buckit Operator 4.5.8 and Later to 5.0.15
 ------------------------------------------------
 
 .. admonition:: Prerequisites
@@ -51,11 +51,11 @@ Upgrade MinIO Operator 4.5.8 and Later to 5.0.15
 
    This procedure requires the following:
 
-   - You have an existing MinIO Operator deployment running 4.5.8 or later
+   - You have an existing Buckit Operator deployment running 4.5.8 or later
    - Your Kubernetes cluster runs 1.21.0 or later
    - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
-This procedure upgrades the MinIO Operator from any 4.5.8 or later release to 5.0.15
+This procedure upgrades the Buckit Operator from any 4.5.8 or later release to 5.0.15
 
 Tenant Custom Resource Definition Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,7 +65,7 @@ The following changes apply for Operator v5.0.0 or later:
 - The ``.spec.s3`` field is replaced by the ``.spec.features`` field.
 - The ``.spec.credsSecret`` field is replaced by the ``.spec.configuration`` field.
 
-  The ``.spec.credsSecret`` should hold all the environment variables for the MinIO deployment that contain sensitive information and should not show in ``.spec.env``.
+  The ``.spec.credsSecret`` should hold all the environment variables for the Buckit deployment that contain sensitive information and should not show in ``.spec.env``.
   This change impacts the Tenant :abbr:`CRD (CustomResourceDefinition)` and only impacts users editing a tenant YAML directly, such as through Helm or Kustomize.
 - Both the **Log Search API** (``.spec.log``) and **Prometheus** (``.spec.prometheus``) deployments have been removed.
   However, existing deployments are left running as standalone deployments / statefulsets with no connection to the Tenant CR.
@@ -73,7 +73,7 @@ The following changes apply for Operator v5.0.0 or later:
 
   .. important::
 
-     MinIO recommends that you create a yaml file to manage these deployments going forward.
+     Buckit recommends that you create a yaml file to manage these deployments going forward.
 
 Log Search and Prometheus
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,16 +142,16 @@ Procedure
 
    .. tab-item:: Upgrade using Kustomize
 
-      The following procedure upgrades the MinIO Operator using Kustomize.
+      The following procedure upgrades the Buckit Operator using Kustomize.
 
-      For Operator versions 5.0.1 to 5.0.14 installed with the MinIO Kubernetes Plugin, follow the Kustomize instructions below to upgrade to 5.0.15 or later.
+      For Operator versions 5.0.1 to 5.0.14 installed with the Buckit Kubernetes Plugin, follow the Kustomize instructions below to upgrade to 5.0.15 or later.
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
-      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      #. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+         Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
       #. Verify the existing Operator installation.
          Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
@@ -231,15 +231,15 @@ Procedure
 
    .. tab-item:: Upgrade using Helm
 
-      The following procedure upgrades an existing MinIO Operator Installation using Helm.
+      The following procedure upgrades an existing Buckit Operator Installation using Helm.
 
       If you installed the Operator using Kustomize, use the :guilabel:`Upgrade using Kustomize` instructions instead.
 
-      #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+      #. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-         Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+         Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
       #. Verify the existing Operator installation.
 
@@ -292,8 +292,8 @@ Procedure
 
       #. Update the Operator Repository
 
-         Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
-         If you set a different alias for the MinIO Operator repository, specify that in the command instead of ``minio-operator``.
+         Use ``helm repo update minio-operator`` to update the Buckit Operator repo.
+         If you set a different alias for the Buckit Operator repository, specify that in the command instead of ``minio-operator``.
          You can use ``helm repo list`` to review your installed repositories.
 
          Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
@@ -310,15 +310,15 @@ Procedure
             :substitutions:
 
             NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-            minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-            minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
-            minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+            minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for Buckit Operator
+            minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
+            minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
 
          The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
 
       #. Run ``helm upgrade``
 
-         Helm uses the latest chart to upgrade the MinIO Operator:
+         Helm uses the latest chart to upgrade the Buckit Operator:
 
          .. code-block:: shell
             :class: copyable
@@ -326,7 +326,7 @@ Procedure
             helm upgrade -n minio-operator \
               operator minio-operator/operator
 
-         If you installed the MinIO Operator to a different namespace, specify that in the ``-n`` argument.
+         If you installed the Buckit Operator to a different namespace, specify that in the ``-n`` argument.
 
          If you used a different installation name from ``operator``, replace the value above with the installation name.
 
@@ -344,7 +344,7 @@ Procedure
 
 .. _minio-k8s-upgrade-minio-operator-to-4.5.8:
 
-Upgrade MinIO Operator 4.2.3 through 4.5.7 to 4.5.8
+Upgrade Buckit Operator 4.2.3 through 4.5.7 to 4.5.8
 ---------------------------------------------------
 
 Prerequisites
@@ -352,23 +352,23 @@ Prerequisites
 
 This procedure requires the following:
 
-- You have an existing MinIO Operator deployment running 4.2.3 through 4.5.7
+- You have an existing Buckit Operator deployment running 4.2.3 through 4.5.7
 - Your Kubernetes cluster runs 1.19.0 or later
 - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
 Procedure
 ~~~~~~~~~
 
-This procedure upgrades MinIO Operator release 4.2.3 through 4.5.7 to release 4.5.8.
+This procedure upgrades Buckit Operator release 4.2.3 through 4.5.7 to release 4.5.8.
 You can then upgrade from release 4.5.8 to 5.0.15.
 
-1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+1. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-   Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+   Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
 
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Verify the existing Operator installation.
 
@@ -401,13 +401,13 @@ You can then upgrade from release 4.5.8 to 5.0.15.
          "name": "minio-operator"
       }
 
-#. Download the Latest Stable Version of the MinIO Kubernetes Plugin
+#. Download the Latest Stable Version of the Buckit Kubernetes Plugin
 
    .. include:: /includes/k8s/install-minio-kubectl-plugin.rst
 
 #. Run the initialization command to upgrade the Operator
 
-   Use the ``kubectl minio init`` command to upgrade the existing MinIO Operator installation
+   Use the ``kubectl minio init`` command to upgrade the existing Buckit Operator installation
 
    .. code-block:: shell
       :class: copyable
@@ -420,7 +420,7 @@ You can then upgrade from release 4.5.8 to 5.0.15.
 
 .. _minio-k8s-upgrade-minio-operator-4.2.2-procedure:
 
-Upgrade MinIO Operator 4.0.0 through 4.2.2 to 4.2.3
+Upgrade Buckit Operator 4.0.0 through 4.2.2 to 4.2.3
 ---------------------------------------------------
 
 Prerequisites
@@ -428,28 +428,28 @@ Prerequisites
 
 This procedure assumes that:
 
-- You have an existing MinIO Operator deployment running any release from 4.0.0 through 4.2.2
+- You have an existing Buckit Operator deployment running any release from 4.0.0 through 4.2.2
 - Your Kubernetes cluster runs 1.19.0 or later
 - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
 Procedure
 ~~~~~~~~~
 
-This procedure covers the necessary steps to upgrade a MinIO Operator deployment running any release from 4.0.0 through 4.2.2 to 4.2.3.
+This procedure covers the necessary steps to upgrade a Buckit Operator deployment running any release from 4.0.0 through 4.2.2 to 4.2.3.
 You can then perform :ref:`minio-k8s-upgrade-minio-operator-procedure` to complete the upgrade to |operator-version-stable|.
 
 There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-version-stable|.
 
-1. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+1. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-   Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+   Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Check the Security Context for each Tenant Pool
 
-   Use the following command to validate the specification for each managed MinIO Tenant:
+   Use the following command to validate the specification for each managed Buckit Tenant:
 
    .. code-block:: shell
       :class: copyable
@@ -482,7 +482,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
 #. Upgrade to Operator 4.2.3
 
-   Download the MinIO Kubernetes Plugin 4.2.3 and use it to upgrade the Operator.
+   Download the Buckit Kubernetes Plugin 4.2.3 and use it to upgrade the Operator.
    Open https://github.com/minio/operator/releases/tag/v4.2.3 in a browser and download the binary that corresponds to your local host OS.
 
    For example, Linux hosts running an Intel or AMD processor can run the following commands:
@@ -496,7 +496,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
 #. Validate all Tenants and Operator pods
 
-   Check the Operator and MinIO Tenant namespaces to ensure all pods and services started successfully.
+   Check the Operator and Buckit Tenant namespaces to ensure all pods and services started successfully.
 
    For example:
 
@@ -510,7 +510,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
    Follow the :ref:`minio-k8s-upgrade-minio-operator-procedure` procedure to upgrade to the latest stable Operator version.
 
-Upgrade MinIO Operator 3.0.0 through 3.0.29 to 4.2.2
+Upgrade Buckit Operator 3.0.0 through 3.0.29 to 4.2.2
 ----------------------------------------------------
 
 Prerequisites
@@ -518,29 +518,29 @@ Prerequisites
 
 This procedure assumes that:
 
-- You have an existing MinIO Operator deployment running 3.X.X
+- You have an existing Buckit Operator deployment running 3.X.X
 - Your Kubernetes cluster runs 1.19.0 or later
 - Your local host has ``kubectl`` installed and configured with access to the Kubernetes cluster
 
 Procedure
 ~~~~~~~~~
 
-This procedure covers the necessary steps to upgrade a MinIO Operator deployment running any release from 3.0.0 through 3.2.9 to 4.2.2.
+This procedure covers the necessary steps to upgrade a Buckit Operator deployment running any release from 3.0.0 through 3.2.9 to 4.2.2.
 You can then perform :ref:`minio-k8s-upgrade-minio-operator-4.2.2-procedure`, followed by :ref:`minio-k8s-upgrade-minio-operator-procedure`.
 
 There is no direct upgrade path from a 3.X.X series installation to |operator-version-stable|.
 
-1. (Optional) Update each MinIO Tenant to the latest stable MinIO Version.
+1. (Optional) Update each Buckit Tenant to the latest stable Buckit Version.
 
-   Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+   Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
 
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Validate the Tenant ``tenant.spec.zones`` values
 
-   Use the following command to validate the specification for each managed MinIO Tenant:
+   Use the following command to validate the specification for each managed Buckit Tenant:
 
    .. code-block:: shell
       :class: copyable
@@ -602,7 +602,7 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
 
 #. Upgrade to Operator 4.2.2
 
-   Download the MinIO Kubernetes Plugin 4.2.2 and use it to upgrade the Operator.
+   Download the Buckit Kubernetes Plugin 4.2.2 and use it to upgrade the Operator.
    Open https://github.com/minio/operator/releases/tag/v4.2.2 in a browser and download the binary that corresponds to your local host OS.
    For example, Linux hosts running an Intel or AMD processor can run the following commands:
 
@@ -616,7 +616,7 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
 
 #. Validate all Tenants and Operator pods
 
-   Check the Operator and MinIO Tenant namespaces to ensure all pods and services started successfully.
+   Check the Operator and Buckit Tenant namespaces to ensure all pods and services started successfully.
 
    For example:
 

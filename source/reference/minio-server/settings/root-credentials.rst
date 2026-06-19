@@ -10,10 +10,10 @@ Root Access Settings
    :local:
    :depth: 2
 
-This page covers settings that control root (superuser) access for the MinIO process. 
-The root user has complete access and permissions to perform operations on the MinIO deployment.
+This page covers settings that control root (superuser) access for the Buckit process. 
+The root user has complete access and permissions to perform operations on the Buckit deployment.
 
-Root User and Root Password are required even if you use the :kes-docs:`MinIO Key Encryption Service <>` or other key management utility.
+Root User and Root Password are required even if you use the :kes-docs:`Buckit Key Encryption Service <>` or other key management utility.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -40,7 +40,7 @@ Root User
          If :envvar:`MINIO_ROOT_USER` is unset, :mc:`minio` defaults to ``minioadmin``.
    
          **NEVER** use the default credentials in production environments.
-         MinIO strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_USER` value for all environments.
+         Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_USER` value for all environments.
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -65,7 +65,7 @@ Root Password
          If :envvar:`MINIO_ROOT_PASSWORD` is unset, :mc:`minio` defaults to ``minioadmin``.
 
          **NEVER** use the default credentials in production environments.
-         MinIO strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
+         Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
 
    .. tab-item:: Configuration Setting
 
@@ -90,7 +90,7 @@ Root Access
       .. mc-conf:: api root-access
          :delimiter: " "
 
-.. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+.. versionadded:: Buckit Server RELEASE.2023-05-04T21-44-30Z
 
 Specify ``on`` to enable and ``off`` to disable the :ref:`root <minio-users-root>` user account.
 Disabling the root service account also disables all service accounts associated with root, excluding those used by site replication.

@@ -1,7 +1,7 @@
 .. Descriptions for External Identity Management using an LDAP Provider   
    Used in the following files:                                                                
-   - /source/reference/minio-mc/mc-idp-ldap-add.rst
-   - /source/reference/minio-mc/mc-idp-ldap-update.rst
+   - /source/reference/bm-cli/bm-idp-ldap-add.rst
+   - /source/reference/bm-cli/bm-idp-ldap-update.rst
 
    Does not include ALIAS, as the example differs between add and update
 
@@ -73,7 +73,7 @@
 
    Set to ``false`` to disable the AD/LDAP configuration.
 
-   If ``false``, applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider.
+   If ``false``, applications cannot generate STS credentials or otherwise authenticate to Buckit using the configured provider.
 
    Defaults to ``true`` or "enabled".
 
@@ -137,17 +137,17 @@
 
 .. Descriptions for adding LDAP access keys
    Used in the following files:                                                                
-   - /source/reference/minio-mc/mc-idp-ldap-accesskey.rst
-   - /source/reference/minio-mc/mc-idp-ldap-accesskey-info.rst
-   - /source/reference/minio-mc/mc-idp-ldap-accesskey-rm.rst
-   - /source/reference/minio-mc/mc-idp-ldap-accesskey-ls.rst
+   - /source/reference/bm-cli/bm-idp-ldap-accesskey.rst
+   - /source/reference/bm-cli/bm-idp-ldap-accesskey-info.rst
+   - /source/reference/bm-cli/bm-idp-ldap-accesskey-rm.rst
+   - /source/reference/bm-cli/bm-idp-ldap-accesskey-ls.rst
 
 .. start-minio-ad-ldap-accesskey-creation
 
-This command works against :ref:`access keys <minio-id-access-keys>` created by an AD/LDAP user after authenticating to MinIO.
+This command works against :ref:`access keys <minio-id-access-keys>` created by an AD/LDAP user after authenticating to Buckit.
 
 Create AD/LDAP service accounts with the :mc-cmd:`mc idp ldap accesskey create` command.
 
-MinIO supports using :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>` to generate temporary access keys using the :ref:`Security Token Service <minio-security-token-service>`.
+Buckit supports using :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>` to generate temporary access keys using the :ref:`Security Token Service <minio-security-token-service>`.
 
 .. end-minio-ad-ldap-accesskey-creation

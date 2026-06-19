@@ -1,6 +1,6 @@
 .. start-create-bucket-replication-rule-cli-desc
 
-Use the :mc:`mc replicate add` command to add a new replication rule to each MinIO deployment.
+Use the :mc:`mc replicate add` command to add a new replication rule to each Buckit deployment.
 
 .. code-block:: shell
    :class: copyable
@@ -9,16 +9,16 @@ Use the :mc:`mc replicate add` command to add a new replication rule to each Min
       --remote-bucket 'https://USER:PASSWORD@HOSTNAME:PORT/BUCKET' \
       --replicate "delete,delete-marker,existing-objects"
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of the origin MinIO deployment.  
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of the origin Buckit deployment.  
   The name *must* match the bucket specified when creating the remote target in the previous step.
 
 - Replace ``BUCKET`` with the name of the bucket to replicate from on the origin deployment. 
 
-- Replace the ``--remote-bucket`` to specify the remote MinIO deployment and bucket to which the ``ALIAS/BUCKET`` replicates.
+- Replace the ``--remote-bucket`` to specify the remote Buckit deployment and bucket to which the ``ALIAS/BUCKET`` replicates.
 
   The ``USER:PASSWORD`` must correspond to a user on the remote deployment with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
-  The ``HOSTNAME:PORT`` must resolve to a reachable MinIO instance on the remote deployment.
+  The ``HOSTNAME:PORT`` must resolve to a reachable Buckit instance on the remote deployment.
   The ``BUCKET`` must exist and otherwise meet all other :ref:`replication requirements <minio-bucket-replication-requirements>`.
 
 - The ``--replicate "delete,delete-marker,existing-objects"`` flag enables the following replication features:

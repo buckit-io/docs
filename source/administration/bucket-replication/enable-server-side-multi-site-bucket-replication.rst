@@ -11,7 +11,7 @@ Enable Multi-Site Server-Side Bucket Replication
    :depth: 2
 
 
-The procedure on this page configures automatic server-side bucket replication between multiple MinIO deployments. Multi-Site Active-Active replication builds on the :ref:`minio-bucket-replication-serverside-twoway` procedure with additional considerations required to ensure predictable replication behavior across all sites.
+The procedure on this page configures automatic server-side bucket replication between multiple Buckit deployments. Multi-Site Active-Active replication builds on the :ref:`minio-bucket-replication-serverside-twoway` procedure with additional considerations required to ensure predictable replication behavior across all sites.
 
 .. image:: /images/replication/active-active-multi-replication.svg
    :width: 600px
@@ -20,11 +20,11 @@ The procedure on this page configures automatic server-side bucket replication b
 
 - To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
 
-- To configure one-way "active-active" replication between two MinIO deployments, see :ref:`minio-bucket-replication-serverside-twoway`.
+- To configure one-way "active-active" replication between two Buckit deployments, see :ref:`minio-bucket-replication-serverside-twoway`.
 
-- To configure one-way "active-passive" replication between MinIO deployments, see :ref:`minio-bucket-replication-serverside-oneway`.
+- To configure one-way "active-passive" replication between Buckit deployments, see :ref:`minio-bucket-replication-serverside-oneway`.
 
-Multi-Site Active-Active replication configurations can span multiple racks, datacenters, or geographic locations. Complexity of configuring and maintaining multi-site configurations generally increase with the number of sites and size of each site. Enterprises looking to implement multi-site replication should consider leveraging `MinIO SUBNET <https://min.io/pricing?ref=docs>`__ support to access the expertise, planning, and engineering resources required for addressing that use case. 
+Multi-Site Active-Active replication configurations can span multiple racks, datacenters, or geographic locations. Complexity of configuring and maintaining multi-site configurations generally increase with the number of sites and size of each site. Enterprises looking to implement multi-site replication should consider leveraging `Buckit SUBNET <https://min.io/pricing?ref=docs>`__ support to access the expertise, planning, and engineering resources required for addressing that use case. 
 
 .. seealso::
 
@@ -49,7 +49,7 @@ Access to All Clusters
 You must have network access and log in credentials with correct permissions to all deployments to set up multi-site active-active bucket replication.
 
 You can access the deployments by installing :mc:`mc` and using the command line.
-Use the :mc:`mc alias set` command to create an alias for each MinIO deployment.
+Use the :mc:`mc alias set` command to create an alias for each Buckit deployment.
 
 Alias creation requires specifying an access key for a user on the deployment. 
 This user **must** have permission to create and manage users and policies on the deployment. 
@@ -72,43 +72,43 @@ Click to expand any of the following:
 .. dropdown:: Use Consistent Replication Settings
    :icon: fold-down
 
-   MinIO supports customizing the replication configuration to enable or disable the following replication behaviors:
+   Buckit supports customizing the replication configuration to enable or disable the following replication behaviors:
 
    - Replication of :ref:`delete operations <minio-object-delete>`
    - Replication of delete markers
    - Replication of existing objects
    - Replication of metadata-only changes
 
-   When configuring replication rules for a bucket, ensure that all MinIO deployments participating in multi-site replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
+   When configuring replication rules for a bucket, ensure that all Buckit deployments participating in multi-site replication use the *same* replication behaviors to ensure consistent and predictable synchronization of objects.
 
 .. dropdown:: Replication of Existing Objects
    :icon: fold-down
 
-   MinIO supports automatically replicating existing objects in a bucket.
+   Buckit supports automatically replicating existing objects in a bucket.
 
-   MinIO requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
+   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
    This procedure includes the required flags for enabling replication of existing objects.
 
 .. dropdown:: Replication of Delete Operations
    :icon: fold-down
 
-   MinIO supports replicating :ref:`delete operations <minio-object-delete>` onto the target bucket. 
-   Specifically, MinIO can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
+   Buckit supports replicating :ref:`delete operations <minio-object-delete>` onto the target bucket. 
+   Specifically, Buckit can replicate versioning :s3-docs:`Delete Markers <versioning-workflows.html>` and the deletion of specific versioned objects:
 
-   - For delete operations on an object, MinIO replication also creates the delete marker on the target bucket.
+   - For delete operations on an object, Buckit replication also creates the delete marker on the target bucket.
 
-   - For delete operations on versions of an object, MinIO replication also deletes those versions on the target bucket.
+   - For delete operations on versions of an object, Buckit replication also deletes those versions on the target bucket.
 
-   MinIO requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
+   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
    This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
-   MinIO does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
+   Buckit does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
    Configure matching expiration rules for the bucket on all replication sites to ensure consistent application of object expiration.
 
 Procedure 
 ---------
 
-This procedure requires repeating steps for each MinIO deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. MinIO recommends reading through the procedure *before* attempting to implement the documented steps.
+This procedure requires repeating steps for each Buckit deployment participating in the multi-site replication configuration. Depending on the number of deployments, this procedure may require significant time and care in implementation. Buckit recommends reading through the procedure *before* attempting to implement the documented steps.
 
 - Configure Multi-Site Bucket Replication Using the Command Line
    
@@ -119,8 +119,8 @@ This procedure requires repeating steps for each MinIO deployment participating 
 Configure Multi-Site Bucket Replication Using the Command Line ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each MinIO deployment being configured for replication. 
-Replace these values with the appropriate alias for each MinIO deployment.
+This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each Buckit deployment being configured for replication. 
+Replace these values with the appropriate alias for each Buckit deployment.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-requirements>`.
 
@@ -138,8 +138,8 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
    :start-after: start-create-bucket-replication-rule-cli-desc
    :end-before: end-create-bucket-replication-rule-cli-desc
 
-Repeat these commands for each remote MinIO deployment participating in the multi-site replication configuration. 
-For example, a multi-site replication configuration consisting of MinIO deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
+Repeat these commands for each remote Buckit deployment participating in the multi-site replication configuration. 
+For example, a multi-site replication configuration consisting of Buckit deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
          
 Specifically, in this scenario, perform this step twice on each deployment:
 

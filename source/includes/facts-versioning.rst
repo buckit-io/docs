@@ -10,7 +10,7 @@ existed at specified point-in-time.
   ``#d#hh#mm#ss`` format. For example: ``--rewind "1d2hh3mm4ss"``.
 
 |rewind| requires that the specified |alias| be an S3-compatible service
-that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
+that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
 :mc:`mc version` to enable or disable bucket versioning.
 
 .. end-rewind-desc
@@ -21,7 +21,7 @@ Directs |command| to operate on all object versions that exist in the
 bucket.
 
 |versions| requires that the specified |alias| be an S3-compatible service
-that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
+that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
 :mc:`mc version` to enable or disable bucket versioning.
 
 .. end-versions-desc
@@ -31,7 +31,7 @@ that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
 Directs |command| to operate only on the specified object version.
 
 |versionid| requires that the specified |alias| be an S3-compatible service
-that supports :ref:`minio-bucket-versioning`. For MinIO deployments, use
+that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
 :mc:`mc version` to enable or disable bucket versioning.
 
 .. end-version-id-desc

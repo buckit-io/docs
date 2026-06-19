@@ -14,16 +14,16 @@ Publish Events to PostgreSQL
 
 .. |postgresql-uri-reference| replace:: `PostgreSQL Connection String <https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING>`__
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to 
-`PostgreSQL <https://www.postgresql.org/>`__. MinIO supports
+`PostgreSQL <https://www.postgresql.org/>`__. Buckit supports
 PostgreSQL 9.5 and later *only*.
 
-Add a PostgreSQL Endpoint to a MinIO Deployment
+Add a PostgreSQL Endpoint to a Buckit Deployment
 -----------------------------------------------
 
 The following procedure adds a new PostgreSQL service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -32,15 +32,15 @@ Prerequisites
 PostgreSQL 9.5 and later
 ++++++++++++++++++++++++
 
-MinIO relies on features introduced with PostgreSQL 9.5.
+Buckit relies on features introduced with PostgreSQL 9.5.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the PostgreSQL Endpoint to MinIO
+1) Add the PostgreSQL Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new PostgreSQL service endpoint using either environment
@@ -50,7 +50,7 @@ variables *or* by setting runtime configuration settings.
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the PostgreSQL service endpoint and associated
+      Buckit supports specifying the PostgreSQL service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-postgresql>`. The 
@@ -77,7 +77,7 @@ variables *or* by setting runtime configuration settings.
                set MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
                set MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
                set MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
-               set MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
+               set MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for Buckit"
 
       .. cond:: not windows
 
@@ -91,7 +91,7 @@ variables *or* by setting runtime configuration settings.
                export MINIO_NOTIFY_POSTGRES_MAX_OPEN_CONNECTIONS_<IDENTIFIER>="2"
                export MINIO_NOTIFY_POSTGRES_QUEUE_DIR_<IDENTIFIER>="/opt/minio/events"
                export MINIO_NOTIFY_POSTGRES_QUEUE_LIMIT_<IDENTIFIER>="100000"
-               export MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for MinIO"
+               export MINIO_NOTIFY_POSTGRES_COMMENT_<IDENTIFIER>="PostgreSQL Notification Event Logging for Buckit"
 
       - Replace ``<IDENTIFIER>`` with a unique descriptive string for the
         PostgreSQL service endpoint. Use the same ``<IDENTIFIER>`` value for all 
@@ -99,13 +99,13 @@ variables *or* by setting runtime configuration settings.
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing PostgreSQL service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
-        review the currently configured PostgreSQL endpoints on the MinIO deployment.
+        review the currently configured PostgreSQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the |postgresql-uri-reference|
-        for PostgreSQL service endpoint. MinIO supports ``key=value`` format for 
+        for PostgreSQL service endpoint. Buckit supports ``key=value`` format for 
         the connection string. For example:
 
         ``"host=https://postgresql.example.com port=5432 ..."``
@@ -119,7 +119,7 @@ variables *or* by setting runtime configuration settings.
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating PostgreSQL endpoints on a running 
+      Buckit supports adding or updating PostgreSQL endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_postgres` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -150,14 +150,14 @@ variables *or* by setting runtime configuration settings.
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing PostgreSQL service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
-        review the currently configured PostgreSQL endpoints on the MinIO deployment.
+        review the currently configured PostgreSQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the `PostgreSQL URI connection string 
         <https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING>`__ 
-        of the PostgreSQL service endpoint. MinIO supports ``key=value`` format
+        of the PostgreSQL service endpoint. Buckit supports ``key=value`` format
         for the PostgreSQL connection string. For example:
 
         ``"host=https://postgresql.example.com port=5432 ..."``
@@ -169,10 +169,10 @@ variables *or* by setting runtime configuration settings.
       <minio-server-config-bucket-notification-postgresql>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -209,10 +209,10 @@ event with the configured PostgreSQL service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:postgresql \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the ßevent.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
@@ -240,11 +240,11 @@ a notification.
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
-Update a PostgreSQL Endpoint in a MinIO Deployment
+Update a PostgreSQL Endpoint in a Buckit Deployment
 ---------------------------------------------------
 
 The following procedure updates an existing PostgreSQL service endpoint for
-supporting :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+supporting :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -253,9 +253,9 @@ Prerequisites
 PostgreSQL 9.5 and later
 ++++++++++++++++++++++++
 
-MinIO relies on features introduced with PostgreSQL 9.5.
+Buckit relies on features introduced with PostgreSQL 9.5.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -273,7 +273,7 @@ configured PostgreSQL service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_postgres
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -322,10 +322,10 @@ All other configuration settings are *optional*. See
 :ref:`minio-server-config-bucket-notification-postgresql` for a complete list of
 PostgreSQL configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

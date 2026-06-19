@@ -97,7 +97,7 @@ Enabled
 
 Set to ``false`` to disable the OpenID configuration.
 
-Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+Applications cannot generate STS credentials or otherwise authenticate to Buckit using the configured provider if set to ``false``.
 
 Defaults to ``true`` or "enabled".
 

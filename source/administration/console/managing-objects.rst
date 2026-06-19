@@ -11,7 +11,7 @@ Managing Objects
    :local:
    :depth: 2
 
-You can use the MinIO Console to perform several of the bucket and object interaction functions available in MinIO.
+You can use the Buckit Console to perform several of the bucket and object interaction functions available in Buckit.
 Depending on the permissions and IAM policies for the authenticated user, you can:
 
 - :ref:`Browse, upload, revert, manage, and interact with objects <minio-console-object-browser>`.
@@ -52,7 +52,7 @@ Example actions the user may be able to perform include:
 
 .. versionchanged:: Console v0.35.0
 
-   If you select multiple objects to download, MinIO creates a ZIP archive of those objects for downloading.
+   If you select multiple objects to download, Buckit creates a ZIP archive of those objects for downloading.
    You must unzip or uncompress this archive after downloading to access the files.
 
 .. _minio-console-buckets:
@@ -65,11 +65,11 @@ Buckets
 The Console's :guilabel:`Bucket` section displays all buckets to which the authenticated user has :ref:`access <minio-policy>`.
 
 Select :guilabel:`Create Bucket` to create a new bucket on the deployment.
-MinIO validates bucket names.
+Buckit validates bucket names.
 To see the rules for bucket names, select :guilabel:`View Bucket Naming Rules`.
 
-MinIO does not limit the total number of buckets allowed on a deployment.
-However, MinIO recommends no more than 500,000 buckets per deployment as a general guideline.
+Buckit does not limit the total number of buckets allowed on a deployment.
+However, Buckit recommends no more than 500,000 buckets per deployment as a general guideline.
 
 While creating a bucket, you can enable :ref:`versioning <minio-bucket-versioning>`, :ref:`object locking <minio-object-locking>`, bucket size (quota) limits, and :ref:`retention rules <minio-object-locking-retention-modes>` (which require versioning).
 

@@ -1,14 +1,14 @@
 
 .. start-kes-minio-start-service-desc
 
-For new MinIO deployments, run the following command on each MinIO host to start the service:
+For new Buckit deployments, run the following command on each Buckit host to start the service:
 
 .. code-block:: shell
    :class: copyable
 
    systemctl start minio
 
-For existing MinIO deployments, run the following command on each MinIO host to restart the service:
+For existing Buckit deployments, run the following command on each Buckit host to restart the service:
 
 .. code-block:: shell
    :class: copyable
@@ -20,8 +20,8 @@ For existing MinIO deployments, run the following command on each MinIO host to 
 
 .. start-kes-generate-kes-certs-prod-desc
 
-KES requires TLS connectivity for all client connections, including those originating from MinIO.
-See :ref:`minio-tls` for more information on enabling TLS for the MinIO deployment.
+KES requires TLS connectivity for all client connections, including those originating from Buckit.
+See :ref:`minio-tls` for more information on enabling TLS for the Buckit deployment.
 
 Depending on your selected KMS target's configuration, you may also need to create a dedicated set of TLS certificates for KES to connect and authenticate to the KMS.
 
@@ -45,10 +45,10 @@ For example:
 
 .. start-kes-generate-key-desc
 
-MinIO requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
+Buckit requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the MinIO backend.
+The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the Buckit backend.
 
 .. code-block:: shell
    :class: copyable

@@ -1,6 +1,6 @@
 .. start-common-deploy-pull-latest-minio-image
 
-Select the tab for either Podman or Docker to see instructions for pulling the MinIO container image.
+Select the tab for either Podman or Docker to see instructions for pulling the Buckit container image.
 The instructions include examples for both quay.io and DockerHub:
 
 .. tab-set::
@@ -69,29 +69,29 @@ The instructions include examples for both quay.io and DockerHub:
 
 .. tab-set::
 
-   .. tab-item:: MinIO Web Console
+   .. tab-item:: Buckit Web Console
 
-      You can access the MinIO Web Console by entering http://localhost:9001 in your preferred browser.
-      Any traffic to the MinIO Console port on the local host redirects to the container.
+      You can access the Buckit Web Console by entering http://localhost:9001 in your preferred browser.
+      Any traffic to the Buckit Console port on the local host redirects to the container.
 
       Log in with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` configured in the environment file specified to the container.
 
       .. image:: /images/minio-console/console-bucket-none.png
          :width: 600px
-         :alt: MinIO Console displaying Buckets view in a fresh installation.
+         :alt: Buckit Console displaying Buckets view in a fresh installation.
          :align: center
 
-      Each MinIO server includes its own embedded MinIO Console.
+      Each Buckit server includes its own embedded Buckit Console.
 
       If your local host firewall permits external access to the Console port, other hosts on the same network can access the Console using the IP or hostname for your local host.
 
-   .. tab-item:: MinIO CLI (mc)
+   .. tab-item:: Buckit CLI (mc)
 
-      You can access the MinIO deployment over a Terminal or Shell using the :ref:`MinIO Client <minio-client>` (:mc:`mc`).
-      See :ref:`MinIO Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
+      You can access the Buckit deployment over a Terminal or Shell using the :ref:`Buckit Client <minio-client>` (:mc:`mc`).
+      See :ref:`Buckit Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
 
-      Create a new :mc:`alias <mc alias set>` corresponding to the MinIO deployment. 
-      Use a hostname or IP address for your local machine along with the S3 API port ``9000`` to access the MinIO deployment.
+      Create a new :mc:`alias <mc alias set>` corresponding to the Buckit deployment. 
+      Use a hostname or IP address for your local machine along with the S3 API port ``9000`` to access the Buckit deployment.
       Any traffic to that port on the local host redirects to the container.
 
       .. code-block:: shell
@@ -106,7 +106,7 @@ The instructions include examples for both quay.io and DockerHub:
       The command should return success if the container is running and accessible at the specified port.
 
       You can then interact with the container using any :mc:`mc` command.
-      If your local host firewall permits external access to the MinIO S3 API port, other hosts on the same network can access the MinIO deployment using the IP or hostname for your local host.
+      If your local host firewall permits external access to the Buckit S3 API port, other hosts on the same network can access the Buckit deployment using the IP or hostname for your local host.
 
 .. end-common-deploy-connect-to-minio-service
 

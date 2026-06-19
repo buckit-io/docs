@@ -12,27 +12,27 @@ Publish Events to Redis
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to a `Redis <https://redis.io/>`__ 
 service endpoint.
 
-Add a Redis Endpoint to a MinIO Deployment
+Add a Redis Endpoint to a Buckit Deployment
 -------------------------------------------
 
 The following procedure adds a new Redis service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the Redis Endpoint to MinIO
+1) Add the Redis Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new Redis service endpoint using either environment variables
@@ -42,7 +42,7 @@ You can configure a new Redis service endpoint using either environment variable
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the Redis service endpoint and associated
+      Buckit supports specifying the Redis service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-redis>`. The 
@@ -92,10 +92,10 @@ You can configure a new Redis service endpoint using either environment variable
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing Redis service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_redis <mc admin config get>` to
-        review the currently configured Redis endpoints on the MinIO deployment.
+        review the currently configured Redis endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the Redis service endpoint.
         For example: ``https://redis.example.com:6369``
@@ -107,7 +107,7 @@ You can configure a new Redis service endpoint using either environment variable
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating Redis endpoints on a running 
+      Buckit supports adding or updating Redis endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_redis` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -137,10 +137,10 @@ You can configure a new Redis service endpoint using either environment variable
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing Redis service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_redis <mc admin config get>` to
-        review the currently configured Redis endpoints on the MinIO deployment.
+        review the currently configured Redis endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the Redis service endpoint.
         For example: ``https://redis.example.com:6369``
@@ -149,10 +149,10 @@ You can configure a new Redis service endpoint using either environment variable
       <minio-server-config-bucket-notification-redis>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -189,11 +189,11 @@ event with the configured Redis service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:redis \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the 
   event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
@@ -221,17 +221,17 @@ a notification.
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
-Update an Redis Endpoint in a MinIO Deployment
+Update an Redis Endpoint in a Buckit Deployment
 ----------------------------------------------
 
 The following procedure updates an existing Redis service endpoint for
-supporting :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+supporting :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -249,7 +249,7 @@ configured Redis service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_redis
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -291,10 +291,10 @@ settings are *optional*. See
 :ref:`minio-server-config-bucket-notification-redis` for a complete list of
 Redis configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

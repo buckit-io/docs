@@ -10,14 +10,14 @@ Bucket notifications
    :local:
    :depth: 2
 
-MinIO bucket notifications allow administrators to send notifications to supported external services on certain object or bucket events. 
-MinIO supports bucket and object-level S3 events similar to the 
+Buckit bucket notifications allow administrators to send notifications to supported external services on certain object or bucket events. 
+Buckit supports bucket and object-level S3 events similar to the 
 :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`.
 
 Supported notification targets
 ------------------------------
 
-MinIO supports publishing event notifications to the following targets:
+Buckit supports publishing event notifications to the following targets:
 
 .. list-table::
    :header-rows: 1
@@ -84,44 +84,44 @@ Asynchronous vs synchronous bucket notifications
 
 .. versionadded:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO supports either asynchronous (default) or synchronous bucket notifications for *all* remote targets.
+   Buckit supports either asynchronous (default) or synchronous bucket notifications for *all* remote targets.
 
-With asynchronous delivery, MinIO fires the event at the configured remote and does *not* wait for a response before continuing to the next event.
+With asynchronous delivery, Buckit fires the event at the configured remote and does *not* wait for a response before continuing to the next event.
 Asynchronous bucket notification prioritizes sending events with the risk of some events being lost if the remote target has a transient issue during transit or processing.
 
-With synchronous delivery, MinIO fires the event at the configured remote and then waits for the remote to confirm a successful receipt before continuing to the next event.
+With synchronous delivery, Buckit fires the event at the configured remote and then waits for the remote to confirm a successful receipt before continuing to the next event.
 Synchronous bucket notification prioritizes delivery of events with the risk of a slower event-send rate and queue fill.
 
 To enable synchronous bucket notifications for *all configured remote targets*, use either of the following settings:
 
-- Set the :envvar:`MINIO_API_SYNC_EVENTS` environment variable to ``on`` and restart the MinIO deployment.
+- Set the :envvar:`MINIO_API_SYNC_EVENTS` environment variable to ``on`` and restart the Buckit deployment.
 
-- Set the :mc-conf:`api.sync_events` configuration setting to ``on`` and restart the MinIO deployment.
+- Set the :mc-conf:`api.sync_events` configuration setting to ``on`` and restart the Buckit deployment.
 
 .. note::
 
-   For synchronous and asynchronous events, MinIO maintains a per-remote queue where it stores unsent and pending events.
+   For synchronous and asynchronous events, Buckit maintains a per-remote queue where it stores unsent and pending events.
    The queue limit defaults to ``100000``.
 
-   MinIO discards new events when the queue is full.
+   Buckit discards new events when the queue is full.
 
-   You can increase the queue size as necessary to better accommodate the rate of event send and processing of the MinIO deployment and remote target.
+   You can increase the queue size as necessary to better accommodate the rate of event send and processing of the Buckit deployment and remote target.
    Use the ``QUEUE_LIMIT`` environment variable or configuration setting for your notification method to modify this limit.
 
-   For asynchronous events, MinIO allows a maximum of ``50000`` concurrent ``send`` calls.
+   For asynchronous events, Buckit allows a maximum of ``50000`` concurrent ``send`` calls.
 
 .. _minio-bucket-notifications-event-types:
 
 Supported S3 event types
 ------------------------
 
-MinIO bucket notifications are compatible with :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`. 
+Buckit bucket notifications are compatible with :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`. 
 This section lists all supported events.
 
 Object events
 ~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 object events:
+Buckit supports triggering notifications on the following S3 object events:
 
 .. data:: s3:ObjectAccessed:Get
 .. data:: s3:ObjectAccessed:GetLegalHold
@@ -155,7 +155,7 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 Replication events
 ~~~~~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 replication events:
+Buckit supports triggering notifications on the following S3 replication events:
 
 .. data:: s3:Replication:OperationCompletedReplication
 .. data:: s3:Replication:OperationFailedReplication
@@ -170,7 +170,7 @@ Specify the wildcard ``*`` character to select all ``s3:Replication`` events:
 ILM transition events
 ~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 ILM transition events:
+Buckit supports triggering notifications on the following S3 ILM transition events:
 
 .. data:: s3:ObjectRestore:Post
 .. data:: s3:ObjectRestore:Completed
@@ -190,7 +190,7 @@ Specify the wildcard ``*`` character to select all events related to a prefix:
 Scanner events
 ~~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following S3 :ref:`scanner <minio-concepts-scanner>` transition events:
+Buckit supports triggering notifications on the following S3 :ref:`scanner <minio-concepts-scanner>` transition events:
 
 .. data:: s3:Scanner:ManyVersions
 
@@ -203,7 +203,7 @@ MinIO supports triggering notifications on the following S3 :ref:`scanner <minio
 Global events
 ~~~~~~~~~~~~~
 
-MinIO supports triggering notifications on the following global events. 
+Buckit supports triggering notifications on the following global events. 
 You can only listen to these events through the `ListenNotification <https://docs.min.io/community/minio-object-store/developers/go/API.html#listennotification-context-context-context-prefix-suffix-string-events-string-chan-notification-info>`__ API:
 
 .. data:: s3:BucketCreated
@@ -320,7 +320,7 @@ The following example is a notification for an ``s3:ObjectCreated:Put`` event:
          "source": {
            "host": "192.168.1.10",
            "port": "",
-           "userAgent": "MinIO (linux; amd64) minio-go/v7.0.83"
+           "userAgent": "Buckit (linux; amd64) minio-go/v7.0.83"
          }
        }
      ]

@@ -1,7 +1,7 @@
 .. _minio-operator-crd:
 
 ================================
-MinIO Custom Resource Definition
+Buckit Custom Resource Definition
 ================================
 
 .. default-domain:: minio
@@ -11,7 +11,7 @@ MinIO Custom Resource Definition
    :depth: 2
 
 
-The MinIO Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources>` that describes a MinIO Tenant object.
+The Buckit Operator installs a :kube-docs:`Custom Resource Definition (CRD) <concepts/extend-kubernetes/api-extension/custom-resources>` that describes a Buckit Tenant object.
 The Operator uses this CRD for provisioning and managing Tenant resources within a Kubernetes cluster.
 
 This page documents the CRD reference for use in customizing Operator-deployed Tenants.

@@ -1,4 +1,4 @@
-Deploy MinIO and KES with Server-Side Encryption
+Deploy Buckit and KES with Server-Side Encryption
 ------------------------------------------------
 
 Prior to starting these steps, create the following folders:
@@ -20,7 +20,7 @@ Prerequisite
 Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-1) Create the KES and MinIO Configurations
+1) Create the KES and Buckit Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a. Create the KES Configuration File
@@ -37,7 +37,7 @@ a. Create the KES Configuration File
       :start-after: start-kes-configuration-hashicorp-vault-desc
       :end-before: end-kes-configuration-hashicorp-vault-desc
 
-   - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the MinIO mTLS certificate.
+   - Set ``MINIO_IDENTITY_HASH`` to the identity hash of the Buckit mTLS certificate.
 
       The following command computes the necessary hash:
 
@@ -51,7 +51,7 @@ a. Create the KES Configuration File
 
    - Refer to the instructions for setting up KES for your :kes-docs:`supported KMS solution <#kes-supported-targets>` for additional variables to define specific to your chosen KMS target.
 
-b. Create the MinIO Environment File
+b. Create the Buckit Environment File
 
    Create the environment file using your preferred text editor.
    The following example uses ``nano``:
@@ -82,12 +82,12 @@ b. Create the MinIO Environment File
 4) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+Use the Buckit :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
 
 
 The following commands:
 
-- Create a new :ref:`alias <alias>` for the MinIO deployment
+- Create a new :ref:`alias <alias>` for the Buckit deployment
 - Create a new bucket for storing encrypted data
 - Enable SSE-KMS encryption on that bucket
 

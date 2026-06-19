@@ -13,11 +13,11 @@ Metrics and alerts
    :depth: 2
 
 
-MinIO publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
-You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
+Buckit publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+You can use any scraping tool to pull metrics data from Buckit for further analysis and alerting.
 
-Starting with MinIO Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and MinIO Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 provides additional endpoints.
-MinIO recommends version 3 for new deployments.
+Starting with Buckit Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and Buckit Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 provides additional endpoints.
+Buckit recommends version 3 for new deployments.
 
 .. admonition:: Metrics version 2
    :class: note
@@ -43,14 +43,14 @@ For example, the following endpoint returns audit metrics:
 
    http://HOSTNAME:PORT/minio/metrics/v3/audit
 
-Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
+For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
-By default, MinIO requires authentication to scrape the metrics endpoints.
+By default, Buckit requires authentication to scrape the metrics endpoints.
 To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
 You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
-MinIO provides the following scraping endpoints, relative to the base URL:
+Buckit provides the following scraping endpoints, relative to the base URL:
 
 .. list-table::
    :header-rows: 1
@@ -115,7 +115,7 @@ MinIO provides the following scraping endpoints, relative to the base URL:
 For a complete list of metrics for each endpoint, see :ref:`Available version 3 metrics <minio-metrics-and-alerts-available-metrics>`.
 
    
-To enable historical data visualization in MinIO Console, set the following environment variables on each node in the MinIO deployment:
+To enable historical data visualization in Buckit Console, set the following environment variables on each node in the Buckit deployment:
 
 - Set :envvar:`MINIO_PROMETHEUS_URL` to the URL of the Prometheus service
 - Set :envvar:`MINIO_PROMETHEUS_JOB_ID` to the unique job ID assigned to the collected metrics
@@ -125,7 +125,7 @@ To enable historical data visualization in MinIO Console, set the following envi
 Available version 3 metrics
 ---------------------------
 
-MinIO publishes a number of metrics for clusters, API requests, buckets, and other aspects of the MinIO service:
+Buckit publishes a number of metrics for clusters, API requests, buckets, and other aspects of the Buckit service:
 
 - :ref:`API Metrics <minio-available-v3-api-metrics>`
 - :ref:`Audit Metrics <minio-available-v3-audit-metrics>`

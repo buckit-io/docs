@@ -20,11 +20,11 @@ Description
 .. start-mc-admin-top-desc
 
 The :mc-cmd:`mc admin top` command returns statistics for distributed
-MinIO deployments, similar to the output of the ``top`` command. 
+Buckit deployments, similar to the output of the ``top`` command. 
 
 .. end-mc-admin-top-desc
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -37,7 +37,7 @@ Syntax
 .. mc-cmd:: locks
    :fullpath:
 
-   Returns the 10 oldest locks on the MinIO deployment.
+   Returns the 10 oldest locks on the Buckit deployment.
 
    The command has the following syntax:
 
@@ -50,10 +50,10 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from which
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from which
       the command retrieves statistics.
 
-      The alias *must* correspond to a distributed (multi-node) MinIO deployment.
+      The alias *must* correspond to a distributed (multi-node) Buckit deployment.
       The command returns an error for :term:`single-node single-drive` deployments.
       
 

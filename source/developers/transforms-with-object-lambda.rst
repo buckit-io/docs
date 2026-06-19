@@ -10,15 +10,15 @@ Transforms with Object Lambda
    :local:
    :depth: 2
 
-MinIO's Object Lambda enables developers to programmatically transform objects on demand.
+Buckit's Object Lambda enables developers to programmatically transform objects on demand.
 You can transform objects as needed for your use case, such as redacting personally identifiable information (PII), enriching data with information from other sources, or converting between formats.
 
 Overview
 --------
 
 An :ref:`Object Lambda handler <minio_object_lambda_handers>` is a small code module that transforms the contents of an object and returns the results.
-Like :s3-docs:`Amazon S3 Object Lambda functions <transforming-objects.html>`, you trigger a MinIO Object Lambda handler function with a GET request from an application.
-The handler retrieves the requested object from MinIO, transforms it, and returns the modified data back to MinIO to send to the original application.
+Like :s3-docs:`Amazon S3 Object Lambda functions <transforming-objects.html>`, you trigger a Buckit Object Lambda handler function with a GET request from an application.
+The handler retrieves the requested object from Buckit, transforms it, and returns the modified data back to Buckit to send to the original application.
 The original object remains unchanged.
 
 Each handler is an independent process, and multiple handlers can transform the same data.
@@ -56,20 +56,20 @@ A handler function should perform the following steps:
       * - ``inputS3Url``
         - A `presigned URL <https://docs.min.io/community/minio-object-store/developers/go/API.html#presigned-operations>`__ for the original object.
 	  The calling application generates the URL and sends it in the original request.
-	  This allows the handler to access the original object without the MinIO credentials usually required.
+	  This allows the handler to access the original object without the Buckit credentials usually required.
           The URL is valid for one hour.
 
       * - ``outputRoute``
-        - A token that allows MinIO to validate the destination for the transformed object.
+        - A token that allows Buckit to validate the destination for the transformed object.
 	  Return this value with the response in an ``x-amz-request-route`` header.
 
       * - ``outputToken``
-        - A token that allows MinIO to validate the response.
+        - A token that allows Buckit to validate the response.
 	  Return this value in the response in an ``x-amz-request-token`` header.
 
-#. Retrieve the original object from MinIO.
+#. Retrieve the original object from Buckit.
 
-   Use the presigned URL to retrieve the object from the MinIO deployment.
+   Use the presigned URL to retrieve the object from the Buckit deployment.
    The contents of the object are in the body of the response.
 
 #. Transform the object as desired.
@@ -85,20 +85,20 @@ A handler function should perform the following steps:
 
 #. Return the response back to Object Lambda.
 
-   MinIO validates the response and sends the transformed data back to the original calling application.
+   Buckit validates the response and sends the transformed data back to the original calling application.
 
    
 .. admonition:: Response headers
    :class: note
 
    Handlers **must** include the ``outputRoute`` and ``outputToken`` values in the appropriate response headers.
-   This allows MinIO to correctly validate the response from the handler.
+   This allows Buckit to correctly validate the response from the handler.
 
 
 Register the Handler
 ~~~~~~~~~~~~~~~~~~~~
 
-To enable MinIO to call the handler, register the handler function as a webhook with the following :ref:`MinIO server Object Lambda environment variables <minio-server-envvar-object-lambda-webhook>`:
+To enable Buckit to call the handler, register the handler function as a webhook with the following :ref:`Buckit server Object Lambda environment variables <minio-server-envvar-object-lambda-webhook>`:
 
 :envvar:`MINIO_LAMBDA_WEBHOOK_ENABLE_functionname <MINIO_LAMBDA_WEBHOOK_ENABLE>`
    Enable or disable Object Lambda for a handler function.
@@ -108,7 +108,7 @@ To enable MinIO to call the handler, register the handler function as a webhook 
    Register an endpoint for a handler function.
    For multiple handlers, set this environment variable for each function endpoint.
 
-MinIO also supports the following environment variables for authenticated webhook endpoints:
+Buckit also supports the following environment variables for authenticated webhook endpoints:
 
 :envvar:`MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN_functionanme <MINIO_LAMBDA_WEBHOOK_AUTH_TOKEN>`
    Specify the opaque string or JWT authorization token for authenticating to the webhook.
@@ -119,9 +119,9 @@ MinIO also supports the following environment variables for authenticated webhoo
 :envvar:`MINIO_LAMBDA_WEBHOOK_CLIENT_KEY_functionname <MINIO_LAMBDA_WEBHOOK_CLIENT_CERT>`
    Specify the private key to use for mTLS authentication to the webhook.
 
-Restart MinIO to apply the changes.
+Restart Buckit to apply the changes.
 
-Alternatively, configure Object Lambda with the :ref:`MinIO Client <minio-client>` command line tool.
+Alternatively, configure Object Lambda with the :ref:`Buckit Client <minio-client>` command line tool.
 For more information, see :ref:`minio-server-envvar-object-lambda-webhook`.
 
 Trigger From an Application
@@ -129,7 +129,7 @@ Trigger From an Application
 
 To request a transformed object from your application:
 
-#. Connect to the MinIO deployment.
+#. Connect to the Buckit deployment.
 
 #. Set the Object Lambda target by adding a ``lambdaArn`` parameter with the ARN of the desired handler.
 
@@ -137,8 +137,8 @@ To request a transformed object from your application:
 
 #. Use the generated URL to retrieve the transformed object.
 
-   MinIO sends the request to the target Object Lambda handler.
-   The handler returns the transformed contents back to MinIO, which validates the response and sends it back to the application.
+   Buckit sends the request to the target Object Lambda handler.
+   The handler returns the transformed contents back to Buckit, which validates the response and sends it back to the application.
 
    
 Example
@@ -152,9 +152,9 @@ Transform the contents of an object using Python, Go, and ``curl``:
 
 Prerequisites:
 
-- An existing :ref:`MinIO <minio-installation>` deployment
+- An existing :ref:`Buckit <minio-installation>` deployment
 - Working Python (3.8+) and Golang development environments
-- :doc:`The MinIO Go SDK </developers/go/minio-go>`
+- :doc:`The Buckit Go SDK </developers/go/minio-go>`
 
 
 Create a Handler
@@ -172,7 +172,7 @@ The following command installs Flask and other needed dependencies:
    pip install flask requests
 
 The handler calls ``swapcase()`` to change the case of each letter in the original text.
-It then sends the results back to MinIO, which returns it to the caller.
+It then sends the results back to Buckit, which returns it to the caller.
 
 .. code-block:: py
    :class: copyable
@@ -191,7 +191,7 @@ It then sends the results back to MinIO, which returns it to the caller.
          object_context = event["getObjectContext"]
 
          # Get the presigned URL
-	 # Used to fetch the original object from MinIO
+	 # Used to fetch the original object from Buckit
          s3_url = object_context["inputS3Url"]
 
          # Extract the route and request tokens from the input context
@@ -206,7 +206,7 @@ It then sends the results back to MinIO, which returns it to the caller.
          transformed_object = original_object.swapcase()
 
          # Return the object back to Object Lambda, with required headers
-         # This sends the transformed data to MinIO
+         # This sends the transformed data to Buckit
 	 # and then to the user
          resp = make_response(transformed_object, 200)
          resp.headers['x-amz-request-route'] = request_route
@@ -241,26 +241,26 @@ The output resembles the following:
    Press CTRL+C to quit
 
 
-Start MinIO
+Start Buckit
 +++++++++++
    
-Once the handler is running, start MinIO with the :envvar:`MINIO_LAMBDA_WEBHOOK_ENABLE` and :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT` environment variables to register the function with MinIO.
+Once the handler is running, start Buckit with the :envvar:`MINIO_LAMBDA_WEBHOOK_ENABLE` and :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT` environment variables to register the function with Buckit.
 To identify the specific Object Lambda handler, append the name of the function to the name of the environment variable.
 
-The following command starts MinIO in your local development environment:
+The following command starts Buckit in your local development environment:
 
 .. code-block:: shell
    :class: copyable
 
    MINIO_LAMBDA_WEBHOOK_ENABLE_myfunction=on MINIO_LAMBDA_WEBHOOK_ENDPOINT_myfunction=http://localhost:5000 minio server /data
 
-Replace ``myfunction`` with the name of your handler function and ``/data`` with the location of the MinIO directory for your local deployment. 
+Replace ``myfunction`` with the name of your handler function and ``/data`` with the location of the Buckit directory for your local deployment. 
 The output resembles the following:
 
 .. code-block:: shell
 
-   MinIO Object Storage Server
-   Copyright: 2015-2023 MinIO, Inc.
+   Buckit Object Storage Server
+   Copyright: 2015-2023 Buckit, Inc.
    License: GNU AGPLv3 <https://www.gnu.org/licenses/agpl-3.0.html>
    Version: RELEASE.2023-03-24T21-41-23Z (go1.19.7 linux/arm64)
    
@@ -291,7 +291,7 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
 
 #. Invoke the Handler
 
-   The following Go code uses the :doc:`The MinIO Go SDK </developers/go/minio-go>` to generate a presigned URL and print it to ``stdout``.
+   The following Go code uses the :doc:`The Buckit Go SDK </developers/go/minio-go>` to generate a presigned URL and print it to ``stdout``.
 
    .. code-block:: go
       :class: copyable
@@ -311,7 +311,7 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
 
       func main() {
 
-         // Connect to the MinIO deployment
+         // Connect to the Buckit deployment
          s3Client, err := minio.New("localhost:9000", &minio.Options{
             Creds:  credentials.NewStaticV4("my_admin_user", "my_admin_password", ""),
             Secure: false,
@@ -336,7 +336,7 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
 
    In the code above, replace the following values:
 
-   - Replace ``my_admin_user`` and ``my_admin_password`` with user credentials for a MinIO deployment.
+   - Replace ``my_admin_user`` and ``my_admin_password`` with user credentials for a Buckit deployment.
    - Replace ``myfunction`` with the same function name set in the ``MINIO_LAMBDA_WEBHOOK_ENABLE`` and ``MINIO_LAMBDA_WEBHOOK_ENDPOINT`` environment variables.
 
    To retrieve the transformed object, execute the Go code with ``curl`` to generate a GET request:

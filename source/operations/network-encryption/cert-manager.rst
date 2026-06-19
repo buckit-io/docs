@@ -14,19 +14,19 @@ TLS certificate management with cert-manager
 --------------------------------------------
 
 This guide shows you how to install cert-manager for TLS certificate management.
-The guide assumes a new or fresh MinIO Operator installation.
+The guide assumes a new or fresh Buckit Operator installation.
 
 .. note::
 
    This guide uses a self-signed ``Cluster Issuer``. 
    You can also use `other Issuers supported by cert-manager <https://cert-manager.io/docs/configuration/issuers/>`__.
 
-   The main difference is that you must provide that ``Issuer`` CA certificate to MinIO, instead of the CA's mentioned in this guide.
+   The main difference is that you must provide that ``Issuer`` CA certificate to Buckit, instead of the CA's mentioned in this guide.
 
 Refer to the `cert-manager documentation <https://cert-manager.io>`__ and your own organization's certificate requirements for more advanced configurations.
 
 cert-manager manages certificates within Kubernetes clusters.
-The MinIO Operator supports using cert-manager for managing and provisioning certificates as an alternative to the MinIO Operator managing certificates for itself and its tenants.
+The Buckit Operator supports using cert-manager for managing and provisioning certificates as an alternative to the Buckit Operator managing certificates for itself and its tenants.
 
 cert-manager obtains valid certificates from an ``Issuer`` or ``ClusterIssuer`` and can automatically renew certificates prior to expiration.
 
@@ -38,7 +38,7 @@ The following graphic depicts how cert-manager provides certificates in namespac
 - A ``ClusterIssuer`` exists at the root level of the Kubernetes cluster, typically the ``default`` namespace, to provide certificates to all other namespaces.
 - The ``minio-operator`` namespace receives its own, local ``Issuer``. 
 - Each tenant's namespace receives its own, local ``Issuer``.
-- The certificates issued by each tenant namespace must be made known to and trusted by the MinIO Operator.
+- The certificates issued by each tenant namespace must be made known to and trusted by the Buckit Operator.
 
 .. image:: /images/k8s/cert-manager-graph.png
    :width: 600px
@@ -103,7 +103,7 @@ The ``Cluster Issuer`` is the top level Issuer from which all other certificates
 Next steps
 ----------
 
-Set up :ref:`cert-manager for the MinIO Operator <minio-certmanager-operator>`.
+Set up :ref:`cert-manager for the Buckit Operator <minio-certmanager-operator>`.
 
 .. toctree::
    :titlesonly:

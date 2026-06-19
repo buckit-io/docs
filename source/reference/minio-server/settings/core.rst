@@ -10,7 +10,7 @@ Core Settings
    :local:
    :depth: 2
 
-This page covers settings that control core behavior of the MinIO process.
+This page covers settings that control core behavior of the Buckit process.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -20,7 +20,7 @@ This page covers settings that control core behavior of the MinIO process.
    :start-after: start-minio-settings-test-before-prod
    :end-before: end-minio-settings-test-before-prod
 
-MinIO Server CLI Options
+Buckit Server CLI Options
 ------------------------
 
 .. tab-set::
@@ -37,9 +37,9 @@ MinIO Server CLI Options
 
 *Optional*
 
-Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the MinIO Server.
+Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the Buckit Server.
 
-For Unix-like systems using the recommended MinIO ``systemd`` service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
+For Unix-like systems using the recommended Buckit ``systemd`` service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
 
 .. code-block:: shell
    :class: copyable
@@ -49,7 +49,7 @@ For Unix-like systems using the recommended MinIO ``systemd`` service, use the `
    MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
 For systems running ``minio`` on the command line, ``MINIO_OPTS`` is optional.
-To use it, declare the environment variable using standard shell semantics, then reference the environment variable when starting up the MinIO Server:
+To use it, declare the environment variable using standard shell semantics, then reference the environment variable when starting up the Buckit Server:
 
 .. code-block:: shell
    :class: copyable
@@ -80,7 +80,7 @@ Storage Volumes
          The directories or drives the :mc:`minio server` process uses as the storage backend.
 
          Functionally equivalent to setting :mc-cmd:`minio server DIRECTORIES`.
-         Use this value when configuring MinIO to run using an environment file.
+         Use this value when configuring Buckit to run using an environment file.
 
    .. tab-item:: Configuration Setting
 
@@ -97,9 +97,9 @@ Environment Variable File Path
 
       .. envvar:: MINIO_CONFIG_ENV_FILE
 
-         Specifies the full path to the file the MinIO server process uses for loading environment variables.
+         Specifies the full path to the file the Buckit server process uses for loading environment variables.
 
-         For ``systemd``-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct MinIO to reload changes to that file when using :mc-cmd:`mc admin service restart` to restart the deployment.
+         For ``systemd``-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct Buckit to reload changes to that file when using :mc-cmd:`mc admin service restart` to restart the deployment.
 
    .. tab-item:: Configuration Setting
 
@@ -118,7 +118,7 @@ Workers for Expiration
       .. envvar:: MINIO_ILM_EXPIRY_WORKERS
 
          Specifies the number of workers to make available to expire objects configured with ILM rules for expiration.
-         When not set, MinIO defaults to using up to half of the available processing cores available.
+         When not set, Buckit defaults to using up to half of the available processing cores available.
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -136,12 +136,12 @@ Domain
 
       .. envvar:: MINIO_DOMAIN
 
-         Enables Virtual Host-style requests to the MinIO deployment.
-         Set the value to the Fully Qualified Domain Name (FQDN) for MinIO to accept incoming virtual host requests.
+         Enables Virtual Host-style requests to the Buckit deployment.
+         Set the value to the Fully Qualified Domain Name (FQDN) for Buckit to accept incoming virtual host requests.
 
-         Omitting this setting directs MinIO to only accept the default path-style requests.
+         Omitting this setting directs Buckit to only accept the default path-style requests.
 
-         For example, consider a MinIO deployment with an assigned FQDN of ``minio.example.net``.
+         For example, consider a Buckit deployment with an assigned FQDN of ``minio.example.net``.
 
          - With path-style lookups, applications can access the bucket using its full path as ``minio.example.net/mybucket``.
          - With virtual-host lookups, application can access the bucket as a virtual host as ``mybucket.minio.example.net/``.
@@ -149,9 +149,9 @@ Domain
          .. important::
 
             If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
-            Any MinIO services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision.
+            Any Buckit services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision.
 
-            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any MinIO service or target.
+            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any Buckit service or target.
             This includes hostnames for use with :ref:`bucket <minio-bucket-replication>`, :ref:`batch <minio-batch-framework-replicate-job>`, or :ref:`site replication <minio-site-replication-overview>`.
 
    .. tab-item:: Configuration Setting
@@ -178,7 +178,7 @@ Scanner Speed
       .. mc-conf:: scanner speed
          :delimiter: " "
 
-Manage the maximum wait period for the :ref:`scanner <minio-concepts-scanner>` when balancing MinIO read/write performance to scanner processes.
+Manage the maximum wait period for the :ref:`scanner <minio-concepts-scanner>` when balancing Buckit read/write performance to scanner processes.
 
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-values
@@ -253,7 +253,7 @@ Defaults to ``off``.
 .. admonition:: Encrypting compressed objects may compromise security
    :class: warning
 
-   MinIO strongly recommends against encrypting compressed objects.
+   Buckit strongly recommends against encrypting compressed objects.
    If you require encryption, carefully evaluate the risk of potentially leaking information about the contents of encrypted objects.
 
 Compression Extensions
@@ -280,9 +280,9 @@ Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
 
 .. versionchanged:: RELEASE.2024-03-15T01-07-19Z
 
-   Specify ``"*"`` to direct MinIO to compress all supported file types.
+   Specify ``"*"`` to direct Buckit to compress all supported file types.
 
-MinIO does not support compressing file types on the :ref:`Excluded File Types <minio-data-compression-excluded-types>` list, even if explicitly specified in this argument.
+Buckit does not support compressing file types on the :ref:`Excluded File Types <minio-data-compression-excluded-types>` list, even if explicitly specified in this argument.
 
 Compression MIME Types
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -310,7 +310,7 @@ Defaults to ``"text/*, application/json, application/xml, binary/octet-stream"``
    :class: note
 
    Some	types of files cannot be significantly reduced in size.
-   MinIO will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
+   Buckit will *not* compress these, even if specified in an :mc-conf:`~compression.mime_types` argument.
    See :ref:`Excluded types <minio-data-compression-excluded-types>` for details.
 
 Comments
@@ -360,10 +360,10 @@ The selected stripe size is **immutable** after the cluster has been initialized
 
 .. warning::
 
-   **Do not** change the stripe size setting unless directed to by MinIO engineering.
+   **Do not** change the stripe size setting unless directed to by Buckit engineering.
 
    Changes to stripe size have significant impact to deployment functionality, availability, performance, and behavior.
-   MinIO's stripe selection algorithms set appropriate defaults for the majority of workloads.
+   Buckit's stripe selection algorithms set appropriate defaults for the majority of workloads.
    Changing the stripe size from this default is unusual and generally not necessary or advised.
 
 Maximum Object Versions
@@ -386,11 +386,11 @@ Maximum Object Versions
 
 Defines the default maximum versions to allow per object.
 
-By default, MinIO allows up to the maximum value of an Int64 versions per object, or over 9.2 quintillion.
+By default, Buckit allows up to the maximum value of an Int64 versions per object, or over 9.2 quintillion.
 
 .. note::
 
-   MinIO versions from ``RELEASE.2023-08-04T17-40-21Z``to ``RELEASE.2024-03-26T22-10-45Z`` had a default limit of 10,000 object versions.
+   Buckit versions from ``RELEASE.2023-08-04T17-40-21Z``to ``RELEASE.2024-03-26T22-10-45Z`` had a default limit of 10,000 object versions.
    This setting can be used to override that limit to another value.
 
 Arbitrarily high versions per objects may cause performance degradation on some operations, such as ``LIST``.

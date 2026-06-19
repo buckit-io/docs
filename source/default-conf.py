@@ -130,8 +130,38 @@ images_config = {
 # `.rst` for source assumed in the rules
 # `.html` for target must be included
 redirects = {
-    "reference/minio-mc-admin/mc-admin-top": "../deprecated/mc-admin-top.html"
+    "reference/minio-mc": "bm-cli.html",
+    "reference/minio-mc-admin": "bm-admin.html",
+    "reference/minio-mc-deprecated": "bm-cli-deprecated.html",
+    "reference/bm-admin/bm-admin-top": "../deprecated/mc-admin-top.html",
+    # Content-less section landing pages redirect to their first child so that
+    # clicking the parent in the nav opens real content instead of a blank page.
+    "installation-and-upgrade": "operations/checklists.html",
+    "cluster-management": "administration/concepts.html",
+    "object-and-bucket-operations": "operations/concepts.html",
+    "developers": "developers/minio-drivers.html",
 }
+
+for name in os.listdir("reference/bm-cli"):
+    if not name.endswith(".rst"):
+        continue
+    stem = name[:-4]
+    if stem == "bm-cli-settings":
+        old_stem = "minio-client-settings"
+    elif stem.startswith("bm-"):
+        old_stem = "mc-" + stem[3:]
+    else:
+        continue
+    redirects[f"reference/minio-mc/{old_stem}"] = f"../bm-cli/{stem}.html"
+
+for name in os.listdir("reference/bm-admin"):
+    if not name.endswith(".rst"):
+        continue
+    stem = name[:-4]
+    if not stem.startswith("bm-admin-"):
+        continue
+    old_stem = "mc-admin-" + stem[9:]
+    redirects[f"reference/minio-mc-admin/{old_stem}"] = f"../bm-admin/{stem}.html"
 
 
 # sphinxcontrib-autoyaml customization
@@ -184,7 +214,7 @@ project = 'Documentation for Buckit Object Storage'
 copyright = '2020-Present, Buckit, Inc. '
 author = 'Buckit Documentation Team'
 html_title = 'Buckit Object Storage (AGPLv3)'
-html_short_title = 'Buckit Object Storage'
+html_short_title = 'Buckit Object Storage User Guide'
 
 html_permalinks_icon = ''
 
@@ -221,7 +251,7 @@ rst_prolog = """
 .. |minio-rpms-390x| replace:: RPMS390XURL
 .. |minio-debs-390x| replace:: DEBS390XURL
 .. |minio-binarys-390x| replace:: MINIOS390XURL
-.. |subnet| replace:: `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__
+.. |subnet| replace:: `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`

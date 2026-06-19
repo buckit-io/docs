@@ -12,7 +12,7 @@ Requirements to Set Up Bucket Replication
 
 .. _minio-bucket-replication-serverside-oneway-permissions:
 
-Bucket replication uses rules to synchronize the contents of a bucket on one MinIO deployment to a bucket on a remote MinIO deployment.
+Bucket replication uses rules to synchronize the contents of a bucket on one Buckit deployment to a bucket on a remote Buckit deployment.
 
 Replication can be done in any of the following ways:
 
@@ -40,7 +40,7 @@ Matching Object Encryption Settings for Bucket Replication
    :start-after: start-replication-encrypted-objects
    :end-before: end-replication-encrypted-objects
 
-Bucket Replication Requires MinIO Deployments
+Bucket Replication Requires Buckit Deployments
 ---------------------------------------------
 
 .. include:: /includes/common-replication.rst

@@ -1,13 +1,13 @@
 .. start-scanner-speed-config
 
-You can adjust how MinIO balances the scanner performance with read/write operations using either the :envvar:`MINIO_SCANNER_SPEED` environment variable or the :mc-conf:`scanner speed <scanner.speed>` configuration setting.
+You can adjust how Buckit balances the scanner performance with read/write operations using either the :envvar:`MINIO_SCANNER_SPEED` environment variable or the :mc-conf:`scanner speed <scanner.speed>` configuration setting.
 
 .. end-scanner-speed-config
 
 
 .. start-scanner-speed-values
 
-MinIO utilizes the :ref:`scanner <minio-concepts-scanner>` for :ref:`bucket replication <minio-bucket-replication>`, :ref:`site replication <minio-site-replication-overview>`, :ref:`lifecycle management <minio-lifecycle-management>`, and :ref:`healing <minio-concepts-healing>` tasks.
+Buckit utilizes the :ref:`scanner <minio-concepts-scanner>` for :ref:`bucket replication <minio-bucket-replication>`, :ref:`site replication <minio-site-replication-overview>`, :ref:`lifecycle management <minio-lifecycle-management>`, and :ref:`healing <minio-concepts-healing>` tasks.
 
 Valid values include:
 

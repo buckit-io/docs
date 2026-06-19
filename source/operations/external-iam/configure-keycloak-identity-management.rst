@@ -1,7 +1,7 @@
 .. _minio-authenticate-using-keycloak:
 
 =================================================
-Configure MinIO for Authentication using Keycloak
+Configure Buckit for Authentication using Keycloak
 =================================================
 
 .. default-domain:: minio
@@ -14,9 +14,9 @@ Configure MinIO for Authentication using Keycloak
 Overview
 --------
 
-This procedure configures MinIO to use `Keycloak <https://www.keycloak.org/>`__ as an external IDentity Provider (IDP) for authentication of users via the OpenID Connect (OIDC) protocol.
+This procedure configures Buckit to use `Keycloak <https://www.keycloak.org/>`__ as an external IDentity Provider (IDP) for authentication of users via the OpenID Connect (OIDC) protocol.
 
-This page has procedures for configuring OIDC for MinIO deployments in Kubernetes and Baremetal infrastructures.
+This page has procedures for configuring OIDC for Buckit deployments in Kubernetes and Baremetal infrastructures.
 
 Select the tab corresponding to your infrastructure to switch between instruction sets.
 
@@ -26,23 +26,23 @@ Select the tab corresponding to your infrastructure to switch between instructio
    .. tab-item:: Kubernetes
       :sync: k8s
 
-      For MinIO Tenants deployed using the :ref:`MinIO Kubernetes Operator <minio-kubernetes>`, this procedure covers:
+      For Buckit Tenants deployed using the :ref:`Buckit Kubernetes Operator <minio-kubernetes>`, this procedure covers:
 
-      - Configure Keycloak for use with MinIO authentication and authorization
-      - Configure a new or existing MinIO Tenant to use Keycloak as the OIDC provider
+      - Configure Keycloak for use with Buckit authentication and authorization
+      - Configure a new or existing Buckit Tenant to use Keycloak as the OIDC provider
       - Create policies to control access of Keycloak-authenticated users
-      - Log into the MinIO Tenant Console using SSO and a Keycloak-managed identity
+      - Log into the Buckit Tenant Console using SSO and a Keycloak-managed identity
       - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
    .. tab-item:: Baremetal
       :sync: baremetal
 
-      For MinIO deployments on baremetal infrastructure, this procedure covers:
+      For Buckit deployments on baremetal infrastructure, this procedure covers:
 
-      - Configure Keycloak for use with MinIO authentication and authorization
-      - Configure a new or existing MinIO cluster to use Keycloak as the OIDC provider
+      - Configure Keycloak for use with Buckit authentication and authorization
+      - Configure a new or existing Buckit cluster to use Keycloak as the OIDC provider
       - Create policies to control access of Keycloak-authenticated users
-      - Log into the MinIO Console using SSO and a Keycloak-managed identity
+      - Log into the Buckit Console using SSO and a Keycloak-managed identity
       - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 This procedure was written and tested against Keycloak ``21.0.0``. 
@@ -63,20 +63,20 @@ Specifically, you must have permission to create and configure Realms, Clients, 
    .. tab-item:: Kubernetes
       :sync: k8s
 
-      For Keycloak deployments within the same Kubernetes cluster as the MinIO Tenant, this procedure assumes bidirectional access between the Keycloak and MinIO pods/services.
-      For Keycloak deployments external to the Kubernetes cluster, this procedure assumes an existing Ingress, Load Balancer, or similar Kubernetes network control component that manages network access to and from the MinIO Tenant.
+      For Keycloak deployments within the same Kubernetes cluster as the Buckit Tenant, this procedure assumes bidirectional access between the Keycloak and Buckit pods/services.
+      For Keycloak deployments external to the Kubernetes cluster, this procedure assumes an existing Ingress, Load Balancer, or similar Kubernetes network control component that manages network access to and from the Buckit Tenant.
 
 
    .. tab-item:: Baremetal
       :sync: baremetal
 
-      The MinIO deployment must have bidirectional access to the target OIDC service.
+      The Buckit deployment must have bidirectional access to the target OIDC service.
 
-Ensure each user identity intended for use with MinIO has the appropriate :ref:`claim <minio-external-identity-management-openid-access-control>` configured such that MinIO can associate a :ref:`policy <minio-policy>` to the authenticated user.
-An OpenID user with no assigned policy has no permission to access any action or resource on the MinIO cluster.
+Ensure each user identity intended for use with Buckit has the appropriate :ref:`claim <minio-external-identity-management-openid-access-control>` configured such that Buckit can associate a :ref:`policy <minio-policy>` to the authenticated user.
+An OpenID user with no assigned policy has no permission to access any action or resource on the Buckit cluster.
 
 
-Access to MinIO Cluster
+Access to Buckit Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
@@ -84,21 +84,21 @@ Access to MinIO Cluster
    .. tab-item:: Kubernetes
       :sync: k8s
 
-      You must have access to the MinIO Operator Console web UI.
-      You can either expose the MinIO Operator Console service using your preferred Kubernetes routing component, or use temporary port forwarding to expose the Console service port on your local machine.
+      You must have access to the Buckit Operator Console web UI.
+      You can either expose the Buckit Operator Console service using your preferred Kubernetes routing component, or use temporary port forwarding to expose the Console service port on your local machine.
 
    .. tab-item:: Baremetal
       :sync: baremetal
 
-      This procedure uses :mc:`mc` for performing operations on the MinIO cluster. 
+      This procedure uses :mc:`mc` for performing operations on the Buckit cluster. 
       Install ``mc`` on a machine with network access to the cluster.
       See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
 
-      This procedure assumes a configured :mc:`alias <mc alias>` for the MinIO cluster. 
+      This procedure assumes a configured :mc:`alias <mc alias>` for the Buckit cluster. 
 
 .. _minio-external-identity-management-keycloak-configure:
 
-Configure MinIO for Keycloak Identity Management
+Configure Buckit for Keycloak Identity Management
 ------------------------------------------------
 
 .. tab-set::
@@ -116,11 +116,11 @@ Configure MinIO for Keycloak Identity Management
 Enable the Keycloak Admin REST API
 ----------------------------------
 
-MinIO supports using the Keycloak Admin REST API for checking if an authenticated user exists *and* is enabled on the Keycloak realm.
-This functionality allows MinIO to more quickly remove access from previously authenticated Keycloak users.
-Without this functionality, the earliest point in time that MinIO could disable access for a disabled or removed user is when the last retrieved authentication token expires.
+Buckit supports using the Keycloak Admin REST API for checking if an authenticated user exists *and* is enabled on the Keycloak realm.
+This functionality allows Buckit to more quickly remove access from previously authenticated Keycloak users.
+Without this functionality, the earliest point in time that Buckit could disable access for a disabled or removed user is when the last retrieved authentication token expires.
 
-This procedure assumes an existing MinIO deployment configured with Keycloak as an external identity manager.
+This procedure assumes an existing Buckit deployment configured with Keycloak as an external identity manager.
 
 1) Create the Necessary Client Scopes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,7 +141,7 @@ Navigate to the :guilabel:`Client scopes` view and create a new scope:
    * - :guilabel:`Included Client Audience`
      - Set to ``security-admin-console``.
 
-Navigate to :guilabel:`Clients` and select the MinIO client
+Navigate to :guilabel:`Clients` and select the Buckit client
 
 1. From :guilabel:`Service account roles`, select :guilabel:`Assign role` and assign the ``admin`` role
 2. From :guilabel:`Client scopes`, select :guilabel:`Add client scope` and add the previously created scope
@@ -151,7 +151,7 @@ Navigate to :guilabel:`Settings` and ensure :guilabel:`Authentication flow` incl
 2) Validate Admin API Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can validate the functionality by using the Admin REST API with the MinIO client credentials to retrieve a bearer token and user data:
+You can validate the functionality by using the Admin REST API with the Buckit client credentials to retrieve a bearer token and user data:
 
 1. Retrieve the bearer token:
 
@@ -202,15 +202,15 @@ You can validate the functionality by using the Admin REST API with the MinIO cl
          }
       }
 
-   MinIO would revoke access for an authenticated user if the returned value has ``enabled: false`` or ``null`` (user was removed from Keycloak).
+   Buckit would revoke access for an authenticated user if the returned value has ``enabled: false`` or ``null`` (user was removed from Keycloak).
 
-3) Enable Keycloak Admin Support on MinIO
+3) Enable Keycloak Admin Support on Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports multiple methods for configuring Keycloak Admin API Support:
+Buckit supports multiple methods for configuring Keycloak Admin API Support:
 
 - Using a terminal/shell and the :mc:`mc idp openid` command
-- Using environment variables set prior to starting MinIO
+- Using environment variables set prior to starting Buckit
 
 .. tab-set::
 
@@ -229,7 +229,7 @@ MinIO supports multiple methods for configuring Keycloak Admin API Support:
             keycloak_realm="REALM"
 
       - Replace ``KEYCLOAK_IDENTIFIER`` with the name of the configured Keycloak IDP.
-        You can use :mc-cmd:`mc idp openid ls` to view all configured IDP configurations on the MinIO deployment
+        You can use :mc-cmd:`mc idp openid ls` to view all configured IDP configurations on the Buckit deployment
         
       - Specify the Keycloak admin URL in the :mc-conf:`keycloak_admin_url <identity_openid.keycloak_admin_url>` configuration setting
 

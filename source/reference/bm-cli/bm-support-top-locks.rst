@@ -1,0 +1,101 @@
+========================
+``bm support top locks``
+========================
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: bm support top locks
+
+.. include:: /includes/common-mc-support.rst
+   :start-after: start-minio-only
+   :end-before: end-minio-only
+
+Syntax
+------
+
+.. start-mc-support-top-locks-desc
+
+The :mc:`bm support top locks` command lists the ten oldest :ref:`locks <minio-object-locking>` on a Buckit deployment.
+
+.. end-mc-support-top-locks-desc
+
+The command outputs the age of the lock, type of lock, owner, and resource.
+The output resembles the following:
+
+.. code-block:: shell
+
+   Since                 Type    Owner                 Resource
+   13 hours ago          WRITE   10.68.100.18:9000     .minio.sys/leader.lock
+   13 hours ago          WRITE   10.68.100.18:9000     .minio.sys/callhome/runCallhome.lock
+   13 hours ago          WRITE   10.68.100.23:9000     .minio.sys/new-drive-healing/0/0
+
+.. tab-set::
+
+   .. tab-item:: EXAMPLE
+
+      The following command displays the current in-progress S3 API calls on the :term:`alias` ``myminio``.
+
+      .. code-block:: shell
+         :class: copyable
+
+         bm support top locks myminio/
+
+   .. tab-item:: SYNTAX
+
+      The command has the following syntax:
+
+      .. code-block:: shell
+         :class: copyable
+
+         bm [GLOBALFLAGS] support top locks  \
+                          [--stale]          \ 
+                          TARGET
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: TARGET
+   :required:
+
+   The full path to the :ref:`alias <minio-mc-alias>` or prefix where the command should run.
+
+.. mc-cmd:: --stale
+   :optional:
+
+   Return only stale locks.
+
+Global Flags
+~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+
+Examples
+--------
+
+Display the 10 Oldest Locks on the ``myminio`` Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: shell
+   :class: copyable
+
+   bm support top locks myminio/
+
+Display Stale Locks on the ``myminio`` Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following command displays all in-progress ``s3.PutObject`` calls for the ``myminio`` deployment:
+
+.. code-block:: shell
+   :class: copyable
+
+   bm support top locks --stale myminio/

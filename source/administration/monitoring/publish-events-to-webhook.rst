@@ -12,27 +12,27 @@ Publish Events to Webhook
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to a 
 `Webhook <https://en.wikipedia.org/wiki/Webhook>`__ service endpoint.
 
-Add a Webhook Endpoint to a MinIO Deployment
+Add a Webhook Endpoint to a Buckit Deployment
 --------------------------------------------
 
 The following procedure adds a new Webhook service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the Webhook Endpoint to MinIO
+1) Add the Webhook Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new Webhook service endpoint using either environment
@@ -42,7 +42,7 @@ variables *or* by setting runtime configuration settings.
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the Webhook service endpoint and associated
+      Buckit supports specifying the Webhook service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-webhook>`. The 
@@ -87,10 +87,10 @@ variables *or* by setting runtime configuration settings.
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing Webhook service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_webhook <mc admin config get>` to
-        review the currently configured Webhook endpoints on the MinIO deployment.
+        review the currently configured Webhook endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the Webhook service endpoint.
         For example:
@@ -103,7 +103,7 @@ variables *or* by setting runtime configuration settings.
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating Webhook endpoints on a running 
+      Buckit supports adding or updating Webhook endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_webhook` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -129,10 +129,10 @@ variables *or* by setting runtime configuration settings.
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing Webhook service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_webhook <mc admin config get>` to
-        review the currently configured Webhook endpoints on the MinIO deployment.
+        review the currently configured Webhook endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the Webhook service endpoint.
         For example:
@@ -143,10 +143,10 @@ variables *or* by setting runtime configuration settings.
       <minio-server-config-bucket-notification-webhook>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -183,11 +183,11 @@ event with the configured Webhook service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:webhook \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the 
   event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
@@ -215,17 +215,17 @@ a notification.
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
-Update an Webhook Endpoint in a MinIO Deployment
+Update an Webhook Endpoint in a Buckit Deployment
 ------------------------------------------------
 
 The following procedure updates an existing Webhook service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -243,7 +243,7 @@ configured Webhook service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_webhook
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -284,10 +284,10 @@ configuration settings are *optional*. See
 :ref:`minio-server-config-bucket-notification-webhook` for a complete list of
 Webhook configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

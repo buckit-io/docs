@@ -1,7 +1,7 @@
 .. _minio-k8s-upgrade-minio-operator:
 
 ======================
-Upgrade MinIO Operator
+Upgrade Buckit Operator
 ======================
 
 .. default-domain:: minio
@@ -10,9 +10,9 @@ Upgrade MinIO Operator
    :local:
    :depth: 1
 
-You can upgrade the MinIO Operator at any time without impacting your managed MinIO Tenants.
+You can upgrade the Buckit Operator at any time without impacting your managed Buckit Tenants.
 
-As part of the upgrade process, the Operator may update and restart Tenants to support changes to the MinIO Custom Resource Definition (CRD). 
+As part of the upgrade process, the Operator may update and restart Tenants to support changes to the Buckit Custom Resource Definition (CRD). 
 These changes require no action on the part of any operator or administrator, and do not impact Tenant operations.
 
 This page describes how to upgrade from Operator 5.0.15 to |operator-version-stable|.
@@ -21,18 +21,18 @@ See :ref:`minio-k8s-upgrade-minio-operator-to-5.0.15` for instructions on upgrad
 
 .. admonition:: Operator 6.0.0 Deprecates the Operator Console
 
-   Starting with Operator 6.0.0, the MinIO Operator Console is deprecated and removed.
+   Starting with Operator 6.0.0, the Buckit Operator Console is deprecated and removed.
 
-   You can continue to manage and deploy MinIO Tenants using standard Kubernetes approaches such as Kustomize or Helm.
+   You can continue to manage and deploy Buckit Tenants using standard Kubernetes approaches such as Kustomize or Helm.
 
 .. _minio-k8s-upgrade-minio-operator-procedure:
 
-Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
+Upgrade Buckit Operator 5.0.15 to |operator-version-stable|
 ----------------------------------------------------------
 
 .. important::
 
-   Operator 6.0.0 deprecates the MinIO Operator Console and removes the related resources from the MinIO Operator CRD.
+   Operator 6.0.0 deprecates the Buckit Operator Console and removes the related resources from the Buckit Operator CRD.
    This includes removal of Operator Console resources such as services and pods.
 
    Use either Kustomization or Helm for managing Tenants moving forward.
@@ -41,18 +41,18 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
 
    .. tab-item:: Upgrade using Kustomize
 
-      The following procedure upgrades the MinIO Operator using Kustomize.
+      The following procedure upgrades the Buckit Operator using Kustomize.
       For deployments using Operator 5.0.0 through 5.0.14, follow the :ref:`minio-k8s-upgrade-minio-operator-to-5.0.15` procedure before performing this upgrade.
 
       If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
 
       .. container:: procedure
 
-         #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+         #. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-            Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+            Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
             Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
          #. Verify the existing Operator installation.
             Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
@@ -122,17 +122,17 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
 
    .. tab-item:: Upgrade using Helm
 
-      The following procedure upgrades an existing MinIO Operator Installation using Helm.
+      The following procedure upgrades an existing Buckit Operator Installation using Helm.
 
       If you installed the Operator using Kustomize, use the :guilabel:`Upgrade using Kustomize` instructions instead.
 
       .. container:: procedure
 
-         #. *(Optional)* Update each MinIO Tenant to the latest stable MinIO Version.
+         #. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
-            Upgrading MinIO regularly ensures your Tenants have the latest features and performance improvements.
+            Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
             Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading MinIO Tenants.
+            See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
          #. Verify the existing Operator installation.
 
@@ -157,8 +157,8 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
 
          #. Update the Operator Repository
 
-            Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
-            If you set a different alias for the MinIO Operator repository, specify that in the command instead of ``minio-operator``.
+            Use ``helm repo update minio-operator`` to update the Buckit Operator repo.
+            If you set a different alias for the Buckit Operator repository, specify that in the command instead of ``minio-operator``.
             You can use ``helm repo list`` to review your installed repositories.
 
             Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
@@ -175,15 +175,15 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
                :substitutions:
 
                NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-               minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-               minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
-               minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+               minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for Buckit Operator
+               minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
+               minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
 
             The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
 
          #. Run ``helm upgrade``
 
-            Helm uses the latest chart to upgrade the MinIO Operator:
+            Helm uses the latest chart to upgrade the Buckit Operator:
 
             .. code-block:: shell
                :class: copyable
@@ -191,7 +191,7 @@ Upgrade MinIO Operator 5.0.15 to |operator-version-stable|
                helm upgrade -n minio-operator \
                operator minio-operator/operator
 
-            If you installed the MinIO Operator to a different namespace, specify that in the ``-n`` argument.
+            If you installed the Buckit Operator to a different namespace, specify that in the ``-n`` argument.
 
             If you used a different installation name from ``operator``, replace the value above with the installation name.
 

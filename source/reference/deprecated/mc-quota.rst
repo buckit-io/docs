@@ -23,15 +23,15 @@ The :mc:`mc quota` commands configure, display, or remove a quota limit on a buc
 
 .. end-mc-quota-desc
 
-When a bucket with a quota configured reaches the specified limit, as determined by the MinIO object scanner, MinIO rejects further ``PUT`` requests for the bucket.
+When a bucket with a quota configured reaches the specified limit, as determined by the Buckit object scanner, Buckit rejects further ``PUT`` requests for the bucket.
 
-Each time the MinIO :ref:`object scanner <minio-lifecycle-management-scanner>` scans a bucket for pending :ref:`object lifecycle transitions <minio-lifecycle-management>`, it also checks if the bucket has exceeded a configured quota.
+Each time the Buckit :ref:`object scanner <minio-lifecycle-management-scanner>` scans a bucket for pending :ref:`object lifecycle transitions <minio-lifecycle-management>`, it also checks if the bucket has exceeded a configured quota.
 
 .. admonition:: Quota enforcement is not immediate
    :class: note
 
    Bucket quotas are not intended to enforce a strict hard limit on a bucket's size.
-   If a bucket exceeds its quota between scanner passes, MinIO continues to accept ``PUT`` requests for that bucket until _after_ the next scanner pass identifies the quota violation.
+   If a bucket exceeds its quota between scanner passes, Buckit continues to accept ``PUT`` requests for that bucket until _after_ the next scanner pass identifies the quota violation.
 
 
 Subcommands

@@ -16,7 +16,7 @@ Overview
 
 Helm is a tool for automating the deployment of applications to Kubernetes clusters.
 A `Helm chart <https://helm.sh/docs/topics/charts/>`__ is a set of YAML files, templates, and other files that define the deployment details.
-The following procedure uses a Helm Chart to install the :ref:`MinIO Kubernetes Operator <minio-operator-installation>` to a Kubernetes cluster.
+The following procedure uses a Helm Chart to install the :ref:`Buckit Kubernetes Operator <minio-operator-installation>` to a Kubernetes cluster.
 
 Prerequisites
 -------------
@@ -34,21 +34,21 @@ While this documentation may provide guidance for configuring or deploying Kuber
 
 .. _minio-k8s-deploy-operator-helm-repo:
 
-Install the MinIO Operator using Helm Charts
+Install the Buckit Operator using Helm Charts
 --------------------------------------------
 
-The following procedure installs the Operator using the MinIO Operator Chart Repository.
+The following procedure installs the Operator using the Buckit Operator Chart Repository.
 This method supports a simplified installation path compared to the :ref:`local chart installation <minio-k8s-deploy-operator-helm-local>`.
 You can modify the Operator deployment after installation.
 
 .. important::
 
    If you use Helm charts to install the Operator, you must use Helm to manage that installation.
-   Do not use ``kubectl krew``, Kustomize, or similar methods to update or manage the MinIO Operator installation.
+   Do not use ``kubectl krew``, Kustomize, or similar methods to update or manage the Buckit Operator installation.
 
-#. Add the MinIO Operator Repo to Helm
+#. Add the Buckit Operator Repo to Helm
 
-   MinIO maintains a Helm-compatible repository at https://operator.min.io.
+   Buckit maintains a Helm-compatible repository at https://operator.min.io.
    Add this repository to Helm:
 
    .. code-block:: shell
@@ -69,9 +69,9 @@ You can modify the Operator deployment after installation.
       :class: copyable
 
       NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
-      minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-      minio-operator/operator         6.0.1           v6.0.1          A Helm chart for MinIO Operator
-      minio-operator/tenant           6.0.1           v6.0.1          A Helm chart for MinIO Operator
+      minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for Buckit Operator
+      minio-operator/operator         6.0.1           v6.0.1          A Helm chart for Buckit Operator
+      minio-operator/tenant           6.0.1           v6.0.1          A Helm chart for Buckit Operator
 
    The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
 
@@ -79,7 +79,7 @@ You can modify the Operator deployment after installation.
 
    Run the ``helm install`` command to install the Operator.
    The following command specifies and creates a dedicated namespace ``minio-operator`` for installation.
-   MinIO strongly recommends using a dedicated namespace for the Operator.
+   Buckit strongly recommends using a dedicated namespace for the Operator.
 
    .. code-block:: shell
       :class: copyable
@@ -120,7 +120,7 @@ You can now :ref:`deploy a tenant using Helm Charts <deploy-tenant-helm>`.
 
 .. _minio-k8s-deploy-operator-helm-local:
 
-Install the MinIO Operator using Local Helm Charts
+Install the Buckit Operator using Local Helm Charts
 --------------------------------------------------
 
 The following procedure installs the Operator using a local copy of the Helm Charts.
@@ -140,7 +140,7 @@ This method may support easier pre-configuration of the Operator compared to the
 #. (Optional) Modify the ``values.yaml``
 
    The chart contains a ``values.yaml`` file you can customize to suit your needs.
-   For details on the options available in the MinIO Operator ``values.yaml``, see :ref:`minio-operator-chart-values`.
+   For details on the options available in the Buckit Operator ``values.yaml``, see :ref:`minio-operator-chart-values`.
 
    For example, you can change the number of replicas for ``operators.replicaCount`` to increase or decrease pod availability in the deployment.
    See :ref:`minio-operator-chart-values` for more complete documentation on the Operator Helm Chart and Values.

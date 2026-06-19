@@ -99,7 +99,7 @@ Enable
 
       .. mc-conf:: notify_mysql
    
-      The top-level configuration key for defining an MySQL service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an MySQL service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an MySQL service endpoint. 
       The following arguments are *required* for each target: 
@@ -138,7 +138,7 @@ Data Source Name (DSN) String
       .. mc-conf:: notify_mysql dsn_string
          :delimiter: " "
 
-Specify the data source name (DSN) of the MySQL service endpoint. MinIO expects the following format:
+Specify the data source name (DSN) of the MySQL service endpoint. Buckit expects the following format:
 
 ``<user>:<password>@tcp(<host>:<port>)/<database>``
  
@@ -168,7 +168,7 @@ Table
       .. mc-conf:: notify_mysql table
          :delimiter: " "
 
-Specify the name of the MySQL table to which MinIO publishes event notifications.
+Specify the name of the MySQL table to which Buckit publishes event notifications.
       
 Format
 ~~~~~~
@@ -189,15 +189,15 @@ Format
          :delimiter: " "
       
 Specify the format of event data written to the MySQL service endpoint.
-MinIO supports the following values:
+Buckit supports the following values:
 
 ``namespace``
-   For each bucket event, MinIO creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
+   For each bucket event, Buckit creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
    Additional updates to that object modify the existing table entry for that object. 
    Similarly, deleting the object also deletes the corresponding table entry.
    
 ``access``
-   For each bucket event, MinIO creates a JSON document with the event details and appends it to the table with a MySQL-generated random ID. 
+   For each bucket event, Buckit creates a JSON document with the event details and appends it to the table with a MySQL-generated random ID. 
    Additional updates to an object result in new index entries,    and existing entries remain unmodified.
       
 Max Open Connections
@@ -241,9 +241,9 @@ Queue Directory
       .. mc-conf:: notify_mysql queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the MySQL server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the MySQL server/broker is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

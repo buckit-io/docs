@@ -1,7 +1,7 @@
 .. _minio-external-identity-management-plugin:
 
 =========================================
-MinIO External Identity Management Plugin
+Buckit External Identity Management Plugin
 =========================================
 
 .. default-domain:: minio
@@ -14,21 +14,21 @@ MinIO External Identity Management Plugin
 Overview
 --------
 
-The MinIO Identity Management Plugin provides a REST interface for offloading authentication to an external identity manager through a webhook service.
+The Buckit Identity Management Plugin provides a REST interface for offloading authentication to an external identity manager through a webhook service.
 
-Once enabled, client applications use the ``AssumeRoleWithCustomToken`` STS API extension to generate access tokens for MinIO.
-MinIO verifies this token by making a POST request to the configured plugin endpoint and uses the returned response to determine the authentication status of the client.
+Once enabled, client applications use the ``AssumeRoleWithCustomToken`` STS API extension to generate access tokens for Buckit.
+Buckit verifies this token by making a POST request to the configured plugin endpoint and uses the returned response to determine the authentication status of the client.
 
 Configuration Settings
 ----------------------
 
-You can configure the MinIO Identity Management Plugin using the following environment variables or configuration settings:
+You can configure the Buckit Identity Management Plugin using the following environment variables or configuration settings:
 
 .. tab-set::
 
    .. tab-item:: Environment Variables
 
-      Specify the following :ref:`environment variables <minio-server-envvar-external-identity-management-plugin>` to each MinIO server in the deployment:
+      Specify the following :ref:`environment variables <minio-server-envvar-external-identity-management-plugin>` to each Buckit server in the deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -66,7 +66,7 @@ The login flow for an application is as follows:
 
    The request includes a token used by the configured external identity manager for authenticating the client.
 
-2. MinIO makes a POST call to the configured identity plugin URL using the token specified to the STS API.
+2. Buckit makes a POST call to the configured identity plugin URL using the token specified to the STS API.
 
 3. On successful authentication, the identity manager returns a ``200 OK`` response with an ``application/json`` content-type and body with the following structure:
 
@@ -91,9 +91,9 @@ The login flow for an application is as follows:
 
       * - ``claims``
         - A JSON string of ``"key": "value"`` pair claims associated with the requested credentials.
-          MinIO reserves and ignores the ``exp``, ``parent``, and ``sub`` claims objects if present.
+          Buckit reserves and ignores the ``exp``, ``parent``, and ``sub`` claims objects if present.
 
-4. MinIO returns a response to the STS API request that includes temporary credentials for use with making authenticated requests.
+4. Buckit returns a response to the STS API request that includes temporary credentials for use with making authenticated requests.
 
 If the identity manager rejects the authentication request or otherwise encounters an error, the response *must* return a ``403 FORBIDDEN`` HTTP status code with an ``application/json`` content-type and body with the following structure:
 

@@ -10,13 +10,13 @@ Identity and Access Management Settings
    :local:
    :depth: 2
 
-The pages in this section document settings for configuring MinIO to work with identity and access management (IAM) solutions.
-There is a page of settings for each of the IAM methods MinIO supports.
+The pages in this section document settings for configuring Buckit to work with identity and access management (IAM) solutions.
+There is a page of settings for each of the IAM methods Buckit supports.
 
 - :ref:`Active Directory / LDAP <minio-server-envvar-external-identity-management-ad-ldap>`
 - :ref:`OpenID <minio-server-envvar-external-identity-management-openid>`
-- :ref:`MinIO Identity Management Plugin <minio-server-envvar-external-identity-management-plugin>`
-- :ref:`MinIO Access Management Plugin <minio-server-envvar-external-identity-management-plugin>`
+- :ref:`Buckit Identity Management Plugin <minio-server-envvar-external-identity-management-plugin>`
+- :ref:`Buckit Access Management Plugin <minio-server-envvar-external-identity-management-plugin>`
 
 .. toctree::
    :titlesonly:

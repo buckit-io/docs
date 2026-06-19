@@ -1,14 +1,14 @@
 .. _minio-operator-envvars:
 
 ====================================
-MinIO Operator Environment Variables
+Buckit Operator Environment Variables
 ====================================
 
 .. default-domain:: minio
 
 .. contents:: Table of Contents
 
-The :ref:`MinIO Operator <minio-operator-installation>` uses the following environment variables during startup to set configuration settings.
+The :ref:`Buckit Operator <minio-operator-installation>` uses the following environment variables during startup to set configuration settings.
 Configure these variables in the ``minio-operator`` container.
 
 Setting Environment Variables in Kubernetes
@@ -31,7 +31,7 @@ Replace:
 
 You can set or modify multiple environment variables by separating each ``VARIABLE=value`` pair with a space.
 
-Available MinIO Operator Environment Variables
+Available Buckit Operator Environment Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. envvar:: MINIO_OPERATOR_CERTIFICATES_VERSION
@@ -89,7 +89,7 @@ Available MinIO Operator Environment Variables
 
    .. versionadded:: v5.0.11
 
-   Specify the image of the MinIO instance sidecar container loaded by the Operator.
+   Specify the image of the Buckit instance sidecar container loaded by the Operator.
 
    Omit to use the Operator image.
 

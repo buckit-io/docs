@@ -1,7 +1,7 @@
 .. _minio-upgrade:
 
 ==========================
-Upgrade a MinIO Deployment
+Upgrade a Buckit Deployment
 ==========================
 
 .. default-domain:: minio

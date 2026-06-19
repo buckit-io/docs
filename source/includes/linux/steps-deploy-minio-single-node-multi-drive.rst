@@ -1,4 +1,4 @@
-1) Download the MinIO Server
+1) Download the Buckit Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
@@ -23,10 +23,10 @@
    :start-after: start-common-deploy-create-unique-root-credentials 
    :end-before: end-common-deploy-create-unique-root-credentials
 
-4) Start the MinIO Service
+4) Start the Buckit Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Issue the following command on the local host to start the MinIO |SNSD| deployment as a service:
+Issue the following command on the local host to start the Buckit |SNSD| deployment as a service:
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-start-service-desc
@@ -44,15 +44,15 @@ The ``journalctl`` output should resemble the following:
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 
-   Command-line: https://docs.min.io/community/minio-object-store/reference/minio-mc.html
+   Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
       $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
 
    Documentation: https://docs.min.io/community/minio-object-store/index.html
 
-The ``API`` block lists the network interfaces and port on which clients can access the MinIO S3 API.
-The ``Console`` block lists the network interfaces and port on which clients can access the MinIO Web Console.
+The ``API`` block lists the network interfaces and port on which clients can access the Buckit S3 API.
+The ``Console`` block lists the network interfaces and port on which clients can access the Buckit Web Console.
 
-5) Connect to the MinIO Service
+5) Connect to the Buckit Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-deploy.rst

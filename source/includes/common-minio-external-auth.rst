@@ -7,20 +7,20 @@
 
 .. start-minio-openid-client-id
 
-Specify the unique public identifier MinIO uses when authenticating user
+Specify the unique public identifier Buckit uses when authenticating user
 credentials against the :abbr:`OIDC (OpenID Connect)` compatible provider.
 
 .. end-minio-openid-client-id
 
 .. start-minio-openid-client-secret
 
-Specify the client secret MinIO uses when authenticating user credentials
+Specify the client secret Buckit uses when authenticating user credentials
 against the :abbr:`OIDC (OpenID Connect)` compatible provider. This field
 may be optional depending on the provider.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-openid-client-secret
 
@@ -28,7 +28,7 @@ may be optional depending on the provider.
 .. start-minio-openid-role-policy
 
 Specify a comma-separated list of :ref:`policy names <minio-policy>` to use for the request's ``RoleArn`` for all authentication requests for the provider.
-The specified policy or policies must already exist on the MinIO Server.
+The specified policy or policies must already exist on the Buckit Server.
 
 To use this OIDC configuration, you must specify the corresponding :ref:`RoleArn <minio-assumerolewithwebidentity-query-parameters>` in the STS request body.
 
@@ -37,7 +37,7 @@ To use this OIDC configuration, you must specify the corresponding :ref:`RoleArn
 
 .. start-minio-openid-jwks-url
 
-Specify the URL for the JSON Web Key Set (JWKS) for MinIO to use when verifying
+Specify the URL for the JSON Web Key Set (JWKS) for Buckit to use when verifying
 any JSON Web Tokens (JWT) issued by the :abbr:`OIDC (OpenID Connect)` compatible
 provider.
 
@@ -60,12 +60,12 @@ following:
 
 Specify the name of the 
 `JWT Claim <https://datatracker.ietf.org/doc/html/rfc7519#section-4>`__ 
-MinIO uses to identify the :ref:`policies <minio-policy>` to attach to the
+Buckit uses to identify the :ref:`policies <minio-policy>` to attach to the
 authenticated user.
 
 The claim can contain one or more comma-separated policy names to attach to 
 the user. The claim must contain *at least* one policy for the user to have
-any permissions on the MinIO server.
+any permissions on the Buckit server.
 
 Defaults to ``policy``.
 
@@ -73,7 +73,7 @@ Defaults to ``policy``.
 
 .. start-minio-openid-display-name
 
-Specify the user-facing name the MinIO Console displays on the login screen.
+Specify the user-facing name the Buckit Console displays on the login screen.
 
 .. end-minio-openid-display-name
 
@@ -100,15 +100,15 @@ Defaults to those scopes advertised in the discovery document.
    This parameter was removed in :minio-release:`RELEASE.2023-02-27T18-10-45Z`.
    Use the :envvar:`MINIO_BROWSER_REDIRECT_URL` :ref:`environment variable <minio-server-environment-variables>` instead.
 
-The MinIO Console defaults to using the hostname of the node making the authentication request. 
-For MinIO deployments behind a load balancer or reverse proxy, specify this field to ensure the OIDC provider returns the authentication response to the correct MinIO Console URL.
+The Buckit Console defaults to using the hostname of the node making the authentication request. 
+For Buckit deployments behind a load balancer or reverse proxy, specify this field to ensure the OIDC provider returns the authentication response to the correct Buckit Console URL.
 Include the Console hostname, port, and ``/oauth_callback``:
 
 .. code-block:: shell
 
    http://minio.example.net:consoleport/oauth_callback
 
-Ensure you start the MinIO Server with the :mc-cmd:`~minio server --console-address` option to set a static Console listen port.
+Ensure you start the Buckit Server with the :mc-cmd:`~minio server --console-address` option to set a static Console listen port.
 The default behavior with that option omitted is to select a random port number at startup.
 
 The specified URI *must* match one of the approved redirect / callback URIs on the provider. 
@@ -118,17 +118,17 @@ See the OpenID `Authentication Request <https://openid.net/specs/openid-connect-
 
 .. start-minio-openid-redirect-uri-dynamic
 
-The MinIO Console defaults to using the hostname of the node making the authentication request as part of the redirect URI provided to the OIDC provider.
-For MinIO deployments behind a load balancer using a round-robin protocol, this may result in the load balancer returning the response to a different MinIO Node than the originating client.
+The Buckit Console defaults to using the hostname of the node making the authentication request as part of the redirect URI provided to the OIDC provider.
+For Buckit deployments behind a load balancer using a round-robin protocol, this may result in the load balancer returning the response to a different Buckit Node than the originating client.
 
-Specify this option as ``on`` to direct the MinIO Console to use the ``Host`` header of the originating request to construct the redirect URI passed to the OIDC provider.
+Specify this option as ``on`` to direct the Buckit Console to use the ``Host`` header of the originating request to construct the redirect URI passed to the OIDC provider.
 Defaults to ``off``.
 
 .. end-minio-openid-redirect-uri-dynamic
 
 .. start-minio-openid-claim-userinfo
 
-Allow MinIO to fetch claims from the `UserInfo Endpoint <https://openid.net/specs/openid-connect-core-1_0.html#UserInfo>`__ for the authenticated user.
+Allow Buckit to fetch claims from the `UserInfo Endpoint <https://openid.net/specs/openid-connect-core-1_0.html#UserInfo>`__ for the authenticated user.
 
 Valid values are ``on`` or ``off``.
 
@@ -153,7 +153,7 @@ Specify the Keycloak Realm to use as part of Keycloak Admin API Operations, such
 .. start-minio-openid-keycloak-admin-url
 
 Specify the Keycloak Admin API URL. 
-MinIO can use this URL if configured to periodically validate authenticated Keycloak users as active/existing.
+Buckit can use this URL if configured to periodically validate authenticated Keycloak users as active/existing.
 For example, ``https://keycloak-endpoint:port/admin/``.
 
 .. end-minio-openid-keycloak-admin-url
@@ -191,7 +191,7 @@ Specify the hostname for the Active Directory / LDAP server. For example:
 
 .. start-minio-ad-ldap-lookup-bind-dn
 
-Specify the Distinguished Name (DN) for an AD/LDAP account MinIO uses when
+Specify the Distinguished Name (DN) for an AD/LDAP account Buckit uses when
 querying the AD/LDAP server. Enables :ref:`Lookup-Bind
 <minio-external-identity-management-ad-ldap-lookup-bind>` authentication to the AD/LDAP server.
 
@@ -207,7 +207,7 @@ Specify the password for the :ref:`Lookup-Bind
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 .. end-minio-ad-ldap-lookup-bind-password
 
@@ -231,7 +231,7 @@ The user can then use the passed SSH Public Key to log in to SFTP servers.
 
 .. start-minio-ad-ldap-user-dn-search-base-dn
 
-Specify the base Distinguished Name (DN) MinIO uses when querying for 
+Specify the base Distinguished Name (DN) Buckit uses when querying for 
 user credentials matching those provided by an authenticating client.
 
 Separate multiple DNs with a semicolon (``;``).
@@ -249,7 +249,7 @@ Supports :ref:`Lookup-Bind  <minio-external-identity-management-ad-ldap-lookup-b
 
 .. start-minio-ad-ldap-user-dn-search-filter
 
-Specify the AD/LDAP search filter MinIO uses when querying for user credentials
+Specify the AD/LDAP search filter Buckit uses when querying for user credentials
 matching those provided by an authenticating client. 
 
 Use the ``%s`` substitution character to insert the client-specified
@@ -289,7 +289,7 @@ Functions sensitive to large request or response bodies may exhibit unexpected b
 .. start-minio-ad-ldap-group-search-base-dn
 
 Specify a semicolon-separated (``;``) list of group search base `Distinguished Names <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ldap/distinguished-names>`__
-MinIO uses when performing group lookups.
+Buckit uses when performing group lookups.
  
 For example:
 
@@ -315,7 +315,7 @@ Defaults to ``off``
 Specify ``on`` to allow unsecured (non-TLS encrypted) connections to
 the AD/LDAP server.
 
-MinIO sends AD/LDAP user credentials in plain text to the AD/LDAP server, such
+Buckit sends AD/LDAP user credentials in plain text to the AD/LDAP server, such
 that enabling TLS is *required* to prevent reading credentials over the wire.
 Using this option presents a security risk where any user with access to
 network traffic can observe the unencrypted plaintext credentials.
@@ -336,9 +336,9 @@ For more about ``StartTLS``, refer to section 4.14 of the `LDAP RFC 4511 specifi
 
 .. start-minio-ad-ldap-srv_record_name
 
-Specify the appropriate value to enable MinIO to select an AD/LDAP server using a `DNS SRV record <https://ldap.com/dns-srv-records-for-ldap>`__ request.
+Specify the appropriate value to enable Buckit to select an AD/LDAP server using a `DNS SRV record <https://ldap.com/dns-srv-records-for-ldap>`__ request.
 
-When enabled, MinIO selects an AD/LDAP server by:
+When enabled, Buckit selects an AD/LDAP server by:
 
 - Constructing the target SRV record name following standard naming conventions.
 - Requesting a list of available AD/LDAP servers.
@@ -383,7 +383,7 @@ Specify a comment to associate to the AD/LDAP configuration.
 
 .. start-minio-ad-ldap-console-enable
 
-#. Log in to the MinIO Console as either the :ref:`root <minio-users-root>` user or a MinIO user with the  :userpolicy:`consoleAdmin` policy.
+#. Log in to the Buckit Console as either the :ref:`root <minio-users-root>` user or a Buckit user with the  :userpolicy:`consoleAdmin` policy.
 #. In the :guilabel:`Identity` section, select :guilabel:`LDAP` and then :guilabel:`Edit Configuration` to configure an Active Directory or LDAP server.
    The minimum required settings are:
 
@@ -393,7 +393,7 @@ Specify a comment to associate to the AD/LDAP configuration.
    - User DN Search Base
    - User DN Search Filter
 
-   Not all configuration options are available in the MinIO Console.
+   Not all configuration options are available in the Buckit Console.
    For additional settings, use :mc:`mc idp ldap` or :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
  
 .. end-minio-ad-ldap-console-enable
@@ -409,22 +409,22 @@ The webhook endpoint for the external identity management service (``https://aut
 An authentication token to present to the configured webhook endpoint.
 
 Specify a supported HTTP `Authentication scheme <https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes>`__ as a string value, such as ``"Bearer TOKEN"``.
-MinIO sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
+Buckit sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
 
 .. end-minio-identity-management-auth-token
 
 .. start-minio-identity-management-role-policy
 
-Specify a comma-separated list of MinIO :ref:`policies <minio-policy>` to assign to authenticated users.
+Specify a comma-separated list of Buckit :ref:`policies <minio-policy>` to assign to authenticated users.
 
 .. end-minio-identity-management-role-policy
 
 .. start-minio-identity-management-role-id
 
-Specify a unique ID MinIO uses to generate an ARN for this identity manager.
-MinIO automatically adds an ``idmp-`` prefix to the specified ID when generating the ARN.
+Specify a unique ID Buckit uses to generate an ARN for this identity manager.
+Buckit automatically adds an ``idmp-`` prefix to the specified ID when generating the ARN.
 
-If omitted, MinIO automatically generates the ID and prints the full ARN to the server log.
+If omitted, Buckit automatically generates the ID and prints the full ARN to the server log.
 
 .. end-minio-identity-management-role-id
 
@@ -445,7 +445,7 @@ The webhook endpoint for the external access management service (``https://authz
 An authentication token to present to the configured webhook endpoint.
 
 Specify a supported HTTP `Authentication scheme <https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes>`__ as a string value, such as ``"Bearer TOKEN"``.
-MinIO sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
+Buckit sends the token using the HTTP `Authorization <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization>`__ header.
 
 .. end-minio-access-management-plugin-auth-token
 

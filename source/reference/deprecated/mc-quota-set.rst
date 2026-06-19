@@ -23,7 +23,7 @@ Description
 
 .. start-mc-quota-set-desc
 
-The :mc-cmd:`mc quota set` assigns a hard quota limit to a bucket beyond which MinIO does not allow writes.
+The :mc-cmd:`mc quota set` assigns a hard quota limit to a bucket beyond which Buckit does not allow writes.
 
 .. end-mc-quota-set-desc
 
@@ -80,7 +80,7 @@ Hard quotas prevent the bucket size from growing past the specified limit.
 
    mc quota set TARGET/BUCKET --size LIMIT
 
-- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment. 
+- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment. 
   Replace ``BUCKET`` with the name of the bucket on which to set the hard quota.
 
 - Replace ``LIMIT`` with the maximum size to which the bucket can grow as an integer and, as desired, a suffix. 
@@ -102,7 +102,7 @@ Syntax
    :required:
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the MinIO deployment as a prefix to the path. 
+   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a prefix to the path. 
    For example:
 
    .. code-block:: shell
@@ -114,7 +114,7 @@ Syntax
    :required:
 
    Sets a maximum limit to the bucket storage size. 
-   The MinIO server rejects any incoming ``PUT`` request whose contents would exceed the bucket's configured quota.
+   The Buckit server rejects any incoming ``PUT`` request whose contents would exceed the bucket's configured quota.
 
    For example, a hard limit of ``10G`` would prevent adding any additional objects if the bucket reaches 10 gigabytes of size.
 

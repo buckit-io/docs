@@ -86,9 +86,9 @@
 
 Enables synchronous :ref:`bucket notifications <minio-bucket-notifications>`.
 
-Specify ``on`` to direct MinIO to wait until the remote target returns success on receipt of an event before processing further events.
+Specify ``on`` to direct Buckit to wait until the remote target returns success on receipt of an event before processing further events.
 
-Defaults to ``off``, or asynchronous bucket notifications where MinIO does not wait for the remote target to return success on receipt of an event.
+Defaults to ``off``, or asynchronous bucket notifications where Buckit does not wait for the remote target to return success on receipt of an event.
 
 .. end-minio-api-sync-events
 
@@ -102,11 +102,11 @@ This setting does not have a configuration setting option.
 
 You can establish or modify settings by defining:
 
-- an *environment variable* on the host system prior to starting or restarting the MinIO Server.
+- an *environment variable* on the host system prior to starting or restarting the Buckit Server.
   Refer to your operating system's documentation for how to define an environment variable.
 - a *configuration setting* using :mc:`mc admin config set`.
   
-If you define both an environment variable and the similar configuration setting, MinIO uses the environment variable value.
+If you define both an environment variable and the similar configuration setting, Buckit uses the environment variable value.
 
 Some settings have only an environment variable or a configuration setting, but not both.
 
@@ -116,7 +116,7 @@ Some settings have only an environment variable or a configuration setting, but 
 
 .. important::
 
-   Each configuration setting controls fundamental MinIO behavior and functionality.
-   MinIO **strongly recommends** testing configuration changes in a lower environment, such as DEV or QA, before applying to production.
+   Each configuration setting controls fundamental Buckit behavior and functionality.
+   Buckit **strongly recommends** testing configuration changes in a lower environment, such as DEV or QA, before applying to production.
 
 .. end-minio-settings-test-before-prod

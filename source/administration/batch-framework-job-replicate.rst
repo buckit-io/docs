@@ -10,25 +10,25 @@ Batch Replication
    :local:
    :depth: 2
 
-.. versionadded:: MinIO RELEASE.2022-10-08T20-11-00Z
+.. versionadded:: Buckit RELEASE.2022-10-08T20-11-00Z
 
    The Batch Framework was introduced with the ``replicate`` job type in the :mc:`mc` :mc-release:`RELEASE.2022-10-08T20-11-00Z`.
 
-The MinIO Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
-The batch jobs run directly on the MinIO deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`MinIO Client <minio-client>`.
+The Buckit Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
+The batch jobs run directly on the Buckit deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`Buckit Client <minio-client>`.
 
-The ``replicate`` batch job replicates objects from one MinIO deployment (the ``source`` deployment) to another MinIO deployment (the ``target`` deployment).
+The ``replicate`` batch job replicates objects from one Buckit deployment (the ``source`` deployment) to another Buckit deployment (the ``target`` deployment).
 Either the ``source`` or the ``target`` **must** be the :ref:`local <minio-batch-local>` deployment.
 
-Batch Replication between MinIO deployments have the following advantages over using :mc:`mc mirror`:
+Batch Replication between Buckit deployments have the following advantages over using :mc:`mc mirror`:
 
 - Removes the client to cluster network as a potential bottleneck
 - A user only needs access to starting a batch job with no other permissions, as the job runs entirely server side on the cluster
 - The job provides for retry attempts in event that objects do not replicate
 - Batch jobs are one-time, curated processes allowing for fine control replication
-- (MinIO to MinIO only) The replication process copies object versions from source to target
+- (Buckit to Buckit only) The replication process copies object versions from source to target
 
-Starting with the MinIO Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another MinIO deployment or any S3-compatible location using a realtime storage class.
+Starting with the Buckit Server ``RELEASE.2023-05-04T21-44-30Z``, the other deployment can be either another Buckit deployment or any S3-compatible location using a realtime storage class.
 Use filtering options in the replication ``YAML`` file to exclude objects stored in locations that require rehydration or other restoration methods before serving the requested object.
 Batch replication to these types of remotes uses ``mc mirror`` behavior.
 
@@ -53,9 +53,9 @@ The credentials for the "remote" deployment must have a policy similar to the fo
    :language: json
 
 
-See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, access keys, and policies to a MinIO deployment.
+See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, access keys, and policies to a Buckit deployment.
 
-MinIO deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management can instead create dedicated :ref:`access keys <minio-idp-service-account>` for supporting batch replication.
+Buckit deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management can instead create dedicated :ref:`access keys <minio-idp-service-account>` for supporting batch replication.
 
 Filter Replication Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,9 +63,9 @@ Filter Replication Targets
 The batch job definition file can limit the replication by bucket, prefix, and/or filters to only replicate certain objects.
 The access to objects and buckets for the replication process may be restricted by the credentials you provide in the YAML for either the source or target destinations. 
 
-.. versionchanged:: MinIO Server RELEASE.2023-04-07T05-28-58Z
+.. versionchanged:: Buckit Server RELEASE.2023-04-07T05-28-58Z
 
-   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
+   You can replicate from a remote Buckit deployment to the local deployment that runs the batch job.
 
 For example, you can use a batch job to perform a one-time replication sync to push objects from a bucket on a local deployment at ``minio-local/invoices/`` to a bucket on a remote deployment at ``minio-remote/invoices``.
 You can also pull objects from the remote deployment at ``minio-remote/invoices`` to the local deployment at ``minio-local/invoices``.
@@ -74,7 +74,7 @@ Small File Optimization
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with :minio-release:`RELEASE.2023-12-09T18-17-51Z`, batch replication by default automatically batches and compresses objects smaller than 5MiB to efficiently transfer data between the source and remote.
-The remote MinIO deployment can check and immediately apply lifecycle management tiering rules to batched objects.
+The remote Buckit deployment can check and immediately apply lifecycle management tiering rules to batched objects.
 The functionality resembles that offered by S3 Snowball Edge small file batching.
 
 You can modify the compression settings in the :ref:`replicate <minio-batch-job-types>` job configuration.
@@ -88,11 +88,11 @@ The YAML **must** define the source and target deployments.
 If the *source* deployment is remote, then the *target* deployment **must** be ``local``.
 Optionally, the YAML can also define flags to filter which objects replicate, send notifications for the job, or define retry attempts for the job.
 
-.. versionchanged:: MinIO RELEASE.2023-04-07T05-28-58Z
+.. versionchanged:: Buckit RELEASE.2023-04-07T05-28-58Z
 
-   You can replicate from a remote MinIO deployment to the local deployment that runs the batch job.
+   You can replicate from a remote Buckit deployment to the local deployment that runs the batch job.
 
-.. versionchanged:: MinIO RELEASE.2024-08-03T04-33-23Z
+.. versionchanged:: Buckit RELEASE.2024-08-03T04-33-23Z
 
    This release introduces a new version of the Batch Job Replicate API, ``v2``.
    The updated API allows you to list multiple prefixes on the source to replicate from.
@@ -132,23 +132,23 @@ For the **source deployment**
 
      * - ``prefix:`` 
        - | The prefix on the object(s) that should replicate.
-         | Beginning with MinIO Server ``RELEASE.2024-08-03T04-33-23Z``, v2 of the Batch Job Replicate API allows you to list multiple prefixes.
+         | Beginning with Buckit Server ``RELEASE.2024-08-03T04-33-23Z``, v2 of the Batch Job Replicate API allows you to list multiple prefixes.
          | Specify ``replicate.apiVersion`` as ``v2`` to replicate from multiple prefixes.
 
      * - ``endpoint:`` 
        - | Location of the deployment to use for either the source or the target of a replication batch job. 
          | For example, ``https://minio.example.net``. 
          |
-         | If the deployment is the :ref:`alias` specified to the command, omit this field to direct MinIO to use that alias for the endpoint and credentials values. 
+         | If the deployment is the :ref:`alias` specified to the command, omit this field to direct Buckit to use that alias for the endpoint and credentials values. 
          | Either the source deployment *or* the remote deployment *must* be the :ref:`"local" <minio-batch-local>` alias.
          | The non-"local" deployment must specify the ``endpoint`` and ``credentials``.
 
      * - ``path:``
-       - | Directs MinIO to use Path or Virtual Style (DNS) lookup of the bucket.
+       - | Directs Buckit to use Path or Virtual Style (DNS) lookup of the bucket.
          | 
          | - Specify ``on`` for Path style
          | - Specify ``off`` for Virtual style
-         | - Specify ``auto`` to let MinIO determine the correct lookup style.
+         | - Specify ``auto`` to let Buckit determine the correct lookup style.
          |
          | Defaults to ``auto``.
 
@@ -178,11 +178,11 @@ For the **source deployment**
          | Defaults to ``false`` or no compression.
 
      * - ``snowball.smallerThan``
-       - | Specify the size of object in Megabits (MiB) under which MinIO should batch objects.
+       - | Specify the size of object in Megabits (MiB) under which Buckit should batch objects.
          | Defaults to ``5MiB``.
 
      * - ``snowball.skipErrs``
-       - | Specify ``false`` to direct MinIO to halt on any object which produces errors on read.
+       - | Specify ``false`` to direct Buckit to halt on any object which produces errors on read.
          | Defaults to ``true``.
 
 For the **target deployment**

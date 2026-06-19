@@ -4,7 +4,7 @@ Kubernetes Reference
 
 .. default-domain:: minio
 
-This page acts as an index for MinIO-specific Kubernetes references.
+This page acts as an index for Buckit-specific Kubernetes references.
 
 .. toctree::
    :titlesonly:

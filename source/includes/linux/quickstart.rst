@@ -2,7 +2,7 @@
 
 .. |OS| replace:: Linux
 
-This procedure deploys a :ref:`Standalone <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
+This procedure deploys a :ref:`Standalone <minio-installation-comparison>` Buckit server onto |OS| for early development and evaluation of Buckit Object Storage and its S3-compatible API layer. 
 
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
@@ -17,15 +17,15 @@ Prerequisites
 Procedure
 ---------
 
-#. **Install the MinIO Server**
+#. **Install the Buckit Server**
 
    .. include:: /includes/linux/common-installation.rst
       :start-after: start-install-minio-binary-desc
       :end-before: end-install-minio-binary-desc
 
-#. **Launch the MinIO Server**
+#. **Launch the Buckit Server**
 
-   Run the following command from the system terminal or shell to start a local MinIO instance using the ``~/minio`` folder. You can replace this path with another folder path on the local machine:
+   Run the following command from the system terminal or shell to start a local Buckit instance using the ``~/minio`` folder. You can replace this path with another folder path on the local machine:
 
    .. code-block:: shell
       :class: copyable
@@ -35,7 +35,7 @@ Procedure
 
    The ``mkdir`` command creates the folder explicitly at the specified path.
 
-   The ``minio server`` command starts the MinIO server. The path argument
+   The ``minio server`` command starts the Buckit server. The path argument
    ``~/minio`` identifies the folder in which the server operates.
 
    The :mc:`minio server` process prints its output to the system console, similar to the following:
@@ -50,27 +50,27 @@ Procedure
       RootUser: minioadmin
       RootPass: minioadmin
 
-      Command-line: https://docs.min.io/community/minio-object-store/reference/minio-mc.html
+      Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
          $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
 
       Documentation: https://docs.min.io/community/minio-object-store/index.html
 
       WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
 
-#. **Connect Your Browser to the MinIO Server**
+#. **Connect Your Browser to the Buckit Server**
 
-   Open http://127.0.0.1:9000 in a web browser to access the :ref:`MinIO Console <minio-console>`. 
+   Open http://127.0.0.1:9000 in a web browser to access the :ref:`Buckit Console <minio-console>`. 
    You can alternatively enter any of the network addresses specified as part of the server command output.
    For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
-   While the port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
+   While the port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
 
    Log in to the Console with the ``RootUser`` and ``RootPass`` user credentials displayed in the output.
    These default to ``minioadmin | minioadmin``.
 
-#. `(Optional)` **Install the MinIO Client**
+#. `(Optional)` **Install the Buckit Client**
 
-   The :ref:`MinIO Client <minio-client>` allows you to work with your MinIO server from the commandline.
+   The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit server from the commandline.
 
    Download the :mc:`mc` client and install it to a location on your system ``PATH`` such as 
    ``/usr/local/bin``. You can alternatively run the binary from the download location.
@@ -94,9 +94,9 @@ Procedure
    The :mc:`mc alias set` takes four arguments:
 
    - The name of the alias
-   - The hostname or IP address and port of the MinIO server
-   - The Access Key for a MinIO :ref:`user <minio-users>`
-   - The Secret Key for a MinIO :ref:`user <minio-users>`
+   - The hostname or IP address and port of the Buckit server
+   - The Access Key for a Buckit :ref:`user <minio-users>`
+   - The Secret Key for a Buckit :ref:`user <minio-users>`
 
    The example above uses the :ref:`root user <minio-users-root>`.
 
@@ -105,7 +105,7 @@ Procedure
 Next Steps
 ----------
 
-- :ref:`Connect your applications to MinIO <minio-drivers>`
+- :ref:`Connect your applications to Buckit <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO for Production Environments <deploy-minio-distributed>`
+- :ref:`Deploy Buckit for Production Environments <deploy-minio-distributed>`

@@ -97,7 +97,7 @@ Enable
       
       .. mc-conf:: notify_elasticsearch
       
-         The top-level configuration key for defining an Elasticsearch service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+         The top-level configuration key for defining an Elasticsearch service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
       
          Use :mc-cmd:`mc admin config set` to set or update an Elasticsearch service endpoint. 
          The following arguments are *required* for each target:
@@ -133,10 +133,10 @@ URL
       .. mc-conf:: notify_elasticsearch url
          :delimiter: " "
 
-Specify the Elasticsearch service endpoint to which MinIO publishes bucket events. 
+Specify the Elasticsearch service endpoint to which Buckit publishes bucket events. 
 For example, ``https://elasticsearch.example.com:9200``.
 
-MinIO supports passing authentication information using as URL parameters using the format ``PROTOCOL://USERNAME:PASSWORD@HOSTNAME:PORT``.
+Buckit supports passing authentication information using as URL parameters using the format ``PROTOCOL://USERNAME:PASSWORD@HOSTNAME:PORT``.
 
 .. include:: /includes/linux/minio-server.rst
    :start-after: start-notify-target-online-desc
@@ -159,7 +159,7 @@ Index
       .. mc-conf:: notify_elasticsearch index
          :delimiter: " "
 
-Specify the name of the Elasticsearch index in which to store or update MinIO bucket events. 
+Specify the name of the Elasticsearch index in which to store or update Buckit bucket events. 
 Elasticsearch automatically creates the index if it does not exist.
 
 Format
@@ -181,15 +181,15 @@ Format
          :delimiter: " "
 
 Specify the format of event data written to the Elasticsearch index. 
-MinIO supports the following values:
+Buckit supports the following values:
 
 ``namespace``
-   For each bucket event, MinIO creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
+   For each bucket event, Buckit creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
    Additional updates to that object modify the existing index entry for that object. 
    Similarly, deleting the object also deletes the corresponding index entry.
    
 ``access``
-   For each bucket event, MinIO creates a JSON document with the event details and appends it to the index with an Elasticsearch-generated random ID. 
+   For each bucket event, Buckit creates a JSON document with the event details and appends it to the index with an Elasticsearch-generated random ID. 
    Additional updates to an object result in new index entries,    and existing entries remain unmodified.
 
 Username
@@ -234,7 +234,7 @@ The password for connecting to an Elasticsearch service endpoint which enforces 
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 Queue Directory
 ~~~~~~~~~~~~~~~
@@ -254,9 +254,9 @@ Queue Directory
       .. mc-conf:: notify_elasticsearch queue_dir 
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the Elasticsearch service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the Elasticsearch service is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

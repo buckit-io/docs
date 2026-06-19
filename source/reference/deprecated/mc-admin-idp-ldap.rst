@@ -79,7 +79,7 @@ Syntax
 .. mc-cmd:: add
 
    Create a new configuration for an AD/LDAP provider.
-   MinIO supports no more than *one* (1) AD/LDAP provider per deployment.
+   Buckit supports no more than *one* (1) AD/LDAP provider per deployment.
 
    .. tab-set::
 
@@ -112,7 +112,7 @@ Syntax
                                        [CFG_PARAM1]      \
                                        [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to create for AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to create for AD/LDAP integration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs in the format of ``PARAMETER="value"``.
 
 .. mc-cmd:: update
@@ -145,7 +145,7 @@ Syntax
                                             [CFG_PARAM1]     \
                                             [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to update for AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to update for AD/LDAP integration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-ldap-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
 
 .. mc-cmd:: ls, list
@@ -172,7 +172,7 @@ Syntax
 
             mc [GLOBALFLAGS] admin idp ldap ls ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list the AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to list the AD/LDAP integration.
 
 .. mc-cmd:: rm, remove
 
@@ -199,12 +199,12 @@ Syntax
             mc [GLOBALFLAGS] admin idp ldap rm     \
                                             ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to remove the AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to remove the AD/LDAP integration.
 
 
 .. mc-cmd:: info
 
-   Outputs the current configuration for an AD/LDAP provider on a specified MinIO deployment.
+   Outputs the current configuration for an AD/LDAP provider on a specified Buckit deployment.
 
    .. tab-set::
 
@@ -227,7 +227,7 @@ Syntax
             mc [GLOBALFLAGS] admin idp ldap info     \
                                             ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to retrieve info on the AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to retrieve info on the AD/LDAP integration.
 
 .. mc-cmd:: enable
 
@@ -255,7 +255,7 @@ Syntax
             mc [GLOBALFLAGS] admin idp ldap enable     \
                                             ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to enable the AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to enable the AD/LDAP integration.
 
 .. mc-cmd:: disable
 
@@ -283,7 +283,7 @@ Syntax
             mc [GLOBALFLAGS] admin idp ldap disable       \
                                             ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to disable the AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to disable the AD/LDAP integration.
 
 Global Flags
 ------------

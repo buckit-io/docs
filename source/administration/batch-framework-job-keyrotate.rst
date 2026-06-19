@@ -11,12 +11,12 @@ Batch Key Rotation
    :local:
    :depth: 2
 
-.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z
+.. versionadded:: Buckit RELEASE.2023-04-07T05-28-58Z
 
-The MinIO Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
-The batch jobs run directly on the MinIO deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`MinIO Client <minio-client>`.
+The Buckit Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
+The batch jobs run directly on the Buckit deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`Buckit Client <minio-client>`.
 
-The ``keyrotate`` batch job type cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects on a MinIO deployment.
+The ``keyrotate`` batch job type cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects on a Buckit deployment.
 
 The YAML configuration supports filters to restrict key rotation to a specific set of objects by creation date, tags, metadata, or kms key.
 You can also define retry attempts or set a notification endpoint and token.
@@ -26,7 +26,7 @@ You can also define retry attempts or set a notification endpoint and token.
 Key Rotate Batch Job Reference
 ------------------------------
 
-.. versionadded:: MinIO RELEASE.2023-04-07T05-28-58Z 
+.. versionadded:: Buckit RELEASE.2023-04-07T05-28-58Z 
 
 Use the ``keyrotate`` job type to create a batch job that cycles the :ref:`sse-s3 or sse-kms keys <minio-sse-data-encryption>` for encrypted objects.
 

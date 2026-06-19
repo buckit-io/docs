@@ -1,26 +1,26 @@
-#. Generate a KES API Key for use by MinIO
+#. Generate a KES API Key for use by Buckit
 
-   Use the :kes-docs:`kes identity new <cli/kes-identity/new>` command to generate a new API key for use by the MinIO Server:
+   Use the :kes-docs:`kes identity new <cli/kes-identity/new>` command to generate a new API key for use by the Buckit Server:
 
    .. code-block:: shell
       :class: copyable
 
       kes identity new
 
-   The output includes both the API Key for use with MinIO and the Identity hash for use with the :kes-docs:`KES Policy configuration <tutorials/configuration/#policy-configuration>`.
+   The output includes both the API Key for use with Buckit and the Identity hash for use with the :kes-docs:`KES Policy configuration <tutorials/configuration/#policy-configuration>`.
 
-#. Configure the MinIO Environment File
+#. Configure the Buckit Environment File
 
-   Create or modify the MinIO Server environment file for all hosts in the target deployment to include the following environment variables:
+   Create or modify the Buckit Server environment file for all hosts in the target deployment to include the following environment variables:
 
    .. include:: /includes/common/common-minio-kes.rst
       :start-after: start-kes-configuration-minio-desc
       :end-before: end-kes-configuration-minio-desc
 
-   MinIO defaults to expecting this file at ``/etc/default/minio``.
+   Buckit defaults to expecting this file at ``/etc/default/minio``.
    If you modified your deployment to use a different location for the environment file, modify the file at that location.
 
-#. Start MinIO
+#. Start Buckit
 
    .. admonition:: KES Operations Requires Unsealed Vault
       :class: important
@@ -30,10 +30,10 @@
       
       Refer to the :kes-docs:`documentation for your chosen KMS solution <#supported-kms-targets>` for information regarding whether sealing and unsealing the instance is required for operations.
 
-      You must start KES *before* starting MinIO. 
-      The MinIO deployment requires access to KES as part of its startup.
+      You must start KES *before* starting Buckit. 
+      The Buckit deployment requires access to KES as part of its startup.
 
-   You can use the :mc:`mc admin service restart` command to restart MinIO:
+   You can use the :mc:`mc admin service restart` command to restart Buckit:
 
    .. code-block:: shell
       :class: copyable

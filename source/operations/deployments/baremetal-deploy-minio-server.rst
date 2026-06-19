@@ -1,7 +1,7 @@
 .. _deploy-minio-standalone:
 
 ========================
-Install the MinIO Server
+Install the Buckit Server
 ========================
 
 .. default-domain:: minio
@@ -10,14 +10,18 @@ Install the MinIO Server
    :local:
    :depth: 1
 
-MinIO supports deploying onto baremetal infrastructure - physical machines or virtualized hosts - running Linux, MacOS, and Windows.
+Buckit supports deploying onto baremetal infrastructure - physical machines or virtualized hosts - running Linux, MacOS, and Windows.
+
+You can deploy Buckit in one of two ways:
+
+- Guided Deployment using Buckit Manager: use the ``bm web`` wizard to deploy
+  Buckit to Linux servers over SSH.
+- Manual deployment of Buckit: follow the platform-specific installation steps
+  for Linux, containers, MacOS, or Windows.
 
 .. toctree::
    :titlesonly:
    :hidden:
    
-   /operations/deployments/baremetal-deploy-minio-on-redhat-linux
-   /operations/deployments/baremetal-deploy-minio-on-ubuntu-linux
-   /operations/deployments/baremetal-deploy-minio-as-a-container
-   /operations/deployments/baremetal-deploy-minio-on-macos
-   /operations/deployments/baremetal-deploy-minio-on-windows
+   /operations/deployments/guided-deployment-using-bucket-manager
+   /operations/deployments/manual-deployment-of-buckit

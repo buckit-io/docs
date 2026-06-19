@@ -1,7 +1,7 @@
 .. _minio-server-envvar-external-identity-management-plugin:
 
 =========================================
-MinIO Identity Management Plugin Settings
+Buckit Identity Management Plugin Settings
 =========================================
 
 .. default-domain:: minio
@@ -10,7 +10,7 @@ MinIO Identity Management Plugin Settings
    :local:
    :depth: 2
 
-This page documents settings for enabling external identity management using the MinIO Identity Management Plugin. 
+This page documents settings for enabling external identity management using the Buckit Identity Management Plugin. 
 See :ref:`minio-external-identity-management-plugin` for a tutorial on using these settings.
 
 .. include:: /includes/common-mc-admin-config.rst
@@ -24,7 +24,7 @@ See :ref:`minio-external-identity-management-plugin` for a tutorial on using the
 Examples
 --------
 
-When setting up the MinIO Identity Management Plugin, you must define at a minimum all of the *required* settings.
+When setting up the Buckit Identity Management Plugin, you must define at a minimum all of the *required* settings.
 The examples here represent the minimum required settings.
 
 .. tab-set::
@@ -119,7 +119,7 @@ Enable
 
 Set to ``false`` to disable the identity provider configuration.
 
-Applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider if set to ``false``.
+Applications cannot generate STS credentials or otherwise authenticate to Buckit using the configured provider if set to ``false``.
 
 Defaults to ``true`` or "enabled".
 

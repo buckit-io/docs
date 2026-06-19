@@ -94,7 +94,7 @@ Enable
 
       .. mc-conf:: notify_redis
 
-      The top-level configuration key for defining an Redis server/broker endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an Redis server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an Redis server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
@@ -132,7 +132,7 @@ Address
       .. mc-conf:: notify_redis address
          :delimiter: " "
 
-Specify the Redis service endpoint to which MinIO publishes bucket events.
+Specify the Redis service endpoint to which Buckit publishes bucket events.
 For example, ``redis.example.com:6369``.
 
 .. include:: /includes/linux/minio-server.rst
@@ -179,15 +179,15 @@ Format
          :delimiter: " "
 
 Specify the format of event data written to the Redis service endpoint. 
-MinIO supports the following values:
+Buckit supports the following values:
 
 ``namespace``
-   For each bucket event, MinIO creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
+   For each bucket event, Buckit creates a JSON document with the bucket and object name from the event as the document ID and the actual event as part of the document body. 
    Additional updates to that object modify the existing index entry for that object. 
    Similarly, deleting the object also deletes the corresponding index entry.
    
 ``access``
-   For each bucket event, MinIO creates a JSON document with the event details and appends it to the key with a Redis-generated random ID. 
+   For each bucket event, Buckit creates a JSON document with the event details and appends it to the key with a Redis-generated random ID. 
    Additional updates to an object result in new index entries, and existing entries remain unmodified.
 
 Password
@@ -212,7 +212,7 @@ Specify the password for the Redis server.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 User
 ~~~~
@@ -255,9 +255,9 @@ Queue Directory
       .. mc-conf:: notify_redis queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the Redis server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the Redis server/broker is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

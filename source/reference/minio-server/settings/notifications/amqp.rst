@@ -85,7 +85,7 @@ Enable
 
       .. mc-conf:: notify_amqp
 
-      The top-level configuration key for defining an AMQP service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an AMQP service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
 
       Use :mc-cmd:`mc admin config set` to set or update an AMQP service endpoint. 
       The :mc-conf:`~notify_amqp.url` argument is *required* for each target.
@@ -116,7 +116,7 @@ URL
       .. mc-conf:: notify_amqp url
          :delimiter: " "
 
-Specify the AMQP server endpoint to which MinIO publishes bucket events.
+Specify the AMQP server endpoint to which Buckit publishes bucket events.
 For example, ``amqp://myuser:mypassword@localhost:5672``.
 
 .. include:: /includes/linux/minio-server.rst
@@ -332,9 +332,9 @@ Queue Directory
       .. mc-conf:: notify_amqp queue_dir 
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the AMQP service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the AMQP service is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

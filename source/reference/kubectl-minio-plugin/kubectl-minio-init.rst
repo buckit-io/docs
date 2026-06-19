@@ -19,12 +19,12 @@ Description
 
 .. start-kubectl-minio-init-desc
 
-The :mc:`kubectl minio init` command initialize the MinIO Operator.
+The :mc:`kubectl minio init` command initialize the Buckit Operator.
 
 .. end-kubectl-minio-init-desc
 
-If the Kubernetes cluster has an existing MinIO Operator installation, this command upgrades the Operator to match the MinIO plugin version.
-For more information on upgrading the MinIO Operator, see :ref:`minio-k8s-upgrade-minio-operator`.
+If the Kubernetes cluster has an existing Buckit Operator installation, this command upgrades the Operator to match the Buckit plugin version.
+For more information on upgrading the Buckit Operator, see :ref:`minio-k8s-upgrade-minio-operator`.
 
 Syntax
 ------
@@ -33,7 +33,7 @@ Syntax
 
    .. tab-item:: EXAMPLE
 
-      The following command initializes a new MinIO Operator deployment running |operator-version-stable|.
+      The following command initializes a new Buckit Operator deployment running |operator-version-stable|.
 
       .. code-block:: shell
          :class: copyable
@@ -82,7 +82,7 @@ The command supports the following flags:
 .. mc-cmd:: --console-image
    :optional:
 
-   The image to use when deploying the :minio-git:`Operator Console <operator>` in Operator mode, where administrators can create and manage MinIO tenants using a Graphical User Interface.
+   The image to use when deploying the :minio-git:`Operator Console <operator>` in Operator mode, where administrators can create and manage Buckit tenants using a Graphical User Interface.
    Defaults to the `version bundled in variable DefaultOperatorImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --console-tls
@@ -97,13 +97,13 @@ The command supports the following flags:
 .. mc-cmd:: --default-kes-image
    :optional:
 
-   The default :minio-git:`kes <kes>` image to use when creating a new MinIO tenant. 
+   The default :minio-git:`kes <kes>` image to use when creating a new Buckit tenant. 
    Defaults to the `version bundled in variable DefaultKESImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --default-minio-image
    :optional:
 
-   The default :minio-git:`minio <minio>` image to use when creating a new MinIO tenant. 
+   The default :minio-git:`minio <minio>` image to use when creating a new Buckit tenant. 
    Defaults to the `version bundled in variable DefaultTenantImage for the matching Operator release <https://github.com/minio/operator/blob/master/kubectl-minio/cmd/helpers/constants.go>`__.
 
 .. mc-cmd:: --image
@@ -117,8 +117,8 @@ The command supports the following flags:
 
    Secret key for use with pulling the :mc-cmd:`~kubectl minio init --image`.
 
-   The MinIO-hosted ``minio/operator`` image is *not* password protected.
-   This option is only required for non-MinIO image sources which are password protected.
+   The Buckit-hosted ``minio/operator`` image is *not* password protected.
+   This option is only required for non-Buckit image sources which are password protected.
 
 .. mc-cmd:: --namespace
    :optional:
@@ -129,7 +129,7 @@ The command supports the following flags:
 .. mc-cmd:: --namespace-to-watch
    :optional:
 
-   The namespace which the operator watches for MinIO tenants.
+   The namespace which the operator watches for Buckit tenants.
    Defaults to ``""`` for *all namespaces*.
 
 .. mc-cmd:: --output

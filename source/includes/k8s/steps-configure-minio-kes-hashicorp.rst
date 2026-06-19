@@ -7,7 +7,7 @@
 #. Create or Modify your Tenant YAML to set the values of ``KesConfig`` as necessary:
 
    You must modify your Tenant YAML or ``Kustomize`` templates to reflect the necessary KES configuration.
-   The following example is taken from the :minio-git:`MinIO Operator Kustomize examples </operator/blob/master/examples/kustomization/tenant-kes-encryption/tenant.yaml>`
+   The following example is taken from the :minio-git:`Buckit Operator Kustomize examples </operator/blob/master/examples/kustomization/tenant-kes-encryption/tenant.yaml>`
 
    .. code-block:: yaml
 

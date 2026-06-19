@@ -20,9 +20,9 @@ Description
 -----------
 
 The :mc:`mc admin console` command returns server log entries for each
-MinIO server in the deployment.
+Buckit server in the deployment.
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -44,12 +44,12 @@ Syntax
 
 .. mc-cmd:: TARGET
 
-   The :mc:`alias <mc alias>` of a configured MinIO deployment from which
+   The :mc:`alias <mc alias>` of a configured Buckit deployment from which
    the command retrieves server logs.
 
 .. mc-cmd:: NODENAME
 
-   The specific MinIO server node from which the command retrieves server logs.
+   The specific Buckit server node from which the command retrieves server logs.
 
 .. mc-cmd:: --limit, l
    

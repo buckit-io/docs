@@ -8,7 +8,7 @@ Glossary
    :sorted:
 
    access keys
-     A MinIO deployment or tenant user account with limited account typically used with API calls.
+     A Buckit deployment or tenant user account with limited account typically used with API calls.
      Access Keys were previously referred to as "Service Accounts"
 
    active-active
@@ -25,11 +25,11 @@ Glossary
      See also: :term:`active-active`.
 
    alias
-     A locally defined reference to a MinIO Deployment used in most command line interface operations.
+     A locally defined reference to a Buckit Deployment used in most command line interface operations.
      See :mc:`mc alias set`.
 
    audit logs
-     Granular descriptions of each operation on a MinIO deployment.
+     Granular descriptions of each operation on a Buckit deployment.
      :ref:`Audit logs <minio-logging>` support security standards and regulations which require detailed tracking of operations.
      
      See also: :term:`server logs`.
@@ -37,31 +37,31 @@ Glossary
    bit rot 
      Data corruption that occurs without the user’s knowledge. 
      
-     MinIO combats bit rot with :term:`hashing` and :term:`erasure coding`.
+     Buckit combats bit rot with :term:`hashing` and :term:`erasure coding`.
 
    bit rot healing
      Objects corrupted due to bit rot are automatically :term:`healed <healing>` during any ``GET`` or ``HEAD`` operation.
-     MinIO captures and heals corrupted objects on the fly with its :term:`hashing` implementation.
+     Buckit captures and heals corrupted objects on the fly with its :term:`hashing` implementation.
 
    bucket
    buckets
      A grouping of :term:`objects` and associated configurations.
 
    cluster
-     A group of drives and one or more MinIO server processes pooled into a single storage resource.
+     A group of drives and one or more Buckit server processes pooled into a single storage resource.
      
      See also: :term:`tenant`.
 
    cluster registration
-     Cluster registration links a MinIO deployment to a :term:`SUBNET` `subscription <https://min.io/pricing?jmp=docs>`__.
-     An organization may have more than one MinIO clusters registered to the same SUBNET subscription.
+     Cluster registration links a Buckit deployment to a :term:`SUBNET` `subscription <https://min.io/pricing?jmp=docs>`__.
+     An organization may have more than one Buckit clusters registered to the same SUBNET subscription.
 
    Console
-   MinIO Console
-     Graphical User Interface (GUI) for interacting with a MinIO deployment or :term:`tenant`.
+   Buckit Console
+     Graphical User Interface (GUI) for interacting with a Buckit deployment or :term:`tenant`.
 
    data
-     One of the two types of blocks MinIO writes when doing :term:`erasure coding`.
+     One of the two types of blocks Buckit writes when doing :term:`erasure coding`.
      Data blocks contain the contents of a file.
 
      :term:`Parity` blocks support data reconstruction should data blocks become corrupt or go missing.
@@ -73,7 +73,7 @@ Glossary
      The process is not reversible.
    
    deployment
-     A specific instance of MinIO containing a set of :term:`buckets` and :term:`objects`.
+     A specific instance of Buckit containing a set of :term:`buckets` and :term:`objects`.
 
    disk encryption
      The conversion of all of the contents written to a disk to values that cannot be easily deciphered by an unauthorized entity.
@@ -85,7 +85,7 @@ Glossary
      Each enclave within a KES server holds separate keys, policies, and administration identity.
      An enclave cannot see or make use of any other enclave on the server.
 
-     For example, you might use multiple enclaves to hold completely separate key stores for multiple MinIO tenants within a single stateful KES server.
+     For example, you might use multiple enclaves to hold completely separate key stores for multiple Buckit tenants within a single stateful KES server.
 
    encryption at rest
      A method of encryption that stores an object in an encrypted state.
@@ -101,11 +101,11 @@ Glossary
    erasure coding
      A technology that splits :term:`objects` into multiple shards and writes the shards to multiple, separate drives.
      
-     Depending on the :term:`topology` used, erasure coding allows for loss of drives or nodes within a MinIO deployment without losing read or write access.
+     Depending on the :term:`topology` used, erasure coding allows for loss of drives or nodes within a Buckit deployment without losing read or write access.
 
    erasure set
-     A group of drives within MinIO that support :term:`erasure coding`. 
-     MinIO divides the number of drives in a deployment's server pool into groups of 4 to 16 drives that make up each *erasure set*.
+     A group of drives within Buckit that support :term:`erasure coding`. 
+     Buckit divides the number of drives in a deployment's server pool into groups of 4 to 16 drives that make up each *erasure set*.
      When writing objects, :term:`data` and :term:`parity` blocks write randomly to the drives in the erasure set.
 
    hashing
@@ -115,7 +115,7 @@ Glossary
      Restoration of data from partial loss due to bit rot, drive failure, or site failure.
 
    health diagnostics
-     A suite of MinIO :ref:`API endpoints <minio-healthcheck-api>` available to check whether a server is
+     A suite of Buckit :ref:`API endpoints <minio-healthcheck-api>` available to check whether a server is
      
      - online 
      - available for writing data
@@ -128,9 +128,9 @@ Glossary
      The :abbr:`HBA (host bus adapter)` handles processing to reduce load on the host system's processor.
 
    IAM integration
-     MinIO only allows access to data for authenticated users.
-     MinIO provides a built-in identity management solution to create authorized credentials.
-     Optionally, MinIO users can authenticate with credentials from a 3rd party identify provider (IDP), including either OpenID or LDAP providers.
+     Buckit only allows access to data for authenticated users.
+     Buckit provides a built-in identity management solution to create authorized credentials.
+     Optionally, Buckit users can authenticate with credentials from a 3rd party identify provider (IDP), including either OpenID or LDAP providers.
 
    JBOD 
      Initialism for "Just A Bunch of Drives".
@@ -147,8 +147,8 @@ Glossary
      A rule that prevents removal or deletion of an object until an authorized agent removes the rule or it expires.
 
    monitoring
-     The act of reviewing the status, activity, and availability of a MinIO cluster, deployment, tenant, or server.
-     MinIO provides the following tools: 
+     The act of reviewing the status, activity, and availability of a Buckit cluster, deployment, tenant, or server.
+     Buckit provides the following tools: 
 
      - `Prometheus <https://prometheus.io/>`__ compatible metrics and alerts
      - :term:`Audit logs`
@@ -159,12 +159,12 @@ Glossary
    multi-node multi-drive
    MNMD
    distributed
-     A system :term:`topology` that uses more than one server and more than one drive per server to host a MinIO instance.
-     MinIO recommends Kubernetes for distributed deployments.
+     A system :term:`topology` that uses more than one server and more than one drive per server to host a Buckit instance.
+     Buckit recommends Kubernetes for distributed deployments.
 
    multipart upload
      Multipart upload is a client-initiated :s3-docs:`S3 function <mpuoverview.html>` that splits a single object into multiple parts for moving from one location to another.
-     The client uploads each part independently to MinIO, and MinIO manages reconstructing those received parts into the original object. 
+     The client uploads each part independently to Buckit, and Buckit manages reconstructing those received parts into the original object. 
 
      Multipart uploads provide benefits such as improved throughput and resiliency to network errors. 
      Use multipart uploads for objects greater than 100MB in actual or estimated size for best results.
@@ -173,19 +173,19 @@ Glossary
 
    network encryption
      A method of securing data during transit from one location to another, such as server-server or client-server.
-     MinIO supports :ref:`Transport Layer Security (TLS) <minio-tls>`, version 1.2 and later, for both incoming and outgoing traffic.
+     Buckit supports :ref:`Transport Layer Security (TLS) <minio-tls>`, version 1.2 and later, for both incoming and outgoing traffic.
 
    object
    objects
-     An item of data MinIO interacts with using an S3-compatible API.
+     An item of data Buckit interacts with using an S3-compatible API.
      Objects can be grouped into :term:`buckets`.
 
    Operator
    Operator Console
-     The Graphical User Interface (GUI) to deploy and manage the MinIO :term:`tenants` in a distributed deployment environment.
+     The Graphical User Interface (GUI) to deploy and manage the Buckit :term:`tenants` in a distributed deployment environment.
 
    parity
-     The portion of blocks written for an object by MinIO to support data reconstruction due to missing or corrupt data blocks.
+     The portion of blocks written for an object by Buckit to support data reconstruction due to missing or corrupt data blocks.
      The number of parity blocks indicates the number of drives in the :term:`erasure set` that a deployment can lose while still retaining read and write operations.
 
    prefix
@@ -193,14 +193,14 @@ Glossary
      Use a delimiter character, typically a `/` to add layers to the hierarchy.
      While prefixed objects may resemble a directory structure in some file systems, prefixes are not directories.
 
-     MinIO itself does not limit the number of objects that any specific prefix can contain.
+     Buckit itself does not limit the number of objects that any specific prefix can contain.
      However, hardware and network conditions may show performance impacts with large prefixes.
 
      - Deployments with modest or budget-focused hardware should architect their workloads to target 10,000 objects per prefix as a baseline. 
        Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
      - Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
 
-    |SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your MinIO-dependent projects.
+    |SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your Buckit-dependent projects.
     
    RAID
      Initialism for "Redundant Array of Independent Disks".
@@ -218,8 +218,8 @@ Glossary
      The replication of a :ref:`bucket <minio-bucket-replication>` or entire :ref:`site <minio-site-replication-overview>` to another location.
 
    scanner 
-   MinIO Scanner
-     One of several low-priority processes MinIO runs to check:
+   Buckit Scanner
+     One of several low-priority processes Buckit runs to check:
      
      - lifecycle management rules requiring object transition
      - bucket or site replication status
@@ -247,12 +247,12 @@ Glossary
 
    service account
      Renamed to :term:`access keys`.
-     A MinIO deployment or tenant user account with limited account typically used with API calls.
+     A Buckit deployment or tenant user account with limited account typically used with API calls.
 
    shard
    shards
-     A portion of an object after being :term:`erasure coded <erasure coding>` by MinIO.
-     Each "shard" represents either data or parity for MinIO to use for reconstructing objects on read requests.
+     A portion of an object after being :term:`erasure coded <erasure coding>` by Buckit.
+     Each "shard" represents either data or parity for Buckit to use for reconstructing objects on read requests.
 
      .. include:: /includes/common-admonitions.rst
         :start-after: start-exclusive-drive-access
@@ -262,12 +262,12 @@ Glossary
 
    single-node multi-drive
    SNMD
-     A system :term:`topology` that deploys MinIO on one compute resource with more than one attached volume.
+     A system :term:`topology` that deploys Buckit on one compute resource with more than one attached volume.
 
    single-node single-drive
    SNSD
    filesystem
-     A system :term:`topology` that deploys MinIO on a single compute resource with a single drive.
+     A system :term:`topology` that deploys Buckit on a single compute resource with a single drive.
      This adds S3-type functionality to an otherwise standard filesystem. 
 
    SSE-C
@@ -280,7 +280,7 @@ Glossary
    SSE-KMS
      A method of :term:`encryption at rest` that encrypts each object at the time of writing with separate keys managed by a service provider.
      Use keys at either the bucket level (default) or at the object level.
-     MinIO recommends the SSE-KMS method for key management of encryption.
+     Buckit recommends the SSE-KMS method for key management of encryption.
 
      See also: :term:`SSE-S3`, :term:`SSE-C`, :term:`encryption at rest`, :term:`network encryption`.
 
@@ -291,20 +291,20 @@ Glossary
      See also: :term:`SSE-KMS`, :term:`SSE-C`, :term:`encryption at rest`, :term:`network encryption`.
 
    standalone deployment
-     A :term:`single-node single-drive` (SNSD) MinIO deployment.
+     A :term:`single-node single-drive` (SNSD) Buckit deployment.
      This term previously referred to the deprecated :ref:`Gateway or Filesystem Mode <minio-gateway-migration>` deployment types.
 
    SUBNET
-     `MinIO's Subscription Network <https://min.io/pricing?jmp=docs>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.
+     `Buckit's Subscription Network <https://min.io/pricing?jmp=docs>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.
 
    tenant
    tenants
-     In a :term:`distributed` mode, a specific MinIO deployment.
-     One instance of the MinIO Operator may have multiple tenants.
+     In a :term:`distributed` mode, a specific Buckit deployment.
+     One instance of the Buckit Operator may have multiple tenants.
 
    topology
      The hardware configuration used for a deployment.
-     MinIO works with three topologies:
+     Buckit works with three topologies:
      
      - :term:`multi-node multi-drive`
      - :term:`single-node multi-drive`
@@ -318,7 +318,7 @@ Glossary
      The format is typically :abbr:`JSON (JavaScript Object Notation)` sent as an HTTP POST request.
 
    write quorum
-     The minimum number of object shards MinIO must successfully write to an :ref:`erasure set <minio-ec-erasure-set>` for write operations.
+     The minimum number of object shards Buckit must successfully write to an :ref:`erasure set <minio-ec-erasure-set>` for write operations.
      See :ref:`minio-ec-basics` for more information
 
    WORM

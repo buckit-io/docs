@@ -89,7 +89,7 @@ Syntax
                                             [--user=`USER`]   \
                                             [--group=`GROUP`]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for AD/LDAP integration.
          - Replace ``POLICYNAME`` with the policy to attach to the entity.
            You may list multiple policies to attach to the entity.
          - Use must use one of either the ``--user`` or ``--group`` flag.
@@ -139,7 +139,7 @@ Syntax
                                             [--user=`USER`]   \
                                             [--group=`GROUP`]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for AD/LDAP integration.
          - Replace ``POLICYNAME`` with the policy to detach from the entity.
            You may list multiple policies to detach from the entity.
          - Use must use one of either the ``--user`` or ``--group`` flag.
@@ -182,7 +182,7 @@ Syntax
                                             [--group `value`, -g `value`]  \
                                             [--policy value]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for AD/LDAP integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for AD/LDAP integration.
          - You may use each of the ``--user``, ``--group``, and/or ``--policy`` flags as many times as desired in the command.
          - For each flag, the output lists the entities mapped to the specified policy, user, or group.
          - Omit all flags to return a list of mappings for all policies.

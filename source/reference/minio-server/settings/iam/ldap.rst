@@ -18,9 +18,9 @@ See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using thes
 
    New in version ``RELEASE.2023-05-26T23-31-54Z``: 
 
-   :mc:`mc idp ldap` commands are preferred over using configuration settings to configure MinIO to use Active Directory or LDAP for identity management.
+   :mc:`mc idp ldap` commands are preferred over using configuration settings to configure Buckit to use Active Directory or LDAP for identity management.
 
-   MinIO recommends using the :mc:`mc idp ldap` commands for LDAP management operations. 
+   Buckit recommends using the :mc:`mc idp ldap` commands for LDAP management operations. 
    These commands offer better validation and additional features, while providing the same settings as the ``identity_ldap`` configuration key. 
    See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using :mc:`mc idp ldap`.
 
@@ -240,7 +240,7 @@ Enabled
 
 Set to ``false`` to disable the AD/LDAP configuration.
 
-If ``false``, applications cannot generate STS credentials or otherwise authenticate to MinIO using the configured provider.
+If ``false``, applications cannot generate STS credentials or otherwise authenticate to Buckit using the configured provider.
 
 Defaults to ``true`` or "enabled".
 

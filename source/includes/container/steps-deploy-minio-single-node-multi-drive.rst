@@ -1,4 +1,4 @@
-1) Pull the Latest Stable Image of MinIO
+1) Pull the Latest Stable Image of Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-deploy.rst
@@ -108,10 +108,10 @@ The following table describes each line of the command and provides additional c
      - Mounts the environment file created in the previous step to the ``/etc/config.env`` path on the Container.
        For Windows hosts, specify the Windows-style path ``-v C:\minio\config:/etc/config.env``.
          
-       The MinIO Server uses this environment file for configuration.
+       The Buckit Server uses this environment file for configuration.
          
    * - ``-e "MINIO_CONFIG_ENV_FILE=/etc/config.env"``
-     - Sets a MinIO environment variable pointing to the container-mounted path of the environment file.
+     - Sets a Buckit environment variable pointing to the container-mounted path of the environment file.
 
    * - ``--name "minio_local"``
      - Sets a custom name for the container. 
@@ -119,8 +119,8 @@ The following table describes each line of the command and provides additional c
        You can replace this value to best reflect your requirements.
 
    * - ``minio server --console-address ":9001"``
-     - Starts the MinIO server using the ``minio:minio`` image pulled from an earlier step.
-       The :mc-cmd:`minio server --console-address ":9001" <minio server --console-address>` option directs the server to set a static port for the MinIO Console Web Interface.
+     - Starts the Buckit server using the ``minio:minio`` image pulled from an earlier step.
+       The :mc-cmd:`minio server --console-address ":9001" <minio server --console-address>` option directs the server to set a static port for the Buckit Console Web Interface.
        This option is *required* for containerized environments.
 
        If you modify this value, ensure you set the proper port mapping using the ``-p`` flag to Podman/Docker to ensure traffic forwarding between the local host and the container.
@@ -142,7 +142,7 @@ The following table describes each line of the command and provides additional c
    RootUser: myminioadmin 
    RootPass: minio-secret-key-change-me 
 
-   Command-line: https://docs.min.io/community/minio-object-store/reference/minio-mc.html
+   Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
       $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
 
    Documentation: https://docs.min.io/community/minio-object-store/operations/deployments/baremetal-deploy-minio-as-a-container.html
@@ -150,11 +150,11 @@ The following table describes each line of the command and provides additional c
 .. admonition:: Container Networks May Not Be Accessible Outside of the Host
 
    The ``API`` and ``CONSOLE`` blocks may include the network interfaces for the container.
-   Clients outside of the container network cannot access the MinIO API or Console using these addresses.
+   Clients outside of the container network cannot access the Buckit API or Console using these addresses.
 
    External access requires using a network address for the container host machine and assumes the host firewall allows access to the related ports (``9000`` and ``9001`` in the examples).
 
-5) Connect to the MinIO Service
+5) Connect to the Buckit Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-deploy.rst

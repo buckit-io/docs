@@ -1,12 +1,12 @@
-# Generate Let's Encrypt certificate using Certbot for MinIO [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# Generate Let's Encrypt certificate using Certbot for Buckit [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 [Let’s Encrypt](https://letsencrypt.org/) is a new free, automated, and open source, Certificate Authority.
 
 [Certbot](https://certbot.eff.org/) is a console based certificate generation tool for Let's Encrypt.
 
-In this recipe, we will generate a Let's Encypt certificate using Certbot. This certificate will then be deployed for use in the MinIO server.
+In this recipe, we will generate a Let's Encypt certificate using Certbot. This certificate will then be deployed for use in the Buckit server.
 
 ## 1. Prerequisites
-- Install MinIO Server from [here](https://docs.min.io/community/minio-object-store/index.html#procedure).
+- Install Buckit Server from [here](https://docs.min.io/community/minio-object-store/index.html#procedure).
 - Install Certbot from [here](https://certbot.eff.org/)
 
 ## 2. Dependencies
@@ -36,7 +36,7 @@ lrwxrwxrwx 1 root root  40 Aug  2 09:58 privkey.pem -> ../../archive/myminio.com
 -rw-r--r-- 1 root root 543 May 10 22:07 README
 ```
 
-### Step 4: Set up SSL on MinIO Server with the certificates.
+### Step 4: Set up SSL on Buckit Server with the certificates.
 The certificate and key generated via Certbot needs to be placed inside user's home directory.
 ```sh
 $ cp /etc/letsencrypt/live/myminio.com/fullchain.pem /home/user/.minio/certs/public.crt
@@ -49,21 +49,21 @@ $ sudo chown user:user /home/user/.minio/certs/private.key
 $ sudo chown user:user /home/user/.minio/certs/public.crt
 ```
 
-### Step 6: Start MinIO Server using HTTPS.
+### Step 6: Start Buckit Server using HTTPS.
 
-If you are not going to run MinIO with `root` privileges, you will need to give MinIO the capability of listening on ports less than 1024 using the following command:
+If you are not going to run Buckit with `root` privileges, you will need to give Buckit the capability of listening on ports less than 1024 using the following command:
 
 ```sh
 sudo setcap 'cap_net_bind_service=+ep' ./minio
 ```
 
-Now, you can start MinIO Server on port "443".
+Now, you can start Buckit Server on port "443".
 
 ```sh
 $ ./minio server --address ":443" /mnt/data
 ```
 
-If you are using dockerized version of MinIO then you would need to
+If you are using dockerized version of Buckit then you would need to
 ```sh
 $ sudo docker run -p 443:443 -v /home/user/.minio:/root/.minio/ -v /home/user/data:/data minio/minio server --address ":443" /data
 ```

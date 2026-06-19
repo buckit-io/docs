@@ -80,7 +80,7 @@ Enable
 
       .. mc-conf:: notify_webhook
 
-      The top-level configuration key for defining an Webhook service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an Webhook service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an Webhook service endpoint.
       The :mc-conf:`~notify_webhook.endpoint` argument is *required* for each target.
@@ -132,7 +132,7 @@ Auth Token
       An authentication token of the appropriate type for the endpoint.
       Omit for endpoints which do not require authentication.
    
-      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
       Depending on the endpoint, you may need to include additional information.
    
       For example, for a Bearer token, prepend ``Bearer``:
@@ -161,7 +161,7 @@ Auth Token
          An authentication token of the appropriate type for the endpoint.
          Omit for endpoints which do not require authentication.
    
-         To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+         To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
          Depending on the endpoint, you may need to include additional information.
    
          For example, for a Bearer token, prepend ``Bearer``:
@@ -187,7 +187,7 @@ Auth Token
    
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
    
-         MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+         Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 Queue Directory
 ~~~~~~~~~~~~~~~
@@ -207,9 +207,9 @@ Queue Directory
       .. mc-conf:: notify_webhook queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

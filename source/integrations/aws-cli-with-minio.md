@@ -1,12 +1,12 @@
-# AWS CLI with MinIO Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# AWS CLI with Buckit Server [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
 AWS CLI is a unified tool to manage AWS services. It is frequently the tool used to transfer data in and out of AWS S3. It works with any S3 compatible cloud storage service.
 
-In this recipe we will learn how to configure and use AWS CLI to manage data with MinIO Server.
+In this recipe we will learn how to configure and use AWS CLI to manage data with Buckit Server.
 
 ## 1. Prerequisites
 
-Install MinIO Server from [here](https://docs.min.io/community/minio-object-store/operations/deployments/installation.html).
+Install Buckit Server from [here](https://docs.min.io/community/minio-object-store/operations/deployments/installation.html).
 
 ## 2. Installation
 
@@ -14,10 +14,10 @@ Install AWS CLI from <https://aws.amazon.com/cli/>
 
 ## 3. Configuration
 
-To configure AWS CLI, type `aws configure` and specify the MinIO key information.
+To configure AWS CLI, type `aws configure` and specify the Buckit key information.
 
 Access credentials shown in this example belong to <https://play.min.io:9000>.
-These credentials are open to public. Feel free to use this service for testing and development. Replace with your own MinIO keys in deployment.
+These credentials are open to public. Feel free to use this service for testing and development. Replace with your own Buckit keys in deployment.
 
 ```sh
 aws configure
@@ -27,7 +27,7 @@ Default region name [None]: us-east-1
 Default output format [None]: ENTER
 ```
 
-Additionally enable AWS Signature Version '4' for MinIO server.
+Additionally enable AWS Signature Version '4' for Buckit server.
 
 ```sh
 aws configure set default.s3.signature_version s3v4

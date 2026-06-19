@@ -2,17 +2,17 @@
 
 Using pre-signed URLs, a client can upload files directly to an S3-compatible cloud storage server (S3) without exposing the S3 credentials to the user. 
 
-This guide describes how to use the [`presignedPutObject`](https://docs.min.io/community/minio-object-store/developers/go/API.html#presignedputobject-ctx-context-context-bucketname-objectname-string-expiry-time-duration-url-url-error) API from the [MinIO JavaScript Library](https://github.com/minio/minio-js) to generate a pre-signed URL. This is demonstrated through a JavaScript example in which an Express Node.js server exposes an endpoint to generate a pre-signed URL and a client-side web application uploads a file to MinIO Server using that URL.
+This guide describes how to use the [`presignedPutObject`](https://docs.min.io/community/minio-object-store/developers/go/API.html#presignedputobject-ctx-context-context-bucketname-objectname-string-expiry-time-duration-url-url-error) API from the [Buckit JavaScript Library](https://github.com/minio/minio-js) to generate a pre-signed URL. This is demonstrated through a JavaScript example in which an Express Node.js server exposes an endpoint to generate a pre-signed URL and a client-side web application uploads a file to Buckit Server using that URL.
 
 - [Upload Files Using Pre-signed URLs ](#upload-files-using-pre-signed-urls-)
   - [1. Create the Server](#1-create-the-server)
   - [2. Create the Client-side Web Application](#2-create-the-client-side-web-application)
 
 ## <a name="createserver"></a>1. Create the Server
-The server consists of an [Express](https://expressjs.com) Node.js server that exposes an endpoint called `/presignedUrl`. This endpoint uses a `Minio.Client` object to generate a short-lived, pre-signed URL that can be used to upload a file to MinIO Server.
+The server consists of an [Express](https://expressjs.com) Node.js server that exposes an endpoint called `/presignedUrl`. This endpoint uses a `Minio.Client` object to generate a short-lived, pre-signed URL that can be used to upload a file to Buckit Server.
 
 ```js
-// In order to use the MinIO JavaScript API to generate the pre-signed URL, begin by instantiating
+// In order to use the Buckit JavaScript API to generate the pre-signed URL, begin by instantiating
 // a `Minio.Client` object and pass in the values for your server.
 // The example below uses values for play.min.io:9000
 

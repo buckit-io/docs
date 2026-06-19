@@ -8,7 +8,7 @@ Erasure Coding
 
 .. container:: extlinks-video
 
-   - `Overview of MinIO Erasure Coding <https://www.youtube.com/watch?v=QniHMNNmbfI>`__   
+   - `Overview of Buckit Erasure Coding <https://www.youtube.com/watch?v=QniHMNNmbfI>`__   
 
 .. contents:: Table of Contents
    :local:
@@ -16,12 +16,12 @@ Erasure Coding
 
 .. meta::
    :keywords: erasure coding, healing, availability, resiliency
-   :description: Information on MinIO Erasure Coding
+   :description: Information on Buckit Erasure Coding
 
-MinIO implements Erasure Coding as a core component in providing data redundancy and availability.
-This page provides an introduction to MinIO Erasure Coding.
+Buckit implements Erasure Coding as a core component in providing data redundancy and availability.
+This page provides an introduction to Buckit Erasure Coding.
 
-See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more information on how MinIO uses erasure coding in production deployments.
+See :ref:`minio-availability-resiliency` and :ref:`minio-architecture` for more information on how Buckit uses erasure coding in production deployments.
 
 
 .. _minio-ec-basics:
@@ -33,21 +33,21 @@ Erasure Coding Basics
 
 .. note::
    
-   The diagrams and content in this section present a simplified view of MinIO erasure coding operations and are not intended to represent the complexities of MinIO's full erasure coding implementation.
+   The diagrams and content in this section present a simplified view of Buckit erasure coding operations and are not intended to represent the complexities of Buckit's full erasure coding implementation.
 
-MinIO groups drives in each :term:`server pool` into one or more **Erasure Sets** of the same size.
+Buckit groups drives in each :term:`server pool` into one or more **Erasure Sets** of the same size.
    .. figure:: /images/erasure/erasure-coding-erasure-set.svg
       :figwidth: 100%
       :align: center
       :alt: Diagram of erasure set covering 4 nodes and 16 drives
 
       The above example deployment consists of 4 nodes with 4 drives each.
-      MinIO initializes with a single erasure set consisting of all 16 drives across all four nodes.
+      Buckit initializes with a single erasure set consisting of all 16 drives across all four nodes.
 
-   MinIO determines the optimal number and size of erasure sets when initializing a :term:`server pool`.
+   Buckit determines the optimal number and size of erasure sets when initializing a :term:`server pool`.
    You cannot modify these settings after this initial setup.
 
-For each write operation, MinIO partitions the object into **data** and **parity** shards.
+For each write operation, Buckit partitions the object into **data** and **parity** shards.
    Erasure set stripe size dictates the maximum possible :ref:`parity <minio-ec-parity>` of the deployment.
    The formula for determining the number of data and parity shards to generate is:
 
@@ -67,14 +67,14 @@ You can set the parity value between 0 and 1/2 the Erasure Set size.
    .. figure:: /images/erasure/erasure-coding-erasure-set-shard-distribution.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of an object being sharded using MinIO's Reed-Solomon Erasure Coding algorithm.
+      :alt: Diagram of an object being sharded using Buckit's Reed-Solomon Erasure Coding algorithm.
 
-      MinIO uses a Reed-Solomon erasure coding implementation and partitions the object for distribution across an erasure set.
+      Buckit uses a Reed-Solomon erasure coding implementation and partitions the object for distribution across an erasure set.
       The example deployment above has an erasure set size of 16 and a parity of ``EC:4``
 
    Objects written with a given parity settings do not automatically update if you change the parity values later.
 
-MinIO requires a minimum of ``K`` shards of any type to **read** an object.
+Buckit requires a minimum of ``K`` shards of any type to **read** an object.
    The value ``K`` here constitutes the **read quorum** for the deployment.
    The erasure set must therefore have at least ``K`` healthy drives in the erasure set to support read operations.
 
@@ -85,12 +85,12 @@ MinIO requires a minimum of ``K`` shards of any type to **read** an object.
 
       This deployment has one offline node, resulting in only 12 remaining healthy drives.
       The object was written with ``EC:4`` with a read quorum of ``K=12``.
-      This object therefore maintains read quorum and MinIO can reconstruct it for read operations.
+      This object therefore maintains read quorum and Buckit can reconstruct it for read operations.
 
-   MinIO cannot reconstruct an object that has lost read quorum.
+   Buckit cannot reconstruct an object that has lost read quorum.
    Such objects may be recovered through other means such as :ref:`replication resynchronization <minio-bucket-replication-resynchronize>`.
 
-MinIO requires a minimum of ``K`` erasure set drives to **write** an object.
+Buckit requires a minimum of ``K`` erasure set drives to **write** an object.
    The value ``K`` here constitutes the **write quorum** for the deployment.
    The erasure set must therefore have at least ``K`` available drives online to support write operations.
 
@@ -101,7 +101,7 @@ MinIO requires a minimum of ``K`` erasure set drives to **write** an object.
 
       This deployment has one offline node, resulting in only 12 remaining healthy drives.
       A client writes an object with ``EC:4`` parity settings where the erasure set has a write quorum of ``K=12``.
-      This erasure set maintains write quorum and MinIO can use it for write operations.
+      This erasure set maintains write quorum and Buckit can use it for write operations.
 
 If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+1``
    This prevents a split-brain type scenario, such as one where a network issue isolates exactly half the erasure set drives from the other.
@@ -113,20 +113,20 @@ If Parity ``EC:M`` is exactly 1/2 the erasure set size, **write quorum** is ``K+
 
       This deployment has two nodes offline due to a transient network failure.
       A client writes an object with ``EC:8`` parity settings where the erasure set has a write quorum of ``K=9``.
-      This erasure set has lost write quorum and MinIO cannot use it for write operations.
+      This erasure set has lost write quorum and Buckit cannot use it for write operations.
 
    The ``K+1`` logic ensures that a client could not potentially write the same object twice - once to each "half" of the erasure set.
 
-For an object maintaining **read quorum**, MinIO can use any data or parity shard to :ref:`heal <minio-concepts-healing>` damaged shards.
+For an object maintaining **read quorum**, Buckit can use any data or parity shard to :ref:`heal <minio-concepts-healing>` damaged shards.
    .. figure:: /images/erasure/erasure-coding-shard-healing.svg
       :figwidth: 100%
       :align: center
-      :alt: Diagram of MinIO using parity shards to heal lost data shards on a node.
+      :alt: Diagram of Buckit using parity shards to heal lost data shards on a node.
 
       An object with ``EC:4`` lost four data shards out of 12 due to drive failures.
-      Since the object has maintained **read quorum**, MinIO can heal those lost data shards using the available parity shards.
+      Since the object has maintained **read quorum**, Buckit can heal those lost data shards using the available parity shards.
 
-Use the `Erasure Coding Calculator </docs/_static/ec-calculator.html>`__ to explore the possible erasure set size and distributions for your planned topology.
+Use the `Erasure Coding Calculator <../../_static/ec-calculator.html>`__ to explore the possible erasure set size and distributions for your planned topology.
 Where possible, use an even number of nodes and drives per node to simplify topology planning and conceptualization of drive/erasure-set distribution.
 
 .. include:: /includes/common-admonitions.rst
@@ -140,11 +140,11 @@ Erasure Parity and Storage Efficiency
 
 Setting the parity for a deployment is a balance between availability and total usable storage. 
 Higher parity values increase resiliency to drive or node failure at the cost of usable storage, while lower parity provides maximum storage with reduced tolerance for drive/node failures. 
-Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ to explore the effect of parity on your planned cluster deployment.
+Use the `Erasure Code Calculator <../../_static/ec-calculator.html>`__ to explore the effect of parity on your planned cluster deployment.
 
-The following table lists the outcome of varying erasure code parity levels on a MinIO deployment consisting of 1 node and 16 1TB drives:
+The following table lists the outcome of varying erasure code parity levels on a Buckit deployment consisting of 1 node and 16 1TB drives:
 
-.. list-table:: Outcome of Parity Settings on a 16 Drive MinIO Cluster
+.. list-table:: Outcome of Parity Settings on a 16 Drive Buckit Cluster
    :header-rows: 1
    :widths: 20 20 20 20 20
    :width: 100%
@@ -183,6 +183,6 @@ For data drives, it is typically the result of decay of the electrical charge or
 These sources can range from the small current spike during a power outage to a random cosmic ray resulting in flipped bits.
 The resulting "bit rot" can cause subtle errors or corruption on the data medium without triggering monitoring tools or hardware.
 
-MinIO’s optimized implementation of the :minio-git:`HighwayHash algorithm <highwayhash/blob/master/README.md>` ensures that it captures and heals corrupted objects on the fly. 
+Buckit’s optimized implementation of the :minio-git:`HighwayHash algorithm <highwayhash/blob/master/README.md>` ensures that it captures and heals corrupted objects on the fly. 
 Integrity is ensured from end to end by computing a hash on READ and verifying it on WRITE from the application, across the network, and to the memory or drive. 
 The implementation is designed for speed and can achieve hashing speeds over 10 GB/sec on a single core on Intel CPUs.

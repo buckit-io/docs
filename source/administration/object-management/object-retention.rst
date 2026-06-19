@@ -2,7 +2,7 @@
 .. _minio-object-retention:
 
 ====================
-MinIO Object Locking
+Buckit Object Locking
 ====================
 
 .. default-domain:: minio
@@ -19,14 +19,14 @@ MinIO Object Locking
 Overview
 --------
 
-MinIO Object Locking ("Object Retention") enforces Write-Once Read-Many (WORM)
+Buckit Object Locking ("Object Retention") enforces Write-Once Read-Many (WORM)
 immutability to protect :ref:`versioned objects <minio-bucket-versioning>` from
-deletion. MinIO supports both 
+deletion. Buckit supports both 
 :ref:`duration based object retention <minio-object-locking-retention-modes>` 
 and 
 :ref:`indefinite legal hold retention <minio-object-locking-legalhold>`.
 
-MinIO Object Locking provides key data retention compliance and meets
+Buckit Object Locking provides key data retention compliance and meets
 SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per 
 `Cohasset Associates <https://min.io/cohasset?ref-docs>`__.
 
@@ -39,7 +39,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
          :align: center
          :width: 600px
 
-      MinIO versioning preserves the full history of object mutations. 
+      Buckit versioning preserves the full history of object mutations. 
       However, applications can explicitly delete specific object versions.
 
    .. card:: Bucket With Locking
@@ -60,7 +60,7 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
          :width: 600px
 
       :ref:`Delete operations <minio-object-delete>` follow normal behavior in 
-      :ref:`versioned buckets <minio-bucket-versioning-delete>`, where MinIO
+      :ref:`versioned buckets <minio-bucket-versioning-delete>`, where Buckit
       creates a ``DeleteMarker`` for the object. However, non-Delete Marker 
       versions of the object remain under the retention rules and are protected 
       from any specific deletion or overwrite attempts.
@@ -72,14 +72,14 @@ SEC17a-4(f), FINRA 4511(C), and CFTC 1.31(c)-(d) requirements as per
          :align: center
          :width: 600px
 
-      MinIO blocks any attempt to :ref:`delete <minio-object-delete>` a specific object version held under
+      Buckit blocks any attempt to :ref:`delete <minio-object-delete>` a specific object version held under
       WORM lock. The earliest possible time after which a client may delete
       the version is when the lock expires.
 
-MinIO object locking is 
+Buckit object locking is 
 :s3-docs:`feature and API compatible with AWS S3 <object-lock.html>`. 
 This page summarizes Object Locking / Retention concepts as implemented by 
-MinIO. See the AWS S3 documentation on
+Buckit. See the AWS S3 documentation on
 :s3-docs:`How S3 Object Lock works <object-lock.html>` for additional
 resources.
 
@@ -146,15 +146,15 @@ a new ``DeleteMarker`` for the object:
 Interaction with Lifecycle Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO :ref:`object expiration <minio-lifecycle-management-expiration>` 
+Buckit :ref:`object expiration <minio-lifecycle-management-expiration>` 
 respects any active object lock and retention settings for objects covered by
 the expiration rule.
 
 - For expiration rules operating on only the *current* object version, 
-  MinIO creates a Delete Marker for the locked object.
+  Buckit creates a Delete Marker for the locked object.
 
 - For expiration rules operating on *non-current object versions*, 
-  MinIO can only expire the non-current versions *after* the retention period
+  Buckit can only expire the non-current versions *after* the retention period
   has passed *or* has been explicitly lifted (e.g. legal holds).
 
 For example, consider the following bucket with 
@@ -192,7 +192,7 @@ Create Bucket with Object Locking Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must enable object locking during bucket creation as per S3 behavior.
-You can create a bucket with object locking enabled using the MinIO :mc:`mc` CLI or using an S3-compatible SDK.
+You can create a bucket with object locking enabled using the Buckit :mc:`mc` CLI or using an S3-compatible SDK.
 
 Use the :mc:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
 option to create a bucket with object locking enabled:
@@ -203,7 +203,7 @@ option to create a bucket with object locking enabled:
    mc mb --with-lock ALIAS/BUCKET
 
 - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
-  MinIO deployment.
+  Buckit deployment.
 
 - Replace ``BUCKET`` with the 
   :mc-cmd:`name <mc mb ALIAS>` of the bucket to create.
@@ -211,9 +211,9 @@ option to create a bucket with object locking enabled:
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can configure object locking rules ("object retention") using the MinIO :mc:`mc` CLI, or using an S3-compatible SDK. 
+You can configure object locking rules ("object retention") using the Buckit :mc:`mc` CLI, or using an S3-compatible SDK. 
 
-MinIO supports setting both bucket-default *and* per-object retention rules. 
+Buckit supports setting both bucket-default *and* per-object retention rules. 
 The following examples set bucket-default retention. For per-object retention
 settings, defer to the documentation for the ``PUT`` operation used by your
 preferred SDK.
@@ -233,14 +233,14 @@ default retention mode for a bucket:
 
 - Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration for which the object lock remains in effect.
 
-- Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 - Replace :mc-cmd:`BUCKET <mc retention set ALIAS>` with the name of the bucket on which to set the default retention rule.
 
 Enable Legal Hold Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable or disable indefinite legal hold retention for an object using the MinIO :mc:`mc` CLI or using an S3-compatible SDK. 
+You can enable or disable indefinite legal hold retention for an object using the Buckit :mc:`mc` CLI or using an S3-compatible SDK. 
 
 You can place a legal hold on an object already held under a :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>` lock. 
 The object remains WORM locked under the legal hold even when the retention lock expires. 
@@ -253,7 +253,7 @@ Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on 
 
    mc legalhold set ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 - Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the path to the object for which to enable the legal hold. 
 
@@ -262,7 +262,7 @@ Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on 
 Object Retention Modes
 ----------------------
 
-MinIO implements the following 
+Buckit implements the following 
 :s3-docs:`S3 Object Locking Modes <object-lock-overview.html>`:
 
 .. list-table::
@@ -280,17 +280,17 @@ MinIO implements the following
        Users with the :policy-action:`s3:BypassGovernanceRetention` permission
        on the bucket or object can modify the object or its locking settings.
 
-       MinIO lifts the lock automatically after the configured retention rule
+       Buckit lifts the lock automatically after the configured retention rule
        duration has passed.
 
    * - :ref:`minio-object-locking-compliance`
      - Prevents any operation that would mutate or modify the object or its
        locking settings.
        
-       No MinIO user can modify the object or its settings, including the
-       :ref:`MinIO root <minio-users-root>` user.
+       No Buckit user can modify the object or its settings, including the
+       :ref:`Buckit root <minio-users-root>` user.
 
-       MinIO lifts the lock automatically after the configured retention rule
+       Buckit lifts the lock automatically after the configured retention rule
        duration has passed.
 
 .. _minio-object-locking-governance:
@@ -307,7 +307,7 @@ modify the locked object, change the retention duration, or lift the lock
 entirely. Bypassing ``GOVERNANCE`` retention also requires setting the 
 ``x-amz-bypass-governance-retention:true`` header as part of the request.
 
-The MinIO ``GOVERNANCE`` lock is functionally identical to the 
+The Buckit ``GOVERNANCE`` lock is functionally identical to the 
 :s3-docs:`S3 GOVERNANCE mode 
 <object-lock.html#object-lock-retention-modes>`.
 
@@ -317,13 +317,13 @@ COMPLIANCE Mode
 ~~~~~~~~~~~~~~~
 
 An object under ``COMPLIANCE`` lock is protected from write operations by *all*
-users, including the :ref:`MinIO root <minio-users-root>` user.
+users, including the :ref:`Buckit root <minio-users-root>` user.
 
 ``COMPLIANCE`` locked objects enforce complete immutability for locked objects.
 You cannot change or remove the lock before the configured retention
 duration has passed.
 
-The MinIO ``COMPLIANCE`` lock is functionally identical to the 
+The Buckit ``COMPLIANCE`` lock is functionally identical to the 
 :s3-docs:`S3 COMPLIANCE mode 
 <object-lock.html#object-lock-retention-modes>`.
 
@@ -333,7 +333,7 @@ Legal Hold
 ----------
 
 An object under legal hold is protected from write operations by *all* 
-users, including the :ref:`MinIO root <minio-users-root>` user. 
+users, including the :ref:`Buckit root <minio-users-root>` user. 
 
 Legal holds are indefinite and enforce complete immutability for locked objects.
 Only privileged users with the :policy-action:`s3:PutObjectLegalHold` permission can set or lift the legal hold.

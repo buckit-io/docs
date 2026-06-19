@@ -1,4 +1,4 @@
-Deploy MinIO and KES with Server-Side Encryption
+Deploy Buckit and KES with Server-Side Encryption
 ------------------------------------------------
 
 Prior to starting these steps, create the following folders:
@@ -17,10 +17,10 @@ Prerequisite
 Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets>` configuration, you may need to pass the ``kes-server.cert`` as a trusted Certificate Authority (CA).
 Defer to the client documentation for instructions on trusting a third-party CA.
 
-1) Create the MinIO Configurations
+1) Create the Buckit Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create the MinIO Environment File
+Create the Buckit Environment File
 
 Create the environment file using your preferred text editor.
 The following example uses ``nano``:
@@ -34,13 +34,13 @@ The following example uses ``nano``:
    :start-after: start-kes-configuration-minio-desc
    :end-before: end-kes-configuration-minio-desc
 
-3) Start the MinIO Server
+3) Start the Buckit Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
 
-   You **must** start KES *before* starting MinIO. 
-   The MinIO deployment requires access to KES as part of its startup.
+   You **must** start KES *before* starting Buckit. 
+   The Buckit deployment requires access to KES as part of its startup.
 
 .. include:: /includes/common/common-minio-kes.rst
    :start-after: start-kes-minio-start-server-desc

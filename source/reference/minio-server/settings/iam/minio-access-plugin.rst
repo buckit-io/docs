@@ -1,7 +1,7 @@
 .. _minio-server-envvar-external-access-management-plugin:
 
 =======================================
-MinIO Access Management Plugin Settings
+Buckit Access Management Plugin Settings
 =======================================
 
 .. default-domain:: minio
@@ -10,7 +10,7 @@ MinIO Access Management Plugin Settings
    :local:
    :depth: 2
 
-This page documents settings for enabling external authorization management using the MinIO Access Management Plugin.
+This page documents settings for enabling external authorization management using the Buckit Access Management Plugin.
 See :ref:`minio-external-access-management-plugin` for a tutorial on using these settings.
 
 .. include:: /includes/common-mc-admin-config.rst
@@ -24,7 +24,7 @@ See :ref:`minio-external-access-management-plugin` for a tutorial on using these
 Examples
 --------
 
-When setting up the MinIO Access Management plugin, you must define at minimum all *required* settings.
+When setting up the Buckit Access Management plugin, you must define at minimum all *required* settings.
 The examples here represent the minimum required setting.
 
 .. tab-set::

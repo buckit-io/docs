@@ -18,21 +18,21 @@ Server-Side Encryption Per-Deployment Key (SSE-S3)
 .. |KMS| replace:: :abbr:`KMS (Key Management Service)`
 .. |KES| replace:: :abbr:`KES (Key Encryption Service)`
 
-MinIO Server-Side Encryption (SSE) protects objects as part of write operations,
+Buckit Server-Side Encryption (SSE) protects objects as part of write operations,
 allowing clients to take advantage of server processing power to secure objects
 at the storage layer (encryption-at-rest). SSE also provides key functionality
 to regulatory and compliance requirements around secure locking and erasure.
 
-MinIO SSE uses the :kes-docs:`MinIO Key Encryption Service (KES) <>` and an
+Buckit SSE uses the :kes-docs:`Buckit Key Encryption Service (KES) <>` and an
 external Key Management Service (KMS) for performing secured cryptographic
-operations at scale. MinIO also supports client-managed key management, where
+operations at scale. Buckit also supports client-managed key management, where
 the application takes full responsibility for creating and managing encryption
-keys for use with MinIO SSE. 
+keys for use with Buckit SSE. 
 
-MinIO SSE-S3 en/decrypts objects using an External Key (EK) managed by a 
+Buckit SSE-S3 en/decrypts objects using an External Key (EK) managed by a 
 Key Management System (KMS). You must specify the |EK| using the 
 :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable when starting up the
-MinIO server. MinIO uses the same EK for *all* SSE-S3 cryptographic operations.
+Buckit server. Buckit uses the same EK for *all* SSE-S3 cryptographic operations.
 
 You can enable bucket-default SSE-S3 encryption using the :mc:`mc encrypt set` command:
 
@@ -44,7 +44,7 @@ You can enable bucket-default SSE-S3 encryption using the :mc:`mc encrypt set` c
 - Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
-MinIO SSE-S3 is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with Amazon S3-Managed Keys <UsingServerSideEncryption.html>` while expanding support to include the following KMS providers:
+Buckit SSE-S3 is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with Amazon S3-Managed Keys <UsingServerSideEncryption.html>` while expanding support to include the following KMS providers:
 
 - :kes-docs:`AWS Secrets Manager <integrations/aws-secrets-manager/>`
 - :kes-docs:`Azure KeyVault <integrations/azure-keyvault/>`
@@ -65,7 +65,7 @@ Quickstart
       :start-after: start-kes-encrypted-backend-desc
       :end-before: end-kes-encrypted-backend-desc
 
-The following procedure uses the ``play`` MinIO |KES| sandbox for 
+The following procedure uses the ``play`` Buckit |KES| sandbox for 
 supporting |SSE| with SSE-S3 in evaluation and early development environments.
 
 For extended development or production environments, use one of the following
@@ -88,7 +88,7 @@ This procedure requires the following components:
 - Install :mc:`mc` on a machine with network access to the source deployment. 
   See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
 
-- Install :kes-docs:`MinIO Key Encryption Service (KES) <>` on a machine with internet access. 
+- Install :kes-docs:`Buckit Key Encryption Service (KES) <>` on a machine with internet access. 
   See the KES :kes-docs:`Getting Started <tutorials/getting-started/>` guide for instructions on downloading, installing, and configuring KES.
 
 
@@ -122,11 +122,11 @@ Set the following environment variables in the terminal or shell:
    * - ``KES_CLIENT_KEY``
      - The private key for an :kes-docs:`identity <concepts/#authorization>` on the KES server.
        The identity must grant access to at minimum the ``/v1/create``, ``/v1/generate``, and ``/v1/list`` :kes-docs:`API endpoints <concepts/server-api/>`. 
-       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
+       This step uses the ``root`` identity for the Buckit ``play`` KES sandbox, which provides access to all operations on the KES server.
 
    * - ``KES_CLIENT_CERT``
      - The corresponding certificate for the :kes-docs:`identity <concepts/#authorization>` on the KES server.
-       This step uses the ``root`` identity for the MinIO ``play`` KES sandbox, which provides access to all operations on the KES server.
+       This step uses the ``root`` identity for the Buckit ``play`` KES sandbox, which provides access to all operations on the KES server.
 
 The following command creates a new |EK| through the :kes-docs:`KES CLI <cli/kes-key/create/>`:
 
@@ -138,11 +138,11 @@ The following command creates a new |EK| through the :kes-docs:`KES CLI <cli/kes
 This tutorial uses the example ``my-minio-sse-s3-key`` name for ease of reference. 
 Specify a unique key name to prevent collision with existing keys.
 
-2) Configure MinIO for SSE-S3 Object Encryption
+2) Configure Buckit for SSE-S3 Object Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       
 Specify the following environment variables in the shell or terminal on each
-MinIO server host in the deployment:
+Buckit server host in the deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -167,7 +167,7 @@ MinIO server host in the deployment:
    :widths: 30 80
 
    * - :envvar:`MINIO_KMS_KES_ENDPOINT`
-     - The endpoint for the MinIO ``Play`` KES service.
+     - The endpoint for the Buckit ``Play`` KES service.
 
    * - :envvar:`MINIO_KMS_KES_KEY_FILE`
      - The private key file corresponding to an 
@@ -191,10 +191,10 @@ MinIO server host in the deployment:
        the configured Key Management System (KMS). Specify the name of the
        key created in the previous step. 
 
-3) Restart the MinIO Deployment to Enable SSE-S3
+3) Restart the Buckit Deployment to Enable SSE-S3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -220,7 +220,7 @@ of all objects written to a specific bucket.
    mc encrypt set sse-s3 ALIAS/BUCKET
 
 - Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the MinIO deployment on which you enabled SSE-S3.
+  :mc:`alias <mc alias>` of the Buckit deployment on which you enabled SSE-S3.
 
 - Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix on which you want to enable automatic SSE-S3.
@@ -231,7 +231,7 @@ Secure Erasure and Locking
 --------------------------
 
 SSE-S3 protects objects using an |EK| specified at server startup
-using the :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable. MinIO
+using the :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable. Buckit
 therefore *requires* access to that |EK| for decrypting that object.
 
 - Disabling the |EK| temporarily locks SSE-S3-encrypted objects in the
@@ -254,9 +254,9 @@ Encryption Process
 
 .. note:: 
 
-   The following section describes MinIO internal logic and functionality.
+   The following section describes Buckit internal logic and functionality.
    This information is purely educational and is not necessary for 
-   configuring or implementing any MinIO feature.
+   configuring or implementing any Buckit feature.
 
 SSE-S3 uses an External Key (EK) managed by the configured Key Management
 System (KMS) for performing cryptographic operations and protecting objects.
@@ -270,8 +270,8 @@ The table below describes each stage of the encryption process:
      - Description
 
    * - SSE-Enabled Write Operation
-     - MinIO receives a write operation requesting SSE-S3 encryption. 
-       MinIO uses the key name specified to 
+     - Buckit receives a write operation requesting SSE-S3 encryption. 
+       Buckit uses the key name specified to 
        :envvar:`MINIO_KMS_KES_KEY_NAME` as the External Key (EK).
 
    * - Generate the Data Encryption Key (DEK)
@@ -290,8 +290,8 @@ The table below describes each stage of the encryption process:
           :end-before: end-sse-oek
 
    * - Encrypt the Object
-     - MinIO uses the |OEK| to encrypt the object *prior* to storing the
-       object to a drive. MinIO then encrypts the |OEK| with the |KEK|. 
+     - Buckit uses the |OEK| to encrypt the object *prior* to storing the
+       object to a drive. Buckit then encrypts the |OEK| with the |KEK|. 
 
-       MinIO stores the encrypted representation of the |OEK| and |DEK| as part
+       Buckit stores the encrypted representation of the |OEK| and |DEK| as part
        of the metadata.

@@ -24,7 +24,7 @@ purposes.
 
 .. end-mc-admin-profile-desc
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -55,7 +55,7 @@ resource:
    mc admin profile start --type "TYPE" ALIAS
 
 - Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO host.
+  :mc-cmd:`alias <mc alias>` of the Buckit host.
 
 - Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resource to
   profile.
@@ -83,7 +83,7 @@ resources:
    mc admin profile start --type "TYPE,[TYPE...]" ALIAS
 
 - Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO host.
+  :mc-cmd:`alias <mc alias>` of the Buckit host.
 
 - Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resources to
   profile. Specify multiple resources as a comma-separated list.
@@ -113,7 +113,7 @@ Syntax
 .. mc-cmd:: start
    :fullpath:
 
-   Starts collecting profiling data on the target MinIO deployment. The
+   Starts collecting profiling data on the target Buckit deployment. The
    command has the following syntax:
 
    .. code-block:: shell
@@ -125,14 +125,14 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from
       which the command collects profiling data.
 
    .. mc-cmd:: type
       
 
       The type(s) of profiling data to collect from the 
-      :mc-cmd:`~mc admin profile start TARGET` MinIO deployment.
+      :mc-cmd:`~mc admin profile start TARGET` Buckit deployment.
 
       Specify one or more of the following supported types as a comma-separated
       list:
@@ -166,7 +166,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment from
+      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from
       which the command returns available profiling data. 
 
 

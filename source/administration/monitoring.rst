@@ -11,11 +11,11 @@ Monitoring Bucket and Object Events
 Bucket Notifications
 --------------------
 
-MinIO bucket notifications allow administrators to send notifications to supported external services on certain object or bucket events. 
-MinIO supports bucket and object-level S3 events similar to the 
+Buckit bucket notifications allow administrators to send notifications to supported external services on certain object or bucket events. 
+Buckit supports bucket and object-level S3 events similar to the 
 :s3-docs:`Amazon S3 Event Notifications <NotificationHowTo.html>`.
 
-MinIO supports publishing bucket or object events to the following supported 
+Buckit supports publishing bucket or object events to the following supported 
 targets on certain supported events. 
 
 - :ref:`minio-bucket-notifications-publish-amqp`
@@ -30,20 +30,20 @@ targets on certain supported events.
 - :ref:`minio-bucket-notifications-publish-webhook` 
 
 See :ref:`minio-bucket-notifications`
-for more complete documentation on MinIO Bucket Notifications.
+for more complete documentation on Buckit Bucket Notifications.
 
 Deployment Metrics
 ------------------
 
-MinIO provides a Prometheus-compatible endpoint for supporting time-series querying of metrics.
+Buckit provides a Prometheus-compatible endpoint for supporting time-series querying of metrics.
 
 Server Logs
 -----------
 
-MinIO provides the following interfaces for remotely reading server logs:
+Buckit provides the following interfaces for remotely reading server logs:
 
 - The :mc:`mc admin logs` command returns the specified server's console output.
-- MinIO supports pushing server logs to an HTTP webhook for further ingestion. 
+- Buckit supports pushing server logs to an HTTP webhook for further ingestion. 
   See :ref:`minio-logging-publish-server-logs` for more information.
 
 .. toctree::

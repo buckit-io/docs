@@ -12,27 +12,27 @@ Publish Events to NSQ
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to `NSQ <https://nsq.io/>`__ 
 service endpoint.
 
-Add a NSQ Endpoint to a MinIO Deployment
+Add a NSQ Endpoint to a Buckit Deployment
 ----------------------------------------
 
 The following procedure adds a new NSQ service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the NSQ Endpoint to MinIO
+1) Add the NSQ Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new NSQ service endpoint using either environment variables
@@ -42,7 +42,7 @@ You can configure a new NSQ service endpoint using either environment variables
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the NSQ service endpoint and associated
+      Buckit supports specifying the NSQ service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-nsq>`. The 
@@ -89,10 +89,10 @@ You can configure a new NSQ service endpoint using either environment variables
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing NSQ service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_nsq <mc admin config get>` to
-        review the currently configured NSQ endpoints on the MinIO deployment.
+        review the currently configured NSQ endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the NSQ service endpoint.
         For example, ``https://nsq-service.example.com:4150``.
@@ -103,7 +103,7 @@ You can configure a new NSQ service endpoint using either environment variables
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating NSQ endpoints on a running 
+      Buckit supports adding or updating NSQ endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_nsq` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -132,10 +132,10 @@ You can configure a new NSQ service endpoint using either environment variables
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing NSQ service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_nsq <mc admin config get>` to
-        review the currently configured NSQ endpoints on the MinIO deployment.
+        review the currently configured NSQ endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the NSQ service endpoint.
         For example:
@@ -146,10 +146,10 @@ You can configure a new NSQ service endpoint using either environment variables
       <minio-server-config-bucket-notification-nsq>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -184,10 +184,10 @@ Use the :mc:`mc event add` command to add a new bucket notification event with t
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:nsq \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for a given notification target:
 
@@ -209,15 +209,15 @@ For example, if the bucket notification configuration includes the ``s3:ObjectCr
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
-Update an NSQ Endpoint in a MinIO Deployment
+Update an NSQ Endpoint in a Buckit Deployment
 --------------------------------------------
 
-The following procedure updates an existing NSQ service endpoint for supporting :ref:`bucket notifications <minio-bucket-notifications>` in a MinIO deployment.
+The following procedure updates an existing NSQ service endpoint for supporting :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit deployment.
 
 Prerequisites
 ~~~~~~~~~~~~~~
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -234,7 +234,7 @@ Use the :mc-cmd:`mc admin config get` command to list the currently configured N
 
    mc admin config get ALIAS/ notify_nsq
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -270,10 +270,10 @@ The :mc-conf:`notify_nsq nsqd_address <notify_nsq.nsqd_address>` configuration s
 All other configuration settings are *optional*. 
 See :ref:`minio-server-config-bucket-notification-nsq` for a complete list of NSQ configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

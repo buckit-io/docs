@@ -10,7 +10,7 @@ Deprecated Settings
    :local:
    :depth: 2
 
-This page covers deprecated settings that control core behavior of the MinIO process. 
+This page covers deprecated settings that control core behavior of the Buckit process. 
 
 Settings on this page may be removed at any time.
 Users should migrate to the recommended replacement at the earliest opportunity.
@@ -42,7 +42,7 @@ They are listed here for historical reference only.
       If :envvar:`MINIO_SECRET_KEY` is unset, :mc:`minio` defaults to ``minioadmin``.
 
       **NEVER** use the default credentials in production environments.
-      MinIO strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.
+      Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.
 
 .. envvar:: MINIO_ACCESS_KEY
 
@@ -57,7 +57,7 @@ They are listed here for historical reference only.
       If :envvar:`MINIO_ACCESS_KEY` is unset, :mc:`minio` defaults to ``minioadmin``.
 
       **NEVER** use the default credentials in production environments.
-      MinIO strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.
+      Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.
 
 .. envvar:: MINIO_ACCESS_KEY_OLD
 
@@ -83,17 +83,17 @@ They are listed here for historical reference only.
 
    .. deprecated:: RELEASE.2024-05-10T01-41-38Z
 
-   The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the MinIO Console uses for connecting to the MinIO Server.
+   The `fully qualified domain name <https://en.wikipedia.org/wiki/Fully_qualified_domain_name>`__ (FQDN) the Buckit Console uses for connecting to the Buckit Server.
 
-   For the Console to function correctly, the MinIO server URL *must* be the FQDN of the host, resolveable, and reachable.
+   For the Console to function correctly, the Buckit server URL *must* be the FQDN of the host, resolveable, and reachable.
 
-   If the specified value does not resolve to the MinIO server, logins via the MinIO Console fail and return a network error after a wait period.
+   If the specified value does not resolve to the Buckit server, logins via the Buckit Console fail and return a network error after a wait period.
    Older versions of the Console may return a generic 'Invalid Login' error instead.
    Unset the value *or* address the FQDN resolution issue to allow Console logins to proceed.
    This setting may be required if:
 
-   - The MinIO Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN).
+   - The Buckit Server uses a TLS certificate that does not include the host local IP(s) in the certificate Subject Alternative Name (SAN).
 
    or
 
-   - The Console must use a specific hostname to connect or reference the MinIO Server, such as due to a reverse proxy or similar configuration.
+   - The Console must use a specific hostname to connect or reference the Buckit Server, such as due to a reverse proxy or similar configuration.

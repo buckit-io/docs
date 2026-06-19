@@ -1,7 +1,7 @@
 .. _minio-internal-idp:
 
 =========================
-MinIO Identity Management
+Buckit Identity Management
 =========================
 
 .. default-domain:: minio
@@ -10,23 +10,23 @@ MinIO Identity Management
    :local:
    :depth: 2
 
-MinIO includes a built-in IDentity Provider (IDP) that provides core identity
-management functionality. The MinIO IDP supports creating an arbitrary number of
+Buckit includes a built-in IDentity Provider (IDP) that provides core identity
+management functionality. The Buckit IDP supports creating an arbitrary number of
 long-lived users on the deployment for supporting client authentication. 
 
 Each user consists of a unique access key (username) and corresponding secret
 key (password). Clients must authenticate their identity by specifying both
 a valid access key (username) and the corresponding secret key (password) of
-an existing MinIO user.
+an existing Buckit user.
 
 Administrators use the :mc:`mc admin user` command to create and manage
-MinIO users.
+Buckit users.
 
-MinIO also supports creating :ref:`access keys
+Buckit also supports creating :ref:`access keys
 <minio-idp-service-account>`. Access Keys are child identities of an
 authenticated parent user and inherit their permissions from the parent. 
 
-MinIO by default denies access to all actions or resources not explicitly
+Buckit by default denies access to all actions or resources not explicitly
 allowed by a user's assigned or inherited :ref:`policies <minio-policy>`. You
 must either explicitly assign a :ref:`policy <minio-policy>` describing the
 user's authorized actions and resources *or* assign the user to :ref:`groups
@@ -36,7 +36,7 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
 .. admonition:: External Identity Management
    :class: note
 
-   MinIO supports external management of identities using either an
+   Buckit supports external management of identities using either an
    OpenID Connect (OIDC) or Active Directory/LDAP IDentity Provider (IDP).
    For more information, see:
 
@@ -44,9 +44,9 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
    - :ref:`minio-external-identity-management-ad-ldap`
 
    AD/LDAP and OIDC configurations are mutually exclusive.
-   Furthermore, enabling AD/LDAP external identity management disables the MinIO internal IDP, with the exception of creating :ref:`access keys
+   Furthermore, enabling AD/LDAP external identity management disables the Buckit internal IDP, with the exception of creating :ref:`access keys
    <minio-idp-service-account>`.
-   You can configure multiple OIDC providers while maintaining MinIO-managed users.
+   You can configure multiple OIDC providers while maintaining Buckit-managed users.
 
 .. toctree::
    :titlesonly:

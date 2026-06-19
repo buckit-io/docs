@@ -12,21 +12,21 @@ Publish Events to AMQP (RabbitMQ)
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to a `AMQP 0-9-1 <https://www.amqp.org/>`__ 
 service endpoint such as `RabbitMQ <https://www.rabbitmq.com>`__. 
 
-MinIO relies on the :github:`streadway/amqp` project for AMQP connectivity. The
+Buckit relies on the :github:`streadway/amqp` project for AMQP connectivity. The
 project is primarily tested against `RabbitMQ <https://www.rabbitmq.com/>`__
 deployments, though other `AMQP 0-9-1-compatible <https://www.amqp.org/>`__
 services *may* also work. The procedures on this page assume a RabbitMQ
 deployment using the AMQP 0-9-1 protocol as the service endpoint.
 
-Add an AMQP Endpoint to a MinIO Deployment
+Add an AMQP Endpoint to a Buckit Deployment
 ------------------------------------------
 
 The following procedure adds a new AMQP service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -35,23 +35,23 @@ Prerequisites
 AMQP 0-9-1 Service Endpoint
 +++++++++++++++++++++++++++
 
-MinIO relies on the :github:`streadway/amqp` project for AMQP connectivity. The
+Buckit relies on the :github:`streadway/amqp` project for AMQP connectivity. The
 project is primarily tested against `RabbitMQ <https://www.rabbitmq.com/>`__
 deployments, though other `AMQP 0-9-1-compatible <https://www.amqp.org/>`__
 services *may* also work. This procedure assumes a RabbitMQ deployment 
 using the 0-9-1 protocol as the service endpoint.
 
 If the AMQP service requires authentication, you *must* provide an appropriate
-username and password during the configuration process to grant MinIO access
+username and password during the configuration process to grant Buckit access
 to the service.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the AMQP Endpoint to MinIO
+1) Add the AMQP Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new AMQP service endpoint using either environment variables
@@ -61,7 +61,7 @@ You can configure a new AMQP service endpoint using either environment variables
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the AMQP service endpoint and associated
+      Buckit supports specifying the AMQP service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-amqp>`. The 
@@ -120,10 +120,10 @@ You can configure a new AMQP service endpoint using either environment variables
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing AMQP service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_amqp <mc admin config get>` to
-        review the currently configured AMQP endpoints on the MinIO deployment.
+        review the currently configured AMQP endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the AMQP service endpoint.
         For example:
@@ -136,7 +136,7 @@ You can configure a new AMQP service endpoint using either environment variables
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating AMQP endpoints on a running 
+      Buckit supports adding or updating AMQP endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_amqp` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -169,10 +169,10 @@ You can configure a new AMQP service endpoint using either environment variables
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing AMQP service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_amqp <mc admin config get>` to
-        review the currently configured AMQP endpoints on the MinIO deployment.
+        review the currently configured AMQP endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the AMQP service endpoint.
         For example:
@@ -183,10 +183,10 @@ You can configure a new AMQP service endpoint using either environment variables
       <minio-server-config-bucket-notification-amqp>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -223,11 +223,11 @@ event with the configured AMQP service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:amqp \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the 
   event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
@@ -257,11 +257,11 @@ a notification.
 
 
 
-Update an AMQP Endpoint in a MinIO Deployment
+Update an AMQP Endpoint in a Buckit Deployment
 ---------------------------------------------
 
 The following procedure updates an existing AMQP service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -270,17 +270,17 @@ Prerequisites
 AMQP 0-9-1 Service Endpoint
 +++++++++++++++++++++++++++
 
-MinIO relies on the :github:`streadway/amqp` project for AMQP connectivity. The
+Buckit relies on the :github:`streadway/amqp` project for AMQP connectivity. The
 project is primarily tested against `RabbitMQ <https://www.rabbitmq.com/>`__
 deployments, though other `AMQP 0-9-1-compatible <https://www.amqp.org/>`__
 services *may* also work. This procedure *assumes* a RabbitMQ deployment 
 as the service endpoint.
 
 If the AMQP service requires authentication, you *must* provide an appropriate
-username and password during the configuration process to grant MinIO access
+username and password during the configuration process to grant Buckit access
 to the service.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -298,7 +298,7 @@ configured AMQP service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_amqp
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -345,10 +345,10 @@ The :mc-conf:`notify_amqp url <notify_amqp.url>` configuration setting is the
 settings are *optional*. See :ref:`minio-server-config-bucket-notification-amqp`
 for a complete list of AMQP configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

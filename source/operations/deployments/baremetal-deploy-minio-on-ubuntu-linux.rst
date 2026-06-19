@@ -1,7 +1,7 @@
 .. _deploy-minio-ubuntu:
 
 ============================
-Deploy MinIO on Ubuntu Linux
+Deploy Buckit on Ubuntu Linux
 ============================
 
 .. default-domain:: minio
@@ -10,16 +10,10 @@ Deploy MinIO on Ubuntu Linux
    :local:
    :depth: 1
 
-.. container:: extlinks-video
+This page documents deploying Buckit on Ubuntu Linux operating systems.
 
-   - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-   
-   - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
-This page documents deploying MinIO on Ubuntu Linux operating systems.
-
-MinIO officially supports Ubuntu Long Term Support (LTS) releases in the **Standard** or **Ubuntu Pro** support phases of the Ubuntu life cycle.
-MinIO strongly recommends only those releases that include the Linux 5.X kernel and above for best performance.
+Buckit officially supports Ubuntu Long Term Support (LTS) releases in the **Standard** or **Ubuntu Pro** support phases of the Ubuntu life cycle.
+Buckit strongly recommends only those releases that include the Linux 5.X kernel and above for best performance.
 At the time of writing, that includes:
 
 - Ubuntu 24.04+ LTS (Noble Numbat) (**Recommended**)
@@ -29,7 +23,7 @@ At the time of writing, that includes:
 
 The above list assumes your organization has the necessary service contracts with Ubuntu to ensure end-to-end supportability throughout the release's lifespan.
 
-MinIO *may* run on versions of Ubuntu that use older kernels, are out of support, or are in legacy support phases, with limited support or troubleshooting from either MinIO or RedHat.
+Buckit *may* run on versions of Ubuntu that use older kernels, are out of support, or are in legacy support phases, with limited support or troubleshooting from either Buckit or Ubuntu.
 
 The procedure focuses on production-grade Multi-Node Multi-Drive (MNMD) "Distributed" configurations.
 |MNMD| deployments provide enterprise-grade performance, availability, and scalability and are the recommended topology for all production workloads.
@@ -48,159 +42,145 @@ Ensure you have reviewed our published Hardware, Software, and Security checklis
 Erasure Coding Parity
 ~~~~~~~~~~~~~~~~~~~~~
 
-MinIO automatically determines the default :ref:`erasure coding <minio-erasure-coding>` configuration for the cluster based on the total number of nodes and drives in the topology.
-You can configure the per-object :term:`parity` setting when you set up the cluster *or* let MinIO select the default (``EC:4`` for production-grade clusters).
+Buckit automatically determines the default :ref:`erasure coding <minio-erasure-coding>` configuration for the cluster based on the total number of nodes and drives in the topology.
+You can configure the per-object :term:`parity` setting when you set up the cluster *or* let Buckit select the default (``EC:4`` for production-grade clusters).
 
 Parity controls the relationship between object availability and storage on disk. 
-Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
+Use the `Erasure Code Calculator <../../_static/ec-calculator.html>`__ for guidance in selecting the appropriate erasure code parity level for your cluster.
 
 While you can change erasure parity settings at any time, objects written with a given parity do **not** automatically update to the new parity settings.
 
 Capacity-Based Planning
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO recommends planning storage capacity sufficient to store **at least** 2 years of data before reaching 70% usage.
+Buckit recommends planning storage capacity sufficient to store **at least** 2 years of data before reaching 70% usage.
 Performing :ref:`server pool expansion <expand-minio-distributed>` more frequently or on a "just-in-time" basis generally indicates an architecture or planning issue.
 
 For example, consider an application suite expected to produce at least 100 TiB of data per year and a 3 year target before expansion.
 By ensuring the deployment has ~500TiB of usable storage up front, the cluster can safely meet the 70% threshold with additional buffer for growth in data storage output per year.
 
-Consider using the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ for guidance in planning capacity around specific erasure code settings.
+Consider using the `Erasure Code Calculator <../../_static/ec-calculator.html>`__ for guidance in planning capacity around specific erasure code settings.
 
 Procedure
 ---------
 
-1. Download the MinIO RPM
-~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Download and install the Buckit DEB
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the following commands to download the latest stable MinIO DEB and install it.
+Use the following commands to download, verify, and install the Buckit DEB
+for your Linux host.
 
 .. code-block:: shell
    :class: copyable
-   :substitutions:
 
-   wget |minio-deb| -O minio.deb
-   sudo dpkg -i minio.deb
+   curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
+   sudo apt install ./buckit.deb
 
 2. Review the ``systemd`` Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``.deb`` package install the following `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/usr/lib/systemd/system/minio.service``:
+The DEB installs the Buckit binary at ``/usr/local/bin/buckit`` and the
+following `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__
+service file at ``/lib/systemd/system/buckit.service``:
     
 .. code-block:: shell
    :class: copyable
 
    [Unit]
-   Description=MinIO
-   Documentation=https://docs.min.io/community/minio-object-store/index.html
+   Description=Buckit Object Storage
+   Documentation=https://github.com/buckit-io/buckit
    Wants=network-online.target
    After=network-online.target
-   AssertFileIsExecutable=/usr/local/bin/minio
+   AssertFileIsExecutable=/usr/local/bin/buckit
 
    [Service]
+   Type=notify
+
    WorkingDirectory=/usr/local
 
-   User=minio-user
-   Group=minio-user
+   User=buckit
+   Group=buckit
    ProtectProc=invisible
 
    EnvironmentFile=-/etc/default/minio
-   ExecStartPre=/bin/bash -c "if [ -z \"${MINIO_VOLUMES}\" ]; then echo \"Variable MINIO_VOLUMES not set in /etc/default/minio\"; exit 1; fi"
-   ExecStart=/usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES
-
-   # MinIO RELEASE.2023-05-04T21-44-30Z adds support for Type=notify (https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type=)
-   # This may improve systemctl setups where other services use `After=minio.server`
-   # Uncomment the line to enable the functionality
-   # Type=notify
+   ExecStart=/usr/local/bin/buckit server $MINIO_OPTS $MINIO_VOLUMES
 
    # Let systemd restart this service always
    Restart=always
 
    # Specifies the maximum file descriptor number that can be opened by this process
-   LimitNOFILE=65536
+   LimitNOFILE=1048576
+
+   # Turn-off memory accounting by systemd, which is buggy.
+   MemoryAccounting=no
 
    # Specifies the maximum number of threads this process can create
    TasksMax=infinity
 
    # Disable timeout logic and wait until process is stopped
-   TimeoutStopSec=infinity
+   TimeoutSec=infinity
+   OOMScoreAdjust=-1000
    SendSIGKILL=no
 
    [Install]
    WantedBy=multi-user.target
 
-   # Built for ${project.name}-${project.version} (${project.name})
-
-3. Create a User and Group for MinIO
+3. Review the Buckit Service Account
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``minio.service`` file runs as the ``minio-user`` User and Group by default.
-You can create the user and group using the ``groupadd`` and ``useradd`` commands. 
-The following example creates the user, group, and sets permissions to access the folder paths intended for use by MinIO. 
-These commands typically require root (``sudo``) permissions.
+The package post-install script automatically creates the ``buckit`` system
+user and group if they do not already exist.
+
+You **must** ``chown`` the drive paths you intend to use with Buckit so the
+``buckit`` user can access them.
+
+For example, the following command sets ``buckit:buckit`` as the user-group
+owner of all drives at ``/mnt/drives-n`` where ``n`` is between 1 and 16
+inclusive:
 
 .. code-block:: shell
    :class: copyable
 
-   groupadd -r minio-user
-   useradd -M -r -g minio-user minio-user
-
-The command above creates the user **without** a home directory, as is typical for system service accounts.
-
-You **must** ``chown`` the drive paths you intend to use with MinIO.
-If the ``minio-user`` user or group cannot read, write, or list contents of any drive, the MinIO process returns errors on startup.
-
-For example, the following command sets ``minio-user:minio-user`` as the user-group owner of all drives at ``/mnt/drives-n`` where ``n`` is between 1 and 16 inclusive:
-
-.. code-block:: shell
-   :class: copyable
-
-   chown -R minio-user:minio-user /mnt/drives-{1...16}
+   chown -R buckit:buckit /mnt/drives-{1...16}
 
 4. Enable TLS Connectivity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can skip this step to deploy without TLS enabled. 
-MinIO strongly recommends *against* non-TLS deployments outside of early development.
+Create or provide :ref:`Transport Layer Security (TLS) <minio-tls>` certificates to Buckit to automatically enable HTTPS-secured connections between the server and clients.
 
-Create or provide :ref:`Transport Layer Security (TLS) <minio-tls>` certificates to MinIO to automatically enable HTTPS-secured connections between the server and clients.
-
-MinIO expects the default certificate names of ``private.key`` and ``public.crt`` for the private and public keys respectively.
-Place the certificates in a directory accessible by the ``minio-user`` user/group:
+Place the certificates in a directory accessible by the ``buckit`` user/group:
 
 .. code-block:: shell
    :class: copyable
 
-   mkdir -p /opt/minio/certs
-   chown -R minio-user:minio-user /opt/minio/certs
+   mkdir -p /opt/buckit/certs
+   chown -R buckit:buckit /opt/buckit/certs
 
-   cp private.key /opt/minio/certs
-   cp public.crt /opt/minio/certs
+   cp private.key /opt/buckit/certs
+   cp public.crt /opt/buckit/certs
 
+For local testing or development environments, you can use the Buckit :minio-git:`certgen <certgen>` to mint self-signed certificates.
+For example, the following command generates a self-signed certificate with a set of IP and DNS Subject Alternate Names (SANs) associated to the Buckit Server hosts:
 
-MinIO verifies client certificates against the OS/System's default list of trusted Certificate Authorities.
-To enable verification of third-party or internally-signed certificates, place the CA file in the ``/opt/minio/certs/CAs`` folder.
+.. code-block:: shell
+
+   certgen -host "localhost,buckit-*.example.net"
+
+Place the generated ``public.crt`` and ``private.key`` into the ``/path/to/certs`` directory to enable TLS for the Buckit deployment.
+Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the Buckit deployment without disabling certificate validation.
+
+When Buckit runs with TLS enabled, it also verifies connecting client certificates against the OS list of trusted Certificate Authorities.
+To enable verification of third-party or internally-signed certificates, place the CA file in the ``/opt/buckit/certs/CAs`` folder.
 The CA file should include the full chain of trust from leaf to root to ensure successful verification.
 
-For more specific guidance on configuring MinIO for TLS, including multi-domain support via Server Name Indication (SNI), see :ref:`minio-tls`. 
+For more specific guidance on configuring Buckit for TLS, including multi-domain support via Server Name Indication (SNI), see :ref:`minio-tls`. 
+You can optionally skip this step to deploy without TLS enabled. Buckit strongly recommends *against* non-TLS deployments outside of early development.
 
-.. dropdown:: Certificates for Early Development
-
-   For local testing or development environments, you can use the MinIO :minio-git:`certgen <certgen>` to mint self-signed certificates.
-   For example, the following command generates a self-signed certificate with a set of IP and DNS Subject Alternate Names (SANs) associated to the MinIO Server hosts:
-
-   .. code-block:: shell
-
-      certgen -host "localhost,minio-*.example.net"
-
-   Place the generated ``public.crt`` and ``private.key`` into the ``/path/to/certs`` directory to enable TLS for the MinIO deployment.
-   Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the MinIO deployment without disabling certificate validation.
-
-5. Create the MinIO Environment File
+5. Create the Buckit Environment File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create an environment file at ``/etc/default/minio``. 
-The MinIO service uses this file as the source of all :ref:`environment variables <minio-server-environment-variables>` used by MinIO *and* the ``minio.service`` file.
+The Buckit service uses this file as the source of all :ref:`environment variables <minio-server-environment-variables>` used by Buckit and by ``buckit.service``.
 
 Modify the example to reflect your deployment topology. 
 
@@ -213,26 +193,26 @@ Modify the example to reflect your deployment topology.
       .. code-block:: shell
          :class: copyable
 
-         # Set the hosts and volumes MinIO uses at startup
-         # The command uses MinIO expansion notation {x...y} to denote a
+         # Set the hosts and volumes Buckit uses at startup
+         # The command uses Buckit expansion notation {x...y} to denote a
          # sequential series. 
          # 
-         # The following example covers four MinIO hosts
+         # The following example covers four Buckit hosts
          # with 4 drives each at the specified hostname and drive locations.
          #
-         # The command includes the port that each MinIO server listens on
+         # The command includes the port that each Buckit server listens on
          # (default 9000).
          # If you run without TLS, change https -> http
 
-         MINIO_VOLUMES="https://minio{1...4}.example.net:9000/mnt/disk{1...4}/minio"
+         MINIO_VOLUMES="https://buckit{1...4}.example.net:9000/mnt/disk{1...4}/buckit"
 
-         # Set all MinIO server command-line options
+         # Set all Buckit server command-line options
          #
-         # The following explicitly sets the MinIO Console listen address to
+         # The following explicitly sets the Buckit Console listen address to
          # port 9001 on all network interfaces. 
          # The default behavior is dynamic port selection.
 
-         MINIO_OPTS="--console-address :9001 --certs-dir /opt/minio/certs"
+         MINIO_OPTS="--console-address :9001 --certs-dir /opt/buckit/certs"
 
          # Set the root username. 
          # This user has unrestricted permissions to perform S3 and 
@@ -257,25 +237,25 @@ Modify the example to reflect your deployment topology.
       .. code-block:: shell
          :class: copyable
 
-         # Set the volumes MinIO uses at startup
-         # The command uses MinIO expansion notation {x...y} to denote a
+         # Set the volumes Buckit uses at startup
+         # The command uses Buckit expansion notation {x...y} to denote a
          # sequential series. 
          # 
          # The following specifies a single host with 4 drives at the specified location
          #
-         # The command includes the port that the MinIO server listens on
+         # The command includes the port that the Buckit server listens on
          # (default 9000).
          # If you run without TLS, change https -> http
 
-         MINIO_VOLUMES="https://minio1.example.net:9000/mnt/drive{1...4}/minio"
+         MINIO_VOLUMES="https://buckit1.example.net:9000/mnt/drive{1...4}/buckit"
 
-         # Set all MinIO server command-line options
+         # Set all Buckit server command-line options
          #
-         # The following explicitly sets the MinIO Console listen address to
+         # The following explicitly sets the Buckit Console listen address to
          # port 9001 on all network interfaces. 
          # The default behavior is dynamic port selection.
 
-         MINIO_OPTS="--console-address :9001 --certs-dir /opt/minio/certs"
+         MINIO_OPTS="--console-address :9001 --certs-dir /opt/buckit/certs"
 
          # Set the root username. 
          # This user has unrestricted permissions to perform S3 and 
@@ -295,7 +275,7 @@ Modify the example to reflect your deployment topology.
    .. tab-item:: Single-Node Single-Drive
 
       Use Single-Node Single-Drive ("Standalone") deployments in early development and evaluation environments.
-      MinIO does not recommend Standalone deployments in production, as the loss of the node or its storage medium results in data loss.
+      Buckit does not recommend Standalone deployments in production, as the loss of the node or its storage medium results in data loss.
 
       .. important::
 
@@ -304,19 +284,19 @@ Modify the example to reflect your deployment topology.
       .. code-block:: shell
          :class: copyable
 
-         # Set the volume MinIO uses at startup
+         # Set the volume Buckit uses at startup
          # 
          # The following specifies the drive or folder path
 
-         MINIO_VOLUMES="/mnt/drive1/minio"
+         MINIO_VOLUMES="/mnt/drive1/buckit"
 
-         # Set all MinIO server command-line options
+         # Set all Buckit server command-line options
          #
-         # The following explicitly sets the MinIO Console listen address to
+         # The following explicitly sets the Buckit Console listen address to
          # port 9001 on all network interfaces. 
          # The default behavior is dynamic port selection.
 
-         MINIO_OPTS="--console-address :9001 --certs-dir /opt/minio/certs"
+         MINIO_OPTS="--console-address :9001 --certs-dir /opt/buckit/certs"
 
          # Set the root username. 
          # This user has unrestricted permissions to perform S3 and 
@@ -338,42 +318,30 @@ Specify any other :ref:`environment variables <minio-server-environment-variable
 For distributed deployments, all nodes **must** have matching ``/etc/default/minio`` environment files.
 Use a utility such as ``shasum -a 256 /etc/default/minio`` on each node to verify an exact match across all nodes.
 
-6. Start the MinIO Deployment
+6. Start the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use ``systemctl start minio`` to start each node in the deployment.
-
-You can track the status of the startup using ``journalctl -u minio`` on each node.
-
-On successful startup, the MinIO process emits a summary of the deployment that resembles the following output:
+Enable and start the Buckit service on each node:
 
 .. code-block:: shell
+   :class: copyable
 
-   MinIO Object Storage Server
-   Copyright: 2015-2024 MinIO, Inc.
-   License: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html
-   Version: RELEASE.2024-06-07T16-42-07Z (go1.22.4 linux/amd64)
+   sudo systemctl enable --now buckit
 
-   API: https://minio-1.example.net:9000 https://203.0.113.10:9000 https://127.0.0.1:9000 
-      RootUser: minioadmin 
-      RootPass: minioadmin 
+Check service status and startup logs:
 
-   WebUI: https://minio-1.example.net:9001 https://203.0.113.10:9001 https://127.0.0.1:9001          
-      RootUser: minioadmin 
-      RootPass: minioadmin 
+.. code-block:: shell
+   :class: copyable
 
-   CLI: https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart
-      $ mc alias set 'myminio' 'https://minio-1.example.net:9000' 'minioadmin' 'minioadmin'
-
-   Docs: https://docs.min.io/community/minio-object-store/index.html
-   Status:         16 Online, 0 Offline. 
+   sudo systemctl status buckit
+   sudo journalctl -u buckit -f
 
 You may see increased log churn as the cluster starts up and synchronizes. 
 
 Common reasons for startup failure include:
 
-- The MinIO process does not have read-write-list access to the specified drives
-- The drives are not empty or contain non-MinIO data
+- The Buckit process does not have read-write-list access to the specified drives
+- The drives are not empty or contain non-Buckit data
 - The drives are not formatted or mounted properly
 - One or more hosts are not reachable over the network
 
@@ -386,40 +354,35 @@ Following our checklists typically mitigates the risk of encountering those or s
 
    .. tab-item:: Console
 
-      Open your browser and access any of the MinIO hostnames at port ``:9001`` to open the :ref:`MinIO Console <minio-console>` login page. 
-      For example, ``https://minio1.example.com:9001``.
+      Open your browser and access any of the Buckit hostnames at port ``:9001`` to open the :ref:`Buckit Console <minio-console>` login page. 
+      For example, ``https://buckit1.example.com:9001``.
 
       Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
       from the previous step.
 
       .. image:: /images/minio-console/console-login.png
          :width: 600px
-         :alt: MinIO Console Login Page
+         :alt: Buckit Console Login Page
          :align: center
 
-      You can use the MinIO Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
-      Each MinIO server includes its own embedded MinIO Console.
+      You can use the Buckit Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
+      Each Buckit server includes its own embedded Buckit Console.
 
    .. tab-item:: CLI
 
       Follow the :ref:`installation instructions <mc-install>` for ``mc`` on your local host.
       Run ``mc --version`` to verify the installation.
 
-      If your MinIO deployment uses third-party or self-signed TLS certificates, copy the :abbr:`CA (Certificate Authority)` files to ``~/.mc/certs/CAs`` to allow ``mc`` 
+      If your Buckit deployment uses third-party or self-signed TLS certificates, copy the :abbr:`CA (Certificate Authority)` files to ``~/.mc/certs/CAs`` to allow ``mc`` 
 
 
-      Once installed, create an alias for the MinIO deployment:
+      Once installed, create an alias for the Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myminio https://minio-1.example.net:9000 USERNAME PASSWORD
+         mc alias set mybuckit https://buckit1.example.net:9000 USERNAME PASSWORD
 
       Change the hostname, username, and password to reflect your deployment.
-      The hostname can be any MinIO node in the deployment.
+      The hostname can be any Buckit node in the deployment.
       You can also specify the hostname load balancer, reverse proxy, or similar network control plane that handles connections to the deployment.
-
-8. Next Steps
-~~~~~~~~~~~~~
-
-TODO

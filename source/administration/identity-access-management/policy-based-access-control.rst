@@ -13,14 +13,14 @@ Access Management
 Overview
 --------
 
-MinIO uses Policy-Based Access Control (PBAC) to define the authorized actions and resources to which an authenticated user has access. 
+Buckit uses Policy-Based Access Control (PBAC) to define the authorized actions and resources to which an authenticated user has access. 
 Each policy describes one or more :ref:`actions <minio-policy-actions>` and :ref:`conditions <minio-policy-conditions>` that outline the permissions of a :ref:`user <minio-users>` or :ref:`group <minio-groups>` of users.
 
-MinIO PBAC is built for compatibility with AWS IAM policy syntax, structure, and behavior. 
-The MinIO documentation makes a best-effort to cover IAM-specific behavior and functionality. 
+Buckit PBAC is built for compatibility with AWS IAM policy syntax, structure, and behavior. 
+The Buckit documentation makes a best-effort to cover IAM-specific behavior and functionality. 
 Consider deferring to the :iam-docs:`IAM documentation <>` for more complete documentation on AWS IAM-specific topics.
 
-The :mc:`mc admin policy` command supports creation and management of policies on the MinIO deployment. 
+The :mc:`mc admin policy` command supports creation and management of policies on the Buckit deployment. 
 See the command reference for examples of usage.
 
 Tag-Based Policy Conditions
@@ -30,7 +30,7 @@ Tag-Based Policy Conditions
 
    Policies can use conditions to limit a user's access only to objects with a :ref:`specific tag <minio-object-tagging>`.
 
-   MinIO supports :s3-docs:`tag-based conditionals <tagging-and-policies.html>` for policies for :ref:`selected actions <minio-selected-conditional-actions>`.
+   Buckit supports :s3-docs:`tag-based conditionals <tagging-and-policies.html>` for policies for :ref:`selected actions <minio-selected-conditional-actions>`.
    Use the ``s3:ExistingObjectTag/<key>`` in the ``Condition`` statement of the policy.
 
 .. _minio-policy-built-in:
@@ -38,13 +38,13 @@ Tag-Based Policy Conditions
 Built-In Policies
 -----------------
 
-MinIO provides the following built-in policies for assigning to 
+Buckit provides the following built-in policies for assigning to 
 :ref:`users <minio-users>` or :ref:`groups <minio-groups>`:
 
 .. userpolicy:: consoleAdmin
 
    Grants complete access to all S3 and administrative API operations against
-   all resources on the MinIO deployment. Equivalent to the following set of
+   all resources on the Buckit deployment. Equivalent to the following set of
    actions:
 
    - :policy-action:`s3:*`
@@ -52,7 +52,7 @@ MinIO provides the following built-in policies for assigning to
 
 .. userpolicy:: readonly
 
-   Grants read-only permissions on any object on the MinIO deployment. The GET
+   Grants read-only permissions on any object on the Buckit deployment. The GET
    action *must* apply to a specific object without requiring any listing.
    Equivalent to the following set of actions:
 
@@ -74,11 +74,11 @@ MinIO provides the following built-in policies for assigning to
 .. userpolicy:: readwrite
 
    Grants read and write permissions for all buckets and objects on the
-   MinIO server. Equivalent to :policy-action:`s3:*`.
+   Buckit server. Equivalent to :policy-action:`s3:*`.
 
 .. userpolicy:: diagnostics
 
-   Grants permission to perform diagnostic actions on the MinIO deployment. 
+   Grants permission to perform diagnostic actions on the Buckit deployment. 
    Specifically includes the following actions:
 
    - :policy-action:`admin:ServerTrace`
@@ -93,12 +93,12 @@ MinIO provides the following built-in policies for assigning to
 .. userpolicy:: writeonly
 
    Grants write-only permissions to any namespace (bucket and path to object)
-   the MinIO deployment. The PUT action *must* apply to a specific object
+   the Buckit deployment. The PUT action *must* apply to a specific object
    location without requiring any listing. 
    Equivalent to the :policy-action:`s3:PutObject` action.
 
 Use :mc:`mc admin policy attach` to associate a policy to a 
-user or group on a MinIO deployment.
+user or group on a Buckit deployment.
 
 For example, consider the following table of users. Each user is assigned
 a :ref:`built-in policy <minio-policy-built-in>` or
@@ -131,17 +131,17 @@ as that user:
      - All :mc:`mc admin` commands.
 
 Each user can access only those resources and operations which are *explicitly*
-granted by the built-in role. MinIO denies access to any other resource or
+granted by the built-in role. Buckit denies access to any other resource or
 action by default.
 
 .. admonition:: ``Deny`` overrides ``Allow``
    :class: note
 
-   MinIO follows the IAM policy evaluation rules where a ``Deny`` rule overrides
+   Buckit follows the IAM policy evaluation rules where a ``Deny`` rule overrides
    ``Allow`` rule on the same action/resource. For example, if a user has an
    explicitly assigned policy with an ``Allow`` rule for an action/resource
    while one of its groups has an assigned policy with a ``Deny`` rule for that
-   action/resource, MinIO would apply only the ``Deny`` rule. 
+   action/resource, Buckit would apply only the ``Deny`` rule. 
 
    For more information on IAM policy evaluation logic, see the IAM
    documentation on 
@@ -153,10 +153,10 @@ action by default.
 Policy Document Structure
 -------------------------
 
-MinIO policy documents use the same schema as 
+Buckit policy documents use the same schema as 
 :aws-docs:`AWS IAM Policy <IAM/latest/UserGuide/access.html>` documents.
 
-The following sample document provides a template for creating custom policies for use with a MinIO deployment. 
+The following sample document provides a template for creating custom policies for use with a Buckit deployment. 
 For more complete documentation on IAM policy elements, see the :aws-docs:`IAM JSON Policy Elements Reference <IAM/latest/UserGuide/reference_policies_elements.html>`.
 
 The maximum size for any single policy document is 20KiB.
@@ -199,7 +199,7 @@ There is no limit to the number of policy documents that can be attached to a us
 Supported S3 Policy Actions
 ---------------------------
 
-MinIO policy documents support a subset of IAM :iam-docs:`S3 Action keys <list_amazons3.html#amazons3-actions-as-permissions>`.
+Buckit policy documents support a subset of IAM :iam-docs:`S3 Action keys <list_amazons3.html#amazons3-actions-as-permissions>`.
 This section also includes any :ref:`condition keys <minio-policy-conditions>` supported by a specific action beyond the common set of supported keys.
 
 The following actions control access to common S3 operations. 
@@ -207,7 +207,7 @@ The remaining subsections document actions for more advanced S3 operations:
 
 .. policy-action:: s3:*
    
-   Selector for *all* MinIO S3 operations. 
+   Selector for *all* Buckit S3 operations. 
    Applying this action to a given resource allows the user to perform *any* S3 operation against that resource. 
 
 .. policy-action:: s3:CreateBucket
@@ -559,13 +559,13 @@ Bucket Notifications
 
 .. policy-action:: s3:ListenNotification
   
-   MinIO Extension for controlling API operations related to MinIO Bucket Notifications. 
+   Buckit Extension for controlling API operations related to Buckit Bucket Notifications. 
 
    This action is **not** intended for use with other S3-compatible services.
 
 .. policy-action:: s3:ListenBucketNotification
 
-   MinIO Extension for controlling API operations related to MinIO Bucket Notifications. 
+   Buckit Extension for controlling API operations related to Buckit Bucket Notifications. 
 
    This action is **not** intended for use with other S3-compatible services.
 
@@ -604,9 +604,9 @@ Bucket Replication
 
 .. policy-action:: s3:ReplicateObject
 
-   MinIO Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+   Buckit Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
 
-   Required for MinIO server-side replication.
+   Required for Buckit server-side replication.
 
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 
@@ -617,9 +617,9 @@ Bucket Replication
 
 .. policy-action:: s3:ReplicateDelete
 
-   MinIO Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+   Buckit Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
 
-   Required for synchronizing :ref:`delete operations <minio-object-delete>` as part of MinIO server-side replication.
+   Required for synchronizing :ref:`delete operations <minio-object-delete>` as part of Buckit server-side replication.
    
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 
@@ -630,9 +630,9 @@ Bucket Replication
 
 .. policy-action:: s3:ReplicateTags
 
-   MinIO Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+   Buckit Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
 
-   Required for MinIO server-side replication.
+   Required for Buckit server-side replication.
    
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 
@@ -643,9 +643,9 @@ Bucket Replication
 
 .. policy-action:: s3:GetObjectVersionForReplication
 
-   MinIO Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
+   Buckit Extension for controlling API operations related to :ref:`Server-Side Bucket Replication <minio-bucket-replication-serverside>`.
 
-   Required for MinIO server-side replication.
+   Required for Buckit server-side replication.
    
    Supports the following additional :ref:`condition keys <minio-policy-conditions>`:
 
@@ -660,12 +660,12 @@ Bucket Replication
 Supported S3 Policy Condition Keys
 ----------------------------------
 
-MinIO policy documents support IAM :iam-docs:`conditional statements <reference_policies_elements_condition.html>`. 
+Buckit policy documents support IAM :iam-docs:`conditional statements <reference_policies_elements_condition.html>`. 
 
-Each condition element consists of :iam-docs:`operators <reference_policies_elements_condition_operators.html>` and condition keys. MinIO supports a subset of IAM condition keys. 
+Each condition element consists of :iam-docs:`operators <reference_policies_elements_condition_operators.html>` and condition keys. Buckit supports a subset of IAM condition keys. 
 For complete information on any listed condition key, see the :iam-docs:`IAM Condition Element Documentation <reference_policies_elements_condition.html>`
 
-MinIO supports the following condition keys for all supported 
+Buckit supports the following condition keys for all supported 
 :ref:`actions <minio-policy-actions>`:
 
 - ``aws:Referer``
@@ -683,20 +683,20 @@ MinIO supports the following condition keys for all supported
 .. warning:: 
 
    The ``aws:Referer``, ``aws:SourceIp``, and ``aws.UserAgent`` keys may be easily spoofed and therefore pose a potential security risk.
-   MinIO recommends only using these condition keys to *deny* access as a secondary security measure.
+   Buckit recommends only using these condition keys to *deny* access as a secondary security measure.
    
    **Never** use these three keys to grant access by themselves.
 
 For additional keys supported by a specific S3 action, see the reference documentation for that action.
 
-MinIO Extended Condition Keys
+Buckit Extended Condition Keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO extends the S3 standard condition keys with the following extended key:
+Buckit extends the S3 standard condition keys with the following extended key:
 
 ``sts:DurationSeconds``
 
-   .. versionadded:: MinIO SERVER RELEASE.2024-02-06T21-36-22Z
+   .. versionadded:: Buckit SERVER RELEASE.2024-02-06T21-36-22Z
 
    Specify a time in seconds to limit the duration of *all* Security Token Service credentials generated by :ref:`minio-sts-assumerolewithwebidentity`.
 
@@ -728,9 +728,9 @@ MinIO extends the S3 standard condition keys with the following extended key:
 ``mc admin`` Policy Action Keys
 -------------------------------
 
-MinIO supports the following actions for use with defining policies
+Buckit supports the following actions for use with defining policies
 for :mc:`mc admin` operations. These actions are *only* valid for
-MinIO deployments and are *not* intended for use with other S3-compatible
+Buckit deployments and are *not* intended for use with other S3-compatible
 services:
 
 .. policy-action:: admin:*
@@ -787,27 +787,27 @@ services:
 
 .. policy-action:: admin:ServerUpdate
 
-   Allows MinIO binary update
+   Allows Buckit binary update
 
 .. policy-action:: admin:ServiceRestart
 
-   Allows restart of MinIO service.
+   Allows restart of Buckit service.
 
 .. policy-action:: admin:ServiceStop
 
-   Allows stopping MinIO service.
+   Allows stopping Buckit service.
 
 .. policy-action:: admin:ConfigUpdate
 
-   Allows MinIO config management
+   Allows Buckit config management
 
 .. policy-action:: admin:CreateUser
 
-   Allows creating MinIO user
+   Allows creating Buckit user
 
 .. policy-action:: admin:DeleteUser
 
-   Allows deleting MinIO user
+   Allows deleting Buckit user
 
 .. policy-action:: admin:ListUsers
 
@@ -871,19 +871,19 @@ services:
 
 .. policy-action:: admin:CreateServiceAccount
 
-   Allows creating MinIO Access Key
+   Allows creating Buckit Access Key
 
 .. policy-action:: admin:UpdateServiceAccount
 
-   Allows updating MinIO Access Key
+   Allows updating Buckit Access Key
 
 .. policy-action:: admin:RemoveServiceAccount
 
-   Allows deleting MinIO Access Key
+   Allows deleting Buckit Access Key
 
 .. policy-action:: admin:ListServiceAccounts
 
-   Allows listing MinIO Access Key
+   Allows listing Buckit Access Key
 
 .. policy-action:: admin:SetBucketQuota
 
@@ -917,8 +917,8 @@ services:
 
 .. policy-action:: admin:Prometheus
 
-   Allows access to MinIO :ref:`metrics <minio-metrics-and-alerts>`. 
-   Only required if MinIO requires authentication for scraping metrics.
+   Allows access to Buckit :ref:`metrics <minio-metrics-and-alerts>`. 
+   Only required if Buckit requires authentication for scraping metrics.
 
 .. policy-action:: admin:ListBatchJobs
 
@@ -943,7 +943,7 @@ services:
 KMS policy action keys
 ----------------------
 
-MinIO supports restricting key management service (KMS) actions by policy.
+Buckit supports restricting key management service (KMS) actions by policy.
 
 You can restrict KMS activities in a policy with any of the following KMS actions:
 
@@ -1008,7 +1008,7 @@ To select all of the available kms policy actions, use ``kms:*``.
 ``mc admin`` Policy Condition Keys
 ----------------------------------
 
-MinIO supports the following conditions for use with defining policies for
+Buckit supports the following conditions for use with defining policies for
 :mc:`mc admin` :ref:`actions <minio-policy-mc-admin-actions>`.
 
 - ``aws:Referer``
@@ -1023,11 +1023,11 @@ For complete information on any listed condition key, see the :iam-docs:`IAM Con
 Policy Variables
 ----------------
 
-MinIO supports using policy variables for automatically substituting context from the authenticated user and/or the operation into the user's assigned policy or policies.
+Buckit supports using policy variables for automatically substituting context from the authenticated user and/or the operation into the user's assigned policy or policies.
 Use the ``${POLICYVARIABLE}`` format to specify the variable to the policy as part of the ``Condition`` or ``Resource`` definition.
-MinIO policy variables function similarly to :iam-docs:`AWS IAM policy elements: Variables and tags <reference_policies_variables.html>`.
+Buckit policy variables function similarly to :iam-docs:`AWS IAM policy elements: Variables and tags <reference_policies_variables.html>`.
 
-Each MinIO :ref:`identity provider <minio-authentication-and-identity-management>` supports its own set of policy variables:
+Each Buckit :ref:`identity provider <minio-authentication-and-identity-management>` supports its own set of policy variables:
 
 - :ref:`minio-policy-variables-internal`
 - :ref:`minio-policy-variables-oidc`
@@ -1035,10 +1035,10 @@ Each MinIO :ref:`identity provider <minio-authentication-and-identity-management
 
 .. _minio-policy-variables-internal:
 
-MinIO Policy Variables
+Buckit Policy Variables
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The following table contains a list of recommended policy variables for use in authorizing :ref:`MinIO-managed users <minio-internal-idp>`:
+The following table contains a list of recommended policy variables for use in authorizing :ref:`Buckit-managed users <minio-internal-idp>`:
 
 .. list-table::
    :header-rows: 1
@@ -1081,8 +1081,8 @@ For example, the following policy uses variables to substitute the authenticated
       ]
    }
 
-MinIO replaces the ``${aws:username}`` variable in the ``Resource`` field with the username.
-MinIO then evaluates the policy and grants or revokes access to the requested API and resource.
+Buckit replaces the ``${aws:username}`` variable in the ``Resource`` field with the username.
+Buckit then evaluates the policy and grants or revokes access to the requested API and resource.
 
 .. _minio-policy-variables-oidc:
 
@@ -1142,5 +1142,5 @@ For example, the following policy uses variables to substitute the authenticated
       ]
    }
 
-MinIO replaces the ``${ldap:username}`` variable in the ``Resource`` field with the value of the authenticated user's ``name``.
-MinIO then evaluates the policy and grants or revokes access to the requested API and resource.
+Buckit replaces the ``${ldap:username}`` variable in the ``Resource`` field with the value of the authenticated user's ``name``.
+Buckit then evaluates the policy and grants or revokes access to the requested API and resource.

@@ -1,6 +1,6 @@
 .. start-configure-keycloak-client
 
-Select :guilabel:`Create client` and follow the instructions to create a new Keycloak client for MinIO.
+Select :guilabel:`Create client` and follow the instructions to create a new Keycloak client for Buckit.
 Fill in the specified inputs as follows:
 
 .. list-table::
@@ -9,7 +9,7 @@ Fill in the specified inputs as follows:
    :width: 100%
 
    * - :guilabel:`Client ID`
-     - Set to a unique identifier for MinIO (``minio``)
+     - Set to a unique identifier for Buckit (``minio``)
    * - :guilabel:`Client type` 
      - Set to ``OpenID Connect``
    * - :guilabel:`Always display in console`
@@ -33,7 +33,7 @@ The following table provides a baseline of settings and values to configure:
    * - :guilabel:`Root URL`
      - Set to ``${authBaseUrl}``
    * - :guilabel:`Home URL`
-     - Set to the Realm you want MinIO to use (``/realms/master/account/``)
+     - Set to the Realm you want Buckit to use (``/realms/master/account/``)
    * - :guilabel:`Valid Redirect URI`
      - Set to ``*``
    * - :guilabel:`Keys -> Use JWKS URL`
@@ -45,7 +45,7 @@ The following table provides a baseline of settings and values to configure:
 
 .. start-configure-keycloak-client-scope
 
-Navigate to the :guilabel:`Client scopes` view and create a new client scope for MinIO authorization:
+Navigate to the :guilabel:`Client scopes` view and create a new client scope for Buckit authorization:
 
 .. list-table::
    :stub-columns: 1
@@ -87,9 +87,9 @@ Select :guilabel:`Configure a new mapper` to create a new mapping:
 
        This allows users to inherit any ``policy`` set in their Groups
 
-Once created, assign the Client Scope to the MinIO client.
+Once created, assign the Client Scope to the Buckit client.
 
-1. Navigate to :guilabel:`Clients` and select the MinIO client.
+1. Navigate to :guilabel:`Clients` and select the Buckit client.
 2. Select :guilabel:`Client scopes`, then select :guilabel:`Add client scope`.
 3. Select the previously created scope and set the :guilabel:`Assigned type` to ``default``.
 
@@ -121,7 +121,7 @@ For Groups, navigate to :guilabel:`Groups` and select or create the Group:
 
 You can assign users to groups such that they inherit the specified ``policy`` attribute.
 If you set the Mapper settings to enable :guilabel:`Aggregate attribute values`, Keycloak includes the aggregated array of policies as part of the authenticated user's JWT token.
-MinIO can use this list of policies when authorizing the user.
+Buckit can use this list of policies when authorizing the user.
 
 You can test the configured policies of a user by using the Keycloak API:
 
@@ -136,16 +136,16 @@ You can test the configured policies of a user by using the Keycloak API:
         -d "password=minio-user-1-password" \
         http://|KEYCLOAK_URL|/realms/REALM/protocol/openid-connect/token
 
-If successful, the ``access_token`` contains the JWT necessary to use the MinIO :ref:`minio-sts-assumerolewithwebidentity` STS API and generate S3 credentials.
+If successful, the ``access_token`` contains the JWT necessary to use the Buckit :ref:`minio-sts-assumerolewithwebidentity` STS API and generate S3 credentials.
 
-You can use a JWT decoder to review the payload and ensure it contains the ``policy`` key with one or more MinIO policies listed.
+You can use a JWT decoder to review the payload and ensure it contains the ``policy`` key with one or more Buckit policies listed.
 
 .. end-configure-keycloak-user-group-attributes
 
 .. start-configure-keycloak-sts
 
 Applications using an S3-compatible SDK must specify credentials in the form of an access key and secret key.
-The MinIO :ref:`minio-sts-assumerolewithwebidentity` API returns the necessary temporary credentials, including a required session token, using a JWT returned by Keycloak after authentication.
+The Buckit :ref:`minio-sts-assumerolewithwebidentity` API returns the necessary temporary credentials, including a required session token, using a JWT returned by Keycloak after authentication.
 
 You can test this workflow using the following sequence of HTTP calls and the ``curl`` utility:
 
@@ -164,13 +164,13 @@ You can test this workflow using the following sequence of HTTP calls and the ``
            -d "client_secret=SECRET"
 
    - Replace the ``USER`` and ``PASSWORD`` with the credentials of a Keycloak user on the ``REALM``.
-   - Replace the ``CLIENT`` and ``SECRET`` with the client ID and secret for the MinIO-specific Keycloak client on the ``REALM``
+   - Replace the ``CLIENT`` and ``SECRET`` with the client ID and secret for the Buckit-specific Keycloak client on the ``REALM``
 
    You can process the results using ``jq`` or a similar JSON-formatting utility.
    Extract the ``access_token`` field to retrieve the necessary access token.
    Pay attention to the ``expires_in`` field to note the number of seconds before the token expires.
 
-2. Generate MinIO Credentials using the ``AssumeRoleWithWebIdentity`` API
+2. Generate Buckit Credentials using the ``AssumeRoleWithWebIdentity`` API
 
    .. code-block:: shell
       :class: copyable
@@ -194,16 +194,16 @@ You can test this workflow using the following sequence of HTTP calls and the ``
 
 3. Test the Credentials
 
-   Use your preferred S3-compatible SDK to connect to MinIO using the generated credentials.
+   Use your preferred S3-compatible SDK to connect to Buckit using the generated credentials.
 
-   For example, the following Python code using the MinIO :ref:`Python SDK <minio-python-quickstart>` connects to the MinIO deployment and returns a list of buckets:
+   For example, the following Python code using the Buckit :ref:`Python SDK <minio-python-quickstart>` connects to the Buckit deployment and returns a list of buckets:
 
    .. code-block:: python
       :substitutions:
 
       from minio import Minio
 
-      client = MinIO(
+      client = Buckit(
          "|MINIO_S3_URL|",
          access_key = "ACCESS_KEY",
          secret_key = "SECRET_KEY",
@@ -217,7 +217,7 @@ You can test this workflow using the following sequence of HTTP calls and the ``
 
 .. start-configure-keycloak-minio-console
 
-Log in as a user with administrative privileges for the MinIO deployment such as a user with the :userpolicy:`consoleAdmin` policy.
+Log in as a user with administrative privileges for the Buckit deployment such as a user with the :userpolicy:`consoleAdmin` policy.
 
 Select :guilabel:`Identity` from the left-hand navigation bar, then select :guilabel:`OpenID`.
 Select :guilabel:`Create Configuration` to create a new configuration.
@@ -235,7 +235,7 @@ Enter the following information into the modal:
    * - :guilabel:`Config URL`
      - Specify the address of the Keycloak OpenID configuration document (|KEYCLOAK_URL|)
 
-       Ensure the ``REALM`` matches the Keycloak realm you want to use for authenticating users to MinIO.
+       Ensure the ``REALM`` matches the Keycloak realm you want to use for authenticating users to Buckit.
 
    * - :guilabel:`Client ID`
      - Specify the name of the Keycloak client created in Step 1
@@ -244,7 +244,7 @@ Enter the following information into the modal:
      - Specify the secret credential value for the Keycloak client created in Step 1
 
    * - :guilabel:`Display Name`
-     - Specify the user-facing name the MinIO Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
+     - Specify the user-facing name the Buckit Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
 
    * - :guilabel:`Scopes` 
      - Specify the OpenID scopes to include in the JWT, such as ``preferred_username`` or ``email``
@@ -254,10 +254,10 @@ Enter the following information into the modal:
    * - :guilabel:`Redirect URI Dynamic`
      - Toggle to ``on``
      
-       Substitutes the MinIO Console address used by the client as part of the Keycloak redirect URI.
+       Substitutes the Buckit Console address used by the client as part of the Keycloak redirect URI.
        Keycloak returns authenticated users to the Console using the provided URI.
         
-       For MinIO Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
+       For Buckit Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
 
 Select :guilabel:`Save` to apply the configuration.
 
@@ -297,7 +297,7 @@ The command takes all supported :ref:`OpenID Configuration Settings <minio-open-
      - Set to the address of the Keycloak OpenID configuration document (|KEYCLOAK_URL|)
 
    * - ``display_name`` 
-     - Set to a user-facing name the MinIO Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
+     - Set to a user-facing name the Buckit Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
 
    * - ``scopes`` 
      - Set to a list of OpenID scopes you want to include in the JWT, such as ``preferred_username`` or ``email``
@@ -305,10 +305,10 @@ The command takes all supported :ref:`OpenID Configuration Settings <minio-open-
    * - ``redirect_uri_dynamic``
      - Set to ``on``
 
-       Substitutes the MinIO Console address used by the client as part of the Keycloak redirect URI.
+       Substitutes the Buckit Console address used by the client as part of the Keycloak redirect URI.
        Keycloak returns authenticated users to the Console using the provided URI.
         
-       For MinIO Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
+       For Buckit Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
 
 .. end-configure-keycloak-minio-cli
 
@@ -343,7 +343,7 @@ The following example code sets the minimum required environment variables relat
    * - :envvar:`CONFIG_URL <MINIO_IDENTITY_OPENID_CONFIG_URL>`
      - Specify the address of the Keycloak OpenID configuration document (|KEYCLOAK_URL|)
 
-       Ensure the ``REALM`` matches the Keycloak realm you want to use for authenticating users to MinIO
+       Ensure the ``REALM`` matches the Keycloak realm you want to use for authenticating users to Buckit
 
    * - | :envvar:`CLIENT_ID <MINIO_IDENTITY_OPENID_CLIENT_ID>`
        | :envvar:`CLIENT_SECRET <MINIO_IDENTITY_OPENID_CLIENT_SECRET>`
@@ -351,7 +351,7 @@ The following example code sets the minimum required environment variables relat
      - Specify the Keycloak client ID and secret configured in Step 1
 
    * - :envvar:`DISPLAY_NAME <MINIO_IDENTITY_OPENID_DISPLAY_NAME>` 
-     - Specify the user-facing name the MinIO Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
+     - Specify the user-facing name the Buckit Console displays as part of the Single-Sign On (SSO) workflow for the configured Keycloak service
 
    * - :envvar:`OPENID_SCOPES <MINIO_IDENTITY_OPENID_SCOPES>`
 
@@ -360,10 +360,10 @@ The following example code sets the minimum required environment variables relat
    * - :envvar:`REDIRECT_URI_DYNAMIC <MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC>`
      - Set to ``on``
 
-       Substitutes the MinIO Console address used by the client as part of the Keycloak redirect URI.
+       Substitutes the Buckit Console address used by the client as part of the Keycloak redirect URI.
        Keycloak returns authenticated users to the Console using the provided URI.
         
-       For MinIO Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
+       For Buckit Console deployments behind a reverse proxy, load balancer, or similar network control plane, you can instead use the :envvar:`MINIO_BROWSER_REDIRECT_URL` variable to set the redirect address for Keycloak to use.
 
 For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-openid`
 

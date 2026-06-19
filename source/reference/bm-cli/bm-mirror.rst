@@ -1,0 +1,446 @@
+=============
+``bm mirror``
+=============
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: bm mirror
+
+Syntax
+------
+
+.. start-mc-mirror-desc
+
+The :mc:`bm mirror` command synchronizes content to Buckit deployment, similar to the ``rsync`` utility.
+:mc:`bm mirror` supports filesystems, Buckit deployments, and other S3-compatible hosts as the synchronization source.
+
+.. end-mc-mirror-desc
+
+.. note::
+
+   :mc:`bm mirror` only synchronizes the current object without any version information or metadata.
+   To synchronize an object's version history and metadata, consider using :mc:`bm replicate` for :ref:`bucket replication <minio-bucket-replication-serverside>` or :mc:`bm admin replicate` for :ref:`site replication <minio-site-replication-overview>`.
+
+
+.. tab-set::
+
+   .. tab-item:: EXAMPLE
+
+      The following command synchronizes content from a local filesystem directory to the ``mydata`` bucket on the ``myminio`` Buckit deployment.
+
+      .. code-block:: shell
+         :class: copyable
+
+         bm mirror --watch ~/mydata myminio/mydata
+
+      The command "watches" for files added or removed on the local filesystem and synchronizes those operations to Buckit until explicitly terminated. 
+
+      :mc-cmd:`bm mirror --watch` updates files changed on the local filesystem to Buckit (see :mc-cmd:`~bm mirror --overwrite`).
+      ``--watch`` does not remove other files from Buckit not present on the local filesystem (see :mc-cmd:`~bm mirror --remove`).
+
+   .. tab-item:: SYNTAX
+
+      The command has the following syntax:
+
+      .. code-block:: shell
+         :class: copyable
+
+         bm [GLOBALFLAGS] mirror                            \
+                          [--active-active]                 \
+                          [--attr "string"]                 \
+                          [--checksum "value"]              \
+                          [--disable-multipart]             \
+                          [--dry-run]                       \
+                          [--enc-kms "string"]              \
+                          [--enc-s3 "string"]               \
+                          [--enc-c "string"]                \
+                          [--exclude "string"]              \
+                          [--exclude-bucket "string"]       \
+                          [--exclude-storageclass "string"] \
+                          [--limit-download string]         \
+                          [--limit-upload string]           \
+                          [--md5]                           \
+                          [--monitoring-address "string"]   \
+                          [--newer-than "string"]           \
+                          [--older-than "string"]           \
+                          [--overwrite]                     \
+                          [--preserve]                      \
+                          [--region "string"]               \
+                          [--remove]                        \
+                          [--retry]                         \
+                          [--skip-errors]                   \
+                          [--storage-class "string"]        \
+                          [--summary]                       \
+                          [--watch]                         \
+                          SOURCE                            \
+                          TARGET
+
+      .. include:: /includes/common-minio-mc.rst
+         :start-after: start-minio-syntax
+         :end-before: end-minio-syntax
+
+Parameters
+~~~~~~~~~~
+
+.. mc-cmd:: SOURCE
+   :required:
+
+   The file(s) or object(s) to synchronize to the :mc-cmd:`~bm mirror TARGET` S3 host.
+
+   For objects on S3-compatible hosts, specify the path to the object as ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <bm alias>` of a configured S3-compatible host, *and*
+
+   - ``PATH`` is the path to the bucket or object. If specifying a bucket, :mc:`bm mirror` synchronizes all objects in the bucket.
+
+   .. code-block:: shell
+
+      bm mirror [FLAGS] play/mybucket/ myminio/mybucket
+
+   For files on a filesystem, specify the full filesystem path to the file or directory :
+
+   .. code-block:: shell
+
+      bm mirror [FLAGS] ~/data/ myminio/mybucket
+
+   If specifying a directory, :mc:`bm mirror` synchronizes all files in the directory.
+
+.. mc-cmd:: TARGET
+   :required:
+
+   The full path to bucket to which :mc:`bm mirror` synchronizes SOURCE objects. Specify the ``TARGET`` as ``ALIAS/PATH``, where:
+
+   - ``ALIAS`` is the :mc:`alias <bm alias>` of a configured S3-compatible host, *and*
+
+   - ``PATH`` is the path to the bucket.
+
+   .. code-block:: shell
+
+      bm mirror SOURCE play/mybucket
+
+   :mc:`bm mirror` uses the object or file names from the :mc-cmd:`~bm mirror SOURCE` when synchronizing to the ``TARGET`` bucket.
+
+.. mc-cmd:: --active-active
+   :optional:
+
+   Establish active-active mirror activities between two sites.
+   The command must be repeated on each site.
+
+   For example:
+
+   On site A, to mirror from A to B
+   
+   .. code-block::
+      :class: copyable
+
+      bm mirror --active-active siteA siteB
+
+   On site B, to mirror from B to A
+
+   .. code-block::
+      :class: copyable
+
+      bm mirror --active-active siteB siteA
+
+.. mc-cmd:: --attr
+   :optional:
+
+   Add custom metadata for mirrored objects. Specify key-value pairs as ``KEY=VALUE\;``. 
+   For example, ``--attr key1=value1\;key2=value2\;key3=value3``.
+
+.. mc-cmd:: --checksum
+   :optional:
+
+   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
+
+   Add a checksum to an uploaded object. 
+   
+   Valid values are: 
+   - ``MD5``
+   - ``CRC32``
+   - ``CRC32C``
+   - ``SHA1``
+   - ``SHA256``
+
+   The flag requires server trailing headers and works with AWS or Buckit targets.
+
+.. mc-cmd:: --disable-multipart
+   :optional:
+
+   Disables multipart upload for the synchronization session.
+
+.. mc-cmd:: --dry-run
+   :optional:
+
+   Perform a mock mirror operation.
+   Use this operation to test that the :mc:`bm mirror` operation will only mirror the desired objects or buckets.
+
+.. block include of enc-c , enc-s3, and enc-kms
+
+.. include:: /includes/common-minio-sse.rst
+   :start-after: start-minio-mc-sse-options
+   :end-before: end-minio-mc-sse-options
+
+.. mc-cmd:: --exclude
+   :optional:
+
+   Exclude object(s) in the :mc-cmd:`~bm mirror SOURCE` path that match the specified object :ref:`name pattern <minio-wildcard-matching>`.
+
+.. mc-cmd:: --exclude-bucket
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-03-03T00-13-08Z
+
+   Exclude bucket(s) in the :mc-cmd:`~bm mirror SOURCE` path that match the specified bucket :ref:`name pattern <minio-wildcard-matching>`.
+
+.. mc-cmd:: --exclude-storageclass
+   :optional:
+
+   Exclude object(s) on the :mc-cmd:`~bm mirror SOURCE` that have the specified storage class.
+   You can use this flag multiple times in a command to exclude objects from more than one storage class.
+
+   Use this to exclude objects with storage classes that require rehydration or restoration of objects, such as migrating from an AWS S3 bucket where some objects have the ``GLACIER`` or ``DEEP_ARCHIVE`` storage classes.
+
+.. --limit-download and --limit-upload included here
+
+.. include:: /includes/linux/minio-client.rst
+   :start-after: start-mc-limit-flags-desc
+   :end-before: end-mc-limit-flags-desc
+
+.. mc-cmd:: --md5
+   :optional:
+
+   Forces all uploads to calculate MD5 checksums.
+
+.. mc-cmd:: --monitoring-address
+   :optional:
+
+   Creates a `Prometheus <https://prometheus.io/>`__ endpoint for monitoring mirroring activity. 
+   Specify the local network adapter and port address on which to create the scraping endpoint. 
+   Defaults to ``localhost:8081``).
+
+.. mc-cmd:: --newer-than
+   :optional:
+
+   Mirror object(s) newer than the specified number of days.
+   Specify a string in ``#d#hh#mm#ss`` format
+   For example: ``--newer-than 1d2hh3mm4ss``.
+
+.. mc-cmd:: --older-than
+   :optional:
+
+   Mirror object(s) older than the specified time limit.
+   Specify a string in ``#d#hh#mm#ss`` format.
+   For example: ``--older-than 1d2hh3mm4ss``.
+
+   Defaults to ``0`` (all objects).
+
+.. mc-cmd:: --overwrite
+   :optional:
+
+   Overwrites object(s) on the :mc-cmd:`~bm mirror TARGET`.
+
+   For example, consider an active ``bm mirror --overwrite`` synchronizing content from Source to Destination.
+
+   If an object on Source changes, ``bm mirror --overwrite`` synchronizes and overwrites any matching file on Destination.
+
+   Without ``--overwrite``, if an object already exists on the Destination, the mirror process fails to synchronize that object.
+   ``bm mirror`` logs an error and continues to synchronize other objects.
+
+.. mc-cmd:: --preserve, a
+   :optional:
+
+   Preserve file system attributes and bucket policy rules of the :mc-cmd:`~bm mirror SOURCE` on the :mc-cmd:`~bm mirror TARGET`.
+
+.. mc-cmd:: --region
+   :optional:
+
+   Specify the ``string`` region when creating new bucket(s) on the target.
+
+   Defaults to ``"us-east-1"``.
+
+.. mc-cmd:: --remove
+   :optional:
+
+   Removes object(s) on the Target that do not exist on the Source.
+
+   Use the ``--remove`` flag to have the same list of objects on both Source and Target.
+
+   For example, objects A, B, and C exist on Source.
+   Objects C, D, and E exist on Target.
+
+   When running ``bm mirror --remove``, objects A and B synchronize to Target and objects D and E are removed from Target.
+   Since an object C already exists on both, nothing moves from Source to Target. 
+
+   After the action, only objects A, B, and C exist on both the Source and the Target.
+
+   ``bm mirror --remove`` does not verify that the contents of object C are the same on both Source and Target, only that an object called `C` exists on both.
+   To ensure objects on the Source and Target match both names `and` content, use  :mc-cmd:`~bm mirror --overwrite` or :mc-cmd:`~bm mirror --watch`.
+
+   .. versionchanged:: RELEASE.2023-05-04T18-10-16Z
+
+      ``bm mirror --remove`` returns an error if the target path is a local filesystem directory that does not exist.
+
+      In prior versions, specifying ``/path/to/directory`` would result in the removal of the ``/path/to`` folder if ``directory`` did not exist.
+
+.. mc-cmd:: --retry
+   :optional:
+
+   In case of errors during mirror process, retry on each errored object.
+
+.. mc-cmd:: --storage-class, sc
+   :optional:
+
+   Set the storage class for the new object(s) on the :mc-cmd:`~bm mirror TARGET`. 
+
+   See the Amazon documentation on :aws-docs:`Storage Classes <AmazonS3/latest/dev/storage-class-intro.html>` for more information on S3 storage classses.
+
+.. mc-cmd:: --skip-errors
+   :optional:
+
+   .. versionadded:: mc RELEASE.2024-01-28T16-23-14Z
+
+   Skip any objects that produce errors while mirroring.
+
+.. mc-cmd:: --summary
+   :optional:
+
+   On completion, output a summary of the data that was synchronized.
+
+.. mc-cmd:: --watch, w
+   :optional:
+
+   Use ``--watch`` flag to mirror objects from Source to Target, where the Target may also have additional objects not present on the Source.
+
+   - ``--watch`` continuously synchronizes files from Source to Target until explicitly terminated
+   - The Target may have files that do not exist on Source
+   - ``--watch`` overwrites objects on the Target if a match exists on Source, like the :mc-cmd:`~bm mirror --overwrite` flag
+
+   Defaults to ``0`` (all objects).
+
+   For example, object A and B exist on the watched Source.
+   Objects A, B, and C exist on the watched Target.
+
+   A client writes object D to Source and removes object B.
+
+   After the operation, objects A and D exist on the Source.
+   Objects A, C, and D exist on the Target.
+
+
+Global Flags
+~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-globals
+   :end-before: end-minio-mc-globals
+
+Examples
+--------
+
+Mirror a Local Directory to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`bm mirror` to mirror files from a filesystem to an S3 Host:
+
+.. code-block::
+   :class: copyable
+
+   bm mirror FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <bm mirror SOURCE>` with the full file path to the directory to mirror.
+
+- Replace :mc-cmd:`ALIAS <bm mirror TARGET>` with the :mc-cmd:`alias <bm alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <bm mirror TARGET>` with the destination bucket.
+
+Continuously Mirror a Local Directory to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`bm mirror` with :mc-cmd:`~bm mirror --watch` to continuously mirror files from a filesystem to an S3-compatible host where objects added to or deleted from the filesystem are added to or deleted from the host:
+
+.. code-block::
+   :class: copyable
+
+   bm mirror --watch FILEPATH ALIAS/PATH
+
+- Replace :mc-cmd:`FILEPATH <bm mirror SOURCE>` with the full file path to the directory to mirror.
+
+- Replace :mc-cmd:`ALIAS <bm mirror TARGET>` with the :mc-cmd:`alias <bm alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`PATH <bm mirror TARGET>` with the destination bucket.
+
+Continuously Mirror S3 Bucket to an S3-Compatible Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`bm mirror` with :mc-cmd:`~bm mirror --watch` to continuously mirror objects in a bucket on one S3-compatible host to another S3-compatible host where objects added to or deleted from the bucket are added to or deleted from the host.
+
+.. code-block::
+   :class: copyable
+
+   bm mirror --watch SRCALIAS/SRCPATH TGTALIAS/TGTPATH
+
+- Replace :mc-cmd:`SRCALIAS <bm mirror SOURCE>` with :mc-cmd:`alias <bm alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`SRCPATH <bm mirror SOURCE>` with the bucket to mirror.
+
+- Replace :mc-cmd:`TGTALIAS <bm mirror TARGET>` with the :mc-cmd:`alias <bm alias>` of a configured S3-compatible host.
+
+- Replace :mc-cmd:`TGTPATH <bm mirror TARGET>` with the destination bucket.
+
+Mirror Objects from AWS S3 to Buckit Skipping Objects in GLACIER
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use :mc:`bm mirror` with :mc-cmd:`~bm mirror --exclude-storageclass` to mirror objects from AWS S3 to Buckit without mirroring objects in GLACIER or DEEP_ARCHIVE storage.
+
+.. code-block::
+   :class: copyable
+
+   bm mirror --exclude-storageclass GLACIER  \
+      --exclude-storageclass DEEP_ARCHIVE SRCALIAS/SRCPATH TGALIAS/TGPATH
+
+- Replace :mc-cmd:`SRCALIAS <bm mirror SOURCE>` with the :mc-cmd:`alias <bm alias>` of a configured S3 host.
+
+- Replace :mc-cmd:`SRCPATH <bm mirror SOURCE>` with the bucket to mirror.
+
+- Replace :mc-cmd:`TGTALIAS <bm mirror TARGET>` with the :mc-cmd:`alias <bm alias>` of a configured S3 host.
+
+- Replace :mc-cmd:`TGTPATH <bm mirror TARGET>` with the destination bucket.
+
+Behavior
+--------
+
+Mirror Continues on Failed Object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If an object of the same name exists on the target, Buckit outputs an error for the duplicate object.
+``bm mirror`` continues to mirror other objects from the source to the destination after the error.
+
+Buckit Trims Empty Prefixes on Object Removal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :mc-cmd:`bm mirror --watch` command continuously synchronizes the source and destination targets for added and deleted objects. 
+This includes automatically removing objects on the destination if they are removed on the source.
+
+For objects updated on the source to also update on the target, use `--overwrite`.
+To remove objects from the target that are not on the source, use `--remove`.
+
+.. |command| replace:: :mc-cmd:`bm mirror --watch`
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes
+   :end-before: end-remove-api-trims-prefixes
+
+.. include:: /includes/common-admonitions.rst
+   :start-after: start-remove-api-trims-prefixes-fs
+   :end-before: end-remove-api-trims-prefixes-fs
+
+S3 Compatibility
+~~~~~~~~~~~~~~~~
+
+.. include:: /includes/common-minio-mc.rst
+   :start-after: start-minio-mc-s3-compatibility
+   :end-before: end-minio-mc-s3-compatibility

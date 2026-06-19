@@ -1,7 +1,7 @@
 .. _minio-k8s-upgrade-minio-tenant:
 
 ======================
-Upgrade a MinIO Tenant
+Upgrade a Buckit Tenant
 ======================
 
 .. default-domain:: minio
@@ -11,12 +11,12 @@ Upgrade a MinIO Tenant
    :depth: 1
 
 
-The following procedures upgrade a single MinIO Tenant, using either Kustomize or Helm.
-MinIO recommends you test upgrades in a lower environment such as a Dev or QA Tenant, before upgrading production Tenants.
+The following procedures upgrade a single Buckit Tenant, using either Kustomize or Helm.
+Buckit recommends you test upgrades in a lower environment such as a Dev or QA Tenant, before upgrading production Tenants.
 
 .. important::
 
-   For Tenants using a MinIO Image older than :minio-release:`RELEASE.2024-03-30T09-41-56Z` running with :ref:`AD/LDAP <minio-ldap-config-settings>` enabled, you **must** read through the release notes for :minio-release:`RELEASE.2024-04-18T19-09-19Z` before starting this procedure.
+   For Tenants using a Buckit Image older than :minio-release:`RELEASE.2024-03-30T09-41-56Z` running with :ref:`AD/LDAP <minio-ldap-config-settings>` enabled, you **must** read through the release notes for :minio-release:`RELEASE.2024-04-18T19-09-19Z` before starting this procedure.
    You must take the extra steps documented in the linked release as part of the upgrade procedure.
 
 .. _minio-upgrade-tenant-plugin:
@@ -25,7 +25,7 @@ MinIO recommends you test upgrades in a lower environment such as a Dev or QA Te
 Upgrade a Tenant using Kustomize
 --------------------------------
 
-The following procedure upgrades a MinIO Tenant using Kustomize and the ``kubectl`` CLI.
+The following procedure upgrades a Buckit Tenant using Kustomize and the ``kubectl`` CLI.
 If you deployed the Tenant using :ref:`Helm <deploy-tenant-helm>`, use the :ref:`minio-upgrade-tenant-helm` procedure instead.
 
 To upgrade a Tenant with Kustomize:
@@ -113,7 +113,7 @@ This file instructs Kustomize to upgrade the tenant using the specified image.
 The name of this file, ``upgrade-minio-tenant.yaml``, must match the ``patches.path`` filename specified in the ``kustomization.yaml`` file created in the previous step.
 
 Replace ``my-tenant`` and ``my-tenant-ns`` with the name and namespace of the Tenant to upgrade.
-Specify the MinIO version to upgrade to in ``image:``.
+Specify the Buckit version to upgrade to in ``image:``.
 
 Alternatively, you can update the base configuration directly, according to your local procedures.
 Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-objects/kustomization>` for more information.
@@ -134,14 +134,14 @@ Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-object
 
 .. _minio-upgrade-tenant-helm:
 
-Upgrade the Tenant using the MinIO Helm Chart
+Upgrade the Tenant using the Buckit Helm Chart
 ---------------------------------------------
 
-This procedure upgrades an existing MinIO Tenant using Helm Charts.
+This procedure upgrades an existing Buckit Tenant using Helm Charts.
 
 If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-kustomize` procedure instead.
 
-1. Verify the existing MinIO Tenant installation.
+1. Verify the existing Buckit Tenant installation.
 
    Use ``kubectl get all -n TENANT_NAMESPACE`` to verify the health and status of all Tenant pods and services.
 
@@ -162,8 +162,8 @@ If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-k
 
 #. Update the Operator Repository 
 
-   Use ``helm repo update minio-operator`` to update the MinIO Operator repo.
-   If you set a different alias for the MinIO Operator repository, specify that to the command.
+   Use ``helm repo update minio-operator`` to update the Buckit Operator repo.
+   If you set a different alias for the Buckit Operator repository, specify that to the command.
    You can use ``helm repo list`` to review your installed repositories.
 
    Use ``helm search`` to check the latest available chart version after updating the Operator Repo:
@@ -180,9 +180,9 @@ If you deployed the Tenant using Kustomize, use the :ref:`minio-upgrade-tenant-k
       :substitutions:
 
       NAME                            CHART VERSION   APP VERSION     DESCRIPTION                    
-      minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for MinIO Operator
-      minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
-      minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for MinIO Operator
+      minio-operator/minio-operator   4.3.7           v4.3.7          A Helm chart for Buckit Operator
+      minio-operator/operator         |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
+      minio-operator/tenant           |operator-version-stable|          v|operator-version-stable|         A Helm chart for Buckit Operator
 
    The ``minio-operator/minio-operator`` is a legacy chart and should **not** be installed under normal circumstances.
 

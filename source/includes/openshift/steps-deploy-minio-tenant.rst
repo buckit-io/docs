@@ -3,22 +3,22 @@
 Deploy a Tenant using the OpenShift Web Console
 -----------------------------------------------
 
-1) Access the MinIO Operator Interface
+1) Access the Buckit Operator Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can find the MinIO Operator Interface from the :guilabel:`Operators` left-hand navigation header.
+You can find the Buckit Operator Interface from the :guilabel:`Operators` left-hand navigation header.
 
 1. Go to :guilabel:`Operators`, then :guilabel:`Installed Operators`. 
 
 2. For the :guilabel:`Project` dropdown, select :guilabel:`openshift-operators`.
 
-3. Select :guilabel:`MinIO Operators` from the list of installed operators.
+3. Select :guilabel:`Buckit Operators` from the list of installed operators.
 
 Click :guilabel:`Create Tenant` to begin the Tenant Creation process.
 
 2) Create the Tenant
 ~~~~~~~~~~~~~~~~~~~~
-The :guilabel:`Form View` provides a user interface for configuring the new MinIO Tenant.
+The :guilabel:`Form View` provides a user interface for configuring the new Buckit Tenant.
 
 .. image:: /images/openshift/minio-openshift-tenant-create-ui.png
    :align: center
@@ -26,14 +26,14 @@ The :guilabel:`Form View` provides a user interface for configuring the new MinI
    :class: no-scaled-link
    :alt: OpenShift Tenant Creation UI View
 
-- Ensure the :guilabel:`Tenant Secret -> Name` is set to the name of the MinIO Root User Kubernetes Secret created as part of the prerequisites. 
+- Ensure the :guilabel:`Tenant Secret -> Name` is set to the name of the Buckit Root User Kubernetes Secret created as part of the prerequisites. 
 
-- Ensure the :guilabel:`Console -> Console Secret -> Name` is set to the name of the MinIO Console Kubernetes Secret created as part of the prerequisites.
+- Ensure the :guilabel:`Console -> Console Secret -> Name` is set to the name of the Buckit Console Kubernetes Secret created as part of the prerequisites.
 
-You can also use the YAML view to perform more granular configuration of the MinIO Tenant. 
-Refer to the :minio-git:`MinIO Custom Resource Definition Documentation <operator/blob/master/docs/tenant_crd.adoc>` for guidance on setting specific fields. 
-MinIO also publishes examples for additional guidance in creating custom Tenant YAML objects. 
-Note that the OperatorHub YAML view supports creating only the MinIO Tenant object. 
+You can also use the YAML view to perform more granular configuration of the Buckit Tenant. 
+Refer to the :minio-git:`Buckit Custom Resource Definition Documentation <operator/blob/master/docs/tenant_crd.adoc>` for guidance on setting specific fields. 
+Buckit also publishes examples for additional guidance in creating custom Tenant YAML objects. 
+Note that the OperatorHub YAML view supports creating only the Buckit Tenant object. 
 Do not specify any other objects as part of the YAML input.
 
 .. image:: /images/openshift/minio-openshift-tenant-create-yaml.png
@@ -51,13 +51,13 @@ For example, you can make modifications in the :guilabel:`YAML View` and see tho
    If your OpenShift cluster Security Context Configuration restricts the supported pod security contexts, open the YAML View and locate the ``spec.pools[n].securityContext`` and ``spec.console.securityContext`` objects. 
    Modify the ``securityContext`` settings to use a supported UID based on the SCC of your OpenShift Cluster.
 
-Click :guilabel:`Create` to create the MinIO Tenant using the specified configuration. 
-Use the credentials specified as part of the MinIO Root User secret to access the MinIO Server.
+Click :guilabel:`Create` to create the Buckit Tenant using the specified configuration. 
+Use the credentials specified as part of the Buckit Root User secret to access the Buckit Server.
 
 3) Connect to the Tenant
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The MinIO Operator creates services for the MinIO Tenant. 
+The Buckit Operator creates services for the Buckit Tenant. 
 Use the ``oc get svc -n NAMESPACE`` command to review the deployed services:
 
 .. code-block:: shell
@@ -75,11 +75,11 @@ Use the ``oc get svc -n NAMESPACE`` command to review the deployed services:
    minio-tenant-1-log-search-api      ClusterIP      10.103.5.235     <none>        8080/TCP         2d3h
    minio-tenant-1-prometheus-hl-svc   ClusterIP      None             <none>        9090/TCP         7h39m
 
-- The ``minio`` service corresponds to the MinIO Tenant service. 
-  Applications should use this service for performing operations against the MinIO Tenant.
+- The ``minio`` service corresponds to the Buckit Tenant service. 
+  Applications should use this service for performing operations against the Buckit Tenant.
  
-- The ``*-console`` service corresponds to the :minio-git:`MinIO Console <console>`. 
-  Administrators should use this service for accessing the MinIO Console and performing administrative operations on the MinIO Tenant.
+- The ``*-console`` service corresponds to the :minio-git:`Buckit Console <console>`. 
+  Administrators should use this service for accessing the Buckit Console and performing administrative operations on the Buckit Tenant.
 
 The remaining services support Tenant operations and are not intended for consumption by users or administrators.
  

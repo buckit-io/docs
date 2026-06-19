@@ -12,14 +12,14 @@ Monitoring and Alerting using Prometheus
 
 .. container:: extlinks-video
 
-   - `Monitoring with MinIO and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
-   - `Monitoring with MinIO and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
+   - `Monitoring with Buckit and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
+   - `Monitoring with Buckit and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
 
-MinIO publishes cluster, node, bucket, and resource metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
+Buckit publishes cluster, node, bucket, and resource metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
-- Configuring a Prometheus service to scrape and display metrics from a MinIO deployment
-- Configuring an Alert Rule on a MinIO Metric to trigger an AlertManager action
+- Configuring a Prometheus service to scrape and display metrics from a Buckit deployment
+- Configuring an Alert Rule on a Buckit Metric to trigger an AlertManager action
 
 These instructions use :ref:`version 2 metrics. <minio-metrics-v2>`
 For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`
@@ -31,12 +31,12 @@ For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metric
 
    - An existing :prometheus-docs:`Prometheus deployment <prometheus/latest/installation/>` with backing :prometheus-docs:`Alert Manager <alerting/latest/overview/>`
 
-   - An existing MinIO deployment with network access to the Prometheus deployment
+   - An existing Buckit deployment with network access to the Prometheus deployment
 
-   - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the MinIO deployment
+   - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the Buckit deployment
 
 
-Configure Prometheus to Collect and Alert using MinIO Metrics
+Configure Prometheus to Collect and Alert using Buckit Metrics
 -------------------------------------------------------------
 
 1) Generate the Scrape Configuration
@@ -46,16 +46,16 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 
 .. tab-set::
 
-   .. tab-item:: MinIO Server
+   .. tab-item:: Buckit Server
 
-      The following command scrapes metrics for the MinIO cluster.
+      The following command scrapes metrics for the Buckit cluster.
 
       .. code-block:: shell
          :class: copyable
       
          mc admin prometheus generate ALIAS
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
 	 
       The command returns output similar to the following:
 
@@ -75,14 +75,14 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 		      
    .. tab-item:: Nodes
 
-      The following command scrapes metrics for a node on the MinIO Server.
+      The following command scrapes metrics for a node on the Buckit Server.
 
       .. code-block:: shell
          :class: copyable
       
          mc admin prometheus generate ALIAS node
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -100,14 +100,14 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 		      
    .. tab-item:: Buckets
 
-      The following command scrapes metrics for buckets on the MinIO Server.
+      The following command scrapes metrics for buckets on the Buckit Server.
 
       .. code-block:: shell
          :class: copyable
       
          mc admin prometheus generate ALIAS bucket
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -127,14 +127,14 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
 
       .. versionadded:: RELEASE.2023-10-07T15-07-38Z
 
-      The following command scrapes metrics for resources on the MinIO Server.
+      The following command scrapes metrics for resources on the Buckit Server.
 
       .. code-block:: shell
          :class: copyable
 
          mc admin prometheus generate ALIAS resource
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the MinIO deployment.
+      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -154,22 +154,22 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
   The recommended value is 60 seconds.
 
   Some deployments require a longer scrape interval due to the number of metrics being scraped.
-  To reduce the load on your MinIO and Prometheus servers, choose the longest interval that meets your monitoring requirements.
+  To reduce the load on your Buckit and Prometheus servers, choose the longest interval that meets your monitoring requirements.
 
-- Set the ``job_name`` to a value associated to the MinIO deployment.
+- Set the ``job_name`` to a value associated to the Buckit deployment.
 
   Use a unique value to ensure isolation of the deployment metrics from any others collected by that Prometheus service.
 
-- MinIO deployments started with :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` set to ``"public"`` can omit the ``bearer_token`` field.
+- Buckit deployments started with :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` set to ``"public"`` can omit the ``bearer_token`` field.
 
-- Set the ``scheme`` to http for MinIO deployments not using TLS.
+- Set the ``scheme`` to http for Buckit deployments not using TLS.
 
-- Set the ``targets`` array with a hostname that resolves to the MinIO deployment.
+- Set the ``targets`` array with a hostname that resolves to the Buckit deployment.
 
-  This can be any single node, or a load balancer/proxy which handles connections to the MinIO nodes.
+  This can be any single node, or a load balancer/proxy which handles connections to the Buckit nodes.
 
-  For MinIO Tenants on Kubernetes infrastructure, when using a Prometheus cluster in that same cluster you can specify the service DNS name for the ``minio`` service.
-  You can otherwise specify the ingress or load balancer endpoint configured to route connections to and from the MinIO Tenant.
+  For Buckit Tenants on Kubernetes infrastructure, when using a Prometheus cluster in that same cluster you can specify the service DNS name for the ``minio`` service.
+  You can otherwise specify the ingress or load balancer endpoint configured to route connections to and from the Buckit Tenant.
 
 2) Restart Prometheus with the Updated Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -199,7 +199,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
 
    .. tab-item:: Nodes
 
-      Node metrics are specific for node-level monitoring. You need to list all MinIO nodes for this configuration.
+      Node metrics are specific for node-level monitoring. You need to list all Buckit nodes for this configuration.
 
       .. code-block:: yaml
          :class: copyable
@@ -290,7 +290,7 @@ You can execute queries here to analyze the collected metrics.
 
    .. tab-item:: Recommended Metrics
 
-      MinIO recommends the following as a basic set of metrics to monitor.
+      Buckit recommends the following as a basic set of metrics to monitor.
 
       See :ref:`minio-metrics-and-alerts` for information about all available metrics.
 
@@ -335,12 +335,12 @@ You can execute queries here to analyze the collected metrics.
          * - ``minio_node_drive_io_waiting``
            - Total number of I/O operations waiting on drive.
 
-4) Configure an Alert Rule using MinIO Metrics
+4) Configure an Alert Rule using Buckit Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected MinIO metrics.
+You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected Buckit metrics.
 
-The following example alert rule files provide a baseline of alerts for a MinIO deployment.
+The following example alert rule files provide a baseline of alerts for a Buckit deployment.
 You can modify or otherwise use these examples as guidance in building your own alerts.
 
 .. code-block:: yaml
@@ -355,7 +355,7 @@ You can modify or otherwise use these examples as guidance in building your own 
        labels:
          severity: warn
        annotations:
-         summary: "Node down in MinIO deployment"
+         summary: "Node down in Buckit deployment"
          description: "Node(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
 
      - alert: DisksOffline
@@ -364,7 +364,7 @@ You can modify or otherwise use these examples as guidance in building your own 
        labels:
          severity: warn
        annotations:
-         summary: "Disks down in MinIO deployment"
+         summary: "Disks down in Buckit deployment"
          description: "Disks(s) in cluster {{ $labels.instance }} offline for more than 5 minutes"
 
 In the Prometheus configuration, specify the path to the alert file in the ``rule_files`` key:
@@ -379,5 +379,5 @@ Once triggered, Prometheus sends the alert to the configured AlertManager servic
 Dashboards
 ----------
 
-MinIO provides Grafana Dashboards to display metrics collected by Prometheus.
+Buckit provides Grafana Dashboards to display metrics collected by Prometheus.
 For more information, see :ref:`minio-grafana`

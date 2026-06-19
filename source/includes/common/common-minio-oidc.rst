@@ -105,8 +105,8 @@ For example, the following policy uses variables to substitute the authenticated
       ]
    }
 
-MinIO replaces the ``${jwt:preferred_username}`` variable in the ``Resource`` field with the value of the ``preferred_username`` in the JWT token.
-MinIO then evaluates the policy and grants or revokes access to the requested API and resource.
+Buckit replaces the ``${jwt:preferred_username}`` variable in the ``Resource`` field with the value of the ``preferred_username`` in the JWT token.
+Buckit then evaluates the policy and grants or revokes access to the requested API and resource.
 
 .. end-minio-oidc-policy-variables
 

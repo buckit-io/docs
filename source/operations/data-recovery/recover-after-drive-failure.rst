@@ -10,18 +10,18 @@ Drive Failure Recovery
    :local:
    :depth: 1
 
-MinIO supports hot-swapping failed drives with new healthy drives. 
-MinIO detects and heals those drives without requiring any node or deployment-level restart.
-:ref:`MinIO healing <minio-concepts-healing>` occurs only on the replaced drive(s) and in most cases has minimal or negligible impact on deployment performance.
+Buckit supports hot-swapping failed drives with new healthy drives. 
+Buckit detects and heals those drives without requiring any node or deployment-level restart.
+:ref:`Buckit healing <minio-concepts-healing>` occurs only on the replaced drive(s) and in most cases has minimal or negligible impact on deployment performance.
 
-MinIO healing ensures consistency and correctness of all data restored onto the drive. 
+Buckit healing ensures consistency and correctness of all data restored onto the drive. 
 
 .. include:: /includes/common-admonitions.rst
    :start-after: start-exclusive-drive-access
    :end-before: end-exclusive-drive-access
 
 The following steps provide a more detailed walkthrough of drive replacement.
-These steps assume a MinIO deployment where each node manages drives using ``/etc/fstab`` with per-drive labels as per the :ref:`documented prerequisites <minio-installation>`.
+These steps assume a Buckit deployment where each node manages drives using ``/etc/fstab`` with per-drive labels as per the :ref:`documented prerequisites <minio-installation>`.
 
 1) Unmount the failed drive(s)
 ------------------------------
@@ -45,7 +45,7 @@ healthy drive(s). Replacement drives *must* meet the following requirements:
 - Equal or greater capacity.
 
 Using a replacement drive with greater capacity does not increase the total
-cluster storage. MinIO uses the *smallest* drive's capacity as the ceiling for
+cluster storage. Buckit uses the *smallest* drive's capacity as the ceiling for
 all drives in the :ref:`Server Pool <minio-intro-server-pool>`.
 
 The following command formats a drive as XFS and assigns it a label to match
@@ -55,7 +55,7 @@ the failed drive.
 
    mkfs.xfs /dev/sdb -L DRIVE1
 
-MinIO **strongly recommends** using label-based mounting to ensure consistent
+Buckit **strongly recommends** using label-based mounting to ensure consistent
 drive order that persists through system restarts.
 
 3) Review and Update ``fstab``
@@ -89,7 +89,7 @@ For example, consider
 
    You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
    
-   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+   You should not use this option on systems which have locally attached disks, as silencing drive errors prevents both Buckit and the OS from responding to those errors in a normal fashion.
 
 Given the previous example command, no changes are required to 
 ``fstab`` since the replacement drive at ``/mnt/drive1`` uses the same
@@ -108,7 +108,7 @@ procedure:
 
 The command should result in remounting of all of the replaced drives.
 
-5) Monitor MinIO for Drive Detection and Healing Status
+5) Monitor Buckit for Drive Detection and Healing Status
 -------------------------------------------------------
 
 Use :mc:`mc admin logs` command *or* ``journalctl -u minio`` for
@@ -117,7 +117,7 @@ remounting drives. The output should include messages identifying each formatted
 and empty drive.
 
 Use :mc:`mc admin heal` to monitor the overall :ref:`healing <minio-concepts-healing>` status on the
-deployment. MinIO aggressively heals replaced drive(s) to ensure rapid recovery
+deployment. Buckit aggressively heals replaced drive(s) to ensure rapid recovery
 from the degraded state.
 
 6) Next Steps
@@ -126,5 +126,5 @@ from the degraded state.
 Monitor the cluster for any further drive failures. Some drive batches may fail
 in close proximity to each other. Deployments seeing higher than expected drive
 failure rates should schedule dedicated maintenance around replacing the known
-bad batch. Consider using `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ to
-coordinate with MinIO engineering around guidance for any such operations.
+bad batch. Consider using `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ to
+coordinate with Buckit engineering around guidance for any such operations.

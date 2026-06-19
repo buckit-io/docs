@@ -3,9 +3,9 @@
 
 .. start-kes-encrypted-backend-desc
 
-Enabling |SSE| on a MinIO deployment automatically encrypts the backend data for that deployment using the default encryption key.
+Enabling |SSE| on a Buckit deployment automatically encrypts the backend data for that deployment using the default encryption key.
 
-MinIO *requires* access to KES and the external KMS to decrypt the backend and start normally.
+Buckit *requires* access to KES and the external KMS to decrypt the backend and start normally.
 The KMS **must** maintain and provide access to the :envvar:`MINIO_KMS_KES_KEY_NAME`.
 You cannot disable KES later or "undo" the |SSE| configuration at a later point.
 
@@ -13,14 +13,14 @@ You cannot disable KES later or "undo" the |SSE| configuration at a later point.
 
 .. start-kes-new-existing-minio-deployment-desc
 
-This procedure provides instructions for modifying the startup environment variables of a MinIO deployment to enable |SSE| via KES and the KMS target.
+This procedure provides instructions for modifying the startup environment variables of a Buckit deployment to enable |SSE| via KES and the KMS target.
 
 For instructions on new production deployments, see the :ref:`Multi-Node Multi-Drive (Distributed) <minio-mnmd>` tutorial.
 For instructions on new local or evaluation deployments, see the :ref:`Single-Node Single-Drive <minio-snsd>` tutorial.
 
 When creating the environment file for the deployment, pause and switch back to this tutorial to include the necessary environment variables to support |SSE|.
 
-For existing MinIO Deployments, you can modify the existing environment file and restart the deployment as instructed during this procedure.
+For existing Buckit Deployments, you can modify the existing environment file and restart the deployment as instructed during this procedure.
 
 .. end-kes-new-existing-minio-deployment-desc
 
@@ -29,7 +29,7 @@ For existing MinIO Deployments, you can modify the existing environment file and
 The following commands create two TLS certificates that expire within 30 days of creation:
 
 - A TLS certificate to secure communications between KES and the KMS.
-- A TLS certificate for MinIO to perform mTLS authentication to KES.
+- A TLS certificate for Buckit to perform mTLS authentication to KES.
 
 .. admonition:: Use Caution in Production Environments
    :class: important
@@ -59,14 +59,14 @@ The following commands create two TLS certificates that expire within 30 days of
      --dns  localhost
 
 The ``--ip`` and ``--dns`` parameters set the IP and DNS ``SubjectAlternativeName`` for the certificate.
-The above example assumes that all components (KMS, MinIO, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
+The above example assumes that all components (KMS, Buckit, and KES) deploy on the same local host machine accessible via ``localhost`` or ``127.0.0.1``.
 You can specify additional IP or Hostnames based on the network configuration of your local host.
 
 .. end-kes-generate-kes-certs-desc
 
 .. start-kes-minio-start-server-desc
 
-Run the following command in a terminal or shell to start the MinIO server as a foreground process.
+Run the following command in a terminal or shell to start the Buckit server as a foreground process.
 
 .. code-block:: shell
    :class: copyable
@@ -97,7 +97,7 @@ Versions 0.20.0 and earlier required specifying the ``--mlock`` argument to KES.
 
 The second command starts the KES server in the foreground using the configuration file created in the last step. 
 The ``--auth=off`` disables strict validation of client TLS certificates.
-Using self-signed certificates for either the MinIO client or the root KMS server requires specifying this option.
+Using self-signed certificates for either the Buckit client or the root KMS server requires specifying this option.
 
 |KES| listens on port ``7373`` by default. 
 You can monitor the server logs from the terminal session. 
@@ -107,10 +107,10 @@ If you run |KES| without tying it to the current shell session (for example, wit
 
 .. start-kes-generate-key-desc
 
-MinIO requires that the |EK| exist on the KMS *before* performing |SSE| operations using that key. 
+Buckit requires that the |EK| exist on the KMS *before* performing |SSE| operations using that key. 
 Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the KMS server for use with encrypting the MinIO backend.
+The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the KMS server for use with encrypting the Buckit backend.
 
 .. code-block:: shell
    :class: copyable
@@ -121,8 +121,8 @@ The following command uses the :mc-cmd:`mc admin kms key create` command to add 
 
 .. start-kes-configuration-minio-desc
 
-Add the following lines to the MinIO Environment file on each MinIO host.
-See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for more detailed descriptions of a base MinIO environment file.
+Add the following lines to the Buckit Environment file on each Buckit host.
+See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd` for more detailed descriptions of a base Buckit environment file.
 
 .. code-block:: shell
    :class: copyable
@@ -141,14 +141,14 @@ See the tutorials for :ref:`minio-snsd`, :ref:`minio-snmd`, or :ref:`minio-mnmd`
    MINIO_KMS_KES_KEY_NAME=minio-backend-default-key
 
 Replace ``HOSTNAME`` with the IP address or hostname of the KES server.
-If the MinIO server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
+If the Buckit server host machines cannot resolve or reach the specified ``HOSTNAME``, the deployment may return errors or fail to start.
 
 - If using a single KES server host, specify the IP or hostname of that host
 - If using multiple KES server hosts, specify a comma-separated list of IPs or hostnames of each host
 
-MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
+Buckit uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptographic operations:
 
-- Encrypting the MinIO backend (IAM, configuration, etc.)
+- Encrypting the Buckit backend (IAM, configuration, etc.)
 - Encrypting objects using :ref:`SSE-KMS <minio-encryption-sse-kms>` if the request does not include a specific |EK|.
 - Encrypting objects using :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
@@ -156,11 +156,11 @@ MinIO uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptograp
 
 .. start-kes-enable-sse-kms-desc
 
-Use the MinIO :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+Use the Buckit :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
 
 The following commands:
 
-- Create a new :ref:`alias <alias>` for the MinIO deployment
+- Create a new :ref:`alias <alias>` for the Buckit deployment
 - Create a new bucket for storing encrypted data
 - Enable SSE-KMS encryption on that bucket
 
@@ -211,19 +211,19 @@ Specify the full path for both the private ``.key`` and public ``.cert`` to the 
 
 Specify one or more :minio-git:`policies <kes/wiki/Configuration#policy-configuration>` to control access to the KES server.
 
-MinIO |SSE| requires access to the following KES cryptographic APIs:
+Buckit |SSE| requires access to the following KES cryptographic APIs:
 
 - ``/v1/key/create/*``
 - ``/v1/key/generate/*``
 - ``/v1/key/decrypt/*``
 
-Specifying additional keys does not expand MinIO |SSE| functionality and may violate security best practices around providing unnecessary client access to cryptographic key operations.
+Specifying additional keys does not expand Buckit |SSE| functionality and may violate security best practices around providing unnecessary client access to cryptographic key operations.
 
-You can restrict the range of key names MinIO can create as part of performing |SSE| by specifying a prefix before the ``*``. 
+You can restrict the range of key names Buckit can create as part of performing |SSE| by specifying a prefix before the ``*``. 
 For example, ``minio-sse-*`` only grants access to create, generate, or decrypt keys using the ``minio-sse-`` prefix.
 
 |KES| uses mTLS to authorize connecting clients by comparing the hash of the TLS certificate against the ``identities`` of each configured policy. 
-Use the ``kes identity of`` command to compute the identity of the MinIO mTLS certificate and add it to the ``policy.<NAME>.identities`` array to associate MinIO to the ``<NAME>`` policy. 
+Use the ``kes identity of`` command to compute the identity of the Buckit mTLS certificate and add it to the ``policy.<NAME>.identities`` array to associate Buckit to the ``<NAME>`` policy. 
 
 .. end-kes-conf-policy-desc
 
@@ -248,7 +248,7 @@ KES does not accept any client requests until it completes validation of all spe
 
 .. important::
 
-   The MinIO KES ``Play`` sandbox is public and grants root access to all created External Keys (EK). 
+   The Buckit KES ``Play`` sandbox is public and grants root access to all created External Keys (EK). 
    Any |EK| stored on the ``Play`` sandbox may be accessed or destroyed at any time, rendering protected data vulnerable or permanently unreadable. 
    
    - **Never** use the ``Play`` sandbox to protect data you cannot afford to lose or reveal.

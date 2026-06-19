@@ -1,7 +1,7 @@
 .. _minio-lifecycle-management-transition-to-minio:
 
 =============================================
-Transition Objects to Remote MinIO Deployment
+Transition Objects to Remote Buckit Deployment
 =============================================
 
 .. default-domain:: minio
@@ -10,8 +10,8 @@ Transition Objects to Remote MinIO Deployment
    :local:
    :depth: 2
 
-The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary MinIO deployment to a bucket on a remote MinIO deployment.
-This procedure supports cost-management strategies such as tiering objects from a "hot" MinIO deployment using NVMe storage to a "warm" MinIO deployment using SSD.
+The procedure on this page creates a new object lifecycle management rule that transitions objects from a bucket on a primary Buckit deployment to a bucket on a remote Buckit deployment.
+This procedure supports cost-management strategies such as tiering objects from a "hot" Buckit deployment using NVMe storage to a "warm" Buckit deployment using SSD.
 
 .. todo: diagram
 
@@ -21,12 +21,12 @@ Requirements
 Install and Configure ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the MinIO cluster.
+This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
 Install :mc:`mc` on a machine with network access to both source and destination
 clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
 instructions on downloading and installing ``mc``.
 
-Use the :mc:`mc alias set` command to create an alias for the source MinIO cluster.
+Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-minio-permissions>` for configuring and
@@ -34,16 +34,16 @@ applying transition operations.
 
 .. _minio-lifecycle-management-transition-to-minio-permissions:
 
-Required Source MinIO Permissions
+Required Source Buckit Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to the bucket or buckets 
+Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
 - :policy-action:`s3:GetLifecycleConfiguration`
 
-MinIO also requires the following administrative permissions on the cluster
+Buckit also requires the following administrative permissions on the cluster
 in which you are creating remote tiers for object transition lifecycle
 management rules:
 
@@ -59,22 +59,22 @@ transition lifecycle management rules on any bucket in the cluster:
 
 .. _minio-lifecycle-management-transition-to-minio-permissions-remote:
 
-Required Remote MinIO Permissions
+Required Remote Buckit Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Object transition lifecycle management rules require additional permissions
-on the remote storage tier. Specifically, MinIO requires the remote
+on the remote storage tier. Specifically, Buckit requires the remote
 tier credentials provide read, write, list, and delete permissions for the
 remote bucket.
 
-For example, the following policy on the remote MinIO deployment provides the necessary permission
+For example, the following policy on the remote Buckit deployment provides the necessary permission
 for transitioning objects into and out of the remote tier:
 
 .. literalinclude:: /extra/examples/LifecycleManagementUser.json
    :language: json
    :class: copyable
 
-Modify the ``Resource`` for the bucket into which MinIO tiers objects.
+Modify the ``Resource`` for the bucket into which Buckit tiers objects.
 
 Refer to the :ref:`minio-policy` documentation for more complete guidance on configuring the required permissions.
 
@@ -91,7 +91,7 @@ Considerations
 Lifecycle Management Object Scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
+Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
 lifecycle management rules. Slow scanning due to high IO workloads or
 limited system resources may delay application of lifecycle management rules.
 
@@ -124,7 +124,7 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add the remote MinIO deployment as the
+Use the :mc:`mc ilm tier add` command to add the remote Buckit deployment as the
 new remote storage tier:
 
 .. code-block:: shell
@@ -150,19 +150,19 @@ The example above uses the following arguments:
      - Description
    
    * - :mc-cmd:`ALIAS <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the MinIO deployment on which to configure
-       the MinIO remote tier.
+     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
+       the Buckit remote tier.
    
    * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
-     - The name to associate with the new MinIO remote storage tier. Specify the
+     - The name to associate with the new Buckit remote storage tier. Specify the
        name in all-caps, e.g. ``MINIO_WARM_TIER``. This value is required in the next
        step.
 
    * - :mc-cmd:`HOSTNAME <mc ilm tier add --endpoint>`
-     - The URL endpoint for the MinIO storage backend.
+     - The URL endpoint for the Buckit storage backend.
 
    * - :mc-cmd:`ACCESS_KEY <mc ilm tier add --access-key>`
-     - The access key MinIO uses to access the bucket. The
+     - The access key Buckit uses to access the bucket. The
        access key *must* correspond to an IAM user with the 
        required 
        :ref:`permissions 
@@ -172,33 +172,33 @@ The example above uses the following arguments:
      - The corresponding secret key for the specified ``ACCESS_KEY``.
 
    * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
-     - The name of the bucket on the remote MinIO deployment to which the ``SOURCE``
+     - The name of the bucket on the remote Buckit deployment to which the ``SOURCE``
        transitions objects.
 
    * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
-     - The optional bucket prefix within which MinIO transitions objects.
+     - The optional bucket prefix within which Buckit transitions objects.
 
-       MinIO stores all transitioned objects in the specified ``BUCKET`` under a
+       Buckit stores all transitioned objects in the specified ``BUCKET`` under a
        unique per-deployment prefix value. Omit this argument to use only that
        value for isolating and organizing data within the remote storage.
 
-       MinIO recommends specifying this optional prefix for remote storage tiers
-       which contain other data, including transitioned objects from other MinIO
+       Buckit recommends specifying this optional prefix for remote storage tiers
+       which contain other data, including transitioned objects from other Buckit
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to facilitate ease of operations related to
+       source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
-     - The :ref:`Erasure Coding storage class <minio-ec-storage-class>` MinIO applies to objects transitions to the remote MinIO bucket. 
+     - The :ref:`Erasure Coding storage class <minio-ec-storage-class>` Buckit applies to objects transitions to the remote Buckit bucket. 
        Specify one of the following supported storage classes:
 
        - ``STANDARD`` *Recommended*
        - ``REDUCED``
 
    * - :mc-cmd:`REGION <mc ilm tier add --region>`
-     - The MinIO region of the specified ``BUCKET``.
+     - The Buckit region of the specified ``BUCKET``.
 
-       MinIO deployments typically do not require setting a region as part of setup.
+       Buckit deployments typically do not require setting a region as part of setup.
        Only include this option if you explicitly set the ``MINIO_SITE_REGION`` configuration setting for the deployment.
 
 3) Create and Apply the Transition Rule
@@ -221,7 +221,7 @@ rules:
    mc ilm rule ls ALIAS/PATH --transition
 
 - Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
-  of the MinIO deployment.
+  of the Buckit deployment.
 
 - Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

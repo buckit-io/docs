@@ -1,11 +1,11 @@
-1. Start MinIO with an FTP and/or SFTP port enabled.
+1. Start Buckit with an FTP and/or SFTP port enabled.
 
    .. tab-set::
 
       .. tab-item:: FTPS
          :sync: ftps
 
-         The following example starts MinIO with FTPS enabled.
+         The following example starts Buckit with FTPS enabled.
 
          .. code-block:: shell
             :class: copyable
@@ -19,8 +19,8 @@
 
          .. note:: 
 
-            Omit ``tls-private-key`` and ``tls-public-cert`` to use the MinIO default TLS keys for FTPS.
-            For more information, see the :ref:`TLS on MinIO documentation <minio-tls>`.
+            Omit ``tls-private-key`` and ``tls-public-cert`` to use the Buckit default TLS keys for FTPS.
+            For more information, see the :ref:`TLS on Buckit documentation <minio-tls>`.
 
       .. tab-item:: SFTP/FTP
          :sync: sftp
@@ -35,25 +35,25 @@
             --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
             ...
     
-         See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the MinIO service.
-         To connect to the an FTP port with TLS (FTPS), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the MinIO default TLS keys.
+         See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the Buckit service.
+         To connect to the an FTP port with TLS (FTPS), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the Buckit default TLS keys.
 
          The output of the command should return a response that resembles the following:
 
          .. code-block:: shell
 
-            MinIO FTP Server listening on :8021
-            MinIO SFTP Server listening on :8022
+            Buckit FTP Server listening on :8021
+            Buckit SFTP Server listening on :8022
 
-2. Use your preferred FTP client to connect to the MinIO deployment.
+2. Use your preferred FTP client to connect to the Buckit deployment.
    You must connect as a user whose :ref:`policies <minio-policy>` allow access to the desired buckets and objects.
 
-   The specifics of connecting to the MinIO deployment depend on your FTP client.
+   The specifics of connecting to the Buckit deployment depend on your FTP client.
    Refer to the documentation for your client.
 
    To connect over TLS or through SSH, you must use a client that supports the desired protocol.
 
-3. Connect to MinIO
+3. Connect to Buckit
 
    .. tab-set::
 
@@ -75,13 +75,13 @@
       .. tab-item:: FTPS
          :sync: ftps
 
-         The following uses the Linux uses the `FTP CLI client <https://linux.die.net/man/1/ftp>`__ to connect to the MinIO server using ``minio`` credentials to list contents in a bucket named ``runner``
+         The following uses the Linux uses the `FTP CLI client <https://linux.die.net/man/1/ftp>`__ to connect to the Buckit server using ``minio`` credentials to list contents in a bucket named ``runner``
 
          .. code-block:: shell
 
             > ftp localhost -P 8021
             Connected to localhost.
-            220 Welcome to MinIO FTP Server
+            220 Welcome to Buckit FTP Server
             Name (localhost:user): minio
             331 User name ok, password required
             Password:
@@ -126,7 +126,7 @@
 
             > ftp localhost -P 8021
             Connected to localhost.
-            220 Welcome to MinIO FTP Server
+            220 Welcome to Buckit FTP Server
             Name (localhost:user): minio
             331 User name ok, password required
             Password:

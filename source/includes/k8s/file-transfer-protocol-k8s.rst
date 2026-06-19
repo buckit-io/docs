@@ -23,7 +23,7 @@
             features:
                enableSFTP: true
 
-      Kubectl restarts MinIO to apply the change.
+      Kubectl restarts Buckit to apply the change.
 
       You may also set ``enableSFTP`` in your `Helm chart <https://github.com/minio/operator/blob/8385948929bc95648d1be82d96f829c810519674/helm/tenant/values.yaml>`__ or `Kustomize configuration <https://github.com/minio/operator/blob/8385948929bc95648d1be82d96f829c810519674/examples/kustomization/base/tenant.yaml>`__ to enable SFTP for newly created Tenants.
 	 
@@ -47,13 +47,13 @@
 
       enableSFTP: true
 
-#. Use your preferred SFTP client to connect to the MinIO deployment.
+#. Use your preferred SFTP client to connect to the Buckit deployment.
    You must connect as a user whose :ref:`policies <minio-policy>` allow access to the desired buckets and objects.
 
-   The specifics of connecting to the MinIO deployment depend on your SFTP client.
+   The specifics of connecting to the Buckit deployment depend on your SFTP client.
    Refer to the documentation for your client.
 
-   The following example connects to the MinIO Tenant SFTP server forwarded to the local host system, and lists the contents of a bucket named ``runner``.
+   The following example connects to the Buckit Tenant SFTP server forwarded to the local host system, and lists the contents of a bucket named ``runner``.
 
          .. code-block:: console
 

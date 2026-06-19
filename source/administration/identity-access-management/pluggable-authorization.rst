@@ -1,7 +1,7 @@
 .. _minio-external-access-management-plugin:
 
 =======================================
-MinIO External Access Management Plugin
+Buckit External Access Management Plugin
 =======================================
 
 .. default-domain:: minio
@@ -14,21 +14,21 @@ MinIO External Access Management Plugin
 Overview
 --------
 
-The MinIO Access Management Plugin provides a ``REST`` interface for offloading authorization through a webhook service.
+The Buckit Access Management Plugin provides a ``REST`` interface for offloading authorization through a webhook service.
 
-Once enabled, MinIO sends the request and credential details for every API call to the configured external HTTP(S) endpoint and looks for a response of ``ALLOW`` or ``DENY``.
-MinIO can therefore delegate the access management to the external system instead of relying on S3 :ref:`policy based access control <minio-policy>`.
+Once enabled, Buckit sends the request and credential details for every API call to the configured external HTTP(S) endpoint and looks for a response of ``ALLOW`` or ``DENY``.
+Buckit can therefore delegate the access management to the external system instead of relying on S3 :ref:`policy based access control <minio-policy>`.
 
 Configuration Settings
 ----------------------
 
-You can configure the MinIO External Access Management Plugin using the following environment variables or configuration settings.
+You can configure the Buckit External Access Management Plugin using the following environment variables or configuration settings.
 
 .. tab-set::
 
    .. tab-item:: Environment Variables
 
-      Specify the following :ref:`environmental variables <minio-server-envvar-external-access-management-plugin>` to each MinIO server in the deployment:
+      Specify the following :ref:`environmental variables <minio-server-envvar-external-access-management-plugin>` to each Buckit server in the deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -64,11 +64,11 @@ The login flow for an application is as follows:
 
 2. The configured Identity Manager authenticates the client
 
-3. MinIO makes a ``POST`` call to the configured access management plugin URL which includes the context of the API call and authentication data
+3. Buckit makes a ``POST`` call to the configured access management plugin URL which includes the context of the API call and authentication data
 
 4. On successful authorization, the access manager returns a ``200 OK`` response with a JSON body of either ``result true`` or ``"result" : { "allow" : true }``:
 
-If the access manager rejects the authorization request, MinIO automatically blocks and denies the API call.
+If the access manager rejects the authorization request, Buckit automatically blocks and denies the API call.
 
 Request Body Example
 --------------------
@@ -96,8 +96,8 @@ The following JSON resembles the request body sent as part of the POST to the co
             "Referer": [ "" ],
             "SecureTransport": [ "false" ],
             "SourceIp": [ "127.0.0.1" ],
-            "User-Agent": [ "MinIO (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z" ],
-            "UserAgent": [ "MinIO (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z" ],
+            "User-Agent": [ "Buckit (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z" ],
+            "UserAgent": [ "Buckit (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z" ],
             "X-Amz-Content-Sha256": [ "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" ],
             "X-Amz-Date": [ "20220507T183141Z" ],
             "authType": [ "REST-HEADER" ],
@@ -117,7 +117,7 @@ The following JSON resembles the request body sent as part of the POST to the co
 Response Body Example
 ---------------------
 
-MinIO requires the response body from the Access Management service meet one of the two following formats:
+Buckit requires the response body from the Access Management service meet one of the two following formats:
 
 .. code-block:: json
 

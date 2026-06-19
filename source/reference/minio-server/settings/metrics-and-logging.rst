@@ -10,7 +10,7 @@ Metrics and Logging Settings
    :local:
    :depth: 2
 
-This page covers settings that control behavior related to MinIO metrics and logging. 
+This page covers settings that control behavior related to Buckit metrics and logging. 
 See :ref:`minio-metrics-and-alerts` for more information.
 
 These settings configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
@@ -31,7 +31,7 @@ See :ref:`minio-logging` for more complete documentation.
 Prometheus Authentication
 -------------------------
 
-This setting controls how MinIO authenticates to Prometheus.
+This setting controls how Buckit authenticates to Prometheus.
 
 .. tab-set::
 
@@ -48,10 +48,10 @@ This setting controls how MinIO authenticates to Prometheus.
 
 Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <minio-metrics-and-alerts>`.
 
-- ``jwt`` - *Default* MinIO requires that the scraping client specify a JWT token for authenticating requests. 
+- ``jwt`` - *Default* Buckit requires that the scraping client specify a JWT token for authenticating requests. 
    Use :mc-cmd:`mc admin prometheus generate` to generate the necessary JWT bearer tokens.
 
-- ``public`` MinIO does not require that scraping clients authenticate their requests.
+- ``public`` Buckit does not require that scraping clients authenticate their requests.
 
 .. _minio-server-envvar-logging-regular:
 .. _minio-server-config-logging-regular:
@@ -59,7 +59,7 @@ Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <m
 Server Logs
 -----------
 
-The following section documents settings for configuring MinIO to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
+The following section documents settings for configuring Buckit to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
 See :ref:`minio-logging-publish-server-logs` for more complete documentation and tutorials on using these settings.
 
 Defining Multiple Endpoints
@@ -155,7 +155,7 @@ Auth Token
       An authentication token of the appropriate type for the endpoint.
       Omit for endpoints which do not require authentication.
    
-      To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+      To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
       Depending on the endpoint, you may need to include additional information.
    
       For example: for a Bearer token, prepend ``Bearer``:
@@ -186,7 +186,7 @@ Auth Token
          An authentication token of the appropriate type for the endpoint.
          Omit for endpoints which do not require authentication.
    
-         To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+         To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
          Depending on the endpoint, you may need to include additional information.
    
          For example: for a Bearer token, prepend ``Bearer``:
@@ -213,7 +213,7 @@ Auth Token
 Batch Size
 ++++++++++
 
-.. versionadded:: MinIO Server RELEASE.2024-03-10T02-53-48Z
+.. versionadded:: Buckit Server RELEASE.2024-03-10T02-53-48Z
 
 *Optional*
 
@@ -231,7 +231,7 @@ Batch Size
          :delimiter: " "
 
 Collect and send the specified number of events to the webhook as a batch.
-If not set, MinIO sends one event per request.
+If not set, Buckit sends one event per request.
 
 Client Certificate
 ++++++++++++++++++
@@ -295,9 +295,9 @@ Proxy
       .. mc-conf:: logger_webhook proxy
          :delimiter: " "
 
-      .. versionadded:: MinIO RELEASE.2023-02-22T18-23-45Z 
+      .. versionadded:: Buckit RELEASE.2023-02-22T18-23-45Z 
 
-Define a proxy to use for the webhook logger when communicating from MinIO to external webhooks.
+Define a proxy to use for the webhook logger when communicating from Buckit to external webhooks.
 
 Queue Directory
 +++++++++++++++
@@ -319,10 +319,10 @@ Queue Directory
       .. mc-conf:: logger_webhook queue_dir
          :delimiter: " "
 
-Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-The MinIO process must have read, write, and list access on the specified directory.
+Specify the directory path, such as ``/opt/minio/events``, to enable Buckit's persistent event store for undelivered messages.
+The Buckit process must have read, write, and list access on the specified directory.
 
-MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
  
 Queue Size
 ++++++++++
@@ -350,7 +350,7 @@ An integer value to use for the queue size for logger webhook targets.
 Webhook Audit Logs
 ------------------
 
-The following section documents environment variables for configuring MinIO to publish audit logs to an HTTP webhook endpoint. 
+The following section documents environment variables for configuring Buckit to publish audit logs to an HTTP webhook endpoint. 
 See :ref:`minio-logging-publish-audit-logs` for more complete documentation and tutorials on using these environment variables.
 
 Multiple Targets
@@ -386,7 +386,7 @@ For example, the following commands set two distinct audit log webhook endpoints
       .. mc-conf:: audit_webhook
       
          The top-level configuration key for defining an HTTP webhook target for
-         publishing :ref:`MinIO audit logs <minio-logging>`. 
+         publishing :ref:`Buckit audit logs <minio-logging>`. 
       
          Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
          Specify additional optional arguments as a whitespace (``" "``)-delimited 
@@ -476,7 +476,7 @@ Auth Token
 An authentication token of the appropriate type for the endpoint.
 Omit for endpoints which do not require authentication.
 
-To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
 Depending on the endpoint, you may need to include additional information.
 
 .. tab-set::
@@ -526,7 +526,7 @@ Consult the documentation for the desired service for more details.
 Batch Size
 ++++++++++
 
-.. versionadded:: MinIO Server RELEASE.2024-03-10T02-53-48Z
+.. versionadded:: Buckit Server RELEASE.2024-03-10T02-53-48Z
 
 *Optional*
 
@@ -545,7 +545,7 @@ Batch Size
          :delimiter: " "
 
 Collect and send the specified number of events to the webhook as a batch.
-If not set, MinIO sends one event per request.
+If not set, Buckit sends one event per request.
 
 Client Certificate
 ++++++++++++++++++
@@ -618,10 +618,10 @@ Queue Directory
 
 .. versionadded:: RELEASE.2023-05-18T00-05-36Z
 
-Specify the directory path, such as ``/opt/minio/events``, to enable MinIO's persistent event store for undelivered messages.
-The MinIO process must have read, write, and list access on the specified directory.
+Specify the directory path, such as ``/opt/minio/events``, to enable Buckit's persistent event store for undelivered messages.
+The Buckit process must have read, write, and list access on the specified directory.
 
-MinIO stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the webhook service is offline and replays the stored events when connectivity resumes.
 
 Queue Size
 ++++++++++
@@ -650,12 +650,12 @@ The default is ``100000`` events.
 Kafka Audit Logs
 ----------------
 
-The following section documents environment variables for configuring MinIO to publish audit logs to a Kafka broker.
+The following section documents environment variables for configuring Buckit to publish audit logs to a Kafka broker.
 
 
 .. mc-conf:: audit_kafka
 
-   The top-level configuration key for defining a Kafka broker target for publishing :ref:`MinIO audit logs <minio-logging>`.
+   The top-level configuration key for defining a Kafka broker target for publishing :ref:`Buckit audit logs <minio-logging>`.
 
    Use :mc-cmd:`mc admin config set` to set or update a Kafka audit target.
    Specify additional optional arguments as a whitespace (``" "``)-delimited list.
@@ -715,8 +715,8 @@ A comma-separated list of Kafka broker addresses:
 
    brokers="https://kafka-1.example.net:9092,https://kafka-2.example.net:9092"
 
-At least one broker must be online and reachable by the MinIO server to initialize and send audit log events.
-MinIO checks each specified broker in order of specification.
+At least one broker must be online and reachable by the Buckit server to initialize and send audit log events.
+Buckit checks each specified broker in order of specification.
 
 Topic
 +++++
@@ -736,7 +736,7 @@ Topic
       .. mc-conf:: audit_kafka topic
          :delimiter: " "
 
-The name of the Kafka topic to associate to MinIO audit log events.
+The name of the Kafka topic to associate to Buckit audit log events.
 
 TLS
 +++
@@ -778,11 +778,11 @@ TLS Skip Verify
       .. mc-conf:: audit_kafka tls_skip_verify
          :delimiter: " "
 
-Set to ``"on"`` to direct MinIO to skip verification of the Kafka broker TLS certificates.
+Set to ``"on"`` to direct Buckit to skip verification of the Kafka broker TLS certificates.
 
 You can use this option for enabling connectivity to Kafka brokers using TLS certificates signed by unknown parties, such as self-signed or corporate-internal Certificate Authorities (CA).
 
-MinIO by default uses the system trust store *and* the contents of the MinIO :ref:`CA directory <minio-tls>` for verifying remote client TLS certificates.
+Buckit by default uses the system trust store *and* the contents of the Buckit :ref:`CA directory <minio-tls>` for verifying remote client TLS certificates.
 
 Defaults to ``"off"`` for strict verification of TLS certificates.
 
@@ -808,7 +808,7 @@ SASL
 
       Requires specifying :mc-conf:`~audit_kafka.sasl_username` and :mc-conf:`~audit_kafka.sasl_password`.
 
-Set to ``"on"`` to direct MinIO to use SASL to authenticate against the Kafka brokers.
+Set to ``"on"`` to direct Buckit to use SASL to authenticate against the Kafka brokers.
 
 SASL Username
 +++++++++++++
@@ -832,7 +832,7 @@ SASL Username
 
       Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_password`.
 
-The SASL username MinIO uses for authentication against the Kafka brokers.
+The SASL username Buckit uses for authentication against the Kafka brokers.
 
 SASL Password
 +++++++++++++
@@ -856,7 +856,7 @@ SASL Password
 
       Requires specifying :mc-conf:`~audit_kafka.sasl` and :mc-conf:`~audit_kafka.sasl_username`.
 
-The SASL password MinIO uses for authentication against the Kafka brokers.
+The SASL password Buckit uses for authentication against the Kafka brokers.
 
 SASL Mechanism
 ++++++++++++++
@@ -886,7 +886,7 @@ SASL Mechanism
          The ``PLAIN`` authentication mechanism sends credentials in plain text over the network.
          Use :mc-conf:`~audit_kafka.tls` to enable TLS connectivity to the Kafka brokers and ensure secure transmission of SASL credentials.
 
-The SASL mechanism MinIO uses for authentication against the Kafka brokers.
+The SASL mechanism Buckit uses for authentication against the Kafka brokers.
 
 Defaults to ``plain``.
 
@@ -912,7 +912,7 @@ TLS  Client Auth
 
       Requires specifying :mc-conf:`~audit_kafka.client_tls_cert` and :mc-conf:`~audit_kafka.client_tls_key`.
 
-Set to ``"on"`` to direct MinIO to use mTLS to authenticate against the Kafka brokers.
+Set to ``"on"`` to direct Buckit to use mTLS to authenticate against the Kafka brokers.
 
 Client TLS Certificate
 ++++++++++++++++++++++
@@ -972,9 +972,9 @@ Version
       .. mc-conf:: audit_kafka version
          :delimiter: " "
 
-The version of the Kafka broker MinIO expects at the specified endpoints.
+The version of the Kafka broker Buckit expects at the specified endpoints.
 
-MinIO returns an error if the Kakfa broker version does not match those specified to this setting.
+Buckit returns an error if the Kakfa broker version does not match those specified to this setting.
 
 Comment
 +++++++
@@ -1014,9 +1014,9 @@ Queue Directory
       .. mc-conf:: audit_kafka queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the Kafka service is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the Kafka service is offline and replays the stored events when connectivity resumes.
 
 Queue Size
 ++++++++++

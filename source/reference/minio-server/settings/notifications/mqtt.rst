@@ -87,7 +87,7 @@ Enable
 
       .. mc-conf:: notify_mqtt
 
-      The top-level configuration key for defining an MQTT server/broker endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an MQTT server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an MQTT server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
@@ -128,7 +128,7 @@ Broker
          :delimiter: " "
 
 Specify the MQTT server/broker endpoint. 
-MinIO supports TCP, TLS, or Websocket connections to the server/broker URL. 
+Buckit supports TCP, TLS, or Websocket connections to the server/broker URL. 
 For example:
 
 - ``tcp://mqtt.example.net:1883``
@@ -157,7 +157,7 @@ Topic
       .. mc-conf:: notify_mqtt topic
          :delimiter: " "
 
-Specify the name of the MQTT topic to associate with events published by MinIO to the MQTT endpoint.
+Specify the name of the MQTT topic to associate with events published by Buckit to the MQTT endpoint.
 
 Username
 ~~~~~~~~
@@ -177,7 +177,7 @@ Username
       .. mc-conf:: notify_mqtt username
          :delimiter: " "
 
-Specify the MQTT username MinIO should use to authenticate to the MQTT server/broker.
+Specify the MQTT username Buckit should use to authenticate to the MQTT server/broker.
 
 Password
 ~~~~~~~~
@@ -197,11 +197,11 @@ Password
       .. mc-conf:: notify_mqtt password
          :delimiter: " "
 
-Specify the password for the MQTT username MinIO uses to authenticate to the MQTT server/broker.
+Specify the password for the MQTT username Buckit uses to authenticate to the MQTT server/broker.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 Quality of Service
 ~~~~~~~~~~~~~~~~~~
@@ -243,7 +243,7 @@ Keep Alive Interval
       .. mc-conf:: notify_mqtt keep_alive_interval
          :delimiter: " "
 
-Specify the keep-alive interval for the MQTT connections. MinIO 
+Specify the keep-alive interval for the MQTT connections. Buckit 
 supports the following units of time measurement:
 
 - ``s`` - seconds, "60s"
@@ -269,7 +269,7 @@ Reconnect Interval
       .. mc-conf:: notify_mqtt reconnect_interval
          :delimiter: " "
 
-Specify the reconnect interval for the MQTT connections. MinIO 
+Specify the reconnect interval for the MQTT connections. Buckit 
 supports the following units of time measurement:
 
 - ``s`` - seconds, "60s"
@@ -295,9 +295,9 @@ Queue Directory
       .. mc-conf:: notify_mqtt queue_dir 
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the MQTT server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the MQTT server/broker is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

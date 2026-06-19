@@ -11,7 +11,7 @@ Automatic Object Expiration
    :depth: 2
 
 Each procedure on this page creates a new object lifecycle management rule that
-expires objects on a MinIO bucket. This procedure supports use cases like
+expires objects on a Buckit bucket. This procedure supports use cases like
 removing "old" objects after a certain time period or calendar date.
 
 .. todo: diagram
@@ -22,12 +22,12 @@ Requirements
 Install and Configure ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the MinIO cluster.
+This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
 Install :mc:`mc` on a machine with network access to both source and destination
 clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
 instructions on downloading and installing ``mc``.
 
-Use the :mc:`mc alias set` command to create an alias for the source MinIO cluster
+Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster
 and the destination S3-compatible service. Alias creation requires specifying an
 access key for a user on the source and destination clusters. The specified
 users must have :ref:`permissions
@@ -39,13 +39,13 @@ and applying expiry operations.
 Required Permissions
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to the bucket or buckets 
+Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
 - :policy-action:`s3:GetLifecycleConfiguration`
 
-MinIO also requires the following administrative permissions on the cluster
+Buckit also requires the following administrative permissions on the cluster
 in which you are creating remote tiers for object transition lifecycle
 management rules:
 

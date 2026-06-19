@@ -1,4 +1,4 @@
-You can install the MinIO plugin using either the Kubernetes Krew plugin manager or manually by downloading and installing the plugin binary to your local host:
+You can install the Buckit plugin using either the Kubernetes Krew plugin manager or manually by downloading and installing the plugin binary to your local host:
 
 .. tab-set::
 
@@ -8,7 +8,7 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
       See the ``krew`` `installation documentation <https://krew.sigs.k8s.io/docs/user-guide/setup/install/>`__ for specific instructions.
       You can use the Krew plugin for Linux, macOS, and Windows operating systems.
 
-      You can use Krew to install the MinIO ``kubectl`` plugin using the following commands:
+      You can use Krew to install the Buckit ``kubectl`` plugin using the following commands:
 
       .. code-block:: shell
          :class: copyable
@@ -16,7 +16,7 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
          kubectl krew update
          kubectl krew install minio
 
-      If you want to update the MinIO plugin with Krew, use the following command:
+      If you want to update the Buckit plugin with Krew, use the following command:
 
       .. code-block:: shell
          :class: copyable
@@ -25,10 +25,10 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
    .. tab-item:: Manual (Linux, MacOS)
 
-      You can download the MinIO ``kubectl`` plugin to your local system path.
+      You can download the Buckit ``kubectl`` plugin to your local system path.
       The ``kubectl`` CLI automatically discovers and runs compatible plugins.
 
-      The following code downloads the most recent version of the MinIO Kubernetes plugin and installs it to the system path:
+      The following code downloads the most recent version of the Buckit Kubernetes plugin and installs it to the system path:
 
       .. code-block:: shell
          :substitutions:
@@ -51,10 +51,10 @@ You can install the MinIO plugin using either the Kubernetes Krew plugin manager
 
    .. tab-item:: Manual (Windows)
 
-      You can download the MinIO ``kubectl`` plugin to your local system path.
+      You can download the Buckit ``kubectl`` plugin to your local system path.
       The ``kubectl`` CLI automatically discovers and runs compatible plugins.
 
-      The following PowerShell command downloads the most recent version of the MinIO Kubernetes plugin and installs it to the system path:
+      The following PowerShell command downloads the most recent version of the Buckit Kubernetes plugin and installs it to the system path:
 
       .. code-block:: powershell
          :substitutions:

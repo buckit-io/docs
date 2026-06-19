@@ -2,7 +2,7 @@
 
 .. |OS| replace:: MacOS
 
-This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer.
+This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` Buckit server onto |OS| for early development and evaluation of Buckit Object Storage and its S3-compatible API layer.
 
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
@@ -15,35 +15,35 @@ Prerequisites
 Procedure
 ---------
 
-#. **Install the MinIO Server**
+#. **Install the Buckit Server**
 
    .. include:: /includes/macos/common-installation.rst
       :start-after: start-install-minio-binary-desc
       :end-before: end-install-minio-binary-desc
 
  
-#. **Launch the MinIO Server**
+#. **Launch the Buckit Server**
 
    .. include:: /includes/macos/common-installation.rst
       :start-after: start-run-minio-binary-desc
       :end-before: end-run-minio-binary-desc
 
-#. **Connect your Browser to the MinIO Server**
+#. **Connect your Browser to the Buckit Server**
 
    Access the :ref:`minio-console` by going to a browser (such as Safari) and going to ``https://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
    For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
-   While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
+   While port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
 
-#. `(Optional)` Install the MinIO Client
+#. `(Optional)` Install the Buckit Client
 
-   The :ref:`MinIO Client <minio-client>` allows you to work with your MinIO volume from the commandline.
+   The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit volume from the commandline.
 
    .. tab-set::
 
       .. tab-item:: Homebrew
 
-         Run the following commands to install the latest stable MinIO Client package using `Homebrew <https://brew.sh>`_.
+         Run the following commands to install the latest stable Buckit Client package using `Homebrew <https://brew.sh>`_.
 
          .. code-block:: shell
             :class: copyable
@@ -58,7 +58,7 @@ Procedure
 
       .. tab-item:: Binary (arm64)
 
-         Download the standalone MinIO server for MacOS and make it executable.
+         Download the standalone Buckit server for MacOS and make it executable.
            
          .. code-block:: shell
             :class: copyable
@@ -75,7 +75,7 @@ Procedure
 
       .. tab-item:: Binary (amd64)
 
-         Download the standalone MinIO server for MacOS and make it executable.     
+         Download the standalone Buckit server for MacOS and make it executable.     
 
          .. code-block:: shell
             :class: copyable
@@ -90,7 +90,7 @@ Procedure
             
             mc {command} {flag}
             
-   Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+   Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
 
    .. code-block:: shell
       :class: copyable
@@ -101,9 +101,9 @@ Procedure
    The :mc:`mc alias set` takes four arguments:
 
    - The name of the alias
-   - The hostname or IP address and port of the MinIO server
-   - The Access Key for a MinIO :ref:`user <minio-users>`
-   - The Secret Key for a MinIO :ref:`user <minio-users>`
+   - The hostname or IP address and port of the Buckit server
+   - The Access Key for a Buckit :ref:`user <minio-users>`
+   - The Secret Key for a Buckit :ref:`user <minio-users>`
 
    For additional details about this command, see :ref:`alias`.
 
@@ -112,7 +112,7 @@ Procedure
 Next Steps
 ----------
 
-- :ref:`Connect your applications to MinIO <minio-drivers>`
+- :ref:`Connect your applications to Buckit <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO for Production Environments <deploy-minio-distributed>`
+- :ref:`Deploy Buckit for Production Environments <deploy-minio-distributed>`

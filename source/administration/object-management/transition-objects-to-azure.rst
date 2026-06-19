@@ -1,7 +1,7 @@
 .. _minio-lifecycle-management-transition-to-azure:
 
 ======================================
-Transition Objects from MinIO to Azure
+Transition Objects from Buckit to Azure
 ======================================
 
 .. default-domain:: minio
@@ -11,7 +11,7 @@ Transition Objects from MinIO to Azure
    :depth: 2
 
 The procedure on this page creates a new object lifecycle management rule that
-transition objects from a MinIO bucket to a remote storage tier on the
+transition objects from a Buckit bucket to a remote storage tier on the
 :abbr:`Azure (Microsoft Azure)` storage backend. This procedure supports use
 cases like moving aged data to low-cost public cloud storage solutions after a
 certain time period or calendar date.
@@ -24,12 +24,12 @@ Requirements
 Install and Configure ``mc``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the MinIO cluster.
+This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
 Install :mc:`mc` on a machine with network access to both source and destination
 clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
 instructions on downloading and installing ``mc``.
 
-Use the :mc:`mc alias set` command to create an alias for the source MinIO cluster.
+Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-azure-permissions>` for configuring
@@ -37,16 +37,16 @@ and applying transition operations.
 
 .. _minio-lifecycle-management-transition-to-azure-permissions:
 
-Required MinIO Permissions
+Required Buckit Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO requires the following permissions scoped to the bucket or buckets 
+Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
 
 - :policy-action:`s3:PutLifecycleConfiguration`
 - :policy-action:`s3:GetLifecycleConfiguration`
 
-MinIO also requires the following administrative permissions on the cluster
+Buckit also requires the following administrative permissions on the cluster
 in which you are creating remote tiers for object transition lifecycle
 management rules:
 
@@ -66,7 +66,7 @@ Required Azure Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Object transition lifecycle management rules require additional permissions on
-the remote storage tier. Specifically, MinIO requires the 
+the remote storage tier. Specifically, Buckit requires the 
 :abbr:`Azure (Microsoft Azure)` credentials provide read, write, list, and
 delete permissions for the remote storage account and container.
 
@@ -80,10 +80,10 @@ Remote Storage Account and Container Must Exist
 
 Create the remote :azure-docs:`Azure storage account <storage/common/storage-account-overview>` and container *prior* to configuring lifecycle management tiers or rules using that resource as the target.
 When :azure-docs:`creating the Azure storage account <storage/common/storage-account-create>`, ensure the storage account corresponds to either Standard or Premium blob storage with the locally redundant storage (LRS) redundancy option.
-The Azure Go SDK API used by MinIO does not support any other redundancy options.
+The Azure Go SDK API used by Buckit does not support any other redundancy options.
 
-If you set a Storage Account :azure-docs:`default access tier <storage/blobs/access-tiers-online-manage>`, MinIO uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
-Ensure you document the settings of both your Azure storage account and MinIO tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
+If you set a Storage Account :azure-docs:`default access tier <storage/blobs/access-tiers-online-manage>`, Buckit uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+Ensure you document the settings of both your Azure storage account and Buckit tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
 
 For more information on Azure storage accounts, see :azure-docs:`Storage accounts <storage/common/storage-account-overview#types-of-storage-accounts>`.
 
@@ -99,12 +99,12 @@ Exclusive Access to Remote Data
 
 .. important::
 
-   MinIO does *not* support changing the account name associated to an Azure
+   Buckit does *not* support changing the account name associated to an Azure
    remote tier. Azure storage backends are tied to the account, such that
    changing the account would change the storage backend and prevent access
    to any objects transitioned to the original account/backend.
 
-   Please contact `MinIO Support <https://min.io/pricing?ref=docs>`__ if you need
+   Please contact `Buckit Support <https://min.io/pricing?ref=docs>`__ if you need
    situation-specific guidance around configuring Azure remote tiers.
 
 Availability of Remote Data
@@ -154,7 +154,7 @@ The example above uses the following arguments:
      - Description
    
    * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the MinIO deployment on which to configure
+     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
        the remote tier.
    
    * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
@@ -177,32 +177,32 @@ The example above uses the following arguments:
 
    * - :mc-cmd:`CONTAINER <mc ilm tier add --bucket>`
      - The name of the container on the :abbr:`Azure (Microsoft Azure)` storage
-       backend to which MinIO transitions objects.
+       backend to which Buckit transitions objects.
 
    * - :mc-cmd:`ENDPOINT <mc ilm tier add --endpoint>`
-     - (Optional) The full URL of the Azure blob storage backend to which MinIO transitions objects.  Defaults
+     - (Optional) The full URL of the Azure blob storage backend to which Buckit transitions objects.  Defaults
        to ``https://ACCOUNT.blob.core.windows.net`` if not specified.
 
    * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
-     - The optional container prefix within which MinIO transitions objects.
+     - The optional container prefix within which Buckit transitions objects.
 
-       MinIO stores all transitioned objects in the specified ``BUCKET`` under a
+       Buckit stores all transitioned objects in the specified ``BUCKET`` under a
        unique per-deployment prefix value. Omit this argument to use only that
        value for isolating and organizing data within the remote storage.
 
-       MinIO recommends specifying this optional prefix for remote storage tiers
-       which contain other data, including transitioned objects from other MinIO
+       Buckit recommends specifying this optional prefix for remote storage tiers
+       which contain other data, including transitioned objects from other Buckit
        deployments. This prefix should provide a clear reference back to the
-       source MinIO deployment to facilitate ease of operations related to
+       source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
    * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
-     - The Azure access tier MinIO applies to objects transitioned to the Azure container.
+     - The Azure access tier Buckit applies to objects transitioned to the Azure container.
 
-       MinIO tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
-       MinIO therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
+       Buckit tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
+       Buckit therefore *cannot* support remote storage which requires rehydration, wait periods, or manual intervention.
 
-       The following Azure access tiers meet MinIO's requirements as a remote tier:
+       The following Azure access tiers meet Buckit's requirements as a remote tier:
 
        - ``Hot``
        - ``Cool``
@@ -228,7 +228,7 @@ Use the :mc:`mc ilm rule ls` command to review the configured transition rules:
    mc ilm rule ls ALIAS/PATH --transition
 
 - Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
-  of the MinIO deployment.
+  of the Buckit deployment.
 
 - Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

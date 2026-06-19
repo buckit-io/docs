@@ -11,8 +11,8 @@ Erasure Code Settings
    :local:
    :depth: 2
 
-This page covers settings that configure the :ref:`Erasure Code <minio-erasure-coding>` :ref:`parity <minio-ec-parity>` to use for objects written to the MinIO cluster.
-This impacts how MinIO uses the space on the drive(s) and how MinIO can recover objects stored on lost drives or similar issues.
+This page covers settings that configure the :ref:`Erasure Code <minio-erasure-coding>` :ref:`parity <minio-ec-parity>` to use for objects written to the Buckit cluster.
+This impacts how Buckit uses the space on the drive(s) and how Buckit can recover objects stored on lost drives or similar issues.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -29,10 +29,10 @@ Standard Storage Class
 
 .. note::
 
-   *MinIO Storage Classes* are distinct from *AWS Storage Classes*.
+   *Buckit Storage Classes* are distinct from *AWS Storage Classes*.
 
    AWS Storage Classes refer to the specific storage tier on which to store a given object, such as ``hot`` or ``glacier`` storage.
-   MinIO Storage Classes affect the erasure code parity setting used and relate to :ref:`minio-availability-resiliency` of objects.
+   Buckit Storage Classes affect the erasure code parity setting used and relate to :ref:`minio-availability-resiliency` of objects.
 
    For tiering from one type of storage to another, such as for cost management purposes, see :ref:`minio-lifecycle-management-tiering`.
 
@@ -50,10 +50,10 @@ Standard Storage Class
          :delimiter: " "
 
 The :ref:`parity level <minio-ec-parity>` for the deployment.
-MinIO shards objects written with the default ``STANDARD`` storage class using this parity value.
+Buckit shards objects written with the default ``STANDARD`` storage class using this parity value.
 
-MinIO references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
-The specific syntax or method for setting headers depends on your preferred method for interfacing with the MinIO server.
+Buckit references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
+The specific syntax or method for setting headers depends on your preferred method for interfacing with the Buckit server.
 
 Specify the value using ``EC:M`` notation, where ``M`` refers to the number of parity blocks to create for the object.
 
@@ -89,7 +89,7 @@ The maximum value depends on the erasure set size of the initial server pool in 
 For example, a deployment with erasure set stripe size of 16 has a maximum standard parity of 8.
 
 You can change this value after startup to any value between ``0`` and the upper bound for the erasure set size.
-MinIO only applies the changed parity to newly written objects.
+Buckit only applies the changed parity to newly written objects.
 Existing objects retain the parity value in place at the time of their creation.
 
 Reduced Redundancy Storage Class
@@ -97,10 +97,10 @@ Reduced Redundancy Storage Class
 
 .. note::
 
-   *MinIO Storage Classes* are distinct from *AWS Storage Classes*.
+   *Buckit Storage Classes* are distinct from *AWS Storage Classes*.
 
    AWS Storage Classes refer to the specific storage tier on which to store a given object, such as ``hot`` or ``glacier`` storage.
-   MinIO Storage Classes affect the erasure code parity setting used and relate to :ref:`minio-availability-resiliency` of objects.
+   Buckit Storage Classes affect the erasure code parity setting used and relate to :ref:`minio-availability-resiliency` of objects.
 
    For tiering from one type of storage to another, such as for cost management purposes, see :ref:`minio-lifecycle-management-tiering`.
 
@@ -119,8 +119,8 @@ Reduced Redundancy Storage Class
 
 The :ref:`parity level <minio-ec-parity>` for objects written with the ``REDUCED`` storage class.
 
-MinIO references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
-The specific syntax or method for setting headers depends on your preferred method for interfacing with the MinIO server.
+Buckit references the ``x-amz-storage-class`` header in request metadata for determining which storage class to assign an object. 
+The specific syntax or method for setting headers depends on your preferred method for interfacing with the Buckit server.
 
 Specify the value using ``EC:M`` notation, where ``M`` refers to the number of parity blocks to create for the object.
 
@@ -146,10 +146,10 @@ Parity Retention Optimization
       .. mc-conf:: storage_class optimize
          :delimiter: " "
 
-MinIO by default automatically "upgrades" parity for an object if the destination erasure set maintains write quorum *but* has one or more drives offline.
+Buckit by default automatically "upgrades" parity for an object if the destination erasure set maintains write quorum *but* has one or more drives offline.
 This behavior helps ensure that the given object maintains the same availability as objects written to the healthy erasure set.
 
-Specify ``capacity`` to this setting to direct MinIO to not create any additional parity for the object.
+Specify ``capacity`` to this setting to direct Buckit to not create any additional parity for the object.
 This prioritizes the overall capacity of the cluster at the cost of potentially reduced object availability in the event more drives in that erasure set fail.
 
 Comment

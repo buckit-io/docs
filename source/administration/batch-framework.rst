@@ -15,17 +15,17 @@ Batch Framework
 Overview
 --------
 
-The MinIO Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
-The batch jobs run directly on the MinIO deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`MinIO Client <minio-client>`.
+The Buckit Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
+The batch jobs run directly on the Buckit deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`Buckit Client <minio-client>`.
 
 A batch file defines one job task.
 
-Once started, MinIO starts processing the job.
+Once started, Buckit starts processing the job.
 Time to completion depends on the resources available to the deployment.
 
-If any portion of the job fails, MinIO retries the job up to the number of times defined in the job definition.
+If any portion of the job fails, Buckit retries the job up to the number of times defined in the job definition.
 
-The MinIO Batch Framework supports the following job types:
+The Buckit Batch Framework supports the following job types:
 
 .. list-table:: 
    :header-rows: 1
@@ -36,7 +36,7 @@ The MinIO Batch Framework supports the following job types:
      - Description
 
    * - :ref:`replicate <minio-batch-framework-replicate-job>`
-     - Perform a one-time replication procedure from one MinIO location to another MinIO location.
+     - Perform a one-time replication procedure from one Buckit location to another Buckit location.
 
    * - :ref:`keyrotate <minio-batch-framework-keyrotate-job>`
      - Perform a one-time process to cycle the :ref:`sse-s3 or sse-kms <minio-sse-data-encryption>` cryptographic keys on objects.
@@ -44,11 +44,11 @@ The MinIO Batch Framework supports the following job types:
    * - :ref:`expire <minio-batch-framework-expire-job>`
      - Perform a one-time immediate expiration of objects in a bucket.
 
-MinIO Batch CLI
+Buckit Batch CLI
 ---------------
 
-- Install the :ref:`MinIO Client <minio-client>`
-- Define an :mc:`alias <mc alias set>` for the MinIO deployment
+- Install the :ref:`Buckit Client <minio-client>`
+- Define an :mc:`alias <mc alias set>` for the Buckit deployment
 
 The :mc:`mc batch` commands include
 
@@ -57,27 +57,27 @@ The :mc:`mc batch` commands include
    :width: 90%
 
    * - :mc:`mc batch generate`
-     - .. include:: /reference/minio-mc/mc-batch-generate.rst
+     - .. include:: /reference/bm-cli/bm-batch-generate.rst
           :start-after: start-mc-batch-generate-desc
           :end-before: end-mc-batch-generate-desc
    * - :mc:`mc batch start`
-     - .. include:: /reference/minio-mc/mc-batch-start.rst
+     - .. include:: /reference/bm-cli/bm-batch-start.rst
           :start-after: start-mc-batch-start-desc
           :end-before: end-mc-batch-start-desc
    * - :mc:`mc batch list`
-     - .. include:: /reference/minio-mc/mc-batch-list.rst
+     - .. include:: /reference/bm-cli/bm-batch-list.rst
           :start-after: start-mc-batch-list-desc
           :end-before: end-mc-batch-list-desc
    * - :mc:`mc batch status`
-     - .. include:: /reference/minio-mc/mc-batch-status.rst
+     - .. include:: /reference/bm-cli/bm-batch-status.rst
           :start-after: start-mc-batch-status-desc
           :end-before: end-mc-batch-status-desc
    * - :mc:`mc batch describe`
-     - .. include:: /reference/minio-mc/mc-batch-describe.rst
+     - .. include:: /reference/bm-cli/bm-batch-describe.rst
           :start-after: start-mc-batch-describe-desc
           :end-before: end-mc-batch-describe-desc
    * - :mc:`mc batch cancel`
-     - .. include:: /reference/minio-mc/mc-batch-cancel.rst
+     - .. include:: /reference/bm-cli/bm-batch-cancel.rst
           :start-after: start-mc-batch-cancel-desc
           :end-before: end-mc-batch-cancel-desc
 

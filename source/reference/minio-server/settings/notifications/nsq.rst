@@ -81,7 +81,7 @@ Enable
 
       .. mc-conf:: notify_nsq
 
-      The top-level configuration key for defining an NSQ server/broker endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an NSQ server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
       Use :mc-cmd:`mc admin config set` to set or update an NSQ server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
@@ -144,7 +144,7 @@ Topic
       .. mc-conf:: notify_nsq topic
          :delimiter: " "
 
-Specify the name of the NSQ topic MinIO uses when publishing events to the broker.
+Specify the name of the NSQ topic Buckit uses when publishing events to the broker.
 
 TLS
 ~~~
@@ -207,9 +207,9 @@ Queue Directory
       .. mc-conf:: notify_nsq queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the NSQ server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the NSQ server/broker is offline and replays the stored events when connectivity resumes.
 
 
 Queue Limit

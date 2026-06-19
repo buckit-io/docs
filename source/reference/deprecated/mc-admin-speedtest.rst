@@ -25,13 +25,13 @@ and ``GET`` operations.
 .. end-mc-admin-speedtest-desc
 
 :mc-cmd:`~mc admin speedtest` is available starting with ``mc``
-:mc-release:`RELEASE.2021-09-02T09-21-27Z` and supports distributed MinIO
+:mc-release:`RELEASE.2021-09-02T09-21-27Z` and supports distributed Buckit
 deployments running :minio-release:`RELEASE.2021-07-30T00-02-00Z` or later.
 
-:mc-cmd:`~mc admin speedtest` does not support standalone or MinIO Gateway
+:mc-cmd:`~mc admin speedtest` does not support standalone or Buckit Gateway
 deployments.
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -54,7 +54,7 @@ Syntax
 
    *Required*
 
-   The :mc-cmd:`alias <mc alias>` of a configured MinIO deployment to run the speedtest against.
+   The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment to run the speedtest against.
 
 .. mc-cmd:: --duration
    

@@ -11,7 +11,7 @@ cert-manager for Operator
    :depth: 1
 
 
-MinIO Operator manages TLS certificate issuing for the services hosted in the ``minio-operator`` namespace. 
+Buckit Operator manages TLS certificate issuing for the services hosted in the ``minio-operator`` namespace. 
 
 This page describes how to manage the Operator's TLS certificates with :ref:`cert-manager <minio-certmanager>`.
 
@@ -22,20 +22,20 @@ Prerequisites
 - `kustomize <https://kustomize.io/>`__ installed
 - ``kubectl`` access to your ``k8s`` cluster
 - Completed the steps to :ref:`set up cert-manager <minio-setup-certmanager>`
-- The MinIO Operator must not yet be installed.
+- The Buckit Operator must not yet be installed.
 
 
 1) Create a CA Issuer for the ``minio-operator`` namespace
 ----------------------------------------------------------
 
-This guide **disables** the automatic generation of certificates in MinIO Operator and issues certificates using cert-manager instead.
+This guide **disables** the automatic generation of certificates in Buckit Operator and issues certificates using cert-manager instead.
 
 The ``minio-operator`` namespace must have its own certificate authority (CA), derived from the cluster's ``ClusterIssuer`` certificate created during :ref:`cert-manager setup <minio-certmanager>`.
 Create this CA certificate using cert-manager.
 
 .. important::
 
-   This CA certificate **must** exist *before* installing MinIO Operator.
+   This CA certificate **must** exist *before* installing Buckit Operator.
 
 1. If it does not exist, create the ``minio-operator`` namespace
 
@@ -89,7 +89,7 @@ Kubernetes creates a new secret with the name ``operator-ca-tls`` in the ``minio
 
 .. important::
 
-   Make sure to trust this certificate in any applications that need to interact with the MinIO Operator.
+   Make sure to trust this certificate in any applications that need to interact with the Buckit Operator.
 
 
 2) Use the secret to create the ``Issuer``
@@ -131,7 +131,7 @@ The certificate from cert-manager must be valid for the following DNS domains:
 
   .. important::
 
-      Replace ``<cluster domain>`` with the actual value for your MinIO tenant.
+      Replace ``<cluster domain>`` with the actual value for your Buckit tenant.
       ``cluster domain`` is the internal root DNS domain assigned in your Kubernetes cluster. 
       Typically, this is ``cluster.local``, but confirm the value by checking your CoreDNS configuration for the correct value for your Kubernetes cluster. 
       
@@ -191,11 +191,11 @@ This creates a secret called ``sts-tls`` in the ``minio-operator`` namespace.
 4) Install Operator with Auto TLS disabled
 ------------------------------------------
 
-You can now :ref:`install the MinIO Operator <minio-operator-installation>`.
+You can now :ref:`install the Buckit Operator <minio-operator-installation>`.
 
 When installing the Operator deployment, set the ``OPERATOR_STS_AUTO_TLS_ENABLED`` environment variable to ``off`` in the ``minio-operator`` container. 
 
-Disabling this environment variable prevents the MinIO Operator from issuing the certificates.
+Disabling this environment variable prevents the Buckit Operator from issuing the certificates.
 Instead, Operator relies on cert-manager to issue the TLS certificate.
 
 There are various methods to define an environment variable depending on how you install the Operator.
@@ -238,18 +238,18 @@ The following steps define the variable with kustomize.
    
       kubectl apply -k minio-operator
 
-Migrate an existing MinIO Operator deployment to cert-manager
+Migrate an existing Buckit Operator deployment to cert-manager
 -------------------------------------------------------------
 
-To transition an existing MinIO Operator deployment from using AutoCert to cert-manager, complete the following steps:
+To transition an existing Buckit Operator deployment from using AutoCert to cert-manager, complete the following steps:
 
 1. Complete the steps for :ref:`installing cert-manager <minio-certmanager>`, including disabling auto-cert.
 2. Complete steps 1-3 on this page to generate the certificate authority for the Operator.
 3. When you get to the install step on this page, instead replace the existing Operator TLS certificate with the cert-manager issued certificate.
 4. Create new cert-manager certificates for each tenant, similar to the steps described on the :ref:`cert-manager for Tenants <minio-certmanager-tenants>` page.
-5. Replace the secrets in the MinIO Operator namespace for the tenants with secrets related to each tenant's cert-manager issued certificate.
+5. Replace the secrets in the Buckit Operator namespace for the tenants with secrets related to each tenant's cert-manager issued certificate.
 
 Next steps
 ----------
 
-Set up :ref:`cert-manager for a MinIO Tenant <minio-certmanager-tenants>`.
+Set up :ref:`cert-manager for a Buckit Tenant <minio-certmanager-tenants>`.

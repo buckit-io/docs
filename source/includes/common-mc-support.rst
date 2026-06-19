@@ -3,7 +3,7 @@
 .. admonition:: SUBNET Registration Required
    :class: note
 
-   The ``mc support`` commands are designed for MinIO deployments registered with |subnet| to ensure optimal outcome of diagnostics and performance testing. 
+   The ``mc support`` commands are designed for Buckit deployments registered with |subnet| to ensure optimal outcome of diagnostics and performance testing. 
    Deployments not registered with SUBNET cannot use the ``mc support`` commands.
 
 .. end-minio-only

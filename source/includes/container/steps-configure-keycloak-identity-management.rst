@@ -5,7 +5,7 @@
 1) Create the Podman Pod
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a Podman Pod to deploy the Keycloak and MinIO containers in a Pod with shared networking.
+Create a Podman Pod to deploy the Keycloak and Buckit containers in a Pod with shared networking.
 This ensures both containers can communicate normally.
 
 .. code-block:: shell
@@ -16,7 +16,7 @@ This ensures both containers can communicate normally.
         -v ~/minio-keycloak/minio:/mnt/minio \
         -n minio-keycloak
 
-Replace ``~/minio-keycloak/minio`` with a path to an empty folder in which the MinIO container stores data.
+Replace ``~/minio-keycloak/minio`` with a path to an empty folder in which the Buckit container stores data.
 
 You can alternatively deploy the Containers as Root to allow access to the host network for the purpose of inter-container networking.
 
@@ -49,12 +49,12 @@ Authenticate to the Keycloak :guilabel:`Administrative Console` and navigate to 
    :start-after: start-configure-keycloak-client
    :end-before: end-configure-keycloak-client
 
-4) Create Client Scope for MinIO Client
+4) Create Client Scope for Buckit Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Client scopes allow Keycloak to map user attributes as part of the JSON Web Token (JWT) returned in authentication requests.
-This allows MinIO to reference those attributes when assigning policies to the user.
-This step creates the necessary client scope to support MinIO authorization after successful Keycloak authentication.
+This allows Buckit to reference those attributes when assigning policies to the user.
+This step creates the necessary client scope to support Buckit authorization after successful Keycloak authentication.
 
 .. include:: /includes/common/common-configure-keycloak-identity-management.rst
    :start-after: start-configure-keycloak-client-scope
@@ -64,16 +64,16 @@ This step creates the necessary client scope to support MinIO authorization afte
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must assign an attribute named ``policy`` to the Keycloak Users or Groups. 
-Set the value to any :ref:`policy <minio-policy>` on the MinIO deployment.
+Set the value to any :ref:`policy <minio-policy>` on the Buckit deployment.
 
 .. include:: /includes/common/common-configure-keycloak-identity-management.rst
    :start-after: start-configure-keycloak-user-group-attributes
    :end-before: end-configure-keycloak-user-group-attributes
 
-6) Start the MinIO Container
+6) Start the Buckit Container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command starts the MinIO Container and attaches it to the ``minio-keycloak`` pod.
+The following command starts the Buckit Container and attaches it to the ``minio-keycloak`` pod.
 
 .. code-block:: shell
    :class: copyable
@@ -83,16 +83,16 @@ The following command starts the MinIO Container and attaches it to the ``minio-
           --pod minio-keycloak \
           quay.io/minio/minio:RELEASE.2023-02-22T18-23-45Z server /mnt/data --console-address :9001
 
-Go to ``localhost:9001`` to access the MinIO Console.
+Go to ``localhost:9001`` to access the Buckit Console.
 Log in using the default credentials ``minioadmin:minioadmin``.
 
-7) Configure MinIO for Keycloak Authentication
+7) Configure Buckit for Keycloak Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports multiple methods for configuring Keycloak authentication:
+Buckit supports multiple methods for configuring Keycloak authentication:
 
 - Using a terminal/shell and the :mc:`mc idp openid` command
-- Using environment variables set prior to starting MinIO
+- Using environment variables set prior to starting Buckit
 
 .. tab-set::
 
@@ -109,9 +109,9 @@ MinIO supports multiple methods for configuring Keycloak authentication:
          :end-before: end-configure-keycloak-minio-envvar
 
 
-You must restart the MinIO deployment for the changes to apply.
+You must restart the Buckit deployment for the changes to apply.
 
-Check the :ref:`MinIO server logs <minio-logging>` and verify that startup succeeded with no errors related to the Keycloak configuration.
+Check the :ref:`Buckit server logs <minio-logging>` and verify that startup succeeded with no errors related to the Keycloak configuration.
 
 
 8) Generate Application Credentials using the Security Token Service (STS)
@@ -125,4 +125,4 @@ Next Steps
 ~~~~~~~~~~~~~
 
 Applications should implement the :ref:`STS <minio-security-token-service>` flow using their :ref:`SDK <minio-drivers>` of choice.
-When STS credentials expire, applications should have logic in place to regenerate the JWT token, STS token, and MinIO credentials before retrying and continuing operations.
+When STS credentials expire, applications should have logic in place to regenerate the JWT token, STS token, and Buckit credentials before retrying and continuing operations.

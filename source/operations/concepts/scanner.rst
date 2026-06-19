@@ -13,7 +13,7 @@ Object Scanner
 Overview
 --------
 
-MinIO uses the built-in scanner to check objects for healing and to take any scheduled object actions.
+Buckit uses the built-in scanner to check objects for healing and to take any scheduled object actions.
 Such actions may include:
 
 - calculate data usage on drives
@@ -28,8 +28,8 @@ The scanner completes checks on all bucket groups before starting over with a ne
 
 At the bucket level, the scanner groups items in buckets and scans selected items from that bucket.
 The scanner selects objects for a scan based on a hash of the object name.
-Over a span of 16 scans, MinIO checks every object in the namespace.
-MinIO fully scans any prefixes known to be new since the last scan.
+Over a span of 16 scans, Buckit checks every object in the namespace.
+Buckit fully scans any prefixes known to be new since the last scan.
 
 Scan Length
 -----------
@@ -38,16 +38,16 @@ Multiple factors impact the time it takes for a scan to complete.
 
 Some of these factors include:
 
-- Type of drives provided to MinIO
+- Type of drives provided to Buckit
 - Throughput and :abbr:`iops (input/output operations per second)` available
 - Number and size of objects
-- Other activity on the MinIO Server
+- Other activity on the Buckit Server
 
-For example, by default, MinIO pauses the scanner to make I/O operations available for read and write requests.
+For example, by default, Buckit pauses the scanner to make I/O operations available for read and write requests.
 This can lengthen the time it takes for a scan to complete.
 
-MinIO waits between each scan by a factor multiplication of the time it takes each scan operation to complete.
-By default, the value of this factor is ``10.0``, meaning MinIO waits 10x the length of an operation after one scan completes before starting the next scan.
+Buckit waits between each scan by a factor multiplication of the time it takes each scan operation to complete.
+By default, the value of this factor is ``10.0``, meaning Buckit waits 10x the length of an operation after one scan completes before starting the next scan.
 The value of this factor changes depending on the configured :ref:`scanner speed setting <minio-scanner-speed-options>`. 
 
 Scanner Performance
@@ -64,7 +64,7 @@ Some of these factors include:
 For example, a cluster that starts with 100TB of data and then grows to 200TB of data may require more time to scan the entire namespace of buckets and objects given the same hardware and workload.
 Likewise, a single erasure set of 16 drives takes longer to scan than the same number of drives split into two erasure sets of 8 drives each.
 
-MinIO treats the scanner as a background task and pauses it in favor of completing read and write requests on the cluster.
+Buckit treats the scanner as a background task and pauses it in favor of completing read and write requests on the cluster.
 As the cluster or workload increases, scanner performance decreases as it yields more frequently to ensure priority of normal S3 operations.
 
 .. include:: /includes/common/scanner.rst
@@ -74,7 +74,7 @@ As the cluster or workload increases, scanner performance decreases as it yields
 Scanner Metrics
 ---------------
 
-MinIO provides a number of `metrics related to the scanner <https://docs.min.io/community/minio-object-store/operations/monitoring/metrics-v2.html#scanner-metrics>`__.
+Buckit provides a number of `metrics related to the scanner <https://docs.min.io/community/minio-object-store/operations/monitoring/metrics-v2.html#scanner-metrics>`__.
 
 Use ``mc admin scanner info`` to see the current status of the scanner and the time since the last full scan.
 This can help in understanding the metrics provided by the scanner operation.

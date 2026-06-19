@@ -14,14 +14,14 @@ Data Compression
 Overview
 --------
 
-MinIO Server supports compressing objects to reduce disk usage.
+Buckit Server supports compressing objects to reduce disk usage.
 Objects are compressed on PUT before writing to disk, and uncompressed on GET before they are sent to the client. This makes the compression process transparent to client applications and services.
 
 Depending on the type of data, compression may also increase overall throughput.
 Write throughput for a production deployment is generally 500MB per second or greater per available CPU core in the system.
 Decompression is approximately 1 GB per second or greater for each CPU core.
 
-For best results, review MinIO's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` or use |subnet| to work directly with engineers for analyzing compression performance.
+For best results, review Buckit's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` or use |subnet| to work directly with engineers for analyzing compression performance.
 
 .. _minio-data-compression-default-types:
 
@@ -50,7 +50,7 @@ Excluded File Types
 
 Some data cannot be effectively compressed.
 For example: video, already compressed data, or files less than 4KiB.
-MinIO does not compress common incompressible file types, even if they are specified in the compression configuration.
+Buckit does not compress common incompressible file types, even if they are specified in the compression configuration.
 
 Objects of these types are never compressed:
 
@@ -62,10 +62,10 @@ Objects of these types are never compressed:
 Data Compression and Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports encrypting compressed objects but recommends against combining compression and encryption without a prior risk assessment.
+Buckit supports encrypting compressed objects but recommends against combining compression and encryption without a prior risk assessment.
 Before enabling encryption for compressed objects, carefully consider the security needs of your environment.
 
-See `Transparent Data Compression on MinIO <https://blog.min.io/transparent-data-compression/>`__ for more about combining compression and encryption.
+See `Transparent Data Compression on Buckit <https://blog.min.io/transparent-data-compression/>`__ for more about combining compression and encryption.
 |subnet| users can `log in <https://subnet.min.io/?ref=docs>`__ and engage with our engineering and security teams to review encryption options.
 
 
@@ -84,7 +84,7 @@ The following enables compression for new objects of the :ref:`default types <mi
 
    mc admin config set ALIAS compression enable=on
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 Existing uncompressed objects are not modified.
 To configure which extensions and types to compress, see :ref:`minio-data-compression-configure-objects`.
@@ -109,7 +109,7 @@ The following disables data compression for new objects:
 
    mc admin config set ALIAS compression enable=off
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 Existing compressed objects are not modified.
 
@@ -130,7 +130,7 @@ The default data compression configuration compresses the following types of dat
    :class: note
 
    Some objects cannot be efficiently compressed.
-   MinIO will not attempt to compress these objects, even if they are specified in :mc-conf:`~compression.extensions` or :mc-conf:`~compression.mime_types` arguments.
+   Buckit will not attempt to compress these objects, even if they are specified in :mc-conf:`~compression.extensions` or :mc-conf:`~compression.mime_types` arguments.
    See :ref:`minio-data-compression-excluded-types` for a list of excluded types.
 
 The sections below describe how to configure compression for the desired file extensions and media types.
@@ -145,7 +145,7 @@ To compress all objects except the :ref:`default excluded types <minio-data-comp
 
    mc admin config set ALIAS compression extensions= mime_types=
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
   
 Compress Objects by File Extension
@@ -160,7 +160,7 @@ The following command compresses files with the extensions ``.bin`` and ``.txt``
 
    mc admin config set ALIAS compression extensions=".bin, .txt"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 The new list of file extensions replaces the previous list.
 To add or remove an extension, repeat the :mc-conf:`~compression.extensions` command with the complete list of extensions to compress.
@@ -172,7 +172,7 @@ The following adds ``.pdf`` to the list of file extensions from the previous exa
 
    mc admin config set ALIAS compression extensions=".bin, .txt, .pdf"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 
 Compress Objects by Media Type
@@ -187,7 +187,7 @@ The following example compresses files of types ``application/json`` and ``image
 
    mc admin config set ALIAS compression mime_types="application/json, image/bmp"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
 
 The new list of media types replaces the previous list.
 To add or remove a type, repeat the :mc-conf:`~compression.mime_types` command with the complete list of types to compress.
@@ -200,4 +200,4 @@ The following command adds all ``text`` subtypes to the list from the previous e
 
    mc admin config set ALIAS compression mime_types="application/json, image/bmp, text/*"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured MinIO deployment.
+- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.

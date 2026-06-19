@@ -12,15 +12,15 @@ Publish Events to MQTT
    :local:
    :depth: 1
 
-MinIO supports publishing :ref:`bucket notification
+Buckit supports publishing :ref:`bucket notification
 <minio-bucket-notifications>` events to `MQTT <https://www.mqtt.org/>`__ 
 server/broker endpoint.
 
-Add an MQTT Endpoint to a MinIO Deployment
+Add an MQTT Endpoint to a Buckit Deployment
 ------------------------------------------
 
 The following procedure adds a new MQTT service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -30,21 +30,21 @@ MQTT 3.1 or 3.1.1 Server/Broker
 +++++++++++++++++++++++++++++++
 
 This procedure assumes an existing MQTT 3.1 or 3.1.1 server/broker to which the
-MinIO deployment has connectivity. See the 
+Buckit deployment has connectivity. See the 
 `mqtt.org software listing <https://mqtt.org/software/>`__ for a list of
 MQTT-compatible server/brokers.
 
 If the MQTT service requires authentication, you *must* provide an appropriate
-username and password during the configuration process to grant MinIO access
+username and password during the configuration process to grant Buckit access
 to the service.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
-1) Add the MQTT Endpoint to MinIO
+1) Add the MQTT Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new MQTT service endpoint using either environment variables
@@ -54,7 +54,7 @@ You can configure a new MQTT service endpoint using either environment variables
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the MQTT service endpoint and associated
+      Buckit supports specifying the MQTT service endpoint and associated
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-mqtt>`. The 
@@ -111,17 +111,17 @@ You can configure a new MQTT service endpoint using either environment variables
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing MQTT service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_mqtt <mc admin config get>` to
-        review the currently configured MQTT endpoints on the MinIO deployment.
+        review the currently configured MQTT endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the MQTT service endpoint.
         For example:
 
         ``tcp://hostname:port``
 
-      - Replace ``TOPIC`` with the MQTT topic to which MinIO associates 
+      - Replace ``TOPIC`` with the MQTT topic to which Buckit associates 
         events published to the server/broker.
 
       See :ref:`MQTT Service for Bucket Notifications
@@ -130,7 +130,7 @@ You can configure a new MQTT service endpoint using either environment variables
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating MQTT endpoints on a running 
+      Buckit supports adding or updating MQTT endpoints on a running 
       :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
       and the :mc-conf:`notify_mqtt` configuration key. You must restart the 
       :mc:`minio server` process to apply any new or updated configuration
@@ -165,27 +165,27 @@ You can configure a new MQTT service endpoint using either environment variables
         assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing MQTT service
-        endpoint on the MinIO deployment, the new settings *override* 
+        endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
         :mc-cmd:`mc admin config get notify_mqtt <mc admin config get>` to
-        review the currently configured MQTT endpoints on the MinIO deployment.
+        review the currently configured MQTT endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the MQTT service endpoint.
         For example:
 
         ``tcp://hostname:port``
 
-      - Replace ``TOPIC`` with the MQTT topic to which MinIO associates 
+      - Replace ``TOPIC`` with the MQTT topic to which Buckit associates 
         events published to the server/broker.
 
       See :ref:`MQTT Bucket Notification Configuration Settings
       <minio-server-config-bucket-notification-mqtt>` for complete 
       documentation on each setting.
 
-1) Restart the MinIO Deployment
+1) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell
@@ -222,11 +222,11 @@ event with the configured MQTT service as a target:
    mc event add ALIAS/BUCKET arn:minio:sqs::primary:mqtt \
      --event EVENTS
 
-- Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment.
+- Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
 - Replace ``BUCKET`` with the name of the bucket in which to configure the 
   event.
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
-  <mc-event-supported-events>` for which MinIO triggers notifications.
+  <mc-event-supported-events>` for which Buckit triggers notifications.
 
 Use :mc:`mc event ls` to view all configured bucket events for 
 a given notification target:
@@ -254,11 +254,11 @@ a notification.
 
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
-Update an MQTT Endpoint in a MinIO Deployment
+Update an MQTT Endpoint in a Buckit Deployment
 ---------------------------------------------
 
 The following procedure updates an existing MQTT service endpoint for supporting
-:ref:`bucket notifications <minio-bucket-notifications>` in a MinIO
+:ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
 deployment.
 
 Prerequisites
@@ -268,15 +268,15 @@ MQTT 3.1 or 3.1.1 Server/Broker Endpoint
 ++++++++++++++++++++++++++++++++++++++++
 
 This procedure assumes an existing MQTT 3.1 or 3.1.1 server/broker to which the
-MinIO deployment has connectivity. See the 
+Buckit deployment has connectivity. See the 
 `mqtt.org software listing <https://mqtt.org/software/>`__ for a list of
 MQTT-compatible server/brokers.
 
 If the MQTT service requires authentication, you *must* provide an appropriate
-username and password during the configuration process to grant MinIO access
+username and password during the configuration process to grant Buckit access
 to the service.
 
-MinIO ``mc`` Command Line Tool
+Buckit ``mc`` Command Line Tool
 ++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
@@ -294,7 +294,7 @@ configured MQTT service endpoints in the deployment:
 
    mc admin config get ALIAS/ notify_mqtt
 
-Replace ``ALIAS`` with the :ref:`alias <alias>` of the MinIO deployment.
+Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
 The command output resembles the following:
 
@@ -348,10 +348,10 @@ All other configuration settings are *optional*. See
 :ref:`minio-server-config-bucket-notification-mqtt` for a complete list of MQTT
 configuration settings.
 
-3) Restart the MinIO Deployment
+3) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must restart the MinIO deployment to apply the configuration changes. 
+You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
 .. code-block:: shell

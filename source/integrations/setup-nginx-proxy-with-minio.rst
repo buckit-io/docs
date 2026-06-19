@@ -1,7 +1,7 @@
 .. _integrations-nginx-proxy:
 
 ======================================
-Configure NGINX Proxy for MinIO Server
+Configure NGINX Proxy for Buckit Server
 ======================================
 
 .. default-domain:: minio
@@ -10,32 +10,32 @@ Configure NGINX Proxy for MinIO Server
    :local:
    :depth: 2
 
-The following documentation provides a baseline for configuring NGINX to proxy requests to MinIO in a Linux environment.
+The following documentation provides a baseline for configuring NGINX to proxy requests to Buckit in a Linux environment.
 It is not intended as a comprehensive approach to NGINX, proxying, or reverse proxying in general.
 Modify the configuration as necessary for your infrastructure.
 
 This documentation assumes the following:
 
 - An existing `NGINX <http://nginx.org/en/download.html>`__ deployment
-- An existing :ref:`MinIO <minio-installation>` deployment
-- A DNS hostname which uniquely identifies the MinIO deployment
+- An existing :ref:`Buckit <minio-installation>` deployment
+- A DNS hostname which uniquely identifies the Buckit deployment
 
-There are two models for proxying requests to the MinIO Server API and the MinIO Console:
+There are two models for proxying requests to the Buckit Server API and the Buckit Console:
 
 .. tab-set::
 
    .. tab-item:: Dedicated DNS
 
-      Create or configure a dedicated DNS name for the MinIO service.
+      Create or configure a dedicated DNS name for the Buckit service.
 
-      For the MinIO Server S3 API, proxy requests to the root of that domain.
-      For the MinIO Console Web GUI, proxy requests to the ``/minio`` subpath.
+      For the Buckit Server S3 API, proxy requests to the root of that domain.
+      For the Buckit Console Web GUI, proxy requests to the ``/minio`` subpath.
 
       For example, given the hostname ``minio.example.net``: 
       
-      - Proxy requests to the root ``https://minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``.
+      - Proxy requests to the root ``https://minio.example.net`` to the Buckit Server listening on ``https://minio.local:9000``.
 
-      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the MinIO Console listening on ``https://minio.local:9001``.
+      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the Buckit Console listening on ``https://minio.local:9001``.
 
       The following location blocks provide a template for further customization in your unique environment:
 
@@ -100,7 +100,7 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
 
                proxy_connect_timeout 300;
                
-               # To support websockets in MinIO versions released after January 2023
+               # To support websockets in Buckit versions released after January 2023
                proxy_http_version 1.1;
                proxy_set_header Upgrade $http_upgrade;
                proxy_set_header Connection "upgrade";
@@ -114,21 +114,21 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             }
          }
 
-      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the MinIO Server API such as ``example.net/s3/``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the Buckit Server API such as ``example.net/s3/``.
 
-      You must also set the following environment variables for the MinIO deployment:
+      You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://example.net/minio/ui``)
+      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://example.net/minio/ui``)
 
    .. tab-item:: Subdomain
 
-      Create or configure separate, unique subdomains for the MinIO Server S3 API and for the MinIO Console Web GUI.
+      Create or configure separate, unique subdomains for the Buckit Server S3 API and for the Buckit Console Web GUI.
 
       For example, given the root domain of ``example.net``:
 
-      - Proxy request to the subdomain ``minio.example.net`` to the MinIO Server listening on ``https://minio.local:9000``
+      - Proxy request to the subdomain ``minio.example.net`` to the Buckit Server listening on ``https://minio.local:9000``
 
-      - Proxy requests to the subdomain ``console.example.net`` to the MinIO Console listening on ``https://minio.local:9001``
+      - Proxy requests to the subdomain ``console.example.net`` to the Buckit Console listening on ``https://minio.local:9001``
 
       The following location blocks provide a template for further customization in your unique environment:
 
@@ -219,8 +219,8 @@ There are two models for proxying requests to the MinIO Server API and the MinIO
             }
          }
 
-      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the MinIO Server API on a subpath, such as ``minio.example.net/s3/``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the Buckit Server API on a subpath, such as ``minio.example.net/s3/``.
 
-      You must also set the following environment variables for the MinIO deployment:
+      You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the MinIO Console (``https://console.example.net/``)
+      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://console.example.net/``)

@@ -10,26 +10,26 @@ Publish Server or Audit Logs to an External Service
    :local:
    :depth: 1
 
-MinIO publishes all :mc:`minio server` operations to the system console. 
+Buckit publishes all :mc:`minio server` operations to the system console. 
 Reading these logs depends on how the server process is managed. 
 For example, if the server is managed through a ``systemd`` script, 
 you can read the logs using ``journalctl -u SERVICENAME.service``. Replace
-``SERVICENAME`` with the name of the MinIO service.
+``SERVICENAME`` with the name of the Buckit service.
 
-MinIO also supports publishing server logs and audit logs to an HTTP webhook.
+Buckit also supports publishing server logs and audit logs to an HTTP webhook.
 
 - :ref:`Server logs <minio-logging-publish-server-logs>` contain the same
   :mc:`minio server` operations logged to the system console. Server logs
   support general monitoring and troubleshooting of operations.
 
 - :ref:`Audit logs <minio-logging-publish-audit-logs>` are more granular
-  descriptions of each operation on the MinIO deployment. Audit logging 
+  descriptions of each operation on the Buckit deployment. Audit logging 
   supports security standards and regulations which require detailed tracking
   of operations.
 
-MinIO publishes logs as a JSON document as a ``PUT`` request to each configured
+Buckit publishes logs as a JSON document as a ``PUT`` request to each configured
 endpoint. The endpoint server is responsible for processing each JSON document.
-MinIO requires explicit configuration of each webhook endpoint and does *not*
+Buckit requires explicit configuration of each webhook endpoint and does *not*
 publish logs to a webhook by default.
 
 .. _minio-logging-publish-server-logs:
@@ -37,7 +37,7 @@ publish logs to a webhook by default.
 Publish Server Logs to HTTP Webhook
 -----------------------------------
 
-You can configure a new HTTP webhook endpoint to which MinIO publishes 
+You can configure a new HTTP webhook endpoint to which Buckit publishes 
 :mc:`minio server` logs using either environment variables *or* by setting 
 runtime configuration settings. 
 
@@ -45,7 +45,7 @@ runtime configuration settings.
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the :mc:`minio server` log HTTP webhook endpoint
+      Buckit supports specifying the :mc:`minio server` log HTTP webhook endpoint
       and associated configuration settings using :ref:`environment variables
       <minio-server-envvar-logging-regular>`.
 
@@ -89,7 +89,7 @@ runtime configuration settings.
       - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
         Omit for endpoints which do not require authentication.
 
-        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+        To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
         Depending on the endpoint, you may need to include additional information.
 
         For example: for a Bearer token, prepend ``Bearer``:
@@ -123,16 +123,16 @@ runtime configuration settings.
 
         Consult the documenation for the desired service for more details.
 
-      Restart the MinIO server to apply the new configuration settings. You
+      Restart the Buckit server to apply the new configuration settings. You
       must specify the same environment variables and settings on 
-      *all* MinIO servers in the deployment.
+      *all* Buckit servers in the deployment.
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating log HTTP webhook endpoints on a MinIO
+      Buckit supports adding or updating log HTTP webhook endpoints on a Buckit
       deployment using the :mc-cmd:`mc admin config set` command and the
       :mc-conf:`logger_webhook` configuration key. You must restart the
-      MinIO deployment to apply any new or updated configuration settings.
+      Buckit deployment to apply any new or updated configuration settings.
 
       The following example code sets *all* settings related to configuring
       a log HTTP webhook endpoint. The minimum *required* setting is 
@@ -160,7 +160,7 @@ runtime configuration settings.
       - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
         Omit for endpoints which do not require authentication.
 
-	To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+	To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
         Depending on the endpoint, you may need to include additional information.
 
         For example: for a Bearer token, prepend ``Bearer``:
@@ -189,7 +189,7 @@ runtime configuration settings.
 Publish Audit Logs to HTTP Webhook
 ----------------------------------
 
-You can configure a new HTTP webhook endpoint to which MinIO publishes audit
+You can configure a new HTTP webhook endpoint to which Buckit publishes audit
 logs using either environment variables *or* by setting runtime configuration
 settings:
 
@@ -197,7 +197,7 @@ settings:
 
    .. tab-item:: Environment Variables
 
-      MinIO supports specifying the audit log HTTP webhook endpoint and
+      Buckit supports specifying the audit log HTTP webhook endpoint and
       associated configuration settings using :ref:`environment variables
       <minio-server-envvar-logging-audit>`.
 
@@ -245,7 +245,7 @@ settings:
       - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint. 
         Omit for endpoints which do not require authentication.
 
-        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*. 
+        To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*. 
         Depending on the endpoint, you may need to include additional information.
 
         For example: for a Bearer token, prepend ``Bearer``:
@@ -284,15 +284,15 @@ settings:
         Omit for endpoints which do not require clients to present TLS
         certificates.
 
-      Restart the MinIO server to apply the new configuration settings. You
+      Restart the Buckit server to apply the new configuration settings. You
       must specify the same environment variables and settings on 
-      *all* MinIO servers in the deployment.
+      *all* Buckit servers in the deployment.
 
    .. tab-item:: Configuration Settings
 
-      MinIO supports adding or updating audit log HTTP webhook endpoints on a
-      MinIO deployment using the :mc-cmd:`mc admin config set` command and the
-      :mc-conf:`audit_webhook` configuration key. You must restart the MinIO
+      Buckit supports adding or updating audit log HTTP webhook endpoints on a
+      Buckit deployment using the :mc-cmd:`mc admin config set` command and the
+      :mc-conf:`audit_webhook` configuration key. You must restart the Buckit
       deployment to apply any new or updated configuration settings.
 
       The following example code sets *all* settings related to configuring
@@ -323,7 +323,7 @@ settings:
       - Replace ``TOKEN`` with an authentication token of the appropriate type for the endpoint.
         Omit for endpoints which do not require authentication.
 
-        To allow for a variety of token types, MinIO creates the request authentication header using the value *exactly as specified*.
+        To allow for a variety of token types, Buckit creates the request authentication header using the value *exactly as specified*.
         Depending on the endpoint, you may need to include additional information.
 
         For example: for a Bearer token, prepend ``Bearer``:
@@ -355,7 +355,7 @@ settings:
 Audit Log Structure
 ~~~~~~~~~~~~~~~~~~~
 
-MinIO audit logs resemble the following JSON document:
+Buckit audit logs resemble the following JSON document:
 
 - The ``api.timeToFirstByte`` and ``api.timeToResponse`` fields are expressed
   in nanoseconds.
@@ -396,7 +396,7 @@ MinIO audit logs resemble the following JSON document:
       },
       "remotehost": "127.0.0.1",
       "requestID": "17B86CB0ED88EBE9",
-      "userAgent": "MinIO (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
+      "userAgent": "Buckit (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
       "requestPath": "/data/test-data.csv",
       "requestHost": "minio.example.net:9000",
       "requestQuery": {
@@ -407,7 +407,7 @@ MinIO audit logs resemble the following JSON document:
          "Authorization": "AWS4-HMAC-SHA256 Credential=minioadmin/20240229/us-east-1/s3/aws4_request, SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccb3acdc1763509a88a7e4a3d7fe431ef0ee5ca3f66ccb430d5a09326e87e893",
          "Content-Length": "267",
          "Content-Type": "application/octet-stream",
-         "User-Agent": "MinIO (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
+         "User-Agent": "Buckit (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
          "X-Amz-Content-Sha256": "d61969719ee94f43c4e87044229b7a13b54cab320131e9a77259ad0c9344f6d3",
          "X-Amz-Date": "20240229T193925Z"
       },
@@ -416,7 +416,7 @@ MinIO audit logs resemble the following JSON document:
          "Content-Length": "358",
          "Content-Type": "application/xml",
          "ETag": "1d9fdc88af5e74f5eac0a3dd750ce58e-2",
-         "Server": "MinIO",
+         "Server": "Buckit",
          "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
          "Vary": "Origin,Accept-Encoding",
          "X-Amz-Id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",

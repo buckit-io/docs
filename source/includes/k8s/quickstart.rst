@@ -2,9 +2,9 @@
 
 .. |OS| replace:: Kubernetes
 
-This procedure deploys a Single-Node Single-Drive MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
+This procedure deploys a Single-Node Single-Drive Buckit server onto |OS| for early development and evaluation of Buckit Object Storage and its S3-compatible API layer. 
 
-Use the :ref:`MinIO Operator <minio-operator-installation>` to deploy and manage production-ready MinIO tenants on Kubernetes.
+Use the :ref:`Buckit Operator <minio-operator-installation>` to deploy and manage production-ready Buckit tenants on Kubernetes.
 
 Prerequisites
 -------------
@@ -17,11 +17,11 @@ Prerequisites
 Procedure
 ---------
 
-#. **Download the MinIO Object**
+#. **Download the Buckit Object**
 
    .. tab-set::
 
-      .. tab-item:: Download the MinIO Kubernetes Object Definition
+      .. tab-item:: Download the Buckit Kubernetes Object Definition
 
          Download `minio-dev.yaml <https://raw.githubusercontent.com/minio/docs/master/source/extra/examples/minio-dev.yaml>`__ to your host machine:
 
@@ -33,11 +33,11 @@ Procedure
          The file describes two Kubernetes resources:
 
          - A new namespace ``minio-dev``, and
-         - A MinIO pod using a drive or volume on the Worker Node for serving data
+         - A Buckit pod using a drive or volume on the Worker Node for serving data
 
-         Select the :guilabel:`Overview of the MinIO Object YAML` for a more detailed description of the object.
+         Select the :guilabel:`Overview of the Buckit Object YAML` for a more detailed description of the object.
 
-      .. tab-item:: Overview of the MinIO Object YAML
+      .. tab-item:: Overview of the Buckit Object YAML
 
          The ``minio-dev.yaml`` contains the following Kubernetes resources:
 
@@ -47,16 +47,16 @@ Procedure
          The object deploys two resources:
 
          - A new namespace ``minio-dev``, and
-         - A MinIO pod using a drive or volume on the Worker Node for serving data
+         - A Buckit pod using a drive or volume on the Worker Node for serving data
 
-         The MinIO resource definition uses Kubernetes :kube-docs:`Node Selectors and Labels <concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels>` to restrict the pod to a node with matching hostname label. 
+         The Buckit resource definition uses Kubernetes :kube-docs:`Node Selectors and Labels <concepts/scheduling-eviction/assign-pod-node/#built-in-node-labels>` to restrict the pod to a node with matching hostname label. 
          Use ``kubectl get nodes --show-labels`` to view all labels assigned to each node in the cluster.
 
-         The MinIO Pod uses a :kube-docs:`hostPath <concepts/storage/volumes/#hostpath>` volume for storing data. This path *must* correspond to a local drive or folder on the Kubernetes worker node.
+         The Buckit Pod uses a :kube-docs:`hostPath <concepts/storage/volumes/#hostpath>` volume for storing data. This path *must* correspond to a local drive or folder on the Kubernetes worker node.
 
          Users familiar with Kubernetes scheduling and volume provisioning may modify the ``spec.nodeSelector``, ``volumeMounts.name``, and ``volumes`` fields to meet more specific requirements.
 
-#. **Apply the MinIO Object Definition**
+#. **Apply the Buckit Object Definition**
 
    The following command applies the ``minio-dev.yaml`` configuration and deploys the objects to Kubernetes:
 
@@ -95,9 +95,9 @@ Procedure
 
       kubectl logs pod/minio -n minio-dev
 
-#. **Temporarily Access the MinIO S3 API and Console**
+#. **Temporarily Access the Buckit S3 API and Console**
 
-   Use the ``kubectl port-forward`` command to temporarily forward traffic from the MinIO pod to the local machine:
+   Use the ``kubectl port-forward`` command to temporarily forward traffic from the Buckit pod to the local machine:
 
    .. code-block:: shell
       :class: copyable
@@ -114,16 +114,16 @@ Procedure
 
       To configure long term access to the pod, configure :kube-docs:`Ingress <concepts/services-networking/ingress/>` or similar network control components within Kubernetes to route traffic to and from the pod. Configuring Ingress is out of the scope for this documentation.
 
-#. **Connect your Browser to the MinIO Server**
+#. **Connect your Browser to the Buckit Server**
 
    Access the :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9001``.
 
    Log in to the Console with the credentials ``minioadmin | minioadmin``.
    These are the default :ref:`root user <minio-users-root>` credentials.
 
-#. **(Optional) Connect the MinIO Client**
+#. **(Optional) Connect the Buckit Client**
 
-   If your local machine has :mc:`mc` :ref:`installed <mc-install>`, use the :mc:`mc alias set` command to authenticate and connect to the MinIO deployment:
+   If your local machine has :mc:`mc` :ref:`installed <mc-install>`, use the :mc:`mc alias set` command to authenticate and connect to the Buckit deployment:
 
    .. code-block:: shell
       :class: copyable
@@ -132,16 +132,16 @@ Procedure
       mc admin info k8s-minio-dev
 
    - The name of the alias
-   - The hostname or IP address and port of the MinIO server
-   - The Access Key for a MinIO :ref:`user <minio-users>`
-   - The Secret Key for a MinIO :ref:`user <minio-users>`
+   - The hostname or IP address and port of the Buckit server
+   - The Access Key for a Buckit :ref:`user <minio-users>`
+   - The Secret Key for a Buckit :ref:`user <minio-users>`
 
 .. rst-class:: section-next-steps
    
 Next Steps
 ----------
 
-- :ref:`Connect your applications to MinIO <minio-drivers>`
+- :ref:`Connect your applications to Buckit <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO for Production Environments <deploy-minio-distributed>`
+- :ref:`Deploy Buckit for Production Environments <deploy-minio-distributed>`

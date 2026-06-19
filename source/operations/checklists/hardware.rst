@@ -10,12 +10,12 @@ Hardware Checklist
    :local:
    :depth: 2
 
-Use the following checklist when planning the hardware configuration for a production, distributed MinIO deployment.
+Use the following checklist when planning the hardware configuration for a production, distributed Buckit deployment.
 
 Considerations
 --------------
 
-When selecting hardware for your MinIO implementation, take into account the following factors:
+When selecting hardware for your Buckit implementation, take into account the following factors:
 
 - Expected amount of data in tebibytes to store at launch
 - Expected growth in size of data for at least the next two years
@@ -29,40 +29,19 @@ When selecting hardware for your MinIO implementation, take into account the fol
 Production Hardware Recommendations
 -----------------------------------
 
-The following checklist follows MinIO's `Recommended Configuration <https://min.io/product/reference-hardware?ref-docs>`__ for production deployments.
-The provided guidance is intended as a baseline and cannot replace |subnet| Performance Diagnostics, Architecture Reviews, and direct-to-engineering support.
-
-MinIO, like any distributed system, benefits from selecting identical configurations for all nodes in a given :term:`server pool`. 
+Buckit, like any distributed system, benefits from selecting identical configurations for all nodes in a given :term:`server pool`. 
 Ensure a consistent selection of hardware (CPU, memory, motherboard, storage adapters) and software (operating system, kernel settings, system services) across pool nodes. 
 
 Deployments may exhibit unpredictable performance if nodes have varying hardware or software configurations. 
-Workloads that benefit from storing aged data on lower-cost hardware should instead deploy a dedicated "warm" or "cold" MinIO deployment and :ref:`transition <minio-lifecycle-management-tiering>` data to that tier.
+Workloads that benefit from storing aged data on lower-cost hardware should instead deploy a dedicated "warm" or "cold" Buckit deployment and :ref:`transition <minio-lifecycle-management-tiering>` data to that tier.
 
-.. admonition:: MinIO does not provide hosted services or hardware sales
-   :class: important
-
-   See our `Reference Hardware <https://min.io/product/reference-hardware#hardware?ref-docs>`__ page for a curated selection of servers and storage components from our hardware partners.
-
-.. tab-set::
-   :class: parent
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      .. include:: /includes/common/common-checklist.rst
-         :start-after: start-k8s-hardware-checklist
-         :end-before: end-k8s-hardware-checklist
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      .. include:: /includes/common/common-checklist.rst
-         :start-after: start-linux-hardware-checklist
-         :end-before: end-linux-hardware-checklist
+.. include:: /includes/common/common-checklist.rst
+   :start-after: start-linux-hardware-checklist
+   :end-before: end-linux-hardware-checklist
 
 .. important:: 
 
-   The following areas have the greatest impact on MinIO performance, listed in order of importance:
+   The following areas have the greatest impact on Buckit performance, listed in order of importance:
 
    .. list-table:: 
       :stub-columns: 1
@@ -80,15 +59,15 @@ Workloads that benefit from storing aged data on lower-cost hardware should inst
 
    Prioritize securing the necessary components for each of these areas before focusing on other hardware resources, such as compute-related constraints.
 
-The minimum recommendations above reflect MinIO's experience with assisting enterprise customers in deploying on a variety of IT infrastructures while maintaining the desired SLA/SLO. 
-While MinIO may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability, performance, or overall functionality.
+The minimum recommendations above reflect Buckit's experience with assisting enterprise customers in deploying on a variety of IT infrastructures while maintaining the desired SLA/SLO. 
+While Buckit may run on less than the minimum recommended topology, any potential cost savings come at the risk of decreased reliability, performance, or overall functionality.
 
 .. _minio-hardware-checklist-network:
 
 Networking
 ~~~~~~~~~~
 
-MinIO recommends high speed networking to support the maximum possible throughput of the attached storage (aggregated drives, storage controllers, and PCIe busses). The following table provides a general guideline for the maximum storage throughput supported by a given physical or virtual network interface.
+Buckit recommends high speed networking to support the maximum possible throughput of the attached storage (aggregated drives, storage controllers, and PCIe busses). The following table provides a general guideline for the maximum storage throughput supported by a given physical or virtual network interface.
 This table assumes all network infrastructure components, such as routers, switches, and physical cabling, also supports the NIC bandwidth.
 
 .. list-table::
@@ -110,7 +89,7 @@ This table assumes all network infrastructure components, such as routers, switc
    * - 100Gbps
      - 12.5GBps
 
-Networking has the greatest impact on MinIO performance, where low per-host bandwidth artificially constrains the potential performance of the storage.
+Networking has the greatest impact on Buckit performance, where low per-host bandwidth artificially constrains the potential performance of the storage.
 The following examples of network throughput constraints assume spinning disks with ~100MB/S sustained I/O
 
 - 1GbE network link can support up to 125MB/s, or one spinning disk
@@ -169,7 +148,7 @@ The following table lists the maximum concurrent requests on a node based on the
      - 4,681 
      - 9,362 
 
-The following table provides general guidelines for allocating memory for use by MinIO based on the total amount of local storage on the node:
+The following table provides general guidelines for allocating memory for use by Buckit based on the total amount of local storage on the node:
 
 .. list-table::
    :header-rows: 1
@@ -194,10 +173,6 @@ The following table provides general guidelines for allocating memory for use by
    * - More than 1 Pebibyte (Pi)
      - 128GiB
 
-.. important::
-
-   Starting with :minio-release:`RELEASE.2024-01-28T22-35-53Z`, MinIO preallocates 2GiB of memory per node in distributed setups and 1GiB of memory for a single-node setup.
-
 .. _minio-hardware-checklist-storage:
 
 Storage
@@ -207,201 +182,134 @@ Storage
    :start-after: start-exclusive-drive-access
    :end-before: end-exclusive-drive-access
 
-Recommended Storage Mediums
-+++++++++++++++++++++++++++
+Storage Mediums
++++++++++++++++
 
-.. tab-set::
-   
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      MinIO recommends provisioning a storage class for each MinIO Tenant that meets the performance objectives for that tenant.
-
-      Where possible, configure the Storage Class, CSI, or other provisioner underlying the PV to format volumes as XFS to ensure best performance.
-
-      Ensure a consistent underlying storage type (NVMe, SSD, HDD) for all PVs provisioned in a Tenant.
-      
-      Ensure the same presented capacity of each PV across all nodes in each Tenant :ref:`server pool <minio-intro-server-pool>`.
-      MinIO limits the maximum usable size per PV to the smallest PV in the pool.
-      For example, if a pool has 15 10TB PVs and 1 1TB PV, MinIO limits the per-PV capacity to 1TB.
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      MinIO recommends using flash-based storage (NVMe or SSD) for all workload types and scales.
-      Workloads that require high performance should prefer NVMe over SSD.
-
-      MinIO does not recommends HDD storage for production environments.
-      HDD storage typically does not provide the necessary performance to meet the expectations of modern workloads, and any cost efficiencies at scale are offset by the performance constraints of the medium. 
+HDD and flash-based (NVMe or SSD) storage devices are all supported, but their performance varies.
+Workloads with higher throughput or latency requirements should account for the performance characteristics of the selected storage medium.
 
 Prefer Direct-Attached "Local" Storage (DAS)
 ++++++++++++++++++++++++++++++++++++++++++++
 
 :abbr:`DAS (Direct-Attached Storage)`, such as locally-attached JBOD (Just a Bunch of Disks) arrays, provide significant performance and consistency advantages over networked (NAS, SAN, NFS) storage.
 
-.. tab-set::
-   
+Configure the JBOD arrays without any RAID, pooling, or similar software-level layers, such that the storage is presented directly to Buckit.
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      While MinIO Tenants can make use of remote Persistent Volume (PV) resources, the cost of performing I/O over the network typically constrains overall performance.
-
-      MinIO strongly recommends using CSIs which can provision storage attached to the worker node on which Kubernetes schedules your MinIO pods, such as :minio-docs:`MinIO DirectPV <directpv>`.
-
-      For all other cases, make every effort possible to select a CSI which presents the storage to MinIO as if it were a locally-attached filesystem.
-      CSIs which add layers of software or translations between MinIO and the OS-level storage access APIs necessarily increase the complexity of the syste and can contribute to unexpected or undesired behavior.
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      Configure the JBOD arrays without any RAID, pooling, or similar software-level layers, such that the storage is presented directly to MinIO.
-
-      For virtual machines or systems that require provising storage as a virtual volume, MinIO recommends using thick LUNs only.
+For virtual machines or systems that require provising storage as a virtual volume, Buckit recommends using thick LUNs only.
 
 .. dropdown:: Network File System Volumes Break Consistency Guarantees
    :class-title: note
 
-   MinIO's strict **read-after-write** and **list-after-write** consistency model requires local drive filesystems.
-   MinIO cannot provide consistency guarantees if the underlying storage volumes are NFS or a similar network-attached storage volume. 
+   Buckit's strict **read-after-write** and **list-after-write** consistency model requires local drive filesystems.
+   Buckit cannot provide consistency guarantees if the underlying storage volumes are NFS or a similar network-attached storage volume. 
 
 
 Use XFS-Formatted Drives with Consistent Mounting
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. tab-set::
+Format drives as XFS and present them to Buckit as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
+Using any other type of backing storage (SAN/NAS, ext4, RAID, LVM) typically results in a reduction in performance, reliability, predictability, and consistency.
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
+When formatting XFS drives, apply a unique label per drive.
+For example, the following command formats four drives as XFS and applies a corresponding drive label.
 
-      MinIO recommends formatting the drives underlying MinIO Persistent Volumes as ``xfs``.
+.. code-block:: shell
 
-      If using a CSI, review the documentation for that CSI and ensure it supports specifying the ``xfs`` filesystem.
-      MinIO strongly recommends avoiding any CSI which formats drives as ``ext4``, ``btrfs`` or other filesystems.
+   mkfs.xfs /dev/sdb -L BUCKITDRIVE1
+   mkfs.xfs /dev/sdc -L BUCKITDRIVE2
+   mkfs.xfs /dev/sdd -L BUCKITDRIVE3
+   mkfs.xfs /dev/sde -L BUCKITDRIVE4
 
-      MinIO expects all provisioned Persistent Volumes (PV) to be intended for its exclusive use, where the underlying storage medium guarantees access to the stored data at the assigned mount path.
-      Modifications to the underlying storage medium, including but not limited to external or third-party applications or the arbitrary re-mounting of locally-attached storage, may result in unexpected behavior or data loss.
+Buckit **requires** that drives maintain their ordering at the mounted position across restarts.
+Buckit **does not** support arbitrary migration of a drive with existing Buckit data to a new mount position, whether intentional or as the result of OS-level behavior.
 
-   .. tab-item:: Baremetal
-      :sync: baremetal
+You **must** use ``/etc/fstab`` or a similar mount control system to mount drives at a consistent path.
+For example:
 
-      Format drives as XFS and present them to MinIO as a :abbr:`JBOD (Just a Bunch of Disks)` array with no RAID or other pooling configurations.
-      Using any other type of backing storage (SAN/NAS, ext4, RAID, LVM) typically results in a reduction in performance, reliability, predictability, and consistency.
+.. code-block:: shell
+   :class: copyable
 
-      When formatting XFS drives, apply a unique label per drive.
-      For example, the following command formats four drives as XFS and applies a corresponding drive label.
+   $ nano /etc/fstab
 
-      .. code-block:: shell
+   # <file system>        <mount point>    <type>  <options>         <dump>  <pass>
+   LABEL=BUCKITDRIVE1     /mnt/drive-1     xfs     defaults,noatime  0       2
+   LABEL=BUCKITDRIVE2     /mnt/drive-2     xfs     defaults,noatime  0       2
+   LABEL=BUCKITDRIVE3     /mnt/drive-3     xfs     defaults,noatime  0       2
+   LABEL=BUCKITDRIVE4     /mnt/drive-4     xfs     defaults,noatime  0       2
 
-         mkfs.xfs /dev/sdb -L MINIODRIVE1
-         mkfs.xfs /dev/sdc -L MINIODRIVE2
-         mkfs.xfs /dev/sdd -L MINIODRIVE3
-         mkfs.xfs /dev/sde -L MINIODRIVE4
+You can use ``mount -a`` to mount those drives at those paths during initial setup.
+The Operating System should otherwise mount these drives as part of the node startup process.
 
-      MinIO **requires** that drives maintain their ordering at the mounted position across restarts.
-      MinIO **does not** support arbitrary migration of a drive with existing MinIO data to a new mount position, whether intentional or as the result of OS-level behavior.
+Buckit **strongly recommends** using label-based mounting rules over UUID-based rules.
+Label-based rules allow swapping an unhealthy or non-working drive with a replacement that has matching format and label.
+UUID-based rules require editing the ``/etc/fstab`` file to replace mappings with the new drive UUID.
 
-      You **must** use ``/etc/fstab`` or a similar mount control system to mount drives at a consistent path.
-      For example:
+.. note:: 
 
-      .. code-block:: shell
-         :class: copyable
+   Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
+   For example, an AWS ECS instance with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
 
-         $ nano /etc/fstab
-
-         # <file system>        <mount point>    <type>  <options>         <dump>  <pass>
-         LABEL=MINIODRIVE1      /mnt/drive-1     xfs     defaults,noatime  0       2
-         LABEL=MINIODRIVE2      /mnt/drive-2     xfs     defaults,noatime  0       2
-         LABEL=MINIODRIVE3      /mnt/drive-3     xfs     defaults,noatime  0       2
-         LABEL=MINIODRIVE4      /mnt/drive-4     xfs     defaults,noatime  0       2
-
-      You can use ``mount -a`` to mount those drives at those paths during initial setup.
-      The Operating System should otherwise mount these drives as part of the node startup process.
-
-      MinIO **strongly recommends** using label-based mounting rules over UUID-based rules.
-      Label-based rules allow swapping an unhealthy or non-working drive with a replacement that has matching format and label.
-      UUID-based rules require editing the ``/etc/fstab`` file to replace mappings with the new drive UUID.
-
-      .. note:: 
-
-         Cloud environment instances which depend on mounted external storage may encounter boot failure if one or more of the remote file mounts return errors or failure.
-         For example, an AWS ECS instance with mounted persistent EBS volumes may not boot with the standard ``/etc/fstab`` configuration if one or more EBS volumes fail to mount.
-
-         You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
-         
-         You should not use this option on systems with locally attached disks, as silencing drive errors prevents both MinIO and the OS from responding to those errors in a normal fashion.
+   You can set the ``nofail`` option to silence error reporting at boot and allow the instance to boot with one or more mount issues.
+   
+   You should not use this option on systems with locally attached disks, as silencing drive errors prevents both Buckit and the OS from responding to those errors in a normal fashion.
 
 Disable XFS Retry On Error
 ++++++++++++++++++++++++++
 
-MinIO **strongly recommends** disabling `retry-on-error <https://docs.kernel.org/admin-guide/xfs.html?highlight=xfs#error-handling>`__ behavior using the ``max_retries`` configuration for the following error classes:
+Buckit **strongly recommends** disabling `retry-on-error <https://docs.kernel.org/admin-guide/xfs.html?highlight=xfs#error-handling>`__ behavior using the ``max_retries`` configuration for the following error classes:
 
 - ``EIO`` Error when reading or writing
 - ``ENOSPC`` Error no space left on device
 - ``default`` All other errors
 
 The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
-MinIO can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
+Buckit can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
 
 
-.. tab-set::
-   
+The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
+The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
+Modify the ``/mnt/drive`` line to match the pattern used for your Buckit drives.
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
+.. code-block:: bash
+   :class: copyable
 
-      Defer to the documentation for your preferred CSI or StorageClass on options for configuring filesystem-level settings.
+   #!/bin/bash
 
-   .. tab-item:: Baremetal
-      :sync: baremetal
+   for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
+         mountPath="$(df -h | grep $i | awk '{ print $6 }')"
+         deviceName="$(basename $i)"
+         echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
+         echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
+         echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
+         echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
+   done
+   exit 0
 
-      The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
-      The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
-      Modify the ``/mnt/drive`` line to match the pattern used for your MinIO drives.
+You must run this script on all Buckit nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
+You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
+Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
 
-      .. code-block:: bash
-         :class: copyable
+.. code-block:: shell
+   :class: copyable
 
-         #!/bin/bash
-
-         for i in $(df -h | grep /mnt/drive | awk '{ print $1 }'); do
-               mountPath="$(df -h | grep $i | awk '{ print $6 }')"
-               deviceName="$(basename $i)"
-               echo "Modifying xfs max_retries and retry_timeout_seconds for drive $i mounted at $mountPath"
-               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/EIO/max_retries
-               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/ENOSPC/max_retries
-               echo 0 > /sys/fs/xfs/$deviceName/error/metadata/default/max_retries
-         done
-         exit 0
-
-      You must run this script on all MinIO nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
-      You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
-      Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
-
-      .. code-block:: shell
-         :class: copyable
-
-         @reboot /opt/minio/xfs-retry-settings.sh
+   @reboot /opt/minio/xfs-retry-settings.sh
 
 Use Consistent Drive Type and Capacity
 ++++++++++++++++++++++++++++++++++++++
 
-Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage in a MinIO deployment.
-MinIO does not distinguish between storage types and does not support configuring "hot" or "warm" drives within a single deployment.
+Ensure a consistent drive type (NVMe, SSD, HDD) for the underlying storage in a Buckit deployment.
+Buckit does not distinguish between storage types and does not support configuring "hot" or "warm" drives within a single deployment.
 Mixing drive types typically results in performance degradation, as the slowest drives in the deployment become a bottleneck regardless of the capabilities of the faster drives.
 
-Use the same capacity and type of drive across all nodes in each MinIO :ref:`server pool <minio-intro-server-pool>`. 
-MinIO limits the maximum usable size per drive to the smallest size in the deployment.
-For example, if a deployment has 15 10TB drives and 1 1TB drive, MinIO limits the per-drive capacity to 1TB.
+Use the same capacity and type of drive across all nodes in each Buckit :ref:`server pool <minio-intro-server-pool>`. 
+Buckit limits the maximum usable size per drive to the smallest size in the deployment.
+For example, if a deployment has 15 10TB drives and 1 1TB drive, Buckit limits the per-drive capacity to 1TB.
 
 Recommended Hardware Tests
 --------------------------
 
 Operating System Diagnostic Tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you cannot run the :mc:`mc support diag` or the results show unexpected results, you can use the operating system's default tools.
 
 Test each drive independently on all servers to ensure they are identical in performance.
 Use the results of these OS-level tools to verify the capabilities of your storage hardware.
@@ -517,53 +425,3 @@ Document the performance numbers for each server in your deployment.
      - Number of threads (:math:`numberOfDrives * 16`)
    * - ``-F <>``  
      - list of files (the above command tests with 16 files per drive)  
-
-Recommended tools for MinIO subscriptions
------------------------------------------
-
-.. important::
-
-   The tools noted in this section **require** a MinIO subscription.
-   MinIO strongly recommends all production deployments use `AIStor Object Store <https://docs.min.io/community/minio-object-store/index.html>`__  with their SUBNET license.
-   For more information, see the `MinIO AIStor pricing page <https://min.io/pricing?jmp=docs>`__.
-
-#. Health diagnostic tool
-
-   Generate a summary of the health status of your deployment.
-   If you have access to :ref:`SUBNET <minio-docs-subnet>`, you can upload the results there.
-
-   .. code-block:: shell
-      :class: copyable
-   
-      mc support diag ALIAS --airgap
-   
-   Replace ALIAS with the :mc:`~mc alias` defined for the deployment.
-
-#. Network test
-
-   Run a network throughput test on a cluster with alias ``minio1``.
-
-   .. code-block:: shell
-      :class: copyable
-
-      mc support perf net minio1
-
-#. Drive test
-
-   Run drive read/write performance measurements on all drive on all nodes for a cluster with alias ``minio1``.
-   The command uses the default blocksize of 4MiB.
-
-   .. code-block:: shell
-      :class: copyable
- 
-      mc support perf drive minio1
-
-#. Object test
-
-   Measure the performance of S3 read/write of an object on the alias ``minio1``.
-   MinIO autotunes concurrency to obtain maximum throughput and IOPS (Input/Output Per Second).
-
-   .. code-block:: shell
-      :class: copyable
- 
-      mc support perf object minio1

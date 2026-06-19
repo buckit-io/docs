@@ -1,5 +1,5 @@
 ============
-MinIO Server
+Buckit Server
 ============
 
 .. default-domain:: minio
@@ -10,10 +10,10 @@ MinIO Server
 
 .. mc:: minio
 
-MinIO Server
+Buckit Server
 ------------
 
-The :mc:`minio server` command starts the MinIO server process:
+The :mc:`minio server` command starts the Buckit server process:
 
 .. code-block:: shell
    :class: copyable
@@ -22,7 +22,7 @@ The :mc:`minio server` command starts the MinIO server process:
 
 For examples of deploying :mc:`minio server` on a bare metal environment, see :ref:`minio-installation`.
 
-For examples of deploying :mc:`minio server` on a Kubernetes environment, see :ref:`Deploying a MinIO Tenant <minio-k8s-deploy-minio-tenant>`.
+For examples of deploying :mc:`minio server` on a Kubernetes environment, see :ref:`Deploying a Buckit Tenant <minio-k8s-deploy-minio-tenant>`.
 
 
 .. _minio-server-parameters:
@@ -53,8 +53,8 @@ The command accepts the following arguments:
    For distributed deployments, specify the hostname of each :mc:`minio server` in the deployment. 
    The group of :mc:`minio server` processes represent a single :ref:`Server Pool <minio-intro-server-pool>`.
 
-   :mc-cmd:`~minio server HOSTNAME` supports MinIO expansion notation ``{x...y}`` to denote a sequential series of hostnames. 
-   MinIO *requires* sequential hostnames to identify each :mc:`minio server` process in the set.
+   :mc-cmd:`~minio server HOSTNAME` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of hostnames. 
+   Buckit *requires* sequential hostnames to identify each :mc:`minio server` process in the set.
 
    For example, ``https://minio{1...4}.example.net`` expands to:
 
@@ -65,7 +65,7 @@ The command accepts the following arguments:
 
    You must run the :mc:`minio server` command with the *same* combination of :mc-cmd:`~minio server HOSTNAME` and :mc-cmd:`~minio server DIRECTORIES` on   each host in the Server Pool.
 
-   Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional Server Set for the purpose of horizontal expansion of the MinIO deployment. 
+   Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional Server Set for the purpose of horizontal expansion of the Buckit deployment. 
    For more information on Server Pools, see :ref:`Server Pool <minio-intro-server-pool>`.
 
 .. mc-cmd:: DIRECTORIES
@@ -73,7 +73,7 @@ The command accepts the following arguments:
 
    The directories or drives the :mc:`minio server` process uses as the storage backend.
 
-   :mc-cmd:`~minio server DIRECTORIES` supports MinIO expansion notation ``{x...y}`` to denote a sequential series of folders or drives. 
+   :mc-cmd:`~minio server DIRECTORIES` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of folders or drives. 
    For example, ``/mnt/disk{1...4}`` expands to:
 
    - ``/mnt/disk1``
@@ -87,13 +87,13 @@ The command accepts the following arguments:
 
    .. important::
 
-      MinIO recommends locally-attached drives, where the :mc-cmd:`~minio server DIRECTORIES` path points to each drive on the host machine. 
-      MinIO recommends *against* using network-attached storage, as network latency reduces performance of those drives compared to locally-attached storage.
+      Buckit recommends locally-attached drives, where the :mc-cmd:`~minio server DIRECTORIES` path points to each drive on the host machine. 
+      Buckit recommends *against* using network-attached storage, as network latency reduces performance of those drives compared to locally-attached storage.
 
       For development or evaluation, you can specify multiple logical directories or partitions on a single physical volume to enable erasure coding on the deployment.
 
-      For production environments, MinIO does **not recommend** using multiple logical directories or partitions on a single physical disk. 
-      While MinIO supports those configurations, the potential cost savings come at the risk of decreased reliability.
+      For production environments, Buckit does **not recommend** using multiple logical directories or partitions on a single physical disk. 
+      While Buckit supports those configurations, the potential cost savings come at the risk of decreased reliability.
 
 
 .. mc-cmd:: --address
@@ -101,13 +101,13 @@ The command accepts the following arguments:
 
    Binds the :mc:`minio <minio server>` server process to a specific network address and port number. 
    Specify the address and port as ``ADDRESS:PORT``, where ``ADDRESS`` is an IP address or hostname and ``PORT`` is a valid and open port on the host system.
-   MinIO supports both IPv4 and IPv6 addressing, provided that the specified addresses are routable and resolveable. 
+   Buckit supports both IPv4 and IPv6 addressing, provided that the specified addresses are routable and resolveable. 
 
    To change the port number for all IP addresses or hostnames configured on the host machine, specify only ``:PORT`` where ``PORT`` is a valid and open port on the host.
 
    .. versionchanged:: RELEASE.2023-01-02T09-40-09Z
    
-      You can configure your hosts file to have MinIO only listen on specific IPs.
+      You can configure your hosts file to have Buckit only listen on specific IPs.
       For example, if the machine's `/etc/hosts` file contains the following:
 
       .. code-block:: shell
@@ -126,10 +126,10 @@ The command accepts the following arguments:
 .. mc-cmd:: --console-address
    :optional:
 
-   Specifies a static port for the embedded MinIO Console.
+   Specifies a static port for the embedded Buckit Console.
 
-   Omit to direct MinIO to generate a dynamic port at server startup. 
-   The MinIO server outputs the port to the system log.
+   Omit to direct Buckit to generate a dynamic port at server startup. 
+   The Buckit server outputs the port to the system log.
 
 .. mc-cmd:: --ftp
    :optional:
@@ -143,17 +143,17 @@ The command accepts the following arguments:
    
    - *(Optional)* ``passive-port-range``, which restricts the range of potential ports the server can use to transfer data, such as when tight firewall rules limit the port the FTP server can request for the connection
    
-   - *(Optional)* ``tls-private-key``, which takes the path to the user's private key for accessing the MinIO deployment by TLS
+   - *(Optional)* ``tls-private-key``, which takes the path to the user's private key for accessing the Buckit deployment by TLS
      
      Use with ``tls-public-cert``.
    
-   - *(Optional)* ``tls-public-cert``, which takes the path to the certificate for accessing the MinIO deployment by TLS
+   - *(Optional)* ``tls-public-cert``, which takes the path to the certificate for accessing the Buckit deployment by TLS
      
      Use with ``tls-private-key``.
 
-   For MinIO deployments with TLS enabled, omit ``tls-private-key`` and ``tls-public-key`` to direct MinIO to use the default TLS keys for the MinIO deployment. 
+   For Buckit deployments with TLS enabled, omit ``tls-private-key`` and ``tls-public-key`` to direct Buckit to use the default TLS keys for the Buckit deployment. 
    See :ref:`minio-tls` for more information.
-   You only need to specify a certificate and private key to a different set of TLS certificate and key than the MinIO default (for example, to use a different domain).
+   You only need to specify a certificate and private key to a different set of TLS certificate and key than the Buckit default (for example, to use a different domain).
 
    For example:
 
@@ -300,7 +300,7 @@ The command accepts the following arguments:
 
    .. important::
 
-      :minio-release:`MinIO Server RELEASE.2023-12-09T18-17-51Z <RELEASE.2023-12-09T18-17-51Z>` removes the deprecated ``--config-dir | -C`` parameter.
+      :minio-release:`Buckit Server RELEASE.2023-12-09T18-17-51Z <RELEASE.2023-12-09T18-17-51Z>` removes the deprecated ``--config-dir | -C`` parameter.
       Deployments using this flag may start without TLS enabled.
       Replace those parameters with ``--certs-dir | -S`` and restart to re-enable TLS.
 
@@ -322,15 +322,15 @@ The command accepts the following arguments:
 .. note::
 
    You can define any of the ``minio`` parameters above by setting them in the :envvar:`MINIO_OPTS` environment variable.
-   This variable takes as its value a single string that contains any of the above parameters and their values that you want to set when starting the MinIO Server.
+   This variable takes as its value a single string that contains any of the above parameters and their values that you want to set when starting the Buckit Server.
 
 Settings
 --------
 
-You can perform other customizations to the MinIO Server process by defining additional :ref:`Configuration Values <minio-server-configuration-options>` or :ref:`Environment Variables <minio-server-environment-variables>`.
+You can perform other customizations to the Buckit Server process by defining additional :ref:`Configuration Values <minio-server-configuration-options>` or :ref:`Environment Variables <minio-server-environment-variables>`.
 
 Many configuration values and environment variables define the same value.
-If you set both a configuration value and the matching environment variable, MinIO uses the value from the environment variable.
+If you set both a configuration value and the matching environment variable, Buckit uses the value from the environment variable.
 
    
 .. toctree::

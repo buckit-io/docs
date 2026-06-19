@@ -1,0 +1,128 @@
+===============
+``bm ilm tier``
+===============
+
+.. default-domain:: minio
+
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
+
+.. mc:: bm ilm tier
+
+.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
+
+   :mc-cmd:`bm ilm tier` replaces ``bm admin tier``.
+
+Description
+-----------
+
+.. start-mc-ilm-tier-desc
+
+The :mc:`bm ilm tier` command and its subcommands configure a remote supported S3-compatible service for Buckit :ref:`Lifecycle Management: Object Transition ("Tiering") <minio-lifecycle-management-expiration>`. 
+
+.. end-mc-ilm-tier-desc
+
+After creating one or more tiers with this command, use :mc-cmd:`bm ilm rule` and its subcommands to create the rules that move objects to other storage.
+
+For more information, see the overview of :ref:`lifecycle management <minio-lifecycle-management>`.
+
+Subcommands
+-----------
+
+:mc-cmd:`bm ilm tier` includes the following subcommands:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+   :width: 100%
+
+   * - Subcommand
+     - Description
+
+   * - :mc:`~bm ilm tier add`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-add.rst
+          :start-after: start-mc-ilm-tier-add-desc
+          :end-before: end-mc-ilm-tier-add-desc
+
+   * - :mc:`~bm ilm tier check`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-check.rst
+          :start-after: start-mc-ilm-tier-check-desc
+          :end-before: end-mc-ilm-tier-check-desc
+
+   * - :mc:`~bm ilm tier info`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-info.rst
+          :start-after: start-mc-ilm-tier-info-desc
+          :end-before: end-mc-ilm-tier-info-desc
+
+   * - :mc:`~bm ilm tier ls`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-ls.rst
+          :start-after: start-mc-ilm-tier-ls-desc
+          :end-before: end-mc-ilm-tier-ls-desc
+
+   * - :mc:`~bm ilm tier rm`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-rm.rst
+          :start-after: start-mc-ilm-tier-rm-desc
+          :end-before: end-mc-ilm-tier-rm-desc
+
+   * - :mc:`~bm ilm tier update`
+     - .. include:: /reference/bm-cli/bm-ilm-tier-update.rst
+          :start-after: start-mc-ilm-tier-update-desc
+          :end-before: end-mc-ilm-tier-update-desc
+
+
+.. _minio-mc-ilm-tier-permissions:
+
+Required Permissions
+--------------------
+
+To create tiers for object transition, Buckit requires the following administrative permissions on the cluster:
+
+- :policy-action:`admin:SetTier`
+- :policy-action:`admin:ListTier`
+
+For example, the following policy provides sufficient permissions for configuring object transition lifecycle management rules on any bucket in the cluster:
+
+.. literalinclude:: /extra/examples/LifecycleManagementAdmin.json
+   :language: json
+   :class: copyable
+
+Transition Permissions
+~~~~~~~~~~~~~~~~~~~~~~
+
+Object transition lifecycle management rules require additional permissions on the remote storage tier. 
+Specifically, Buckit requires the remote tier credentials provide read, write, list, and delete permissions.
+
+For example, if the remote storage tier implements AWS IAM policy-based access control, the following policy provides the necessary permissions for transitioning objects into and out of the remote tier:
+
+.. literalinclude:: /extra/examples/LifecycleManagementUser.json
+   :language: json
+   :class: copyable
+
+Modify the ``Resource`` for the bucket into which Buckit tiers objects.
+
+.. admonition:: Avoid enabling versioning in the remote tier
+   :class: important
+
+   Buckit strongly recommends against enabling bucket versioning for remote tiers.
+   If the remote tier bucket is versioned, each source object version is transitioned to a *unique object* in the remote tier.
+   
+   If your environment requires versioning for the remote tier, you must also allow the ``s3:DeleteObjectVersion`` permission.
+
+Defer to the documentation for the supported tiering targets for more complete information on configuring users and permissions to support Buckit tiering:
+
+- :aws-docs:`Amazon S3 Permissions <service-authorization/latest/reference/list_amazons3.html#amazons3-actions-as-permissions>`
+- `Google Cloud Storage Access Control <https://cloud.google.com/storage/docs/access-control>`__
+- `Authorizing access to data in Azure storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-auth?toc=/azure/storage/blobs/toc.json>`__
+
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+   
+   /reference/bm-cli/bm-ilm-tier-add
+   /reference/bm-cli/bm-ilm-tier-check
+   /reference/bm-cli/bm-ilm-tier-info
+   /reference/bm-cli/bm-ilm-tier-ls
+   /reference/bm-cli/bm-ilm-tier-rm
+   /reference/bm-cli/bm-ilm-tier-update

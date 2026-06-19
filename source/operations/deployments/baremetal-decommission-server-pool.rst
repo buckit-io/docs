@@ -10,34 +10,34 @@ Decommission Server Pools
    :local:
    :depth: 1
 
-MinIO supports decommissioning and removing :ref:`server pools <minio-intro-server-pool>` from a deployment with two or more pools.
+Buckit supports decommissioning and removing :ref:`server pools <minio-intro-server-pool>` from a deployment with two or more pools.
 To decommission, there must be at least one remaining pool with sufficient available space to receive the objects from the decommissioned pools.
 
-Starting with ``RELEASE.2023-01-18T04-36-38Z``, MinIO supports queueing  :ref:`multiple pools <minio-decommission-multiple-pools>` in a single decommission command.
+Starting with ``RELEASE.2023-01-18T04-36-38Z``, Buckit supports queueing  :ref:`multiple pools <minio-decommission-multiple-pools>` in a single decommission command.
 Each listed pool immediately enters a read-only status, but draining occurs one pool at a time.
 
 Decommissioning is designed for removing an older server pool whose hardware is no longer sufficient or performant compared to the pools in the deployment. 
-MinIO automatically migrates data from the decommissioned pools to the remaining pools in the deployment based on the ratio of free space available in each pool.
+Buckit automatically migrates data from the decommissioned pools to the remaining pools in the deployment based on the ratio of free space available in each pool.
 
-During the decommissioning process, MinIO routes read operations (e.g. ``GET``, ``LIST``, ``HEAD``) normally. 
-MinIO routes write operations (e.g. ``PUT``, versioned ``DELETE``) to the remaining "active" pools in the deployment.
+During the decommissioning process, Buckit routes read operations (e.g. ``GET``, ``LIST``, ``HEAD``) normally. 
+Buckit routes write operations (e.g. ``PUT``, versioned ``DELETE``) to the remaining "active" pools in the deployment.
 Versioned objects maintain their ordering throughout the migration process.
 
-The procedures on this page decommission and remove one or more server pools from a :ref:`distributed <deploy-minio-distributed>` MinIO deployment with *at least* two server pools.
+The procedures on this page decommission and remove one or more server pools from a :ref:`distributed <deploy-minio-distributed>` Buckit deployment with *at least* two server pools.
 
 .. admonition:: Decommissioning is Permanent
    :class: important
 
-   Once MinIO begins decommissioning a pool, it marks that pool as *permanently* inactive ("draining"). 
+   Once Buckit begins decommissioning a pool, it marks that pool as *permanently* inactive ("draining"). 
    Cancelling or otherwise interrupting the  decommissioning procedure does **not** restore the pool to an active state. 
    Use extra caution when decommissioning multiple pools.
 
    Decommissioning is a major administrative operation that requires care in planning and execution, and is not a trivial or 'daily' task. 
 
-   `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to decommissioning. 
-   Coordination with MinIO Engineering via SUBNET can ensure successful decommissioning, including performance testing and health diagnostics.
+   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to decommissioning. 
+   Coordination with Buckit Engineering via SUBNET can ensure successful decommissioning, including performance testing and health diagnostics.
 
-   Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. 
+   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 
 
@@ -60,7 +60,7 @@ the deployment. For containerized or orchestrated infrastructures, this may
 require specific configuration of networking and routing components such as
 ingress or load balancers. Certain operating systems may also require setting
 firewall rules. For example, the following command explicitly opens the default
-MinIO server API port ``9000`` on servers using ``firewalld``:
+Buckit server API port ``9000`` on servers using ``firewalld``:
 
 .. code-block:: shell
    :class: copyable
@@ -68,21 +68,21 @@ MinIO server API port ``9000`` on servers using ``firewalld``:
    firewall-cmd --permanent --zone=public --add-port=9000/tcp
    firewall-cmd --reload
 
-If you set a static :ref:`MinIO Console <minio-console>` port (e.g. ``:9001``)
+If you set a static :ref:`Buckit Console <minio-console>` port (e.g. ``:9001``)
 you must *also* grant access to that port to ensure connectivity from external
 clients.
 
-MinIO **strongly recomends** using a load balancer to manage connectivity to the
+Buckit **strongly recomends** using a load balancer to manage connectivity to the
 cluster. The Load Balancer should use a "Least Connections" algorithm for
-routing requests to the MinIO deployment, since any MinIO node in the deployment
+routing requests to the Buckit deployment, since any Buckit node in the deployment
 can receive, route, or process client requests. 
 
-The following load balancers are known to work well with MinIO:
+The following load balancers are known to work well with Buckit:
 
 - `NGINX <https://www.nginx.com/products/nginx/load-balancing/>`__
 - `HAProxy <https://cbonte.github.io/haproxy-dconv/2.3/intro.html#3.3.5>`__
 
-Configuring firewalls or load balancers to support MinIO is out of scope for
+Configuring firewalls or load balancers to support Buckit is out of scope for
 this procedure.
 
 Deployment Must Have Sufficient Storage
@@ -91,7 +91,7 @@ Deployment Must Have Sufficient Storage
 The decommissioning process migrates objects from the target pool to other pools in the deployment. 
 The total available storage on the deployment *must* exceed the total storage of the decommissioned pool.
 
-Use the `Erasure Code Calculator </docs/_static/ec-calculator.html>`__ to determine the usable storage capacity.
+Use the `Erasure Code Calculator <../../_static/ec-calculator.html>`__ to determine the usable storage capacity.
 Then reduce that by the size of the objects already on the deployment.
 
 For example, consider a deployment with the following distribution of used and free storage:
@@ -137,10 +137,10 @@ Do **not** attempt to perform expansion and decommission changes in a single ste
 Decommissioning is Resumable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO resumes decommissioning if interrupted by transient issues such as
+Buckit resumes decommissioning if interrupted by transient issues such as
 deployment restarts or network failures.
 
-For manually cancelled or failed decommissioning attempts, MinIO 
+For manually cancelled or failed decommissioning attempts, Buckit 
 resumes only after you manually re-initiate the decommissioning operation.
 
 The pool remains in the decommissioning state *regardless* of the interruption.
@@ -149,7 +149,7 @@ A pool can *never* return to active status after decommissioning begins.
 Decommissioning is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Removing a decommissioned server pool requires restarting *all* MinIO
+Removing a decommissioned server pool requires restarting *all* Buckit
 nodes in the deployment at around the same time.
 
 .. include:: /includes/common-installation.rst
@@ -174,13 +174,13 @@ Behavior
 Final Listing Check
 ~~~~~~~~~~~~~~~~~~~
 
-At the end of the decommission process, MinIO checks for a list of items on the pool.
-If the list returns empty, MinIO marks the decommission as successfully completed.
-If any objects return, MinIO returns an error that the decommission process failed.
+At the end of the decommission process, Buckit checks for a list of items on the pool.
+If the list returns empty, Buckit marks the decommission as successfully completed.
+If any objects return, Buckit returns an error that the decommission process failed.
 
 If the decommission fails, customers should open a |SUBNET| issue for further assistance before retrying the decommission. 
-Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `MinIO Community Slack <https://slack.min.io/>`__.
-MinIO provides Community Support at best-effort only and provides no :abbr:`SLA (Service Level Agreement)` around responsiveness.
+Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `Buckit Community Slack <https://slack.min.io/>`__.
+Buckit provides Community Support at best-effort only and provides no :abbr:`SLA (Service Level Agreement)` around responsiveness.
 
 Decommissioning a Server with Tiering Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -188,20 +188,20 @@ Decommissioning a Server with Tiering Enabled
 .. versionchanged:: RELEASE.2023-03-20T20-16-18Z
 
 For deployments with tiering enabled and active, decommissioning moves the object references to a new active pool.
-Applications can continue issuing GET requests against those objects where MinIO handles transparently retrieving them from the remote tier.
+Applications can continue issuing GET requests against those objects where Buckit handles transparently retrieving them from the remote tier.
 
-In older MinIO versions, tiering configurations prevent decommissioning. 
+In older Buckit versions, tiering configurations prevent decommissioning. 
 
 .. _minio-decommissioning-server-pool:
 
 Decommission a Server Pool
 --------------------------
 
-1) Review the MinIO Deployment Topology
+1) Review the Buckit Deployment Topology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :mc:`mc admin decommission` command returns a list of all
-pools in the MinIO deployment:
+pools in the Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -228,7 +228,7 @@ capacity to migrate all object stored in the decommissioned pool.
 
 In the example above, the deployment has 210TiB total storage with 110TiB used.
 The first pool (``minio-{01...04}``) is the decommissioning target, as it was
-provisioned when the MinIO deployment was created and is completely full. The
+provisioned when the Buckit deployment was created and is completely full. The
 remaining newer pools can absorb all objects stored on the first pool without
 significantly impacting total available storage.
 
@@ -238,7 +238,7 @@ significantly impacting total available storage.
 .. admonition:: Decommissioning is Permanent
    :class: warning
 
-   Once MinIO begins decommissioning a pool, it marks that pool as *permanently*
+   Once Buckit begins decommissioning a pool, it marks that pool as *permanently*
    inactive ("draining"). Cancelling or otherwise interrupting the 
    decommissioning procedure does **not** restore the pool to an active
    state. 
@@ -258,9 +258,9 @@ full description of the pool to decommission, including all hosts, disks, and fi
 The example command begins decommissioning the matching server pool on the
 ``myminio`` deployment.
 
-During the decommissioning process, MinIO continues routing read operations
+During the decommissioning process, Buckit continues routing read operations
 (``GET``, ``LIST``, ``HEAD``) to the pool for those objects not
-yet migrated. MinIO routes all new write operations (``PUT``) to the
+yet migrated. Buckit routes all new write operations (``PUT``) to the
 remaining pools in the deployment.
 
 Load balancers, reverse proxy, or other network control components which
@@ -318,7 +318,7 @@ errors.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As each pool completes decommissioning, you can safely remove it from the
-deployment configuration. Modify the startup command for each remaining MinIO
+deployment configuration. Modify the startup command for each remaining Buckit
 server in the deployment and remove the decommissioned pool.
 
 The ``.deb`` or ``.rpm`` packages install a 
@@ -351,16 +351,16 @@ Edit the environment file and remove the decommissioned pool from the
 
 Update any load balancers, reverse proxies, or other network control planes
 to remove the decommissioned server pool from the connection configuration for
-the MinIO deployment.
+the Buckit deployment.
 
 Specific instructions for configuring network control plane components is
 out of scope for this procedure.
 
-6) Restart the MinIO Deployment
+6) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following commands on each node **simultaneously** in the deployment
-to restart the MinIO service:
+to restart the Buckit service:
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-restart-service-desc
@@ -384,9 +384,9 @@ You can start the decommission process for multiple server pools when issuing a 
 
 After entering the command:
 
-- MinIO immediately stops write access to all pools to be decommissioned.
+- Buckit immediately stops write access to all pools to be decommissioned.
 - Decommissioning happens one pool at a time.
-- Each pool completes the decommission draining process before MinIO begins draining the next pool.
+- Each pool completes the decommission draining process before Buckit begins draining the next pool.
 
 To decommission multiple server pools from one command, add the full description of each server pool to decommission as a comma-separated list.
 
@@ -396,10 +396,10 @@ All other considerations about decommissioning apply when performing the process
 - Once you mark the pools as decommissioned, you **cannot** restore them.
 - Confirm you select the intended pools.
 
-1) Review the MinIO Deployment Topology
+1) Review the Buckit Deployment Topology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :mc:`mc admin decommission` command returns a list of all pools in the MinIO deployment:
+The :mc:`mc admin decommission` command returns a list of all pools in the Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
@@ -426,8 +426,8 @@ The remaining pools in the deployment *must* have sufficient total capacity to m
 
 In the example above, the deployment has 1110TiB total storage with 145TiB used.
 
-- The first pool (``minio-{01...04}``) is the first decommissioning target, as it was provisioned when the MinIO deployment was created and is completely full.
-- The second pool (``minio-{05...08}``) is the second decommissioning target, as it was also provisioned when the MinIO deployment was created and is nearly full.
+- The first pool (``minio-{01...04}``) is the first decommissioning target, as it was provisioned when the Buckit deployment was created and is completely full.
+- The second pool (``minio-{05...08}``) is the second decommissioning target, as it was also provisioned when the Buckit deployment was created and is nearly full.
 - The fourth pool (``minio-{13...16}``) is a newly added pool with new hardware from a completed server expansion.
 
 The third and fourth pools can absorb all objects stored on the first pool without significantly impacting total available storage.
@@ -442,7 +442,7 @@ The third and fourth pools can absorb all objects stored on the first pool witho
 .. admonition:: Decommissioning is Permanent
    :class: warning
 
-   Once MinIO begins decommissioning the pools, it marks those pools as *permanently* inactive ("draining"). 
+   Once Buckit begins decommissioning the pools, it marks those pools as *permanently* inactive ("draining"). 
    Cancelling or otherwise interrupting the decommissioning procedure does **not** restore the pools to an active state. 
 
    Review and validate that you are decommissioning the correct pools *before* running the following command.
@@ -457,8 +457,8 @@ Specify the :ref:`alias <alias>` of the deployment and a comma-separated list of
 
 The example command begins decommissioning the two listed matching server pools on the ``myminio`` deployment.
 
-During the decommissioning process, MinIO continues routing read operations (``GET``, ``LIST``, ``HEAD``) operations to the pools for those objects not yet migrated. 
-MinIO routes all new write operations (``PUT``) to the remaining pools in the deployment not scheduled for decommissioning.
+During the decommissioning process, Buckit continues routing read operations (``GET``, ``LIST``, ``HEAD``) operations to the pools for those objects not yet migrated. 
+Buckit routes all new write operations (``PUT``) to the remaining pools in the deployment not scheduled for decommissioning.
 
 Draining of decommissioned pools happens one pool at a time, completing the decommission of each pool in sequence.
 Draining does _not_ happen concurrently for all decommissioning pools.
@@ -502,7 +502,7 @@ The command returns output similar to the following:
    Started: 30 minutes ago
 
 :mc-cmd:`mc admin decommission status` marks the :guilabel:`Status` as :guilabel:`Complete` once decommissioning is completed. 
-You can move on to the next step once MinIO completes decommissioning for all pools.
+You can move on to the next step once Buckit completes decommissioning for all pools.
 
 If :guilabel:`Status` reads as failed, you can re-run the :mc-cmd:`mc admin decommission start` command to resume the process. 
 For persistent failures, use :mc:`mc admin logs` or review the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific errors.
@@ -511,7 +511,7 @@ For persistent failures, use :mc:`mc admin logs` or review the ``systemd`` logs 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once decommissioning completes, you can safely remove the pools from the deployment configuration. 
-Modify the startup command for each remaining MinIO server in the deployment and remove the decommissioned pool.
+Modify the startup command for each remaining Buckit server in the deployment and remove the decommissioned pool.
 
 The ``.deb`` or ``.rpm`` packages install a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/lib/systemd/system/minio.service``. 
 For binary installations, this procedure assumes the file was created manually as per the :ref:`deploy-minio-distributed` procedure.
@@ -535,14 +535,14 @@ Edit the environment file and remove the decommissioned pools from the ``MINIO_V
 5) Update Network Control Plane
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Update any load balancers, reverse proxies, or other network control planes to remove the decommissioned server pools from the connection configuration for the MinIO deployment.
+Update any load balancers, reverse proxies, or other network control planes to remove the decommissioned server pools from the connection configuration for the Buckit deployment.
 
 Specific instructions for configuring network control plane components is out of scope for this procedure.
 
-6) Restart the MinIO Deployment
+6) Restart the Buckit Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Issue the following commands on each node **simultaneously** in the deployment to restart the MinIO service:
+Issue the following commands on each node **simultaneously** in the deployment to restart the Buckit service:
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-restart-service-desc

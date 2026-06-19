@@ -2,18 +2,18 @@
 
    Configure the AD/LDAP provider using one of the following:
 
-   * MinIO Client
+   * Buckit Client
    * Environment variables
 
-   All methods require starting/restarting the MinIO deployment to apply changes.
+   All methods require starting/restarting the Buckit deployment to apply changes.
 
    The following tabs provide a quick reference for the available configuration methods:
 
    .. tab-set::
 
-      .. tab-item:: MinIO Client
+      .. tab-item:: Buckit Client
 
-         MinIO supports specifying the AD/LDAP provider settings using :mc:`mc idp ldap` commands.
+         Buckit supports specifying the AD/LDAP provider settings using :mc:`mc idp ldap` commands.
 
          For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
 
@@ -36,14 +36,14 @@
               user_dn_search_base_dn="DC=example,DC=net"                           \
               user_dn_search_filter="(&(objectCategory=user)(sAMAccountName=%s))"  \
               group_search_filter= "(&(objectClass=group)(member=%d))"             \
-              group_search_base_dn="ou=MinIO Users,dc=example,dc=net"              \
+              group_search_base_dn="ou=Buckit Users,dc=example,dc=net"              \
               tls_skip_verify="off"                                                \
               server_insecure=off                                                  \
               server_starttls="off"                                                \
               srv_record_name=""                                                   \
               comment="Test LDAP server"
 
-        For Kubernetes deployments, ensure the `ALIAS` corresponds to the externally accessible hostname for the MinIO Tenant.
+        For Kubernetes deployments, ensure the `ALIAS` corresponds to the externally accessible hostname for the Buckit Tenant.
 
         For more complete documentation on these settings, see :mc:`mc idp ldap`.
 
@@ -57,7 +57,7 @@
 
       .. tab-item:: Environment Variables
 
-         MinIO supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
+         Buckit supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
 	      The :mc:`minio server` process applies the specified settings on its next startup.
 	      For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
 	      Any differences in server configurations between nodes will result in startup or configuration failures.
@@ -79,7 +79,7 @@
             export MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER="(&(objectCategory=user)(sAMAccountName=%s))"
             export MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD="xxxxxxxxx"
             export MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER="(&(objectClass=group)(member=%d))"
-            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=MinIO Users,dc=example,dc=net"
+            export MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN="ou=Buckit Users,dc=example,dc=net"
             export MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY="off"
             export MINIO_IDENTITY_LDAP_SERVER_INSECURE="off"
             export MINIO_IDENTITY_LDAP_SERVER_STARTTLS="off"
@@ -88,14 +88,14 @@
 
          For complete documentation on these variables, see :ref:`minio-server-envvar-external-identity-management-ad-ldap`.
 
-#. Restart the MinIO Deployment
+#. Restart the Buckit Deployment
 
-   You must restart the MinIO deployment to apply the configuration changes.
+   You must restart the Buckit deployment to apply the configuration changes.
 
-   If you configured AD/LDAP from the MinIO Console, no additional action is required.
-   The MinIO Console automatically restarts the deployment after saving the new AD/LDAP configuration.
+   If you configured AD/LDAP from the Buckit Console, no additional action is required.
+   The Buckit Console automatically restarts the deployment after saving the new AD/LDAP configuration.
 
-   For MinIO Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
+   For Buckit Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
 
    .. code-block:: shell
       :class: copyable
@@ -104,25 +104,25 @@
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
-#. Use the MinIO Console to Log In with AD/LDAP Credentials
+#. Use the Buckit Console to Log In with AD/LDAP Credentials
    
-   The MinIO Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the MinIO :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the MinIO deployment.
+   The Buckit Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the Buckit :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the Buckit deployment.
 
-   You can access the Console by opening the root URL for the MinIO cluster. For example, ``https://minio.example.net:9000``.
+   You can access the Console by opening the root URL for the Buckit cluster. For example, ``https://minio.example.net:9000``.
 
    Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-ad-ldap-access-control>`.
 
-   You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on MinIO.
+   You can also create :ref:`access keys <minio-idp-service-account>` for supporting applications which must perform operations on Buckit.
    Access Keys are long-lived credentials which inherit their privileges from the parent user.
    The parent user can further restrict those privileges while creating the service account.
 
 #. Generate S3-Compatible Temporary Credentials using AD/LDAP Credentials
 
-   MinIO requires clients to authenticate using :s3-api:`AWS Signature Version 4 protocol <sig-v4-authenticating-requests.html>` with support for the deprecated Signature Version 2 protocol.
-   Specifically, clients must present a valid access key and secret key to access any S3 or MinIO administrative API, such as ``PUT``, ``GET``, and ``DELETE`` operations.
+   Buckit requires clients to authenticate using :s3-api:`AWS Signature Version 4 protocol <sig-v4-authenticating-requests.html>` with support for the deprecated Signature Version 2 protocol.
+   Specifically, clients must present a valid access key and secret key to access any S3 or Buckit administrative API, such as ``PUT``, ``GET``, and ``DELETE`` operations.
 
    Applications can generate temporary access credentials as-needed using the :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) API endpoint and AD/LDAP user credentials. 
-   MinIO provides an example Go application :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` that manages this workflow.
+   Buckit provides an example Go application :minio-git:`ldap.go <minio/blob/master/docs/sts/ldap.go>` that manages this workflow.
 
    .. code-block:: shell
 
@@ -141,6 +141,6 @@
      Omit to use the  :ref:`policy whose name matches <minio-external-identity-management-ad-ldap-access-control>` the Distinguished Name (DN) of the AD/LDAP user. 
 
    The API response consists of an XML document containing the access key, secret key, session token, and expiration date.
-   Applications can use the access key and secret key to access and perform operations on MinIO.
+   Applications can use the access key and secret key to access and perform operations on Buckit.
 
    See the :ref:`minio-sts-assumerolewithldapidentity` for reference documentation.

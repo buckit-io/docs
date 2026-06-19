@@ -2,7 +2,7 @@
 
    You can configure the :abbr:`OIDC (OpenID Connect)` provider using either
    environment variables *or* server runtime configuration settings. Both
-   methods require starting/restarting the MinIO deployment to apply changes. The
+   methods require starting/restarting the Buckit deployment to apply changes. The
    following tabs provide a quick reference of all required and optional
    environment variables and configuration settings respectively:
 
@@ -10,7 +10,7 @@
 
       .. tab-item:: Environment Variables
 
-         MinIO supports specifying the :abbr:`OIDC (OpenID Connect)` provider
+         Buckit supports specifying the :abbr:`OIDC (OpenID Connect)` provider
          settings using :ref:`environment variables
          <minio-server-envvar-external-identity-management-openid>`. The 
          :mc:`minio server` process applies the specified settings on its next
@@ -42,7 +42,7 @@
 
       .. tab-item:: Configuration Settings
 
-         MinIO supports specifying the :abbr:`OIDC (OpenID Connect)` provider
+         Buckit supports specifying the :abbr:`OIDC (OpenID Connect)` provider
          settings using :mc-conf:`configuration settings <identity_openid>`. The 
          :mc:`minio server` process applies the specified settings on its next
          startup. For distributed deployments, the :mc:`mc admin config`
@@ -71,9 +71,9 @@
          For more complete documentation on these settings, see
          :mc-conf:`identity_openid`.
 
-#. Restart the MinIO Deployment
+#. Restart the Buckit Deployment
 
-   You must restart the MinIO deployment to apply the configuration changes. 
+   You must restart the Buckit deployment to apply the configuration changes. 
    Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
 
    .. code-block:: shell
@@ -86,10 +86,10 @@
 
 #. Generate S3-Compatible Temporary Credentials using OIDC Credentials
 
-   MinIO requires clients authenticate using :s3-api:`AWS Signature Version 4
+   Buckit requires clients authenticate using :s3-api:`AWS Signature Version 4
    protocol <sig-v4-authenticating-requests.html>` with support for the deprecated
    Signature Version 2 protocol. Specifically, clients must present a valid access
-   key and secret key to access any S3 or MinIO administrative API, such as
+   key and secret key to access any S3 or Buckit administrative API, such as
    ``PUT``, ``GET``, and ``DELETE`` operations.
 
    Applications can generate temporary access credentials as-needed using the 
@@ -101,7 +101,7 @@
    :abbr:`OIDC (OpenID Connect)` provider and retrieving the 
    JSON Web Token (JWT) associated to the authentication session. Defer to the
    provider documentation for obtaining and parsing the JWT token after successful
-   authentication. MinIO provides an example Go application 
+   authentication. Buckit provides an example Go application 
    :minio-git:`web-identity.go <minio/blob/master/docs/sts/web-identity.go>` with
    an example of managing this workflow.
 
@@ -126,6 +126,6 @@
    The API response consists of an XML document containing the
    access key, secret key, session token, and expiration date. Applications
    can use the access key and secret key to access and perform operations on
-   MinIO.
+   Buckit.
 
    See the :ref:`minio-sts-assumerolewithwebidentity` for reference documentation.

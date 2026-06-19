@@ -23,7 +23,7 @@ Syntax
 .. start-mc-ilm-ls-desc
 
 The :mc:`mc ilm ls` command summrizes all configured object lifecycle management 
-rules on a MinIO bucket in a tabular format.
+rules on a Buckit bucket in a tabular format.
 
 .. end-mc-ilm-ls-desc
 
@@ -66,7 +66,7 @@ The output of the command might resemble the following:
    .. tab-item:: EXAMPLE
 
       The following command lists all lifecycle management rules for the
-      ``mydata`` bucket on the ``myminio`` MinIO deployment:
+      ``mydata`` bucket on the ``myminio`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -93,7 +93,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
    
-   The :ref:`alias <alias>` and full path to the bucket on the MinIO
+   The :ref:`alias <alias>` and full path to the bucket on the Buckit
    deployment for which to list the object lifecycle management rules. For
    example:
 

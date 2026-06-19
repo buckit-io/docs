@@ -1,7 +1,7 @@
 .. _minio-server-envvar-console:
 
 ======================
-MinIO Console Settings
+Buckit Console Settings
 ======================
 
 .. default-domain:: minio
@@ -17,7 +17,7 @@ MinIO Console Settings
 
    Some of the settings on this page may no longer be relevant for newer deployments.
 
-This page covers settings that manage access and behavior for the MinIO Console. 
+This page covers settings that manage access and behavior for the Buckit Console. 
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -30,9 +30,9 @@ This page covers settings that manage access and behavior for the MinIO Console.
 Browser Settings
 ----------------
 
-The following settings control behavior for the embedded MinIO Console.
+The following settings control behavior for the embedded Buckit Console.
 
-MinIO Console
+Buckit Console
 ~~~~~~~~~~~~~
 
 *Optional*
@@ -43,7 +43,7 @@ MinIO Console
 
       .. envvar:: MINIO_BROWSER
 
-         Specify ``off`` to disable the embedded MinIO Console.
+         Specify ``off`` to disable the embedded Buckit Console.
 
    .. tab-item:: Configuration Setting
 
@@ -61,9 +61,9 @@ Animation
 
       .. envvar:: MINIO_BROWSER_LOGIN_ANIMATION
 
-         .. versionadded:: MinIO Server RELEASE.2023-05-04T21-44-30Z
+         .. versionadded:: Buckit Server RELEASE.2023-05-04T21-44-30Z
 
-         Specify ``off`` to disable the animated login screen for the MinIO Console. 
+         Specify ``off`` to disable the animated login screen for the Buckit Console. 
          Defaults to ``on``.
    .. tab-item:: Configuration Setting
 
@@ -81,7 +81,7 @@ Browser Redirect
 
       .. envvar:: MINIO_BROWSER_REDIRECT
 
-         .. versionadded:: MinIO Server RELEASE.2023-09-16T01-01-47Z
+         .. versionadded:: Buckit Server RELEASE.2023-09-16T01-01-47Z
 
         Specify whether requests from a web browser automatically redirect to the Console address.
         Defaults to ``true``.
@@ -102,14 +102,14 @@ Browser Redirect URL
 
       .. envvar:: MINIO_BROWSER_REDIRECT_URL
 
-         Specify the Fully Qualified Domain Name (FQDN) the MinIO Console listens for incoming connections on.
+         Specify the Fully Qualified Domain Name (FQDN) the Buckit Console listens for incoming connections on.
    
-         If you want to host the MinIO Console exclusively from a reverse-proxy service, you must specify the hostname managed by that service.
+         If you want to host the Buckit Console exclusively from a reverse-proxy service, you must specify the hostname managed by that service.
    
-         For example, consider a reverse proxy configured to route ``https://example.net/minio/`` to the MinIO Console.
+         For example, consider a reverse proxy configured to route ``https://example.net/minio/`` to the Buckit Console.
          You must set this environment variable to match that hostname for the Console to both listen and respond to requests using that hostname.
 
-         If you omit this variable, the Console listens and responds to all IP addresses or hostnames associated to the host machine on which the MinIO Server runs.
+         If you omit this variable, the Console listens and responds to all IP addresses or hostnames associated to the host machine on which the Buckit Server runs.
 
    .. tab-item:: Configuration Setting
 
@@ -127,11 +127,11 @@ Session Duration
 
       .. envvar:: MINIO_BROWSER_SESSION_DURATION
 
-         .. versionadded:: MinIO Server RELEASE.2023-08-23T10-07-06Z
+         .. versionadded:: Buckit Server RELEASE.2023-08-23T10-07-06Z
 
-         Specify the duration of a browser session for working with the MinIO Console.
+         Specify the duration of a browser session for working with the Buckit Console.
 
-         MinIO supports the following units of time measurement:
+         Buckit supports the following units of time measurement:
 
          - ``s`` - seconds, "60s"
          - ``m`` - minutes, "60m"
@@ -156,8 +156,8 @@ Log Query URL
 
       .. envvar:: MINIO_LOG_QUERY_URL
 
-         Specify the URL of a PostgreSQL service to which MinIO writes :ref:`Audit logs <minio-logging-publish-audit-logs>`. 
-         The embedded MinIO Console provides a Log Search tool that allows querying the PostgreSQL service for collected logs.
+         Specify the URL of a PostgreSQL service to which Buckit writes :ref:`Audit logs <minio-logging-publish-audit-logs>`. 
+         The embedded Buckit Console provides a Log Search tool that allows querying the PostgreSQL service for collected logs.
 
    .. tab-item:: Configuration Setting
 
@@ -169,7 +169,7 @@ Content Security Policy
 
 *Optional*
 
-Configure MinIO Console to generate a `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in HTTP responses.
+Configure Buckit Console to generate a `Content-Security-Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ header in HTTP responses.
 Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
 
 .. tab-set::
@@ -204,7 +204,7 @@ Strict Transport Security
 
 *Optional*
 
-Configure MinIO console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in HTTP responses.
+Configure Buckit console to generate a `Strict-Transport-Security <https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security>`__ header in HTTP responses.
 
 To generate the header, you **must** set a duration using either :envvar:`MINIO_BROWSER_HSTS_SECONDS` or :mc-conf:`~browser.hsts_seconds`.
 Other HSTS settings are optional.
@@ -227,7 +227,7 @@ Other HSTS settings are optional.
 
       .. envvar:: MINIO_BROWSER_HSTS_INCLUDE_SUB_DOMAINS
 
-         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Set to ``on`` to also apply the configured HSTS policy to all Buckit Console subdomains.
          Defaults to ``off``.
 
          .. code-block:: shell
@@ -237,7 +237,7 @@ Other HSTS settings are optional.
 
       .. envvar:: MINIO_BROWSER_HSTS_PRELOAD
 
-         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Set to ``on`` to direct the client browser to add the Buckit Console domain to its HSTS preload list.
          Defaults to ``off``.
 
          .. code-block:: shell
@@ -268,7 +268,7 @@ Other HSTS settings are optional.
       .. mc-conf:: browser hsts_include_subdomains
          :delimiter: " "
 
-         Set to ``on`` to also apply the configured HSTS policy to all MinIO Console subdomains.
+         Set to ``on`` to also apply the configured HSTS policy to all Buckit Console subdomains.
          Defaults to ``off``.
 
          .. code-block:: shell
@@ -282,7 +282,7 @@ Other HSTS settings are optional.
       .. mc-conf:: browser hsts_preload
          :delimiter: " "
 
-         Set to ``on`` to direct the client browser to add the MinIO Console domain to its HSTS preload list.
+         Set to ``on`` to direct the client browser to add the Buckit Console domain to its HSTS preload list.
          Defaults to ``off``.
 
          .. code-block:: shell
@@ -343,7 +343,7 @@ Referrer Policy
 
 *Optional*
 
-Configure MinIO Console to generate a `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in HTTP responses.
+Configure Buckit Console to generate a `Referrer-Policy <https://www.w3.org/TR/referrer-policy/>`__ header in HTTP responses.
 Defaults to ``strict-origin-when-cross-origin``.
 
 .. tab-set::
@@ -374,7 +374,7 @@ Defaults to ``strict-origin-when-cross-origin``.
 Prometheus Settings
 -------------------
 
-The following settings manage how MinIO interacts with your Prometheus service.
+The following settings manage how Buckit interacts with your Prometheus service.
 
 Prometheus URL
 ~~~~~~~~~~~~~~
@@ -387,11 +387,11 @@ Prometheus URL
 
       .. envvar:: MINIO_PROMETHEUS_URL
 
-         Specify the URL for a Prometheus service configured to :ref:`scrape MinIO metrics <minio-metrics-collect-using-prometheus>`.
+         Specify the URL for a Prometheus service configured to :ref:`scrape Buckit metrics <minio-metrics-collect-using-prometheus>`.
 
-         The MinIO Console populates the :guilabel:`Dashboard` with cluster metrics using the ``minio-job`` Prometheus scraping job.
+         The Buckit Console populates the :guilabel:`Dashboard` with cluster metrics using the ``minio-job`` Prometheus scraping job.
 
-         If you are using a standalone MinIO Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_URL``.
+         If you are using a standalone Buckit Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_URL``.
 
    .. tab-item:: Configuration Setting
 
@@ -409,11 +409,11 @@ Prometheus Job ID
 
       .. envvar:: MINIO_PROMETHEUS_JOB_ID
 
-         Specify the custom Prometheus job ID used for :ref:`scraping MinIO metrics <minio-metrics-collect-using-prometheus>`. 
+         Specify the custom Prometheus job ID used for :ref:`scraping Buckit metrics <minio-metrics-collect-using-prometheus>`. 
 
-         MinIO defaults to ``minio-job``.
+         Buckit defaults to ``minio-job``.
 
-         If you are using a standalone MinIO Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_JOB_ID``.
+         If you are using a standalone Buckit Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_JOB_ID``.
 
    .. tab-item:: Configuration Setting
 
@@ -439,7 +439,7 @@ Prometheus Auth Token
 
             eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW8iLCJleHAiOjQ4NTAwMzg0MDJ9.GZCKR3d0FH2TCvNHSd39HaVfSuQVVV0s8glICBDmhT51V6CQ_hw8gTYlKHJmcpR8aHkqiJwCqcYJhaMmqwe00XY
 
-         If you are using a standalone MinIO Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_AUTH_TOKEN``.
+         If you are using a standalone Buckit Console process, this variable corresponds with ``CONSOLE_PROMETHEUS_AUTH_TOKEN``.
 
    .. tab-item:: Configuration Setting
 

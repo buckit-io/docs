@@ -11,8 +11,8 @@ Metrics version 2
    :depth: 3
 
 
-MinIO publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
-You can use any scraping tool to pull metrics data from MinIO for further analysis and alerting.
+Buckit publishes cluster and node metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
+You can use any scraping tool to pull metrics data from Buckit for further analysis and alerting.
 
 Version 2 Endpoints
 -------------------
@@ -37,10 +37,10 @@ For more flexible scraping and a wider range of metrics, use :ref:`metrics versi
    Existing deployments can continue to use version 2 :ref:`metrics <minio-metrics-v2>` and :ref:`Grafana dashboards <minio-grafana>`.
 
 
-MinIO Grafana dashboard
+Buckit Grafana dashboard
 -----------------------
 
-MinIO publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing v2 metrics.
+Buckit publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing v2 metrics.
 For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.
 
 
@@ -60,13 +60,13 @@ The following sections describe the version 2 endpoints and metrics.
 
          http://HOSTNAME:PORT/minio/v2/metrics/cluster
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
+      For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
 
    .. tab-item:: Bucket Metrics
 
-      .. versionchanged:: MinIO RELEASE.2023-07-21T21-12-44Z
+      .. versionchanged:: Buckit RELEASE.2023-07-21T21-12-44Z
 
          Bucket metrics have moved to use their own, separate endpoint.
 
@@ -84,8 +84,8 @@ The following sections describe the version 2 endpoints and metrics.
 
          http://HOSTNAME:PORT/minio/v2/metrics/bucket
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
+      For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
 
    .. tab-item:: Resource Metrics
@@ -99,8 +99,8 @@ The following sections describe the version 2 endpoints and metrics.
 
          http://HOSTNAME:PORT/minio/v2/metrics/resource
 
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the MinIO deployment.
-      For deployments with a load balancer managing connections between MinIO nodes, specify the address of the load balancer.
+      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
+      For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`

@@ -8,12 +8,12 @@ S3 API Compatibility
    :local:
    :depth: 2
 
-This page documents S3 APIs supported by MinIO Object Storage.
+This page documents S3 APIs supported by Buckit Object Storage.
 For reference documentation on any given API, see the corresponding documentation for Amazon S3.
 
 .. important::
 
-   MinIO strongly recommends using an :ref:`S3-Compatible SDK <minio-drivers>` for performing object storage operations.
+   Buckit strongly recommends using an :ref:`S3-Compatible SDK <minio-drivers>` for performing object storage operations.
 
 Object APIs
 -----------
@@ -158,7 +158,7 @@ Unsupported API Bucket Operations
    DeleteBucketAnalyticsConfiguration
    CreateSession
 
-MinIO alternatives for unsupported Bucket resources
+Buckit alternatives for unsupported Bucket resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - For calls to ``BucketACL`` or ``ObjectACL`` operations, use :ref:`Policies <minio-policy>`.

@@ -41,7 +41,7 @@ Use :mc-cmd:`mc quota info` to retrieve the current quota configuration for a bu
 
    mc quota info TARGET/BUCKET
 
-Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment. 
+Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment. 
 Replace ``BUCKET`` with the name of the bucket on which to retrieve the quota.
 
 Syntax
@@ -60,7 +60,7 @@ Syntax
    :required:
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the MinIO deployment as a prefix to the path. 
+   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a prefix to the path. 
    For example:
 
    .. code-block:: shell

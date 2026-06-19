@@ -11,32 +11,32 @@ Resynchronize Bucket from Remote Replica
    :local:
    :depth: 1
 
-The procedure on this page resynchronizes the contents of a MinIO bucket using a healthy replication remote. Resynchronization supports recovery after partial or total loss of data on a MinIO deployment in a replica configuration.
+The procedure on this page resynchronizes the contents of a Buckit bucket using a healthy replication remote. Resynchronization supports recovery after partial or total loss of data on a Buckit deployment in a replica configuration.
 
-For example, consider a MinIO active-active replication configuration similar to the following:
+For example, consider a Buckit active-active replication configuration similar to the following:
 
 .. image:: /images/replication/active-active-twoway-replication.svg
    :width: 600px
    :alt: Active-Active Replication synchronizes data between two remote deployments.
    :align: center
 
-Resynchronization allows using the healthy data on one of the participating MinIO deployments as the source for rebuilding the other deployment.
+Resynchronization allows using the healthy data on one of the participating Buckit deployments as the source for rebuilding the other deployment.
 
 Resynchronization is a per-bucket process. You must repeat resynchronization for each bucket on the remote which suffered partial or total data loss.
 
 .. admonition:: Professional Support during BC/DR Operations
    :class: important
 
-   `MinIO SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to resynchronization. Coordination with MinIO Engineering via SUBNET can ensure successful resynchronization and restoration of normal operations, including performance testing and health diagnostics.
+   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to resynchronization. Coordination with Buckit Engineering via SUBNET can ensure successful resynchronization and restoration of normal operations, including performance testing and health diagnostics.
 
-   Community users can seek support on the `MinIO Community Slack <https://slack.min.io>`__. Community Support is best-effort only and has no SLAs around responsiveness.
+   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. _minio-bucket-replication-serverside-resynchronize-requirements:
 
 Requirements
 ------------
 
-MinIO Deployments Must Be Online
+Buckit Deployments Must Be Online
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Resynchronization requires both the source and target deployments be online and able to accept read and write operations. The source *must* have complete network connectivity to the remote.
@@ -57,7 +57,7 @@ Replication Requires Matching Object Encryption Settings
    :start-after: start-replication-encrypted-objects
    :end-before: end-replication-encrypted-objects
 
-Replication Requires MinIO Deployments
+Replication Requires Buckit Deployments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common-replication.rst
@@ -84,9 +84,9 @@ Considerations
 Resynchronization Requires Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Resynchronization is a background processes that continually checks objects in the source MinIO bucket and copies them to the remote as-needed. The time required for replication to complete may vary depending on the number and size of objects, the throughput to the remote MinIO deployment, and the load on the source MinIO deployment. Total time for completion is generally not predictable due to these variables.
+Resynchronization is a background processes that continually checks objects in the source Buckit bucket and copies them to the remote as-needed. The time required for replication to complete may vary depending on the number and size of objects, the throughput to the remote Buckit deployment, and the load on the source Buckit deployment. Total time for completion is generally not predictable due to these variables.
 
-MinIO recommends configuring load balancers or proxies to direct traffic only to the healthy cluster until synchronization completes. The following commands can provide insight into the resynchronization status:
+Buckit recommends configuring load balancers or proxies to direct traffic only to the healthy cluster until synchronization completes. The following commands can provide insight into the resynchronization status:
 
 - :mc-cmd:`mc replicate resync status` on the source to track the resynchronization progress.
 
@@ -97,7 +97,7 @@ MinIO recommends configuring load balancers or proxies to direct traffic only to
 Resynchronize Objects after Data Loss
 -------------------------------------
 
-This procedure uses an existing :ref:`MinIO replication configuration <minio-bucket-replication-serverside>` to restore missing data to one of the MinIO deployments participating in that configuration. Specifically, a  healthy MinIO deployment (the ``SOURCE``) synchronizes it's existing data to the unhealthy MinIO deployment (the ``TARGET``).
+This procedure uses an existing :ref:`Buckit replication configuration <minio-bucket-replication-serverside>` to restore missing data to one of the Buckit deployments participating in that configuration. Specifically, a  healthy Buckit deployment (the ``SOURCE``) synchronizes it's existing data to the unhealthy Buckit deployment (the ``TARGET``).
 
 This procedure assumes an existing :ref:`alias <alias>` for the ``SOURCE`` that has the :ref:`necessary permissions <minio-bucket-replication-serverside-twoway-permissions>` for configuring replication.
 
@@ -113,7 +113,7 @@ Run the :mc:`mc replicate ls` command to list the configured remote targets on t
 
    mc replicate ls SOURCE/BUCKET --json
 
-- Replace ``SOURCE`` with the :ref:`alias <alias>` of the source MinIO deployment.
+- Replace ``SOURCE`` with the :ref:`alias <alias>` of the source Buckit deployment.
 
 - Replace ``BUCKET`` with the name of the bucket to use as the source for resynchronization.
 
@@ -168,11 +168,11 @@ Run the :mc-cmd:`mc replicate resync start` command to begin the resynchronizati
 
    mc replicate resync start --remote-bucket "arn:minio:replication::UUID:BUCKET" SOURCE/BUCKET
 
-- Replace the ``--remote-bucket`` value with the ARN of the unhealthy ``BUCKET`` on the ``TARGET`` MinIO deployment. 
+- Replace the ``--remote-bucket`` value with the ARN of the unhealthy ``BUCKET`` on the ``TARGET`` Buckit deployment. 
 
-- Replaced ``SOURCE`` with the :ref:`alias <alias>` of the source MinIO deployment.
+- Replaced ``SOURCE`` with the :ref:`alias <alias>` of the source Buckit deployment.
 
-- Replace the ``BUCKET`` with the name of the bucket on the healthy ``SOURCE`` MinIO
+- Replace the ``BUCKET`` with the name of the bucket on the healthy ``SOURCE`` Buckit
   deployment.
 
 The command returns a resynchronization job ID indicating that the process has begun.

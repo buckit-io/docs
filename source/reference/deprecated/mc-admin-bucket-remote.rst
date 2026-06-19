@@ -33,7 +33,7 @@ for use with :mc-cmd:`bucket replication <mc replicate>`.
 
 .. end-mc-admin-bucket-remote-desc
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -55,14 +55,14 @@ ARN for use with :mc:`mc replicate add`:
    mc admin bucket remote add SOURCE/BUCKET DESTINATION/BUCKET
 
 - Replace :mc-cmd:`SOURCE <mc admin bucket remote add SOURCE>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment to use as the replication
-  target. Replace ``BUCKET`` with the full path of the bucket into which MinIO
+  :mc-cmd:`alias <mc alias>` of the Buckit deployment to use as the replication
+  target. Replace ``BUCKET`` with the full path of the bucket into which Buckit
   replicates objects from the ``DESTINATION``.
 
 - Replace :mc-cmd:`DESTINATION <mc admin bucket remote add DESTINATION>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment to use as the
+  :mc-cmd:`alias <mc alias>` of the Buckit deployment to use as the
   replication source. Replace ``BUCKET`` with the full path of the bucket from
-  which MinIO replicates objects into the ``SOURCE``.
+  which Buckit replicates objects into the ``SOURCE``.
 
 Remove an Existing Replication Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,9 +76,9 @@ bucket:
    mc admin bucket remote rm SOURCE/BUCKET --arn ARN
 
 - Replace :mc-cmd:`SOURCE <mc admin bucket remote rm SOURCE>` with the
-  :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
+  :mc-cmd:`alias <mc alias>` of the Buckit deployment being used as the
   replication source. Replace ``BUCKET`` with the full path of the bucket from
-  which MinIO replicates objects.
+  which Buckit replicates objects.
 
 - Replace :mc-cmd:`ARN <mc admin bucket remote rm ARN>` with the 
   ARN of the remote target. 
@@ -98,9 +98,9 @@ Use :mc-cmd:`mc replicate ls` to list a bucket's configured replication targets:
 
    mc replicate ls ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc replicate ls ALIAS>` with the :mc-cmd:`alias <mc alias>` of the MinIO deployment being used as the
+- Replace :mc-cmd:`ALIAS <mc replicate ls ALIAS>` with the :mc-cmd:`alias <mc alias>` of the Buckit deployment being used as the
   replication source. 
-  Replace ``PATH`` with the full path of the bucket from  which MinIO replicates objects.
+  Replace ``PATH`` with the full path of the bucket from  which Buckit replicates objects.
 
 Syntax
 ------
@@ -112,7 +112,7 @@ Syntax
 
       - ``mc admin bucket remote add`` replaced by :mc-cmd:`mc replicate add`
 
-   Adds a remote target to a bucket on a MinIO deployment. The
+   Adds a remote target to a bucket on a Buckit deployment. The
    command has the following syntax:
 
    .. code-block:: shell
@@ -127,7 +127,7 @@ Syntax
       *Required*
 
       The full path to the bucket to which the command adds the remote target.
-      Specify the :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as
+      Specify the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment as
       the prefix to the bucket path. For example:
 
       .. code-block:: shell
@@ -139,9 +139,9 @@ Syntax
 
       *Required*
 
-      The target MinIO deployment and bucket.
+      The target Buckit deployment and bucket.
 
-      Specify the full URL to the destination MinIO deployment and bucket
+      Specify the full URL to the destination Buckit deployment and bucket
       using the following format:
 
       .. code-block:: shell
@@ -150,12 +150,12 @@ Syntax
          http(s)://ACCESSKEY:SECRETKEY@DESTHOSTNAME/DESTBUCKET
 
       - Replace ``ACCESSKEY`` with the access key for a user on the
-         destination MinIO deployment.
+         destination Buckit deployment.
 
       - Replace ``SECRETKEY`` with the secret key for a user on the
-         destination MinIO deployment.
+         destination Buckit deployment.
 
-      - Replace ``DESTHOSTNAME`` with the hostname and port of the MinIO
+      - Replace ``DESTHOSTNAME`` with the hostname and port of the Buckit
          deployment (i.e. ``minio-server.example.net:9000``).
 
       - Replace ``DESTBUCKET`` with the bucket on the
@@ -187,13 +187,13 @@ Syntax
 
    .. mc-cmd:: --sync
 
-      Enables synchronous replication, where MinIO attempts to replicate
+      Enables synchronous replication, where Buckit attempts to replicate
       the object *prior* to returning the PUT object response. Synchronous 
       replication may increase the time spent waiting for PUT operations
       to return successfully.
 
       By default, :mc-cmd:`mc admin bucket remote add` operates in 
-      asynchronous mode, where MinIO attempts replicating objects
+      asynchronous mode, where Buckit attempts replicating objects
       *after* returning the PUT object response.
 
 .. mc-cmd:: ls
@@ -203,7 +203,7 @@ Syntax
 
       - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
 
-   Lists all remote targets associated to a bucket on the MinIO deployment.
+   Lists all remote targets associated to a bucket on the Buckit deployment.
    Use ``mc admin bucket remote ls --help`` for usage syntax.
 
 
@@ -214,7 +214,7 @@ Syntax
 
       - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
    
-   Removes a remote target for a bucket on the MinIO deployment. The
+   Removes a remote target for a bucket on the Buckit deployment. The
    command has the following syntax:
 
    .. code-block:: shell
@@ -230,7 +230,7 @@ Syntax
 
       The full path to the bucket from which the command removes the 
       remote target. Specify the
-      :mc-cmd:`alias <mc alias>` of a configured MinIO deployment as the
+      :mc-cmd:`alias <mc alias>` of a configured Buckit deployment as the
       prefix to the bucket path. For example:
 
       .. code-block:: shell

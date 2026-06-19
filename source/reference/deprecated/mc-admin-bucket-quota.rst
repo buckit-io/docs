@@ -28,7 +28,7 @@ storage quotas.
 
 .. end-mc-admin-bucket-quota-desc
 
-.. admonition:: Use ``mc admin`` on MinIO Deployments Only
+.. admonition:: Use ``mc admin`` on Buckit Deployments Only
    :class: note
 
    .. include:: /includes/facts-mc-admin.rst
@@ -95,7 +95,7 @@ limit.
    mc admin bucket quota TARGET/BUCKET --hard LIMIT
 
 - Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
-  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+  Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
   set the hard quota.
 
 - Replace ``LIMIT`` with the maximum size to which the bucket can grow. 
@@ -114,7 +114,7 @@ for a bucket:
    mc admin bucket quota TARGET/BUCKET
 
 Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
-MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
 retrieve the quota.
 
 Clear Configured Bucket Quota
@@ -130,7 +130,7 @@ a bucket.
    mc admin bucket quota TARGET/BUCKET --clear
 
 - Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
-  MinIO deployment. Replace ``BUCKET`` with the name of the bucket on which to
+  Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
   clear the quota.
 
 Syntax
@@ -148,7 +148,7 @@ Syntax
 .. mc-cmd:: TARGET
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the MinIO deployment as a 
+   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a 
    prefix to the path. For example:
 
    .. code-block:: shell
@@ -162,7 +162,7 @@ Syntax
 .. mc-cmd:: --hard
    
 
-   Sets a maximum limit to the bucket storage size. The MinIO server rejects any
+   Sets a maximum limit to the bucket storage size. The Buckit server rejects any
    incoming ``PUT`` request whose contents would exceed the bucket's configured
    quota.
 

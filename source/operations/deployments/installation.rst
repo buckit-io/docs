@@ -1,3 +1,5 @@
+:orphan:
+
 .. _deploy-minio-distributed:
 .. _minio-mnmd:
 .. _minio-installation:
@@ -14,26 +16,26 @@ Installation and Management
    :local:
    :depth: 2
 
-This section documents steps for installing and managing the AGPLv3-licensed Community MinIO Object Storage on :ref:`Kubernetes <minio-kubernetes>` and :ref:`Baremetal <minio-baremetal>` infrastructures.
+This section documents steps for installing and managing the AGPLv3-licensed Community Buckit Object Storage on :ref:`Kubernetes <minio-kubernetes>` and :ref:`Baremetal <minio-baremetal>` infrastructures.
 
 .. meta::
-   :description: MinIO Deployment Topologies and Installation Instructions
-   :keywords: MinIO, Deploy, Architecture, Topology, Distributed, Replication, Install
+   :description: Buckit Deployment Topologies and Installation Instructions
+   :keywords: Buckit, Deploy, Architecture, Topology, Distributed, Replication, Install
 
 .. container:: extlinks-video
 
-   - `Installing and Running MinIO on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__
+   - `Installing and Running Buckit on Linux <https://www.youtube.com/watch?v=74usXkZpNt8&list=PLFOIsHSSYIK1BnzVY66pCL-iJ30Ht9t1o>`__
 
    - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
    
-   - `How to Connect to MinIO with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
+   - `How to Connect to Buckit with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
 
-MinIO is a software-defined high performance distributed object storage server.
-You can run MinIO on consumer or enterprise-grade hardware and a variety
+Buckit is a software-defined high performance distributed object storage server.
+You can run Buckit on consumer or enterprise-grade hardware and a variety
 of operating systems and architectures.
 
-All MinIO deployments implement :ref:`Erasure Coding <minio-erasure-coding>` backends.
-You can deploy MinIO using one of the following topologies: 
+All Buckit deployments implement :ref:`Erasure Coding <minio-erasure-coding>` backends.
+You can deploy Buckit using one of the following topologies: 
 
 .. _minio-installation-comparison:
 
@@ -59,43 +61,37 @@ You can deploy MinIO using one of the following topologies:
 Kubernetes
 ----------
 
-MinIO provides a Kubernetes-native Operator framework for managing and deploying Tenants onto your managed infrastructure.
+Buckit provides a Kubernetes-native Operator framework for managing and deploying Tenants onto your managed infrastructure.
 
-MinIO fully supports upstream Kubernetes and most flavors which inherit from the upstream as a base.
+Buckit fully supports upstream Kubernetes and most flavors which inherit from the upstream as a base.
 This includes, but is not limited to, RedHat Openshift, SUSE Rancher, VMWare Tanzu.
-MinIO also fully supports cloud-based Kubernetes engines such as Elastic Kubernetes Engine, Google Kubernetes Service, and Azure Kubernetes Service.
+Buckit also fully supports cloud-based Kubernetes engines such as Elastic Kubernetes Engine, Google Kubernetes Service, and Azure Kubernetes Service.
 
 Select the link most appropriate for your Kubernetes infrastructure.
 If your provider is not listed, use the Kubernetes Upstream documentation as a baseline and modify as needed based on your provider's guidance or divergence from upstream semantics and behavior.
 
-- :ref:`Deploy MinIO on Kubernetes (Upstream) <deploy-operator-kubernetes>`
-- :ref:`Deploy MinIO on Openshift Kubernetes <deploy-operator-openshift>`
-- :ref:`Deploy MinIO on SUSE Rancher Kubernetes <deploy-operator-rancher>`
-- :ref:`Deploy MinIO on Elastic Kubernetes Service <deploy-operator-eks>`
-- :ref:`Deploy MinIO on Google Kubernetes Engine <deploy-operator-gke>`
-- :ref:`Deploy MinIO on Azure Kubernetes Service <deploy-operator-aks>`
+- :ref:`Deploy Buckit on Kubernetes (Upstream) <deploy-operator-kubernetes>`
+- :ref:`Deploy Buckit on Openshift Kubernetes <deploy-operator-openshift>`
+- :ref:`Deploy Buckit on SUSE Rancher Kubernetes <deploy-operator-rancher>`
+- :ref:`Deploy Buckit on Elastic Kubernetes Service <deploy-operator-eks>`
+- :ref:`Deploy Buckit on Google Kubernetes Engine <deploy-operator-gke>`
+- :ref:`Deploy Buckit on Azure Kubernetes Service <deploy-operator-aks>`
 
 Baremetal
 ---------
 
-MinIO supports deploying onto baremetal infrastructure - physical machines or virtualized hosts - running Linux, MacOS, and Windows.
-You can also deploy MinIO as a container onto supported Operating Systems.
+Buckit supports deploying onto baremetal infrastructure - physical machines or virtualized hosts - running Linux, MacOS, and Windows.
+You can also deploy Buckit as a container onto supported Operating Systems.
 
-- :ref:`Deploy MinIO onto RedHat Linux <deploy-minio-rhel>`
-- :ref:`Deploy MinIO onto Ubuntu Linux <deploy-minio-ubuntu>`
-- :ref:`Deploy MinIO as a Container <deploy-minio-container>`
-- :ref:`Deploy MinIO onto MacOS <deploy-minio-macos>`
-- :ref:`Deploy MinIO onto Windows <deploy-minio-windows>`
+- :ref:`Deploy Buckit onto RedHat Linux <deploy-minio-rhel>`
+- :ref:`Deploy Buckit onto Ubuntu Linux <deploy-minio-ubuntu>`
+- :ref:`Deploy Buckit as a Container <deploy-minio-container>`
+- :ref:`Deploy Buckit onto MacOS <deploy-minio-macos>`
+- :ref:`Deploy Buckit onto Windows <deploy-minio-windows>`
 
 .. important::
 
-   MinIO strongly recommends :minio-docs:`Linux (RHEL, Ubuntu) <minio/linux/index.html>` or :minio-docs:`Kubernetes (Upstream, OpenShift) <minio/kubernetes/upstream/index.html>` for long-term development and production environments.
+   Buckit strongly recommends :minio-docs:`Linux (RHEL, Ubuntu) <minio/linux/index.html>` or :minio-docs:`Kubernetes (Upstream, OpenShift) <minio/kubernetes/upstream/index.html>` for long-term development and production environments.
 
-   MinIO provides no guarantee of support for :abbr:`SNMD (Single-Node Multi-Drive)` or :abbr:`MNMD (Multi-Node Multi-Drive)` topologies on MacOS, Windows, or Containerized deployments.
+   Buckit provides no guarantee of support for :abbr:`SNMD (Single-Node Multi-Drive)` or :abbr:`MNMD (Multi-Node Multi-Drive)` topologies on MacOS, Windows, or Containerized deployments.
 
-.. toctree::
-   :titlesonly:
-   :hidden:
-
-   /operations/deployments/kubernetes
-   /operations/deployments/baremetal

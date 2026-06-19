@@ -2,7 +2,7 @@
 
 .. |OS| replace:: Docker or Podman
 
-This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` MinIO server onto |OS| for early development and evaluation of MinIO Object Storage and its S3-compatible API layer. 
+This procedure deploys a :ref:`Single-Node Single-Drive <minio-installation-comparison>` Buckit server onto |OS| for early development and evaluation of Buckit Object Storage and its S3-compatible API layer. 
 
 For instructions on deploying to production environments, see :ref:`deploy-minio-distributed`.
 
@@ -48,7 +48,7 @@ Procedure
               The process is attached to the terminal session and ends when exiting the terminal.
             - ``-p`` binds a local port to a container port.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``~/minio/data``, allowing it to persist between container restarts.
+              When Buckit writes data to ``/data``, that data mirrors to the local path ``~/minio/data``, allowing it to persist between container restarts.
               You can set any file path to which the user has read, write, and delete permissions to use.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -72,7 +72,7 @@ Procedure
             - ``podman run`` starts the container.
             - ``-p`` binds a local port to a container port.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
+              When Buckit writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
               You can set any file path to which the user has read, write, and delete permissions to use.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -102,11 +102,11 @@ Procedure
             The example above works this way:
    
             - ``mkdir`` creates a new local directory at ``~/minio/data`` in your home directory.
-            - ``docker run`` starts the MinIO container.
+            - ``docker run`` starts the Buckit container.
             - ``-p`` binds a local port to a container port.
             - ``-name`` creates a name for the container.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``~/minio/data``, allowing it to persist between container restarts.
+              When Buckit writes data to ``/data``, that data mirrors to the local path ``~/minio/data``, allowing it to persist between container restarts.
               You can replace ``~/minio/data`` with another local file location to which the user has read, write, and delete access.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -128,10 +128,10 @@ Procedure
                
             The example above works this way:
    
-            - ``docker run`` starts the MinIO container.
+            - ``docker run`` starts the Buckit container.
             - ``-p`` binds a local port to a container port.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
+              When Buckit writes data to ``/data``, that data mirrors to the local path ``D:\minio\data``, allowing it to persist between container restarts.
               You can replace ``D:\minio\data`` with another local file location to which the user has read, write, and delete access.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -162,12 +162,12 @@ Procedure
             The example above works this way:
    
             - ``mkdir`` creates a new local directory at ``~/minio/data`` in your home directory.
-            - ``docker run`` starts the MinIO container.
+            - ``docker run`` starts the Buckit container.
             - ``-p`` binds a local port to a container port.
             - ``-user`` sets the username for the container to the policies for the current user and user group.
             - ``-name`` creates a name for the container.
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data actually writes to the local path ``~/minio/data`` where it can persist between container restarts.
+              When Buckit writes data to ``/data``, that data actually writes to the local path ``~/minio/data`` where it can persist between container restarts.
               You can replace ``${HOME}/minio/data`` with another location in the user's home directory to which the user has read, write, and delete access.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
@@ -194,36 +194,36 @@ Procedure
    
             The example above works this way:
    
-            - ``docker run`` starts the MinIO container.
+            - ``docker run`` starts the Buckit container.
             - ``-p`` binds a local port to a container port.
             - ``-name`` creates a name for the container.
             - ``--security-opt`` grants access to the container via a ``credentialspec`` file for a `Group Managed Service Account (gMSA) <https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-run-container>`_ 
             - ``-v`` sets a file path as a persistent volume location for the container to use.
-              When MinIO writes data to ``/data``, that data actually writes to the local path ``D:\data`` where it can persist between container restarts.
+              When Buckit writes data to ``/data``, that data actually writes to the local path ``D:\data`` where it can persist between container restarts.
               You can replace ``D:\data`` with another local file location to which the user has read, write, and delete access.
             - ``-e`` sets the environment variables :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD`, respectively.
               These set the :ref:`root user credentials <minio-users-root>`.
               Change the example values to use for your container.
 
-#. Connect your Browser to the MinIO Server
+#. Connect your Browser to the Buckit Server
 
    Access the :ref:`minio-console` by going to a browser and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
    For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
-   While port ``9000`` is used for connecting to the API, MinIO automatically redirects browser access to the MinIO Console.
+   While port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
 
    Log in to the Console with the credentials you defined in the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` environment variables.
-   Each MinIO server includes its own embedded MinIO Console.
+   Each Buckit server includes its own embedded Buckit Console.
 
-#. `(Optional)` Install the MinIO Client
+#. `(Optional)` Install the Buckit Client
 
-   The :ref:`MinIO Client <minio-client>` allows you to work with your MinIO volume from the commandline.
+   The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit volume from the commandline.
 
    Select your operating system for instructions.
 
    .. dropdown:: GNU/Linux
 
-      The :ref:`MinIO Client <minio-client>` allows you to work with your MinIO server from the commandline.
+      The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit server from the commandline.
 
       Download the :mc:`mc` client and install it to a location on your system ``PATH`` such as 
       ``/usr/local/bin``. You can alternatively run the binary from the download location.
@@ -249,21 +249,21 @@ Procedure
       The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
-      - The hostname or IP address and port of the MinIO server
-      - The Access Key for a MinIO :ref:`user <minio-users>`
-      - The Secret Key for a MinIO :ref:`user <minio-users>`
+      - The hostname or IP address and port of the Buckit server
+      - The Access Key for a Buckit :ref:`user <minio-users>`
+      - The Secret Key for a Buckit :ref:`user <minio-users>`
 
       For additional details about this command, see :ref:`alias`.
 
    .. dropdown:: MacOS
 
-      The :ref:`MinIO Client <minio-client>` allows you to work with your MinIO volume from the commandline.
+      The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit volume from the commandline.
       
       .. tab-set::
       
          .. tab-item:: Homebrew
       
-            Run the following command to install the latest stable MinIO Client package using `Homebrew <https://brew.sh>`_.
+            Run the following command to install the latest stable Buckit Client package using `Homebrew <https://brew.sh>`_.
       
             .. code-block:: shell
                :class: copyable
@@ -272,7 +272,7 @@ Procedure
 
          .. tab-item:: Binary (arm64)
       
-            Run the following commands to install the latest stable MinIO Client package using a binary package for Apple chips.
+            Run the following commands to install the latest stable Buckit Client package using a binary package for Apple chips.
 
             .. code-block:: shell
                :class: copyable
@@ -283,7 +283,7 @@ Procedure
 
          .. tab-item:: Binary (amd64)
                        
-            Run the following commands to install the latest stable MinIO Client package using a binary package for Intel chips.
+            Run the following commands to install the latest stable Buckit Client package using a binary package for Intel chips.
 
             .. code-block:: shell
                :class: copyable
@@ -292,7 +292,7 @@ Procedure
                chmod +x mc
                sudo mv mc /usr/local/bin/mc
       
-      Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+      Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
       
       .. code-block:: shell
          :class: copyable
@@ -305,15 +305,15 @@ Procedure
       The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
-      - The hostname or IP address and port of the MinIO server
-      - The Access Key for a MinIO :ref:`user <minio-users>`
-      - The Secret Key for a MinIO :ref:`user <minio-users>`
+      - The hostname or IP address and port of the Buckit server
+      - The Access Key for a Buckit :ref:`user <minio-users>`
+      - The Secret Key for a Buckit :ref:`user <minio-users>`
 
       For additional details about this command, see :ref:`alias`.
       
    .. dropdown:: Windows
    
-      Download the standalone MinIO server for Windows from the following link:
+      Download the standalone Buckit server for Windows from the following link:
    
       https://dl.min.io/client/mc/release/windows-amd64/mc.exe
    
@@ -325,7 +325,7 @@ Procedure
    
          \path\to\mc.exe --help
          
-      Use :mc:`mc alias set` to quickly authenticate and connect to the MinIO deployment.
+      Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
    
       .. code-block:: shell
          :class: copyable
@@ -338,9 +338,9 @@ Procedure
       The :mc:`mc alias set` takes four arguments:
    
       - The name of the alias
-      - The hostname or IP address and port of the MinIO server
-      - The Access Key for a MinIO :ref:`user <minio-users>`
-      - The Secret Key for a MinIO :ref:`user <minio-users>`
+      - The hostname or IP address and port of the Buckit server
+      - The Access Key for a Buckit :ref:`user <minio-users>`
+      - The Secret Key for a Buckit :ref:`user <minio-users>`
 
       For additional details about this command, see :ref:`alias`.
 
@@ -349,7 +349,7 @@ Procedure
 Next Steps
 ----------
 
-- :ref:`Connect your applications to MinIO <minio-drivers>`
+- :ref:`Connect your applications to Buckit <minio-drivers>`
 - :ref:`Configure Object Retention <minio-object-retention>`
 - :ref:`Configure Security <minio-authentication-and-identity-management>`
-- :ref:`Deploy MinIO in a Distributed Environment <deploy-minio-distributed>`
+- :ref:`Deploy Buckit in a Distributed Environment <deploy-minio-distributed>`

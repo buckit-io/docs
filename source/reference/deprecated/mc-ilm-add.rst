@@ -82,7 +82,7 @@ Parameters
 .. mc-cmd:: ALIAS
    :required:
    
-   The :ref:`alias <alias>` and bucket on the MinIO deployment to which to add the object lifecycle management rule. 
+   The :ref:`alias <alias>` and bucket on the Buckit deployment to which to add the object lifecycle management rule. 
    
    For example:
 
@@ -116,13 +116,13 @@ Parameters
    :required:   
 
    The number of days to retain an object after being created. 
-   MinIO marks the object for deletion after the specified number of days pass. 
+   Buckit marks the object for deletion after the specified number of days pass. 
    Specify the number of days as an integer, e.g. ``30`` for 30 days.
 
    For versioned buckets, the expiry rule applies only to the *current* object version. 
    Use the :mc-cmd:`~mc ilm add --noncurrent-expire-days` option to apply expiration behavior to noncurrent object versions.
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -135,7 +135,7 @@ Parameters
 .. mc-cmd:: --expire-delete-marker
    :optional:
 
-   Specify this option to direct MinIO to remove delete markers for objects with no remaining object versions. 
+   Specify this option to direct Buckit to remove delete markers for objects with no remaining object versions. 
    Specifically, the delete marker is the *only* remaining "version" of the given object.
 
    This option is mutually exclusive with the following option:
@@ -143,7 +143,7 @@ Parameters
    - :mc-cmd:`~mc ilm add --tags`
    - :mc-cmd:`~mc ilm add --expire-days`
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -152,8 +152,8 @@ Parameters
 .. mc-cmd:: --transition-days
    :optional:
    
-   The number of calendar days from object creation after which MinIO marks an object as eligible for transition. 
-   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier`. 
+   The number of calendar days from object creation after which Buckit marks an object as eligible for transition. 
+   Buckit transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier`. 
    Specify the number of days as an integer, e.g. ``30`` for 30 days.
 
    For versioned buckets, the transition rule applies only to the *current* object version. 
@@ -161,7 +161,7 @@ Parameters
 
    Requires specifying :mc-cmd:`~mc ilm add --transition-tier`.
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -170,7 +170,7 @@ Parameters
 .. mc-cmd:: --transition-tier
    :optional:
 
-   The remote tier to which MinIO :ref:`transition objects <minio-lifecycle-management-tiering>`.
+   The remote tier to which Buckit :ref:`transition objects <minio-lifecycle-management-tiering>`.
    Specify an existing remote tier created by :mc:`mc admin tier`. 
 
    Required if specifying :mc-cmd:`~mc ilm add --transition-days`.
@@ -179,33 +179,33 @@ Parameters
    :optional:
 
    The number of days to retain an object version after becoming *non-current* (i.e. a different version of that object is now the `HEAD`).
-   MinIO marks noncurrent object versions for deletion after the specified number of days pass.
+   Buckit marks noncurrent object versions for deletion after the specified number of days pass.
 
    This option has the same behavior as the S3 ``NoncurrentVersionExpiration`` action.
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: --noncurrent-transition-days
    :optional:
 
-   The number of days an object has been non-current (i.e. replaced by a newer version of that same object) after which MinIO marks the object version as eligible for transition. 
-   MinIO transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier` once the system host datetime passes that calendar date.
+   The number of days an object has been non-current (i.e. replaced by a newer version of that same object) after which Buckit marks the object version as eligible for transition. 
+   Buckit transitions the object to the configured remote tier specified to the :mc-cmd:`~mc ilm add --transition-tier` once the system host datetime passes that calendar date.
 
    This option has no effect on non-versioned buckets. 
    Requires specifying :mc-cmd:`~mc ilm add --noncurrent-transition-tier`.
 
    This option has the same behavior as the S3 ``NoncurrentVersionTransition`` action.
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
 .. mc-cmd:: --noncurrent-transition-tier
    :optional:
 
-   The remote tier to which MinIO :ref:`transitions noncurrent objects versions <minio-lifecycle-management-tiering>`. 
+   The remote tier to which Buckit :ref:`transitions noncurrent objects versions <minio-lifecycle-management-tiering>`. 
    Specify a remote tier created by :mc:`mc admin tier`.
 
 .. mc-cmd:: --noncurrent-expire-newer
@@ -214,7 +214,7 @@ Parameters
    The maximum number of non-current object versions to retain, ordered from newest to oldest.
    
    Use this flag to retain a certain number of past versions of a file in a first in, first out fashion.
-   After retaining the maximum number of non-current versions, MinIO marks any remaining older non-current object versions as eligible for expiration.
+   After retaining the maximum number of non-current versions, Buckit marks any remaining older non-current object versions as eligible for expiration.
    
    The following table lists a number of object versions and their expiration eligibility based on ``--noncurrent-expire-newer 3``:
 
@@ -233,16 +233,16 @@ Parameters
       * - v1
         - marked for expiry
 
-   MinIO retains the current version, v5.
-   MinIO also retains the next ``3`` non-current versions, starting with the newest.
-   This means MinIO marks ``v4``, ``v3``, and ``v2`` for the three non-current version to retain.
+   Buckit retains the current version, v5.
+   Buckit also retains the next ``3`` non-current versions, starting with the newest.
+   This means Buckit marks ``v4``, ``v3``, and ``v2`` for the three non-current version to retain.
 
-   ``v1`` would be a fourth non-current version, which falls outside the limit of non-current versions to retain, so MinIO marks ``v1`` for expiration.
+   ``v1`` would be a fourth non-current version, which falls outside the limit of non-current versions to retain, so Buckit marks ``v1`` for expiration.
 
    Updating the number for this flag only impacts the unmarked versions of objects.
    Any versions already marked for expiration do not change if you increase the number to retain.
 
-   MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
+   Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured lifecycle management rules. 
    Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
    See :ref:`minio-lifecycle-management-scanner` for more information.
 
@@ -312,15 +312,15 @@ Behavior
 Lifecycle Management Object Scanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against the configured lifecycle management rules. 
+Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against the configured lifecycle management rules. 
 Slow scanning due to high IO workloads or limited system resources may delay application of lifecycle management rules. 
 See :ref:`minio-lifecycle-management-scanner` for more information.
 
 Expiry vs Transition
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO supports specifying both expiry and transition rules in the same
-bucket or bucket prefix. MinIO can execute an expiration rule on an object
+Buckit supports specifying both expiry and transition rules in the same
+bucket or bucket prefix. Buckit can execute an expiration rule on an object
 regardless of its transition status. Use
 :mc:`mc ilm ls` to review the currently configured object lifecycle
 management rules for any potential interactions between expiry and transition

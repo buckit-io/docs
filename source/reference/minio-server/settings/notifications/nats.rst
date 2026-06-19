@@ -17,7 +17,7 @@ NATS Notification Settings
    NATS Streaming is deprecated.
    Migrate to `JetStream <https://docs.nats.io/nats-concepts/jetstream>`__ instead. 
 
-   The related MinIO configuration options and environment variables are deprecated. 
+   The related Buckit configuration options and environment variables are deprecated. 
 
 This page documents settings for configuring an NATS service as a target for :ref:`Bucket Notifications <minio-bucket-notifications>`. 
 See :ref:`minio-bucket-notifications-publish-nats` for a tutorial on using these settings.
@@ -95,7 +95,7 @@ Enable
 
       .. mc-conf:: notify_nats
 
-      The top-level configuration key for defining an NATS service endpoint for use with :ref:`MinIO bucket notifications <minio-bucket-notifications>`.
+      The top-level configuration key for defining an NATS service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
 
       Use :mc-cmd:`mc admin config set` to set or update an NATS service endpoint. 
       The :mc-conf:`~notify_nats.address` and :mc-conf:`~notify_nats.subject` arguments are *required* for each target.
@@ -127,7 +127,7 @@ Address
       .. mc-conf:: notify_nats address
          :delimiter: " "
 
-Specify the NATS service endpoint to which MinIO publishes bucket events. 
+Specify the NATS service endpoint to which Buckit publishes bucket events. 
 For example, ``nats-endpoint.example.com:4222``.
 
 .. include:: /includes/linux/minio-server.rst
@@ -152,7 +152,7 @@ Subject
       .. mc-conf:: notify_nats subject
          :delimiter: " "
 
-Specify the subscription to which MinIO associates events published to the NATS endpoint.
+Specify the subscription to which Buckit associates events published to the NATS endpoint.
 
 Username
 ~~~~~~~~
@@ -196,7 +196,7 @@ Specify the passport for connecting to the NATS service endpoint.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 Token
 ~~~~~
@@ -220,7 +220,7 @@ Specify the token for connecting to the NATS service endpoint.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 User Credentials File
 ~~~~~~~~~~~~~~~~~~~~~
@@ -304,7 +304,7 @@ Ping Interval
          :delimiter: " "
 
 Specify the duration interval for client pings to the NATS server. 
-MinIO supports the following time units:
+Buckit supports the following time units:
 
 - ``s`` - seconds, ``"60s"``
 - ``m`` - minutes, ``"5m"``
@@ -497,9 +497,9 @@ Queue Directory
       .. mc-conf:: notify_nats queue_dir
          :delimiter: " "
 
-Specify the directory path to enable MinIO's persistent event store for undelivered messages, such as ``/opt/minio/events``.
+Specify the directory path to enable Buckit's persistent event store for undelivered messages, such as ``/opt/minio/events``.
 
-MinIO stores undelivered events in the specified store while the NATS server/broker is offline and replays the stored events when connectivity resumes.
+Buckit stores undelivered events in the specified store while the NATS server/broker is offline and replays the stored events when connectivity resumes.
 
 Queue Limit
 ~~~~~~~~~~~

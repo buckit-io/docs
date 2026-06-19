@@ -10,7 +10,7 @@ Site Replication Overview
    :local:
    :depth: 1
 
-Site replication configures multiple independent MinIO deployments as a cluster of replicas called peer sites.
+Site replication configures multiple independent Buckit deployments as a cluster of replicas called peer sites.
 
    .. figure:: /images/architecture/architecture-load-balancer-multi-site.svg
       :figwidth: 100%
@@ -20,13 +20,13 @@ Site replication configures multiple independent MinIO deployments as a cluster 
       A load balancer manages routing operations to either of the two sites.
       Data written to one site automatically replicates to the other peer site.
 
-Site replication assumes the use of either the included MinIO identity provider (IDP) *or* an external IDP.
+Site replication assumes the use of either the included Buckit identity provider (IDP) *or* an external IDP.
 All configured deployments must use the same IDP.
 Deployments using an external IDP must use the same configuration across sites.
 
-For more information on site replication architecture and deployment concepts, see :ref:`Deployment Architecture: Replicated MinIO Deployments <minio-deployment-architecture-replicated>`.
+For more information on site replication architecture and deployment concepts, see :ref:`Deployment Architecture: Replicated Buckit Deployments <minio-deployment-architecture-replicated>`.
 
-MinIO does not recommend using MacOS, Windows, or non-orchestrated Containerized deployments for site replication outside of early development, evaluation, or general experimentation.
+Buckit does not recommend using MacOS, Windows, or non-orchestrated Containerized deployments for site replication outside of early development, evaluation, or general experimentation.
 For production, use :minio-docs:`Linux <minio/linux/operations/install-deploy-manage/multi-site-replication.html>` or :minio-docs:`Kubernetes <minio/kubernetes/upstream/operations/install-deploy-manage/multi-site-replication.html>`
 
 Overview
@@ -56,7 +56,7 @@ After enabling site replication, identity and access management (IAM) settings s
 
 .. tab-set::
 
-   .. tab-item:: MinIO IDP
+   .. tab-item:: Buckit IDP
 
       #. Policies
       #. User accounts (for local users)
@@ -71,7 +71,7 @@ After enabling site replication, identity and access management (IAM) settings s
    .. tab-item:: OIDC
 
       #. Policies
-      #. Access Keys associated to OIDC accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keys do not sync.
+      #. Access Keys associated to OIDC accounts with a valid :ref:`Buckit Policy <minio-policy>`. ``root`` access keys do not sync.
       #. Policy mapping for synced user accounts
       #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`
 
@@ -79,22 +79,22 @@ After enabling site replication, identity and access management (IAM) settings s
 
       #. Policies
       #. Groups
-      #. Access Keys associated to LDAP accounts with a valid :ref:`MinIO Policy <minio-policy>`. ``root`` access keys do not sync.
+      #. Access Keys associated to LDAP accounts with a valid :ref:`Buckit Policy <minio-policy>`. ``root`` access keys do not sync.
       #. Policy mapping for synced user accounts
       #. Policy mapping for :ref:`Security Token Service (STS) users <minio-security-token-service>`
 
-After the initial synchronization of data across peer sites, MinIO continually replicates and synchronizes :ref:`replicable data <minio-site-replication-what-replicates>` among all sites as they occur on any site.
+After the initial synchronization of data across peer sites, Buckit continually replicates and synchronizes :ref:`replicable data <minio-site-replication-what-replicates>` among all sites as they occur on any site.
 
 Site Healing
 ~~~~~~~~~~~~
 
-Any MinIO deployment in the site replication configuration can resynchronize damaged :ref:`replica-eligible data <minio-site-replication-what-replicates>` from the peer with the most updated ("latest") version of that data.
+Any Buckit deployment in the site replication configuration can resynchronize damaged :ref:`replica-eligible data <minio-site-replication-what-replicates>` from the peer with the most updated ("latest") version of that data.
 
 .. versionchanged:: RELEASE.2023-07-18T17-49-40Z
 
    Site replication operations retry up to three (3) times.
    
-   MinIO dequeues replication operations that fail to replicate after three attempts.
+   Buckit dequeues replication operations that fail to replicate after three attempts.
    The :ref:`scanner <minio-concepts-scanner>` picks up those affected objects at a later time and requeues them for replication.
 
 .. versionchanged:: RELEASE.2022-08-11T04-37-28Z
@@ -105,7 +105,7 @@ Any MinIO deployment in the site replication configuration can resynchronize dam
 .. versionchanged:: RELEASE.2022-12-02T23-48-47Z
 
    If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
-   This launches an active process that resynchronizes the data without waiting for the passive :ref:`MinIO scanner <minio-concepts-scanner>` to recognize the missing data.
+   This launches an active process that resynchronizes the data without waiting for the passive :ref:`Buckit scanner <minio-concepts-scanner>` to recognize the missing data.
 
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-config
@@ -118,14 +118,14 @@ Synchronous vs Asynchronous Replication
    :start-after: start-replication-sync-vs-async
    :end-before: end-replication-sync-vs-async
 
-MinIO strongly recommends using the default asynchronous site replication.
+Buckit strongly recommends using the default asynchronous site replication.
 Synchronous site replication performance depends strongly on latency between sites, where higher latency can result in lower PUT performance and replication lag.
 To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --mode` option.
 
 Proxy to Other Sites
 ~~~~~~~~~~~~~~~~~~~~
 
-MinIO peer sites can proxy ``GET/HEAD`` requests for an object to other peers to check if it exists.
+Buckit peer sites can proxy ``GET/HEAD`` requests for an object to other peers to check if it exists.
 This allows a site that is healing or lagging behind other peers to still return an object persisted to other sites.
 
 For example:
@@ -139,7 +139,7 @@ For example:
 For ``GET/HEAD`` requests that do *not* include a unique version ID, the proxy request returns the *latest* version of that object on the peer site.
 This may result in retrieval of a non-current version of an object, such as if the responding peer site is also experiencing replication lag.
 
-MinIO does not proxy ``LIST``, ``DELETE``, and ``PUT`` operations.
+Buckit does not proxy ``LIST``, ``DELETE``, and ``PUT`` operations.
 
 Prerequisites
 -------------
@@ -162,13 +162,13 @@ All Sites Must Use the Same IDP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All sites must use the same :ref:`Identity Provider <minio-authentication-and-identity-management>`.
-Site replication supports the included MinIO IDP, OIDC, or LDAP.
+Site replication supports the included Buckit IDP, OIDC, or LDAP.
 
-All Sites Must use the Same MinIO Server Version
+All Sites Must use the Same Buckit Server Version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All sites must have a matching and consistent MinIO Server version. 
-Configuring replication between sites with mismatched MinIO Server versions may result in unexpected or undesired replication behavior.
+All sites must have a matching and consistent Buckit Server version. 
+Configuring replication between sites with mismatched Buckit Server versions may result in unexpected or undesired replication behavior.
 
 You should also ensure the :mc:`mc` version used to configure replication closely matches the server version.
 
@@ -185,7 +185,7 @@ Replication Requires Versioning
 Site replication *requires* :ref:`minio-bucket-versioning` and enables it for all created buckets automatically.
 You cannot disable versioning in site replication deployments.
 
-MinIO cannot replicate objects in prefixes in the bucket that you excluded from versioning.
+Buckit cannot replicate objects in prefixes in the bucket that you excluded from versioning.
 
 Load Balancers Installed on Each Site
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -219,7 +219,7 @@ One of the sites contains :ref:`replicable data <minio-site-replication-what-rep
 
 The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``minio1`` contains any data.
 
-#. :ref:`Deploy <deploy-minio-distributed>` three or more separate MinIO sites, using the same :ref:`IDP <minio-authentication-and-identity-management>`
+#. :ref:`Deploy <deploy-minio-distributed>` three or more separate Buckit sites, using the same :ref:`IDP <minio-authentication-and-identity-management>`
 
    Start with empty sites *or* have no more than one site with any :ref:`replicable data <minio-site-replication-what-replicates>`.
 
@@ -229,7 +229,7 @@ The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``
       :start-after: start-mc-admin-replicate-load-balancing
       :end-before: end-mc-admin-replicate-load-balancing
 
-   For example, for three MinIO sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
+   For example, for three Buckit sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
    
    Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
 
@@ -308,7 +308,7 @@ The new site must meet the following requirements:
 - Uses the same root user credentials as other configured sites
 - Contains no bucket or object data
 
-#. Deploy the new MinIO peer site(s) following the stated requirements
+#. Deploy the new Buckit peer site(s) following the stated requirements
 
 #. Configure an alias for the new site
 
@@ -395,14 +395,14 @@ Use :mc-cmd:`mc admin replicate rm`:
 
 All healthy peers in the site replication configuration update to remove the specified peer automatically.
 
-MinIO requires the ``--force`` flag to remove the peer from the site replication configuration.
+Buckit requires the ``--force`` flag to remove the peer from the site replication configuration.
 
 .. _minio-site-replication-status-tutorial:
 
 Review Replication Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-MinIO provides information on replication across the sites for users, groups, policies, or buckets.
+Buckit provides information on replication across the sites for users, groups, policies, or buckets.
 
 The summary information includes the number of **Synced** and **Failed** items for each category.
 

@@ -1,17 +1,17 @@
 .. _minio-k8s-deploy-operator-kustomize-repo-2:
 
-Install the MinIO Operator using Kustomize
+Install the Buckit Operator using Kustomize
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following procedure uses ``kubectl -k`` to install the Operator from the MinIO Operator GitHub repository.
+The following procedure uses ``kubectl -k`` to install the Operator from the Buckit Operator GitHub repository.
 ``kubectl -k`` and ``kubectl --kustomize`` are aliases that perform the same command.
 
 .. important::
 
    If you use Kustomize to install the Operator, you must use Kustomize to manage or upgrade that installation.
-   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or upgrade a MinIO Operator installation deployed with Kustomize.
+   Do not use ``kubectl krew``, a Helm chart, or similar methods to manage or upgrade a Buckit Operator installation deployed with Kustomize.
 
-   You can, however, use Kustomize to upgrade a previous version of Operator (5.0.14 or earlier) installed with the MinIO Kubernetes Plugin.
+   You can, however, use Kustomize to upgrade a previous version of Operator (5.0.14 or earlier) installed with the Buckit Kubernetes Plugin.
 
 #. Install the latest version of Operator
 
@@ -40,7 +40,7 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
       minio-operator-6c758b8c45-nkhlx   1/1     Running   0          2m42s
       minio-operator-6c758b8c45-dgd8n   1/1     Running   0          2m42s
 
-   In this example, the ``minio-operator`` pod is MinIO Operator and the ``console`` pod is the Operator Console.
+   In this example, the ``minio-operator`` pod is Buckit Operator and the ``console`` pod is the Operator Console.
 
    You can modify your Operator deployment by applying kubectl patches.
    You can find examples for common configurations in the `Operator GitHub repository <https://github.com/minio/operator/tree/master/examples/kustomization>`__.
@@ -76,8 +76,8 @@ The following procedure uses ``kubectl -k`` to install the Operator from the Min
 
 #. Next Steps
 
-   You can deploy MinIO tenants using the :ref:`MinIO CRD and Kustomize. <minio-k8s-deploy-minio-tenant>`
-   MinIO also provides a :ref:`Helm chart for deploying Tenants <deploy-tenant-helm>`. 
+   You can deploy Buckit tenants using the :ref:`Buckit CRD and Kustomize. <minio-k8s-deploy-minio-tenant>`
+   Buckit also provides a :ref:`Helm chart for deploying Tenants <deploy-tenant-helm>`. 
 
-   MinIO recommends using the same method of Tenant deployment and management used to install the Operator.
+   Buckit recommends using the same method of Tenant deployment and management used to install the Operator.
    Mixing Kustomize and Helm for Operator or Tenant management may increase operational complexity.

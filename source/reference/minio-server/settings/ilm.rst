@@ -10,7 +10,7 @@ ILM Settings
    :local:
    :depth: 2
 
-This page covers settings that control Information Lifecycle Management (ILM) for the MinIO process. 
+This page covers settings that control Information Lifecycle Management (ILM) for the Buckit process. 
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined
@@ -36,7 +36,7 @@ Expiration Workers
       .. mc-conf:: ilm expiration_workers
          :delimiter: " "
 
-.. versionadded:: MinIO Server RELEASE.2024-03-03T17-50-39Z
+.. versionadded:: Buckit Server RELEASE.2024-03-03T17-50-39Z
 
 Set the number of workers to use for :ref:`expiring objects <minio-lifecycle-management-expiration>`.
 Valid values are ``1`` to ``500``.

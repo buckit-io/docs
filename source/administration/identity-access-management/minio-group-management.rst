@@ -23,7 +23,7 @@ For example, consider the following groups. Each group is assigned a
 :ref:`policy action <minio-policy-actions>`. Each group also has one or
 more assigned users. Each user's total set of permissions consists of their
 explicitly assigned permission *and* the inherited permissions from each of
-their assigned groups. MinIO by default *denies* access to any resource or
+their assigned groups. Buckit by default *denies* access to any resource or
 operation not explicitly allowed by a user's assigned or inherited policies.
 
 .. list-table::
@@ -51,10 +51,10 @@ operation not explicitly allowed by a user's assigned or inherited policies.
 
 Groups provide a simplified method for managing shared permissions among
 users with common access patterns and workloads. Client's *cannot* authenticate
-to a MinIO deployment using a group as an identity. 
+to a Buckit deployment using a group as an identity. 
 
 
 The :mc:`mc admin group` command supports the creation and management of
-groups on the MinIO deployment. See the command reference for examples of
+groups on the Buckit deployment. See the command reference for examples of
 usage.
 

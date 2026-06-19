@@ -2,7 +2,7 @@
 .. _deploy-minio-tenant-redhat-openshift:
 
 =====================
-Deploy a MinIO Tenant
+Deploy a Buckit Tenant
 =====================
 
 .. default-domain:: minio
@@ -11,7 +11,7 @@ Deploy a MinIO Tenant
    :local:
    :depth: 1
 
-This procedure documents deploying a MinIO Tenant using the MinIO Operator.
+This procedure documents deploying a Buckit Tenant using the Buckit Operator.
 
 .. screenshot temporarily removed
 
@@ -19,29 +19,29 @@ This procedure documents deploying a MinIO Tenant using the MinIO Operator.
    :align: center
    :width: 70%
    :class: no-scaled-link
-   :alt: MinIO Operator Console
+   :alt: Buckit Operator Console
 
 
 Deploying Single-Node topologies requires additional configurations not covered in this documentation.
 You can alternatively use a simple Kubernetes YAML object to describe a Single-Node topology for local testing and evaluation as necessary.
-MinIO does not recommend nor support single-node deployment topologies for production environments.
+Buckit does not recommend nor support single-node deployment topologies for production environments.
 
 This documentation assumes familiarity with all referenced Kubernetes concepts, utilities, and procedures. 
 While this documentation *may* provide guidance for configuring or deploying Kubernetes-related resources on a best-effort basis, it is not a replacement for the official :kube-docs:`Kubernetes Documentation <>`.
 
 .. _minio-k8s-deploy-minio-tenant-security:
 
-Deploy a MinIO Tenant using Kustomize
+Deploy a Buckit Tenant using Kustomize
 -------------------------------------
 
-The following procedure uses ``kubectl -k`` to deploy a MinIO Tenant using the ``base`` Kustomization template in the :minio-git:`MinIO Operator Github repository <operator/tree/master/examples/kustomization/base>`.
+The following procedure uses ``kubectl -k`` to deploy a Buckit Tenant using the ``base`` Kustomization template in the :minio-git:`Buckit Operator Github repository <operator/tree/master/examples/kustomization/base>`.
 
-You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the :ref:`MinIO Custom Resource Documentation <minio-operator-crd>`.
+You can select a different base or pre-built template from the :minio-git:`repository <operator/tree/master/examples/kustomization/>` as your starting point, or build your own Kustomization resources using the :ref:`Buckit Custom Resource Documentation <minio-operator-crd>`.
 
 .. important::
 
-   If you use Kustomize to deploy a MinIO Tenant, you must use Kustomize to manage or upgrade that deployment.
-   Do not use ``kubectl krew``, a Helm Chart, or similar methods to manage or upgrade the MinIO Tenant.
+   If you use Kustomize to deploy a Buckit Tenant, you must use Kustomize to manage or upgrade that deployment.
+   Do not use ``kubectl krew``, a Helm Chart, or similar methods to manage or upgrade the Buckit Tenant.
 
 This procedure is not exhaustive of all possible configuration options available in the :ref:`Tenant CRD <minio-operator-crd>`.
 It provides a baseline from which you can modify and tailor the Tenant to your requirements.
@@ -64,7 +64,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
    #. Configure the Tenant topology
 
-      The ``kind: Tenant`` object describes the MinIO Tenant.
+      The ``kind: Tenant`` object describes the Buckit Tenant.
 
       The following fields share the ``spec.pools[0]`` prefix and control the number of servers, volumes per server, and storage class of all pods deployed in the Tenant:
       
@@ -76,10 +76,10 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
            - Description
 
          * - ``servers`` 
-           - The number of MinIO pods to deploy in the Server Pool.
+           - The number of Buckit pods to deploy in the Server Pool.
 
          * - ``volumesPerServer`` 
-           - The number of persistent volumes to attach to each MinIO pod (``servers``).
+           - The number of persistent volumes to attach to each Buckit pod (``servers``).
              The Operator generates ``volumesPerServer x servers`` Persistant Volume Claims for the Tenant.
 
          * - ``volumeClaimTemplate.spec.storageClassName`` 
@@ -92,19 +92,19 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
    #. Configure Tenant Affinity or Anti-Affinity
 
-      The MinIO Operator supports the following Kubernetes Affinity and Anti-Affinity configurations:
+      The Buckit Operator supports the following Kubernetes Affinity and Anti-Affinity configurations:
 
       - Node Affinity (``spec.pools[n].nodeAffinity``)
       - Pod Affinity (``spec.pools[n].podAffinity``)
       - Pod Anti-Affinity (``spec.pools[n].podAntiAffinity``)
 
-      MinIO recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
+      Buckit recommends configuring Tenants with Pod Anti-Affinity to ensure that the Kubernetes schedule does not schedule multiple pods on the same worker node.
 
       If you have specific worker nodes on which you want to deploy the tenant, pass those node labels or filters to the ``nodeAffinity`` field to constrain the scheduler to place pods on those nodes.
 
    #. Configure Network Encryption
 
-      The MinIO Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
+      The Buckit Tenant CRD provides the following fields from which you can configure tenant TLS network encryption:
 
       .. list-table::
          :header-rows: 1
@@ -114,7 +114,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
            - Description
 
          * - ``tenant.certificate.requestAutoCert``
-           - Enable or disable MinIO :ref:`automatic TLS certificate generation <minio-tls>`
+           - Enable or disable Buckit :ref:`automatic TLS certificate generation <minio-tls>`
 
              Defaults to ``true`` or enabled if omitted.
 
@@ -131,9 +131,9 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
          
              Specify one or more Kubernetes secrets of type ``kubernetes.io/tls`` containing the full chain of CA certificates for a given authority.
 
-   #. Configure MinIO Environment Variables
+   #. Configure Buckit Environment Variables
 
-      You can set MinIO Server environment variables using the ``tenant.configuration`` field.
+      You can set Buckit Server environment variables using the ``tenant.configuration`` field.
 
       .. list-table::
          :header-rows: 1
@@ -143,7 +143,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
            - Description
 
          * - ``tenant.configuration``
-           - Specify a Kubernetes opaque secret whose data payload ``config.env`` contains each MinIO environment variable you want to set.
+           - Specify a Kubernetes opaque secret whose data payload ``config.env`` contains each Buckit environment variable you want to set.
 
              The ``config.env`` data payload **must** be a base64-encoded string.
              You can create a local file, set your environment variables, and then use ``cat LOCALFILE | base64`` to create the payload.
@@ -177,11 +177,11 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
          watch kubectl get all -n minio-tenant
 
-   #. Expose the Tenant MinIO S3 API port
+   #. Expose the Tenant Buckit S3 API port
 
-      To test the MinIO Client :mc:`mc` from your local machine, forward the MinIO port and create an alias.
+      To test the Buckit Client :mc:`mc` from your local machine, forward the Buckit port and create an alias.
 
-      * Forward the Tenant's MinIO port:
+      * Forward the Tenant's Buckit port:
 
       .. code-block:: shell
          :class: copyable
@@ -202,7 +202,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
          mc mb myminio/mybucket --insecure
 
-      If you deployed your MinIO Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
+      If you deployed your Buckit Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
       
       See :ref:`create-tenant-connect-tenant` for specific instructions.
 
@@ -211,7 +211,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 Connect to the Tenant
 ---------------------
 
-The MinIO Operator creates services for the MinIO Tenant. 
+The Buckit Operator creates services for the Buckit Tenant. 
 
 
 Use the ``kubectl get svc -n NAMESPACE`` command to review the deployed services.
@@ -229,11 +229,11 @@ For Kubernetes services which use a custom ``kubectl`` analog, you can substitut
    TENANT-NAMESPACE-console           LoadBalancer   10.106.103.247   <pending>     9443:32095/TCP   2d3h
    TENANT-NAMESPACE-hl                ClusterIP      None             <none>        9000/TCP         2d3h
 
-- The ``minio`` service corresponds to the MinIO Tenant service. 
-  Applications should use this service for performing operations against the MinIO Tenant.
+- The ``minio`` service corresponds to the Buckit Tenant service. 
+  Applications should use this service for performing operations against the Buckit Tenant.
  
-- The ``*-console`` service corresponds to the :minio-git:`MinIO Console <console>`. 
-  Administrators should use this service for accessing the MinIO Console and performing administrative operations on the MinIO Tenant.
+- The ``*-console`` service corresponds to the :minio-git:`Buckit Console <console>`. 
+  Administrators should use this service for accessing the Buckit Console and performing administrative operations on the Buckit Tenant.
 
 The remaining services support Tenant operations and are not intended for consumption by users or administrators.
  

@@ -19,8 +19,8 @@
    * - :octicon:`circle`
      - :ref:`Dedicated locally-attached drives for each host <minio-hardware-checklist-storage>`.
 
-     - 4 drives per MinIO Server
-     - 8+ drives per MinIO Server
+     - 4 drives per Buckit Server
+     - 8+ drives per Buckit Server
 
    * - :octicon:`circle`
      - :ref:`High speed network infrastructure <minio-hardware-checklist-network>`.
@@ -52,16 +52,16 @@
      - Recommended
 
    * - :octicon:`circle`
-     - Kubernetes worker nodes to exclusively service the MinIO Tenant.
+     - Kubernetes worker nodes to exclusively service the Buckit Tenant.
 
      - 4 workers per Tenant
      - 8+ workers per Tenant
 
    * - :octicon:`circle`
-     - :ref:`Dedicated Persistent Volumes for the MinIO Tenant <minio-hardware-checklist-storage>`.
+     - :ref:`Dedicated Persistent Volumes for the Buckit Tenant <minio-hardware-checklist-storage>`.
 
-     - 4 PV per MinIO Server pod
-     - 8+ PV per MinIO Server pod
+     - 4 PV per Buckit Server pod
+     - 8+ PV per Buckit Server pod
 
    * - :octicon:`circle`
      - :ref:`High speed network infrastructure <minio-hardware-checklist-network>`.
@@ -71,8 +71,8 @@
 
    * - :octicon:`circle`
      - Server-grade CPUs with support for modern SIMD instructions (AVX-512), such as Intel® Xeon® Scalable or better.
-     - 4 vCPU per MinIO Pod
-     - 8+ vCPU per MinIO Pod
+     - 4 vCPU per Buckit Pod
+     - 8+ vCPU per Buckit Pod
 
    * - :octicon:`circle`
      - :ref:`Available memory to meet or exceed per-server usage <minio-hardware-checklist-memory>` by a reasonable buffer.

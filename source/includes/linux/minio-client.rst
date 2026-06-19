@@ -4,7 +4,7 @@
    :optional:
 
    Limit client-side download rates to no more than a specified rate in KiB/s, MiB/s, or GiB/s.
-   This affects only the download to the local device running the MinIO Client.
+   This affects only the download to the local device running the Buckit Client.
    Valid units include: 
    
    - ``B`` for bytes
@@ -23,13 +23,13 @@
 
       --limit-download 1G
 
-   If not specified, MinIO uses an unlimited download rate.
+   If not specified, Buckit uses an unlimited download rate.
 
 .. mc-cmd:: --limit-upload
    :optional:
 
    Limit client-side upload rates to no more than the specified rate in KiB/s, MiB/s, or GiB/s.
-   This affects only the upload from the local device running the MinIO Client.
+   This affects only the upload from the local device running the Buckit Client.
    Valid units include: 
    
    - ``B`` for bytes
@@ -48,6 +48,6 @@
 
       --limit-upload 1G
 
-   If not specified, MinIO uses an unlimited upload rate.
+   If not specified, Buckit uses an unlimited upload rate.
 
 .. end-mc-limit-flags-desc

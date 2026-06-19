@@ -108,7 +108,7 @@ Syntax
                                        [CFG_PARAM1]      \
                                        [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command creates default configuration values.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-open-id-config-settings>` key-value pairs in the format of ``PARAMETER="value"``.
@@ -145,7 +145,7 @@ Syntax
                                               [CFG_PARAM1]     \
                                               [CFG_PARAM2]...
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command updates the default configuration.
          - Replace the ``[CFG_PARAM#]`` with each of the :ref:`configuration setting <minio-open-id-config-settings>` key-value pairs to update in the format of ``PARAMETER="value"``.
@@ -176,7 +176,7 @@ Syntax
                                               ALIAS      \
                                               [CFG_NAME]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command removes the default configurations. 
 
@@ -204,7 +204,7 @@ Syntax
 
             mc [GLOBALFLAGS] admin idp openid ls ALIAS
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to list OpenID integrations for.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to list OpenID integrations for.
 
 
 .. mc-cmd:: info
@@ -233,7 +233,7 @@ Syntax
                                               ALIAS      \
                                               [CFG_NAME]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the information displays for the default server configuration.
 
@@ -265,7 +265,7 @@ Syntax
                                               ALIAS      \
                                               [CFG_NAME]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command enables the default configuration values.
 
@@ -297,7 +297,7 @@ Syntax
                                               ALIAS         \
                                               [CFG_NAME]
 
-         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a MinIO deployment to configure for OpenID integration.
+         - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment to configure for OpenID integration.
          - Replace ``CFG_NAME`` with a unique string for this configuration.
            If not specified, the command disables the default configuration values.
 

@@ -3,12 +3,12 @@
 # Operator CRD v2 Reference
 
 Package v2 - This page provides a quick automatically generated
-reference for the MinIO Operator `Operator CRD v2 Reference` CRD. For more
-complete documentation on the MinIO Operator CRD, see [MinIO Kubernetes
+reference for the Buckit Operator `Operator CRD v2 Reference` CRD. For more
+complete documentation on the Buckit Operator CRD, see [Buckit Kubernetes
 Documentation](https://docs.min.io/community/minio-object-store/operations/deployments/kubernetes.html).  
 
-The `Operator CRD v2 Reference` API was released with the v4.0.0 MinIO Operator.
-The MinIO Operator automatically converts existing tenants using the
+The `Operator CRD v2 Reference` API was released with the v4.0.0 Buckit Operator.
+The Buckit Operator automatically converts existing tenants using the
 `/v1` API to `/v2`.  
 
 -   [Tenant](#tenant)
@@ -98,7 +98,7 @@ certificates.<br />
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>Specify one or more x.509 Subject Alternative Names (SAN) to
-associate to automatically generated TLS certificates. MinIO Server pods
+associate to automatically generated TLS certificates. Buckit Server pods
 use SNI to determine which certificate to respond with based on the
 requested hostname.</p></td>
 </tr>
@@ -264,7 +264,7 @@ array</em></p></td>
 
 ## ExposeServices
 
-ExposeServices (`exposeServices`) defines the exposure of the MinIO
+ExposeServices (`exposeServices`) defines the exposure of the Buckit
 object storage and Console services.  
 
 -   [TenantSpec](#tenantspec)
@@ -286,7 +286,7 @@ object storage and Console services.
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Directs the Operator to expose the MinIO service. Defaults to
+<p>Directs the Operator to expose the Buckit service. Defaults to
 <code>false</code>.<br />
 </p></td>
 </tr>
@@ -295,7 +295,7 @@ object storage and Console services.
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Directs the Operator to expose the MinIO Console service. Defaults to
+<p>Directs the Operator to expose the Buckit Console service. Defaults to
 <code>false</code>.<br />
 </p></td>
 </tr>
@@ -304,8 +304,8 @@ object storage and Console services.
 
 ## Features
 
-Features (`features`) - Object describing which MinIO features to
-enable/disable in the MinIO Tenant.  
+Features (`features`) - Object describing which Buckit features to
+enable/disable in the Buckit Tenant.  
 
 -   [TenantSpec](#tenantspec)
 
@@ -337,7 +337,7 @@ the DNS path
 href="#tenantdomains">TenantDomains</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Specify a list of domains used to access MinIO and Console.</p></td>
+<p>Specify a list of domains used to access Buckit and Console.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -359,9 +359,9 @@ service or offline
 
 ## KESConfig
 
-KESConfig (`kes`) defines the configuration of the [MinIO Key Encryption
+KESConfig (`kes`) defines the configuration of the [Buckit Key Encryption
 Service](https://github.com/minio/kes) (KES) StatefulSet deployed as
-part of the MinIO Tenant. KES supports Server-Side Encryption of objects
+part of the Buckit Tenant. KES supports Server-Side Encryption of objects
 using an external Key Management Service (KMS).  
 
 -   [TenantSpec](#tenantspec)
@@ -399,7 +399,7 @@ style="text-align: left;"><p><strong><code>imagePullPolicy</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#pullpolicy-v1-core">PullPolicy</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>The pull policy for the MinIO Docker image. Specify one of the
+<p>The pull policy for the Buckit Docker image. Specify one of the
 following:<br />
 </p>
 <ul>
@@ -421,7 +421,7 @@ style="text-align: left;"><p><strong><code>serviceAccountName</code></strong>
 </p>
 <p>The <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">Kubernetes
-Service Account</a> to use for running MinIO KES pods created as part of
+Service Account</a> to use for running Buckit KES pods created as part of
 the Tenant.<br />
 </p></td>
 </tr>
@@ -434,10 +434,10 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#local
 <p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
 opaque secret</a> which contains environment variables to use for
-setting up the MinIO KES service.<br />
+setting up the Buckit KES service.<br />
 </p>
 <p>See the <a
-href="https://github.com/minio/operator/blob/master/examples/kes-secret.yaml">MinIO
+href="https://github.com/minio/operator/blob/master/examples/kes-secret.yaml">Buckit
 Operator <code>console-secret.yaml</code></a> for an example.</p></td>
 </tr>
 <tr class="even">
@@ -447,15 +447,15 @@ style="text-align: left;"><p><strong><code>externalCertSecret</code></strong>
 href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Enables TLS with SNI support on each MinIO KES pod in the tenant. If
+<p>Enables TLS with SNI support on each Buckit KES pod in the tenant. If
 <code>externalCertSecret</code> is omitted <strong>and</strong>
-<code>spec.requestAutoCert</code> is set to <code>false</code>, MinIO
+<code>spec.requestAutoCert</code> is set to <code>false</code>, Buckit
 KES pods deploy <strong>without</strong> TLS enabled.<br />
 </p>
 <p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secret</a>. The MinIO Operator copies the specified certificate to
-every MinIO pod in the tenant. When the MinIO pod/service responds to a
+TLS secret</a>. The Buckit Operator copies the specified certificate to
+every Buckit pod in the tenant. When the Buckit pod/service responds to a
 TLS connection request, it uses SNI to select the certificate with
 matching <code>subjectAlternativeName</code>.<br />
 </p>
@@ -470,9 +470,9 @@ containing the TLS certificate.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html">Buckit
 Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
+on configuring TLS for Buckit Tenants.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -538,7 +538,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resou
 </p>
 <p>Object specification for specifying CPU and memory <a
 href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource
-allocations</a> or limits in the MinIO tenant.<br />
+allocations</a> or limits in the Buckit tenant.<br />
 </p></td>
 </tr>
 <tr class="odd">
@@ -548,7 +548,7 @@ style="text-align: left;"><p><strong><code>nodeSelector</code></strong>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>The filter for the Operator to apply when selecting which nodes on
-which to deploy MinIO KES pods. The Operator only selects those nodes
+which to deploy Buckit KES pods. The Operator only selects those nodes
 whose labels match the specified selector.<br />
 </p>
 <p>See the Kubernetes documentation on <a
@@ -565,7 +565,7 @@ array</em></p></td>
 </p>
 <p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Kubernetes
-tolerations</a> to apply to MinIO KES pods.</p></td>
+tolerations</a> to apply to Buckit KES pods.</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>affinity</code></strong>
@@ -587,7 +587,7 @@ array</em></p></td>
 </p>
 <p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/">Kubernetes
-Topology Spread Constraints</a> to apply to pods deployed in the MinIO
+Topology Spread Constraints</a> to apply to pods deployed in the Buckit
 pool.</p></td>
 </tr>
 <tr class="odd">
@@ -605,7 +605,7 @@ style="text-align: left;"><p><strong><code>securityContext</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podsecuritycontext-v1-core">PodSecurityContext</a></em></p></td>
 <td style="text-align: left;"><p>Specify the <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
-Context</a> of MinIO KES pods. The Operator supports only the following
+Context</a> of Buckit KES pods. The Operator supports only the following
 pod security fields:<br />
 </p>
 <ul>
@@ -630,7 +630,7 @@ style="text-align: left;"><p><strong><code>containerSecurityContext</code></stro
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#securitycontext-v1-core">SecurityContext</a></em></p></td>
 <td style="text-align: left;"><p>Specify the <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security
-Context</a> of MinIO KES pods.</p></td>
+Context</a> of Buckit KES pods.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>env</code></strong>
@@ -639,7 +639,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#envva
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, the MinIO Operator adds the specified environment
+<p>If provided, the Buckit Operator adds the specified environment
 variables when deploying the KES resource.</p></td>
 </tr>
 </tbody>
@@ -650,7 +650,7 @@ variables when deploying the KES resource.</p></td>
 LocalCertificateReference (`externalCertSecret`,
 `externalCaCertSecret`,`clientCertSecret`) contains a Kubernetes secret
 containing TLS certificates or Certificate Authority files for use with
-enabling TLS in the MinIO Tenant.  
+enabling TLS in the Buckit Tenant.  
 
 -   [KESConfig](#kesconfig)
 
@@ -691,7 +691,7 @@ Certificate Authority file.<br />
 
 ## Logging
 
-Logging describes Logging for MinIO tenants.
+Logging describes Logging for Buckit tenants.
 
 -   [TenantSpec](#tenantspec)
 
@@ -727,13 +727,13 @@ Logging describes Logging for MinIO tenants.
 
 ## Pool
 
-Pool (`pools`) defines a MinIO server pool on a Tenant. Each pool
-consists of a set of MinIO server pods which "pool" their storage
+Pool (`pools`) defines a Buckit server pool on a Tenant. Each pool
+consists of a set of Buckit server pods which "pool" their storage
 resources for supporting object storage and retrieval requests. Each
 server pool is independent of all others and supports horizontal scaling
-of available storage resources in the MinIO Tenant.  
+of available storage resources in the Buckit Tenant.  
 
-See the [MinIO Operator CRD](https://docs.min.io/community/minio-object-store/reference/operator-crd.html)
+See the [Buckit Operator CRD](https://docs.min.io/community/minio-object-store/reference/operator-crd.html)
 reference for the `pools` object for examples and more complete documentation.  
 
 -   [TenantSpec](#tenantspec)
@@ -761,9 +761,9 @@ this field is omitted.</p></td>
 <td style="text-align: left;"><p><strong><code>servers</code></strong>
 <em>integer</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong></p>
-<p>The number of MinIO server pods to deploy in the pool. The minimum
+<p>The number of Buckit server pods to deploy in the pool. The minimum
 value is <code>2</code>.</p>
-<p>The MinIO Operator requires a minimum of <code>4</code> volumes per
+<p>The Buckit Operator requires a minimum of <code>4</code> volumes per
 pool. Specifically, the result of
 <code>pools.servers X pools.volumesPerServer</code> must be greater than
 <code>4</code>.<br />
@@ -775,10 +775,10 @@ style="text-align: left;"><p><strong><code>volumesPerServer</code></strong>
 <em>integer</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
 </p>
-<p>The number of Persistent Volume Claims to generate for each MinIO
+<p>The number of Persistent Volume Claims to generate for each Buckit
 server pod in the pool.<br />
 </p>
-<p>The MinIO Operator requires a minimum of <code>4</code> volumes per
+<p>The Buckit Operator requires a minimum of <code>4</code> volumes per
 pool. Specifically, the result of
 <code>pools.servers X pools.volumesPerServer</code> must be greater than
 <code>4</code>.<br />
@@ -791,8 +791,8 @@ style="text-align: left;"><p><strong><code>volumeClaimTemplate</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaim-v1-core">PersistentVolumeClaim</a></em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
 </p>
-<p>Specify the configuration options for the MinIO Operator to use when
-generating Persistent Volume Claims for the MinIO tenant.<br />
+<p>Specify the configuration options for the Buckit Operator to use when
+generating Persistent Volume Claims for the Buckit tenant.<br />
 </p></td>
 </tr>
 <tr class="odd">
@@ -803,7 +803,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resou
 </p>
 <p>Object specification for specifying CPU and memory <a
 href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource
-allocations</a> or limits in the MinIO tenant.<br />
+allocations</a> or limits in the Buckit tenant.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -827,7 +827,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#affin
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>Specify node affinity, pod affinity, and pod anti-affinity for pods
-in the MinIO pool.<br />
+in the Buckit pool.<br />
 </p></td>
 </tr>
 <tr class="even">
@@ -840,7 +840,7 @@ array</em></p></td>
 </p>
 <p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Kubernetes
-tolerations</a> to apply to pods deployed in the MinIO pool.</p></td>
+tolerations</a> to apply to pods deployed in the Buckit pool.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -852,7 +852,7 @@ array</em></p></td>
 </p>
 <p>Specify one or more <a
 href="https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/">Kubernetes
-Topology Spread Constraints</a> to apply to pods deployed in the MinIO
+Topology Spread Constraints</a> to apply to pods deployed in the Buckit
 pool.</p></td>
 </tr>
 <tr class="even">
@@ -982,7 +982,7 @@ should keep running this Pool without a Security Context</p></td>
 ## PoolsMetadata
 
 PoolsMetadata (`poolsMetadata`) defines custom labels and annotations
-for the MinIO pool stateful sets / pods.  
+for the Buckit pool stateful sets / pods.  
 
 -   [TenantSpec](#tenantspec)
 
@@ -1003,7 +1003,7 @@ for the MinIO pool stateful sets / pods.
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, append these labels to the MinIO statefulset /
+<p>If provided, append these labels to the Buckit statefulset /
 pods</p></td>
 </tr>
 <tr class="even">
@@ -1012,7 +1012,7 @@ style="text-align: left;"><p><strong><code>annotations</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, append these annotations to the MinIO statefulset /
+<p>If provided, append these annotations to the Buckit statefulset /
 pods</p></td>
 </tr>
 </tbody>
@@ -1021,7 +1021,7 @@ pods</p></td>
 ## ServiceMetadata
 
 ServiceMetadata (`serviceMetadata`) defines custom labels and
-annotations for the MinIO Object Storage service and/or MinIO Console
+annotations for the Buckit Object Storage service and/or Buckit Console
 service.  
 
 -   [TenantSpec](#tenantspec)
@@ -1044,7 +1044,7 @@ style="text-align: left;"><p><strong><code>minioServiceLabels</code></strong>
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, append these labels to the MinIO service</p></td>
+<p>If provided, append these labels to the Buckit service</p></td>
 </tr>
 <tr class="even">
 <td
@@ -1052,7 +1052,7 @@ style="text-align: left;"><p><strong><code>minioServiceAnnotations</code></stron
 <em>object (keys:string, values:string)</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, append these annotations to the MinIO service</p></td>
+<p>If provided, append these annotations to the Buckit service</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -1092,7 +1092,7 @@ style="text-align: left;"><p><strong><code>kesServiceAnnotations</code></strong>
 ## SideCars
 
 SideCars (`sidecars`) defines a list of containers that the Operator
-attaches to each MinIO server pods in the `pool`.
+attaches to each Buckit server pods in the `pool`.
 
 -   [TenantSpec](#tenantspec)
 
@@ -1160,7 +1160,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resou
 
 Tenant is a [Kubernetes
 object](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
-describing a MinIO Tenant.  
+describing a Buckit Tenant.  
 
 -   [TenantList](#tenantlist)
 
@@ -1206,7 +1206,7 @@ href="#tenantscheduler">TenantScheduler</a></em></p></td>
 href="#tenantspec">TenantSpec</a></em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
 </p>
-<p>The root field for the MinIO Tenant object.</p></td>
+<p>The root field for the Buckit Tenant object.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1214,7 +1214,7 @@ href="#tenantspec">TenantSpec</a></em></p></td>
 ## TenantDomains
 
 TenantDomains (`domains`) - List of domains used to access the tenant
-from outside the kubernetes clusters. this will only configure MinIO for
+from outside the kubernetes clusters. this will only configure Buckit for
 the domains listed, but external DNS configuration is still needed. The
 listed domains should include schema and port if any is used, i.e.
 <https://minio.domain.com:8123>
@@ -1236,15 +1236,15 @@ listed domains should include schema and port if any is used, i.e.
 <tr class="odd">
 <td style="text-align: left;"><p><strong><code>minio</code></strong>
 <em>string array</em></p></td>
-<td style="text-align: left;"><p>List of Domains used by MinIO. This
+<td style="text-align: left;"><p>List of Domains used by Buckit. This
 will enable DNS style access to the object store where the bucket name
 is inferred from a subdomain in the domain.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>console</code></strong>
 <em>string</em></p></td>
-<td style="text-align: left;"><p>Domain used to expose the MinIO
-Console, this will configure the redirect on MinIO when visiting from
+<td style="text-align: left;"><p>Domain used to expose the Buckit
+Console, this will configure the redirect on Buckit when visiting from
 the browser If Console is exposed via a subpath, the domain should
 include it, i.e. <a
 href="https://console.domain.com:8123/subpath/">https://console.domain.com:8123/subpath/</a></p></td>
@@ -1255,7 +1255,7 @@ href="https://console.domain.com:8123/subpath/">https://console.domain.com:8123/
 ## TenantScheduler
 
 TenantScheduler (`scheduler`) - Object describing Kubernetes Scheduler
-to use for deploying the MinIO Tenant.
+to use for deploying the Buckit Tenant.
 
 -   [Tenant](#tenant)
 
@@ -1285,13 +1285,13 @@ scheduler</a> to be used to schedule Tenant pods</p></td>
 
 ## TenantSpec
 
-TenantSpec (`spec`) defines the configuration of a MinIO Tenant
+TenantSpec (`spec`) defines the configuration of a Buckit Tenant
 object.  
 
-The following parameters are specific to the `Operator CRD v2 Reference` MinIO CRD
-API `spec` definition added as part of the MinIO Operator v4.0.0.  
+The following parameters are specific to the `Operator CRD v2 Reference` Buckit CRD
+API `spec` definition added as part of the Buckit Operator v4.0.0.  
 
-For more complete documentation on this object, see the [MinIO
+For more complete documentation on this object, see the [Buckit
 Kubernetes
 Documentation](https://docs.min.io/community/minio-object-store/operations/deployments/kubernetes.html).  
 
@@ -1316,19 +1316,19 @@ href="#pool">Pool</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Required</strong><br />
 </p>
-<p>An array of objects describing each MinIO server pool deployed in the
-MinIO Tenant. Each pool consists of a set of MinIO server pods which
+<p>An array of objects describing each Buckit server pool deployed in the
+Buckit Tenant. Each pool consists of a set of Buckit server pods which
 "pool" their storage resources for supporting object storage and
 retrieval requests. Each server pool is independent of all others and
-supports horizontal scaling of available storage resources in the MinIO
+supports horizontal scaling of available storage resources in the Buckit
 Tenant.<br />
 </p>
-<p>The MinIO Tenant <code>spec</code> <strong>must have</strong> at
+<p>The Buckit Tenant <code>spec</code> <strong>must have</strong> at
 least <strong>one</strong> element in the <code>pools</code>
 array.<br />
 </p>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenant">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenant">Buckit
 Operator CRD</a> reference for the <code>pools</code> object for
 examples and more complete documentation.</p></td>
 </tr>
@@ -1365,7 +1365,7 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#envva
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>If provided, the MinIO Operator adds the specified environment
+<p>If provided, the Buckit Operator adds the specified environment
 variables when deploying the Tenant resource.</p></td>
 </tr>
 <tr class="even">
@@ -1376,15 +1376,15 @@ href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Enables TLS with SNI support on each MinIO pod in the tenant. If
+<p>Enables TLS with SNI support on each Buckit pod in the tenant. If
 <code>externalCertSecret</code> is omitted <strong>and</strong>
-<code>requestAutoCert</code> is set to <code>false</code>, the MinIO
+<code>requestAutoCert</code> is set to <code>false</code>, the Buckit
 Tenant deploys <strong>without</strong> TLS enabled.<br />
 </p>
 <p>Specify an array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secrets</a>. The MinIO Operator copies the specified certificates to
-every MinIO server pod in the tenant. When the MinIO pod/service
+TLS secrets</a>. The Buckit Operator copies the specified certificates to
+every Buckit server pod in the tenant. When the Buckit pod/service
 responds to a TLS connection request, it uses SNI to select the
 certificate with matching <code>subjectAlternativeName</code>.<br />
 </p>
@@ -1400,9 +1400,9 @@ containing the TLS certificate.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">Buckit
 Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
+on configuring TLS for Buckit Tenants.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -1412,13 +1412,13 @@ href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Allows MinIO server pods to verify client TLS certificates signed by
+<p>Allows Buckit server pods to verify client TLS certificates signed by
 a Certificate Authority not in the pod’s trust store.<br />
 </p>
 <p>Specify an array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secrets</a>. The MinIO Operator copies the specified certificates to
-every MinIO server pod in the tenant.<br />
+TLS secrets</a>. The Buckit Operator copies the specified certificates to
+every Buckit server pod in the tenant.<br />
 </p>
 <p>Each element in the <code>externalCertSecret</code> array is an
 object containing the following fields:<br />
@@ -1432,9 +1432,9 @@ containing the Certificate Authority.<br />
 </p></li>
 </ul>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">Buckit
 Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
+on configuring TLS for Buckit Tenants.</p></td>
 </tr>
 <tr class="even">
 <td
@@ -1443,15 +1443,15 @@ style="text-align: left;"><p><strong><code>externalClientCertSecret</code></stro
 href="#localcertificatereference">LocalCertificateReference</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Enables mTLS authentication between the MinIO Tenant pods and <a
-href="https://github.com/minio/kes">MinIO KES</a>.
-<strong>Required</strong> for enabling connectivity between the MinIO
-Tenant and MinIO KES.<br />
+<p>Enables mTLS authentication between the Buckit Tenant pods and <a
+href="https://github.com/minio/kes">Buckit KES</a>.
+<strong>Required</strong> for enabling connectivity between the Buckit
+Tenant and Buckit KES.<br />
 </p>
 <p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secrets</a>. The MinIO Operator copies the specified certificate to
-every MinIO server pod in the tenant. The secret <strong>must</strong>
+TLS secrets</a>. The Buckit Operator copies the specified certificate to
+every Buckit server pod in the tenant. The secret <strong>must</strong>
 contain the following fields:<br />
 </p>
 <ul>
@@ -1466,15 +1466,15 @@ identity on the KES server. See the <a
 href="https://github.com/minio/kes/wiki/Configuration#policy-configuration">KES
 Wiki</a> for more information on KES identities.<br />
 </p>
-<p>If deploying KES with the MinIO Operator, include the hash of the
+<p>If deploying KES with the Buckit Operator, include the hash of the
 certificate as part of the <a
 href="#kesconfig"><code>kes</code></a>
 object specification.<br />
 </p>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">Buckit
 Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
+on configuring TLS for Buckit Tenants.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -1484,7 +1484,7 @@ href="#localcertificatereference">LocalCertificateReference</a>
 array</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Provide support for mounting additional client certificate into MinIO
+<p>Provide support for mounting additional client certificate into Buckit
 Tenant pods Multiple client certificates will be mounted using the
 following folder structure:<br />
 </p>
@@ -1512,8 +1512,8 @@ following folder structure:<br />
 </ul>
 <p>Specify a <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-TLS secrets</a>. The MinIO Operator copies the specified certificate to
-every MinIO server pod in the tenant that later can be referenced using
+TLS secrets</a>. The Buckit Operator copies the specified certificate to
+every Buckit server pod in the tenant that later can be referenced using
 environment variables. The secret <strong>must</strong> contain the
 following fields:<br />
 </p>
@@ -1530,7 +1530,7 @@ the TLS certificate.<br />
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Mount path for MinIO volume (PV). Defaults to
+<p>Mount path for Buckit volume (PV). Defaults to
 <code>/export</code></p></td>
 </tr>
 <tr class="odd">
@@ -1538,7 +1538,7 @@ the TLS certificate.<br />
 <em>string</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Subpath inside mount path. This is the directory where MinIO stores
+<p>Subpath inside mount path. This is the directory where Buckit stores
 data. Default to <code>""`</code> (empty)</p></td>
 </tr>
 <tr class="even">
@@ -1550,7 +1550,7 @@ style="text-align: left;"><p><strong><code>requestAutoCert</code></strong>
 <p>Enables using <a
 href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/">Kubernetes-based
 TLS certificate generation</a> and signing for pods and services in the
-MinIO Tenant.<br />
+Buckit Tenant.<br />
 </p>
 <ul>
 <li><p>Specify <code>true</code> to explicitly enable automatic
@@ -1562,11 +1562,11 @@ generation.<br />
 </ul>
 <p>If <code>requestAutoCert</code> is set to <code>false</code>
 <strong>and</strong> <code>externalCertSecret</code> is omitted, the
-MinIO Tenant deploys <strong>without</strong> TLS enabled.</p>
+Buckit Tenant deploys <strong>without</strong> TLS enabled.</p>
 <p>See the <a
-href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">MinIO
+href="https://docs.min.io/community/minio-object-store/reference/operator-crd.html#tenantspec">Buckit
 Operator CRD</a> reference for examples and more complete documentation
-on configuring TLS for MinIO Tenants.</p></td>
+on configuring TLS for Buckit Tenants.</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -1632,9 +1632,9 @@ this object has no effect if <code>requestAutoCert</code> is
 href="#kesconfig">KESConfig</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Directs the MinIO Operator to deploy the <a
-href="https://github.com/minio/kes">MinIO Key Encryption Service</a>
-(KES) using the specified configuration. The MinIO KES supports
+<p>Directs the Buckit Operator to deploy the <a
+href="https://github.com/minio/kes">Buckit Key Encryption Service</a>
+(KES) using the specified configuration. The Buckit KES supports
 performing server-side encryption of objects on the MiNIO Tenant.<br />
 </p></td>
 </tr>
@@ -1644,7 +1644,7 @@ style="text-align: left;"><p><strong><code>prometheusOperator</code></strong>
 <em>boolean</em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Directs the MinIO Operator to use prometheus operator.<br />
+<p>Directs the Buckit Operator to use prometheus operator.<br />
 </p>
 <p>Tenant scrape configuration will be added to prometheus managed by
 the prometheus-operator.</p></td>
@@ -1657,7 +1657,7 @@ style="text-align: left;"><p><strong><code>serviceAccountName</code></strong>
 </p>
 <p>The <a
 href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">Kubernetes
-Service Account</a> to use for running MinIO pods created as part of the
+Service Account</a> to use for running Buckit pods created as part of the
 Tenant.<br />
 </p></td>
 </tr>
@@ -1668,7 +1668,7 @@ style="text-align: left;"><p><strong><code>priorityClassName</code></strong>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>Indicates the Pod priority and therefore importance of a Pod relative
-to other Pods in the cluster. This is applied to MinIO pods only.<br />
+to other Pods in the cluster. This is applied to Buckit pods only.<br />
 </p>
 <p>Refer Kubernetes <a
 href="https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass">Priority
@@ -1681,7 +1681,7 @@ style="text-align: left;"><p><strong><code>imagePullPolicy</code></strong>
 href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#pullpolicy-v1-core">PullPolicy</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>The pull policy for the MinIO Docker image. Specify one of the
+<p>The pull policy for the Buckit Docker image. Specify one of the
 following:<br />
 </p>
 <ul>
@@ -1701,7 +1701,7 @@ href="https://kubernetes.io/docs/concepts/containers/images#updating-images">htt
 href="#sidecars">SideCars</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>A list of containers to run as sidecars along every MinIO Pod
+<p>A list of containers to run as sidecars along every Buckit Pod
 deployed in the tenant.</p></td>
 </tr>
 <tr class="even">
@@ -1711,7 +1711,7 @@ style="text-align: left;"><p><strong><code>exposeServices</code></strong>
 href="#exposeservices">ExposeServices</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Directs the Operator to expose the MinIO and/or Console
+<p>Directs the Operator to expose the Buckit and/or Console
 services.<br />
 </p></td>
 </tr>
@@ -1722,7 +1722,7 @@ style="text-align: left;"><p><strong><code>serviceMetadata</code></strong>
 href="#servicemetadata">ServiceMetadata</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Specify custom labels and annotations to append to the MinIO service
+<p>Specify custom labels and annotations to append to the Buckit service
 and/or Console service.</p></td>
 </tr>
 <tr class="even">
@@ -1744,7 +1744,7 @@ array</em></p></td>
 </p>
 <p>An array of <a
 href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes
-opaque secrets</a> to use for generating MinIO users during tenant
+opaque secrets</a> to use for generating Buckit users during tenant
 provisioning.<br />
 </p>
 <p>Each element in the array is an object consisting of a key-value pair
@@ -1755,10 +1755,10 @@ references an opaque Kubernetes secret.<br />
 fields:<br />
 </p>
 <ul>
-<li><p><code>CONSOLE_ACCESS_KEY</code> - The "Username" for the MinIO
+<li><p><code>CONSOLE_ACCESS_KEY</code> - The "Username" for the Buckit
 user<br />
 </p></li>
-<li><p><code>CONSOLE_SECRET_KEY</code> - The "Password" for the MinIO
+<li><p><code>CONSOLE_SECRET_KEY</code> - The "Password" for the Buckit
 user<br />
 </p></li>
 </ul>
@@ -1783,7 +1783,7 @@ name already exists</p></td>
 href="#logging">Logging</a></em></p></td>
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
-<p>Enable JSON, Anonymous logging for MinIO tenants.</p></td>
+<p>Enable JSON, Anonymous logging for Buckit tenants.</p></td>
 </tr>
 <tr class="even">
 <td
@@ -1793,9 +1793,9 @@ href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#local
 <td style="text-align: left;"><p><strong>Optional</strong><br />
 </p>
 <p>Specify a secret that contains additional environment variable
-configurations to be used for the MinIO pools. The secret is expected to
+configurations to be used for the Buckit pools. The secret is expected to
 have a key named config.env containing all exported environment
-variables for MinIO+</p></td>
+variables for Buckit+</p></td>
 </tr>
 <tr class="odd">
 <td
@@ -1869,7 +1869,7 @@ tenant in bytes.</p></td>
 <td style="text-align: left;"><p><strong><code>usage</code></strong>
 <em>integer</em></p></td>
 <td style="text-align: left;"><p>Usage is how much data is managed by
-MinIO in bytes.</p></td>
+Buckit in bytes.</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><strong><code>rawUsage</code></strong>

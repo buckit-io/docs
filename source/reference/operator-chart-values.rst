@@ -10,15 +10,15 @@ Operator Helm Charts
    :local:
    :depth: 1
 
-MinIO publishes |helm-charts| for the |helm-operator-chart| and |helm-tenant-chart|.
-You can use these charts to deploy the MinIO Operator and managed Tenants through Helm.
+Buckit publishes |helm-charts| for the |helm-operator-chart| and |helm-tenant-chart|.
+You can use these charts to deploy the Buckit Operator and managed Tenants through Helm.
 
-The following page documents the ``values.yaml`` chart for the MinIO Operator.
-For documentation on the chart for a MinIO Tenant, see :ref:`minio-tenant-chart-values`
+The following page documents the ``values.yaml`` chart for the Buckit Operator.
+For documentation on the chart for a Buckit Tenant, see :ref:`minio-tenant-chart-values`
 
 .. _minio-operator-chart-operator-values:
 
-MinIO Operator Chart
+Buckit Operator Chart
 --------------------
 
 .. tab-set::

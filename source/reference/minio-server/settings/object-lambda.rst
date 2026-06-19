@@ -10,16 +10,16 @@ Object Lambda function settings
    :local:
    :depth: 2
 
-This page describes the settings available to configure MinIO to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
+This page describes the settings available to configure Buckit to publish data to an HTTP webhook endpoint and trigger an Object Lambda function.
 See :ref:`developers-object-lambda` for more complete documentation and tutorials on using these settings.
 
 You can establish or modify settings by defining:
 
-- an *environment variable* on the host system prior to starting or restarting the MinIO Server.
+- an *environment variable* on the host system prior to starting or restarting the Buckit Server.
   Refer to your operating system's documentation for how to define an environment variable.
 - a *configuration setting* using :mc:`mc admin config set`.
 
-If you define both an environment variable and the similar configuration setting, MinIO uses the environment variable value.
+If you define both an environment variable and the similar configuration setting, Buckit uses the environment variable value.
 
 Some settings have only an environment variable or a configuration setting, but not both.
 
@@ -123,7 +123,7 @@ Auth token
 
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-            MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+            Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -137,7 +137,7 @@ Auth token
 
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-            MinIO redacts this value when returned as part of :mc-cmd:`mc admin config get`.         
+            Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.         
 
 Client cert
 -----------

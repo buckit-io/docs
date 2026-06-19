@@ -12,15 +12,15 @@ Key Encryption Service Settings
 
 .. |SSE| replace:: :abbr:`SSE (Server-Side Encryption)`
 
-MinIO Server includes three groups of environment variables to manage how the MinIO Server interacts with the Key Encryption Service (KES), Key Management Service (KMS), or static key files.
+Buckit Server includes three groups of environment variables to manage how the Buckit Server interacts with the Key Encryption Service (KES), Key Management Service (KMS), or static key files.
 You may only define one of the three sets.
-If more than one type of environment variable sets is defined, MinIO returns an error.
+If more than one type of environment variable sets is defined, Buckit returns an error.
 
 .. note::
 
    These settings do not have configuration setting options for use with :mc:`mc admin config set`.
 
-Define any one set of these environment variables in the host system prior to starting or restarting the MinIO process.
+Define any one set of these environment variables in the host system prior to starting or restarting the Buckit process.
 Refer to your operating system's documentation for how to define an environment variable.
 
 .. include:: /includes/common-mc-admin-config.rst
@@ -34,13 +34,13 @@ Define the following variables to use the Key Encryption Service (KES) to connec
 
 .. envvar:: MINIO_KMS_KES_ENDPOINT
 
-   The endpoint(s) for the MinIO Key Encryption Service (KES) process to use for supporting SSE-S3 and MinIO backend encryption operations.
+   The endpoint(s) for the Buckit Key Encryption Service (KES) process to use for supporting SSE-S3 and Buckit backend encryption operations.
    Separate multiple KES endpoints with a ``,``.
 
 .. envvar:: MINIO_KMS_KES_KEY_NAME
 
    The name of an external key on the Key Management system (KMS) configured on the KES server and used for performing en/decryption operations. 
-   MinIO uses this key for the following:
+   Buckit uses this key for the following:
 
    - Encrypting backend data (:ref:`IAM <minio-authentication-and-identity-management>`, server configuration).
 
@@ -96,19 +96,19 @@ Define the following variables to use the Key Encryption Service (KES) to connec
 
    The password used to encrypt and decrypt the TLS private key, if used.
 
-MinIO Key Management Server (KMS)
+Buckit Key Management Server (KMS)
 ---------------------------------
 
-Define the following variables to use `MinIO KMS <https://min.io/product/enterprise/key-management-server?ref=docs>`__ to manage keys.
+Define the following variables to use `Buckit KMS <https://min.io/product/enterprise/key-management-server?ref=docs>`__ to manage keys.
 
 .. envvar:: MINIO_KMS_SERVER
 
-   The endpoint(s) for the MinIO Key Management Service (KMS) process to use for supporting SSE-S3 and MinIO backend encryption operations.
+   The endpoint(s) for the Buckit Key Management Service (KMS) process to use for supporting SSE-S3 and Buckit backend encryption operations.
    Separate multiple KMS endpoints with a ``,``.
 
 .. envvar:: MINIO_KMS_ENCLAVE
 
-   The MinIO KMS Enclave where the key and identity exist.
+   The Buckit KMS Enclave where the key and identity exist.
 
 .. envvar:: MINIO_KMS_SSE_KEY
 
@@ -116,7 +116,7 @@ Define the following variables to use `MinIO KMS <https://min.io/product/enterpr
 
 .. envvar:: MINIO_KMS_API_KEY
 
-   The credential used to authenticate with the MinIO KMS service.
+   The credential used to authenticate with the Buckit KMS service.
 
 Static Key Files
 ----------------
@@ -125,7 +125,7 @@ Static Key Files
 
    These settings support early development and evaluation of Server-Side Encryption of Objects without depending on an external KMS.
    Do not use these settings in any extended development, QA, or production environments.
-   See :ref:`minio-sse-vault` for guidance on deploying SSE using MinIO Key Encryption Service (KES) and an external KMS.
+   See :ref:`minio-sse-vault` for guidance on deploying SSE using Buckit Key Encryption Service (KES) and an external KMS.
 
 Provide a static KMS key or key file to use for encryption.
 

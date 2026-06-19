@@ -10,10 +10,10 @@ Batch Expiration
    :local:
    :depth: 2
 
-.. versionadded:: MinIO RELEASE.2023-12-02T10-51-33Z
+.. versionadded:: Buckit RELEASE.2023-12-02T10-51-33Z
 
-The MinIO Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
-The batch jobs run directly on the MinIO deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`MinIO Client <minio-client>`.
+The Buckit Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
+The batch jobs run directly on the Buckit deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`Buckit Client <minio-client>`.
 
 The ``expire`` batch job applies :ref:`minio-lifecycle-management-create-expiry-rule` behavior to a single bucket.
 The job determines expiration eligibility based on the provided configuration, independent of any configured expiration rules.
