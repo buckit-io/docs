@@ -98,3 +98,169 @@
 :root.dark-mode div.sidebar {
    background-color: var(--sidebar-bg);
 }
+
+div.sidebar {
+   padding-top: calc(var(--content-padding) + 0.35rem);
+}
+
+:root.dark-mode {
+   --docs-nav-active-color: #22c990;
+}
+
+.content__main {
+   display: flex;
+   flex-direction: column;
+   min-height: calc(100vh - 4rem);
+}
+
+.content__body {
+   flex: 1 0 auto;
+}
+
+.footer {
+   margin-top: auto;
+}
+
+.sidebar__title {
+   display: block;
+   margin: 0 0 1.15rem;
+   padding-bottom: 1.15rem;
+   border-bottom: 1px solid var(--docs-nav-group-border-color, rgba(255, 255, 255, 0.08));
+   line-height: 1.1;
+   text-decoration: none;
+}
+
+.sidebar__title-line {
+   display: block;
+}
+
+.sidebar__title-line--eyebrow {
+   font-size: 0.6875rem;
+   font-weight: 600;
+   letter-spacing: 0.09em;
+   text-transform: uppercase;
+   color: rgba(161, 161, 170, 0.85);
+   margin-bottom: 0.34rem;
+}
+
+.sidebar__title-line--primary {
+   font-family: 'Satoshi', sans-serif;   /* match the page-heading font */
+   font-size: 1.8rem;
+   font-weight: 700;
+   letter-spacing: -0.015em;
+   color: #f4f4f5;
+}
+
+.sidebar__title:hover .sidebar__title-line--eyebrow {
+   color: rgba(244, 244, 245, 0.88);
+}
+
+.sidebar__title:hover .sidebar__title-line--primary {
+   color: #ffffff;
+}
+
+/* ── Sidebar tree: node vs. leaf affordance ──────────────────────────────
+   Goal: at a glance, tell an expandable section (node) from a final page
+   (leaf). Nodes get a left-aligned caret that the eye meets before the
+   label; leaves get none, and their labels align with node labels so the
+   hierarchy reads cleanly. The caret is a separate click target — it
+   toggles; the label still navigates. */
+
+/* Every row reserves a fixed left gutter for the caret so labels never
+   overlap it. The compiled stylesheet sets `.docs ul > li > a { padding:
+   0.4rem 0 }`, which outranks a plain `.docs li > a`, so we match that
+   specificity and use !important to guarantee the indent wins. */
+.docs li {
+   position: relative;
+}
+.docs ul > li > a {
+   padding-left: 1.25rem !important;   /* room for the caret gutter */
+}
+
+/* The caret toggle — only present on nodes (added by JS) */
+.docs-caret {
+   position: absolute;
+   left: -0.15rem;
+   top: 0.35rem;
+   width: 1.1rem;
+   height: 1.3rem;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   background: transparent;
+   cursor: pointer;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   color: var(--docs-nav-caret-color, rgba(161, 161, 170, 0.6));
+   transition: transform 0.18s ease, color 0.15s ease;
+   z-index: 1;
+}
+/* the caret glyph: a chevron drawn with a rotated border square */
+.docs-caret::before {
+   content: "";
+   width: 0.4rem;
+   height: 0.4rem;
+   border-right: 2px solid currentColor;
+   border-bottom: 2px solid currentColor;
+   transform: rotate(45deg);          /* points down = expanded */
+   transition: transform 0.18s ease;
+   margin-top: -2px;
+}
+/* nodes whose children are hidden: chevron points right + brighter accent */
+.docs li.collapsed > .docs-caret::before {
+   transform: rotate(-45deg);         /* points right = collapsed */
+}
+.docs-caret:hover {
+   color: var(--text-color);
+}
+
+/* A node label is slightly stronger than a leaf so the eye reads structure */
+.docs li.has-children > a {
+   color: var(--text-color);
+   font-weight: 500;
+}
+
+/* Collapsed nodes hide their child list */
+.docs li.collapsed > ul {
+   display: none;
+}
+
+/* Nested levels get a faint guide line so depth is legible */
+.docs li.has-children > ul {
+   margin-left: 0.55rem !important;
+   padding-left: 0.6rem;
+   border-left: 1px solid var(--docs-nav-group-border-color, rgba(255,255,255,0.08));
+}
+
+/* Carets along the open path (current ancestors) pick up the accent so the
+   active trail reads as one connected unit; idle sections stay muted. */
+.docs li.current > .docs-caret {
+   color: var(--docs-nav-active-color, #34d399);
+}
+
+/* The current page itself gets a clear "you are here" marker: accent text,
+   a faint background, and a left accent bar that aligns to the row gutter. */
+.docs li > a.current,
+.docs li.current > a {
+   position: relative;
+}
+.docs a.current {
+   color: var(--docs-nav-active-color, #34d399) !important;
+   font-weight: 600;
+   background: rgba(34, 201, 144, 0.045);
+   border-radius: 0.3rem;
+}
+/* On node rows, inset the pill's left edge past the caret gutter so the
+   caret isn't crowded against the rounded corner. margin-left + padding-left
+   still sum to the row's 1.25rem, so the label stays aligned with siblings. */
+.docs li.has-children > a.current {
+   margin-left: 1.1rem;
+   padding-left: 0.15rem !important;
+}
+/* The left accent bar only on leaf pages, where there's no caret in the
+   gutter to collide with. Node (expandable) current pages rely on the
+   tinted background + accent caret instead. */
+.docs li.is-leaf > a.current {
+   box-shadow: inset 2px 0 0 var(--docs-nav-active-color, #34d399);
+}

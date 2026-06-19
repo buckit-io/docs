@@ -667,7 +667,7 @@
     </g>
     <g
        id="g2172"
-       inkscape:label="MinIO"
+       inkscape:label="Buckit"
        transform="matrix(1.43325,0,0,1.43325,-20.911969,-133.30787)">
       <g
          transform="translate(0,1.7844352)"
@@ -690,7 +690,7 @@
            transform="translate(-27.123261,-201.09403)"><tspan
              x="69.133118"
              y="327.77352"><tspan
-               style="shape-inside:url(#rect1738-25-1)">MinIO Object Storage Server
+               style="shape-inside:url(#rect1738-25-1)">Buckit Object Storage Server
 </tspan></tspan><tspan
              x="64.761139"
              y="337.77352"><tspan
@@ -698,7 +698,7 @@
 </tspan></tspan><tspan
              x="97.629028"
              y="347.77352"><tspan
-               style="shape-inside:url(#rect1738-25-1)">MinIO Console Server</tspan></tspan></text>
+               style="shape-inside:url(#rect1738-25-1)">Buckit Console Server</tspan></tspan></text>
       </g>
       <g
          id="g1477">
@@ -765,7 +765,7 @@
 </tspan></tspan><tspan
            x="86.253082"
            y="337.77352"><tspan
-             style="shape-inside:url(#rect1738-25-1-5)">MinIO Kubernetes Plugin</tspan></tspan></text>
+             style="shape-inside:url(#rect1738-25-1-5)">Buckit Kubernetes Plugin</tspan></tspan></text>
     </g>
   </g>
 </svg>

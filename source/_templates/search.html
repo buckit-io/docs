@@ -41,7 +41,10 @@
                </button>
             </div>
 
-            <a class="sidebar__title" href="{{ pathto('index') }}">{{ shorttitle}}</a>
+            <a class="sidebar__title" href="{{ pathto('index') }}">
+               <span class="sidebar__title-line sidebar__title-line--eyebrow">Buckit Object Storage</span>
+               <span class="sidebar__title-line sidebar__title-line--primary">User Guide</span>
+            </a>
             
             {{ miniosidebar() }}
          </div>

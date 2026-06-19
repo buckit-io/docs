@@ -1,2 +1,79 @@
 
-{{ toctree(includehidden=theme_sidebar_includehidden, collapse=theme_sidebar_collapse) }}
+{{ toctree(includehidden=True, collapse=False, maxdepth=-1) }}
+
+{# ----------------------------------------------------------------------
+   Sidebar tree: add expand/collapse affordances.
+   Sphinx renders <li><a>…</a><ul>…</ul></li> for nodes and <li><a>…</a></li>
+   for leaves. This script tags nodes, inserts a caret toggle, and collapses
+   everything except the path to the current page.
+   ---------------------------------------------------------------------- #}
+<script>
+(function () {
+  function initDocsTree() {
+    var root = document.querySelector(".docs");
+    if (!root) return;
+
+    var items = root.querySelectorAll("li");
+    items.forEach(function (li) {
+      var childList = li.querySelector(":scope > ul");
+      if (!childList) {
+        li.classList.add("is-leaf");
+        return;
+      }
+      li.classList.add("has-children");
+
+      // Insert a dedicated caret toggle so the label stays a plain link.
+      var caret = document.createElement("button");
+      caret.type = "button";
+      caret.className = "docs-caret";
+      caret.setAttribute("aria-label", "Toggle section");
+      caret.setAttribute("aria-expanded", "true");
+      var link = li.querySelector(":scope > a");
+      if (link) {
+        li.insertBefore(caret, link);
+      } else {
+        li.insertBefore(caret, li.firstChild);
+      }
+
+      caret.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var collapsed = li.classList.toggle("collapsed");
+        caret.setAttribute("aria-expanded", String(!collapsed));
+      });
+    });
+
+    // Collapse every node, then re-open the path to the current page.
+    // Sphinx marks every ancestor <li> of the current page with class
+    // "current", so opening all current nodes restores the full path.
+    function expand(li) {
+      li.classList.remove("collapsed");
+      var c = li.querySelector(":scope > .docs-caret");
+      if (c) c.setAttribute("aria-expanded", "true");
+    }
+    root.querySelectorAll("li.has-children").forEach(function (li) {
+      li.classList.add("collapsed");
+      var c = li.querySelector(":scope > .docs-caret");
+      if (c) c.setAttribute("aria-expanded", "false");
+    });
+    root.querySelectorAll("li.current.has-children").forEach(expand);
+
+    // Also expand the chain of ancestors of the active link, in case a
+    // build variant only marks the link rather than every ancestor li.
+    var active = root.querySelector("a.current");
+    var node = active ? active.closest("li") : null;
+    while (node && node !== root) {
+      if (node.tagName === "LI" && node.classList.contains("has-children")) {
+        expand(node);
+      }
+      node = node.parentElement ? node.parentElement.closest("li") : null;
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDocsTree);
+  } else {
+    initDocsTree();
+  }
+})();
+</script>

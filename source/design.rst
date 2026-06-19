@@ -13,12 +13,12 @@ Design Page
 Overview
 --------
 
-This page is designed to assist MinIO UI/UX work on the documentation. Think of
+This page is designed to assist Buckit UI/UX work on the documentation. Think of
 it like a 'kitchen-sink' of various objects and headers to more easily see
 what everything looks liker right now. If it's on this page, it exists
 somewhere else in the documentation.
 
-If you are not working on MinIO UI/UX, this page has no useful content. 
+If you are not working on Buckit UI/UX, this page has no useful content. 
 Head back to the :doc:`Index </index>`. 
 
 Common Markup
@@ -64,7 +64,7 @@ The following components come from
 Tabs
 ~~~~
 
-MinIO uses the ExecutableBooks 
+Buckit uses the ExecutableBooks 
 :github:`sphinx-design <executablebooks/sphinx-design>`  library for tabs.
 
 .. tab-set::
@@ -252,7 +252,7 @@ for linking. The table of contents for this page is configured to display up to
 Admonitions
 -----------
 
-The MinIO documentation uses the following admonition types. 
+The Buckit documentation uses the following admonition types. 
 Admonition HTML code resembles the following:
 
 .. code-block:: shell
@@ -552,6 +552,6 @@ Images
 
 .. image:: /images/minio-console/minio-console.png
    :width: 600px
-   :alt: MinIO Console Landing Page provides a view of the Object Browser for the authenticated user
+   :alt: Buckit Console Landing Page provides a view of the Object Browser for the authenticated user
    :align: center
 
