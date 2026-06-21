@@ -13,3 +13,4 @@ Installation and Upgrade
    /operations/network-encryption
    /operations/external-iam
    /operations/deployments/baremetal-upgrade-minio-deployment
+   /operations/deployments/baremetal-migrate-minio-community-edition

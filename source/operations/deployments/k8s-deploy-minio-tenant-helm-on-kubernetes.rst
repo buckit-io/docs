@@ -1,8 +1,8 @@
 .. _deploy-tenant-helm:
 
-======================================
+=======================================
 Deploy a Buckit Tenant with Helm Charts
-======================================
+=======================================
 
 .. default-domain:: minio
 
@@ -57,7 +57,7 @@ In addition, Buckit strongly recommends using a dedicated namespace for the tena
 .. _deploy-tenant-helm-repo:
 
 Deploy a Buckit Tenant using Helm Charts
----------------------------------------
+----------------------------------------
 
 The following procedure deploys a Buckit Tenant using the Buckit Operator Chart Repository.
 This method supports a simplified installation path compared to the :ref:`local chart installation <deploy-tenant-helm-local>`.

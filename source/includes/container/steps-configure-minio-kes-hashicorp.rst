@@ -1,5 +1,5 @@
 Deploy Buckit and KES with Server-Side Encryption
-------------------------------------------------
+-------------------------------------------------
 
 Prior to starting these steps, create the following folders:
 
@@ -21,7 +21,7 @@ Depending on your chosen :kes-docs:`supported KMS target <#supported-kms-targets
 Defer to the client documentation for instructions on trusting a third-party CA.
 
 1) Create the KES and Buckit Configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 a. Create the KES Configuration File
 

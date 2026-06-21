@@ -355,7 +355,7 @@ itself. Any configurations associated to the bucket remain in place, such as
 To completely remove a bucket, use :mc:`bm rb` instead of :mc:`bm rm`.
 
 Buckit Trims Empty Prefixes on Object Removal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common-admonitions.rst
    :start-after: start-remove-api-trims-prefixes

@@ -109,7 +109,6 @@ Cards
 .. card:: Title of the card
 
    This is the header of the card
-   ^^^
    This is content inside of the card.
 
    The card can contain varying content. 
@@ -544,7 +543,7 @@ for display. This is intentional (For now).
 
    .. code-block::
 
-      :std:option:`--json <mc.--json>`
+      ``--json``
 
 
 Images
@@ -554,4 +553,3 @@ Images
    :width: 600px
    :alt: Buckit Console Landing Page provides a view of the Object Browser for the authenticated user
    :align: center
-

@@ -14,12 +14,12 @@
 
    The following commands have moved to subcommands under :mc-cmd:`bm ilm rule`:
 
-   - :mc-cmd:`bm ilm add`
-   - :mc-cmd:`bm ilm edit`
-   - :mc-cmd:`bm ilm export`
-   - :mc-cmd:`bm ilm import`
-   - :mc-cmd:`bm ilm ls`
-   - :mc-cmd:`bm ilm rm`
+   - :mc-cmd:`bm ilm rule add`
+   - :mc-cmd:`bm ilm rule edit`
+   - :mc-cmd:`bm ilm rule export`
+   - :mc-cmd:`bm ilm rule import`
+   - :mc-cmd:`bm ilm rule ls`
+   - :mc-cmd:`bm ilm rule rm`
 
 
 Description

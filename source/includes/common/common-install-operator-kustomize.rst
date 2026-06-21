@@ -1,7 +1,7 @@
 .. _minio-k8s-deploy-operator-kustomize-repo-2:
 
 Install the Buckit Operator using Kustomize
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following procedure uses ``kubectl -k`` to install the Operator from the Buckit Operator GitHub repository.
 ``kubectl -k`` and ``kubectl --kustomize`` are aliases that perform the same command.

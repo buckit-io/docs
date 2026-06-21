@@ -88,13 +88,13 @@ The output resembles the following:
 .. code-block::
 
    Overall Statistics                                                                              
-   ------------------                                                                              
+   -
    Last full scan time:   0d0h14m; Estimated 2885.28/month                                         
    Current cycle:         70464; Started: 2024-04-19 20:02:34.568479139 +0000 UTC                  
    Active drives:         2                                                                        
                                                                                                    
    Last Minute Statistics                                                                          
-   ----------------------                                                                          
+   -
    Objects Scanned:       620 objects; Avg: 124.929µs; Rate: 892800/day                            
    Versions Scanned:      620 versions; Avg: 2.801µs; Rate: 892800/day                             
    Versions Heal Checked: 0 versions; Avg: 0ms                                                     

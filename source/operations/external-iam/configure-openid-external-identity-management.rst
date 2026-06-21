@@ -1,8 +1,8 @@
 .. _minio-authenticate-using-openid-generic:
 
-===============================================
+================================================
 Configure Buckit for Authentication using OpenID
-===============================================
+================================================
 
 .. default-domain:: minio
 
@@ -14,8 +14,6 @@ Overview
 --------
 
 Buckit supports using an OpenID Connect (OIDC) compatible IDentity Provider (IDP) such as Okta, KeyCloak, Dex, Google, or Facebook for external management of user identities. 
-
-This page has procedures for configuring OIDC for Buckit deployments in Kubernetes and Baremetal infrastructures.
 
 This procedure covers:
 
@@ -45,31 +43,31 @@ An OpenID user with no assigned policy has no permission to access any action or
 For JWT claim-based authentication, Buckit only supports OIDC flows using the `OpenID Authorization Code Flow <https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth>`__.
 
 Access to Buckit Cluster
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install ``mc`` on a machine with network access to the cluster.
-See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
-This procedure assumes a configured :mc:`alias <mc alias>` for the Buckit cluster. 
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install ``bm`` on a machine with network access to the cluster.
+See :ref:`Install the Buckit Manager <install-buckit-manager>` for instructions on downloading and installing ``bm``.
+This procedure assumes a configured :mc:`alias <bm alias>` for the Buckit cluster.
 
 .. _minio-external-identity-management-openid-configure:
 
 Configure Buckit with OpenID External Identity Management
---------------------------------------------------------
+---------------------------------------------------------
 
 1. Create a new OpenID Configuration
 
-   Use the :mc-cmd:`mc idp openid add` command to create a new OIDC configuration for the Buckit cluster.
+   Use the :mc-cmd:`bm idp openid add` command to create a new OIDC configuration for the Buckit cluster.
    The following example command assumes using the JWT claims returned by the OIDC provider for :ref:`authorization through policy assignment <minio-external-identity-management-openid-access-control>`.
 
    .. code-block:: shell
       :class: copyable
 
-      mc idp openid add ALIAS \
-        client_id=minio-oidc-client-id \
-        client_secret=minio-oidc-client-secret \
+      bm idp openid add ALIAS \
+        client_id=buckit-oidc-client-id \
+        client_secret=buckit-oidc-client-secret \
         config_url="https://openid-provider.example.net/REALM/.well-known/openid-configuration" \
-        claim_name="minio-policies" \
+        claim_name="buckit-policies" \
         scopes="openid,groups"
 
    You can also configure ``RoleArn``-based functionality where all authenticated users have a single policy dictated by the ``role_policy`` setting.
@@ -97,7 +95,7 @@ Configure Buckit with OpenID External Identity Management
    .. code-block:: shell
       :class: copyable
 
-      POST https://minio.example.net?Action=AssumeRoleWithWebIdentity
+      POST https://buckit.example.net?Action=AssumeRoleWithWebIdentity
       &WebIdentityToken=TOKEN
       &Version=2011-06-15
       &DurationSeconds=86400
@@ -115,4 +113,3 @@ Configure Buckit with OpenID External Identity Management
    Applications can use the access key and secret key to access and perform operations on Buckit.
 
    See the :ref:`minio-sts-assumerolewithwebidentity` for reference documentation.
-

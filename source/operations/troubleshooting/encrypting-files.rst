@@ -13,7 +13,7 @@ Encrypting Files
 Description
 -----------
 
-You can encrypt the output of the :mc:`mc support inspect` command for enhanced security when transmitting the files to |SUBNET|.
+You can encrypt the output of the :mc:`mc support inspect` command for enhanced security when transmitting the files to another party.
 
 Encryption
 ----------

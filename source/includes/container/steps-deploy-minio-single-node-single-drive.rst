@@ -1,5 +1,5 @@
 1) Pull the Latest Stable Image of Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-deploy.rst
    :start-after: start-common-deploy-pull-latest-minio-image
@@ -149,7 +149,7 @@ The command should return a unique ID for the created container.
    External access requires using a network address for the container host machine and assumes the host firewall allows access to the related ports (``9000`` and ``9001`` in the examples).
 
 5) Connect to the Buckit Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/container/common-deploy.rst
    :start-after: start-common-deploy-connect-to-minio-service

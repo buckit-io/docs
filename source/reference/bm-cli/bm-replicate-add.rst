@@ -347,7 +347,7 @@ Behavior
 --------
 
 Server-Side Replication Requires Buckit Source and Destination
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit server-side replication only works between Buckit deployments. 
 Both the source and destination deployments *must* run Buckit. 

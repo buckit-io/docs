@@ -3,9 +3,9 @@
 .. _deploy-operator-kubernetes:
 .. _deploy-operator-kubernetes-kustomize:
 
-=========================
+==========================
 Deploy the Buckit Operator
-=========================
+==========================
 
 .. default-domain:: minio
 
@@ -33,12 +33,11 @@ While this documentation *may* provide guidance for configuring or deploying Kub
 
       Support for deploying the Buckit Operator via the RedHat Marketplace or OperatorHub was removed in 2024. 
       Buckit AIStor fully supports installation via the Marketplace and OperatorHub onto enterprise RedHat Kubernetes distributions like OpenShift Container Platform (OCP).
-      |subnet| customers can open an issue for further clarification and instructions on migrating to `AIStor <https://min.io/product/aistor-overview?jmp=docs>`__.
 
       This documentation provides guidance through the general method of operator installation onto Kubernetes infrastructure.
 
 Buckit Operator Components
--------------------------
+--------------------------
 
 The Buckit Operator exists in its own namespace in which it creates Kubernetes resources.
 Those resources includes pods, services, replicasets, and deployments.
@@ -159,7 +158,7 @@ The output of the example command above may differ from the output in your termi
         - --cluster-name=my-cluster-name
         - --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
         - --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
-    ...
+        ...
 
 .. important::
 

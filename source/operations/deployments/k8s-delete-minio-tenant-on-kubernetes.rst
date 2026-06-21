@@ -1,8 +1,8 @@
 .. _minio-k8s-delete-minio-tenant:
 
-=====================
+======================
 Delete a Buckit Tenant
-=====================
+======================
 
 .. default-domain:: minio
 
@@ -14,7 +14,7 @@ Prerequisites
 -------------
 
 Buckit Kubernetes Operator
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedures on this page *requires* a valid installation of the Buckit Kubernetes Operator and assumes the local host has a matching installation of the Buckit Kubernetes Operator.
 This procedure assumes the latest stable Operator, version |operator-version-stable|.

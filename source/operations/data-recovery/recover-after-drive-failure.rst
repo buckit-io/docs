@@ -109,7 +109,7 @@ procedure:
 The command should result in remounting of all of the replaced drives.
 
 5) Monitor Buckit for Drive Detection and Healing Status
--------------------------------------------------------
+--------------------------------------------------------
 
 Use :mc:`mc admin logs` command *or* ``journalctl -u minio`` for
 ``systemd``-managed installations to monitor the server log output after
@@ -126,5 +126,4 @@ from the degraded state.
 Monitor the cluster for any further drive failures. Some drive batches may fail
 in close proximity to each other. Deployments seeing higher than expected drive
 failure rates should schedule dedicated maintenance around replacing the known
-bad batch. Consider using `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ to
-coordinate with Buckit engineering around guidance for any such operations.
+bad batch.

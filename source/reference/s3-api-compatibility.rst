@@ -159,7 +159,7 @@ Unsupported API Bucket Operations
    CreateSession
 
 Buckit alternatives for unsupported Bucket resources
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - For calls to ``BucketACL`` or ``ObjectACL`` operations, use :ref:`Policies <minio-policy>`.
 - Calls to ``BucketCORS`` operations are not needed because CORS is enabled by default on all buckets for all HTTP verbs.

@@ -23,7 +23,7 @@ For information on specific hardware or software configurations, see:
 - :ref:`Thresholds and Limits <minio-server-limits>`
 
 Distributed Buckit Deployments
------------------------------
+------------------------------
 
 A production Buckit deployment consists of at least 4 Buckit hosts with homogeneous storage and compute resources.
    Buckit aggregates these resources together as a :ref:`pool <minio-intro-server-pool>` and presents itself as a single object storage service.
@@ -125,7 +125,7 @@ Client applications can use any S3-compatible SDK or library to interact with th
 .. _minio-deployment-architecture-replicated:
 
 Replicated Buckit Deployments
-----------------------------
+-----------------------------
 
 Buckit :ref:`site replication <minio-site-replication-overview>` provides support for synchronizing distinct independent deployments.
    You can deploy peer sites in different racks, datacenters, or geographic regions to support functions like :abbr:`BC/DR (Business Continuity / Disaster Recovery)` or geo-local read/write performance in a globally distributed Buckit object store.

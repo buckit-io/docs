@@ -9,7 +9,7 @@ Fill in the specified inputs as follows:
    :width: 100%
 
    * - :guilabel:`Client ID`
-     - Set to a unique identifier for Buckit (``minio``)
+     - Set to a unique identifier for Buckit (``buckit``)
    * - :guilabel:`Client type` 
      - Set to ``OpenID Connect``
    * - :guilabel:`Always display in console`
@@ -53,7 +53,7 @@ Navigate to the :guilabel:`Client scopes` view and create a new client scope for
    :width: 100%
 
    * - :guilabel:`Name` 
-     - Set to any recognizable name for the policy (``minio-authorization``)
+     - Set to any recognizable name for the policy (``buckit-authorization``)
    * - :guilabel:`Include in token scope` 
      - Toggle to ``On``
 
@@ -69,7 +69,7 @@ Select :guilabel:`Configure a new mapper` to create a new mapping:
    * - :guilabel:`User Attribute`
      - Select the Mapper Type
    * - :guilabel:`Name`
-     - Set to any recognizable name for the mapping (``minio-policy-mapper``)
+     - Set to any recognizable name for the mapping (``buckit-policy-mapper``)
    * - :guilabel:`User Attribute` 
      - Set to ``policy``
    * - :guilabel:`Token Claim Name` 
@@ -194,24 +194,18 @@ You can test this workflow using the following sequence of HTTP calls and the ``
 
 3. Test the Credentials
 
-   Use your preferred S3-compatible SDK to connect to Buckit using the generated credentials.
+   Use the AWS CLI to connect to Buckit using the generated credentials.
+   See the `AWS CLI installation guide <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>`__ if the AWS CLI is not already installed.
 
-   For example, the following Python code using the Buckit :ref:`Python SDK <minio-python-quickstart>` connects to the Buckit deployment and returns a list of buckets:
+   For example, the following command lists buckets using the generated credentials:
 
-   .. code-block:: python
+   .. code-block:: shell
       :substitutions:
 
-      from minio import Minio
-
-      client = Buckit(
-         "|MINIO_S3_URL|",
-         access_key = "ACCESS_KEY",
-         secret_key = "SECRET_KEY",
-         session_token = "SESSION_TOKEN"
-         secure = True
-      )
-
-      client.list_buckets()
+      AWS_ACCESS_KEY_ID="ACCESS_KEY" \
+      AWS_SECRET_ACCESS_KEY="SECRET_KEY" \
+      AWS_SESSION_TOKEN="SESSION_TOKEN" \
+      aws s3 ls --endpoint-url https://|MINIO_S3_URL|
 
 .. end-configure-keycloak-sts
 
@@ -266,14 +260,14 @@ Select :guilabel:`Save` to apply the configuration.
 .. start-configure-keycloak-minio-cli
 
 
-You can use the :mc-cmd:`mc idp openid add` command to create a new configuration for the Keycloak service.
+You can use the :mc-cmd:`bm idp openid add` command to create a new configuration for the Keycloak service.
 The command takes all supported :ref:`OpenID Configuration Settings <minio-open-id-config-settings>`:
 
 .. code-block:: shell
    :class: copyable
    :substitutions:
 
-   mc idp openid add ALIAS PRIMARY_IAM \
+   bm idp openid add ALIAS PRIMARY_IAM \
       client_id=MINIO_CLIENT \
       client_secret=MINIO_CLIENT_SECRET \
       config_url="https://|KEYCLOAK_URL|/realms/REALM/.well-known/openid-configuration" \

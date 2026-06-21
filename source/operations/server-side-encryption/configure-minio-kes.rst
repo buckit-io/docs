@@ -71,7 +71,7 @@ Prerequisites
 -------------
 
 Access to Buckit Cluster
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
    

@@ -239,7 +239,7 @@ The following steps define the variable with kustomize.
       kubectl apply -k minio-operator
 
 Migrate an existing Buckit Operator deployment to cert-manager
--------------------------------------------------------------
+--------------------------------------------------------------
 
 To transition an existing Buckit Operator deployment from using AutoCert to cert-manager, complete the following steps:
 

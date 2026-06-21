@@ -165,7 +165,7 @@ All sites must use the same :ref:`Identity Provider <minio-authentication-and-id
 Site replication supports the included Buckit IDP, OIDC, or LDAP.
 
 All Sites Must use the Same Buckit Server Version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All sites must have a matching and consistent Buckit Server version. 
 Configuring replication between sites with mismatched Buckit Server versions may result in unexpected or undesired replication behavior.

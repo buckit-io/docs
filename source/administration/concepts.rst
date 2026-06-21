@@ -32,7 +32,7 @@ Buckit supports multiple levels of nested directories through the feature of ``p
 
 
 How does Buckit determine access to objects?
--------------------------------------------
+--------------------------------------------
 
 Buckit requires the client perform both authentication and authorization for each new operation.
 :ref:`Identity and access management (IAM) <minio-authentication-and-identity-management>` is therefore a critical component of a Buckit configuration.
@@ -52,7 +52,7 @@ Alternatively, you can configure Buckit to authenticate with one of several exte
 
 
 How does Buckit secure data?
----------------------------
+----------------------------
 
 Buckit supports methods that encode objects while on drive (encryption-at-rest) and during transition from one location to another (encryption-in-transit, or "in flight").
 When enabled, Buckit utilizes :ref:`server-side encryption <minio-encryption-overview>` to write objects in an encrypted state.
@@ -112,12 +112,10 @@ However, hardware and network conditions may show performance impacts with large
   Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
 - Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
 
-|SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your Buckit-dependent projects.
-
 For a deeper discussion on the benefits of limiting prefix contents, see the article on :s3-docs:`optimizing S3 performance <optimizing-performance.html>`.
 
 How can I backup and restore objects on Buckit?
-----------------------------------------------
+-----------------------------------------------
 
 Buckit provides two types of replication to copy an object, its versions, and its metadata from one location to another.
 You can configure replication at either the :ref:`bucket level <minio-bucket-replication>` or at the :ref:`site level <minio-site-replication-overview>`.
@@ -134,7 +132,7 @@ However, versions and metadata do not back up with the :mc:`mc mirror` command.
    :end-before: end-exclusive-drive-access
 
 What tools does Buckit provide to manage objects based on speed and frequency of access?
----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 :ref:`Tiering rules <minio-lifecycle-management-tiering>` allow frequently accessed objects to store on hot or warm storage, which is typically more expensive but provides better performance.
 
@@ -143,7 +141,7 @@ Cold storage often exchanges slower performance for a cheaper price.
 
 
 How does Buckit protect objects from accidental overwrite or deletion?
----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 Locking
 ~~~~~~~

@@ -97,7 +97,7 @@ Define the following variables to use the Key Encryption Service (KES) to connec
    The password used to encrypt and decrypt the TLS private key, if used.
 
 Buckit Key Management Server (KMS)
----------------------------------
+----------------------------------
 
 Define the following variables to use `Buckit KMS <https://min.io/product/enterprise/key-management-server?ref=docs>`__ to manage keys.
 

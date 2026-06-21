@@ -152,7 +152,7 @@ Procedure
 .. _minio-certificate-key-file-sftp-k8s:
 
 Connect to Buckit Using SFTP with a Certificate Key File
--------------------------------------------------------
+--------------------------------------------------------
 
 .. versionadded:: RELEASE.2024-05-07T06-41-25Z
 

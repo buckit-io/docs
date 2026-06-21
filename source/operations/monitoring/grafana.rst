@@ -1,8 +1,8 @@
 .. _minio-grafana:
 
-===================================
+====================================
 Monitor a Buckit Server with Grafana 
-===================================
+====================================
 
 .. default-domain:: minio
 
@@ -29,7 +29,7 @@ Prerequisites
    For more information about dashboards, see `the Grafana documentation. <https://grafana.com/docs/grafana/latest/dashboards/>`__
 
 Buckit Grafana Dashboard
------------------------
+------------------------
 
 Buckit provides several official Grafana Dashboards you can download from the Grafana Dashboard portal.
 
@@ -42,7 +42,7 @@ To track changes to the Grafana dashboard, introspect the JSON files for the `se
 .. _minio-server-grafana-metrics:
 
 Buckit Server Metrics Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Visualize Buckit metrics with the official Buckit Grafana dashboard for the Buckit Server available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/13502-minio-dashboard/>`__.
 
@@ -60,7 +60,7 @@ These metrics include status, request error rates, and request success rates.
 .. _minio-buckets-grafana-metrics:
 
 Buckit Bucket Metrics Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Visualize Buckit bucket metrics with the official Buckit Grafana dashboard for buckets available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/19237-minio-bucket-dashboard/>`__.
 
@@ -74,7 +74,7 @@ Bucket metrics can be viewed in the Grafana dashboard using the `bucket JSON fil
 .. _minio-node-grafana-metrics:
 
 Buckit Node Metrics Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Node metrics can be viewed in the Grafana dashboard using the `node JSON file on GitHub <https://raw.githubusercontent.com/minio/minio/master/docs/metrics/prometheus/grafana/node/minio-node.json>`__.
 
@@ -87,7 +87,7 @@ Node metrics can be viewed in the Grafana dashboard using the `node JSON file on
 .. _minio-replication-grafana-metrics:
 
 Buckit Replication Metrics Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Visualize Buckit bucket metrics with the official Buckit Grafana dashboard for replication available on the `Grafana dashboard portal <https://grafana.com/grafana/dashboards/15305-minio-replication-dashboard/>`__.
 

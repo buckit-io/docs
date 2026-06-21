@@ -20,7 +20,7 @@ For documentation on the chart for a Buckit Operator, see :ref:`minio-operator-c
 
 
 Buckit Tenant Chart
-------------------
+-------------------
 
 .. tab-set::
 

@@ -1,7 +1,3 @@
-.. |KEYCLOAK_URL| replace:: keycloak-url.example.net:8080
-.. |MINIO_S3_URL| replace:: minio-url.example.net:9000
-.. |MINIO_CONSOLE_URL| replace:: minio-url.example.net:9001
-
 #. Configure or Create a Client for Accessing Keycloak
 
    Authenticate to the Keycloak :guilabel:`Administrative Console` and navigate to :guilabel:`Clients`.
@@ -33,7 +29,7 @@
 
    Buckit supports multiple methods for configuring Keycloak authentication:
 
-   - Using a terminal/shell and the :mc:`mc idp openid` command
+   - Using a terminal/shell and the :mc:`bm idp openid` command
    - Using environment variables set prior to starting Buckit
 
    .. tab-set::
@@ -72,7 +68,5 @@
    When STS credentials expire, applications should have logic in place to regenerate the JWT token, STS token, and Buckit credentials before retrying and continuing operations.
 
    Alternatively, users can generate :ref:`access keys <minio-id-access-keys>` through the Buckit Console for the purpose of creating long-lived API-key like access using their Keycloak credentials.
-
-
 
 

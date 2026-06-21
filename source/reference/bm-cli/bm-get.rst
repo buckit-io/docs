@@ -89,7 +89,7 @@ Examples
 --------
 
 Retrieve an object from Buckit to the local file system
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command retrieves the file ``myobject.csv`` from the bucket ``mybucket`` at the alias ``myminio`` and places it on the local file system at the path ``/my/local/folder``.
 
@@ -99,7 +99,7 @@ The following command retrieves the file ``myobject.csv`` from the bucket ``mybu
    bm get myminio/mybucket/myobject.csv /my/local/folder 
 
 Retrieve an encrypted object from Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command retrieves an encrypted file and places it at a local folder path.
 

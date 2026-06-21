@@ -53,8 +53,8 @@ Glossary
      See also: :term:`tenant`.
 
    cluster registration
-     Cluster registration links a Buckit deployment to a :term:`SUBNET` `subscription <https://min.io/pricing?jmp=docs>`__.
-     An organization may have more than one Buckit clusters registered to the same SUBNET subscription.
+     Cluster registration links a Buckit deployment to a license and account context used by Buckit management tooling.
+     An organization may have more than one Buckit cluster registered to the same account.
 
    Console
    Buckit Console
@@ -200,8 +200,6 @@ Glossary
        Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
      - Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
 
-    |SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your Buckit-dependent projects.
-    
    RAID
      Initialism for "Redundant Array of Independent Disks".
      The technology merges multiple separate physical disks into a single storage unit or array.
@@ -293,9 +291,6 @@ Glossary
    standalone deployment
      A :term:`single-node single-drive` (SNSD) Buckit deployment.
      This term previously referred to the deprecated :ref:`Gateway or Filesystem Mode <minio-gateway-migration>` deployment types.
-
-   SUBNET
-     `Buckit's Subscription Network <https://min.io/pricing?jmp=docs>`__ tracks support tickets and provides 24 hour direct-to-engineer access for subscribed accounts.
 
    tenant
    tenants

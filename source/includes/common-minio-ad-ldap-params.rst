@@ -146,7 +146,7 @@
 
 This command works against :ref:`access keys <minio-id-access-keys>` created by an AD/LDAP user after authenticating to Buckit.
 
-Create AD/LDAP service accounts with the :mc-cmd:`mc idp ldap accesskey create` command.
+Create AD/LDAP service accounts with the :mc-cmd:`bm idp ldap accesskey create` command.
 
 Buckit supports using :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>` to generate temporary access keys using the :ref:`Security Token Service <minio-security-token-service>`.
 

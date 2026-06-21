@@ -19,13 +19,12 @@ This page provides an overview of Buckit's availability and resiliency design an
 .. note::
 
    The contents of this page are intended as a best-effort guide to understanding Buckit's intended design and philosophy behind availability and resiliency. 
-   It cannot replace the functionality of |subnet|, which allows for coordinating with Buckit Engineering when planning your Buckit deployments.
 
    Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 
 Distributed Buckit Deployments
------------------------------
+------------------------------
 
 Buckit implements :ref:`erasure coding <minio-erasure-coding>` as the core component in providing availability and resiliency during drive or node-level failure events.
    Buckit partitions each object into data and :ref:`parity <minio-ec-parity>` shards and distributes those shards across a single :ref:`erasure set <minio-ec-erasure-set>`.
@@ -166,7 +165,7 @@ For multi-pool Buckit deployments, each pool requires at least one erasure set m
    :end-before: end-exclusive-drive-access
 
 Replicated Buckit Deployments
-----------------------------
+-----------------------------
 
 Buckit implements :ref:`site replication <minio-site-replication-overview>` as the primary measure for ensuring Business Continuity and Disaster Recovery (BC/DR) in the case of both small and large scale data loss in a Buckit deployment.
    .. figure:: /images/availability/availability-multi-site-setup.svg
@@ -207,6 +206,5 @@ Sites can continue processing operations during resynchronization by proxying ``
 
    ``PUT`` and ``DELETE`` operations synchronize using the regular replication process.
    ``LIST`` operations do not proxy and require clients to issue them exclusively against healthy peers.
-
 
 

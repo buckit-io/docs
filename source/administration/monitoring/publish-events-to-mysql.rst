@@ -17,7 +17,7 @@ Buckit supports publishing :ref:`bucket notification
 service endpoint. Buckit supports MySQL 5.7.8 and later *only*.
 
 Add a MySQL Endpoint to a Buckit Deployment
-------------------------------------------
+-------------------------------------------
 
 The following procedure adds a new MySQL service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -32,13 +32,13 @@ MySQL 5.7.8 and later
 Buckit relies on features introduced with MySQL 5.7.8.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the MySQL Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new MySQL service endpoint using either environment variables
 *or* by setting runtime configuration settings.
@@ -168,7 +168,7 @@ You can configure a new MySQL service endpoint using either environment variable
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -240,7 +240,7 @@ a notification.
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update a MySQL Endpoint in a Buckit Deployment
----------------------------------------------
+----------------------------------------------
 
 The following procedure updates an existing MySQL service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -255,7 +255,7 @@ MySQL 5.7.8 and later
 Buckit relies on features introduced with MySQL 5.7.8.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -320,7 +320,7 @@ All other configuration settings are *optional*. See
 MySQL configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

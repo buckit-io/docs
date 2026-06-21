@@ -1,9 +1,9 @@
 .. _minio-object-locking:
 .. _minio-object-retention:
 
-====================
+=====================
 Buckit Object Locking
-====================
+=====================
 
 .. default-domain:: minio
 

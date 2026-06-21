@@ -163,44 +163,28 @@ operating systems using RPM, DEB, or binary:
    .. tab-item:: RPM (RHEL)
       :sync: rpm
 
-      Use the following commands to download the latest stable Buckit RPM and
-      update the existing installation.
+      Use the following commands to download, verify, and install the Buckit RPM
+      for your Linux host.
 
       .. code-block:: shell
          :class: copyable
          :substitutions:
 
-         wget |minio-rpm| -O minio.rpm
-         sudo dnf update minio.rpm
+         curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
+         sudo dnf install ./buckit.rpm
 
    .. tab-item:: DEB (Debian/Ubuntu)
       :sync: deb
 
-      Use the following commands to download the latest stable Buckit DEB and
-      upgrade the existing installation:
+      Use the following commands to download, verify, and install the Buckit DEB
+      for your Linux host.
 
       .. code-block:: shell
          :class: copyable
          :substitutions:
 
-         wget |minio-deb| -O minio.deb
-         sudo dpkg -i minio.deb
-
-   .. tab-item:: Binary
-      :sync: binary
-
-      Use the following commands to download the latest stable Buckit binary and
-      overwrite the existing binary:
-
-      .. code-block:: shell
-         :class: copyable
-
-         wget https://dl.min.io/server/minio/release/linux-amd64/minio
-         chmod +x minio
-         sudo mv -f ./minio /usr/local/bin/minio
-
-      Replace ``/usr/local/bin`` with the location of the existing Buckit
-      binary. Run ``which minio`` to identify the path if not already known.
+         curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
+         sudo apt install ./buckit.deb
 
 .. end-upgrade-minio-binary-desc
 

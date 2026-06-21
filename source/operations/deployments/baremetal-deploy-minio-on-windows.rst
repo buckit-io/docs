@@ -1,8 +1,8 @@
 .. _deploy-minio-windows:
 
-=======================
+========================
 Deploy Buckit on Windows
-=======================
+========================
 
 .. default-domain:: minio
 
@@ -67,7 +67,7 @@ The installer downloads the executable to the current directory as
 ``.\buckit.exe``. Run it from PowerShell or Command Prompt.
 
 2. Launch the Buckit Server
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 In PowerShell or the Command Prompt, navigate to the location of the
@@ -129,7 +129,7 @@ In PowerShell or the Command Prompt, navigate to the location of the
       Closing the window stops the server and ends the process.
 
 3. Connect your Browser to the Buckit Server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9001`` or one of the Console addresses specified in the Buckit server command output.
 For example, ``WebUI: http://192.0.2.10:9001 http://127.0.0.1:9001`` in the example output indicates two possible addresses to use for connecting to the Console.
@@ -155,7 +155,7 @@ Each Buckit server includes its own embedded Buckit Console.
 For more information, see the :ref:`minio-console` documentation.
 
 4. `(Optional)` Install the Buckit Client
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit deployment from PowerShell.
 

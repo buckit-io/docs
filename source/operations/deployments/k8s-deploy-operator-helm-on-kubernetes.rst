@@ -35,7 +35,7 @@ While this documentation may provide guidance for configuring or deploying Kuber
 .. _minio-k8s-deploy-operator-helm-repo:
 
 Install the Buckit Operator using Helm Charts
---------------------------------------------
+---------------------------------------------
 
 The following procedure installs the Operator using the Buckit Operator Chart Repository.
 This method supports a simplified installation path compared to the :ref:`local chart installation <minio-k8s-deploy-operator-helm-local>`.
@@ -121,7 +121,7 @@ You can now :ref:`deploy a tenant using Helm Charts <deploy-tenant-helm>`.
 .. _minio-k8s-deploy-operator-helm-local:
 
 Install the Buckit Operator using Local Helm Charts
---------------------------------------------------
+---------------------------------------------------
 
 The following procedure installs the Operator using a local copy of the Helm Charts.
 This method may support easier pre-configuration of the Operator compared to the :ref:`repo-based installation <minio-k8s-deploy-operator-helm-repo>`

@@ -45,7 +45,7 @@ The ability of Buckit to restore a damaged object relates directly to the follow
   In the scenario above, five drives with intact shards must be online and available for Buckit to successfully serve the object.
 
 When does Buckit heal an object?
--------------------------------
+--------------------------------
 
 Buckit has a robust system for healing objects.
 

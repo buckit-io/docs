@@ -50,7 +50,7 @@ Authenticate to the Keycloak :guilabel:`Administrative Console` and navigate to 
    :end-before: end-configure-keycloak-client
 
 4) Create Client Scope for Buckit Client
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Client scopes allow Keycloak to map user attributes as part of the JSON Web Token (JWT) returned in authentication requests.
 This allows Buckit to reference those attributes when assigning policies to the user.
@@ -71,7 +71,7 @@ Set the value to any :ref:`policy <minio-policy>` on the Buckit deployment.
    :end-before: end-configure-keycloak-user-group-attributes
 
 6) Start the Buckit Container
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command starts the Buckit Container and attaches it to the ``minio-keycloak`` pod.
 
@@ -87,7 +87,7 @@ Go to ``localhost:9001`` to access the Buckit Console.
 Log in using the default credentials ``minioadmin:minioadmin``.
 
 7) Configure Buckit for Keycloak Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit supports multiple methods for configuring Keycloak authentication:
 

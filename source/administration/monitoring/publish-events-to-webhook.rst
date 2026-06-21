@@ -17,7 +17,7 @@ Buckit supports publishing :ref:`bucket notification
 `Webhook <https://en.wikipedia.org/wiki/Webhook>`__ service endpoint.
 
 Add a Webhook Endpoint to a Buckit Deployment
---------------------------------------------
+---------------------------------------------
 
 The following procedure adds a new Webhook service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -27,13 +27,13 @@ Prerequisites
 ~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the Webhook Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new Webhook service endpoint using either environment
 variables *or* by setting runtime configuration settings.
@@ -144,7 +144,7 @@ variables *or* by setting runtime configuration settings.
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -216,7 +216,7 @@ a notification.
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an Webhook Endpoint in a Buckit Deployment
-------------------------------------------------
+-------------------------------------------------
 
 The following procedure updates an existing Webhook service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -226,7 +226,7 @@ Prerequisites
 ~~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -285,7 +285,7 @@ configuration settings are *optional*. See
 Webhook configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

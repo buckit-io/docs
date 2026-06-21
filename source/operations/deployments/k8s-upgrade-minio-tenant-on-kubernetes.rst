@@ -1,8 +1,8 @@
 .. _minio-k8s-upgrade-minio-tenant:
 
-======================
+=======================
 Upgrade a Buckit Tenant
-======================
+=======================
 
 .. default-domain:: minio
 
@@ -135,7 +135,7 @@ Refer to the :kube-docs:`Kustomize Documentation <tasks/manage-kubernetes-object
 .. _minio-upgrade-tenant-helm:
 
 Upgrade the Tenant using the Buckit Helm Chart
----------------------------------------------
+----------------------------------------------
 
 This procedure upgrades an existing Buckit Tenant using Helm Charts.
 

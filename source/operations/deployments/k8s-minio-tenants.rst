@@ -1,6 +1,6 @@
-===========================
+============================
 Buckit Tenants on Kubernetes
-===========================
+============================
 
 .. default-domain:: minio
 
@@ -18,7 +18,7 @@ Prerequisites
 Your Kubernetes infrastructure must meet the following pre-requisites for deploying Buckit Tenants.
 
 Buckit Kubernetes Operator
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The procedures on this page *requires* a valid installation of the Buckit Kubernetes Operator and assumes the local host has a matching installation of the Buckit Kubernetes Operator. 
 This procedure assumes the latest stable Operator, version |operator-version-stable|.

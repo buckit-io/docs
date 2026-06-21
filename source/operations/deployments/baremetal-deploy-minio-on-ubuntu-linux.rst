@@ -1,8 +1,8 @@
 .. _deploy-minio-ubuntu:
 
-============================
+=============================
 Deploy Buckit on Ubuntu Linux
-============================
+=============================
 
 .. default-domain:: minio
 
@@ -65,7 +65,7 @@ Procedure
 ---------
 
 1. Download and install the Buckit DEB
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the following commands to download, verify, and install the Buckit DEB
 for your Linux host.
@@ -177,7 +177,7 @@ For more specific guidance on configuring Buckit for TLS, including multi-domain
 You can optionally skip this step to deploy without TLS enabled. Buckit strongly recommends *against* non-TLS deployments outside of early development.
 
 5. Create the Buckit Environment File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create an environment file at ``/etc/default/minio``. 
 The Buckit service uses this file as the source of all :ref:`environment variables <minio-server-environment-variables>` used by Buckit and by ``buckit.service``.
@@ -196,7 +196,7 @@ Modify the example to reflect your deployment topology.
          # Set the hosts and volumes Buckit uses at startup
          # The command uses Buckit expansion notation {x...y} to denote a
          # sequential series. 
-         # 
+         #
          # The following example covers four Buckit hosts
          # with 4 drives each at the specified hostname and drive locations.
          #
@@ -240,7 +240,7 @@ Modify the example to reflect your deployment topology.
          # Set the volumes Buckit uses at startup
          # The command uses Buckit expansion notation {x...y} to denote a
          # sequential series. 
-         # 
+         #
          # The following specifies a single host with 4 drives at the specified location
          #
          # The command includes the port that the Buckit server listens on
@@ -285,7 +285,7 @@ Modify the example to reflect your deployment topology.
          :class: copyable
 
          # Set the volume Buckit uses at startup
-         # 
+         #
          # The following specifies the drive or folder path
 
          MINIO_VOLUMES="/mnt/drive1/buckit"
@@ -319,7 +319,7 @@ For distributed deployments, all nodes **must** have matching ``/etc/default/min
 Use a utility such as ``shasum -a 256 /etc/default/minio`` on each node to verify an exact match across all nodes.
 
 6. Start the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Enable and start the Buckit service on each node:
 
@@ -370,18 +370,27 @@ Following our checklists typically mitigates the risk of encountering those or s
 
    .. tab-item:: CLI
 
-      Follow the :ref:`installation instructions <mc-install>` for ``mc`` on your local host.
-      Run ``mc --version`` to verify the installation.
-
-      If your Buckit deployment uses third-party or self-signed TLS certificates, copy the :abbr:`CA (Certificate Authority)` files to ``~/.mc/certs/CAs`` to allow ``mc`` 
-
+      Install ``bm`` on your local host.
+      Run ``bm --version`` to verify the installation.
 
       Once installed, create an alias for the Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set mybuckit https://buckit1.example.net:9000 USERNAME PASSWORD
+         bm alias set mybuckit https://buckit1.example.net:9000 USERNAME PASSWORD
+
+      If your Buckit deployment uses third-party or self-signed TLS certificates,
+      ``bm`` may prompt you to trust the certificate when run in an interactive
+      terminal.
+
+      For non-interactive use, or to bypass certificate verification
+      temporarily, use ``--insecure``:
+
+      .. code-block:: shell
+         :class: copyable
+
+         bm --insecure alias set mybuckit https://buckit1.example.net:9000 USERNAME PASSWORD
 
       Change the hostname, username, and password to reflect your deployment.
       The hostname can be any Buckit node in the deployment.

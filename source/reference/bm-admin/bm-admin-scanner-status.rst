@@ -45,13 +45,13 @@ This command has an alias of ``bm admin scanner info``.
       .. code-block:: shell
          
          Overall Statistics                               	
-         ------------------                                                  	
+         -
          Last full scan time:   0d0h15m; Estimated 2879.79/month             	
          Current cycle:         (between cycles)                             	
          Active drives: 0                                                    	
                                                                              	
          Last Minute Statistics                                              	
-         ----------------------                                              	
+         -
          Objects Scanned:       3 objects; Avg: 67.611µs; Rate: 4320/day     	
          Versions Scanned:      3 versions; Avg: 2.506µs; Rate: 4320/day     	
          Versions Heal Checked: 0 versions; Avg: 0ms                         	

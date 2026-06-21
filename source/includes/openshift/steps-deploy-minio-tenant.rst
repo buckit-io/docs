@@ -4,7 +4,7 @@ Deploy a Tenant using the OpenShift Web Console
 -----------------------------------------------
 
 1) Access the Buckit Operator Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can find the Buckit Operator Interface from the :guilabel:`Operators` left-hand navigation header.
 

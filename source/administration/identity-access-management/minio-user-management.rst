@@ -71,7 +71,7 @@ STS tokens default to expire in 1 hour, but you set expiration for up to 7 days 
 .. _minio-users-root:
 
 Buckit ``root`` User
--------------------
+--------------------
 
 Buckit deployments have a ``root`` user with access to all actions and resources
 on the deployment, regardless of the configured :ref:`identity manager

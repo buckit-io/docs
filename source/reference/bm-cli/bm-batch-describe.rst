@@ -95,7 +95,7 @@ The output of the above command is similar to the following:
    bm batch describe myminio KwSysDpxcBU9FNhGkn2dCf
    replicate:
      apiVersion: v1
-   ...
+     ...
  
 Note, this example is truncated.
 The output is the full job definition for the specified job.
@@ -110,4 +110,4 @@ S3 Compatibility
 Permissions
 -----------
 
-You must have the :policy-action:`admin:DescribeBatchJobs` permission to describe jobs on the deployment. 
+You must have the :policy-action:`admin:DescribeBatchJob` permission to describe jobs on the deployment. 

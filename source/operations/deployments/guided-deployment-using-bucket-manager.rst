@@ -163,6 +163,15 @@ summary page. When you finish, ``bm web`` opens the Cluster Details page.
 On the Cluster Details page, you can:
 
 - Open the Buckit Console using the cluster console URL.
-- Confirm that the cluster, nodes, and drives are healthy.
-- Review the deployed nodes and basic cluster information.
-- Open the SSH settings for later node management tasks.
+- Monitor cluster and node health, drive status, and basic cluster information.
+- Run restart, upgrade, or heal actions at the cluster or node level.
+
+The wizard also creates a ``bm`` alias for the new cluster using the committed
+cluster ID. For example, if the cluster ID is ``buckit-prod-1``, you can run:
+
+.. code-block:: shell
+   :class: copyable
+
+   bm admin info buckit-prod-1
+
+See :doc:`/reference/bm-admin` for more ``bm`` CLI commands.

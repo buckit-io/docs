@@ -108,8 +108,6 @@ Consider the following points as general guidance for client applications worklo
   Increase this target based on benchmarking and monitoring of real world workloads up to what the hardware can meaningfully handle. 
 - Deployments with high-performance or enterprise-grade :ref:`hardware <deploy-minio-distributed-recommendations>` can typically handle prefixes with millions of objects or more.
 
-|SUBNET| Enterprise accounts can utilize yearly architecture reviews as part of the deployment and maintenance strategy to ensure long-term performance and success of your Buckit-dependent projects.
-
 For a deeper discussion on the benefits of limiting prefix contents, see the article on :s3-docs:`optimizing S3 performance <optimizing-performance.html>`.
 
 .. note::

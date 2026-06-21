@@ -392,7 +392,7 @@ Use :mc:`bm mirror` with :mc-cmd:`~bm mirror --watch` to continuously mirror obj
 - Replace :mc-cmd:`TGTPATH <bm mirror TARGET>` with the destination bucket.
 
 Mirror Objects from AWS S3 to Buckit Skipping Objects in GLACIER
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc:`bm mirror` with :mc-cmd:`~bm mirror --exclude-storageclass` to mirror objects from AWS S3 to Buckit without mirroring objects in GLACIER or DEEP_ARCHIVE storage.
 
@@ -420,7 +420,7 @@ If an object of the same name exists on the target, Buckit outputs an error for 
 ``bm mirror`` continues to mirror other objects from the source to the destination after the error.
 
 Buckit Trims Empty Prefixes on Object Removal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :mc-cmd:`bm mirror --watch` command continuously synchronizes the source and destination targets for added and deleted objects. 
 This includes automatically removing objects on the destination if they are removed on the source.

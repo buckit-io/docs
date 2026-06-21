@@ -1,8 +1,8 @@
 .. _minio-console:
 
-=============
+==============
 Buckit Console
-=============
+==============
 
 .. default-domain:: minio
 

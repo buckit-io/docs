@@ -137,7 +137,7 @@ This tutorial uses the example ``my-minio-sse-kms-key`` name for ease of referen
 Specify a unique key name to prevent collision with existing keys.
 
 2) Configure Buckit for SSE-KMS Object Encryption
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       
 Specify the following environment variables in the shell or terminal on each
 Buckit server host in the deployment:
@@ -183,7 +183,7 @@ Buckit server host in the deployment:
 
 
 3) Restart the Buckit Deployment to Enable SSE-KMS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

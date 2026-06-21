@@ -1,8 +1,8 @@
 .. _minio-server-envvar-console:
 
-======================
+=======================
 Buckit Console Settings
-======================
+=======================
 
 .. default-domain:: minio
 
@@ -33,7 +33,7 @@ Browser Settings
 The following settings control behavior for the embedded Buckit Console.
 
 Buckit Console
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 *Optional*
 

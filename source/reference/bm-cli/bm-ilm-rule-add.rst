@@ -392,7 +392,7 @@ This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` 
 
 - Current objects in the prefix older than 90 days move to the ``MINIOTIER-1`` storage tier.
 - Non-current objects in the prefix older than 45 days move to the ``MINIOTIER-2`` storage tier.
-- Both ``MINIOTIER-1`` and ``MINIOTIER-2`` have already been created with :mc:`bm admin tier add`.
+- Both ``MINIOTIER-1`` and ``MINIOTIER-2`` have already been created with :mc:`bm ilm tier add`.
 
 Expire All Objects at a Prefix, Retain Current Object Versions Longer Than Non-Current Object Versions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

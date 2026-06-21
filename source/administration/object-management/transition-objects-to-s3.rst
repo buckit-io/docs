@@ -1,8 +1,8 @@
 .. _minio-lifecycle-management-transition-to-s3:
 
-===================================
+====================================
 Transition Objects from Buckit to S3
-===================================
+====================================
 
 .. default-domain:: minio
 
@@ -38,7 +38,7 @@ applying transition operations.
 .. _minio-lifecycle-management-transition-to-s3-permissions:
 
 Required Buckit Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.

@@ -34,7 +34,7 @@ Examples
 --------
 
 Restart Buckit Servers in Target Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
    :start-after: myminio-alias

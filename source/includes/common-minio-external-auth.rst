@@ -20,7 +20,7 @@ may be optional depending on the provider.
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
 .. end-minio-openid-client-secret
 
@@ -106,7 +106,7 @@ Include the Console hostname, port, and ``/oauth_callback``:
 
 .. code-block:: shell
 
-   http://minio.example.net:consoleport/oauth_callback
+   http://buckit.example.net:consoleport/oauth_callback
 
 Ensure you start the Buckit Server with the :mc-cmd:`~minio server --console-address` option to set a static Console listen port.
 The default behavior with that option omitted is to select a random port number at startup.
@@ -181,10 +181,10 @@ Specify the hostname for the Active Directory / LDAP server. For example:
 
    ldapserver.com:636
 
-.. admonition:: :mc-cmd:`~mc idp ldap add srv_record_name` automatically identifies the port
+.. admonition:: :mc-cmd:`~bm idp ldap add srv_record_name` automatically identifies the port
    :class: note
 
-   If your AD/LDAP server uses :mc-cmd:`DNS SRV Records <mc idp ldap add srv_record_name>`, do *not* append the port number to your :mc-cmd:`~mc idp ldap add server_addr` value.
+   If your AD/LDAP server uses :mc-cmd:`DNS SRV Records <bm idp ldap add srv_record_name>`, do *not* append the port number to your :mc-cmd:`~bm idp ldap add server_addr` value.
    SRV requests automatically include port numbers when returning the list of available servers.
    
 .. end-minio-ad-ldap-server-addr
@@ -207,7 +207,7 @@ Specify the password for the :ref:`Lookup-Bind
 
 .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+   Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
 .. end-minio-ad-ldap-lookup-bind-password
 
@@ -225,7 +225,7 @@ The user can then use the passed SSH Public Key to log in to SFTP servers.
 .. code-block:: text
    :class: copyable
 
-   mc idp ldap update ALIAS user_dn_attributes=sshPublicKey
+   bm idp ldap update ALIAS user_dn_attributes=sshPublicKey
 
 .. end-minio-ad-ldap-user-dn-attributes
 
@@ -394,7 +394,7 @@ Specify a comment to associate to the AD/LDAP configuration.
    - User DN Search Filter
 
    Not all configuration options are available in the Buckit Console.
-   For additional settings, use :mc:`mc idp ldap` or :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
+   For additional settings, use :mc:`bm idp ldap` or :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
  
 .. end-minio-ad-ldap-console-enable
 

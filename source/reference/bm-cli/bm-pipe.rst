@@ -159,7 +159,7 @@ The following command takes the STDIN stream and creates an object on the Reduce
     bm pipe --storage-class REDUCED_REDUNDANCY s3/personalbuck/meeting-notes.txt
 
 Copy a File to a Buckit Deployment with Metadata
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following command uploads an MP3 file to a Buckit deployment with an ALIAS of ``myminio`` and a ``music`` bucket.
 The object writes with some metadata for ``Cache-Control`` and ``Artist``.

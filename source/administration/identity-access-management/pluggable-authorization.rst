@@ -1,8 +1,8 @@
 .. _minio-external-access-management-plugin:
 
-=======================================
+========================================
 Buckit External Access Management Plugin
-=======================================
+========================================
 
 .. default-domain:: minio
 

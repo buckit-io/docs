@@ -1,8 +1,8 @@
 .. _minio-k8s-upgrade-minio-operator:
 
-======================
+=======================
 Upgrade Buckit Operator
-======================
+=======================
 
 .. default-domain:: minio
 
@@ -28,7 +28,7 @@ See :ref:`minio-k8s-upgrade-minio-operator-to-5.0.15` for instructions on upgrad
 .. _minio-k8s-upgrade-minio-operator-procedure:
 
 Upgrade Buckit Operator 5.0.15 to |operator-version-stable|
-----------------------------------------------------------
+-----------------------------------------------------------
 
 .. important::
 

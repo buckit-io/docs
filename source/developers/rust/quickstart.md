@@ -17,7 +17,7 @@ All request builders implement the [`S3Api`] trait, which provides the async [`s
 
 ## Basic Usage
 
-```no_run
+```rust
 use minio::s3::MinioClient;
 use minio::s3::creds::StaticProvider;
 use minio::s3::http::BaseUrl;

@@ -1,8 +1,8 @@
 .. _minio-server-envvar-external-identity-management-plugin:
 
-=========================================
+==========================================
 Buckit Identity Management Plugin Settings
-=========================================
+==========================================
 
 .. default-domain:: minio
 

@@ -1,8 +1,8 @@
 .. _deploy-minio-container:
 
-===========================
+============================
 Deploy Buckit as a Container
-===========================
+============================
 
 .. default-domain:: minio
 
@@ -177,14 +177,14 @@ For all other container runtimes, follow the documentation for that runtime and 
 
    .. tab-item:: CLI
 
-      Follow the :ref:`installation instructions <mc-install>` for ``mc`` on your local host.
-      Run ``mc --version`` to verify the installation.
+      Install ``bm`` on your local host.
+      Run ``bm --version`` to verify the installation.
 
       Once installed, create an alias for the Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set mybuckit http://localhost:9000 USERNAME PASSWORD
+         bm alias set mybuckit http://localhost:9000 USERNAME PASSWORD
 
       Change the hostname, username, and password to reflect your deployment.

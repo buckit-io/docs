@@ -1,9 +1,9 @@
 
 .. _deploy-minio-operator:
 
-=========================
+==========================
 Buckit Kubernetes Operator
-=========================
+==========================
 
 .. default-domain:: minio
 
@@ -103,7 +103,7 @@ The output of the example command above may differ from the output in your termi
         - --cluster-name=my-cluster-name
         - --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
         - --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
-    ...
+        ...
 
 .. important::
 

@@ -32,7 +32,7 @@ See :ref:`minio-mc-commands` for a list of supported commands.
 .. _mc-client-versioning:
 
 Version Alignment with Buckit Server
------------------------------------
+------------------------------------
 
 Buckit Manager releases separately from the Buckit Server.
 
@@ -297,13 +297,6 @@ The following table lists :mc-cmd:`bm` commands:
           :start-after: start-mc-legalhold-desc
           :end-before: end-mc-legalhold-desc
 
-   * - | :mc:`bm license info`
-       | :mc:`bm license register`
-       | :mc:`bm license update`
-     - .. include:: /reference/bm-cli/bm-license.rst
-          :start-after: start-mc-license-desc
-          :end-before: end-mc-license-desc
-
    * - :mc:`bm ls`
      - .. include:: /reference/bm-cli/bm-ls.rst
           :start-after: start-mc-ls-desc
@@ -395,20 +388,6 @@ The following table lists :mc-cmd:`bm` commands:
      - .. include:: /reference/bm-cli/bm-stat.rst
           :start-after: start-mc-stat-desc
           :end-before: end-mc-stat-desc
-
-   * - | :mc:`bm support callhome`
-       | :mc:`bm support diag`
-       | :mc:`bm support inspect`
-       | :mc:`bm support perf`
-       | :mc:`bm support profile`
-       | :mc:`bm support proxy`
-       | :mc:`bm support top api`
-       | :mc:`bm support top disk`
-       | :mc:`bm support top locks`
-       | :mc:`bm support upload`
-     - .. include:: /reference/bm-cli/bm-support.rst
-          :start-after: start-mc-support-desc
-          :end-before: end-mc-support-desc
 
    * - | :mc:`bm tag list`
        | :mc:`bm tag remove`
@@ -671,7 +650,6 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/bm-cli/bm-idp-openid
    /reference/bm-cli/bm-ilm
    /reference/bm-cli/bm-legalhold
-   /reference/bm-cli/bm-license
    /reference/bm-cli/bm-ls
    /reference/bm-cli/bm-mb
    /reference/bm-cli/bm-mirror
@@ -688,7 +666,6 @@ You can also define some of these options using :ref:`Environment Variables <min
    /reference/bm-cli/bm-share
    /reference/bm-cli/bm-sql
    /reference/bm-cli/bm-stat
-   /reference/bm-cli/bm-support
    /reference/bm-cli/bm-tag
    /reference/bm-cli/bm-tree
    /reference/bm-cli/bm-undo

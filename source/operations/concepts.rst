@@ -9,7 +9,7 @@ Core Operational Concepts
    :depth: 2
 
 What are the components of a Buckit Deployment?
-----------------------------------------------
+-----------------------------------------------
 
 A Buckit deployment consists of a set of storage and compute resources running one or more :mc:`minio server` nodes that together act as a single object storage repository. 
 
@@ -23,7 +23,7 @@ Buckit can run locally, on a private cloud, or in any of the many public clouds 
 The specific way you design, architect, and build your system is called the system's ``topology``.
 
 What system topologies does Buckit support?
-------------------------------------------
+-------------------------------------------
 
 Buckit can deploy to three types of topologies:
 
@@ -42,7 +42,7 @@ Buckit can deploy to three types of topologies:
    For Kubernetes infrastructure, use the Buckit Operator to manage and deploy distributed Buckit Tenants.
 
 How does a distributed Buckit deployment work?
----------------------------------------------
+----------------------------------------------
 
 A distributed deployment makes use of the resources of more than one physical or virtual machine's compute and storage resources.
 In modern situations, this often means running Buckit in a private or public cloud environment, such as with Amazon Web Services, the Google Cloud Platform, Microsoft's Azure platform, or many others.
@@ -50,7 +50,7 @@ In modern situations, this often means running Buckit in a private or public clo
 .. _minio-intro-server-pool:
 
 How does Buckit manage multiple virtual or physical servers?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While testing Buckit may only involve a single drive on a single computer, most production Buckit deployments use multiple compute and storage devices to create a high availability environment.
 A server pool is a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
@@ -79,7 +79,7 @@ See :mc:`minio server` for complete syntax and usage.
 .. _minio-intro-cluster:
 
 How does Buckit link multiple server pools into a single Buckit cluster?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A cluster refers to an entire Buckit deployment consisting of one or more Server Pools. 
 
@@ -97,7 +97,7 @@ Each server pool has one or more :ref:`erasure sets <minio-ec-erasure-set>` depe
 Buckit strongly recommends production clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a Server Pool for proper high availability and durability guarantees.
 
 Can I change the size of an existing Buckit deployment?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit :ref:`distributed deployments <minio-mnmd>` support expansion and decommissioning as functions to increase or decrease the available storage.
 
@@ -116,7 +116,7 @@ Buckit intends decommissioning for use with removing older pools with aged hardw
    :end-before: end-pool-order-must-not-change
 
 How do I manage one or more Buckit instances or clusters?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are several options to manage your Buckit deployments and clusters:
 
@@ -128,7 +128,7 @@ There are several options to manage your Buckit deployments and clusters:
 .. _minio-rebalance:
 
 How do I manage object distribution across a Buckit deployment?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit optimizes storage of objects across available pools by writing new objects (that is, objects with no existing versions) to the server pool with the most free space compared total amount of free space on all available server pools.
 Buckit does not perform the costly action of rebalancing objects from older pools to newer pools.
@@ -147,7 +147,7 @@ Consider scheduling rebalancing operations during non-peak periods to avoid impa
 You can start and stop rebalancing at any time
 
 How do I upload objects to Buckit?
----------------------------------
+----------------------------------
 
 You can use any S3-compatible SDK to upload objects to a Buckit deployment.
 Each SDK performs the equivalent of a PUT operation which transmits the object to Buckit for storage.
@@ -156,17 +156,17 @@ Buckit also implements support for :s3-docs:`multipart uploads <mpuoverview.html
 Buckit reassembles these parts until it has a completed object, then stores that object at the specified path.
 
 How does Buckit provide availability, redundancy, and reliability?
------------------------------------------------------------------
+------------------------------------------------------------------
 
 Buckit Uses :ref:`Erasure Coding <minio-erasure-coding>` for Data Redundancy and Reliability
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit Erasure Coding is a data redundancy and availability feature that allows Buckit deployments with multiple drives to automatically reconstruct objects on-the-fly despite the loss of multiple drives or nodes in the cluster. 
 Erasure Coding provides object-level :ref:`healing <minio-concepts-healing>` with significantly less overhead than adjacent technologies such as RAID or replication.
 
 
 Buckit Implements Bit Rot Healing to Protect Data At Rest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Bit rot is the random, silent corruption to data that can happen on any storage device.
 Bit rot corruption is not prompted by any activity from a user, nor does the system's operating system alone have awareness of the corruption to notify a user or administrator about a change to the data.
@@ -192,7 +192,7 @@ Active bit rot healing during scanner has a high performance impact in compariso
 The automatic checks during normal operations is generally sufficient for bit rot, and Buckit does not recommend using the scanner for this type of health check.
 
 Buckit Distributes Data Across :ref:`Erasure Sets <minio-ec-erasure-set>` for High Availability and Resiliency
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An erasure set is a group of multiple drives that supports Buckit :ref:`Erasure Coding <minio-erasure-coding>`. 
 Erasure Coding provides high availability, reliability, and redundancy of data stored on a Buckit deployment.
@@ -204,7 +204,7 @@ At the highest redundancy levels, Buckit can serve read requests with minimal pe
 Buckit calculates the size and number of Erasure Sets in a Server Pool based on the total number of drives in the set *and* the number of :mc:`minio` servers in the set. See :ref:`minio-ec-erasure-set` for more information.
 
 Buckit Automatically Heals Corrupt or Missing Data On-the-fly
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Healing <minio-concepts-healing>` is Buckit's ability to restore data after some event causes data loss.
 Data loss can come from bit rot, drive loss, or node loss.
@@ -216,7 +216,7 @@ Data loss can come from bit rot, drive loss, or node loss.
    :end-before: end-exclusive-drive-access
 
 Buckit Writes Data Protection at the Object Level with Parity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A Buckit deployment with multiple drives divides the available drives into data drives and parity drives.
 Buckit Erasure Coding adds additional hashing information about the contents of an object to the parity drives when writing an object.

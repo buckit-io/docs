@@ -37,7 +37,7 @@ For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metric
 
 
 Configure Prometheus to Collect and Alert using Buckit Metrics
--------------------------------------------------------------
+--------------------------------------------------------------
 
 1) Generate the Scrape Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,7 +336,7 @@ You can execute queries here to analyze the collected metrics.
            - Total number of I/O operations waiting on drive.
 
 4) Configure an Alert Rule using Buckit Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must configure :prometheus-docs:`Alert Rules <prometheus/latest/configuration/alerting_rules/>` on the Prometheus deployment to trigger alerts based on collected Buckit metrics.
 

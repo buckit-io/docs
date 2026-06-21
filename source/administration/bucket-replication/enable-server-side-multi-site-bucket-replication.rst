@@ -24,7 +24,7 @@ The procedure on this page configures automatic server-side bucket replication b
 
 - To configure one-way "active-passive" replication between Buckit deployments, see :ref:`minio-bucket-replication-serverside-oneway`.
 
-Multi-Site Active-Active replication configurations can span multiple racks, datacenters, or geographic locations. Complexity of configuring and maintaining multi-site configurations generally increase with the number of sites and size of each site. Enterprises looking to implement multi-site replication should consider leveraging `Buckit SUBNET <https://min.io/pricing?ref=docs>`__ support to access the expertise, planning, and engineering resources required for addressing that use case. 
+Multi-Site Active-Active replication configurations can span multiple racks, datacenters, or geographic locations. Complexity of configuring and maintaining multi-site configurations generally increases with the number of sites and size of each site.
 
 .. seealso::
 

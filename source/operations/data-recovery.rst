@@ -57,10 +57,6 @@ write errors.
 .. admonition:: Buckit Professional Support
    :class: note
 
-   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can
-   `log in <https://subnet.min.io/>`__ and create a new issue related to drive, node, or site failures. 
-   Coordination with Buckit Engineering via SUBNET can ensure successful recovery operations of production Buckit deployments, including root-cause analysis, and health diagnostics.
-
    Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 

@@ -690,7 +690,7 @@ Buckit supports the following condition keys for all supported
 For additional keys supported by a specific S3 action, see the reference documentation for that action.
 
 Buckit Extended Condition Keys
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit extends the S3 standard condition keys with the following extended key:
 
@@ -1036,7 +1036,7 @@ Each Buckit :ref:`identity provider <minio-authentication-and-identity-managemen
 .. _minio-policy-variables-internal:
 
 Buckit Policy Variables
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The following table contains a list of recommended policy variables for use in authorizing :ref:`Buckit-managed users <minio-internal-idp>`:
 

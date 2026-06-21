@@ -17,7 +17,7 @@ The :mc:`minio server` process stores its configuration in the storage backend :
 .. _minio-server-configuration-options:
 
 Buckit Settings
---------------
+---------------
 
 Buckit settings define runtime behavior of the Buckit :mc:`server <minio server>` process.
 

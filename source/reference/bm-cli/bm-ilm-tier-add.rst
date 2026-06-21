@@ -350,7 +350,7 @@ Examples
 --------
 
 Configure a Tier to Transition Objects to a Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example creates a new tier on a local deployment that a configured rule can use to transition objects to a separate, remote Buckit deployment.
 

@@ -1,8 +1,8 @@
 .. _minio-server-envvar-mc:
 
-=====================
+===========================
 Buckit Manager CLI Settings
-=====================
+===========================
 
 .. default-domain:: minio
 

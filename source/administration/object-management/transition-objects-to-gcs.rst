@@ -1,8 +1,8 @@
 .. _minio-lifecycle-management-transition-to-gcs:
 
-====================================
+=====================================
 Transition Objects from Buckit to GCS
-====================================
+=====================================
 
 .. default-domain:: minio
 
@@ -38,7 +38,7 @@ applying transition operations.
 .. _minio-lifecycle-management-transition-to-gcs-permissions:
 
 Required Buckit Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.

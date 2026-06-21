@@ -38,7 +38,7 @@ For more flexible scraping and a wider range of metrics, use :ref:`metrics versi
 
 
 Buckit Grafana dashboard
------------------------
+------------------------
 
 Buckit publishes two :ref:`Grafana Dashboards <minio-grafana>` for visualizing v2 metrics.
 For more complete documentation on configuring a Prometheus-compatible data source for Grafana, see the :prometheus-docs:`Prometheus documentation on Grafana Support <visualization/grafana/>`.

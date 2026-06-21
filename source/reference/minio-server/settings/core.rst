@@ -21,7 +21,7 @@ This page covers settings that control core behavior of the Buckit process.
    :end-before: end-minio-settings-test-before-prod
 
 Buckit Server CLI Options
-------------------------
+-------------------------
 
 .. tab-set::
 
@@ -356,7 +356,7 @@ The :ref:`erasure set size <minio-ec-basics>` to apply for all drives in a given
 If you set this value, you **must** do so *before* you initialize the cluster
 The selected stripe size is **immutable** after the cluster has been initialized and affects any future server pools added to the cluster.
 
-|subnet| users should log in and open an issue to discuss stripe size settings prior to implementing them in any environment.
+Review stripe size settings carefully before implementing them in any environment.
 
 .. warning::
 

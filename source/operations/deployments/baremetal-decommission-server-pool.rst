@@ -34,9 +34,6 @@ The procedures on this page decommission and remove one or more server pools fro
 
    Decommissioning is a major administrative operation that requires care in planning and execution, and is not a trivial or 'daily' task. 
 
-   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to decommissioning. 
-   Coordination with Buckit Engineering via SUBNET can ensure successful decommissioning, including performance testing and health diagnostics.
-
    Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
    Community Support is best-effort only and has no SLAs around responsiveness.
 
@@ -178,8 +175,8 @@ At the end of the decommission process, Buckit checks for a list of items on the
 If the list returns empty, Buckit marks the decommission as successfully completed.
 If any objects return, Buckit returns an error that the decommission process failed.
 
-If the decommission fails, customers should open a |SUBNET| issue for further assistance before retrying the decommission. 
-Community users without a SUBNET subscription can retry the decommission process or seek additional support through the `Buckit Community Slack <https://slack.min.io/>`__.
+If the decommission fails, review the failure details before retrying the decommission.
+You can also seek additional support through the `Buckit Community Slack <https://slack.min.io/>`__.
 Buckit provides Community Support at best-effort only and provides no :abbr:`SLA (Service Level Agreement)` around responsiveness.
 
 Decommissioning a Server with Tiering Enabled
@@ -198,7 +195,7 @@ Decommission a Server Pool
 --------------------------
 
 1) Review the Buckit Deployment Topology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :mc:`mc admin decommission` command returns a list of all
 pools in the Buckit deployment:
@@ -357,7 +354,7 @@ Specific instructions for configuring network control plane components is
 out of scope for this procedure.
 
 6) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following commands on each node **simultaneously** in the deployment
 to restart the Buckit service:
@@ -397,7 +394,7 @@ All other considerations about decommissioning apply when performing the process
 - Confirm you select the intended pools.
 
 1) Review the Buckit Deployment Topology
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :mc:`mc admin decommission` command returns a list of all pools in the Buckit deployment:
 
@@ -540,7 +537,7 @@ Update any load balancers, reverse proxies, or other network control planes to r
 Specific instructions for configuring network control plane components is out of scope for this procedure.
 
 6) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following commands on each node **simultaneously** in the deployment to restart the Buckit service:
 

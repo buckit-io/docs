@@ -1,5 +1,5 @@
 1) Download the Buckit Server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-binary-desc
@@ -141,7 +141,7 @@ To rotate the generated root credentials, generate a new key in the KMS, then up
 
 
 4) Start the Buckit Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following command on the local host to start the Buckit |SNSD| deployment as a service:
 
@@ -170,7 +170,7 @@ The ``API`` block lists the network interfaces and port on which clients can acc
 The ``Console`` block lists the network interfaces and port on which clients can access the Buckit Web Console.
 
 5) Connect to the Buckit Service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common/common-deploy.rst
    :start-after: start-common-deploy-connect-to-minio-deployment

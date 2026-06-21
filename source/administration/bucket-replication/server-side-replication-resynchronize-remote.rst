@@ -27,8 +27,6 @@ Resynchronization is a per-bucket process. You must repeat resynchronization for
 .. admonition:: Professional Support during BC/DR Operations
    :class: important
 
-   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can `log in <https://subnet.min.io/>`__ and create a new issue related to resynchronization. Coordination with Buckit Engineering via SUBNET can ensure successful resynchronization and restoration of normal operations, including performance testing and health diagnostics.
-
    Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. _minio-bucket-replication-serverside-resynchronize-requirements:
@@ -37,7 +35,7 @@ Requirements
 ------------
 
 Buckit Deployments Must Be Online
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Resynchronization requires both the source and target deployments be online and able to accept read and write operations. The source *must* have complete network connectivity to the remote.
 
@@ -58,7 +56,7 @@ Replication Requires Matching Object Encryption Settings
    :end-before: end-replication-encrypted-objects
 
 Replication Requires Buckit Deployments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-minio-only

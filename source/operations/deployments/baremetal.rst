@@ -4,9 +4,9 @@
 .. _minio-installation-platform-support:
 .. _deploy-minio-distributed-baremetal:
 
-=========================
+==========================
 Deploy Buckit on Baremetal
-=========================
+==========================
 
 .. default-domain:: minio
 

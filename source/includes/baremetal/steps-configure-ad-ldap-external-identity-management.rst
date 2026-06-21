@@ -13,9 +13,9 @@
 
       .. tab-item:: Buckit Client
 
-         Buckit supports specifying the AD/LDAP provider settings using :mc:`mc idp ldap` commands.
+         Buckit supports specifying the AD/LDAP provider settings using :mc:`bm idp ldap` commands.
 
-         For distributed deployments, the :mc:`mc idp ldap` command applies the configuration to all nodes in the deployment. 
+         For distributed deployments, the :mc:`bm idp ldap` command applies the configuration to all nodes in the deployment.
 
          The following example code sets *all* configuration settings related to configuring an AD/LDAP provider for external identity management.
 	      The minimum *required* settings are:
@@ -29,7 +29,7 @@
          .. code-block:: shell
             :class: copyable
 
-            mc idp ldap add ALIAS                                                  \
+            bm idp ldap add ALIAS                                                  \
               server_addr="ldaps.example.net:636"                                  \
               lookup_bind_dn="CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=example,DC=net"        \
               lookup_bind_password="xxxxxxxx"                                      \
@@ -43,15 +43,13 @@
               srv_record_name=""                                                   \
               comment="Test LDAP server"
 
-        For Kubernetes deployments, ensure the `ALIAS` corresponds to the externally accessible hostname for the Buckit Tenant.
+        For more complete documentation on these settings, see :mc:`bm idp ldap`.
 
-        For more complete documentation on these settings, see :mc:`mc idp ldap`.
-
-	.. admonition:: :mc:`mc idp ldap` recommended
+	.. admonition:: :mc:`bm idp ldap` recommended
            :class: note
 
-           :mc:`mc idp ldap` offers additional features and improved validation over :mc-cmd:`mc admin config set` runtime configuration settings.
-           :mc:`mc idp ldap` supports the same settings as :mc:`mc admin config` and the :mc-conf:`identity_ldap` configuration key.
+           :mc:`bm idp ldap` offers additional features and improved validation over :mc-cmd:`bm admin config set` runtime configuration settings.
+           :mc:`bm idp ldap` supports the same settings as :mc:`bm admin config` and the :mc-conf:`identity_ldap` configuration key.
 
            The :mc-conf:`identity_ldap` configuration key remains available for existing scripts and tools.
 
@@ -95,12 +93,12 @@
    If you configured AD/LDAP from the Buckit Console, no additional action is required.
    The Buckit Console automatically restarts the deployment after saving the new AD/LDAP configuration.
 
-   For Buckit Client and environment variable configuration, use the :mc-cmd:`mc admin service restart` command to restart the deployment:
+   For Buckit Client and environment variable configuration, use the :mc-cmd:`bm admin service restart` command to restart the deployment:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin service restart ALIAS
+      bm admin service restart ALIAS
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
@@ -108,7 +106,7 @@
    
    The Buckit Console supports the full workflow of authenticating to the AD/LDAP provider, generating temporary credentials using the Buckit :ref:`minio-sts-assumerolewithldapidentity` Security Token Service (STS) endpoint, and logging the user into the Buckit deployment.
 
-   You can access the Console by opening the root URL for the Buckit cluster. For example, ``https://minio.example.net:9000``.
+   You can access the Console by opening the root URL for the Buckit cluster. For example, ``https://buckit.example.net:9000``.
 
    Once logged in, you can perform any action for which the authenticated user is :ref:`authorized <minio-external-identity-management-ad-ldap-access-control>`.
 
@@ -126,7 +124,7 @@
 
    .. code-block:: shell
 
-      POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity
+      POST https://buckit.example.net?Action=AssumeRoleWithLDAPIdentity
       &LDAPUsername=USERNAME
       &LDAPPassword=PASSWORD
       &Version=2011-06-15

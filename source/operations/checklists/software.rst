@@ -13,7 +13,7 @@ Software Checklist
 Use the following checklist when planning the software configuration for a production, distributed Buckit deployment.
 
 Buckit Pre-requisites
---------------------
+---------------------
 
 .. list-table::
    :widths: auto
@@ -59,7 +59,7 @@ Buckit Pre-requisites
 
 
 Buckit Install
--------------
+--------------
 
 Install a matching version of Buckit across all nodes in the deployment.
 

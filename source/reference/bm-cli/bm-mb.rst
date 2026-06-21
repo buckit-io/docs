@@ -172,7 +172,7 @@ Buckit does not limit the number of buckets you can create on a deployment.
 However, Buckit recommends no more than 500,000 buckets per deployment as a general guideline.
 
 Bucket Limits for Non-Buckit S3 Services
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Certain S3 services may restrict the number of buckets a given user or account
 can create. For example, Amazon S3 limits each account to 

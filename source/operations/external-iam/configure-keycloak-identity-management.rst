@@ -1,10 +1,14 @@
 .. _minio-authenticate-using-keycloak:
 
-=================================================
+==================================================
 Configure Buckit for Authentication using Keycloak
-=================================================
+==================================================
 
 .. default-domain:: minio
+
+.. |KEYCLOAK_URL| replace:: keycloak-url.example.net:8080
+.. |MINIO_S3_URL| replace:: buckit.example.net:9000
+.. |MINIO_CONSOLE_URL| replace:: console.buckit.example.net:9001
 
 
 .. contents:: Table of Contents
@@ -16,34 +20,13 @@ Overview
 
 This procedure configures Buckit to use `Keycloak <https://www.keycloak.org/>`__ as an external IDentity Provider (IDP) for authentication of users via the OpenID Connect (OIDC) protocol.
 
-This page has procedures for configuring OIDC for Buckit deployments in Kubernetes and Baremetal infrastructures.
+This procedure covers:
 
-Select the tab corresponding to your infrastructure to switch between instruction sets.
-
-.. tab-set::
-   :class: parent-tab
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      For Buckit Tenants deployed using the :ref:`Buckit Kubernetes Operator <minio-kubernetes>`, this procedure covers:
-
-      - Configure Keycloak for use with Buckit authentication and authorization
-      - Configure a new or existing Buckit Tenant to use Keycloak as the OIDC provider
-      - Create policies to control access of Keycloak-authenticated users
-      - Log into the Buckit Tenant Console using SSO and a Keycloak-managed identity
-      - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      For Buckit deployments on baremetal infrastructure, this procedure covers:
-
-      - Configure Keycloak for use with Buckit authentication and authorization
-      - Configure a new or existing Buckit cluster to use Keycloak as the OIDC provider
-      - Create policies to control access of Keycloak-authenticated users
-      - Log into the Buckit Console using SSO and a Keycloak-managed identity
-      - Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
+- Configure Keycloak for use with Buckit authentication and authorization
+- Configure a new or existing Buckit cluster to use Keycloak as the OIDC provider
+- Create policies to control access of Keycloak-authenticated users
+- Log into the Buckit Console using SSO and a Keycloak-managed identity
+- Generate temporary S3 access credentials using the ``AssumeRoleWithWebIdentity`` Security Token Service (STS) API
 
 This procedure was written and tested against Keycloak ``21.0.0``. 
 The provided instructions may work against other Keycloak versions.
@@ -58,60 +41,27 @@ Keycloak Deployment and Realm Configuration
 This procedure assumes an existing Keycloak deployment to which you have administrative access.
 Specifically, you must have permission to create and configure Realms, Clients, Client Scopes, Realm Roles, Users, and Groups on the Keycloak deployment.
 
-.. tab-set::
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      For Keycloak deployments within the same Kubernetes cluster as the Buckit Tenant, this procedure assumes bidirectional access between the Keycloak and Buckit pods/services.
-      For Keycloak deployments external to the Kubernetes cluster, this procedure assumes an existing Ingress, Load Balancer, or similar Kubernetes network control component that manages network access to and from the Buckit Tenant.
-
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      The Buckit deployment must have bidirectional access to the target OIDC service.
+The Buckit deployment must have bidirectional access to the target OIDC service.
 
 Ensure each user identity intended for use with Buckit has the appropriate :ref:`claim <minio-external-identity-management-openid-access-control>` configured such that Buckit can associate a :ref:`policy <minio-policy>` to the authenticated user.
 An OpenID user with no assigned policy has no permission to access any action or resource on the Buckit cluster.
 
 
 Access to Buckit Cluster
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tab-set::
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install ``bm`` on a machine with network access to the cluster.
+See :ref:`Install the Buckit Manager <install-buckit-manager>` for instructions on downloading and installing ``bm``.
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      You must have access to the Buckit Operator Console web UI.
-      You can either expose the Buckit Operator Console service using your preferred Kubernetes routing component, or use temporary port forwarding to expose the Console service port on your local machine.
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      This procedure uses :mc:`mc` for performing operations on the Buckit cluster. 
-      Install ``mc`` on a machine with network access to the cluster.
-      See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
-
-      This procedure assumes a configured :mc:`alias <mc alias>` for the Buckit cluster. 
+This procedure assumes a configured :mc:`alias <bm alias>` for the Buckit cluster.
 
 .. _minio-external-identity-management-keycloak-configure:
 
 Configure Buckit for Keycloak Identity Management
-------------------------------------------------
+-------------------------------------------------
 
-.. tab-set::
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      .. include:: /includes/k8s/steps-configure-keycloak-identity-management.rst
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      .. include:: /includes/baremetal/steps-configure-keycloak-identity-management.rst
+.. include:: /includes/baremetal/steps-configure-keycloak-identity-management.rst
 
 Enable the Keycloak Admin REST API
 ----------------------------------
@@ -205,31 +155,31 @@ You can validate the functionality by using the Admin REST API with the Buckit c
    Buckit would revoke access for an authenticated user if the returned value has ``enabled: false`` or ``null`` (user was removed from Keycloak).
 
 3) Enable Keycloak Admin Support on Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit supports multiple methods for configuring Keycloak Admin API Support:
 
-- Using a terminal/shell and the :mc:`mc idp openid` command
+- Using a terminal/shell and the :mc:`bm idp openid` command
 - Using environment variables set prior to starting Buckit
 
 .. tab-set::
 
    .. tab-item:: CLI
 
-      You can use the :mc-cmd:`mc idp openid update` command to modify the configuration settings for an existing Keycloak service.
+      You can use the :mc-cmd:`bm idp openid update` command to modify the configuration settings for an existing Keycloak service.
       You can alternatively include the following configuration settings when setting up Keycloak for the first time.
       The command takes all supported :ref:`OpenID Configuration Settings <minio-open-id-config-settings>`:
 
       .. code-block:: shell
          :class: copyable
 
-         mc idp openid update ALIAS KEYCLOAK_IDENTIFIER \
+         bm idp openid update ALIAS KEYCLOAK_IDENTIFIER \
             vendor="keycloak" \
             keycloak_admin_url="https://keycloak-url:port/admin"
             keycloak_realm="REALM"
 
       - Replace ``KEYCLOAK_IDENTIFIER`` with the name of the configured Keycloak IDP.
-        You can use :mc-cmd:`mc idp openid ls` to view all configured IDP configurations on the Buckit deployment
+        You can use :mc-cmd:`bm idp openid ls` to view all configured IDP configurations on the Buckit deployment
         
       - Specify the Keycloak admin URL in the :mc-conf:`keycloak_admin_url <identity_openid.keycloak_admin_url>` configuration setting
 
@@ -251,4 +201,3 @@ Buckit supports multiple methods for configuring Keycloak Admin API Support:
 
       - Specify the Keycloak admin URL in the :envvar:`MINIO_IDENTITY_OPENID_KEYCLOAK_ADMIN_URL`
       - Specify the Keycloak Realm name in the :envvar:`MINIO_IDENTITY_OPENID_KEYCLOAK_REALM`
-

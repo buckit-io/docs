@@ -1,8 +1,8 @@
 .. _minio-k8s-expand-minio-tenant:
 
-=====================
+======================
 Expand a Buckit Tenant
-=====================
+======================
 
 .. default-domain:: minio
 
@@ -23,7 +23,7 @@ Prerequisites
 -------------
 
 Buckit Kubernetes Operator
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure on this page *requires* a valid installation of the Buckit Kubernetes Operator and assumes the local host has a matching installation of the Buckit Kubernetes Operator.
 This procedure assumes the latest stable Operator, version |operator-version-stable|.

@@ -33,7 +33,7 @@ The procedure on this page documents the following:
 For Buckit Deployments on Kubernetes, this procedure assumes all necessary network control components, such as Ingress or Load Balancers, to facilitate access between the Buckit Tenant and the InfluxDB service.
 
 Configure InfluxDB to Collect and Alert using Buckit Metrics
------------------------------------------------------------
+------------------------------------------------------------
 
 .. important::
 

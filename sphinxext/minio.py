@@ -44,6 +44,15 @@ from sphinx.util.nodes import make_id, make_refnode
 logger = logging.getLogger(__name__)
 
 
+def _mc_target_alias(name: str) -> str:
+    """Resolve legacy mc command references to renamed bm command targets."""
+    if name == 'mc':
+        return 'bm'
+    if name.startswith('mc.'):
+        return 'bm.' + name[3:]
+    return name
+
+
 class MinioMCCommand(SphinxDirective):
    """
    Description of a MinIO MC Command. Use this class when describing a top level
@@ -569,6 +578,12 @@ class MinIODomain(Domain):
         for search_name in searches:
             if search_name in self.objects:
                 newname = search_name
+
+        if newname is None:
+            for search_name in searches:
+                alias_name = _mc_target_alias(search_name)
+                if alias_name in self.objects:
+                    newname = alias_name
 
         return newname, self.objects.get(newname)
 

@@ -1,10 +1,10 @@
 .. start-minio-only
 
-.. admonition:: SUBNET Registration Required
+.. admonition:: Diagnostic Data Handling
    :class: note
 
-   The ``mc support`` commands are designed for Buckit deployments registered with |subnet| to ensure optimal outcome of diagnostics and performance testing. 
-   Deployments not registered with SUBNET cannot use the ``mc support`` commands.
+   Some ``bm support`` commands can generate diagnostic or performance data that may include sensitive details about your environment.
+   Review the output before sharing it outside your organization.
 
 .. end-minio-only
 

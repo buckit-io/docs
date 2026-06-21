@@ -1,8 +1,8 @@
 .. _minio-external-identity-management-plugin:
 
-=========================================
+==========================================
 Buckit External Identity Management Plugin
-=========================================
+==========================================
 
 .. default-domain:: minio
 
@@ -70,7 +70,7 @@ The login flow for an application is as follows:
 
 3. On successful authentication, the identity manager returns a ``200 OK`` response with an ``application/json`` content-type and body with the following structure:
 
-   .. code-block:: json
+   .. code-block:: text
 
       {
          "user": "<string>",

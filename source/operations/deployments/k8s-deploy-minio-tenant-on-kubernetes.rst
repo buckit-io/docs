@@ -1,9 +1,9 @@
 .. _minio-k8s-deploy-minio-tenant:
 .. _deploy-minio-tenant-redhat-openshift:
 
-=====================
+======================
 Deploy a Buckit Tenant
-=====================
+======================
 
 .. default-domain:: minio
 
@@ -32,7 +32,7 @@ While this documentation *may* provide guidance for configuring or deploying Kub
 .. _minio-k8s-deploy-minio-tenant-security:
 
 Deploy a Buckit Tenant using Kustomize
--------------------------------------
+--------------------------------------
 
 The following procedure uses ``kubectl -k`` to deploy a Buckit Tenant using the ``base`` Kustomization template in the :minio-git:`Buckit Operator Github repository <operator/tree/master/examples/kustomization/base>`.
 

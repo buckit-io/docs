@@ -23,7 +23,7 @@ services *may* also work. The procedures on this page assume a RabbitMQ
 deployment using the AMQP 0-9-1 protocol as the service endpoint.
 
 Add an AMQP Endpoint to a Buckit Deployment
-------------------------------------------
+-------------------------------------------
 
 The following procedure adds a new AMQP service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -46,13 +46,13 @@ username and password during the configuration process to grant Buckit access
 to the service.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the AMQP Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new AMQP service endpoint using either environment variables
 *or* by setting runtime configuration settings.
@@ -184,7 +184,7 @@ You can configure a new AMQP service endpoint using either environment variables
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -258,7 +258,7 @@ a notification.
 
 
 Update an AMQP Endpoint in a Buckit Deployment
----------------------------------------------
+----------------------------------------------
 
 The following procedure updates an existing AMQP service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -281,7 +281,7 @@ username and password during the configuration process to grant Buckit access
 to the service.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -346,7 +346,7 @@ settings are *optional*. See :ref:`minio-server-config-bucket-notification-amqp`
 for a complete list of AMQP configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

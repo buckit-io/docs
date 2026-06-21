@@ -109,7 +109,7 @@ Optionally, the YAML can also define flags to filter which objects replicate, se
           prefix:
             - prefix1
             - prefix2
-      ...
+            ...
 
 For the **source deployment**
 

@@ -1,8 +1,8 @@
 .. _minio-server-envvar-external-access-management-plugin:
 
-=======================================
+========================================
 Buckit Access Management Plugin Settings
-=======================================
+========================================
 
 .. default-domain:: minio
 

@@ -27,13 +27,13 @@ Prerequisites
 ~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the Redis Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new Redis service endpoint using either environment variables
 *or* by setting runtime configuration settings.
@@ -150,7 +150,7 @@ You can configure a new Redis service endpoint using either environment variable
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -222,7 +222,7 @@ a notification.
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an Redis Endpoint in a Buckit Deployment
-----------------------------------------------
+-----------------------------------------------
 
 The following procedure updates an existing Redis service endpoint for
 supporting :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -232,7 +232,7 @@ Prerequisites
 ~~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -292,7 +292,7 @@ settings are *optional*. See
 Redis configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

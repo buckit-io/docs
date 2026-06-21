@@ -8,9 +8,9 @@
 .. _minio-operator-installation:
 
 
-==========================
+===========================
 Deploy Buckit on Kubernetes
-==========================
+===========================
 
 .. default-domain:: minio
 

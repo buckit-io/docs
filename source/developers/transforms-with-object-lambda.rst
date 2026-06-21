@@ -242,7 +242,7 @@ The output resembles the following:
 
 
 Start Buckit
-+++++++++++
+++++++++++++
    
 Once the handler is running, start Buckit with the :envvar:`MINIO_LAMBDA_WEBHOOK_ENABLE` and :envvar:`MINIO_LAMBDA_WEBHOOK_ENDPOINT` environment variables to register the function with Buckit.
 To identify the specific Object Lambda handler, append the name of the function to the name of the environment variable.
@@ -357,7 +357,7 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
       > Host: localhost:9000
       > User-Agent: curl/7.81.0
       > Accept: */*
-      > 
+      ...
       * Mark bundle as not supporting multiuse
       < HTTP/1.1 200 OK
       < Content-Security-Policy: block-all-mixed-content
@@ -371,9 +371,8 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
       < Date: Thu, 06 Apr 2023 18:47:49 GMT
       < Content-Length: 14
       < Content-Type: text/plain; charset=utf-8
-      < 
+      ...
       hELLO, wORLD!
       * Connection #0 to host localhost left intact
-
 
 

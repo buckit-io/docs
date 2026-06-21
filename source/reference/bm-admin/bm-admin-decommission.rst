@@ -40,12 +40,6 @@ decommissioning a server pool.
    Decommissioning is a major administrative operation that requires care
    in planning and execution, and is not a trivial or 'daily' task. 
 
-   `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ users can
-   `log in <https://subnet.min.io/>`__ and create a new issue related to
-   decommissioning. Coordination with Buckit Engineering via SUBNET can ensure
-   successful decommissioning, including performance testing and health
-   diagnostics.
-
    Community users can seek support on the `Buckit Community Slack
    <https://slack.min.io>`__. Community Support is best-effort only and has
    no SLAs around responsiveness.

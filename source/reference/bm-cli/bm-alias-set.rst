@@ -148,7 +148,7 @@ Examples
 --------
 
 Add or Update an Alias for a Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use :mc:`bm alias set` to add an S3-compatible service for use with
 :program:`bm`:

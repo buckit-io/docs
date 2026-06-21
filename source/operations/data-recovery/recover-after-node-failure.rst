@@ -59,7 +59,7 @@ For example, if ``https://minio-1.example.net`` previously resolved to the
 failed host, it should now resolve to the new host.
 
 3) Download and Prepare the Buckit Server
-----------------------------------------
+-----------------------------------------
 
 Follow the :ref:`deployment procedure <minio-installation>` to download
 and run the Buckit server using a matching configuration as all other nodes
@@ -88,6 +88,4 @@ from the degraded state.
 
 Continue monitoring the deployment until healing completes. Deployments with
 persistent and repeated node failures should schedule dedicated maintenance to
-identify the root cause. Consider using
-`Buckit SUBNET <https://min.io/pricing?jmp=docs>`__ to coordinate with Buckit
-engineering around guidance for any such operations.
+identify the root cause.

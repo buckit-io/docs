@@ -1,5 +1,5 @@
 1) Download the Buckit Server
-----------------------------
+-----------------------------
 
 The following tabs provide examples of installing Buckit onto 64-bit Linux operating systems using RPM, DEB, or binary.
 The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``minio`` service for ``systemctl``.
@@ -48,7 +48,7 @@ To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-syste
          sudo mv minio /usr/local/bin/
 
 2) Run the Buckit Server
------------------------
+------------------------
 
 Run the :mc-cmd:`minio server` command to start the Buckit server.
 Specify the path to the volume or folder to use as the storage directory.

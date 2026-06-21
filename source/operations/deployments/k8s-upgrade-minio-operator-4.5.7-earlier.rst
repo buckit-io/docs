@@ -44,7 +44,7 @@ After upgrading to 5.0.15, see :ref:`minio-k8s-upgrade-minio-operator` to upgrad
 .. _minio-k8s-upgrade-minio-operator-to-5.0.15:
 
 Upgrade Buckit Operator 4.5.8 and Later to 5.0.15
-------------------------------------------------
+-------------------------------------------------
 
 .. admonition:: Prerequisites
    :class: note
@@ -345,7 +345,7 @@ Procedure
 .. _minio-k8s-upgrade-minio-operator-to-4.5.8:
 
 Upgrade Buckit Operator 4.2.3 through 4.5.7 to 4.5.8
----------------------------------------------------
+----------------------------------------------------
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -421,7 +421,7 @@ You can then upgrade from release 4.5.8 to 5.0.15.
 .. _minio-k8s-upgrade-minio-operator-4.2.2-procedure:
 
 Upgrade Buckit Operator 4.0.0 through 4.2.2 to 4.2.3
----------------------------------------------------
+----------------------------------------------------
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -511,7 +511,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
    Follow the :ref:`minio-k8s-upgrade-minio-operator-procedure` procedure to upgrade to the latest stable Operator version.
 
 Upgrade Buckit Operator 3.0.0 through 3.0.29 to 4.2.2
-----------------------------------------------------
+-----------------------------------------------------
 
 Prerequisites
 ~~~~~~~~~~~~~

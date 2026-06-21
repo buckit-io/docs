@@ -1,8 +1,8 @@
 .. _minio-operator-envvars:
 
-====================================
+=====================================
 Buckit Operator Environment Variables
-====================================
+=====================================
 
 .. default-domain:: minio
 
@@ -32,7 +32,7 @@ Replace:
 You can set or modify multiple environment variables by separating each ``VARIABLE=value`` pair with a space.
 
 Available Buckit Operator Environment Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. envvar:: MINIO_OPERATOR_CERTIFICATES_VERSION
 

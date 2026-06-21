@@ -139,7 +139,7 @@ This tutorial uses the example ``my-minio-sse-s3-key`` name for ease of referenc
 Specify a unique key name to prevent collision with existing keys.
 
 2) Configure Buckit for SSE-S3 Object Encryption
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       
 Specify the following environment variables in the shell or terminal on each
 Buckit server host in the deployment:
@@ -192,7 +192,7 @@ Buckit server host in the deployment:
        key created in the previous step. 
 
 3) Restart the Buckit Deployment to Enable SSE-S3
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

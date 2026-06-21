@@ -1,8 +1,8 @@
 .. _install-buckit-manager:
 
-=========================
+==========================
 Install the Buckit Manager
-=========================
+==========================
 
 .. default-domain:: minio
 
@@ -52,8 +52,7 @@ architecture, verifies its SHA-256 checksum, and installs it into your user
 account.
 
 By default, the installer places ``bm`` in ``~/.local/bin`` on macOS and Linux,
-or ``%LOCALAPPDATA%\Programs\bm`` on Windows. Set ``BM_INSTALL_DIR`` to use a
-different install directory.
+or ``%LOCALAPPDATA%\Programs\bm`` on Windows.
 
 Verify the Installation
 -----------------------
@@ -64,6 +63,8 @@ Run the following command to verify that ``bm`` is installed:
    :class: copyable
 
    bm --version
+
+For command syntax and examples, see :doc:`/reference/bm-cli`.
 
 Start the Web Interface
 -----------------------
@@ -78,8 +79,33 @@ Run the following command on the system where you installed ``bm``:
 By default, ``bm web`` starts the application on ``http://127.0.0.1:9443/`` and
 opens your default browser automatically.
 
-Next Step
----------
+Use the CLI with a Buckit Deployment
+------------------------------------
 
-Continue with :ref:`Guided Deployment using Buckit Manager
-<deploy-buckit-guided-bm>` to deploy a new Buckit cluster.
+After installing ``bm``, you can use the CLI to connect to a Buckit deployment.
+
+1. Create an alias for the deployment:
+
+   .. code-block:: shell
+      :class: copyable
+
+      bm alias set mybuckit https://buckit1.example.net:9000 ACCESS_KEY SECRET_KEY
+
+   Replace the hostname, access key, and secret key to match your deployment.
+   The hostname can be any Buckit node in the deployment, or a load balancer or
+   reverse proxy in front of the deployment.
+
+2. Check the deployment with ``bm admin info``:
+
+   .. code-block:: shell
+      :class: copyable
+
+      bm admin info mybuckit
+
+If your deployment uses a third-party or self-signed TLS certificate, ``bm``
+may prompt you to trust the certificate when run in an interactive terminal.
+For non-interactive use, or to bypass certificate verification temporarily, use
+``--insecure``.
+
+See :doc:`/reference/bm-cli` for more alias and object-storage commands, and
+:doc:`/reference/bm-admin` for more administration commands.

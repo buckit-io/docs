@@ -20,7 +20,7 @@ Buckit relies on the :github:`elastic/go-elasticsearch` v7 project for Elastic
 connectivity.
 
 Add a Elasticsearch Endpoint to a Buckit Deployment
---------------------------------------------------
+---------------------------------------------------
 
 The following procedure adds a new Elasticsearch service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -37,13 +37,13 @@ connectivity. The ``elastic/v7`` library specifically targets Elasticsearch
 v7.0 and is *not compatible with earlier Elasticsearch versions*.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the Elasticsearch Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new Elasticsearch service endpoint using either environment variables
 *or* by setting runtime configuration settings.
@@ -167,7 +167,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -240,7 +240,7 @@ a notification.
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an Elasticsearch Endpoint in a Buckit Deployment
-------------------------------------------------------
+-------------------------------------------------------
 
 The following procedure updates an existing Elasticsearch service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -257,7 +257,7 @@ connectivity. The ``elastic/v7`` library specifically targets Elasticsearch
 v7.0 and is *not compatible with earlier Elasticsearch versions*.
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -319,7 +319,7 @@ other configuration settings are *optional*. See
 of Elasticsearch configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

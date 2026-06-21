@@ -336,7 +336,7 @@ Checksum Verification
 checksums. 
 
 Buckit Trims Empty Prefixes on Object Removal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. |command| replace:: :mc:`bm mv`
 

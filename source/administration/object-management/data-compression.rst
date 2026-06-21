@@ -21,7 +21,7 @@ Depending on the type of data, compression may also increase overall throughput.
 Write throughput for a production deployment is generally 500MB per second or greater per available CPU core in the system.
 Decompression is approximately 1 GB per second or greater for each CPU core.
 
-For best results, review Buckit's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` or use |subnet| to work directly with engineers for analyzing compression performance.
+For best results, review Buckit's :ref:`recommended hardware configuration <deploy-minio-distributed-recommendations>` and benchmark compression performance on representative workloads before enabling it in production.
 
 .. _minio-data-compression-default-types:
 
@@ -66,7 +66,6 @@ Buckit supports encrypting compressed objects but recommends against combining c
 Before enabling encryption for compressed objects, carefully consider the security needs of your environment.
 
 See `Transparent Data Compression on Buckit <https://blog.min.io/transparent-data-compression/>`__ for more about combining compression and encryption.
-|subnet| users can `log in <https://subnet.min.io/?ref=docs>`__ and engage with our engineering and security teams to review encryption options.
 
 
 Tutorials

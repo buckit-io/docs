@@ -1,8 +1,8 @@
 .. _expand-minio-distributed:
 
-=====================================
+======================================
 Expand a Distributed Buckit Deployment
-=====================================
+======================================
 
 .. default-domain:: minio
 
@@ -207,7 +207,7 @@ All hosts in the deployment should run with matching :ref:`software configuratio
 .. _expand-minio-distributed-baremetal:
 
 Expand a Distributed Buckit Deployment
--------------------------------------
+--------------------------------------
 
 The following procedure adds a :ref:`Server Pool <minio-intro-server-pool>`
 to an existing Buckit deployment. Each Pool expands the total available
@@ -223,7 +223,7 @@ procedure.
 Complete any planned hardware expansion prior to :ref:`decommissioning older hardware pools <minio-decommissioning>`.
 
 1) Install the Buckit Binary on Each Node in the New Server Pool
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-binary-desc
@@ -301,7 +301,7 @@ Modify the example to reflect your deployment topology:
    # Set the hosts and volumes Buckit uses at startup
    # The command uses Buckit expansion notation {x...y} to denote a
    # sequential series. 
-   # 
+   #
    # The following example starts the Buckit server with two server pools.
    #
    # The space delimiter indicates a seperate server pool
@@ -344,7 +344,7 @@ by your deployment. All Buckit nodes in the deployment should include the same
 environment variables with the matching values.
 
 5) Restart the Buckit Deployment with Expanded Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Issue the following commands on each node **simultaneously** in the deployment
 to restart the Buckit service:

@@ -17,7 +17,7 @@ Buckit supports publishing :ref:`bucket notification
 service endpoint.
 
 Add a NSQ Endpoint to a Buckit Deployment
-----------------------------------------
+-----------------------------------------
 
 The following procedure adds a new NSQ service endpoint for supporting
 :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit
@@ -27,13 +27,13 @@ Prerequisites
 ~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the NSQ Endpoint to Buckit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can configure a new NSQ service endpoint using either environment variables
 *or* by setting runtime configuration settings.
@@ -147,7 +147,7 @@ You can configure a new NSQ service endpoint using either environment variables
       documentation on each setting.
 
 1) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
@@ -210,7 +210,7 @@ For example, if the bucket notification configuration includes the ``s3:ObjectCr
    mc cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an NSQ Endpoint in a Buckit Deployment
---------------------------------------------
+---------------------------------------------
 
 The following procedure updates an existing NSQ service endpoint for supporting :ref:`bucket notifications <minio-bucket-notifications>` in a Buckit deployment.
 
@@ -218,7 +218,7 @@ Prerequisites
 ~~~~~~~~~~~~~~
 
 Buckit ``mc`` Command Line Tool
-++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 This procedure uses the :mc:`mc` command line tool for certain actions. 
 See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
@@ -271,7 +271,7 @@ All other configuration settings are *optional*.
 See :ref:`minio-server-config-bucket-notification-nsq` for a complete list of NSQ configuration settings.
 
 3) Restart the Buckit Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
 Use the :mc-cmd:`mc admin service restart` command to restart the deployment.

@@ -1,8 +1,8 @@
 .. _minio-internal-idp:
 
-=========================
+==========================
 Buckit Identity Management
-=========================
+==========================
 
 .. default-domain:: minio
 

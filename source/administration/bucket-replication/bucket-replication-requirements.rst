@@ -41,7 +41,7 @@ Matching Object Encryption Settings for Bucket Replication
    :end-before: end-replication-encrypted-objects
 
 Bucket Replication Requires Buckit Deployments
----------------------------------------------
+----------------------------------------------
 
 .. include:: /includes/common-replication.rst
    :start-after: start-replication-minio-only

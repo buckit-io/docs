@@ -1,7 +1,3 @@
-.. |KEYCLOAK_URL| replace:: keycloak-service.keycloak-namespace.svc.cluster-domain.example
-.. |MINIO_S3_URL| replace:: minio.minio-tenant.svc.cluster-domain.example
-.. |MINIO_CONSOLE_URL| replace:: minio-console.minio-tenant.svc.cluster-domain.example
-
 #. Configure or Create a Client for Accessing Keycloak
 
    Authenticate to the Keycloak :guilabel:`Administrative Console` and navigate to :guilabel:`Clients`.

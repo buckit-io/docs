@@ -1,8 +1,8 @@
 .. _deploy-minio-standalone:
 
-========================
+=========================
 Install the Buckit Server
-========================
+=========================
 
 .. default-domain:: minio
 

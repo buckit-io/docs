@@ -45,7 +45,7 @@ The Buckit Batch Framework supports the following job types:
      - Perform a one-time immediate expiration of objects in a bucket.
 
 Buckit Batch CLI
----------------
+----------------
 
 - Install the :ref:`Buckit Client <minio-client>`
 - Define an :mc:`alias <mc alias set>` for the Buckit deployment

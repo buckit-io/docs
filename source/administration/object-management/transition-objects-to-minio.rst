@@ -1,8 +1,8 @@
 .. _minio-lifecycle-management-transition-to-minio:
 
-=============================================
+==============================================
 Transition Objects to Remote Buckit Deployment
-=============================================
+==============================================
 
 .. default-domain:: minio
 
@@ -35,7 +35,7 @@ applying transition operations.
 .. _minio-lifecycle-management-transition-to-minio-permissions:
 
 Required Source Buckit Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit requires the following permissions scoped to the bucket or buckets 
 for which you are creating lifecycle management rules.
@@ -60,7 +60,7 @@ transition lifecycle management rules on any bucket in the cluster:
 .. _minio-lifecycle-management-transition-to-minio-permissions-remote:
 
 Required Remote Buckit Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Object transition lifecycle management rules require additional permissions
 on the remote storage tier. Specifically, Buckit requires the remote
