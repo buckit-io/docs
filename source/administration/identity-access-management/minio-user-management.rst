@@ -70,13 +70,13 @@ STS tokens default to expire in 1 hour, but you set expiration for up to 7 days 
 
 .. _minio-users-root:
 
-Buckit ``root`` User
---------------------
+Buckit root User
+----------------
 
-Buckit deployments have a ``root`` user with access to all actions and resources
+Buckit deployments have a root user with access to all actions and resources
 on the deployment, regardless of the configured :ref:`identity manager
-<minio-authentication-and-identity-management>`. When a :mc:`minio` server first
-starts, it sets the ``root`` user credentials by checking the value of the
+<minio-authentication-and-identity-management>`. When a Buckit server first
+starts, it sets the root user credentials by checking the value of the
 following environment variables:
 
 - :envvar:`MINIO_ROOT_USER`
@@ -86,10 +86,10 @@ Rotating the root user credentials requires updating either or both variables
 for all Buckit servers in the deployment. Specify *long, unique, and random*
 strings for root credentials. Exercise all possible precautions in storing the
 access key and secret key, such that only known and trusted individuals who
-*require* superuser access to the deployment can retrieve the ``root``
+*require* superuser access to the deployment can retrieve the root
 credentials.
 
-- Buckit *strongly discourages* using the ``root`` user for regular client access
+- Buckit *strongly discourages* using the root user for regular client access
   regardless of the environment (development, staging, or production).
 
 - Buckit *strongly recommends* creating users such that each client has access to
@@ -100,18 +100,6 @@ If these variables are unset, Buckit defaults to ``buckitadmin`` and
 ``buckitadmin`` as the access key and secret key respectively. Buckit *strongly
 discourages* use of the default credentials regardless of deployment
 environment.
-
-.. admonition:: Deprecation of Legacy Root User Environment Variables
-   :class: dropdown, important
-
-   Buckit :minio-release:`RELEASE.2021-04-22T15-44-28Z` and later deprecates the
-   following variables used for setting or updating root user
-   credentials:
-
-   - :envvar:`MINIO_ACCESS_KEY` to the new access key.
-   - :envvar:`MINIO_SECRET_KEY` to the new secret key.
-   - :envvar:`MINIO_ACCESS_KEY_OLD` to the old access key.
-   - :envvar:`MINIO_SECRET_KEY_OLD` to the old secret key.
 
 User Management
 ---------------

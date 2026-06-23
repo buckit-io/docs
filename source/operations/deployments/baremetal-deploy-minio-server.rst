@@ -25,3 +25,4 @@ You can deploy Buckit in one of two ways:
    
    /operations/deployments/guided-deployment-using-bucket-manager
    /operations/deployments/manual-deployment-of-buckit
+   /operations/deployments/post-install-checklist

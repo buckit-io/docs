@@ -27,9 +27,17 @@ Buckit supports the following STS API endpoints:
      - Supported IDP
      - Description
 
+   * - :ref:`AssumeRole <minio-sts-assumerole>`
+     - Built-in users
+     - Generates temporary credentials from an existing built-in user's access key and secret key.
+
    * - :ref:`AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentity>`
      - OpenID Connect
      - Generates an access key and secret key using the JWT token returned by the OIDC provider
+
+   * - :ref:`AssumeRoleWithClientGrants <minio-sts-assumerolewithclientgrants>`
+     - OpenID Connect / OAuth 2.0 client credentials grant
+     - Generates an access key and secret key using an OAuth 2.0 access token returned by the identity provider.
 
    * - :ref:`AssumeRoleWithLDAPIdentity <minio-sts-assumerolewithldapidentity>`
      - Active Directory / LDAP
@@ -38,6 +46,10 @@ Buckit supports the following STS API endpoints:
    * - :ref:`AssumeRoleWithCustomToken <minio-sts-assumerolewithcustomtoken>`
      - Buckit Identity Plugin
      - Generates a token for use with an external identity provider and the :ref:`Buckit Identity Plugin <minio-external-identity-management-plugin>`.
+
+   * - :ref:`AssumeRoleWithCertificate <minio-sts-assumerolewithcertificate>`
+     - X.509 / TLS certificate
+     - Generates an access key and secret key by mapping the subject common name (CN) of a client TLS certificate to a matching policy.
  
 
 .. toctree::

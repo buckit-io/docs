@@ -79,13 +79,13 @@ The following JSON resembles the request body sent as part of the POST to the co
 
    {
       "input": {
-         "account": "minio",
+         "account": "buckit",
          "groups": null,
          "action": "s3:ListBucket",
          "bucket": "test",
          "conditions": {
             "Authorization": [
-            "AWS4-HMAC-SHA256 Credential=minio/20220507/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=62012db6c47d697620cf6c68f0f45f6e34894589a53ab1faf6dc94338468c78a"
+            "AWS4-HMAC-SHA256 Credential=buckit/20220507/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=62012db6c47d697620cf6c68f0f45f6e34894589a53ab1faf6dc94338468c78a"
             ],
             "CurrentTime": [ "2022-05-07T18:31:41Z" ],
             "Delimiter": [ "/" ],
@@ -103,8 +103,8 @@ The following JSON resembles the request body sent as part of the POST to the co
             "authType": [ "REST-HEADER" ],
             "principaltype": [ "Account" ],
             "signatureversion": [ "AWS4-HMAC-SHA256" ],
-            "userid": [ "minio" ],
-            "username": [ "minio" ],
+            "userid": [ "buckit" ],
+            "username": [ "buckit" ],
             "versionid": [ "" ]
          },
          "owner": true,

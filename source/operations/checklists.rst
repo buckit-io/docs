@@ -1,6 +1,6 @@
-=====================
-Deployment Checklists
-=====================
+===============================
+Production Deployment Checklists
+===============================
 
 .. default-domain:: minio
 
@@ -15,12 +15,11 @@ These checklists may not meet the precise requirements of your unique deployment
 Checklists:
 
 - :ref:`Hardware Checklist <minio-hardware-checklist>`
-- :ref:`Security Checklist <minio-security-checklist>`
 - :ref:`Software Checklist <minio-software-checklists>`
 
 .. toctree::
    :titlesonly:
    :hidden:
-   :glob:
 
-   /operations/checklists/*
+   /operations/checklists/hardware
+   /operations/checklists/software

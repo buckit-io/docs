@@ -58,44 +58,6 @@ Buckit Pre-requisites
      - (optional) :ref:`Grafana configured <minio-grafana>` for dashboards 
 
 
-Buckit Install
---------------
-
-Install a matching version of Buckit across all nodes in the deployment.
-
-Post Install Tasks
-------------------
-
-.. list-table::
-   :widths: auto
-   :width: 100%
-
-   * - :octicon:`circle` 
-     - (optional) Create an :mc:`bm alias` for each server with :mc:`bm alias set` from your local machine for command line access to work with the Buckit deployment from a local machine
-
-   * - :octicon:`circle`
-     - Configure :ref:`Bucket replication <minio-bucket-replication-requirements>` to duplicate contents of a bucket to another bucket location
-
-   * - :octicon:`circle`
-     - Configure :ref:`Site replication <minio-site-replication-overview>` to synchronize contents of multiple dispersed data center locations
-
-   * - :octicon:`circle`
-     - Configure :ref:`Object retention rules with lifecycle management <minio-lifecycle-management>` to manage when objects should expire
-
-   * - :octicon:`circle`
-     - Configure :ref:`Object storage level rules with tiering <minio-lifecycle-management-tiering>` to move objects between hot, warm, and cold storage and maximize storage cost efficiencies
-
 .. include:: /includes/common-admonitions.rst
    :start-after: start-exclusive-drive-access
    :end-before: end-exclusive-drive-access
-
-3rd Party Identity Provider Tasks
----------------------------------
-
-.. list-table::
-   :widths: auto
-   :width: 100%
-
-   * - :octicon:`circle`
-     - | Authenticate to Buckit with :ref:`Security Token Service (STS) <minio-security-token-service>`
-       | Enabling this requires Buckit support.

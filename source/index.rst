@@ -87,6 +87,7 @@ Quickstart
    :titlesonly:
    :hidden:
 
+   /operations/deployments/getting-started
    /installation-and-upgrade
    /cluster-management
    /object-and-bucket-operations
