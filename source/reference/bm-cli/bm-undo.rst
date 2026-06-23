@@ -25,12 +25,12 @@ The :mc:`bm undo` command reverses changes due to either a ``PUT`` or ``DELETE``
 
    .. tab-item:: EXAMPLE
 
-      The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
+      The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``mybuckit`` deployment in the ``data`` bucket:
 
       .. code-block:: shell
          :class: copyable
 
-         bm undo myminio/data/file.zip --last 3
+         bm undo mybuckit/data/file.zip --last 3
 
    .. tab-item:: SYNTAX
 
@@ -75,14 +75,14 @@ Parameters
    .. code-block:: shell
       :class: copyable
 
-      bm undo myminio/data/today.zip --action "PUT"
+      bm undo mybuckit/data/today.zip --action "PUT"
 
    This example reverts the most recent ``DELETE`` for the prefix ``archive``, recursively restoring it and any child objects:
 
    .. code-block:: shell
       :class: copyable
 
-      bm undo myminio/data/archive --recursive --action "DELETE"
+      bm undo mybuckit/data/archive --recursive --action "DELETE"
 
    Mutually exclusive with :mc-cmd:`~bm undo --last`.
 
@@ -125,22 +125,22 @@ Examples
 Undo the Last Three Uploads or Deletions on an Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``myminio`` deployment in the ``data`` bucket:
+The following command reverts the last three uploads and/or deletions of the ``file.zip`` object on the ``mybuckit`` deployment in the ``data`` bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   bm undo myminio/data/file.zip --last 3
+   bm undo mybuckit/data/file.zip --last 3
 
 Undo the Last Upload or Deletion of any Object at a Prefix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`bm undo` to reverse the most recent ``PUT`` or ``DELETE`` operation performed on the ``myminio`` alias in the ``data`` bucket under the ``presentations/recordings/`` :term:`prefix`:
+Use :mc:`bm undo` to reverse the most recent ``PUT`` or ``DELETE`` operation performed on the ``mybuckit`` alias in the ``data`` bucket under the ``presentations/recordings/`` :term:`prefix`:
 
 .. code-block:: shell
    :class: copyable
 
-   bm undo myminio/data/presentations/recordings/ --recursive --force
+   bm undo mybuckit/data/presentations/recordings/ --recursive --force
 
 Behavior
 --------

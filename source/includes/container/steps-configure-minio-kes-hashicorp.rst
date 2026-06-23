@@ -82,7 +82,7 @@ b. Create the Buckit Environment File
 4) Enable SSE-KMS for a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the Buckit :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+Use the Buckit :mc:`bm` CLI to enable bucket-default SSE-KMS with the generated key:
 
 
 The following commands:
@@ -94,10 +94,10 @@ The following commands:
 .. code-block:: shell
    :class: copyable
 
-   mc alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
+   bm alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
 
-   mc mb local/encryptedbucket
-   mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
+   bm mb local/encryptedbucket
+   bm encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
 
-Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
-You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
+Write a file to the bucket using :mc:`bm cp` or any S3-compatible SDK with a ``PutObject`` function. 
+You can then run :mc:`bm stat` on the file to confirm the associated encryption metadata.

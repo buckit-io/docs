@@ -11,8 +11,6 @@
 Description
 -----------
 
-.. versionadded:: RELEASE.2022-06-17T02-52-50Z
-
 .. start-mc-admin-cluster-bucket-import-desc
 
 The :mc:`bm admin cluster bucket import` command imports bucket metadata as created by the :mc:`bm admin cluster bucket export` command.
@@ -27,12 +25,12 @@ If you specify only the deployment as the target, this command applies the metad
 
    .. tab-item:: EXAMPLE
 
-      The following command imports the specified metadata to the ``myminio`` deployment.
+      The following command imports the specified metadata to the ``mybuckit`` deployment.
   
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin cluster bucket import myminio ~/minio-metadata-backup/myminio-cluster.zip
+         bm admin cluster bucket import mybuckit ~/minio-metadata-backup/mybuckit-cluster.zip
 
    .. tab-item:: SYNTAX
 

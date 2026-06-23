@@ -31,12 +31,12 @@ The alias :mc:`bm event list` has equivalent functionality to :mc:`bm event ls`.
 
       The following command lists all configured event notifications for the
       specified :ref:`bucket notification target <minio-bucket-notifications>`
-      for the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      for the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm event ls myminio myminio/mydata arn:aws:sqs::primary:target
+         bm event ls mybuckit mybuckit/mydata arn:aws:sqs::primary:target
 
    .. tab-item:: SYNTAX
 
@@ -100,7 +100,7 @@ List Event Notifications on a Bucket
       .. code-block:: shell
          :class: copyable
 
-         bm event ls myminio/mydata
+         bm event ls mybuckit/mydata
 
    .. tab-item:: Syntax
 
@@ -112,7 +112,7 @@ List Event Notifications on a Bucket
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit
         deployment on which to add the bucket notification event. For example:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``ARN`` with the notification target
         :mc-cmd:`ARN <bm event add ARN>`.

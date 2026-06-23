@@ -36,11 +36,11 @@ Buckit relies on the :github:`olivere/elastic` v7 project for Elastic
 connectivity. The ``elastic/v7`` library specifically targets Elasticsearch
 v7.0 and is *not compatible with earlier Elasticsearch versions*.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the Elasticsearch Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +56,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-elasticsearch>`. The 
-      :mc:`minio server` process applies the specified settings on its 
+      :mc:`buckit server <buckit server>` process applies the specified settings on its 
       next startup.
       
       The following example code sets *all*  environment variables
@@ -106,7 +106,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
         If the specified ``<IDENTIFIER>`` matches an existing Elasticsearch
         service endpoint on the Buckit deployment, the new settings *override*
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_elasticsearch <mc admin config get>`
+        :mc-cmd:`bm admin config get notify_elasticsearch <bm admin config get>`
         to review the currently configured Elasticsearch endpoints on the Buckit
         deployment.
 
@@ -120,9 +120,9 @@ You can configure a new Elasticsearch service endpoint using either environment 
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating Elasticsearch endpoints on a running 
-      :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
+      :mc:`buckit server <buckit server>` process using the :mc-cmd:`bm admin config set` command 
       and the :mc-conf:`notify_elasticsearch` configuration key. You must restart the 
-      :mc:`minio server` process to apply any new or updated configuration
+      :mc:`buckit server <buckit server>` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
@@ -135,7 +135,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_elasticsearch:IDENTIFIER \
+         bm admin config set ALIAS/ notify_elasticsearch:IDENTIFIER \
             url="ENDPOINT" \
             index="<string>" \
             format="<string>" \
@@ -153,7 +153,7 @@ You can configure a new Elasticsearch service endpoint using either environment 
         If the specified ``IDENTIFIER`` matches an existing Elasticsearch service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_elasticsearch <mc admin config get>`
+        :mc-cmd:`bm admin config get notify_elasticsearch <bm admin config get>`
         to review the currently configured Elasticsearch endpoints on the Buckit
         deployment.
 
@@ -170,17 +170,17 @@ You can configure a new Elasticsearch service endpoint using either environment 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured Elasticsearch
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured Elasticsearch
 target similar to the following:
 
 .. code-block:: shell
@@ -198,13 +198,13 @@ the associated Elasticsearch deployment as a target.
 3) Configure Bucket Notifications using the Elasticsearch Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc event add` command to add a new bucket notification 
+Use the :mc:`bm event add` command to add a new bucket notification 
 event with the configured Elasticsearch service as a target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event add ALIAS/BUCKET arn:minio:sqs::primary:elasticsearch \
+   bm event add ALIAS/BUCKET arn:minio:sqs::primary:elasticsearch \
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
@@ -213,31 +213,31 @@ event with the configured Elasticsearch service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which Buckit triggers notifications.
 
-Use :mc:`mc event ls` to view all configured bucket events for 
+Use :mc:`bm event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:elasticsearch
+   bm event ls ALIAS/BUCKET arn:minio:sqs::primary:elasticsearch
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on the bucket for which you configured the new event and 
 check the Elasticsearch service for the notification data. The action required
-depends on which :mc-cmd:`events <mc event add --event>` were specified
+depends on which :mc-cmd:`events <bm event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an Elasticsearch Endpoint in a Buckit Deployment
 -------------------------------------------------------
@@ -256,23 +256,23 @@ Buckit relies on the :github:`olivere/elastic` v7 project for Elastic
 connectivity. The ``elastic/v7`` library specifically targets Elasticsearch
 v7.0 and is *not compatible with earlier Elasticsearch versions*.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 
 1) List Configured Elasticsearch Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently
+Use the :mc-cmd:`bm admin config get` command to list the currently
 configured Elasticsearch service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_elasticsearch
+   bm admin config get ALIAS/ notify_elasticsearch
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
@@ -296,13 +296,13 @@ the next step.
 2) Update the Elasticsearch Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration
+Use the :mc-cmd:`bm admin config set` command to set the new configuration
 for the Elasticsearch service endpoint:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_elasticsearch:<IDENTIFIER> \
+   bm admin config set ALIAS/ notify_elasticsearch:<IDENTIFIER> \
       url="https://user:password@hostname:port" \
       index="<string>" \
       format="<string>" \
@@ -322,17 +322,17 @@ of Elasticsearch configuration settings.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured
 Elasticsearch target similar to the following:
 
 .. code-block:: shell
@@ -345,15 +345,15 @@ Elasticsearch target similar to the following:
 Perform an action on a bucket which has an event configuration using the updated
 Elasticsearch service endpoint and check the Elasticsearch service for the
 notification data. The action required depends on which 
-:mc-cmd:`events <mc event add --event>` were specified when configuring the bucket
+:mc-cmd:`events <bm event add --event>` were specified when configuring the bucket
 notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET

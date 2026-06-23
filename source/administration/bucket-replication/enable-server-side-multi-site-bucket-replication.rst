@@ -18,7 +18,7 @@ The procedure on this page configures automatic server-side bucket replication b
    :alt: Active-Active Replication synchronizes data between multiple remote deployments.
    :align: center
 
-- To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
+- To configure replication between arbitrary S3-compatible services, use :mc:`bm mirror`.
 
 - To configure one-way "active-active" replication between two Buckit deployments, see :ref:`minio-bucket-replication-serverside-twoway`.
 
@@ -28,11 +28,11 @@ Multi-Site Active-Active replication configurations can span multiple racks, dat
 
 .. seealso::
 
-   - Use the :mc:`mc replicate update` command to modify an existing replication rule.
+   - Use the :mc:`bm replicate update` command to modify an existing replication rule.
 
-   - Use the :mc:`mc replicate update` command with the :mc-cmd:`--state "disable" <mc replicate update --state>` flag to disable an existing replication rule.
+   - Use the :mc:`bm replicate update` command with the :mc-cmd:`--state "disable" <bm replicate update --state>` flag to disable an existing replication rule.
 
-   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`bm replicate rm` command to remove an existing replication rule.
 
 .. _minio-bucket-replication-serverside-multi-requirements:
 
@@ -48,8 +48,8 @@ Access to All Clusters
 
 You must have network access and log in credentials with correct permissions to all deployments to set up multi-site active-active bucket replication.
 
-You can access the deployments by installing :mc:`mc` and using the command line.
-Use the :mc:`mc alias set` command to create an alias for each Buckit deployment.
+You can access the deployments by installing :mc:`bm` and using the command line.
+Use the :mc:`bm alias set` command to create an alias for each Buckit deployment.
 
 Alias creation requires specifying an access key for a user on the deployment. 
 This user **must** have permission to create and manage users and policies on the deployment. 
@@ -86,7 +86,7 @@ Click to expand any of the following:
 
    Buckit supports automatically replicating existing objects in a bucket.
 
-   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
+   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
    This procedure includes the required flags for enabling replication of existing objects.
 
 .. dropdown:: Replication of Delete Operations
@@ -99,7 +99,7 @@ Click to expand any of the following:
 
    - For delete operations on versions of an object, Buckit replication also deletes those versions on the target bucket.
 
-   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
+   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate`. 
    This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
    Buckit does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
@@ -116,7 +116,7 @@ This procedure requires repeating steps for each Buckit deployment participating
    - :ref:`Validate the Replication Configuration <minio-bucket-replication-multi-site-minio-cli-verify-replication-config>` 
 
 
-Configure Multi-Site Bucket Replication Using the Command Line ``mc``
+Configure Multi-Site Bucket Replication Using the Command Line ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the placeholder ``ALIAS`` to reference the :ref:`alias <alias>` each Buckit deployment being configured for replication. 
@@ -124,10 +124,6 @@ Replace these values with the appropriate alias for each Buckit deployment.
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-requirements>`.
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
-   This procedure only documents the procedure as of that release.
 
 .. _minio-bucket-replication-multi-site-minio-cli-create-replication-rules:
 
@@ -139,15 +135,15 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
    :end-before: end-create-bucket-replication-rule-cli-desc
 
 Repeat these commands for each remote Buckit deployment participating in the multi-site replication configuration. 
-For example, a multi-site replication configuration consisting of Buckit deployments ``minio1``, ``minio2``, and ``minio3`` would require repeating this step on each deployment for each remote. 
+For example, a multi-site replication configuration consisting of Buckit deployments ``buckit1``, ``buckit2``, and ``buckit3`` would require repeating this step on each deployment for each remote. 
          
 Specifically, in this scenario, perform this step twice on each deployment:
 
-- On the ``minio1`` deployment, once for a rule for ``minio2`` and again for a separate rule for ``minio3``. 
+- On the ``buckit1`` deployment, once for a rule for ``buckit2`` and again for a separate rule for ``buckit3``. 
 
-- On the ``minio2`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio3``.
+- On the ``buckit2`` deployment, once for a rule for ``buckit1`` and again for a separate rule for ``buckit3``.
 
-- On the ``minio3`` deployment, once for a rule for ``minio1`` and again for a separate rule for ``minio2``.
+- On the ``buckit3`` deployment, once for a rule for ``buckit1`` and again for a separate rule for ``buckit2``.
 
 .. _minio-bucket-replication-multi-site-minio-cli-verify-replication-config:
 
@@ -160,4 +156,4 @@ Specifically, in this scenario, perform this step twice on each deployment:
 
 Repeat this test on each deployment by copying a new unique file and checking that the file replicates to each of the other deployments.
 
-You can also use :mc:`mc stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.
+You can also use :mc:`bm stat` to check the file to check the current :ref:`replication stage <minio-replication-process>` of the object.

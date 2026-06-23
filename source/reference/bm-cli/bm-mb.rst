@@ -28,13 +28,13 @@ similar results to the ``mkdir -p`` commandline tool.
    .. tab-item:: EXAMPLE
 
       The following command creates a new bucket ``mydata`` on the
-      ``myminio`` Buckit deployment. The command creates the bucket
+      ``mybuckit`` Buckit deployment. The command creates the bucket
       with :ref:`object locking enabled <minio-object-locking>`.
 
       .. code-block:: shell
          :class: copyable
 
-         bm mb --with-locks myminio/mydata
+         bm mb --with-locks mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -147,9 +147,9 @@ The :mc-cmd:`~bm mb --region` option creates the bucket in a desired region.
 .. code-block:: shell
    :class: copyable
 
-   bm mb --region --region=us-west-2 myminio/mynewbucket
+   bm mb --region --region=us-west-2 mybuckit/mynewbucket
 
-The above command creates a new bucket, ``mynewbucket`` on the ``myminio`` bucket within the ``us-west-2`` region.
+The above command creates a new bucket, ``mynewbucket`` on the ``mybuckit`` bucket within the ``us-west-2`` region.
 
 Create a New Bucket with Versioning Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,9 +157,9 @@ Create a New Bucket with Versioning Enabled
 .. code-block:: shell
    :class: copyable
 
-   bm mb --with-versioning myminio/myversionedbucket
+   bm mb --with-versioning mybuckit/myversionedbucket
 
-The above command creates a new bucket, ``myversionedbucket``, on the ``myminio`` alias.
+The above command creates a new bucket, ``myversionedbucket``, on the ``mybuckit`` alias.
 The new bucket enables :ref:`object versioning <minio-bucket-versioning>` for all objects in the bucket.
 
 Behavior

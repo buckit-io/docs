@@ -30,16 +30,16 @@ Buckit automatically sends triggered events to the configured
 
       The following command creates a new event notification trigger for
       all ``PUT`` and ``DELETE`` operations for the ``mydata`` bucket on the
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm event add --event "put,delete" myminio/mydata arn:aws:sqs::primary:target
+         bm event add --event "put,delete" mybuckit/mydata arn:aws:sqs::primary:target
 
       The specified ARN corresponds to a configured
       :ref:`bucket notification target <minio-bucket-notifications>` on the
-      ``myminio`` deployment.
+      ``mybuckit`` deployment.
 
    .. tab-item:: SYNTAX
 
@@ -148,7 +148,7 @@ Add an Event Notification to a Bucket
       .. code-block:: shell
          :class: copyable
 
-         bm event add myminio/mydata arn:minio:sqs::primary:webhook
+         bm event add mybuckit/mydata arn:minio:sqs::primary:webhook
 
    .. tab-item:: Syntax
 
@@ -161,7 +161,7 @@ Add an Event Notification to a Bucket
         deployment and the bucket on which to add the bucket notification event.
         For example:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``ARN`` with the notification target
         :mc-cmd:`ARN <bm event add ARN>`.

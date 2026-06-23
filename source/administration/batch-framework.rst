@@ -48,35 +48,35 @@ Buckit Batch CLI
 ----------------
 
 - Install the :ref:`Buckit Client <minio-client>`
-- Define an :mc:`alias <mc alias set>` for the Buckit deployment
+- Define an :mc:`alias <bm alias set>` for the Buckit deployment
 
-The :mc:`mc batch` commands include
+The :mc:`bm batch` commands include
 
 .. list-table::
    :widths: 30 70
    :width: 90%
 
-   * - :mc:`mc batch generate`
+   * - :mc:`bm batch generate`
      - .. include:: /reference/bm-cli/bm-batch-generate.rst
           :start-after: start-mc-batch-generate-desc
           :end-before: end-mc-batch-generate-desc
-   * - :mc:`mc batch start`
+   * - :mc:`bm batch start`
      - .. include:: /reference/bm-cli/bm-batch-start.rst
           :start-after: start-mc-batch-start-desc
           :end-before: end-mc-batch-start-desc
-   * - :mc:`mc batch list`
+   * - :mc:`bm batch list`
      - .. include:: /reference/bm-cli/bm-batch-list.rst
           :start-after: start-mc-batch-list-desc
           :end-before: end-mc-batch-list-desc
-   * - :mc:`mc batch status`
+   * - :mc:`bm batch status`
      - .. include:: /reference/bm-cli/bm-batch-status.rst
           :start-after: start-mc-batch-status-desc
           :end-before: end-mc-batch-status-desc
-   * - :mc:`mc batch describe`
+   * - :mc:`bm batch describe`
      - .. include:: /reference/bm-cli/bm-batch-describe.rst
           :start-after: start-mc-batch-describe-desc
           :end-before: end-mc-batch-describe-desc
-   * - :mc:`mc batch cancel`
+   * - :mc:`bm batch cancel`
      - .. include:: /reference/bm-cli/bm-batch-cancel.rst
           :start-after: start-mc-batch-cancel-desc
           :end-before: end-mc-batch-cancel-desc
@@ -114,7 +114,7 @@ The built-in ``ConsoleAdmin`` policy includes sufficient access to perform all o
 ``Local`` Deployment
 --------------------
 
-You run a batch job against a particular deployment by passing an ``alias`` to the :mc:`mc batch` command.
+You run a batch job against a particular deployment by passing an ``alias`` to the :mc:`bm batch` command.
 The deployment you specify in the command becomes the ``local`` deployment within the context of that batch job.
 
 .. toctree::

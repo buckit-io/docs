@@ -80,7 +80,7 @@ Buckit uses the ExecutableBooks
       .. code-block:: shell
          :class: copyable
 
-         mc admin info ALIAS
+         bm admin info ALIAS
 
 You can keep tabs in sync. For example, if you have several procedures on a page that have Console and CLI tabs.
 Use the `:sync: key1` option on teach `tab-item`.
@@ -101,7 +101,7 @@ When someone selects a tab for one or the other, all of the other tabs available
       .. code-block:: shell
          :class: copyable
 
-         mc admin info ALIAS
+         bm admin info ALIAS
 
 Cards
 ~~~~~
@@ -292,9 +292,6 @@ You can set custom text for the note title:
 
 To note a version change:
 
-.. versionchanged:: RELEASE.2022-07-15T09-20-55Z
-
-   ``mc license register`` replaces the ``mc support register`` command.
 
 Important Admonition
 ~~~~~~~~~~~~~~~~~~~~

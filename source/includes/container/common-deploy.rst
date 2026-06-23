@@ -87,25 +87,25 @@ The instructions include examples for both quay.io and DockerHub:
 
    .. tab-item:: Buckit CLI (mc)
 
-      You can access the Buckit deployment over a Terminal or Shell using the :ref:`Buckit Client <minio-client>` (:mc:`mc`).
-      See :ref:`Buckit Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
+      You can access the Buckit deployment over a Terminal or Shell using the :ref:`Buckit Client <minio-client>` (:mc:`bm`).
+      See :ref:`Buckit Client Installation Quickstart <mc-install>` for instructions on installing :mc:`bm`.
 
-      Create a new :mc:`alias <mc alias set>` corresponding to the Buckit deployment. 
+      Create a new :mc:`alias <bm alias set>` corresponding to the Buckit deployment. 
       Use a hostname or IP address for your local machine along with the S3 API port ``9000`` to access the Buckit deployment.
       Any traffic to that port on the local host redirects to the container.
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set minio-alias http://localhost:9000 myminioadmin minio-secret-key-change-me
+         bm alias set minio-alias http://localhost:9000 mybuckitadmin buckit-secret-key-change-me
 
       - Replace ``minio-alias`` with the alias name to create for this deployment.
 
-      - Replace ``myminioadmin`` and ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
+      - Replace ``mybuckitadmin`` and ``buckit-secret-key-change-me`` with the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` values in the environment file specified to the container.
 
       The command should return success if the container is running and accessible at the specified port.
 
-      You can then interact with the container using any :mc:`mc` command.
+      You can then interact with the container using any :mc:`bm` command.
       If your local host firewall permits external access to the Buckit S3 API port, other hosts on the same network can access the Buckit deployment using the IP or hostname for your local host.
 
 .. end-common-deploy-connect-to-minio-service

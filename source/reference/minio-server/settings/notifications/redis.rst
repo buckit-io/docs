@@ -52,13 +52,13 @@ For example, the following commands set two distinct Redis service endpoints as 
 
       .. code-block:: shell
 
-         mc admin config set notify_redis:primary              \ 
+         bm admin config set notify_redis:primary              \ 
             address="redis-endpoint.example.net:9200"  \
             key="bucketevents"                                 \
             format="namespace"                                 \
             [ARGUMENT="VALUE"] ...                             \
    
-         mc admin config set notify_redis:secondary            \
+         bm admin config set notify_redis:secondary            \
             address="redis-endpoint2.example.net:9200" \
             key="bucketevents"                                 \
             format="namespace"                                 \
@@ -96,7 +96,7 @@ Enable
 
       The top-level configuration key for defining an Redis server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an Redis server/broker endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an Redis server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
       
       - :mc-conf:`~notify_redis.address`
@@ -108,7 +108,7 @@ Enable
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_redis \ 
+         bm admin config set notify_redis \ 
             address="ENDPOINT" \
             key="<string>" \
             format="<string>" \
@@ -210,16 +210,11 @@ Password
 
 Specify the password for the Redis server.
 
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 User
 ~~~~
 
 *Optional*
-
-.. versionadded:: RELEASE.2024-03-21T23-13-43Z
 
 .. tab-set::
 

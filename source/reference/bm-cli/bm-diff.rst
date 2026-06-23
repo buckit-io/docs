@@ -30,12 +30,12 @@ objects.
 
       The following command computes the difference between an object on
       a local filesystem and an object in the ``mydata`` bucket on the
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm diff ~/mydata/myobject.txt myminio/mydata/myobject.txt
+         bm diff ~/mydata/myobject.txt mybuckit/mydata/myobject.txt
 
    .. tab-item:: SYNTAX
 

@@ -32,15 +32,15 @@ The ``AssumeRoleWithLDAPIdentity`` endpoint has the following form:
 
 .. code-block:: shell
 
-   POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity[&ARGS]
+   POST https://buckit.example.net?Action=AssumeRoleWithLDAPIdentity[&ARGS]
 
 The following example uses all supported arguments. Replace the
-``minio.example.net`` hostname with the appropriate URL for your Buckit 
+``buckit.example.net`` hostname with the appropriate URL for your Buckit 
 cluster:
 
 .. code-block:: shell
 
-   POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity
+   POST https://buckit.example.net?Action=AssumeRoleWithLDAPIdentity
    &LDAPUsername=USERNAME
    &LDAPPassword=PASSWORD
    &Version=2011-06-15
@@ -165,5 +165,4 @@ Error Elements
 The XML error response for this API endpoint is similar to the AWS
 :aws-docs:`AssumeRoleWithLDAPIdentity response
 <STS/latest/APIReference/API_AssumeRoleWithLDAPIdentity.html#API_AssumeRoleWithLDAPIdentity_Errors>`.
-
 

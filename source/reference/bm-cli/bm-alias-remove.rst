@@ -26,13 +26,13 @@ The :mc:`bm alias remove` removes an existing alias from the local
 
    .. tab-item:: EXAMPLE
 
-      The following command removes the ``myminio`` :ref:`alias <alias>` for a
+      The following command removes the ``mybuckit`` :ref:`alias <alias>` for a
       Buckit deployment from the host machine:
 
       .. code-block:: shell
          :class: copyable
 
-         bm alias remove myminio
+         bm alias remove mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -74,12 +74,12 @@ Use :mc:`bm alias remove` to remove an existing alias from the
 
    .. tab-item:: Example
 
-      The following command removes the ``myminio`` alias.
+      The following command removes the ``mybuckit`` alias.
 
       .. code-block:: shell
          :class: copyable
 
-         bm alias remove myminio
+         bm alias remove mybuckit
 
    .. tab-item:: Syntax
 

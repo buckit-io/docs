@@ -34,14 +34,14 @@ Key Management System (KMS). You must specify the |EK| using the
 :envvar:`MINIO_KMS_KES_KEY_NAME` environment variable when starting up the
 Buckit server. Buckit uses the same EK for *all* SSE-S3 cryptographic operations.
 
-You can enable bucket-default SSE-S3 encryption using the :mc:`mc encrypt set` command:
+You can enable bucket-default SSE-S3 encryption using the :mc:`bm encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
 
-   mc encrypt set sse-s3 play/mybucket
+   bm encrypt set sse-s3 play/mybucket
 
-- Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
+- Replace ``play/mybucket`` with the :mc:`alias <bm alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
 Buckit SSE-S3 is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with Amazon S3-Managed Keys <UsingServerSideEncryption.html>` while expanding support to include the following KMS providers:
@@ -85,8 +85,8 @@ supported external Key Management Services (KMS):
 
 This procedure requires the following components:
 
-- Install :mc:`mc` on a machine with network access to the source deployment. 
-  See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+- Install :mc:`bm` on a machine with network access to the source deployment. 
+  See the ``bm`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``bm``.
 
 - Install :kes-docs:`Buckit Key Encryption Service (KES) <>` on a machine with internet access. 
   See the KES :kes-docs:`Getting Started <tutorials/getting-started/>` guide for instructions on downloading, installing, and configuring KES.
@@ -195,12 +195,12 @@ Buckit server host in the deployment:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
@@ -211,18 +211,18 @@ Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
 You can skip this step if you intend to use only client-driven SSE-S3.
 
-Use the :mc:`mc encrypt set` command to enable automatic SSE-S3 protection
+Use the :mc:`bm encrypt set` command to enable automatic SSE-S3 protection
 of all objects written to a specific bucket.
 
 .. code-block:: shell
    :class: copyable
 
-   mc encrypt set sse-s3 ALIAS/BUCKET
+   bm encrypt set sse-s3 ALIAS/BUCKET
 
-- Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the Buckit deployment on which you enabled SSE-S3.
+- Replace :mc-cmd:`ALIAS <bm encrypt set ALIAS>` with the 
+  :mc:`alias <bm alias>` of the Buckit deployment on which you enabled SSE-S3.
 
-- Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
+- Replace :mc-cmd:`BUCKET <bm encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix on which you want to enable automatic SSE-S3.
 
 .. _minio-encryption-sse-s3-erasure-locking:

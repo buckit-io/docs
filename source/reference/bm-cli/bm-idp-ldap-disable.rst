@@ -26,13 +26,13 @@ The :mc:`bm idp ldap disable` command disables the currently configured AD/LDAP 
 
    .. tab-item:: EXAMPLE
 
-      The following example disables the AD/LDAP configurations on the ``myminio`` deployment.
+      The following example disables the AD/LDAP configurations on the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap disable  \
-                     myminio
+                     mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -62,7 +62,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap disable myminio
+      bm idp ldap disable mybuckit
 
 
 

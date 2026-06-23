@@ -40,12 +40,12 @@ similar results to the ``cp`` commandline tool.
    .. tab-item:: EXAMPLE
 
       The following command copies files from a local filesystem directory
-      to the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      to the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm cp --recursive ~/mydata/ myminio/mydata/
+         bm cp --recursive ~/mydata/ mybuckit/mydata/
 
    .. tab-item:: SYNTAX
 
@@ -102,7 +102,7 @@ Parameters
 
    .. code-block:: none
 
-      bm cp ~/data/object.txt myminio/mydata/object.txt play/mydata/
+      bm cp ~/data/object.txt mybuckit/mydata/object.txt play/mydata/
 
    For copying an object from a local filesystem, specify the full path to that object. 
    For example:
@@ -145,18 +145,6 @@ Parameters
 .. mc-cmd:: --checksum
    :optional:
 
-   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
-
-   Add a checksum to an uploaded object. 
-   
-   Valid values are: 
-   - ``MD5``
-   - ``CRC32``
-   - ``CRC32C``
-   - ``SHA1``
-   - ``SHA256``
-
-   The flag requires server trailing headers and works with AWS or Buckit targets.
 
 .. mc-cmd:: --disable-multipart
    :optional:
@@ -467,7 +455,7 @@ The following example sets a ``content-type`` of ``application/json``:
 .. code-block::
    :class: copyable
 
-    bm cp data.ndjson --attr="content-type=application/json" myminio/mybucket                              
+    bm cp data.ndjson --attr="content-type=application/json" mybuckit/mybucket                              
 
 
 Behavior

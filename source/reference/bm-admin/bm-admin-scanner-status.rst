@@ -38,7 +38,7 @@ This command has an alias of ``bm admin scanner info``.
       .. code-block:: shell
          :class: copyable
 
-         bm admin scanner status myminio
+         bm admin scanner status mybuckit
 
       The command returns results similar to the following:
 

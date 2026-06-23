@@ -36,8 +36,6 @@ Expiration Workers
       .. mc-conf:: ilm expiration_workers
          :delimiter: " "
 
-.. versionadded:: Buckit Server RELEASE.2024-03-03T17-50-39Z
-
 Set the number of workers to use for :ref:`expiring objects <minio-lifecycle-management-expiration>`.
 Valid values are ``1`` to ``500``.
 

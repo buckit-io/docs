@@ -26,12 +26,12 @@ The :mc:`bm idp ldap policy detach` command detaches one or more polices from an
 
    .. tab-item:: EXAMPLE
 
-      The following example detaches the policy ``userpolicy`` from the user ``bobfisher`` on the ``myminio`` deployment.
+      The following example detaches the policy ``userpolicy`` from the user ``bobfisher`` on the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap policy detach myminio                                                  \
+         bm idp ldap policy detach mybuckit                                                  \
                                    userpolicy                                               \
                                    --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io' 
 
@@ -74,7 +74,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap policy detach myminio                                                  \
+         bm idp ldap policy detach mybuckit                                                  \
                                    userpolicy                                               \
                                    --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'
 
@@ -82,12 +82,12 @@ Parameters
 Example
 ~~~~~~~
 
-The following example detaches two policies, ``policy1`` and ``policy2``, from the ``projectb`` group on the ``myminio`` deployment:
+The following example detaches two policies, ``policy1`` and ``policy2``, from the ``projectb`` group on the ``mybuckit`` deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap policy detach myminio                                                 \
+   bm idp ldap policy detach mybuckit                                                 \
                              policy1                                                 \
                              policy2                                                 \
                              --group='cn=projectb,ou=groups,ou=swengg,dc=min,dc=io'

@@ -88,8 +88,6 @@ Healing Colors
 
 Some versions of Buckit used a color key as a way to differentiate objects with different healing statuses.
 
-.. versionchanged:: mc RELEASE.2024-11-17T19-35-25Z
-
 The color meaning has been updated.
 
 - Green indicates the bucket is healthy.

@@ -29,13 +29,13 @@ The :mc:`bm idp ldap rm` command removes the existing configuration for an AD/LD
 
    .. tab-item:: EXAMPLE
 
-      The following example removes the AD/LDAP provider settings for the ``myminio`` deployment.
+      The following example removes the AD/LDAP provider settings for the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap rm       \
-                     myminio
+                     mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -65,7 +65,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap rm myminio
+      bm idp ldap rm mybuckit
 
 
 

@@ -24,12 +24,12 @@ Returns the specified policy in JSON format if it exists on the target Buckit de
 
    .. tab-item:: EXAMPLE
 
-      The following command displays the contents of the ``writeonly`` policy on the :term:`alias` ``myminio``.
+      The following command displays the contents of the ``writeonly`` policy on the :term:`alias` ``mybuckit``.
 
       .. code-block:: shell
          :class: copyable
 
-          bm admin policy info myminio writeonly  
+          bm admin policy info mybuckit writeonly  
 
    .. tab-item:: SYNTAX
 
@@ -76,19 +76,19 @@ Global Flags
 Examples
 --------
 
-Display the contents of the ``writeonly`` policy on the :term:`alias` ``myminio``.
+Display the contents of the ``writeonly`` policy on the :term:`alias` ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy info myminio writeonly
+   bm admin policy info mybuckit writeonly
 
 Show information on a given policy and write the policy JSON content to /tmp/policy.json.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy info myminio writeonly --policy-file /tmp/policy.json
+   bm admin policy info mybuckit writeonly --policy-file /tmp/policy.json
 
 Output
 ~~~~~~

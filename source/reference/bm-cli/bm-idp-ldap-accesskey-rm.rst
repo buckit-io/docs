@@ -34,12 +34,12 @@ The :mc:`bm idp ldap accesskey rm` deletes the specified access key from the loc
 
    .. tab-item:: EXAMPLE
 
-         The following example deletes the access key ``mykey`` from the ``minio`` deployment:
+         The following example deletes the access key ``mykey`` from the ``buckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey rm minio/ mykey
+         bm idp ldap accesskey rm buckit/ mykey
 
    .. tab-item:: SYNTAX
 
@@ -73,7 +73,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey ls minio
+         bm idp ldap accesskey ls buckit
 
 .. mc-cmd:: KEY
    :required:
@@ -83,12 +83,12 @@ Parameters
 Example
 ~~~~~~~
 
-Delete the access key ``mykey`` from the ``minio`` deployment.
+Delete the access key ``mykey`` from the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey rm minio/ mykey
+   bm idp ldap accesskey rm buckit/ mykey
 
 Global Flags
 ~~~~~~~~~~~~

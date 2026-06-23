@@ -15,8 +15,6 @@
 Description
 -----------
 
-.. versionadded:: RELEASE.2022-06-17T02-52-50Z
-
 .. start-mc-admin-cluster-bucket-desc
 
 The :mc:`bm admin cluster bucket` command and its subcommands provide tools for manually importing and exporting Buckit bucket metadata.

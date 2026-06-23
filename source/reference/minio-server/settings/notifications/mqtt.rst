@@ -47,14 +47,14 @@ For example, the following commands set two distinct MQTT service endpoints as `
 
       .. code-block:: shell
 
-         mc admin config set notify_mqtt:primary \ 
+         bm admin config set notify_mqtt:primary \ 
             broker="tcp://endpoint:port" \
             topic="minio/bucket-name/events/" \
             username="username" \
             password="password" \
             [ARGUMENT="VALUE"] ... \
    
-         mc admin config set notify_mqtt:secondary \
+         bm admin config set notify_mqtt:secondary \
             broker="tcp://endpoint:port" \
             topic="minio/bucket-name/events/" \
             username="username" \
@@ -89,7 +89,7 @@ Enable
 
       The top-level configuration key for defining an MQTT server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an MQTT server/broker endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an MQTT server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
       
       - :mc-conf:`~notify_mqtt.broker`
@@ -102,7 +102,7 @@ Enable
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_mqtt \ 
+         bm admin config set notify_mqtt \ 
             broker="tcp://endpoint:port" \
             topic="minio/bucket-name/events/" \
             username="username" \
@@ -199,9 +199,6 @@ Password
 
 Specify the password for the MQTT username Buckit uses to authenticate to the MQTT server/broker.
 
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 Quality of Service
 ~~~~~~~~~~~~~~~~~~

@@ -30,7 +30,7 @@ Procedure
 
 #. **Connect your Browser to the Buckit Server**
 
-   Access the :ref:`minio-console` by going to a browser (such as Safari) and going to ``https://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
+   Access the :ref:`minio-console` by going to a browser (such as Safari) and going to ``https://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`buckit server <buckit server>` command's output.
    For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
@@ -54,7 +54,7 @@ Procedure
          
          .. code-block::
             
-            mc {command} {flag}
+            bm {command} {flag}
 
       .. tab-item:: Binary (arm64)
 
@@ -71,7 +71,7 @@ Procedure
          
          .. code-block:: shell
             
-            mc {command} {flag}
+            bm {command} {flag}
 
       .. tab-item:: Binary (amd64)
 
@@ -88,17 +88,17 @@ Procedure
          
          .. code-block:: shell
             
-            mc {command} {flag}
+            bm {command} {flag}
             
-   Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
+   Use :mc:`bm alias set` to quickly authenticate and connect to the Buckit deployment.
 
    .. code-block:: shell
       :class: copyable
 
-      mc alias set local http://127.0.0.1:9000 minioadmin minioadmin
-      mc admin info local
+      bm alias set local http://127.0.0.1:9000 buckitadmin buckitadmin
+      bm admin info local
 
-   The :mc:`mc alias set` takes four arguments:
+   The :mc:`bm alias set` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the Buckit server

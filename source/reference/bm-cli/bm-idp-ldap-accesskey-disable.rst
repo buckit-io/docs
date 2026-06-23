@@ -27,12 +27,12 @@ Description
 
    .. tab-item:: EXAMPLE
 
-         The following example disables the access key ``mykey`` on the ``minio`` deployment:
+         The following example disables the access key ``mykey`` on the ``buckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey disable minio mykey
+         bm idp ldap accesskey disable buckit mykey
 
    .. tab-item:: SYNTAX
 
@@ -66,7 +66,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey disable minio
+         bm idp ldap accesskey disable buckit
 
 .. mc-cmd:: KEY
    :required:
@@ -76,12 +76,12 @@ Parameters
 Example
 ~~~~~~~
 
-Disable the access key ``mykey`` from the ``minio`` deployment.
+Disable the access key ``mykey`` from the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey disable minio/ mykey
+   bm idp ldap accesskey disable buckit/ mykey
 
 Global Flags
 ~~~~~~~~~~~~

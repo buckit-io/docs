@@ -13,9 +13,6 @@
 .. mc:: mc ilm remove
 .. mc:: mc ilm rm
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``mc ilm rm`` replaced by :mc-cmd:`mc ilm rule rm`.
 
 
 Syntax
@@ -23,24 +20,24 @@ Syntax
 
 .. start-mc-ilm-rm-desc
 
-The :mc:`mc ilm rm` command removes an object lifecycle management rule from a 
+The :mc:`bm ilm rm` command removes an object lifecycle management rule from a 
 Buckit Bucket.
 
 .. end-mc-ilm-rm-desc
 
-The :mc:`mc ilm remove` command has equivalent functionality to :mc:`mc ilm rm`.
+The :mc:`bm ilm remove` command has equivalent functionality to :mc:`bm ilm rm`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
       The following command removes a single lifecycle management rule from
-      the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc ilm rm --id "bgrt1ghju" myminio/mydata
+         mc ilm rm --id "bgrt1ghju" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -68,27 +65,27 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm rm myminio/mydata
+      mc ilm rm mybuckit/mydata
 
 .. mc-cmd:: all
 
    *Required* Removes all rules in the bucket. Mutually exclusive with
-   :mc:`mc ilm rm id`.
+   :mc:`bm ilm rm id`.
 
-   Mutually exclusive with :mc:`mc ilm rm id`
+   Mutually exclusive with :mc:`bm ilm rm id`
 
-   Requires including :mc-cmd:`~mc ilm rm force`.
+   Requires including :mc-cmd:`~bm ilm rm force`.
 
 .. mc-cmd:: force
 
-   Required if specifying :mc-cmd:`~mc ilm rm all`.
+   Required if specifying :mc-cmd:`~bm ilm rm all`.
 
 .. mc-cmd:: id
 
-   *Required* The unique ID of the rule. Use :mc:`mc ilm rule ls` to list bucket
+   *Required* The unique ID of the rule. Use :mc:`bm ilm rule ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to remove.
 
-   Mutually exclusive with :mc:`mc ilm rm all`
+   Mutually exclusive with :mc:`bm ilm rm all`
 
 Global Flags
 ~~~~~~~~~~~~
@@ -103,20 +100,20 @@ Examples
 Remove a Bucket Lifecycle Management Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm rm` to remove a bucket lifecycle management rule:
+Use :mc:`bm ilm rm` to remove a bucket lifecycle management rule:
 
 .. code-block:: shell
    :class: copyable
 
    mc ilm rm --id "RULE" ALIAS/PATH
 
-- Replace :mc-cmd:`RULE <mc ilm rm id>` with the unique name of the lifecycle
+- Replace :mc-cmd:`RULE <bm ilm rm id>` with the unique name of the lifecycle
   management rule.
 
-- Replace :mc-cmd:`ALIAS <mc ilm rm ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <bm ilm rm ALIAS>` with the 
+  :mc:`alias <bm alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm rm ALIAS>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <bm ilm rm ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
 Behavior

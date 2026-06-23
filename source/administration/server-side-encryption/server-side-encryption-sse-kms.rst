@@ -28,17 +28,17 @@ Buckit SSE-KMS encrypts or decrypts objects using an External Key (EK) managed b
 Each bucket and object can have a separate |EK|, supporting more granular cryptographic operations in the deployment. 
 Buckit can only decrypt an object if it can access both the KMS *and* the |EK| used to encrypt that object.
 
-You can enable bucket-default SSE-KMS encryption using the :mc:`mc encrypt set` command:
+You can enable bucket-default SSE-KMS encryption using the :mc:`bm encrypt set` command:
 
 .. code-block:: shell
    :class: copyable
 
-   mc encrypt set sse-kms EXTERNALKEY play/mybucket
+   bm encrypt set sse-kms EXTERNALKEY play/mybucket
 
 - Replace ``EXTERNALKEY`` with the name of the |EK| to use for encrypting
   objects in the bucket.
 
-- Replace ``play/mybucket`` with the :mc:`alias <mc alias>` and bucket 
+- Replace ``play/mybucket`` with the :mc:`alias <bm alias>` and bucket 
   on which you want to enable automatic SSE-KMS encryption.
 
 Buckit SSE-KMS is functionally compatible with AWS S3 :s3-docs:`Server-Side Encryption with KMS keys stored in AWS <UsingKMSEncryption.html>` while expanding support to include the following KMS providers:
@@ -82,9 +82,9 @@ supported external Key Management Services (KMS):
 
 This procedure requires the following components:
 
-- Install :mc:`mc` on a machine with network access to the source
-  deployment. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-  instructions on downloading and installing ``mc``.
+- Install :mc:`bm` on a machine with network access to the source
+  deployment. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+  instructions on downloading and installing ``bm``.
 
 
 - Install :kes-docs:`Buckit Key Encryption Service (KES) <>` on a machine with internet access. 
@@ -186,29 +186,29 @@ Buckit server host in the deployment:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
 4) Configure Automatic Bucket Encryption
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc encrypt set` command to enable automatic SSE-KMS protection of all objects written to a specific bucket.
+Use the :mc:`bm encrypt set` command to enable automatic SSE-KMS protection of all objects written to a specific bucket.
 
 .. code-block:: shell
    :class: copyable
 
-   mc encrypt set sse-kms my-minio-sse-kms-key ALIAS/BUCKET
+   bm encrypt set sse-kms my-minio-sse-kms-key ALIAS/BUCKET
 
-- Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the Buckit deployment on which you enabled SSE-KMS.
+- Replace :mc-cmd:`ALIAS <bm encrypt set ALIAS>` with the 
+  :mc:`alias <bm alias>` of the Buckit deployment on which you enabled SSE-KMS.
 
-- Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
+- Replace :mc-cmd:`BUCKET <bm encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix on which you want to enable automatic SSE-KMS.
 
 Objects written to the specified bucket are automatically encrypted using the specified |EK|.

@@ -12,8 +12,6 @@
 
 .. mc:: bm batch generate
 
-.. versionchanged:: Buckit RELEASE.2022-10-08T20-11-00Z or later
-
 Syntax
 ------
 
@@ -32,12 +30,12 @@ See :ref:`job types <minio-batch-job-types>` for the supported jobs you can gene
 
    .. tab-item:: EXAMPLE
 
-      The following command creates a basic YAML file for a replicate job on the ``mybucket`` bucket of the ``myminio`` alias.
+      The following command creates a basic YAML file for a replicate job on the ``mybucket`` bucket of the ``mybuckit`` alias.
 
       .. code-block:: shell
          :class: copyable
 
-         bm batch generate myminio replicate
+         bm batch generate mybuckit replicate
 
    .. tab-item:: SYNTAX
 
@@ -67,7 +65,7 @@ Parameters
 
    .. code-block:: none
 
-      bm batch generate myminio replicate
+      bm batch generate mybuckit replicate
 
 .. mc-cmd:: JOBTYPE
    :required:
@@ -128,15 +126,9 @@ Job Types
 
 - :ref:`minio-mc-batch-generate-keyrotate-job`
 
-  .. versionadded:: Buckit RELEASE.2023-04-07T05-28-58Z 
-  
-  Rotate the sse-s3 or sse-kms keys for objects at rest on a Buckit deployment.
 
 - :ref:`minio-mc-batch-generate-expire-job`
 
-  .. versionadded:: Buckit RELEASE.2023-12-02T10-51-33Z
-
-  Expire objects based using similar semantics as :ref:`minio-lifecycle-management-create-expiry-rule`.
 
 .. _minio-mc-batch-generate-replicate-job:
 

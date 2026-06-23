@@ -12,9 +12,6 @@
 
 .. mc:: mc ilm edit
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``mc ilm edit`` replaced by :mc-cmd:`mc ilm rule edit`.
 
 
 Syntax
@@ -22,7 +19,7 @@ Syntax
 
 .. start-mc-ilm-edit-desc
 
-The :mc:`mc ilm edit` command modifies an existing object lifecycle management
+The :mc:`bm ilm edit` command modifies an existing object lifecycle management
 rule on a Buckit bucket.
 
 .. end-mc-ilm-edit-desc
@@ -32,14 +29,14 @@ rule on a Buckit bucket.
    .. tab-item:: EXAMPLE
 
       The following command modifies existing lifecycle management rules for
-      the ``mydata`` bucket on the ``myminio`` deployment:
+      the ``mydata`` bucket on the ``mybuckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc ilm edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  mydata/myminio
+         mc ilm edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  mydata/mybuckit
          
-         mc ilm edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker mydata/myminio
+         mc ilm edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker mydata/mybuckit
 
          mc ilm edit --id "c79n19dn10dnab109fg1" --transition-days 30 --tier "COLDTIER"
          
@@ -86,12 +83,12 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm edit myminio/mydata
+      mc ilm edit mybuckit/mydata
 
 .. mc-cmd:: --id
    :required:
 
-   The unique ID of the rule. Use :mc:`mc ilm rule ls` to list bucket
+   The unique ID of the rule. Use :mc:`bm ilm rule ls` to list bucket
    rules and retrieve the ``id`` for the rule you want to modify.
 
 .. mc-cmd:: --disable
@@ -114,9 +111,9 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm edit --prefix "meetingnotes/" myminio/mydata/ --expiry-days "90"
+      mc ilm edit --prefix "meetingnotes/" mybuckit/mydata/ --expiry-days "90"
 
-   The command modifies a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
+   The command modifies a rule that expires objects in the ``mydata`` bucket of the ``mybuckit`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
 .. mc-cmd:: --expiry-days
    :optional:
@@ -134,7 +131,7 @@ Parameters
 
    For versioned buckets, the expiry rule applies only to the *current*
    object version. Use the 
-   :mc-cmd:`~mc ilm edit --noncurrentversion-expiration-days` option
+   :mc-cmd:`~bm ilm edit --noncurrentversion-expiration-days` option
    to apply expiration behavior to noncurrent object versions.
 
    Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
@@ -144,7 +141,7 @@ Parameters
 
    Mutually exclusive with the following options:
 
-   - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
+   - :mc-cmd:`~bm ilm edit --expired-object-delete-marker`
 
    See :ref:`minio-object-delete` for more information.
 
@@ -157,8 +154,8 @@ Parameters
 
    This option is mutually exclusive with the following option:
    
-   - :mc-cmd:`~mc ilm edit --tags`
-   - :mc-cmd:`~mc ilm edit --expiry-days`
+   - :mc-cmd:`~bm ilm edit --tags`
+   - :mc-cmd:`~bm ilm edit --expiry-days`
 
    Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
@@ -188,11 +185,11 @@ Parameters
    by a newer version of that same object) after which Buckit marks the object
    version as eligible for transition. Buckit transitions the object to the
    configured remote storage tier specified to the 
-   :mc-cmd:`~mc ilm edit --tier` once the system host datetime
+   :mc-cmd:`~bm ilm edit --tier` once the system host datetime
    passes that calendar date.
 
    This option has no effect on non-versioned buckets. Requires specifying
-   :mc-cmd:`~mc ilm edit --noncurrentversion-tier`.
+   :mc-cmd:`~bm ilm edit --noncurrentversion-tier`.
 
    This option has the same behavior as the 
    S3 ``NoncurrentVersionTransition`` action.
@@ -208,7 +205,7 @@ Parameters
    The remote storage tier to which Buckit 
    :ref:`transitions noncurrent objects versions
    <minio-lifecycle-management-tiering>`. Specify a remote storage tier created
-   by :mc:`mc admin tier`.
+   by :mc:`bm admin tier`.
 
    Buckit does *not* automatically migrate objects from the previously
    specified remote tier to the new remote tier. Buckit continues to
@@ -238,7 +235,7 @@ Parameters
 
    This option is mutually exclusive with the following option:
 
-   - :mc-cmd:`~mc ilm edit --expired-object-delete-marker`
+   - :mc-cmd:`~bm ilm edit --expired-object-delete-marker`
 
 .. mc-cmd:: --transition-days
    :optional:
@@ -246,14 +243,14 @@ Parameters
    The number of calendar days from object creation after which Buckit
    marks an object as eligible for transition. Buckit transitions the object to
    the configured remote storage tier specified to the 
-   :mc-cmd:`~mc ilm edit --tier`. 
+   :mc-cmd:`~bm ilm edit --tier`. 
 
    For versioned buckets, the transition rule applies only to the *current*
    object version. Use the 
-   :mc-cmd:`~mc ilm edit --noncurrentversion-transition-days` option
+   :mc-cmd:`~bm ilm edit --noncurrentversion-transition-days` option
    to apply transition behavior to noncurrent object versions.
 
-   Requires specifying :mc-cmd:`~mc ilm edit --tier`.
+   Requires specifying :mc-cmd:`~bm ilm edit --tier`.
 
    Buckit uses a :ref:`scanner process <minio-concepts-scanner>` to check objects against all configured
    lifecycle management rules. Slow scanning due to high IO workloads or
@@ -265,9 +262,9 @@ Parameters
 
    The remote storage tier to which Buckit 
    :ref:`transition objects <minio-lifecycle-management-tiering>`. Specify a
-   remote storage tier created by :mc:`mc admin tier`. 
+   remote storage tier created by :mc:`bm admin tier`. 
 
-   Required if specifying :mc-cmd:`~mc ilm edit --transition-days`.
+   Required if specifying :mc-cmd:`~bm ilm edit --transition-days`.
 
    Buckit does *not* automatically migrate objects from the previously
    specified remote tier to the new remote tier. Buckit continues to
@@ -286,7 +283,7 @@ Examples
 Modify an Existing Lifecycle Management Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm edit` with :mc-cmd:`~mc ilm edit --id` to modify
+Use :mc:`bm ilm edit` with :mc-cmd:`~bm ilm edit --id` to modify
 an existing object expiration rule:
 
 .. code-block:: shell
@@ -294,34 +291,34 @@ an existing object expiration rule:
 
    mc ilm edit ALIAS/PATH --id "RULEID" [FLAGS]
 
-- Replace :mc-cmd:`ALIAS <mc ilm edit ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <bm ilm edit ALIAS>` with the 
+  :mc:`alias <bm alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm edit ALIAS>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <bm ilm edit ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management
   rule.
-  Use :mc:`mc ilm rule ls` to find the ``RULEID``.
+  Use :mc:`bm ilm rule ls` to find the ``RULEID``.
 
 - Specify any additional flags to add or modify the lifecycle management
   rule. For example, specify
-  :mc-cmd:`~mc ilm edit --transition-days` to override the existing 
+  :mc-cmd:`~bm ilm edit --transition-days` to override the existing 
   transition days value for the rule.
 
 Disable a Lifecycle Management Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm edit` with :mc-cmd:`~mc ilm edit --disable` to stop using an existing management rule.
+Use :mc:`bm ilm edit` with :mc-cmd:`~bm ilm edit --disable` to stop using an existing management rule.
 
 .. code-block:: shell
    :class: copyable
    
-   mc ilm edit --id "RULEID" --disable myminio/mybucket
+   mc ilm edit --id "RULEID" --disable mybuckit/mybucket
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management rule.
-  Use :mc:`mc ilm rule ls` to find the ``RULEID``.
-- Replace ``myminio`` with the ALIAS of the deployment where the rule exists.
+  Use :mc:`bm ilm rule ls` to find the ``RULEID``.
+- Replace ``mybuckit`` with the ALIAS of the deployment where the rule exists.
 - Replace ``mybucket`` with the bucket for the rule.
 
 Behavior

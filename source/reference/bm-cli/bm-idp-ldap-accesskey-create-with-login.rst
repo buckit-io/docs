@@ -13,8 +13,6 @@
 
 .. mc:: bm idp ldap accesskey create-with-login
 
-.. versionadded:: mc RELEASE.2024-04-18T16-45-29Z
-
 Description
 -----------
 
@@ -34,7 +32,7 @@ The :mc:`bm idp ldap accesskey create-with-login` uses interactive terminal-base
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey create-with-login https://minio.example.net/
+         bm idp ldap accesskey create-with-login https://buckit.example.net/
 
    .. tab-item:: SYNTAX
 
@@ -72,7 +70,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey create-with-login https://minio.example.net
+         bm idp ldap accesskey create-with-login https://buckit.example.net
 
 .. mc-cmd:: --access-key
    :optional:
@@ -155,28 +153,28 @@ Examples
 Create a new access-key pair for the authenticated user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The following command creates a new access key pair to use with the currently authenticated user on the Buckit deployment URL.
 The command outputs a randomly generated access key and secret key.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey create-with-login https://minio.example.net
+   bm idp ldap accesskey create-with-login https://buckit.example.net
 
 Create a new access-key pair with a custom access key and secret key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key pair with both an access key and secret key that you specify for the user currently authenticated on the ``minio`` alias.
+The following command creates a new access key pair with both an access key and secret key that you specify for the user currently authenticated on the Buckit deployment URL.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey create-with-login https://minio.example.net/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
+   bm idp ldap accesskey create-with-login https://buckit.example.net/ --access-key my-access-key-change-me --secret-key my-secret-key-change-me
 
 Create a new access-key pair that expires after 24 hours
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The following command creates a new access key pair to use with the currently authenticated user on the Buckit deployment URL.
 The credentials expire after 24 hours.
 
 The command outputs a randomly generated access key and secret key.
@@ -184,12 +182,12 @@ The command outputs a randomly generated access key and secret key.
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey create-with-login https://minio.example.net --expiry-duration 24h
+   bm idp ldap accesskey create-with-login https://buckit.example.net --expiry-duration 24h
 
 Create a new access-key pair that expires after a date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key pair to use with the currently authenticated user on the ``minio`` alias.
+The following command creates a new access key pair to use with the currently authenticated user on the Buckit deployment URL.
 The credentials expire after February 28, 2025.
 
 The command outputs a randomly generated access key and secret key.
@@ -197,4 +195,4 @@ The command outputs a randomly generated access key and secret key.
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey create-with-login https://minio.example.net --expiry 2025-02-28
+   bm idp ldap accesskey create-with-login https://buckit.example.net --expiry 2025-02-28

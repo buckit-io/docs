@@ -89,9 +89,6 @@ Parameters
 .. mc-cmd:: --exit
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-30T22-41-38Z
-      
-   Exit after the first successful check.
 
 .. mc-cmd:: --interval
    :optional:
@@ -123,12 +120,12 @@ Examples
 Return Latency and Liveness for 5 Requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command sends a liveness check for a deployment with the alias ``myminio`` five times, outputs the result of each check, then ends.
+The following command sends a liveness check for a deployment with the alias ``mybuckit`` five times, outputs the result of each check, then ends.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ping myminio --count 5
+   bm ping mybuckit --count 5
 
 Send Liveness Checks Repeatedly with 5 Minute Wait Between Each Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,7 +135,7 @@ The following command sends continuous liveness check requests with an interval 
 .. code-block:: shell
    :class: copyable
 
-   bm ping myminio --interval 300
+   bm ping mybuckit --interval 300
 
 End Liveness Checks for Error Counts Greater Than 20
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,4 +145,4 @@ The following command sends continuous liveness checks until 20 errors have been
 .. code-block:: shell
    :class: copyable
 
-   bm ping myminio --error-count 20
+   bm ping mybuckit --error-count 20

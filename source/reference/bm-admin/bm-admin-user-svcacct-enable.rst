@@ -39,7 +39,7 @@ The :mc-cmd:`bm admin user svcacct enable` command enables an existing access ke
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin user svcacct enable myminio myuserserviceaccount  
+         bm admin user svcacct enable mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

@@ -19,14 +19,14 @@ The ``AssumeRoleWithCustomToken`` endpoint has the following form:
 
 .. code-block:: shell
 
-   POST https://minio.example.net?Action=AssumeRoleWithCustomToken[&ARGS]
+   POST https://buckit.example.net?Action=AssumeRoleWithCustomToken[&ARGS]
 
 The following example uses all supported arguments. 
-Replace the ``minio.example.net`` hostname with the appropriate URL for your Buckit  cluster:
+Replace the ``buckit.example.net`` hostname with the appropriate URL for your Buckit  cluster:
 
 .. code-block:: shell
 
-   POST https://minio.example.net?Action=AssumeRoleWithCustomToken
+   POST https://buckit.example.net?Action=AssumeRoleWithCustomToken
    &Token=TOKEN
    &Version=2011-06-15
    &DurationSeconds=86000

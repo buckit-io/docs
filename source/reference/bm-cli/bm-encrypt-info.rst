@@ -27,12 +27,12 @@ encryption settings for a bucket.
    .. tab-item:: EXAMPLE
 
       The following command returns the default encryption setting for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment.
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         bm encrypt info myminio/mydata
+         bm encrypt info mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -80,7 +80,7 @@ Retrieve the Automatic Server-Side Encryption Settings for a Bucket
       .. code-block:: shell
          :class: copyable
 
-          bm encrypt info myminio/data
+          bm encrypt info mybuckit/data
 
    .. tab-item:: Syntax
 

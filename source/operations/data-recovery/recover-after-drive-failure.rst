@@ -111,12 +111,12 @@ The command should result in remounting of all of the replaced drives.
 5) Monitor Buckit for Drive Detection and Healing Status
 --------------------------------------------------------
 
-Use :mc:`mc admin logs` command *or* ``journalctl -u minio`` for
-``systemd``-managed installations to monitor the server log output after
+Use :mc:`bm admin logs` command *or* ``journalctl -u minio`` for
+systemd-managed installations to monitor the server log output after
 remounting drives. The output should include messages identifying each formatted
 and empty drive.
 
-Use :mc:`mc admin heal` to monitor the overall :ref:`healing <minio-concepts-healing>` status on the
+Use :mc:`bm admin heal` to monitor the overall :ref:`healing <minio-concepts-healing>` status on the
 deployment. Buckit aggressively heals replaced drive(s) to ensure rapid recovery
 from the degraded state.
 

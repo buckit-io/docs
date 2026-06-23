@@ -124,8 +124,8 @@ You can configure replication at either the :ref:`bucket level <minio-bucket-rep
 - Site level replication functions as two-way, active-active replication to keep multiple data locations (such as different geographic data centers) in sync with one another.
 
 Besides replication, Buckit provides a mirroring service.
-:mc:`mc mirror` copies only the actual object to any other S3 compatible data store, including other Buckit stores.
-However, versions and metadata do not back up with the :mc:`mc mirror` command.
+:mc:`bm mirror` copies only the actual object to any other S3 compatible data store, including other Buckit stores.
+However, versions and metadata do not back up with the :mc:`bm mirror` command.
 
 .. include:: /includes/common-admonitions.rst
    :start-after: start-exclusive-drive-access

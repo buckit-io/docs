@@ -66,12 +66,12 @@ Global Flags
 Examples
 --------
 
-List the policies that exist on the deployment at alias ``myminio``.
+List the policies that exist on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy ls myminio
+   bm admin policy ls mybuckit
 
 Output
 ~~~~~~

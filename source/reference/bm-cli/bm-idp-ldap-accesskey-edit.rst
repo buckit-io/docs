@@ -27,12 +27,12 @@ Description
 
    .. tab-item:: EXAMPLE
 
-         The following example modifies the secret for the access key ``mykey`` on the ``minio`` deployment:
+         The following example modifies the secret for the access key ``mykey`` on the ``buckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey edit myminio/ mykey --secret-key 'xxxxxxx' 
+         bm idp ldap accesskey edit buckit/ mykey --secret-key 'xxxxxxx' 
 
    .. tab-item:: SYNTAX
 
@@ -72,7 +72,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey ls minio
+         bm idp ldap accesskey ls buckit
 
 .. mc-cmd:: KEY
    :required:
@@ -128,22 +128,22 @@ Example
 Modify a secret for an access key
 +++++++++++++++++++++++++++++++++
 
-Modify the secret for the access key ``mykey`` on the ``minio`` deployment.
+Modify the secret for the access key ``mykey`` on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey edit myminio/ mykey --secret-key 'xxxxxxx' 
+   bm idp ldap accesskey edit buckit/ mykey --secret-key 'xxxxxxx' 
 
 Modify the expiration duration for an accesskey
 +++++++++++++++++++++++++++++++++++++++++++++++
 
-Modify the expiration duration for the access key ``mykey`` on the ``minio`` deployment.
+Modify the expiration duration for the access key ``mykey`` on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey edit myminio/ mykey ---expiry-duration 24h 
+   bm idp ldap accesskey edit buckit/ mykey ---expiry-duration 24h 
 
 
 Global Flags

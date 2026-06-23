@@ -17,7 +17,7 @@ You can establish or modify settings by defining:
 
 - an *environment variable* on the host system prior to starting or restarting the Buckit Server.
   Refer to your operating system's documentation for how to define an environment variable.
-- a *configuration setting* using :mc:`mc admin config set`.
+- a *configuration setting* using :mc:`bm admin config set`.
 
 If you define both an environment variable and the similar configuration setting, Buckit uses the environment variable value.
 
@@ -67,7 +67,7 @@ Enable
 	 .. code-block:: shell
 	    :class: copyable
 
-            mc admin config set myminio lambda_webhook:myfunction endpoint="https://example.com/" enable=on
+            bm admin config set mybuckit lambda_webhook:myfunction endpoint="https://example.com/" enable=on
 
 Endpoint
 --------
@@ -123,7 +123,7 @@ Auth token
 
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-            Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+            Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
    .. tab-item:: Configuration Setting
       :sync: config
@@ -137,7 +137,7 @@ Auth token
 
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
 
-            Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.         
+            Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.         
 
 Client cert
 -----------

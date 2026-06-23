@@ -26,7 +26,7 @@ The :mc:`bm idp ldap policy entities` command displays a list of mappings for a 
 
    .. tab-item:: EXAMPLE
 
-      The following example lists all mappings for a specific policy, a set of groups, and a selection of users on the ``myminio`` deployment.
+      The following example lists all mappings for a specific policy, a set of groups, and a selection of users on the ``mybuckit`` deployment.
 
       Specifically, it lists:
 
@@ -37,7 +37,7 @@ The :mc:`bm idp ldap policy entities` command displays a list of mappings for a 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap policy entities myminio                                                  \
+         bm idp ldap policy entities mybuckit                                                  \
                                      --policy finteam-policy                                  \
                                      --user 'uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'  \
                                      --group 'cn=projectb,ou=groups,ou=swengg,dc=min,dc=io'
@@ -77,7 +77,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap policy entities myminio
+      bm idp ldap policy entities mybuckit
 
 .. mc-cmd:: --group
    :optional:
@@ -102,12 +102,12 @@ Parameters
 Example
 ~~~~~~~
 
-The following example lists the entities mapped to each of two policies, ``policy1`` and ``policy2`` and entities mapped to the ``projectb`` group on the ``myminio`` deployment:
+The following example lists the entities mapped to each of two policies, ``policy1`` and ``policy2`` and entities mapped to the ``projectb`` group on the ``mybuckit`` deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap policy entities myminio                                                 \
+   bm idp ldap policy entities mybuckit                                                 \
                              policy1                                                 \
                              policy2                                                 \
                              --group='cn=projectb,ou=groups,ou=swengg,dc=min,dc=io'

@@ -18,15 +18,15 @@ This procedure supports cost-management strategies such as tiering objects from 
 Requirements
 ------------
 
-Install and Configure ``mc``
+Install and Configure ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install :mc:`mc` on a machine with network access to both source and destination
-clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install :mc:`bm` on a machine with network access to both source and destination
+clusters. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+instructions on downloading and installing ``bm``.
 
-Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
+Use the :mc:`bm alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-minio-permissions>` for configuring and
@@ -83,7 +83,7 @@ Remote Bucket Must Exist
 
 Create the remote bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
 
-If the remote bucket contains existing data, use the :mc-cmd:`prefix <mc ilm tier add --prefix>` feature to isolate transitioned objects from any other objects on that bucket.
+If the remote bucket contains existing data, use the :mc-cmd:`prefix <bm ilm tier add --prefix>` feature to isolate transitioned objects from any other objects on that bucket.
 
 Considerations
 --------------
@@ -124,13 +124,13 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add the remote Buckit deployment as the
+Use the :mc:`bm ilm tier add` command to add the remote Buckit deployment as the
 new remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier add minio TARGET TIER_NAME  \
+   bm ilm tier add minio TARGET TIER_NAME  \
       --endpoint https://HOSTNAME       \
       --access-key ACCESS_KEY           \
       --secret-key SECRET_KEY           \
@@ -138,6 +138,8 @@ new remote storage tier:
       --prefix PREFIX                   \
       --storage-class STORAGE_CLASS     \
       --region REGION 
+
+The ``minio`` value is the required tier type for a remote Buckit deployment.
 
 The example above uses the following arguments:
 
@@ -149,33 +151,33 @@ The example above uses the following arguments:
    * - Argument
      - Description
    
-   * - :mc-cmd:`ALIAS <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
+   * - :mc-cmd:`ALIAS <bm ilm tier add TARGET>`
+     - The :mc:`alias <bm alias>` of the Buckit deployment on which to configure
        the Buckit remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <bm ilm tier add TIER_NAME>`
      - The name to associate with the new Buckit remote storage tier. Specify the
-       name in all-caps, e.g. ``MINIO_WARM_TIER``. This value is required in the next
+       name in all-caps, e.g. ``BUCKIT_WARM_TIER``. This value is required in the next
        step.
 
-   * - :mc-cmd:`HOSTNAME <mc ilm tier add --endpoint>`
+   * - :mc-cmd:`HOSTNAME <bm ilm tier add --endpoint>`
      - The URL endpoint for the Buckit storage backend.
 
-   * - :mc-cmd:`ACCESS_KEY <mc ilm tier add --access-key>`
+   * - :mc-cmd:`ACCESS_KEY <bm ilm tier add --access-key>`
      - The access key Buckit uses to access the bucket. The
        access key *must* correspond to an IAM user with the 
        required 
        :ref:`permissions 
        <minio-lifecycle-management-transition-to-minio-permissions-remote>`.
 
-   * - :mc-cmd:`SECRET_KEY <mc ilm tier add --secret-key>`
+   * - :mc-cmd:`SECRET_KEY <bm ilm tier add --secret-key>`
      - The corresponding secret key for the specified ``ACCESS_KEY``.
 
-   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
+   * - :mc-cmd:`BUCKET <bm ilm tier add --bucket>`
      - The name of the bucket on the remote Buckit deployment to which the ``SOURCE``
        transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
+   * - :mc-cmd:`PREFIX <bm ilm tier add --prefix>`
      - The optional bucket prefix within which Buckit transitions objects.
 
        Buckit stores all transitioned objects in the specified ``BUCKET`` under a
@@ -188,14 +190,14 @@ The example above uses the following arguments:
        source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <bm ilm tier add --storage-class>`
      - The :ref:`Erasure Coding storage class <minio-ec-storage-class>` Buckit applies to objects transitions to the remote Buckit bucket. 
        Specify one of the following supported storage classes:
 
        - ``STANDARD`` *Recommended*
        - ``REDUCED``
 
-   * - :mc-cmd:`REGION <mc ilm tier add --region>`
+   * - :mc-cmd:`REGION <bm ilm tier add --region>`
      - The Buckit region of the specified ``BUCKET``.
 
        Buckit deployments typically do not require setting a region as part of setup.
@@ -212,16 +214,16 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm rule ls` command to review the configured transition
+Use the :mc:`bm ilm rule ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule ls ALIAS/PATH --transition
+   bm ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <bm ilm rule ls ALIAS>` with the :mc:`alias <bm alias>`
   of the Buckit deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <bm ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

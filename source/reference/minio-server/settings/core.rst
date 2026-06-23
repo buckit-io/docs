@@ -39,7 +39,7 @@ Buckit Server CLI Options
 
 Set a string of :ref:`parameters <minio-server-parameters>` to use when starting the Buckit Server.
 
-For Unix-like systems using the recommended Buckit ``systemd`` service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
+For Unix-like systems using the recommended Buckit systemd service, use the ``/etc/default/minio`` file and create an environment variable ``MINIO_OPTS`` for specifying parameters to append to the ``minio`` systemd process:
 
 .. code-block:: shell
    :class: copyable
@@ -56,7 +56,7 @@ To use it, declare the environment variable using standard shell semantics, then
 
    export MINIO_OPTS=' --console-address=":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-40000" '
 
-   minio server $MINIO_OPTS ...
+   buckit server $MINIO_OPTS ...
 
    # The above is equivalent to running the following:
    # minio server --console-address=":9001" \
@@ -77,9 +77,9 @@ Storage Volumes
 
       .. envvar:: MINIO_VOLUMES
 
-         The directories or drives the :mc:`minio server` process uses as the storage backend.
+         The directories or drives the :mc:`buckit server <buckit server>` process uses as the storage backend.
 
-         Functionally equivalent to setting :mc-cmd:`minio server DIRECTORIES`.
+         Functionally equivalent to setting :mc-cmd:`buckit server DIRECTORIES <buckit server DIRECTORIES>`.
          Use this value when configuring Buckit to run using an environment file.
 
    .. tab-item:: Configuration Setting
@@ -97,9 +97,9 @@ Environment Variable File Path
 
       .. envvar:: MINIO_CONFIG_ENV_FILE
 
-         Specifies the full path to the file the Buckit server process uses for loading environment variables.
+         Specifies the full path to the file the :mc:`buckit server <buckit server>` process uses for loading environment variables.
 
-         For ``systemd``-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct Buckit to reload changes to that file when using :mc-cmd:`mc admin service restart` to restart the deployment.
+         For systemd-managed files, set this value to the path of the environment file (``/etc/default/minio``) to direct Buckit to reload changes to that file when using :mc-cmd:`bm admin service restart` to restart the deployment.
 
    .. tab-item:: Configuration Setting
 
@@ -141,17 +141,17 @@ Domain
 
          Omitting this setting directs Buckit to only accept the default path-style requests.
 
-         For example, consider a Buckit deployment with an assigned FQDN of ``minio.example.net``.
+         For example, consider a Buckit deployment with an assigned FQDN of ``buckit.example.net``.
 
-         - With path-style lookups, applications can access the bucket using its full path as ``minio.example.net/mybucket``.
-         - With virtual-host lookups, application can access the bucket as a virtual host as ``mybucket.minio.example.net/``.
+         - With path-style lookups, applications can access the bucket using its full path as ``buckit.example.net/mybucket``.
+         - With virtual-host lookups, application can access the bucket as a virtual host as ``mybucket.buckit.example.net/``.
 
          .. important::
 
             If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
             Any Buckit services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision.
 
-            For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any Buckit service or target.
+            For example, if setting ``MINIO_DOMAIN=buckit.example.net``, you **cannot** assign any subdomains of ``buckit.example.net`` (in the form of ``*.buckit.example.net``) to any Buckit service or target.
             This includes hostnames for use with :ref:`bucket <minio-bucket-replication>`, :ref:`batch <minio-batch-framework-replicate-job>`, or :ref:`site replication <minio-site-replication-overview>`.
 
    .. tab-item:: Configuration Setting
@@ -278,9 +278,6 @@ Comma-separated list of the file extensions to compress.
 Setting a new list of file extensions replaces the previously configured list.
 Defaults to ``".txt, .log, .csv, .json, .tar, .xml, .bin"``.
 
-.. versionchanged:: RELEASE.2024-03-15T01-07-19Z
-
-   Specify ``"*"`` to direct Buckit to compress all supported file types.
 
 Buckit does not support compressing file types on the :ref:`Excluded File Types <minio-data-compression-excluded-types>` list, even if explicitly specified in this argument.
 

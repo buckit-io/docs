@@ -35,12 +35,12 @@ results as the ``ls`` command.
    .. tab-item:: EXAMPLE
 
       The following command lists all objects *and* object versions in the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ls --recursive --versions myminio/mydata
+         bm ls --recursive --versions mybuckit/mydata
 
       The output resembles the following:
 

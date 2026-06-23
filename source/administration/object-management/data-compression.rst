@@ -74,16 +74,16 @@ Tutorials
 Enable Data Compression
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-To enable data compression, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
+To enable data compression, use :mc-cmd:`bm admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``on``.
 
 The following enables compression for new objects of the :ref:`default types <minio-data-compression-default-types>`:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression enable=on
+   bm admin config set ALIAS compression enable=on
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
 Existing uncompressed objects are not modified.
 To configure which extensions and types to compress, see :ref:`minio-data-compression-configure-objects`.
@@ -93,22 +93,22 @@ To view the current compression settings:
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS compression
+   bm admin config get ALIAS compression
 
 
 Disable Data Compression
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-To disable data compression, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``off``:
+To disable data compression, use :mc-cmd:`bm admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.enable` option to ``off``:
 
 The following disables data compression for new objects:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression enable=off
+   bm admin config set ALIAS compression enable=off
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
 Existing compressed objects are not modified.
 
@@ -137,29 +137,29 @@ The sections below describe how to configure compression for the desired file ex
 Compress All Compressible Objects
 +++++++++++++++++++++++++++++++++
 
-To compress all objects except the :ref:`default excluded types <minio-data-compression-excluded-types>`, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.extensions` and :mc-conf:`~compression.mime_types` options to empty lists:
+To compress all objects except the :ref:`default excluded types <minio-data-compression-excluded-types>`, use :mc-cmd:`bm admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.extensions` and :mc-conf:`~compression.mime_types` options to empty lists:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression extensions= mime_types=
+   bm admin config set ALIAS compression extensions= mime_types=
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
   
 Compress Objects by File Extension
 ++++++++++++++++++++++++++++++++++
 
-To compress objects with certain file extensions, use :mc-cmd:`mc admin config set` to set the desired file extensions in an :mc-conf:`~compression.extensions` argument.
+To compress objects with certain file extensions, use :mc-cmd:`bm admin config set` to set the desired file extensions in an :mc-conf:`~compression.extensions` argument.
 
 The following command compresses files with the extensions ``.bin`` and ``.txt``:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression extensions=".bin, .txt"
+   bm admin config set ALIAS compression extensions=".bin, .txt"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
 The new list of file extensions replaces the previous list.
 To add or remove an extension, repeat the :mc-conf:`~compression.extensions` command with the complete list of extensions to compress.
@@ -169,24 +169,24 @@ The following adds ``.pdf`` to the list of file extensions from the previous exa
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression extensions=".bin, .txt, .pdf"
+   bm admin config set ALIAS compression extensions=".bin, .txt, .pdf"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
 
 Compress Objects by Media Type
 ++++++++++++++++++++++++++++++
 
-To compress objects of certain media types, use :mc-cmd:`mc admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.mime_types` option to a list of the desired types.
+To compress objects of certain media types, use :mc-cmd:`bm admin config set` to set the :mc-conf:`compression` key :mc-conf:`~compression.mime_types` option to a list of the desired types.
 
 The following example compresses files of types ``application/json`` and ``image/bmp``:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression mime_types="application/json, image/bmp"
+   bm admin config set ALIAS compression mime_types="application/json, image/bmp"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
 The new list of media types replaces the previous list.
 To add or remove a type, repeat the :mc-conf:`~compression.mime_types` command with the complete list of types to compress.
@@ -197,6 +197,6 @@ The following command adds all ``text`` subtypes to the list from the previous e
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS compression mime_types="application/json, image/bmp, text/*"
+   bm admin config set ALIAS compression mime_types="application/json, image/bmp, text/*"
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.

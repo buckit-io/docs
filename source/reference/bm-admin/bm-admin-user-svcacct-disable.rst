@@ -39,7 +39,7 @@ The :mc-cmd:`bm admin user svcacct disable` command disables an existing access 
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin user svcacct disable myminio myuserserviceaccount  
+         bm admin user svcacct disable mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

@@ -10,16 +10,16 @@ Publish Server or Audit Logs to an External Service
    :local:
    :depth: 1
 
-Buckit publishes all :mc:`minio server` operations to the system console. 
+Buckit publishes all :mc:`buckit server <buckit server>` operations to the system console. 
 Reading these logs depends on how the server process is managed. 
-For example, if the server is managed through a ``systemd`` script, 
+For example, if the server is managed through a systemd script, 
 you can read the logs using ``journalctl -u SERVICENAME.service``. Replace
 ``SERVICENAME`` with the name of the Buckit service.
 
 Buckit also supports publishing server logs and audit logs to an HTTP webhook.
 
 - :ref:`Server logs <minio-logging-publish-server-logs>` contain the same
-  :mc:`minio server` operations logged to the system console. Server logs
+  :mc:`buckit server <buckit server>` operations logged to the system console. Server logs
   support general monitoring and troubleshooting of operations.
 
 - :ref:`Audit logs <minio-logging-publish-audit-logs>` are more granular
@@ -38,14 +38,14 @@ Publish Server Logs to HTTP Webhook
 -----------------------------------
 
 You can configure a new HTTP webhook endpoint to which Buckit publishes 
-:mc:`minio server` logs using either environment variables *or* by setting 
+:mc:`buckit server <buckit server>` logs using either environment variables *or* by setting 
 runtime configuration settings. 
 
 .. tab-set::
 
    .. tab-item:: Environment Variables
 
-      Buckit supports specifying the :mc:`minio server` log HTTP webhook endpoint
+      Buckit supports specifying the :mc:`buckit server <buckit server>` log HTTP webhook endpoint
       and associated configuration settings using :ref:`environment variables
       <minio-server-envvar-logging-regular>`.
 
@@ -80,7 +80,7 @@ runtime configuration settings.
 
         If the specified ``<IDENTIFIER>`` matches an existing log endpoint,
         the new settings *override* any existing settings for that endpoint.
-        Use :mc-cmd:`mc admin config get logger_webhook <mc admin config get>`
+        Use :mc-cmd:`bm admin config get logger_webhook <bm admin config get>`
         to review the currently configured log HTTP webhook endpoints.
 
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
@@ -130,7 +130,7 @@ runtime configuration settings.
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating log HTTP webhook endpoints on a Buckit
-      deployment using the :mc-cmd:`mc admin config set` command and the
+      deployment using the :mc-cmd:`bm admin config set` command and the
       :mc-conf:`logger_webhook` configuration key. You must restart the
       Buckit deployment to apply any new or updated configuration settings.
 
@@ -141,7 +141,7 @@ runtime configuration settings.
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ logger_webhook:IDENTIFIER  \
+         bm admin config set ALIAS/ logger_webhook:IDENTIFIER  \
             endpoint="https://webhook-1.example.net"           \
             auth_token="TOKEN" 
 
@@ -151,7 +151,7 @@ runtime configuration settings.
 
         If the specified ``<IDENTIFIER>`` matches an existing log endpoint,
         the new settings *override* any existing settings for that endpoint.
-        Use :mc-cmd:`mc admin config get logger_webhook <mc admin config get>`
+        Use :mc-cmd:`bm admin config get logger_webhook <bm admin config get>`
         to review the currently configured log HTTP webhook endpoints.
 
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
@@ -168,7 +168,7 @@ runtime configuration settings.
         .. code-block:: shell
            :class: copyable
 
-            mc admin config set ALIAS/ logger_webhook    \
+            bm admin config set ALIAS/ logger_webhook    \
                endpoint="https://webhook-1.example.net"  \
                auth_token="Bearer 1a2b3c4f5e"
 
@@ -178,7 +178,7 @@ runtime configuration settings.
         .. code-block:: shell
            :class: copyable
 
-           mc admin config set ALIAS/ logger_webhook    \
+           bm admin config set ALIAS/ logger_webhook    \
               endpoint="https://webhook-1.example.net"  \
               auth_token="ServiceXYZ 1a2b3c4f5e"
 
@@ -236,7 +236,7 @@ settings:
 
         If the specified ``<IDENTIFIER>`` matches an existing log endpoint,
         the new settings *override* any existing settings for that endpoint.
-        Use :mc-cmd:`mc admin config get audit_webhook <mc admin config get>`
+        Use :mc-cmd:`bm admin config get audit_webhook <bm admin config get>`
         to review the currently configured audit log HTTP webhook endpoints.
 
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
@@ -291,7 +291,7 @@ settings:
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating audit log HTTP webhook endpoints on a
-      Buckit deployment using the :mc-cmd:`mc admin config set` command and the
+      Buckit deployment using the :mc-cmd:`bm admin config set` command and the
       :mc-conf:`audit_webhook` configuration key. You must restart the Buckit
       deployment to apply any new or updated configuration settings.
 
@@ -302,7 +302,7 @@ settings:
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ audit_webhook:IDENTIFIER  \
+         bm admin config set ALIAS/ audit_webhook:IDENTIFIER  \
             endpoint="https://webhook-1.example.net"          \
             auth_token="TOKEN"                                \
             client_cert="cert.pem"                            \
@@ -314,7 +314,7 @@ settings:
 
         If the specified ``<IDENTIFIER>`` matches an existing log endpoint,
         the new settings *override* any existing settings for that endpoint.
-        Use :mc-cmd:`mc admin config get audit_webhook <mc admin config get>`
+        Use :mc-cmd:`bm admin config get audit_webhook <bm admin config get>`
         to review the currently configured audit log HTTP webhook endpoints.
 
       - Replace ``https://webhook-1.example.net`` with the URL of the HTTP
@@ -331,7 +331,7 @@ settings:
         .. code-block:: shell
            :class: copyable
 
-            mc admin config set ALIAS/ audit_webhook     \
+            bm admin config set ALIAS/ audit_webhook     \
                endpoint="https://webhook-1.example.net"  \
                auth_token="Bearer 1a2b3c4f5e"
 
@@ -341,7 +341,7 @@ settings:
         .. code-block:: shell
            :class: copyable
 
-           mc admin config set ALIAS/ audit_webhook     \
+           bm admin config set ALIAS/ audit_webhook     \
               endpoint="https://webhook-1.example.net"  \
               auth_token="ServiceXYZ 1a2b3c4f5e"
 
@@ -398,13 +398,13 @@ Buckit audit logs resemble the following JSON document:
       "requestID": "17B86CB0ED88EBE9",
       "userAgent": "Buckit (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
       "requestPath": "/data/test-data.csv",
-      "requestHost": "minio.example.net:9000",
+      "requestHost": "buckit.example.net:9000",
       "requestQuery": {
          "uploadId": "OGNhMmI3YWQtMjBjZi00ZDA3LTllZmItMjhiMmY1MTlmNGE1LmU3MjNlNWI4LTNiYWYtNDYyNy1hNzI3LWMyNDE3NTVjMmMzNw"
       },
       "requestHeader": {
          "Accept-Encoding": "zstd,gzip",
-         "Authorization": "AWS4-HMAC-SHA256 Credential=minioadmin/20240229/us-east-1/s3/aws4_request, SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccb3acdc1763509a88a7e4a3d7fe431ef0ee5ca3f66ccb430d5a09326e87e893",
+         "Authorization": "AWS4-HMAC-SHA256 Credential=buckitadmin/20240229/us-east-1/s3/aws4_request, SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=ccb3acdc1763509a88a7e4a3d7fe431ef0ee5ca3f66ccb430d5a09326e87e893",
          "Content-Length": "267",
          "Content-Type": "application/octet-stream",
          "User-Agent": "Buckit (linux; amd64) minio-go/v7.0.67 mc/RELEASE.2024-02-24T01-33-20Z",
@@ -437,5 +437,5 @@ Buckit audit logs resemble the following JSON document:
                ]
          }
       },
-      "accessKey": "minioadmin"
+      "accessKey": "buckitadmin"
    }

@@ -29,13 +29,13 @@ The :mc:`bm idp ldap ls` command lists the existing set of configurations for an
 
    .. tab-item:: EXAMPLE
 
-      The following example lists the AD/LDAP configuration settings for the ``myminio`` deployment.
+      The following example lists the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap ls       \
-                     myminio
+                     mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -65,7 +65,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap ls myminio
+      bm idp ldap ls mybuckit
 
 
 

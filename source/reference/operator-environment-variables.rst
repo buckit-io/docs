@@ -87,11 +87,6 @@ Available Buckit Operator Environment Variables
 
 .. envvar:: MINIO_OPERATOR_IMAGE
 
-   .. versionadded:: v5.0.11
-
-   Specify the image of the Buckit instance sidecar container loaded by the Operator.
-
-   Omit to use the Operator image.
 
 .. envvar:: WATCHED_NAMESPACE
 

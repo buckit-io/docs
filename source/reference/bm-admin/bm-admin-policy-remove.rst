@@ -26,12 +26,12 @@ The :mc:`bm admin policy remove` command has equivalent functionality to :mc:`bm
 
    .. tab-item:: EXAMPLE
 
-      The following command removes the policy names ``writeonly`` from the ``myminio`` Buckit deployment:
+      The following command removes the policy names ``writeonly`` from the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin policy rm myminio writeonly
+         bm admin policy rm mybuckit writeonly
 
    .. tab-item:: SYNTAX
 
@@ -75,4 +75,4 @@ Remove a policy called ``listbuckets``.
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy rm myminio listbuckets
+   bm admin policy rm mybuckit listbuckets

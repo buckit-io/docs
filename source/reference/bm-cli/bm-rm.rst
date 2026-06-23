@@ -42,12 +42,12 @@ For more information on how Buckit performs ``DELETE`` actions on objects, see :
    .. tab-item:: EXAMPLE
 
       The following command removes multiple objects from the 
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm rm --recursive myminio/mydata
+         bm rm --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -383,10 +383,6 @@ object.
 - To remove all non-current versions of an object from a bucket, use
   :mc-cmd:`bm rm --non-current`
 
-.. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
-
-   The output shows the modification time of versioned files.
-   When used with ``--dry-run``, this can help confirm that you selected the correct object(s) for removal.
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

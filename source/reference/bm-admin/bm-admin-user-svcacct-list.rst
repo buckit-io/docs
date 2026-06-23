@@ -42,7 +42,7 @@ The alias :mc:`bm admin user svcacct list` has equivalent functionality to :mc:`
       .. code-block:: shell  
          :class: copyable 
 
-         bm admin user svcacct ls myminio admin1
+         bm admin user svcacct ls mybuckit admin1
 
       The output resembles the following:
    
@@ -54,24 +54,6 @@ The alias :mc:`bm admin user svcacct list` has equivalent functionality to :mc:`
          FZVSEZ8NM9JRBEQZ7B8Q | no-expiry
          HOXGL8ON3RG0IKYCHCUD | no-expiry
 
-      .. versionadded:: RELEASE.2023-05-26T23-31-54Z
-
-        The list of access keys includes the expiry date, or ``no-expiry`` for keys that do not expire.
-	 
-   .. tab-item:: SYNTAX
-
-      The command has the following syntax: 
-  
-      .. code-block:: shell  
-         :class: copyable 
-  
-         bm [GLOBALFLAGS] admin user svcacct ls   \ 
-                                             ALIAS  \ 
-                                             USER
-
-      .. include:: /includes/common-minio-mc.rst
-         :start-after: start-minio-syntax
-         :end-before: end-minio-syntax
 
 
 Parameters

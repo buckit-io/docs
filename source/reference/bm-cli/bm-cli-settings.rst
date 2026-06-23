@@ -93,11 +93,7 @@ Examples
 STS Service
 ~~~~~~~~~~~
 
-.. versionadded:: mc RELEASE.2023-11-06T04-19-23Z
-
 Use this setting to add an STS endpoint to use for :program:`bm` commands.
-
-.. versionchanged:: mc RELEASE.2023-12-02T02-03-28Z 
 
 Supports adding multiple environment variables by alias.
 
@@ -121,11 +117,7 @@ Supports adding multiple environment variables by alias.
 Web Token Identity
 ~~~~~~~~~~~~~~~~~~
 
-.. versionadded:: mc RELEASE.2023-11-06T04-19-23Z
-
 Use this setting to add a web token identity to use for :program:`bm` commands.
-
-.. versionchanged:: mc RELEASE.2023-12-02T02-03-28Z 
 
 Supports adding multiple environment variables by alias.
 
@@ -182,8 +174,6 @@ Disable the Buckit Manager CLI progress bar.
 
 Pager
 ~~~~~
-
-.. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
 
 Disable the pager functionality of the Buckit Manager CLI in the CLI.
 When used, output prints to raw ``STDOUT`` instead.

@@ -118,18 +118,18 @@ Procedure
 
    Access the :ref:`minio-console` by opening a browser on the local machine and navigating to ``http://127.0.0.1:9001``.
 
-   Log in to the Console with the credentials ``minioadmin | minioadmin``.
+   Log in to the Console with the credentials ``buckitadmin | buckitadmin``.
    These are the default :ref:`root user <minio-users-root>` credentials.
 
 #. **(Optional) Connect the Buckit Client**
 
-   If your local machine has :mc:`mc` :ref:`installed <mc-install>`, use the :mc:`mc alias set` command to authenticate and connect to the Buckit deployment:
+   If your local machine has :mc:`bm` :ref:`installed <mc-install>`, use the :mc:`bm alias set` command to authenticate and connect to the Buckit deployment:
 
    .. code-block:: shell
       :class: copyable
 
-      mc alias set k8s-minio-dev http://127.0.0.1:9000 minioadmin minioadmin
-      mc admin info k8s-minio-dev
+      bm alias set k8s-minio-dev http://127.0.0.1:9000 buckitadmin buckitadmin
+      bm admin info k8s-minio-dev
 
    - The name of the alias
    - The hostname or IP address and port of the Buckit server

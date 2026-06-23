@@ -11,9 +11,9 @@ Core Operational Concepts
 What are the components of a Buckit Deployment?
 -----------------------------------------------
 
-A Buckit deployment consists of a set of storage and compute resources running one or more :mc:`minio server` nodes that together act as a single object storage repository. 
+A Buckit deployment consists of a set of storage and compute resources running one or more :mc:`buckit server <buckit server>` nodes that together act as a single object storage repository. 
 
-A standalone instance of Buckit consists of a single Server Pool with a single :mc:`minio server` node. 
+A standalone instance of Buckit consists of a single Server Pool with a single :mc:`buckit server <buckit server>` node. 
 Standalone instances are best suited for initial development and evaluation. 
 
 A Buckit deployment can run directly on a physical device in a ``bare metal`` or non-virtualized infrastructure.
@@ -53,7 +53,7 @@ How does Buckit manage multiple virtual or physical servers?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While testing Buckit may only involve a single drive on a single computer, most production Buckit deployments use multiple compute and storage devices to create a high availability environment.
-A server pool is a set of :mc:`minio server` nodes that pool their drives and resources to support object storage write and retrieval requests.
+A server pool is a set of :mc:`buckit server <buckit server>` nodes that pool their drives and resources to support object storage write and retrieval requests.
 
 Buckit supports adding one or more server pools to existing Buckit deployments for horizontal expansion.
 When Buckit has multiple server pools available, an individual object always writes to the same erasure set in the same server pool.
@@ -62,19 +62,19 @@ If one server pool goes down, Buckit halts I/O to all pools until the cluster re
 You must restore the pool to working operation to resume I/O to the deployment.
 Objects written to other pools remain safe on disk while you perform repair operations.
    
-The :mc-cmd:`~minio server HOSTNAME` argument passed to the :mc:`minio server` command represents a Server Pool:
+The :mc-cmd:`~buckit server HOSTNAME` argument passed to the :mc:`buckit server <buckit server>` command represents a Server Pool:
 
-Consider the following example startup command, which creates a single Server Pool with 4 :mc:`minio server` nodes of 4 drives each for a total of 16 drives. 
+Consider the following example startup command, which creates a single Server Pool with 4 :mc:`buckit server <buckit server>` nodes of 4 drives each for a total of 16 drives. 
 
 .. code-block:: shell
 
-   minio server https://minio{1...4}.example.net/mnt/disk{1...4}
+   buckit server https://buckit{1...4}.example.net/mnt/disk{1...4}
                    
                 |                    Server Pool                |
 
-Starting server pools in the same :mc:`minio server` startup command enables awareness of all server pool peers.
+Starting server pools in the same :mc:`buckit server <buckit server>` startup command enables awareness of all server pool peers.
 
-See :mc:`minio server` for complete syntax and usage.
+See :mc:`buckit server <buckit server>` for complete syntax and usage.
 
 .. _minio-intro-cluster:
 
@@ -83,18 +83,18 @@ How does Buckit link multiple server pools into a single Buckit cluster?
 
 A cluster refers to an entire Buckit deployment consisting of one or more Server Pools. 
 
-Consider the command below that creates a cluster consisting of two Server Pools, each with 4 :mc:`minio server` nodes and 4 drives per node for a total of 32 drives. 
+Consider the command below that creates a cluster consisting of two Server Pools, each with 4 :mc:`buckit server <buckit server>` nodes and 4 drives per node for a total of 32 drives. 
 
 .. code-block:: shell
 
-   minio server https://minio{1...4}.example.net/mnt/disk{1...4} \
-                https://minio{5...8}.example.net/mnt/disk{1...4}
+   buckit server https://buckit{1...4}.example.net/mnt/disk{1...4} \
+                https://buckit{5...8}.example.net/mnt/disk{1...4}
                    
                 |                    Server Pool                |
    
 Each server pool has one or more :ref:`erasure sets <minio-ec-erasure-set>` depending on the number of drives and nodes in the pool.
 
-Buckit strongly recommends production clusters consist of a *minimum* of 4 :mc:`minio server` nodes in a Server Pool for proper high availability and durability guarantees.
+Buckit strongly recommends production clusters consist of a *minimum* of 4 :mc:`buckit server <buckit server>` nodes in a Server Pool for proper high availability and durability guarantees.
 
 Can I change the size of an existing Buckit deployment?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -120,7 +120,9 @@ How do I manage one or more Buckit instances or clusters?
 
 There are several options to manage your Buckit deployments and clusters:
 
-- Use the command line with :mc:`mc` and :mc:`mc admin`
+- Use the command line with :mc:`bm` and :mc:`bm admin`
+- Use the :ref:`Buckit Manager <install-buckit-manager>` web UI (``bm web``)
+  for managing clusters and individual instances
 - The :ref:`Buckit Console <minio-console>` graphical user interface for individual instances
 
 .. Reference Enterprise Operator Console eventually
@@ -139,7 +141,7 @@ For more information on write preference calculation logic, see :ref:`Writing Fi
 Rebalancing data across all pools after an expansion is an expensive operation that requires scanning the entire deployment and moving objects between pools.
 This may take a long time to complete depending on the amount of data to move.
 
-Starting with Buckit Client version RELEASE.2022-11-07T23-47-39Z, you can manually initiate a rebalancing operation across all server pools using :mc:`mc admin rebalance`. 
+You can manually initiate a rebalancing operation across all server pools using :mc:`bm admin rebalance`.
 
 Rebalancing does not block ongoing operations and runs in parallel to all other I/O. 
 This can result in reduced performance of regular operations. 
@@ -201,7 +203,7 @@ Buckit divides objects into chunks — called `shards` — and evenly distribute
 Buckit can continue seamlessly serving read and write requests despite the loss of any single drive. 
 At the highest redundancy levels, Buckit can serve read requests with minimal performance impact despite the loss of up to half (:math:`N / 2`) of the total drives in the deployment.
 
-Buckit calculates the size and number of Erasure Sets in a Server Pool based on the total number of drives in the set *and* the number of :mc:`minio` servers in the set. See :ref:`minio-ec-erasure-set` for more information.
+Buckit calculates the size and number of Erasure Sets in a Server Pool based on the total number of drives in the set *and* the number of Buckit servers in the set. See :ref:`minio-ec-erasure-set` for more information.
 
 Buckit Automatically Heals Corrupt or Missing Data On-the-fly
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

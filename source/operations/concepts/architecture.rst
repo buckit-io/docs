@@ -106,14 +106,6 @@ You can expand a Buckit deployment's available storage through :ref:`pool expans
       Once identified, Buckit partitions the object and distributes the data and parity shards across the appropriate set.
 
 Client applications can use any S3-compatible SDK or library to interact with the Buckit deployment.
-   Buckit publishes its own :ref:`SDK <minio-drivers>` specifically intended for use with S3-compatible deployments.
-
-   .. figure:: /images/architecture/architecture-multiple-clients.svg
-      :figwidth: 100%
-      :alt: Diagram of multiple S3-compatible clients using SDKs to connect to Buckit
-
-      Clients using a variety of S3-compatible SDKs can perform operations against the same Buckit deployment.
-
    Buckit uses a strict implementation of the S3 API, including requiring clients to sign all operations using AWS :s3-api:`Signature V4 <sig-v4-authenticating-requests.html>` or the legacy Signature V2.
    AWS signature calculation uses the client-provided headers, such that any modification to those headers by load balancers, proxies, security programs, or other components will result in signature mismatch errors and request failure.
    Ensure any such intermediate components support pass-through of unaltered headers from client to server.

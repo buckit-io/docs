@@ -21,7 +21,7 @@ The :mc:`bm admin prometheus generate` command generates a metrics scraping conf
 
 For more complete documentation on using Buckit with Prometheus, see :ref:`How to monitor Buckit server with Prometheus <minio-metrics-collect-using-prometheus>`
 
-Starting with Buckit Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and Buckit Manager CLI :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional endpoints and metrics.
+:ref:`Metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional endpoints and metrics.
 To generate a v3 scrape configuration use the ``--api_version v3`` option.
 
 Buckit recommends new deployments use :ref:`version 3 (v3) <minio-metrics-and-alerts>`.
@@ -38,12 +38,12 @@ Existing deployments can continue to use :ref:`metrics version 2 <minio-metrics-
 
    .. tab-item:: EXAMPLE
 
-      The following command generates a Prometheus scrape configuration that collects version 2 bucket metrics from the deployment at :term:`alias` ``myminio``:
+      The following command generates a Prometheus scrape configuration that collects version 2 bucket metrics from the deployment at :term:`alias` ``mybuckit``:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin prometheus generate myminio bucket
+         bm admin prometheus generate mybuckit bucket
 
    .. tab-item:: SYNTAX
 
@@ -278,4 +278,3 @@ The following generates a scrape configuration for v2 bucket metrics:
    :class: copyable
 
    bm admin prometheus generate ALIAS bucket
-

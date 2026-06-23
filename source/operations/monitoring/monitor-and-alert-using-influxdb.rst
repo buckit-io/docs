@@ -25,7 +25,7 @@ The procedure on this page documents the following:
 
    - An existing InfluxDB deployment configured with one or more :influxdb-docs:`notification endpoints <notification-endpoints/>`
    - An existing Buckit deployment with network access to the InfluxDB deployment
-   - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the Buckit deployment
+   - An :mc:`bm` installation on your local host configured to :ref:`access <alias>` the Buckit deployment
 
    These instructions use :ref:`version 2 metrics. <minio-metrics-v2>`
    For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metrics-and-alerts>`

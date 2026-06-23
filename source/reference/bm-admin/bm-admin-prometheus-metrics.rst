@@ -23,7 +23,7 @@ The output includes additional information about each metric, such as if its val
 
 For more complete documentation on using Buckit with Prometheus, see :ref:`How to monitor Buckit server with Prometheus <minio-metrics-collect-using-prometheus>`
 
-Starting with Buckit Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and Buckit Manager CLI :mc-release:`RELEASE.2024-07-11T18-01-28Z`, :ref:`metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional endpoints and metrics.
+:ref:`Metrics version 3 (v3) <minio-metrics-and-alerts>` provides additional endpoints and metrics.
 To print v3 metrics use the ``--api_version v3`` option.
 
 Buckit recommends new deployments use :ref:`version 3 (v3) <minio-metrics-and-alerts>`.
@@ -40,12 +40,12 @@ Existing deployments can continue to use :ref:`metrics version 2 <minio-metrics-
 
    .. tab-item:: EXAMPLE
 
-      The following command prints cluster metrics from the deployment at :term:`alias` ``myminio``:
+      The following command prints cluster metrics from the deployment at :term:`alias` ``mybuckit``:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin prometheus metrics myminio cluster
+         bm admin prometheus metrics mybuckit cluster
 
    .. tab-item:: SYNTAX
 

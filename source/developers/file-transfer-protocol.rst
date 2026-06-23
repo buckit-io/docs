@@ -6,70 +6,41 @@ File Transfer Protocol (FTP/SFTP)
 
 .. default-domain:: minio
 
-.. container:: extlinks-video
-
-   - `File Transport Using FTP and SFTP with Buckit <https://www.youtube.com/watch?v=lNZyL8wD-lI>`__
-
 .. contents:: Table of Contents
    :local:
    :depth: 2
 
-.. tab-set::
+You can use the File Transfer Protocol (FTP) to interact with the objects on a Buckit deployment.
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
+You must specifically enable FTP or SFTP when starting the server.
+Enabling either server type does not affect other Buckit features.
 
-      Starting with Operator 5.0.7 and :minio-release:`Buckit Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the SSH File Transfer Protocol (SFTP) to interact with the objects on a Buckit Operator Tenant deployment.
-
-      SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
-      It allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
-
-      Enabling SFTP does not affect other Buckit features.
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      Starting with :minio-release:`Buckit Server RELEASE.2023-04-20T17-56-55Z <RELEASE.2023-04-20T17-56-55Z>`, you can use the File Transfer Protocol (FTP) to interact with the objects on a Buckit deployment.
-
-      You must specifically enable FTP or SFTP when starting the server.
-      Enabling either server type does not affect other Buckit features.
-
-      This page uses the abbreviation FTP throughout, but you can use any of the supported FTP protocols described below.
+This page uses the abbreviation FTP throughout, but you can use any of the supported FTP protocols described below.
 
 Supported Protocols
 -------------------
 
-.. tab-set::
+When enabled, Buckit supports FTP access over the following protocols:
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
+- SSH File Transfer Protocol (SFTP)
 
-      The Buckit Operator only supports configuring SSH File Transfer Protocol (SFTP).
+  SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
+  SFTP allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
 
-   .. tab-item:: Baremetal
-      :sync: baremetal
+  Your FTP client must support SFTP.
 
-      When enabled, Buckit supports FTP access over the following protocols:
+- File Transfer Protocol over SSL/TLS (FTPS)
 
-      - SSH File Transfer Protocol (SFTP)
+  FTPS allows for encrypted FTP communication with TLS certificates over the standard FTP communication channel.
+  FTPS should not be confused with SFTP, as FTPS does not communicate over a Secure Shell (SSH).
 
-        SFTP is defined by the Internet Engineering Task Force (IETF) as an extension of SSH 2.0.
-        SFTP allows file transfer over SSH for use with :ref:`Transport Layer Security (TLS) <minio-tls>` and virtual private network (VPN) applications.
+  Your FTP client must support FTPS.
 
-        Your FTP client must support SFTP.
+- File Transfer Protocol (FTP)
 
-      - File Transfer Protocol over SSL/TLS (FTPS)
-      
-        FTPS allows for encrypted FTP communication with TLS certificates over the standard FTP communication channel.
-        FTPS should not be confused with SFTP, as FTPS does not communicate over a Secure Shell (SSH).
+  Unencrypted file transfer.
 
-        Your FTP client must support FTPS.
-
-      - File Transfer Protocol (FTP)
-      
-        Unencrypted file transfer.
-
-        Buckit does **not** recommend using unencrypted FTP for file transfer.
+  Buckit does **not** recommend using unencrypted FTP for file transfer.
 
 Supported Commands
 ------------------
@@ -118,43 +89,19 @@ You may not perform other Buckit admin actions with SFTP.
 Prerequisites
 -------------
 
-.. tab-set::
-
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      - Buckit Operator v5.0.7 or later.
-      - Enable an SFTP port (8022) for the server.
-      - A port to use for the SFTP commands and a range of ports to allow the SFTP server to request to use for the data transfer.
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      - Buckit RELEASE.2023-04-20T17-56-55Z or later.
-      - Enable an FTP or SFTP port for the server.
-      - A port to use for the FTP commands and a range of ports to allow the FTP server to request to use for the data transfer.
+- Buckit RELEASE.2023-04-20T17-56-55Z or later.
+- Enable an FTP or SFTP port for the server.
+- A port to use for the FTP commands and a range of ports to allow the FTP server to request to use for the data transfer.
 
 Procedure
 ---------
 
-.. tab-set::
+.. include:: /includes/linux/file-transfer-protocol-not-k8s.rst
 
-   .. tab-item:: Kubernetes
-      :sync: k8s
-
-      .. include:: /includes/k8s/file-transfer-protocol-k8s.rst
-
-   .. tab-item:: Baremetal
-      :sync: baremetal
-
-      .. include:: /includes/linux/file-transfer-protocol-not-k8s.rst
-
-.. _minio-certificate-key-file-sftp-k8s:
+.. _minio-certificate-key-file-sftp:
 
 Connect to Buckit Using SFTP with a Certificate Key File
 --------------------------------------------------------
-
-.. versionadded:: RELEASE.2024-05-07T06-41-25Z
 
 
 Buckit supports mutual TLS (mTLS) certificate-based authentication on SFTP, where both the server and the client verify the authenticity of each other.
@@ -170,7 +117,7 @@ The keys must include a `principals list <https://man.openbsd.org/ssh-keygen#CER
 .. code-block:: shell
    :class: copyable
 
-   ssh-keygen -s ~/.ssh/ca_user_key -I miniouser -n miniouser -V +1h -z 1 miniouser1.pub
+   ssh-keygen -s ~/.ssh/ca_user_key -I buckituser -n buckituser -V +1h -z 1 buckituser.pub
 
 -  ``-s`` specifies the path to the certificate authority public key to use for generating this key.
    The specified public key must have a ``principals`` list that includes this user.
@@ -188,7 +135,7 @@ Start or restart the Buckit Server and specify the path to the trusted certifica
 .. code-block:: shell
    :class: copyable 
 
-   minio server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
+   buckit server {path-to-server} --sftp="trusted-user-ca-key=/path/to/.ssh/ca_user_key.pub" {...other flags}
 
 When connecting to the Buckit Server with SFTP, the client verifies the Buckit Server's certificate.
 The client then passes its own certificate to the Buckit Server.
@@ -209,14 +156,13 @@ Valid suffixes are either ``=ldap`` or ``=svc``.
 
 .. code-block:: console
 
-   > sftp -P 8022 my-ldap-user=ldap@[minio@localhost]:/bucket
+   > sftp -P 8022 my-ldap-user=ldap@[buckit.example.net]:/bucket
 
 
 .. code-block:: console
 
-   > sftp -P 8022 my-ldap-user=svc@[minio@localhost]:/bucket
+   > sftp -P 8022 my-ldap-user=svc@[buckit.example.net]:/bucket
 
 
 - Replace ``my-ldap-user`` with the username to use.
-- Replace ``[minio@localhost]`` with the address of the Buckit server.
-
+- Replace ``[buckit.example.net]`` with the address of the Buckit server.

@@ -45,15 +45,7 @@ Example actions the user may be able to perform include:
 - Display versions
 - :ref:`Delete <minio-object-delete>`
 
-.. versionadded:: Console v0.24.0
 
-   View the status of uploading or downloading objects with the object manager button available on the top right corner of the Console.
-   If you have not uploaded or downloaded any objects during the current session, the button does not appear.
-
-.. versionchanged:: Console v0.35.0
-
-   If you select multiple objects to download, Buckit creates a ZIP archive of those objects for downloading.
-   You must unzip or uncompress this archive after downloading to access the files.
 
 .. _minio-console-buckets:
 
@@ -73,9 +65,6 @@ However, Buckit recommends no more than 500,000 buckets per deployment as a gene
 
 While creating a bucket, you can enable :ref:`versioning <minio-bucket-versioning>`, :ref:`object locking <minio-object-locking>`, bucket size (quota) limits, and :ref:`retention rules <minio-object-locking-retention-modes>` (which require versioning).
 
-.. versionchanged:: Console v0.35.0
-
-   If you enable versioning, you can specify prefixes to exclude from versioning.
 
 You can configure locking and versioning options only when you create the bucket.
 You cannot change these settings for the bucket later.

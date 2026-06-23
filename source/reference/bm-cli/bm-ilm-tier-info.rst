@@ -53,12 +53,12 @@ The command has the following syntax:
 
    .. tab-item:: EXAMPLE
 
-      The following example outputs the configuration for an existing remote tier called ``WARM-TIER`` on the ``myminio`` deployment.
+      The following example outputs the configuration for an existing remote tier called ``WARM-TIER`` on the ``mybuckit`` deployment.
       
       .. code-block:: shell
          :class: copyable
 
-          bm ilm tier info myminio WARM-TIER
+          bm ilm tier info mybuckit WARM-TIER
 
 
    .. tab-item:: SYNTAX
@@ -103,22 +103,22 @@ Example
 Display the Statistics for an Existing Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example displays the statistics of the tier ``WARM-TIER`` on the ``myminio`` deployment.
+The following example displays the statistics of the tier ``WARM-TIER`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier info myminio WARM-TIER 
+   bm ilm tier info mybuckit WARM-TIER 
 
 Display the Statistics for all Existing Tiers on a Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example displays the statistics of all existing tiers on the ``myminio`` deployment.
+The following example displays the statistics of all existing tiers on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier info myminio
+   bm ilm tier info mybuckit
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

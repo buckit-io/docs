@@ -51,35 +51,21 @@ TLS for Buckit
 
 The Buckit Server searches for TLS keys and certificates for each node and uses those credentials for enabling TLS.
 Buckit automatically enables TLS upon discovery and validation of certificates.
-The search location depends on your Buckit configuration:
+Specify a path for the Buckit server to search for certificates using
+``buckit server --certs-dir`` or ``-S``.
 
-.. tab-set::
+For example, the following command fragment directs the Buckit process to use
+the ``/opt/buckit/certs`` directory for TLS certificates.
 
-   .. tab-item:: Default Path
+.. code-block:: shell
 
-      By default, the Buckit server looks for the TLS keys and certificates for each node in the following directory:
+   buckit server --certs-dir /opt/buckit/certs ...
 
-      .. code-block:: shell
+For systemd-managed deployments, modify ``MINIO_OPTS`` in
+``/etc/default/minio`` to include the ``--certs-dir`` option.
 
-         ${HOME}/.minio/certs
-
-      Where ``${HOME}`` is the home directory of the user running the Buckit Server process.
-      You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
-
-      For ``systemd`` managed deployments this must correspond to the ``USER`` running the Buckit process.
-      If that user has no home directory, use the :guilabel:`Custom Path` option instead.
-
-   .. tab-item:: Custom Path
-
-      You can specify a path for the Buckit server to search for certificates using ``buckit server --certs-dir`` or ``-S``.
-
-      For example, the following command fragment directs the Buckit process to use the ``/opt/buckit/certs`` directory for TLS certificates.
-
-      .. code-block:: shell
-
-         buckit server --certs-dir /opt/buckit/certs ...
-
-      The user running the Buckit service *must* have read and write permissions to this directory.
+The user running the Buckit service *must* have read and write permissions to
+this directory.
 
 Place the TLS certificates for the default domain (e.g. ``buckit.example.net``) in the ``/certs`` directory, with the private key as ``private.key`` and public certificate as ``public.crt``.
 
@@ -91,24 +77,15 @@ Self-signed, Internal, Private Certificates, and Public CAs with Intermediate Ce
 If using Certificates signed by a non-global or non-public Certificate Authority, *or* if using a global CA that requires the use of intermediate certificates, you must provide those CAs to the Buckit Server.
 If the Buckit server does not have the necessary CAs, it may return warnings or errors related to TLS validation when connecting to other services.
 
-Place the CA certificates in the ``/certs/CAs`` folder.
-The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (``buckit server --certs-dir`` or ``-S``)
+Place the CA certificates in the ``/certs/CAs`` folder under the configured
+certificate directory.
 
-.. tab-set::
+The following example assumes the Buckit Server was started with
+``--certs-dir /opt/buckit/certs``:
 
-   .. tab-item:: Default Certificate Path
+.. code-block:: shell
 
-      .. code-block:: shell
-
-         mv myCA.crt ${HOME}/.minio/certs/CAs
-
-   .. tab-item:: Custom Certificate Path
-
-      The following example assumes the Buckit Server was started with ``--certs dir /opt/buckit/certs``:
-
-      .. code-block:: shell
-
-         mv myCA.crt /opt/buckit/certs/CAs/
+   mv myCA.crt /opt/buckit/certs/CAs/
 
 For a self-signed certificate, the Certificate Authority is typically the private key used to sign the cert.
 
@@ -122,24 +99,15 @@ Third-Party Certificate Authorities
 
 The Buckit Server validates the TLS certificate presented by each connecting client against the host system's trusted root certificate store.
 
-Place the CA certificates in the ``/certs/CAs`` folder.
-The root path for this folder depends on whether you use the default certificate path *or* a custom certificate path (``buckit server --certs-dir`` or ``-S``)
+Place the CA certificates in the ``/certs/CAs`` folder under the configured
+certificate directory.
 
-.. tab-set::
+The following example assumes the Buckit Server was started with
+``--certs-dir /opt/buckit/certs``:
 
-   .. tab-item:: Default Certificate Path
+.. code-block:: shell
 
-      .. code-block:: shell
-
-         mv myCA.crt ${HOME}/.minio/certs/CAs
-
-   .. tab-item:: Custom Certificate Path
-
-      The following example assumes the Buckit Server was started with ``--certs dir /opt/buckit/certs``:
-
-      .. code-block:: shell
-
-         mv myCA.crt /opt/buckit/certs/CAs/
+   mv myCA.crt /opt/buckit/certs/CAs/
 
 Place the certificate file for each CA into the ``/CAs`` subdirectory.
 Ensure all hosts in the Buckit deployment have a consistent set of trusted CAs in that directory.

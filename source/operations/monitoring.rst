@@ -8,11 +8,6 @@ Monitoring and Alerts
    :local:
    :depth: 1
 
-.. container:: extlinks-video
-
-   - `Monitoring with Buckit and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
-   - `Monitoring with Buckit and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
-
 Metrics and Alerts
 ------------------
 
@@ -37,10 +32,10 @@ Other metrics and analytics software suites which support the Prometheus data mo
 Logging
 -------
 
-Buckit publishes all :mc:`minio server` operations to the system console. 
+Buckit publishes all :mc:`buckit server <buckit server>` operations to the system console. 
 Buckit also supports publishing server logs and audit logs to an HTTP webhook.
 
-- :ref:`Server logs <minio-logging-publish-server-logs>` contain the same :mc:`minio server` operations logged to the system console. 
+- :ref:`Server logs <minio-logging-publish-server-logs>` contain the same :mc:`buckit server <buckit server>` operations logged to the system console. 
   Server logs support general monitoring and troubleshooting of operations.
 
 - :ref:`Audit logs <minio-logging-publish-audit-logs>` are more granular descriptions of each operation on the Buckit deployment. 

@@ -12,8 +12,6 @@
 
 .. mc:: bm alias export
 
-.. versionadded:: mc.RELEASE.2023-11-15T22-45-58Z
-
 Syntax
 ------
 
@@ -101,7 +99,7 @@ It then transforms the configuration using the `jq <https://jqlang.github.io/jq/
 .. code-block:: shell
    :class: copyable
 
-   bm alias export play | jq '.accessKey = "minioadmin" | .secretKey = "minioadmin"' | bm alias import play-custom
+   bm alias export play | jq '.accessKey = "buckitadmin" | .secretKey = "buckitadmin"' | bm alias import play-custom
 
 Back Up An Alias Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

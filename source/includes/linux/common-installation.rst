@@ -1,7 +1,7 @@
 .. start-install-minio-binary-desc
 
 The following tabs provide examples of installing Buckit onto 64-bit Linux operating systems using RPM, DEB, or binary.
-The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``minio`` service for ``systemctl``.
+The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``buckit`` service for ``systemctl``.
 Buckit strongly recommends using the RPM or DEB installation routes.
 To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-systemctl`.
 
@@ -119,27 +119,27 @@ The following example uses the ``~/minio-data`` folder:
    :class: copyable
 
    mkdir ~/minio-data
-   minio server ~/minio-data --console-address ":9001"
+   buckit server ~/minio-data --console-address ":9001"
 
-The :mc:`minio server` process prints its output to the system console, similar
+The :mc:`buckit server <buckit server>` process prints its output to the system console, similar
 to the following:
 
 .. code-block:: shell
 
    API: http://192.0.2.10:9000  http://127.0.0.1:9000
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+   RootUser: buckitadmin 
+   RootPass: buckitadmin 
 
    Console: http://192.0.2.10:9001 http://127.0.0.1:9001     
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+   RootUser: buckitadmin 
+   RootPass: buckitadmin 
 
    Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-      $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
+      $ bm alias set mybuckit http://192.0.2.10:9000 buckitadmin buckitadmin
 
    Documentation: https://docs.min.io/community/minio-object-store/index.html
 
-   WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
+   WARNING: Detected default credentials 'buckitadmin:buckitadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
 
 Open your browser to any of the listed :guilabel:`Console` addresses to open the
 :ref:`Buckit Console <minio-console>` and log in with the :guilabel:`RootUser`
@@ -195,7 +195,7 @@ For binary installations, create this file manually on all Buckit hosts.
 
 .. note::
    
-   ``systemd`` checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path and uses the first file it finds.
+   systemd checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path and uses the first file it finds.
    To avoid conflicting or unexpected configuration options, check that the file only exists at the ``/usr/lib/systemd/system/minio.service`` path.
 
    Refer to the `man page for systemd.unit <https://www.man7.org/linux/man-pages/man5/systemd.unit.5.html>`__ for details on the file path search order.
@@ -275,25 +275,20 @@ To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-syste
 .. code-block:: shell
    :class: copyable
 
-   sudo systemctl start minio.service
+   sudo systemctl start buckit.service
 
 Use the following commands to confirm the service is online and functional:
 
 .. code-block:: shell
    :class: copyable
 
-   sudo systemctl status minio.service
-   journalctl -f -u minio.service
+   sudo systemctl status buckit.service
+   journalctl -f -u buckit.service
 
 Buckit may log an increased number of non-critical warnings while the 
 server processes connect and synchronize. These warnings are typically 
 transient and should resolve as the deployment comes online.
 
-.. versionchanged:: RELEASE.2023-02-09T05-16-53Z
-
-   Buckit starts if it detects enough drives to meet the :ref:`write quorum <minio-ec-parity>` for the deployment.
-      
-   If any drives remain offline after starting Buckit, check and cure any issues blocking their functionality before starting production workloads.
 
 The Buckit service does not automatically start on host reboot.
 You must use ``systemctl enable minio.service`` to start the process as part of the host boot.
@@ -310,15 +305,15 @@ You must use ``systemctl enable minio.service`` to start the process as part of 
 .. code-block:: shell
    :class: copyable
 
-   sudo systemctl restart minio.service
+   sudo systemctl restart buckit.service
 
 Use the following commands to confirm the service is online and functional:
 
 .. code-block:: shell
    :class: copyable
 
-   sudo systemctl status minio.service
-   journalctl -f -u minio.service
+   sudo systemctl status buckit.service
+   journalctl -f -u buckit.service
 
 Buckit may log an increased number of non-critical warnings while the 
 server processes connect and synchronize. These warnings are typically 

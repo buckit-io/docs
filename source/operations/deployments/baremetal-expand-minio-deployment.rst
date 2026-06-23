@@ -76,19 +76,19 @@ Sequential Hostnames
 Buckit *requires* using expansion notation ``{x...y}`` to denote a sequential
 series of Buckit hosts when creating a server pool. Buckit therefore *requires*
 using sequentially-numbered hostnames to represent each
-:mc:`minio server` process in the pool. 
+:mc:`buckit server <buckit server>` process in the pool. 
 
 Create the necessary DNS hostname mappings *prior* to starting this procedure.
 For example, the following hostnames would support a 4-node distributed
 server pool:
 
-- ``minio5.example.com``
-- ``minio6.example.com``
-- ``minio7.example.com``
-- ``minio8.example.com``
+- ``buckit5.example.com``
+- ``buckit6.example.com``
+- ``buckit7.example.com``
+- ``buckit8.example.com``
 
 You can specify the entire range of hostnames using the expansion notation
-``minio{5...8}.example.com``.
+``buckit{5...8}.example.com``.
 
 Configuring DNS to support Buckit is out of scope for this procedure.
 
@@ -135,7 +135,7 @@ Check the documentation for your operating system for how to set up and maintain
 Back Up Cluster Settings First
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
+Use the :mc:`bm admin cluster bucket export` and :mc:`bm admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
 You can use these snapshots to restore :ref:`bucket <minio-mc-admin-cluster-bucket-import>` and :ref:`IAM <minio-mc-admin-cluster-iam-import>` settings to recover from user or process errors as necessary.
 
 Considerations
@@ -169,7 +169,7 @@ Buckit calculates the probability of a write operation to each of the pools as:
 In addition to the free space calculation, if a write option (with parity) would bring a drive
 usage above 99% or a known free inode count below 1000, Buckit does not write to the pool.
 
-If desired, you can manually initiate a rebalance procedure with :mc:`mc admin rebalance`.
+If desired, you can manually initiate a rebalance procedure with :mc:`bm admin rebalance`.
 For more about how rebalancing works, see :ref:`managing objects across a deployment <minio-rebalance>`.
 
 Likewise, Buckit does not write to pools in a decommissioning process.
@@ -177,7 +177,7 @@ Likewise, Buckit does not write to pools in a decommissioning process.
 Expansion is Non-Disruptive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Adding a new server pool requires restarting *all* Buckit server processes in the
+Adding a new server pool requires restarting *all* :mc:`buckit server <buckit server>` processes in the
 deployment at around same time. 
 
 .. include:: /includes/common-installation.rst
@@ -222,22 +222,49 @@ procedure.
 
 Complete any planned hardware expansion prior to :ref:`decommissioning older hardware pools <minio-decommissioning>`.
 
-1) Install the Buckit Binary on Each Node in the New Server Pool
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Install the Buckit Package on Each Node in the New Server Pool
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. include:: /includes/linux/common-installation.rst
-   :start-after: start-install-minio-binary-desc
-   :end-before: end-install-minio-binary-desc
+Use the package format appropriate for each new Linux host in the server pool.
 
-2) Add TLS/SSL Certificates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tab-set::
+
+   .. tab-item:: RPM (RHEL)
+
+      Use the following commands to download, verify, and install the Buckit
+      RPM for each new Linux host in the server pool.
+
+      .. code-block:: shell
+         :class: copyable
+
+         curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
+         sudo dnf install ./buckit.rpm
+
+   .. tab-item:: DEB (Debian/Ubuntu)
+
+      Use the following commands to download, verify, and install the Buckit
+      DEB for each new Linux host in the server pool.
+
+      .. code-block:: shell
+         :class: copyable
+
+         curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
+         sudo apt install ./buckit.deb
+
+2) Add TLS/SSL Certificates (Optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the current deployment already has TLS enabled, configure matching TLS
+certificates on each new node before continuing.
+
+If the current deployment does not have TLS enabled, you can skip this step.
 
 .. include:: /includes/common-installation.rst
    :start-after: start-install-minio-tls-desc
    :end-before: end-install-minio-tls-desc
 
-3) Create the ``systemd`` Service File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3) Create the systemd Service File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-systemd-desc
@@ -258,37 +285,37 @@ The following examples assumes that:
 
   .. code-block:: shell
 
-     minio1.example.com   minio3.example.com   
-     minio2.example.com   minio4.example.com   
+     buckit1.example.com   buckit3.example.com   
+     buckit2.example.com   buckit4.example.com   
 
   Each host has 4 locally attached drives with
   sequential mount points:
 
   .. code-block:: shell
 
-     /mnt/disk1/minio   /mnt/disk3/minio 
-     /mnt/disk2/minio   /mnt/disk4/minio
+     /mnt/disk1/buckit   /mnt/disk3/buckit 
+     /mnt/disk2/buckit   /mnt/disk4/buckit
 
 - The new server pool consists of eight new Buckit hosts with sequential
   hostnames:
 
   .. code-block:: shell
 
-     minio5.example.com   minio9.example.com
-     minio6.example.com   minio10.example.com
-     minio7.example.com   minio11.example.com
-     minio8.example.com   minio12.example.com
+     buckit5.example.com   buckit9.example.com
+     buckit6.example.com   buckit10.example.com
+     buckit7.example.com   buckit11.example.com
+     buckit8.example.com   buckit12.example.com
 
 - All hosts have eight locally-attached drives with sequential mount-points:
 
   .. code-block:: shell
      
-     /mnt/disk1/minio  /mnt/disk5/minio
-     /mnt/disk2/minio  /mnt/disk6/minio
-     /mnt/disk3/minio  /mnt/disk7/minio
-     /mnt/disk4/minio  /mnt/disk8/minio
+     /mnt/disk1/buckit  /mnt/disk5/buckit
+     /mnt/disk2/buckit  /mnt/disk6/buckit
+     /mnt/disk3/buckit  /mnt/disk7/buckit
+     /mnt/disk4/buckit  /mnt/disk8/buckit
 
-- The deployment has a load balancer running at ``https://minio.example.net``
+- The deployment has a load balancer running at ``https://buckit.example.net``
   that manages connections across all Buckit hosts. The load balancer should
   not be routing requests to the new hosts at this step, but should have 
   the necessary configuration updates planned.
@@ -313,7 +340,7 @@ Modify the example to reflect your deployment topology:
    # The command includes the port on which the Buckit servers listen for each
    # server pool.
 
-   MINIO_VOLUMES="https://minio{1...4}.example.net:9000/mnt/disk{1...4}/minio https://minio{5...12}.example.net:9000/mnt/disk{1...8}/minio"
+   MINIO_VOLUMES="https://buckit{1...4}.example.net:9000/mnt/disk{1...4}/buckit https://buckit{5...12}.example.net:9000/mnt/disk{1...8}/buckit"
 
    # Set all Buckit server options
    #
@@ -329,14 +356,14 @@ Modify the example to reflect your deployment topology:
    #
    # Defer to your organizations requirements for superadmin user name.
 
-   MINIO_ROOT_USER=minioadmin
+   MINIO_ROOT_USER=buckitadmin
 
    # Set the root password
    #
    # Use a long, random, unique string that meets your organizations
    # requirements for passwords.
 
-   MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+   MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
 You may specify other :ref:`environment variables
 <minio-server-environment-variables>` or server commandline options as required

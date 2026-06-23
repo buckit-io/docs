@@ -661,4 +661,8 @@
 	<path class="st2" d="M1508.8,221.9c-0.5,0-0.9-0.2-1.2-0.4s-0.4-0.7-0.4-1.2v-4.5h-2.4v-0.9h1.8c0.3,0,0.4-0.1,0.5-0.2
 		c0.1-0.1,0.2-0.3,0.2-0.5v-1.9h1v2.5h3.3v0.9h-3.3v5.2h3.3v0.9L1508.8,221.9L1508.8,221.9z"/>
 </g>
+<rect x="396" y="202" width="222" height="24" rx="3" ry="3" fill="#F5F5F5"/>
+<text x="507" y="219.5" text-anchor="middle" font-family="Menlo, Consolas, Monaco, monospace" font-size="16" fill="#434343">https://buckit-01.example.net</text>
+<rect x="1291" y="202" width="222" height="24" rx="3" ry="3" fill="#F5F5F5"/>
+<text x="1402" y="219.5" text-anchor="middle" font-family="Menlo, Consolas, Monaco, monospace" font-size="16" fill="#434343">https://buckit-02.example.net</text>
 </svg>

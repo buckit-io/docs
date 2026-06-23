@@ -104,7 +104,7 @@ You can establish or modify settings by defining:
 
 - an *environment variable* on the host system prior to starting or restarting the Buckit Server.
   Refer to your operating system's documentation for how to define an environment variable.
-- a *configuration setting* using :mc:`mc admin config set`.
+- a *configuration setting* using :mc:`bm admin config set`.
   
 If you define both an environment variable and the similar configuration setting, Buckit uses the environment variable value.
 

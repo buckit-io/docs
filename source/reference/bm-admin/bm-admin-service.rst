@@ -37,25 +37,25 @@ Restart Buckit Servers in Target Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
-   :start-after: myminio-alias
-   :end-before: end-myminio-alias
+   :start-after: mybuckit-alias
+   :end-before: end-mybuckit-alias
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin service restart myminio
+   bm admin service restart mybuckit
 
 Resume S3 Calls on a Target Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/play-alias-available.rst
-   :start-after: myminio-alias
-   :end-before: end-myminio-alias
+   :start-after: mybuckit-alias
+   :end-before: end-mybuckit-alias
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin service unfreeze myminio
+   bm admin service unfreeze mybuckit
 
 Syntax
 ------

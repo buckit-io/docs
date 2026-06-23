@@ -5,7 +5,7 @@
    :start-after: start-install-minio-binary-desc
    :end-before: end-install-minio-binary-desc
 
-2) Create the ``systemd`` Service File
+2) Create the systemd Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
@@ -38,14 +38,14 @@ The ``journalctl`` output should resemble the following:
 
    Status:         1 Online, 0 Offline. 
    API: http://192.168.2.100:9000  http://127.0.0.1:9000       
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
    Console: http://192.168.2.100:9001 http://127.0.0.1:9001    
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
 
    Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-      $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
+      $ bm alias set mybuckit http://10.0.2.100:9000 mybuckitadmin buckit-secret-key-change-me
 
    Documentation: https://docs.min.io/community/minio-object-store/index.html
 

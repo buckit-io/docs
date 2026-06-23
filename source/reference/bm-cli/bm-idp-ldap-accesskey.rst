@@ -12,8 +12,6 @@
 
 .. mc:: bm idp ldap accesskey
 
-.. versionadded:: RELEASE.2023-10-30T18-43-32Z
-
 Description
 -----------
 

@@ -101,7 +101,7 @@ Each of the following tabs contains a provider-specific example:
       .. code-block:: shell
          :class: copyable
 
-         bm alias set myminio https://minioserver.example.net ACCESS_KEY SECRET_KEY
+         bm alias set mybuckit https://buckitserver.example.net ACCESS_KEY SECRET_KEY
 
    .. tab-item:: AWS S3 Storage
 
@@ -126,7 +126,7 @@ the newly added Buckit deployment:
 .. code-block:: shell
    :class: copyable
 
-   bm admin info myminio
+   bm admin info mybuckit
 
 The command returns information on the S3 service if successful. If
 unsuccessful, check each of the following:
@@ -555,10 +555,6 @@ You can also define some of these options using :ref:`Environment Variables <min
 
 .. option:: --disable-pager, --dp
 
-   .. versionadded:: mc RELEASE.2024-04-29T09-56-05Z
-
-   Disable the pager functionality of the Buckit Manager CLI in the CLI.
-   When used, output prints to raw ``STDOUT`` instead.
 
 .. option:: --insecure
 
@@ -598,24 +594,6 @@ You can also define some of these options using :ref:`Environment Variables <min
 
 .. option:: --resolve
 
-   .. versionadded:: mc RELEASE.2024-08-13T05-33-17Z
-
-   Creates a custom DNS mapping to resolve a HOST to a specified IP address.
-
-   Use the following syntax:
-
-   .. code-block:: text
-
-      --resolve HOST[:PORT]=IP 
-
-   For example:
-
-   .. code-block:: shell
-      :class: copyable
-
-      bm alias set --resolve myminio.example.com:9000=192.168.188.118 'myminio' 'https://myminio.example.com:9000' 'miniouser' 'miniosecret'
-
-   Repeat the flag multiple times to add additional custom DNS mappings.
 
 .. option:: --version
 

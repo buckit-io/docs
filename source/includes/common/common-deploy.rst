@@ -11,11 +11,11 @@ The following example provides a starting environment file:
 
    # MINIO_ROOT_USER and MINIO_ROOT_PASSWORD sets the root account for the Buckit server.
    # This user has unrestricted permissions to perform S3 and administrative API operations on any resource in the deployment.
-   # Omit to use the default values 'minioadmin:minioadmin'.
+   # Omit to use the default values 'buckitadmin:buckitadmin'.
    # Buckit recommends setting non-default values as a best practice, regardless of environment
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ROOT_USER=mybuckitadmin
+   MINIO_ROOT_PASSWORD=buckit-secret-key-change-me
 
    # MINIO_VOLUMES sets the storage volume or path to use for the Buckit server.
 
@@ -31,28 +31,6 @@ Include any other environment variables as required for your deployment.
 
 .. start-common-deploy-create-unique-root-credentials
 
-.. versionadded:: Server RELEASE.2024-03-03T17-50-39Z
-
-   Buckit automatically generates unique root credentials if all of the following conditions are true:
-
-   - :kes-docs:`KES <tutorials/getting-started/>` Release 2024-03-01T18-06-46Z or later running
-  
-   - **Have not** defined:
-  
-     - ``MINIO_ROOT_USER`` variable 
-     - ``MINIO_ROOT_PASSWORD`` variable 
-  
-   - **Have**:
-  
-     - set up KES with a :kes-docs:`supported KMS target <#supported-kms-targets>`
-     - disabled root access with the :ref:`Buckit environment variable <minio-disable-root-access>`
-
-   When those conditions are met at startup, Buckit uses the KMS to generate unique root credentials for the deployment using a `hash-based message authentication code (HMAC) <https://en.wikipedia.org/wiki/HMAC>`__.
-
-   If Buckit generates such credentials, the key used to generate the credentials **must** remain the same *and* continue to exist.
-   All data on the deployment is encrypted with this key!
-
-   To rotate the generated root credentials, generate a new key in the KMS, then update the value of the :envvar:`MINIO_KMS_KES_KEY_NAME` with the new key.
 
 .. end-common-deploy-create-unique-root-credentials
 
@@ -69,11 +47,11 @@ The following example provides a starting environment file:
 
    # MINIO_ROOT_USER and MINIO_ROOT_PASSWORD sets the root account for the Buckit server.
    # This user has unrestricted permissions to perform S3 and administrative API operations on any resource in the deployment.
-   # Omit to use the default values 'minioadmin:minioadmin'.
+   # Omit to use the default values 'buckitadmin:buckitadmin'.
    # Buckit recommends setting non-default values as a best practice, regardless of environment.
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ROOT_USER=mybuckitadmin
+   MINIO_ROOT_PASSWORD=buckit-secret-key-change-me
 
    # MINIO_VOLUMES sets the storage volumes or paths to use for the Buckit server.
    # The specified path uses Buckit expansion notation to denote a sequential series of drives between 1 and 4, inclusive.
@@ -104,24 +82,24 @@ Include any other environment variables as required for your local deployment.
 
    .. tab-item:: Buckit CLI (mc)
 
-      You can access the Buckit deployment over a Terminal or Shell using the :ref:`Buckit Client <minio-client>` (:mc:`mc`).
-      See :ref:`Buckit Client Installation Quickstart <mc-install>` for instructions on installing :mc:`mc`.
+      You can access the Buckit deployment over a Terminal or Shell using the :ref:`Buckit Client <minio-client>` (:mc:`bm`).
+      See :ref:`Buckit Client Installation Quickstart <mc-install>` for instructions on installing :mc:`bm`.
 
-      Create a new :mc:`alias <mc alias set>` corresponding to the Buckit deployment. 
+      Create a new :mc:`alias <bm alias set>` corresponding to the Buckit deployment. 
       Specify any of the hostnames or IP addresses from the Buckit Server ``API`` block, such as http://localhost:9000.
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myminio http://localhost:9000 myminioadmin minio-secret-key-change-me
+         bm alias set mybuckit http://localhost:9000 mybuckitadmin buckit-secret-key-change-me
 
-      - Replace ``myminio`` with the desired name to use for the alias.
+      - Replace ``mybuckit`` with the desired name to use for the alias.
 
-      - Replace ``myminioadmin`` with the :envvar:`MINIO_ROOT_USER` value in the environment file specified to the container.
+      - Replace ``mybuckitadmin`` with the :envvar:`MINIO_ROOT_USER` value in the environment file specified to the container.
 
-      - Replace ``minio-secret-key-change-me`` with the :envvar:`MINIO_ROOT_PASSWORD` value in the environment file specified to the container.
+      - Replace ``buckit-secret-key-change-me`` with the :envvar:`MINIO_ROOT_PASSWORD` value in the environment file specified to the container.
 
-      You can then interact with the container using any :mc:`mc` command.
+      You can then interact with the container using any :mc:`bm` command.
       If your local host firewall permits external access to the Buckit S3 API port, other hosts on the same network can access the Buckit deployment using the IP or hostname for your local host.
 
 .. end-common-deploy-connect-to-minio-deployment

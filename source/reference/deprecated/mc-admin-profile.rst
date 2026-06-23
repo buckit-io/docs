@@ -12,14 +12,14 @@
 
 .. note:: 
 
-   This command has been replaced by :mc:`mc support profile` as of `mc` RELEASE.2023-04-06T16-51-10Z.
+   This command has been replaced by :mc:`bm support profile` as of `mc` RELEASE.2023-04-06T16-51-10Z.
 
 Description
 -----------
 
 .. start-mc-admin-profile-desc
 
-The :mc-cmd:`mc admin profile` command generates profiling data for debugging
+The :mc-cmd:`bm admin profile` command generates profiling data for debugging
 purposes.
 
 .. end-mc-admin-profile-desc
@@ -34,7 +34,7 @@ purposes.
 Profile Data Format
 ~~~~~~~~~~~~~~~~~~~
 
-:mc-cmd:`mc admin profile` produces a ``ZIP`` archive ``profile.zip`` that
+:mc-cmd:`bm admin profile` produces a ``ZIP`` archive ``profile.zip`` that
 contains one or more ``.pprof`` files. Use the 
 `pprof <https://github.com/google/pprof>`__ ``go`` utility to read the
 profile data.
@@ -45,8 +45,8 @@ Examples
 Profile Data for Single Resource
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin profile start` with the
-:mc-cmd:`~mc admin profile start type` flag to start profiling the
+Use :mc-cmd:`bm admin profile start` with the
+:mc-cmd:`~bm admin profile start type` flag to start profiling the
 resource:
 
 .. code-block:: shell
@@ -54,13 +54,13 @@ resource:
 
    mc admin profile start --type "TYPE" ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the Buckit host.
+- Replace :mc-cmd:`ALIAS <bm admin profile start TARGET>` with the
+  :mc-cmd:`alias <bm alias>` of the Buckit host.
 
-- Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resource to
+- Replace :mc-cmd:`TYPE <bm admin profile start type>` with the resource to
   profile.
 
-Use :mc-cmd:`mc admin profile stop` to stop profiling data from the specified
+Use :mc-cmd:`bm admin profile stop` to stop profiling data from the specified
 resource and output the results:
 
 .. code-block:: shell
@@ -73,8 +73,8 @@ The command outputs the profiled data as ``profile.zip``.
 Profile Data for Multiple Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin profile start` with the
-:mc-cmd:`~mc admin profile start type` flag to start profiling the
+Use :mc-cmd:`bm admin profile start` with the
+:mc-cmd:`~bm admin profile start type` flag to start profiling the
 resources:
 
 .. code-block:: shell
@@ -82,13 +82,13 @@ resources:
 
    mc admin profile start --type "TYPE,[TYPE...]" ALIAS
 
-- Replace :mc-cmd:`ALIAS <mc admin profile start TARGET>` with the
-  :mc-cmd:`alias <mc alias>` of the Buckit host.
+- Replace :mc-cmd:`ALIAS <bm admin profile start TARGET>` with the
+  :mc-cmd:`alias <bm alias>` of the Buckit host.
 
-- Replace :mc-cmd:`TYPE <mc admin profile start type>` with the resources to
+- Replace :mc-cmd:`TYPE <bm admin profile start type>` with the resources to
   profile. Specify multiple resources as a comma-separated list.
 
-Use :mc-cmd:`mc admin profile stop` to stop profiling data from the specified
+Use :mc-cmd:`bm admin profile stop` to stop profiling data from the specified
 resources and output the results:
 
 .. code-block:: shell
@@ -101,14 +101,14 @@ The command outputs the profiled data as ``profile.zip``.
 Syntax
 ------
 
-:mc-cmd:`mc admin profile` has the following syntax:
+:mc-cmd:`bm admin profile` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin profile SUBCOMMAND
 
-:mc-cmd:`mc admin profile` supports the following subcommands:
+:mc-cmd:`bm admin profile` supports the following subcommands:
 
 .. mc-cmd:: start
    :fullpath:
@@ -121,18 +121,18 @@ Syntax
 
       mc admin profile start [FLAGS] TARGET
 
-   :mc-cmd:`mc admin profile start` supports the following arguments:
+   :mc-cmd:`bm admin profile start` supports the following arguments:
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment from
       which the command collects profiling data.
 
    .. mc-cmd:: type
       
 
       The type(s) of profiling data to collect from the 
-      :mc-cmd:`~mc admin profile start TARGET` Buckit deployment.
+      :mc-cmd:`~bm admin profile start TARGET` Buckit deployment.
 
       Specify one or more of the following supported types as a comma-separated
       list:
@@ -166,7 +166,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment from
       which the command returns available profiling data. 
 
 

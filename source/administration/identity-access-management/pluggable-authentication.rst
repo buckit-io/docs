@@ -43,12 +43,12 @@ You can configure the Buckit Identity Management Plugin using the following envi
 
    .. tab-item:: Configuration Settings
 
-      Set the following configuration settings using the :mc-cmd:`mc admin config set` command:
+      Set the following configuration settings using the :mc-cmd:`bm admin config set` command:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set identity_plugin \
+         bm admin config set identity_plugin \
             url="https://external-auth.example.net:8080/auth" \
             role_policy="consoleAdmin" \
             
@@ -108,4 +108,4 @@ The ``"reason"`` field should include the reason for the 403.
 Creating Policies to Match Claims
 ---------------------------------
 
-Use the :mc:`mc admin policy` command to create policies that match one or more claim values.
+Use the :mc:`bm admin policy` command to create policies that match one or more claim values.

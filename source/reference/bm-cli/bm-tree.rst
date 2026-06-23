@@ -33,12 +33,12 @@ produce similar results to the ``tree`` commandline tool.
    .. tab-item:: EXAMPLE
 
       The following command prints a complete tree of all objects at any
-      depth in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      depth in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm tree --files myminio/mydata
+         bm tree --files mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -66,14 +66,14 @@ Parameters
 
    .. code-block:: shell
 
-      bm tree myminio/mybucket
+      bm tree mybuckit/mybucket
 
    You can specify multiple targets to the :mc:`bm tree` command. For
    example:
 
    .. code-block:: shell
 
-      bm tree myminio/mybucket myminio/myotherbucket
+      bm tree mybuckit/mybucket mybuckit/myotherbucket
 
    For retrieving the tree heirarchy of a local filesystem directory,
    specify the full path to that directory. For example:

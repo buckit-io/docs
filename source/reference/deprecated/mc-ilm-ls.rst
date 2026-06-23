@@ -12,9 +12,6 @@
 
 .. mc:: mc ilm ls
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``mc ilm ls`` replaced by :mc-cmd:`mc ilm rule ls`.
 
 
 Syntax
@@ -22,7 +19,7 @@ Syntax
 
 .. start-mc-ilm-ls-desc
 
-The :mc:`mc ilm ls` command summrizes all configured object lifecycle management 
+The :mc:`bm ilm ls` command summrizes all configured object lifecycle management 
 rules on a Buckit bucket in a tabular format.
 
 .. end-mc-ilm-ls-desc
@@ -66,16 +63,16 @@ The output of the command might resemble the following:
    .. tab-item:: EXAMPLE
 
       The following command lists all lifecycle management rules for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         mc ilm ls myminio/mydata
+         mc ilm ls mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
-      The :mc:`mc ilm ls` command has the following syntax:
+      The :mc:`bm ilm ls` command has the following syntax:
 
       .. code-block:: shell
          :class: copyable
@@ -99,23 +96,23 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm ls myminio/mydata
+      mc ilm ls mybuckit/mydata
 
 
 .. mc-cmd:: --expiry
    :optional:
    
 
-   :mc:`mc ilm ls` returns only fields related to lifecycle rule expiration.
+   :mc:`bm ilm ls` returns only fields related to lifecycle rule expiration.
 
-   Mutually exclusive with :mc-cmd:`~mc ilm ls --transition`.
+   Mutually exclusive with :mc-cmd:`~bm ilm ls --transition`.
 
 .. mc-cmd:: --transition
    :optional:
 
-   :mc:`mc ilm ls` returns only fields related to lifecycle rule transition.
+   :mc:`bm ilm ls` returns only fields related to lifecycle rule transition.
 
-   Mutually exclusive with :mc-cmd:`~mc ilm ls --expiry`.
+   Mutually exclusive with :mc-cmd:`~bm ilm ls --expiry`.
 
 
 Global Flags
@@ -131,17 +128,17 @@ Examples
 List Bucket Lifecycle Management Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc:`mc ilm ls` to list a bucket's lifecycle management rules:
+Use :mc:`bm ilm ls` to list a bucket's lifecycle management rules:
 
 .. code-block:: shell
    :class: copyable
 
    mc ilm ls ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc ilm ls ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <bm ilm ls ALIAS>` with the 
+  :mc:`alias <bm alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm ls ALIAS>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <bm ilm ls ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
 Behavior

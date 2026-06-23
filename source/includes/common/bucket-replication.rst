@@ -1,11 +1,11 @@
 .. start-create-bucket-replication-rule-cli-desc
 
-Use the :mc:`mc replicate add` command to add a new replication rule to each Buckit deployment.
+Use the :mc:`bm replicate add` command to add a new replication rule to each Buckit deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate add ALIAS/BUCKET \
+   bm replicate add ALIAS/BUCKET \
       --remote-bucket 'https://USER:PASSWORD@HOSTNAME:PORT/BUCKET' \
       --replicate "delete,delete-marker,existing-objects"
 
@@ -26,27 +26,27 @@ Use the :mc:`mc replicate add` command to add a new replication rule to each Buc
   - :ref:`Replication of Deletes <minio-replication-behavior-delete>` 
   - :ref:`Replication of existing Objects <minio-replication-behavior-existing-objects>`
   
-  See :mc-cmd:`mc replicate add --replicate` for more complete documentation. 
+  See :mc-cmd:`bm replicate add --replicate` for more complete documentation. 
   Omit any field to disable replication of that component.
 
-Specify any other supported optional arguments for :mc:`mc replicate add`.
+Specify any other supported optional arguments for :mc:`bm replicate add`.
 
 .. end-create-bucket-replication-rule-cli-desc
 
 .. start-validate-bucket-replication-cli-desc
 
-Use :mc:`mc cp` to copy a new object to the replicated bucket on one of the deployments. 
+Use :mc:`bm cp` to copy a new object to the replicated bucket on one of the deployments. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/foo.txt ALIAS/BUCKET
+   bm cp ~/foo.txt ALIAS/BUCKET
 
-Use :mc:`mc ls` to verify the object exists on the destination bucket:
+Use :mc:`bm ls` to verify the object exists on the destination bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ls ALIAS/BUCKET
+   bm ls ALIAS/BUCKET
 
 .. end-validate-bucket-replication-cli-desc

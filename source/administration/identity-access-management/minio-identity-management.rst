@@ -19,7 +19,7 @@ key (password). Clients must authenticate their identity by specifying both
 a valid access key (username) and the corresponding secret key (password) of
 an existing Buckit user.
 
-Administrators use the :mc:`mc admin user` command to create and manage
+Administrators use the :mc:`bm admin user` command to create and manage
 Buckit users.
 
 Buckit also supports creating :ref:`access keys

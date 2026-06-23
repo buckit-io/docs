@@ -38,7 +38,7 @@ The :mc:`bm admin accesskey remove` command has equivalent functionality to :mc:
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin accesskey rm myminio myuserserviceaccount  
+         bm admin accesskey rm mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

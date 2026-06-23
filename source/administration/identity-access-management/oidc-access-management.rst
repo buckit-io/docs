@@ -118,7 +118,7 @@ Defer to the documentation for your preferred OIDC provider for instructions on 
 Creating Policies to Match Claims
 ---------------------------------
 
-Use the :mc:`mc admin policy` command to create policies that match one or more claim values.
+Use the :mc:`bm admin policy` command to create policies that match one or more claim values.
 
 OIDC Policy Variables
 ---------------------

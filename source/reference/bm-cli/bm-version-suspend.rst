@@ -26,12 +26,12 @@ The :mc:`bm version suspend` command disables versioning on the specified bucket
 
    .. tab-item:: EXAMPLE
 
-      The following command disables versioning for the ``mybucket`` bucket on the ``myminio`` Buckit deployment:
+      The following command disables versioning for the ``mybucket`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm version suspend myminio/mybucket
+         bm version suspend mybuckit/mybucket
 
    .. tab-item:: SYNTAX
 
@@ -57,7 +57,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm version suspend myminio/mybucket
+      bm version suspend mybuckit/mybucket
 
 
 Global Flags

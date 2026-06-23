@@ -13,16 +13,16 @@ Buckit Server
 Buckit Server
 -------------
 
-The :mc:`minio server` command starts the Buckit server process:
+The :mc:`buckit server <buckit server>` command starts the :mc:`buckit server <buckit server>` process:
 
 .. code-block:: shell
    :class: copyable
 
-   minio server /mnt/disk{1...4}
+   buckit server /mnt/disk{1...4}
 
-For examples of deploying :mc:`minio server` on a bare metal environment, see :ref:`minio-installation`.
+For examples of deploying :mc:`buckit server <buckit server>` on a bare metal environment, see :ref:`minio-installation`.
 
-For examples of deploying :mc:`minio server` on a Kubernetes environment, see :ref:`Deploying a Buckit Tenant <minio-k8s-deploy-minio-tenant>`.
+For examples of deploying :mc:`buckit server <buckit server>` on a Kubernetes environment, see :ref:`Deploying a Buckit Tenant <minio-k8s-deploy-minio-tenant>`.
 
 
 .. _minio-server-parameters:
@@ -30,7 +30,7 @@ For examples of deploying :mc:`minio server` on a Kubernetes environment, see :r
 Syntax
 ~~~~~~
 
-.. mc:: minio server
+.. mc:: buckit server
 
 Starts the ``minio`` server process.
 
@@ -39,31 +39,31 @@ The command has the following syntax:
 .. code-block:: shell
    :class: copyable
 
-   minio server [FLAGS] HOSTNAME/DIRECTORIES [HOSTNAME/DIRECTORIES..]
+   buckit server [FLAGS] HOSTNAME/DIRECTORIES [HOSTNAME/DIRECTORIES..]
 
 The command accepts the following arguments:
 
 .. mc-cmd:: HOSTNAME
 
-   The hostname of a :mc:`minio server` process.
+   The hostname of a :mc:`buckit server <buckit server>` process.
 
    For standalone deployments, this field is *optional*. 
-   You can start a standalone :mc:`~minio server` process with only the :mc-cmd:`~minio server DIRECTORIES` argument.
+   You can start a standalone :mc:`buckit server <buckit server>` process with only the :mc-cmd:`~buckit server DIRECTORIES` argument.
 
-   For distributed deployments, specify the hostname of each :mc:`minio server` in the deployment. 
-   The group of :mc:`minio server` processes represent a single :ref:`Server Pool <minio-intro-server-pool>`.
+   For distributed deployments, specify the hostname of each Buckit server in the deployment. 
+   The group of :mc:`buckit server <buckit server>` processes represent a single :ref:`Server Pool <minio-intro-server-pool>`.
 
-   :mc-cmd:`~minio server HOSTNAME` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of hostnames. 
-   Buckit *requires* sequential hostnames to identify each :mc:`minio server` process in the set.
+   :mc-cmd:`~buckit server HOSTNAME` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of hostnames. 
+   Buckit *requires* sequential hostnames to identify each :mc:`buckit server <buckit server>` process in the set.
 
-   For example, ``https://minio{1...4}.example.net`` expands to:
+   For example, ``https://buckit{1...4}.example.net`` expands to:
 
-   - ``https://minio1.example.net``
-   - ``https://minio2.example.net``
-   - ``https://minio3.example.net``
-   - ``https://minio4.example.net``
+   - ``https://buckit1.example.net``
+   - ``https://buckit2.example.net``
+   - ``https://buckit3.example.net``
+   - ``https://buckit4.example.net``
 
-   You must run the :mc:`minio server` command with the *same* combination of :mc-cmd:`~minio server HOSTNAME` and :mc-cmd:`~minio server DIRECTORIES` on   each host in the Server Pool.
+   You must run the :mc:`buckit server <buckit server>` command with the *same* combination of :mc-cmd:`~buckit server HOSTNAME` and :mc-cmd:`~buckit server DIRECTORIES` on   each host in the Server Pool.
 
    Each additional ``HOSTNAME/DIRECTORIES`` pair denotes an additional Server Set for the purpose of horizontal expansion of the Buckit deployment. 
    For more information on Server Pools, see :ref:`Server Pool <minio-intro-server-pool>`.
@@ -71,9 +71,9 @@ The command accepts the following arguments:
 .. mc-cmd:: DIRECTORIES
    :required:
 
-   The directories or drives the :mc:`minio server` process uses as the storage backend.
+   The directories or drives the :mc:`buckit server <buckit server>` process uses as the storage backend.
 
-   :mc-cmd:`~minio server DIRECTORIES` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of folders or drives. 
+   :mc-cmd:`~buckit server DIRECTORIES` supports Buckit expansion notation ``{x...y}`` to denote a sequential series of folders or drives. 
    For example, ``/mnt/disk{1...4}`` expands to:
 
    - ``/mnt/disk1``
@@ -81,13 +81,13 @@ The command accepts the following arguments:
    - ``/mnt/disk3``
    - ``/mnt/disk4``
 
-   The :mc-cmd:`~minio server DIRECTORIES` path(s) *must* be empty when first starting the :mc:`minio <minio server>` process.
+   The :mc-cmd:`~buckit server DIRECTORIES` path(s) *must* be empty when first starting the :mc:`buckit server <buckit server>` process.
 
-   The :mc:`minio server` process requires *at least* 4 drives or directories to enable :ref:`erasure coding <minio-erasure-coding>`.
+   The :mc:`buckit server <buckit server>` process requires *at least* 4 drives or directories to enable :ref:`erasure coding <minio-erasure-coding>`.
 
    .. important::
 
-      Buckit recommends locally-attached drives, where the :mc-cmd:`~minio server DIRECTORIES` path points to each drive on the host machine. 
+      Buckit recommends locally-attached drives, where the :mc-cmd:`~buckit server DIRECTORIES` path points to each drive on the host machine. 
       Buckit recommends *against* using network-attached storage, as network latency reduces performance of those drives compared to locally-attached storage.
 
       For development or evaluation, you can specify multiple logical directories or partitions on a single physical volume to enable erasure coding on the deployment.
@@ -99,7 +99,7 @@ The command accepts the following arguments:
 .. mc-cmd:: --address
    :optional:
 
-   Binds the :mc:`minio <minio server>` server process to a specific network address and port number. 
+   Binds the :mc:`minio <buckit server>` server process to a specific network address and port number. 
    Specify the address and port as ``ADDRESS:PORT``, where ``ADDRESS`` is an IP address or hostname and ``PORT`` is a valid and open port on the host system.
    Buckit supports both IPv4 and IPv6 addressing, provided that the specified addresses are routable and resolveable. 
 
@@ -119,9 +119,9 @@ The command accepts the following arguments:
 
       .. code-block:: shell
 
-         minio server --address "minioip:9000" ~/miniodirectory
+         buckit server --address "minioip:9000" ~/miniodirectory
 
-   If omitted, :mc:`minio <minio server>` binds to port ``9000`` on all configured IPv4 addresses, IPv6 addresses, and hostnames on the host machine.
+   If omitted, :mc:`minio <buckit server>` binds to port ``9000`` on all configured IPv4 addresses, IPv6 addresses, and hostnames on the host machine.
 
 .. mc-cmd:: --console-address
    :optional:
@@ -160,7 +160,7 @@ The command accepts the following arguments:
    .. code-block:: shell
       :class: copyable
 
-      minio server http://server{1...4}/disk{1...4} \
+      buckit server http://server{1...4}/disk{1...4} \
       --ftp="address=:8021"                         \
       --ftp="passive-port-range=30000-40000"        \
       --ftp="tls-private-key=path/to/private.key"   \
@@ -223,7 +223,7 @@ The command accepts the following arguments:
    .. code-block:: shell
       :class: copyable
 
-      minio server http://server{1...4}/disk{1...4}                                 \
+      buckit server http://server{1...4}/disk{1...4}                                 \
       --sftp="address=:8022" --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa"   \
       --sftp="kex-algos=diffie-hellman-group14-sha256,curve25519-sha256@libssh.org" \
       ...
@@ -247,18 +247,9 @@ The command accepts the following arguments:
         CAs/
           full-chain-ca.crt
 
-   Omit to use the default directory paths:
-
-   - Linux/macOS: ``${HOME}/.minio/certs``
-   - Windows: ``%%USERPROFILE%%\.minio\certs``.
+   Specify ``--certs-dir`` to use a custom certificate directory.
 
    See :ref:`minio-TLS` for more information on TLS/SSL connectivity.
-
-   .. important::
-
-      :minio-release:`Buckit Server RELEASE.2023-12-09T18-17-51Z <RELEASE.2023-12-09T18-17-51Z>` removes the deprecated ``--config-dir | -C`` parameter.
-      Deployments using this flag may start without TLS enabled.
-      Replace those parameters with ``--certs-dir | -S`` and restart to re-enable TLS.
 
 .. mc-cmd:: --quiet
    :optional:
@@ -277,7 +268,7 @@ The command accepts the following arguments:
 
 .. note::
 
-   You can define any of the ``minio`` parameters above by setting them in the :envvar:`MINIO_OPTS` environment variable.
+   You can define any of the ``buckit`` parameters above by setting them in the :envvar:`MINIO_OPTS` environment variable.
    This variable takes as its value a single string that contains any of the above parameters and their values that you want to set when starting the Buckit Server.
 
 Settings

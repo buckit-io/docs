@@ -10,16 +10,6 @@
 
 .. mc:: bm ilm rule
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   The following commands have moved to subcommands under :mc-cmd:`bm ilm rule`:
-
-   - :mc-cmd:`bm ilm rule add`
-   - :mc-cmd:`bm ilm rule edit`
-   - :mc-cmd:`bm ilm rule export`
-   - :mc-cmd:`bm ilm rule import`
-   - :mc-cmd:`bm ilm rule ls`
-   - :mc-cmd:`bm ilm rule rm`
 
 
 Description

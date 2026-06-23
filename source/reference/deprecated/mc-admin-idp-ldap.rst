@@ -12,16 +12,13 @@
 
 .. mc:: mc admin idp ldap
 
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``mc admin idp ldap`` and its subcommands replaced by :mc-cmd:`mc idp ldap`.
 
 Description
 -----------
 
 .. start-mc-admin-idp-ldap-desc
 
-The :mc-cmd:`mc admin idp ldap` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`Active Directory or LDAP Identity and Access Management (IAM) integrations <minio-external-identity-management-ad-ldap>`.
+The :mc-cmd:`bm admin idp ldap` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`Active Directory or LDAP Identity and Access Management (IAM) integrations <minio-external-identity-management-ad-ldap>`.
 
 .. end-mc-admin-idp-ldap-desc
 
@@ -32,7 +29,7 @@ Define configuration settings as an alternative to using environment variables w
    Configuration settings do **not** override settings configured as environment variables.
 
 
-The :mc-cmd:`mc admin idp ldap` command has the following subcommands:
+The :mc-cmd:`bm admin idp ldap` command has the following subcommands:
 
 .. list-table::
    :header-rows: 1
@@ -41,34 +38,34 @@ The :mc-cmd:`mc admin idp ldap` command has the following subcommands:
    * - Subcommand
      - Description
 
-   * - :mc-cmd:`mc admin idp ldap add`
+   * - :mc-cmd:`bm admin idp ldap add`
      - Create an AD/LDAP IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap update`
+   * - :mc-cmd:`bm admin idp ldap update`
      - Modify an existing AD/LDAP IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap ls`
+   * - :mc-cmd:`bm admin idp ldap ls`
      - Lists AD/LDAP server configurations.
 
-   * - :mc-cmd:`mc admin idp ldap rm`
+   * - :mc-cmd:`bm admin idp ldap rm`
      - Remove an AD/LDAP IDP server configuration from a deployment.
 
-   * - :mc-cmd:`mc admin idp ldap info`
+   * - :mc-cmd:`bm admin idp ldap info`
      - Displays details for a specific AD/LDAP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap enable`
+   * - :mc-cmd:`bm admin idp ldap enable`
      - Enables an AD/LDAP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap disable`
+   * - :mc-cmd:`bm admin idp ldap disable`
      - Disables an AD/LDAP server configuration.
 
-   * - :mc-cmd:`mc admin idp ldap policy entities`
+   * - :mc-cmd:`bm admin idp ldap policy entities`
      - List policy association entities
 
 Configuration Parameters
 ------------------------
 
-The :mc-cmd:`mc admin idp ldap` subcommands support configuration parameters.
+The :mc-cmd:`bm admin idp ldap` subcommands support configuration parameters.
 The parameters define the server's interaction with the Active Directory or LDAP IAM provider.
 
 For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-ldap-config-settings>`.
@@ -85,13 +82,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example sets the AD/LDAP configuration settings for the ``myminio`` deployment.
+         The following example sets the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
              mc admin idp ldap add                                               \
-                  myminio                                                        \                                              
+                  mybuckit                                                        \                                              
                   server_addr=myldapserver:636                                   \                                                       
                   lookup_bind_dn=cn=admin,dc=min,dc=io                           \                                               
                   lookup_bind_password=somesecret                                \                                                    
@@ -123,13 +120,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example changes two of the AD/LDAP configuration settings for the ``myminio`` deployment.
+         The following example changes two of the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap update                                \
-                              myminio                               \
+                              mybuckit                               \
                               lookup_bind_dn=cn=admin,dc=min,dc=io  \
                               lookup_bind_password=somesecret                                                              
                                     
@@ -156,12 +153,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example lists the AD/LDAP configuration settings for the ``myminio`` deployment.
+         The following example lists the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap ls myminio                   
+            mc admin idp ldap ls mybuckit                   
                                     
       .. tab-item:: SYNTAX
 
@@ -182,12 +179,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example removes the AD/LDAP provider settings for the ``myminio`` deployment.
+         The following example removes the AD/LDAP provider settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap rm myminio                                                             
+            mc admin idp ldap rm mybuckit                                                             
                                     
       .. tab-item:: SYNTAX
 
@@ -210,12 +207,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs the AD/LDAP configuration settings on the ``myminio`` deployment.
+         The following example outputs the AD/LDAP configuration settings on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp ldap info myminio
+            mc admin idp ldap info mybuckit
                                     
       .. tab-item:: SYNTAX
 
@@ -237,13 +234,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example enables the AD/LDAP configuration on the ``myminio`` deployment.
+         The following example enables the AD/LDAP configuration on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap enable       \
-                              myminio
+                              mybuckit
 
       .. tab-item:: SYNTAX
 
@@ -265,13 +262,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example disables the AD/LDAP configurations on the ``myminio`` deployment.
+         The following example disables the AD/LDAP configurations on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp ldap disable      \
-                              myminio
+                              mybuckit
 
       .. tab-item:: SYNTAX
 

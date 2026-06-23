@@ -11,8 +11,6 @@
 Description
 -----------
 
-.. versionadded:: RELEASE.2022-06-17T02-52-50Z
-
 .. start-mc-admin-cluster-bucket-export-desc
 
 The :mc:`bm admin cluster bucket export` command exports bucket metadata for use with the :mc:`bm admin cluster bucket import` command.
@@ -28,12 +26,12 @@ If you specify only the deployment as the target, this command backs up all buck
 
    .. tab-item:: EXAMPLE
 
-      The following command exports all bucket metadata for the ``myminio`` deployment.
+      The following command exports all bucket metadata for the ``mybuckit`` deployment.
   
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin cluster bucket export myminio
+         bm admin cluster bucket export mybuckit
 
    .. tab-item:: SYNTAX
 

@@ -53,10 +53,10 @@ For example, the following commands set two distinct AMQP service endpoints as `
 
       .. code-block:: shell
 
-         mc admin config set notify_amqp:primary \ 
+         bm admin config set notify_amqp:primary \ 
             url="user:password@amqp://amqp-endpoint.example.net:5672" [ARGUMENT=VALUE ...]
 
-         mc admin config set notify_amqp:secondary \
+         bm admin config set notify_amqp:secondary \
             url="user:password@amqp://amqp-endpoint.example.net:5672" [ARGUMENT=VALUE ...]
 
       Notice that for configuration settings, the unique identifier appends to ``amqp`` only, not to each individual argument.
@@ -87,14 +87,14 @@ Enable
 
       The top-level configuration key for defining an AMQP service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
 
-      Use :mc-cmd:`mc admin config set` to set or update an AMQP service endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an AMQP service endpoint. 
       The :mc-conf:`~notify_amqp.url` argument is *required* for each target.
       Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_amqp \ 
+         bm admin config set notify_amqp \ 
            url="amqp://user:password@endpoint:port" \
            [ARGUMENT="VALUE"] ... 
 

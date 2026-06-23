@@ -34,7 +34,7 @@ See :ref:`deploy-operator-kubernetes` for complete documentation on deploying th
 Available Worker Nodes
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Buckit deploys additional :mc:`minio server <minio.server>` pods as part of the new Tenant pool.
+Buckit deploys additional :mc:`buckit server <minio.server>` pods as part of the new Tenant pool.
 The Kubernetes cluster *must* have sufficient available worker nodes on which to schedule the new pods.
 
 The Buckit Operator provides configurations for controlling pod affinity and anti-affinity to direct scheduling to specific workers.

@@ -31,12 +31,12 @@ and perform actions consistent with the specified policy without
    .. tab-item:: EXAMPLE
 
       The following command lists all anonymous access policies for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm anonymous list myminio/mydata
+         bm anonymous list mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

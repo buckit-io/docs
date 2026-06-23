@@ -10,12 +10,6 @@ Object Lifecycle Management
    :local:
    :depth: 1
 
-.. container:: extlinks-video
-
-   - `Buckit Object Lifecycle Management Part I <https://youtu.be/Exg2KsfzHzI?ref=docs>`__
-   - `Buckit Object Lifecycle Management Part II <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
-   - `Buckit Object Lifecycle Management Lab <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
-
 Use Buckit Object Lifecycle Management to create rules for time or date based automatic transition or expiry of objects. 
 For object transition, Buckit automatically moves the object to a configured remote storage tier. 
 For object expiry, Buckit automatically deletes the object.
@@ -42,17 +36,15 @@ Buckit object transition supports use cases like moving aged data from Buckit cl
 Directory objects, which are 0-byte objects with a name ending in ``/``, do **not** tier.
 Buckit manages retrieving tiered objects on-the-fly without any additional application-side logic. 
 
-Use the :mc:`mc ilm tier add` command to create a remote target for tiering data to that target. 
-You can then use the :mc-cmd:`mc ilm rule add --transition-days` command to transition objects to that tier after a specified number of calendar days.
+Use the :mc:`bm ilm tier add` command to create a remote target for tiering data to that target. 
+You can then use the :mc-cmd:`bm ilm rule add --transition-days` command to transition objects to that tier after a specified number of calendar days.
 
-.. versionadded:: RELEASE.2022-11-10T18-20-21Z
-
-You can verify the tiering status of an object using :mc:`mc ls` against the bucket or bucket prefix.
+You can verify the tiering status of an object using :mc:`bm ls` against the bucket or bucket prefix.
 The output includes the storage tier of each object:
 
 .. code-block:: shell
 
-   $ mc ls play/mybucket
+   $ bm ls play/mybucket
    [2022-11-08 11:30:24 PST]    52MB  STANDARD log-data.csv
    [2022-11-09 12:20:18 PST]    120MB WARM event-2022-11-09.mp4
 
@@ -88,7 +80,7 @@ Versioned Buckets
 Buckit adopts :s3-docs:`S3 behavior <intro-lifecycle-rules.html#intro-lifecycle-rules-actions>` for transition rules on :ref:`versioned buckets <minio-bucket-versioning>`. 
 Specifically, Buckit by default applies the transition operation to the *current* object version. 
 
-To transition noncurrent object versions, specify the :mc-cmd:`~mc ilm rule add --noncurrent-transition-days` and :mc-cmd:`~mc ilm rule add --noncurrent-transition-tier` options when creating the transition rule. 
+To transition noncurrent object versions, specify the :mc-cmd:`~bm ilm rule add --noncurrent-transition-days` and :mc-cmd:`~bm ilm rule add --noncurrent-transition-tier` options when creating the transition rule. 
 
 .. _minio-lifecycle-management-expiration:
 
@@ -101,7 +93,7 @@ For example, you can create a lifecycle management rule to expire any object old
 
 .. todo: Diagram of Buckit Expiration
 
-Use :mc-cmd:`mc ilm rule add --expire-days` to expire objects after a specified number of calendar days.
+Use :mc-cmd:`bm ilm rule add --expire-days` to expire objects after a specified number of calendar days.
 
 For buckets with :ref:`replication <minio-bucket-replication>` configured, Buckit does not replicate objects deleted by a lifecycle management expiration rule.
 See :ref:`minio-replication-behavior-delete` for more information.
@@ -114,13 +106,13 @@ Buckit has several default behaviors for versioned buckets:
 
 - Buckit applies the expiration option to only the *current* object version by creating a ``DeleteMarker`` as is normal with versioned delete.
 
-  To expire noncurrent object versions, specify the :mc-cmd:`~mc ilm rule add --noncurrent-expire-days` option when creating the expiration rule. 
+  To expire noncurrent object versions, specify the :mc-cmd:`~bm ilm rule add --noncurrent-expire-days` option when creating the expiration rule. 
 
 - Buckit does not expire ``DeleteMarkers`` *even if* no other versions of that object exist.
 
-  To expire delete markers when there are no remaining versions for that object, specify the :mc-cmd:`~mc ilm rule add --expire-delete-marker` option when creating the expiration rule.
+  To expire delete markers when there are no remaining versions for that object, specify the :mc-cmd:`~bm ilm rule add --expire-delete-marker` option when creating the expiration rule.
 
-- To expire *all* versions of an object that does *not* have a delete marker after a specified period of days, use the :mc-cmd:`~mc ilm rule add --expire-all-object-versions` flag with the :mc-cmd:`~mc ilm rule add --expire-days` flag. 
+- To expire *all* versions of an object that does *not* have a delete marker after a specified period of days, use the :mc-cmd:`~bm ilm rule add --expire-all-object-versions` flag with the :mc-cmd:`~bm ilm rule add --expire-days` flag. 
   This permits the permanent deletion of the object after the specified number of days pass.
 
   .. versionchanged:: Buckit RELEASE.2024-05-01T01-11-10Z

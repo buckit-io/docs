@@ -10,16 +10,13 @@
 
 .. mc:: mc admin tier
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``mc admin tier`` replaced by :mc-cmd:`mc ilm tier`.
 
 Description
 -----------
 
 .. start-mc-admin-tier-desc
 
-The :mc:`mc admin tier` command configures a remote supported S3-compatible
+The :mc:`bm admin tier` command configures a remote supported S3-compatible
 service for supporting Buckit 
 :ref:`Lifecycle Management: Object Transition ("Tiering")
 <minio-lifecycle-management-expiration>`. 
@@ -36,7 +33,7 @@ service for supporting Buckit
 Supported S3 Services
 ~~~~~~~~~~~~~~~~~~~~~
 
-:mc:`mc admin tier` supports *only* the following S3-compatible services
+:mc:`bm admin tier` supports *only* the following S3-compatible services
 as a remote target for object tiering:
 
 - Amazon S3
@@ -133,8 +130,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd:`~mc admin tier add --access-key`
-             - :mc-cmd:`~mc admin tier add --secret-key`
+             - :mc-cmd:`~bm admin tier add --access-key`
+             - :mc-cmd:`~bm admin tier add --secret-key`
 
          * - ``azure``
            - Use :abbr:`Azure (Microsoft Azure)` Blob Storage as the storage
@@ -142,8 +139,8 @@ Syntax
 
              Requires specifying the following additional options:
 
-             - :mc-cmd:`~mc admin tier add --account-name`
-             - :mc-cmd:`~mc admin tier add --account-key`
+             - :mc-cmd:`~bm admin tier add --account-name`
+             - :mc-cmd:`~bm admin tier add --account-key`
          
          * - ``gcs`` 
            - Use :abbr:`GCP (Google Cloud Platform)` Cloud Storage as the
@@ -151,13 +148,13 @@ Syntax
 
              Requires specifying the following additional option:
 
-             - :mc-cmd:`~mc admin tier add --credentials-file`
+             - :mc-cmd:`~bm admin tier add --credentials-file`
 
    .. mc-cmd:: TARGET
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment on which
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment on which
       the command creates the new remote tier.
       
    .. mc-cmd:: TIER_NAME
@@ -176,7 +173,7 @@ Syntax
       
       The URL endpoint for the cloud service provider. The URL endpoint
       *must* resolve to the provider specified to
-      :mc-cmd:`~mc admin tier add TIER_TYPE`. 
+      :mc-cmd:`~bm admin tier add TIER_TYPE`. 
 
    .. mc-cmd:: --access-key
       
@@ -187,7 +184,7 @@ Syntax
       have permission to perform read/write/list/delete operations on the 
       remote bucket or bucket prefix.
       
-      Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
+      Required if :mc-cmd:`~bm admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: --secret-key
@@ -197,7 +194,7 @@ Syntax
       
       The secret key for a user on the remote S3 tier.
 
-      Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
+      Required if :mc-cmd:`~bm admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: --account-name
@@ -209,7 +206,7 @@ Syntax
       must have permission to perform read/write/list/delete operations on the
       remote bucket or bucket prefix.
       
-      Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
+      Required if :mc-cmd:`~bm admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
       Buckit does *not* support changing the account name associated to an Azure
@@ -222,10 +219,10 @@ Syntax
 
       *Required*
       
-      The account key for the :mc-cmd:`~mc admin tier add --account-name` 
+      The account key for the :mc-cmd:`~bm admin tier add --account-name` 
       associated to the remote Azure tier.
 
-      Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
+      Required if :mc-cmd:`~bm admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: --credentials-file
@@ -238,7 +235,7 @@ Syntax
       user on the remote GCS tier. The user must have permission to perform
       read/write/list/delete operations on the remote bucket or bucket prefix.
       
-      Required if :mc-cmd:`~mc admin tier add TIER_TYPE` is ``gcs``. 
+      Required if :mc-cmd:`~bm admin tier add TIER_TYPE` is ``gcs``. 
       This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: --bucket
@@ -253,7 +250,7 @@ Syntax
 
       *Optional*
       
-      The prefix path for the specified :mc-cmd:`~mc admin tier add --bucket`
+      The prefix path for the specified :mc-cmd:`~bm admin tier add --bucket`
       to which Buckit transitions objects.
 
       Omit this field to transition objects into the bucket root.
@@ -271,7 +268,7 @@ Syntax
 
       Defaults to ``S3_STANDARD`` if omitted. 
 
-      This option only applies if :mc-cmd:`~mc admin tier add TIER_TYPE` is 
+      This option only applies if :mc-cmd:`~bm admin tier add TIER_TYPE` is 
       ``s3``. This option has no effect for any other value of ``TIER_TYPE``.
 
    .. mc-cmd:: --region
@@ -280,9 +277,9 @@ Syntax
       *Optional*
 
       The S3 backend region for the specified 
-      :mc-cmd:`~mc admin tier add TIER_TYPE`, such as ``us-west-1``.
+      :mc-cmd:`~bm admin tier add TIER_TYPE`, such as ``us-west-1``.
 
-      This option only applies if :mc-cmd:`~mc admin tier add TIER_TYPE` is 
+      This option only applies if :mc-cmd:`~bm admin tier add TIER_TYPE` is 
       ``s3``. This option has no effect for any other value of ``TIER_TYPE``.
       
 .. mc-cmd:: edit
@@ -305,14 +302,14 @@ Syntax
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment.
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment.
 
    .. mc-cmd:: TIER_NAME
 
       *Required*
 
       The name of the remote tier the command modifies. The value
-      corresponds to the :mc-cmd:`mc admin tier add TIER_NAME` specified
+      corresponds to the :mc-cmd:`bm admin tier add TIER_NAME` specified
       when creating the remote tier.
 
    .. mc-cmd:: --access-key
@@ -325,7 +322,7 @@ Syntax
       remote bucket or bucket prefix.
 
       This option only applies to remote storage tiers with 
-      :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
+      :mc-cmd:`~bm admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: --secret-key
@@ -336,7 +333,7 @@ Syntax
       The secret key for a user on the remote S3 tier.
 
       This option only applies to remote storage tiers with 
-      :mc-cmd:`~mc admin tier add TIER_TYPE` is ``s3``. 
+      :mc-cmd:`~bm admin tier add TIER_TYPE` is ``s3``. 
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: --account-key
@@ -346,11 +343,11 @@ Syntax
 
       The account key for a user on the remote Azure tier.
       Use this option to rotate the credentials for the
-      :mc-cmd:`~mc admin tier add --account-name` 
+      :mc-cmd:`~bm admin tier add --account-name` 
       associated to the remote tier.
 
       This option only applies to remote storage tiers with 
-      :mc-cmd:`~mc admin tier add TIER_TYPE` is ``azure``. 
+      :mc-cmd:`~bm admin tier add TIER_TYPE` is ``azure``. 
       This option has no effect for any other ``TIER_TYPE``.
 
    .. mc-cmd:: --credentials-file
@@ -363,7 +360,7 @@ Syntax
       or bucket prefix.
       
       This option only applies to remote storage tiers with 
-      :mc-cmd:`~mc admin tier add TIER_TYPE` is ``gcs``. 
+      :mc-cmd:`~bm admin tier add TIER_TYPE` is ``gcs``. 
       This option has no effect for any other ``TIER_TYPE``.
    
 .. mc-cmd:: ls
@@ -385,4 +382,4 @@ Syntax
 
       *Required*
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment.
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment.

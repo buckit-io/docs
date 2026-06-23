@@ -10,20 +10,13 @@
 
 .. mc:: mc admin bucket quota
 
-.. versionchanged:: RELEASE.2022-12-13T00-23-28Z
-
-   ``mc admin bucket quota`` replaced by:
-
-   - :mc-cmd:`mc quota set`
-   - :mc-cmd:`mc quota info`
-   - :mc-cmd:`mc quota clear`
 
 Description
 -----------
 
 .. start-mc-admin-bucket-quota-desc
 
-The :mc-cmd:`mc admin bucket quota` command manages per-bucket
+The :mc-cmd:`bm admin bucket quota` command manages per-bucket
 storage quotas.
 
 .. end-mc-admin-bucket-quota-desc
@@ -40,7 +33,7 @@ storage quotas.
 Units of Measurement
 ~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd:`mc admin bucket quota --hard` flag
+The :mc-cmd:`bm admin bucket quota --hard` flag
 accepts the following case-insensitive suffixes to represent the unit of the
 specified size value:
 
@@ -84,8 +77,8 @@ Examples
 Configure a Hard Quota on a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket quota` with the
-:mc-cmd:`~mc admin bucket quota --hard` flag to specify a hard quota 
+Use :mc-cmd:`bm admin bucket quota` with the
+:mc-cmd:`~bm admin bucket quota --hard` flag to specify a hard quota 
 on a bucket. Hard quotas prevent the bucket size from growing past the specified
 limit.
 
@@ -94,7 +87,7 @@ limit.
 
    mc admin bucket quota TARGET/BUCKET --hard LIMIT
 
-- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+- Replace ``TARGET`` with the :mc-cmd:`alias <bm alias>` of a configured 
   Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
   set the hard quota.
 
@@ -105,7 +98,7 @@ limit.
 Retrieve Bucket Quota Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket quota` to retrieve the current quota configuration
+Use :mc-cmd:`bm admin bucket quota` to retrieve the current quota configuration
 for a bucket:
 
 .. code-block:: shell
@@ -113,15 +106,15 @@ for a bucket:
 
    mc admin bucket quota TARGET/BUCKET
 
-Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+Replace ``TARGET`` with the :mc-cmd:`alias <bm alias>` of a configured 
 Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
 retrieve the quota.
 
 Clear Configured Bucket Quota
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket quota` with the
-:mc-cmd:`~mc admin bucket quota --clear` flag to clear all quotas from
+Use :mc-cmd:`bm admin bucket quota` with the
+:mc-cmd:`~bm admin bucket quota --clear` flag to clear all quotas from
 a bucket.
 
 .. code-block:: shell
@@ -129,26 +122,26 @@ a bucket.
 
    mc admin bucket quota TARGET/BUCKET --clear
 
-- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured 
+- Replace ``TARGET`` with the :mc-cmd:`alias <bm alias>` of a configured 
   Buckit deployment. Replace ``BUCKET`` with the name of the bucket on which to
   clear the quota.
 
 Syntax
 ------
 
-:mc-cmd:`mc admin bucket quota` has the following syntax:
+:mc-cmd:`bm admin bucket quota` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin bucket quota TARGET [ARGUMENTS]
 
-:mc-cmd:`mc admin bucket quota` supports the following arguments:
+:mc-cmd:`bm admin bucket quota` supports the following arguments:
 
 .. mc-cmd:: TARGET
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a 
+   Specify the :mc-cmd:`alias <bm alias>` of the Buckit deployment as a 
    prefix to the path. For example:
 
    .. code-block:: shell

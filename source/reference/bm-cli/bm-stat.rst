@@ -32,12 +32,12 @@ You can use :mc:`bm stat` against the local filesystem to produce similar result
 
    .. tab-item:: EXAMPLE
 
-      The following command displays information on all objects in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      The following command displays information on all objects in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm stat --recursive myminio/mydata
+         bm stat --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -72,19 +72,19 @@ Parameters
 
    .. code-block:: shell
 
-      bm stat myminio/mybucket/myobject.txt
+      bm stat mybuckit/mybucket/myobject.txt
 
    You can specify multiple objects on the same or different Buckit deployments:
 
    .. code-block:: shell
 
-      bm stat myminio/mybucket/myobject.txt myminio/mybucket/myobject.txt
+      bm stat mybuckit/mybucket/myobject.txt mybuckit/mybucket/myobject.txt
 
    If specifying the path to a bucket or bucket prefix, you **must** include the :mc-cmd:`bm stat --recursive` flag:
 
    .. code-block:: shell
 
-      bm stat --recursive myminio/mybucket/
+      bm stat --recursive mybuckit/mybucket/
 
    For retrieving information on a file from a local filesystem, specify the full path to that file:
 
@@ -155,7 +155,7 @@ The following example displays details of the object ``myfile.txt`` in the bucke
 .. code-block:: shell
    :class: copyable
 
-   bm stat myminio/mybucket/myfile.txt
+   bm stat mybuckit/mybucket/myfile.txt
 
 The output resembles the following:
 
@@ -174,7 +174,7 @@ You can specify more than one object by adding multiple paths:
 .. code-block:: shell
    :class: copyable
 
-   bm stat myminio/mybucket/file1.txt myminio/yourbucket/file2.txt
+   bm stat mybuckit/mybucket/file1.txt mybuckit/yourbucket/file2.txt
 
 To display detail for all objects in a bucket, use :mc-cmd:`~bm stat --recursive`.
 The following example displays details for all objects in bucket ``mybucket``:
@@ -182,7 +182,7 @@ The following example displays details for all objects in bucket ``mybucket``:
 .. code-block:: shell
    :class: copyable
 
-   bm stat --recursive myminio/mybucket
+   bm stat --recursive mybuckit/mybucket
 
 The output resembles the following:
 
@@ -208,12 +208,12 @@ The output resembles the following:
 Display Bucket Details
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The following example displays information about the bucket ``mybucket`` on the ``myminio`` Buckit deployment:
+The following example displays information about the bucket ``mybucket`` on the ``mybuckit`` Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   bm stat myminio/mybucket
+   bm stat mybuckit/mybucket
 
 The output resembles the following:
 
@@ -259,7 +259,7 @@ The following example uses the `jq <https://jqlang.github.io/jq/>`__ utility:
 .. code-block:: shell
    :class: copyable
 
-   bm stat myminio/mybucket --json | jq '.Usage.objectsCount'
+   bm stat mybuckit/mybucket --json | jq '.Usage.objectsCount'
 
 
 Behavior

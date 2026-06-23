@@ -139,14 +139,14 @@ Modify the example to reflect your deployment topology.
          #
          # Defer to your organizations requirements for superadmin user name.
 
-         MINIO_ROOT_USER=minioadmin
+         MINIO_ROOT_USER=buckitadmin
 
          # Set the root password
          #
          # Use a long, random, unique string that meets your organizations
          # requirements for passwords.
 
-         MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+         MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
    .. tab-item:: Single-Node Single-Drive
 
@@ -176,14 +176,14 @@ Modify the example to reflect your deployment topology.
          #
          # Defer to your organizations requirements for superadmin user name.
 
-         MINIO_ROOT_USER=minioadmin
+         MINIO_ROOT_USER=buckitadmin
 
          # Set the root password
          #
          # Use a long, random, unique string that meets your organizations
          # requirements for passwords.
 
-         MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+         MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
 Specify any other :ref:`environment variables <minio-server-environment-variables>` or server command-line options as required by your deployment. 
 
@@ -214,7 +214,7 @@ The command output resembles the following:
 The ``API`` block lists the network interfaces and port on which clients can access the Buckit S3 API.
 The ``WebUI`` block lists the network interfaces and port on which clients can access the Buckit Web Console.
 
-To run the Buckit server process in the background or as a daemon, defer to your macOS documentation for best practices and procedures.
+To run the :mc:`buckit server <buckit server>` process in the background or as a daemon, defer to your macOS documentation for best practices and procedures.
 
 5. Connect to the Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

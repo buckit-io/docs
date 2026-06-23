@@ -10,16 +10,13 @@
 
 .. mc:: mc quota
 
-.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
-
-   ``mc quota`` and its subcommands are deprecated.
 
 Description
 -----------
 
 .. start-mc-quota-desc
 
-The :mc:`mc quota` commands configure, display, or remove a quota limit on a bucket. 
+The :mc:`bm quota` commands configure, display, or remove a quota limit on a bucket. 
 
 .. end-mc-quota-desc
 
@@ -37,7 +34,7 @@ Each time the Buckit :ref:`object scanner <minio-lifecycle-management-scanner>` 
 Subcommands
 -----------
 
-:mc:`mc quota` includes the following subcommands:
+:mc:`bm quota` includes the following subcommands:
 
 .. list-table::
    :header-rows: 1
@@ -47,17 +44,17 @@ Subcommands
    * - Subcommand
      - Description
 
-   * - :mc:`~mc quota clear`
+   * - :mc:`~bm quota clear`
      - .. include:: /reference/deprecated/mc-quota-clear.rst
           :start-after: start-mc-quota-clear-desc
           :end-before: end-mc-quota-clear-desc
 
-   * - :mc:`~mc quota info`
+   * - :mc:`~bm quota info`
      - .. include:: /reference/deprecated/mc-quota-info.rst
           :start-after: start-mc-quota-info-desc
           :end-before: end-mc-quota-info-desc
 
-   * - :mc:`~mc quota set`
+   * - :mc:`~bm quota set`
      - .. include:: /reference/deprecated/mc-quota-set.rst
           :start-after: start-mc-quota-set-desc
           :end-before: end-mc-quota-set-desc

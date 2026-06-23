@@ -37,12 +37,12 @@ To change the retention status of an object under
    .. tab-item:: EXAMPLE
 
       The following command removes the default object lock configuration for 
-      the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm retention clear --default myminio/mydata
+         bm retention clear --default mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

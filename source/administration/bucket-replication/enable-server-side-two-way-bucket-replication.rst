@@ -17,7 +17,7 @@ The procedure on this page creates a new bucket replication rule for two-way "ac
    :alt: Active-Active Replication synchronizes data between two remote clusters.
    :align: center
 
-- To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
+- To configure replication between arbitrary S3-compatible services, use :mc:`bm mirror`.
 
 - To configure one-way "active-passive" replication between Buckit clusters, see :ref:`minio-bucket-replication-serverside-oneway`.
   
@@ -42,8 +42,8 @@ Access to Both Clusters
 
 You must have network access and login credentials with required permissions to both deployment to set up active-active bucket replication.
 
-You can access the deployments by installing :mc:`mc` and using the command line.
-Use the :mc:`mc alias set` command to create an alias for both Buckit deployments.
+You can access the deployments by installing :mc:`bm` and using the command line.
+Use the :mc:`bm alias set` command to create an alias for both Buckit deployments.
 
 Alias creation requires specifying an access key for a user on the deployment. 
 This user **must** have permission to create and manage users and policies on the deployment. 
@@ -78,7 +78,7 @@ Considerations
 
    Buckit supports automatically replicating existing objects in a bucket.
 
-   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
+   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
    This procedure includes the required flags for enabling replication of existing objects.
 
 .. dropdown:: Replication of Delete Operations
@@ -91,7 +91,7 @@ Considerations
 
    - For delete operations on versions of an object, Buckit replication also deletes those versions on the target bucket.
 
-   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
+   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate`. 
    This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
    Buckit does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`. 
@@ -118,17 +118,13 @@ Procedure
 
 .. _minio-bucket-replication-two-way-minio-cli-procedure:
 
-Configure Two-Way Bucket Replication Using the Command Line ``mc``
+Configure Two-Way Bucket Replication Using the Command Line ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure creates two-way, active-active replication between two Buckit deployments.
 
 This procedure assumes you have already defined an alias for each deployment as a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-twoway-permissions>`.
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
-   This procedure only documents the procedure as of that release.
 
 .. _minio-bucket-replication-two-way-minio-cli-create-remote-targets:
 
@@ -145,7 +141,7 @@ Repeat this step on the other Buckit deployment.
 Change the ``ALIAS`` and ``--remote-bucket`` values to correspond to the first deployment.
 
 You should have two replication rules configured at the conclusion of this step - one created on each deployment that points to the bucket on the other deployment.
-Use the :mc:`mc replicate ls` command to verify the created replication rules.
+Use the :mc:`bm replicate ls` command to verify the created replication rules.
 
 .. _minio-bucket-replication-two-way-minio-cli-verify-replication-config:
 
@@ -162,9 +158,9 @@ Once both objects exist on both deployments, you have successfully set up two-wa
 
 .. seealso::
 
-   - Use the :mc:`mc replicate update` command to modify an existing
+   - Use the :mc:`bm replicate update` command to modify an existing
      replication rule.
 
-   - Use the :mc:`mc replicate update` command with the :mc-cmd:`--state "disable" <mc replicate update --state>` flag to disable an existing replication rule.
+   - Use the :mc:`bm replicate update` command with the :mc-cmd:`--state "disable" <bm replicate update --state>` flag to disable an existing replication rule.
 
-   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`bm replicate rm` command to remove an existing replication rule.

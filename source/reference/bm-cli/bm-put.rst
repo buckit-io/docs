@@ -10,8 +10,6 @@
 
 .. mc:: bm put
 
-.. versionadded:: mc RELEASE.2024-02-24T01-33-20Z
-
 Syntax
 ------
 
@@ -29,12 +27,12 @@ The :mc:`bm put` uploads an object from the local file system to a bucket on a t
 
    .. tab-item:: EXAMPLE
 
-      The following uploads the file ``logo.png`` from the local file system at path ``~/images/collateral/`` to a bucket called ``marketing`` on the Buckit deployment with the alias of ``minio``.
+      The following uploads the file ``logo.png`` from the local file system at path ``~/images/collateral/`` to a bucket called ``marketing`` on the Buckit deployment with the alias of ``buckit``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm put ~/images/collateral/logo.png minio/marketing
+         bm put ~/images/collateral/logo.png buckit/marketing
 
 
    .. tab-item:: SYNTAX
@@ -82,25 +80,10 @@ Parameters
 .. mc-cmd:: --checksum
    :optional:
 
-   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
-
-   Add a checksum to an uploaded object. 
-   
-   Valid values are: 
-   - ``MD5``
-   - ``CRC32``
-   - ``CRC32C``
-   - ``SHA1``
-   - ``SHA256``
-
-   The flag requires server trailing headers and works with AWS or Buckit targets.
 
 .. mc-cmd:: --disable-multipart
    :optional:
 
-   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
-   
-   Disables multipart uploads and directs ``bm`` to send the object in a single ``PUT`` operation.
 
 .. block include of enc-c , enc-s3, and enc-kms
 
@@ -144,12 +127,12 @@ Examples
 Upload a File and Specify the Object Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command uploads the file ``logo.png`` from the local file system to the ``business`` bucket on the ``minio`` deployment, uploading it on the destination as ``company-logo.png``.
+The following command uploads the file ``logo.png`` from the local file system to the ``business`` bucket on the ``buckit`` deployment, uploading it on the destination as ``company-logo.png``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm put images/collateral/logo.png minio/business/company-logo.png
+   bm put images/collateral/logo.png buckit/business/company-logo.png
 
 Upload a Multipart Object in Parallel with a Specified Part Size
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -160,4 +143,4 @@ The following command uploads a file in chunks of 20MiB each and uploads 8 parts
 .. code-block:: shell
    :class: copyable
 
-   bm put ~/videos/collateral/splash-page.mp4 minio/business --parallel 8 --part-size 20MiB
+   bm put ~/videos/collateral/splash-page.mp4 buckit/business --parallel 8 --part-size 20MiB

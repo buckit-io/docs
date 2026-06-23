@@ -33,7 +33,7 @@ The :mc-cmd:`bm admin user sts info` command retrieves information on the specif
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin user sts info myminio/ "J123C4ZXEQN8RK6ND35I"
+         bm admin user sts info mybuckit/ "J123C4ZXEQN8RK6ND35I"
 
    .. tab-item:: SYNTAX
 

@@ -12,14 +12,14 @@ Settings Overview
    :local:
    :depth: 2
 
-The :mc:`minio server` process stores its configuration in the storage backend :mc-cmd:`directory <minio server DIRECTORIES>`. 
+The :mc:`buckit server <buckit server>` process stores its configuration in the storage backend :mc-cmd:`directory <buckit server DIRECTORIES>`. 
 
 .. _minio-server-configuration-options:
 
 Buckit Settings
 ---------------
 
-Buckit settings define runtime behavior of the Buckit :mc:`server <minio server>` process.
+Buckit settings define runtime behavior of the Buckit :mc:`server <buckit server>` process.
 
 .. include:: /includes/common-mc-admin-config.rst
    :start-after: start-minio-settings-defined

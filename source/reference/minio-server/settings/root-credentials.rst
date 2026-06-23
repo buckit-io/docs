@@ -37,7 +37,7 @@ Root User
 
       .. warning::
    
-         If :envvar:`MINIO_ROOT_USER` is unset, :mc:`minio` defaults to ``minioadmin``.
+         If :envvar:`MINIO_ROOT_USER` is unset, Buckit defaults to ``buckitadmin``.
    
          **NEVER** use the default credentials in production environments.
          Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_USER` value for all environments.
@@ -62,7 +62,7 @@ Root Password
 
       .. warning::
 
-         If :envvar:`MINIO_ROOT_PASSWORD` is unset, :mc:`minio` defaults to ``minioadmin``.
+         If :envvar:`MINIO_ROOT_PASSWORD` is unset, Buckit defaults to ``buckitadmin``.
 
          **NEVER** use the default credentials in production environments.
          Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ROOT_PASSWORD` value for all environments.
@@ -89,8 +89,6 @@ Root Access
   
       .. mc-conf:: api root-access
          :delimiter: " "
-
-.. versionadded:: Buckit Server RELEASE.2023-05-04T21-44-30Z
 
 Specify ``on`` to enable and ``off`` to disable the :ref:`root <minio-users-root>` user account.
 Disabling the root service account also disables all service accounts associated with root, excluding those used by site replication.

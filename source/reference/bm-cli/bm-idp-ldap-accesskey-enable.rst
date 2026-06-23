@@ -27,12 +27,12 @@ The :mc:`bm idp ldap accesskey enable` enables the specified :ref:`access key <m
 
    .. tab-item:: EXAMPLE
 
-         The following example enables the access key ``mykey`` from the ``minio`` deployment:
+         The following example enables the access key ``mykey`` from the ``buckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey enable minio/ mykey
+         bm idp ldap accesskey enable buckit/ mykey
 
    .. tab-item:: SYNTAX
 
@@ -66,7 +66,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey enable minio mykey
+         bm idp ldap accesskey enable buckit mykey
 
 .. mc-cmd:: KEY
    :required:
@@ -76,12 +76,12 @@ Parameters
 Example
 ~~~~~~~
 
-Enable the access key ``mykey`` from the ``minio`` deployment.
+Enable the access key ``mykey`` from the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey enable minio/ mykey
+   bm idp ldap accesskey enable buckit/ mykey
 
 Global Flags
 ~~~~~~~~~~~~

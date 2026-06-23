@@ -38,11 +38,11 @@ If the MQTT service requires authentication, you *must* provide an appropriate
 username and password during the configuration process to grant Buckit access
 to the service.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the MQTT Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +58,7 @@ You can configure a new MQTT service endpoint using either environment variables
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-mqtt>`. The 
-      :mc:`minio server` process applies the specified settings on its 
+      :mc:`buckit server <buckit server>` process applies the specified settings on its 
       next startup.
       
       The following example code sets *all*  environment variables
@@ -113,7 +113,7 @@ You can configure a new MQTT service endpoint using either environment variables
         If the specified ``<IDENTIFIER>`` matches an existing MQTT service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_mqtt <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_mqtt <bm admin config get>` to
         review the currently configured MQTT endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the URL of the MQTT service endpoint.
@@ -131,9 +131,9 @@ You can configure a new MQTT service endpoint using either environment variables
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating MQTT endpoints on a running 
-      :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
+      :mc:`buckit server <buckit server>` process using the :mc-cmd:`bm admin config set` command 
       and the :mc-conf:`notify_mqtt` configuration key. You must restart the 
-      :mc:`minio server` process to apply any new or updated configuration
+      :mc:`buckit server <buckit server>` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
@@ -148,7 +148,7 @@ You can configure a new MQTT service endpoint using either environment variables
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_mqtt:IDENTIFIER \
+         bm admin config set ALIAS/ notify_mqtt:IDENTIFIER \
             broker="ENDPOINT" \
             topic="TOPIC" \
             username="username" \
@@ -167,7 +167,7 @@ You can configure a new MQTT service endpoint using either environment variables
         If the specified ``IDENTIFIER`` matches an existing MQTT service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_mqtt <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_mqtt <bm admin config get>` to
         review the currently configured MQTT endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the URL of the MQTT service endpoint.
@@ -186,17 +186,17 @@ You can configure a new MQTT service endpoint using either environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured MQTT
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured MQTT
 target similar to the following:
 
 .. code-block:: shell
@@ -213,13 +213,13 @@ the associated MQTT deployment as a target.
 1) Configure Bucket Notifications using the MQTT Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc event add` command to add a new bucket notification 
+Use the :mc:`bm event add` command to add a new bucket notification 
 event with the configured MQTT service as a target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event add ALIAS/BUCKET arn:minio:sqs::primary:mqtt \
+   bm event add ALIAS/BUCKET arn:minio:sqs::primary:mqtt \
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
@@ -228,31 +228,31 @@ event with the configured MQTT service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which Buckit triggers notifications.
 
-Use :mc:`mc event ls` to view all configured bucket events for 
+Use :mc:`bm event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:MQTT
+   bm event ls ALIAS/BUCKET arn:minio:sqs::primary:MQTT
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on the bucket for which you configured the new event and 
 check the MQTT service for the notification data. The action required
-depends on which :mc-cmd:`events <mc event add --event>` were specified
+depends on which :mc-cmd:`events <bm event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an MQTT Endpoint in a Buckit Deployment
 ----------------------------------------------
@@ -276,23 +276,23 @@ If the MQTT service requires authentication, you *must* provide an appropriate
 username and password during the configuration process to grant Buckit access
 to the service.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 
 1) List Configured MQTT Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently
+Use the :mc-cmd:`bm admin config get` command to list the currently
 configured MQTT service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_mqtt
+   bm admin config get ALIAS/ notify_mqtt
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
@@ -315,13 +315,13 @@ the next step.
 2) Update the MQTT Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration
+Use the :mc-cmd:`bm admin config set` command to set the new configuration
 for the MQTT service endpoint:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_mqtt:<IDENTIFIER> \
+   bm admin config set ALIAS/ notify_mqtt:<IDENTIFIER> \
       url="MQTT://user:password@hostname:port" \
       exchange="<string>" \
       exchange_type="<string>" \
@@ -352,17 +352,17 @@ configuration settings.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured MQTT
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured MQTT
 target similar to the following:
 
 .. code-block:: shell
@@ -374,15 +374,15 @@ target similar to the following:
 
 Perform an action on a bucket which has an event configuration using the updated
 MQTT service endpoint and check the MQTT service for the notification data. The
-action required depends on which :mc-cmd:`events <mc event add --event>` were
+action required depends on which :mc-cmd:`events <bm event add --event>` were
 specified when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET

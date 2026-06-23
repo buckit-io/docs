@@ -34,12 +34,12 @@ Buckit supports adding up to 10 custom tags to an object.
    .. tab-item:: EXAMPLE
 
       The following command sets tags for the ``mydata`` bucket on the
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm tag set myminio/mydata "tag1=value1&tag2=value2"
+         bm tag set mybuckit/mydata "tag1=value1&tag2=value2"
 
    .. tab-item:: SYNTAX
 
@@ -75,7 +75,7 @@ Parameters
 
    .. code-block:: none
 
-      bm tag set myminio/mybucket/object.txt
+      bm tag set mybuckit/mybucket/object.txt
 
 .. mc-cmd:: TAGS
    :required:
@@ -86,31 +86,14 @@ Parameters
 
    .. code-block:: none
 
-      bm tag set myminio/mybucket/object.txt "key1=value1&key2=value2"
+      bm tag set mybuckit/mybucket/object.txt "key1=value1&key2=value2"
 
 .. mc-cmd:: --exclude-folders
    :optional:
 
-   .. versionadded:: RELEASE.2024-01-11T05-49-32Z
-
-   When used with :mc-cmd:`~bm tag set --recursive`, causes :mc:`bm tag set` to **not** traverse child prefixes.
-   Tags are only applied to objects at the specified path.
-   Requires :mc-cmd:`~bm tag set --recursive`.
-
-   The following example applies the tag ``destination=international`` to objects at ``vacation-photos/cancun/`` but not ``vacation-photos/cancun/ocean/`` or other prefixes.
-   
-   For example, the above would add the tags to the object at``vacation-photos/cancun/pretty-beach.jpg`` but not to the object at``vacation-photos/cancun/ocean/tropical-fish.jpg``.
-
-   .. code-block:: shell
-
-      bm tag set myminio/vacation-photos/cancun "destination=international" --exclude-folders --recursive
-   
 .. mc-cmd:: --recursive, r
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-04T18-10-16Z
-
-   Recursively applies the tag to all objects at the path specified to :mc:`ALIAS <bm tag set ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

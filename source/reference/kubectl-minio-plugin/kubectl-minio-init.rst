@@ -88,11 +88,6 @@ The command supports the following flags:
 .. mc-cmd:: --console-tls
    :optional:
 
-   .. versionadded:: 4.5.6
-
-   Enables TLS for the Operator Console.
-
-   Disabled by default.
 
 .. mc-cmd:: --default-kes-image
    :optional:
@@ -155,4 +150,3 @@ The command supports the following flags:
 
    Enable Operator sts (v1alpha1)
 
-   .. versionadded:: 5.0.0

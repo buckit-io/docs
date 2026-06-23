@@ -13,7 +13,7 @@
          Buckit supports specifying the :abbr:`OIDC (OpenID Connect)` provider
          settings using :ref:`environment variables
          <minio-server-envvar-external-identity-management-openid>`. The 
-         :mc:`minio server` process applies the specified settings on its next
+         :mc:`buckit server <buckit server>` process applies the specified settings on its next
          startup. For distributed deployments, specify these settings across all
          nodes in the deployment using the *same* values consistently.
 
@@ -44,8 +44,8 @@
 
          Buckit supports specifying the :abbr:`OIDC (OpenID Connect)` provider
          settings using :mc-conf:`configuration settings <identity_openid>`. The 
-         :mc:`minio server` process applies the specified settings on its next
-         startup. For distributed deployments, the :mc:`mc admin config`
+         :mc:`buckit server <buckit server>` process applies the specified settings on its next
+         startup. For distributed deployments, the :mc:`bm admin config`
          command applies the configuration to all nodes in the deployment.
 
          The following example code sets *all* configuration settings related to
@@ -56,7 +56,7 @@
          .. code-block:: shell
             :class: copyable
 
-            mc admin config set ALIAS/ identity_openid \
+            bm admin config set ALIAS/ identity_openid \
                config_url="https://openid-provider.example.net/.well-known/openid-configuration" \
                client_id="<string>" \
                client_secret="<string>" \
@@ -74,12 +74,12 @@
 #. Restart the Buckit Deployment
 
    You must restart the Buckit deployment to apply the configuration changes. 
-   Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+   Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin service restart ALIAS
+      bm admin service restart ALIAS
 
    Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
    restart.
@@ -111,7 +111,7 @@
    .. code-block:: shell
       :class: copyable
 
-      POST https://minio.example.net?Action=AssumeRoleWithWebIdentity
+      POST https://buckit.example.net?Action=AssumeRoleWithWebIdentity
       &WebIdentityToken=TOKEN
       &Version=2011-06-15
       &DurationSeconds=86400

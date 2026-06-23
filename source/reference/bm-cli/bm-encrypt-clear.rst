@@ -28,12 +28,12 @@ encryption settings for a bucket.
 
       The following command removes the default encryption settings for
       the ``mydata`` bucket on the Buckit deployment associated with the 
-      ``myminio`` :ref:`alias <alias>`:
+      ``mybuckit`` :ref:`alias <alias>`:
 
       .. code-block:: shell
          :class: copyable
 
-         bm encrypt clear myminio/mydata
+         bm encrypt clear mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -81,7 +81,7 @@ Remove the Automatic Server-Side Encryption Settings for a Bucket
       .. code-block:: shell
          :class: copyable
 
-          bm encrypt clear myminio/data
+          bm encrypt clear mybuckit/data
 
    .. tab-item:: Syntax
 

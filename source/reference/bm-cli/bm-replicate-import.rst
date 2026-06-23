@@ -28,12 +28,12 @@ Buckit bucket from ``STDIN``.
    .. tab-item:: EXAMPLE
 
       The following command imports the replication configuration for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate import myminio/mydata < mydata-replication.json
+         bm replicate import mybuckit/mydata < mydata-replication.json
 
    .. tab-item:: SYNTAX
 
@@ -59,7 +59,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate import myminio/mybucket
+      bm replicate import mybuckit/mybucket
 
 Global Flags
 ~~~~~~~~~~~~

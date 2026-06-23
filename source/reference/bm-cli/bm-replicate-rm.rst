@@ -13,10 +13,6 @@
 .. mc:: bm replicate remove
 .. mc:: bm replicate rm
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
-
-   ``bm replicate rm`` replaces the ``bm admin bucket remote rm`` command.
-   Removing the replication automatically removes the underlying remote target.
 
 Syntax
 ------
@@ -40,12 +36,12 @@ The :mc:`bm replicate remove` command has equivalent functionality to :mc:`bm re
    .. tab-item:: EXAMPLE
 
       The following command removes the replication rule with specified
-      id from the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      id from the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate rm --id "c76um9h4b0t1ijr36mug" myminio/mydata
+         bm replicate rm --id "c76um9h4b0t1ijr36mug" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -74,7 +70,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate rm --id "ID" myminio/mybucket
+      bm replicate rm --id "ID" mybuckit/mybucket
 
 
 .. mc-cmd:: --id

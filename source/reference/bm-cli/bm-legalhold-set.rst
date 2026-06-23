@@ -38,12 +38,12 @@ documentation on creating buckets with object locking enabled.
    .. tab-item:: EXAMPLE
 
       The following command enables legalhold WORM locking on all existing objects
-      in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm legalhold set --recursive myminio/mydata
+         bm legalhold set --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

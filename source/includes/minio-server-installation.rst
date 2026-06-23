@@ -72,7 +72,7 @@
 
       .. code-block:: powershell
 
-         \path\to\mc.exe --help
+         \path\to\bm.exe --help
 
    .. tab-item:: Source
 
@@ -88,6 +88,6 @@
 
          go install github.com/minio/minio@latest
 
-      :mc-cmd:`mc admin update` does not support source-based installations.
+      :mc-cmd:`bm admin update` does not support source-based installations.
 
 

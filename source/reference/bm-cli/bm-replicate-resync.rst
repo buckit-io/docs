@@ -40,7 +40,7 @@ for more information on active-active replication:
    .. tab-item:: EXAMPLE
 
       The following command resynchronizes the content of the 
-      ``mydata`` bucket on the ``myminio`` Buckit deployment to the remote
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment to the remote
       Buckit deployment associated to the specified ``--remote-bucket``:
 
       .. code-block:: shell
@@ -48,7 +48,7 @@ for more information on active-active replication:
 
          bm replicate resync start \
             --remote-bucket "arn:minio:replication::d3c086c7-1d64-40c2-954b-fe8222907033:mydata" \ 
-            myminio/mydata
+            mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

@@ -31,11 +31,11 @@ MySQL 5.7.8 and later
 
 Buckit relies on features introduced with MySQL 5.7.8.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the MySQL Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,7 +51,7 @@ You can configure a new MySQL service endpoint using either environment variable
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-mysql>`. The 
-      :mc:`minio server` process applies the specified settings on its 
+      :mc:`buckit server <buckit server>` process applies the specified settings on its 
       next startup.
       
       The following example code sets *all*  environment variables
@@ -99,7 +99,7 @@ You can configure a new MySQL service endpoint using either environment variable
         If the specified ``<IDENTIFIER>`` matches an existing MySQL service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_mysql <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_mysql <bm admin config get>` to
         review the currently configured MySQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the DSN of the MySQL service endpoint.
@@ -119,9 +119,9 @@ You can configure a new MySQL service endpoint using either environment variable
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating MySQL endpoints on a running 
-      :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
+      :mc:`buckit server <buckit server>` process using the :mc-cmd:`bm admin config set` command 
       and the :mc-conf:`notify_mysql` configuration key. You must restart the 
-      :mc:`minio server` process to apply any new or updated configuration
+      :mc:`buckit server <buckit server>` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
@@ -135,7 +135,7 @@ You can configure a new MySQL service endpoint using either environment variable
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_mysql:IDENTIFIER \
+         bm admin config set ALIAS/ notify_mysql:IDENTIFIER \
             dsn_string="<ENDPOINT>" \
             table="<string>" \
             format="<string>" \
@@ -151,7 +151,7 @@ You can configure a new MySQL service endpoint using either environment variable
         If the specified ``IDENTIFIER`` matches an existing MySQL service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_mysql <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_mysql <bm admin config get>` to
         review the currently configured MySQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the DSN of the MySQL service endpoint.
@@ -171,17 +171,17 @@ You can configure a new MySQL service endpoint using either environment variable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured MySQL
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured MySQL
 target similar to the following:
 
 .. code-block:: shell
@@ -198,13 +198,13 @@ the associated MySQL deployment as a target.
 3) Configure Bucket Notifications using the MySQL Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc event add` command to add a new bucket notification 
+Use the :mc:`bm event add` command to add a new bucket notification 
 event with the configured MySQL service as a target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event add ALIAS/BUCKET arn:minio:sqs::primary:mysql \
+   bm event add ALIAS/BUCKET arn:minio:sqs::primary:mysql \
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
@@ -213,31 +213,31 @@ event with the configured MySQL service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which Buckit triggers notifications.
 
-Use :mc:`mc event ls` to view all configured bucket events for 
+Use :mc:`bm event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:mysql
+   bm event ls ALIAS/BUCKET arn:minio:sqs::primary:mysql
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on the bucket for which you configured the new event and 
 check the MySQL service for the notification data. The action required
-depends on which :mc-cmd:`events <mc event add --event>` were specified
+depends on which :mc-cmd:`events <bm event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update a MySQL Endpoint in a Buckit Deployment
 ----------------------------------------------
@@ -254,23 +254,23 @@ MySQL 5.7.8 and later
 
 Buckit relies on features introduced with MySQL 5.7.8.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 
 1) List Configured MySQL Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently
+Use the :mc-cmd:`bm admin config get` command to list the currently
 configured MySQL service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_mysql
+   bm admin config get ALIAS/ notify_mysql
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
@@ -293,13 +293,13 @@ the next step.
 2) Update the MySQL Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration
+Use the :mc-cmd:`bm admin config set` command to set the new configuration
 for the MySQL service endpoint:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_mysql:IDENTIFIER \
+   bm admin config set ALIAS/ notify_mysql:IDENTIFIER \
       dsn_string="<ENDPOINT>" \
       table="<string>" \
       format="<string>" \
@@ -323,17 +323,17 @@ MySQL configuration settings.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured MySQL
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured MySQL
 target similar to the following:
 
 .. code-block:: shell
@@ -345,15 +345,15 @@ target similar to the following:
 
 Perform an action on a bucket which has an event configuration using the updated
 MySQL service endpoint and check the MySQL service for the notification data. The
-action required depends on which :mc-cmd:`events <mc event add --event>` were
+action required depends on which :mc-cmd:`events <bm event add --event>` were
 specified when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET

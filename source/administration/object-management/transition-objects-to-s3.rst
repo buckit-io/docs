@@ -21,15 +21,15 @@ a certain time period or calendar date.
 Requirements
 ------------
 
-Install and Configure ``mc``
+Install and Configure ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install :mc:`mc` on a machine with network access to both source and destination
-clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install :mc:`bm` on a machine with network access to both source and destination
+clusters. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+instructions on downloading and installing ``bm``.
 
-Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
+Use the :mc:`bm alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-s3-permissions>` for configuring and
@@ -129,13 +129,13 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add an Amazon S3 service as the
+Use the :mc:`bm ilm tier add` command to add an Amazon S3 service as the
 new remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier add s3 TARGET TIER_NAME  \
+   bm ilm tier add s3 TARGET TIER_NAME  \
       --endpoint https://HOSTNAME       \
       --access-key ACCESS_KEY           \
       --secret-key SECRET_KEY           \
@@ -154,33 +154,33 @@ The example above uses the following arguments:
    * - Argument
      - Description
    
-   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
+   * - :mc-cmd:`TARGET <bm ilm tier add TARGET>`
+     - The :mc:`alias <bm alias>` of the Buckit deployment on which to configure
        the S3 remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <bm ilm tier add TIER_NAME>`
      - The name to associate with the new S3 remote storage tier. Specify the
        name in all-caps, e.g. ``S3_TIER``. This value is required in the next
        step.
 
-   * - :mc-cmd:`HOSTNAME <mc ilm tier add --endpoint>`
+   * - :mc-cmd:`HOSTNAME <bm ilm tier add --endpoint>`
      - The URL endpoint for the S3 storage backend.
 
-   * - :mc-cmd:`ACCESS_KEY <mc ilm tier add --access-key>`
+   * - :mc-cmd:`ACCESS_KEY <bm ilm tier add --access-key>`
      - The S3 access key Buckit uses to access the bucket. The
        access key *must* correspond to an IAM user with the 
        required 
        :ref:`permissions 
        <minio-lifecycle-management-transition-to-s3-permissions-remote>`.
 
-   * - :mc-cmd:`SECRET_KEY <mc ilm tier add --secret-key>`
+   * - :mc-cmd:`SECRET_KEY <bm ilm tier add --secret-key>`
      - The corresponding secret key for the specified ``ACCESS_KEY``.
 
-   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
+   * - :mc-cmd:`BUCKET <bm ilm tier add --bucket>`
      - The name of the bucket on the S3 storage backend to which Buckit
        transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
+   * - :mc-cmd:`PREFIX <bm ilm tier add --prefix>`
      - The optional bucket prefix within which Buckit transitions objects.
 
        Buckit stores all transitioned objects in the specified ``BUCKET`` under a
@@ -193,7 +193,7 @@ The example above uses the following arguments:
        source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <bm ilm tier add --storage-class>`
      - The S3 storage class to which Buckit transitions objects. 
 
        Buckit tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
@@ -210,7 +210,7 @@ The example above uses the following arguments:
 
        For more information, see :s3-docs:`Using Amazon S3 storage classes <storage-class-intro.html>`.
 
-   * - :mc-cmd:`REGION <mc ilm tier add --region>`
+   * - :mc-cmd:`REGION <bm ilm tier add --region>`
      - The AWS S3 region of the specified ``BUCKET``. You can safely omit this
        option if the ``HOSTNAME`` includes the region.
 
@@ -225,16 +225,16 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm rule ls` command to review the configured transition
+Use the :mc:`bm ilm rule ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule ls ALIAS/PATH --transition
+   bm ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <bm ilm rule ls ALIAS>` with the :mc:`alias <bm alias>`
   of the Buckit deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <bm ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

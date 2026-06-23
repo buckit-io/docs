@@ -12,8 +12,6 @@
 
 .. mc:: bm batch list
 
-.. versionchanged:: Buckit RELEASE.2022-10-08T20-11-00Z or later
-
 Syntax
 ------
 
@@ -28,12 +26,12 @@ The :mc:`bm batch list` command outputs a list of the batch jobs currently in pr
 
    .. tab-item:: EXAMPLE
 
-      The following command outputs a list of all jobs currently in progress on the ``myminio`` alias.
+      The following command outputs a list of all jobs currently in progress on the ``mybuckit`` alias.
 
       .. code-block:: shell
          :class: copyable
 
-         bm batch list myminio
+         bm batch list mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -75,14 +73,14 @@ Example
 List all ``replicate`` type batch jobs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists the ``replicate``` type job(s) on the deployment at :mc:`alias <bm alias>` ``myminio``:
+The following command lists the ``replicate``` type job(s) on the deployment at :mc:`alias <bm alias>` ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm batch list myminio --type "replicate"
+   bm batch list mybuckit --type "replicate"
 
-- Replace ``myminio`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
+- Replace ``mybuckit`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
 
 - Replace ``replicate`` with the job type to output.
   
@@ -93,7 +91,7 @@ The output of the above command is similar to the following:
 .. code-block:: shell
 
    ID                      TYPE            USER            STARTED
-   E24HH4nNMcgY5taynaPfxu  replicate       minioadmin      1 minute ago
+   E24HH4nNMcgY5taynaPfxu  replicate       buckitadmin      1 minute ago
  
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

@@ -101,8 +101,5 @@ Behavior
 Binary Compression 
 ~~~~~~~~~~~~~~~~~~
 
-.. versionchanged:: RELEASE.2024-01-28T22-35-53Z
-
-   :mc-cmd:`bm admin update` compresses the binary before sending to all nodes in the deployment.
 
 This feature does not apply to :ref:`systemctl managed deployments <minio-baremetal>`.

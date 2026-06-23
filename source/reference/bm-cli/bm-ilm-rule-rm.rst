@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm rule rm
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``bm ilm rule rm`` replaces ``bm ilm rm``.
 
 Syntax
 ------
@@ -29,12 +26,12 @@ The :mc:`bm ilm rule rm` command removes an object lifecycle management rule fro
 
    .. tab-item:: EXAMPLE
 
-      The following command removes a single lifecycle management rule from the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      The following command removes a single lifecycle management rule from the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule rm --id "bgrt1ghju" myminio/mydata
+         bm ilm rule rm --id "bgrt1ghju" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -62,7 +59,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule rm myminio/mydata
+      bm ilm rule rm mybuckit/mydata
 
 .. mc-cmd:: --all
    :optional:

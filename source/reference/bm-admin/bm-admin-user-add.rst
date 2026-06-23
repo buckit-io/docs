@@ -22,18 +22,18 @@ The :mc:`bm admin user add` command adds a new :ref:`Buckit user <minio-internal
 
 .. end-mc-admin-user-add-desc
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command creates a new user ``newuser`` on the ``myminio`` Buckit deployment:
+      The following command creates a new user ``newuser`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user add myminio newuser newusersecret
+         bm admin user add mybuckit newuser newusersecret
 
    .. tab-item:: SYNTAX
 

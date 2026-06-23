@@ -12,12 +12,6 @@
 
 .. mc:: bm replicate add
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
-
-   ``bm replicate add`` replaces the ``bm admin bucket remote add`` command.
-
-   Buckit automatically creates remote targets based on a given file path or resource location (such as an IP or DNS address).
-   Users defining a remote target no longer need to determine an ARN for the remote bucket.
 
 Syntax
 ------
@@ -42,7 +36,7 @@ You can optionally configure synchronization of existing objects, delete operati
 
    .. tab-item:: EXAMPLE
 
-      The following command adds a new replication rule for the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      The following command adds a new replication rule for the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -50,7 +44,7 @@ You can optionally configure synchronization of existing objects, delete operati
          bm replicate add                                                     \
             --remote-bucket https://user:secret@minio.mysite.tld:9001/bucket  \
             --replicate "delete,delete-marker,existing-objects"               \
-            myminio/mydata
+            mybuckit/mydata
 
       The replication rule synchronizes versioned delete operations, delete markers, and existing objects to the remote Buckit deployment.
 
@@ -98,7 +92,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate add --remote-bucket https://user:secret@myminio.cloudprovider.tld:9001/bucket play/mybucket
+      bm replicate add --remote-bucket https://user:secret@mybuckit.cloudprovider.tld:9001/bucket play/mybucket
 
 .. mc-cmd:: --remote-bucket
    :required:
@@ -114,7 +108,7 @@ Parameters
 
    .. code-block::
 
-      https://user:secret@myminio.cloudprovider.tld:9001/bucket
+      https://user:secret@mybuckit.cloudprovider.tld:9001/bucket
 
    An alias based target might look like the following:
 
@@ -309,11 +303,11 @@ The following :mc:`bm replicate add` command creates a replication configuration
 .. code-block:: shell
    :class: copyable
 
-   bm replicate add myminio/mybucket \
+   bm replicate add mybuckit/mybucket \
       --remote-bucket https://user:secret@minio.mysite.tld/remotebucket \
       --replicate "delete,delete-marker,existing-objects"
 
-- Replace ``myminio/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and full bucket path for which to create the replication configuration.
+- Replace ``mybuckit/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and full bucket path for which to create the replication configuration.
 
 - Replace the :mc-cmd:`~bm replicate add --remote-bucket` value with the URL or path of the remote target. 
   If using a file path format location, use the ``--path on`` option.
@@ -329,11 +323,11 @@ The following :mc:`bm replicate add` command creates a new bucket replication co
 .. code-block:: shell
    :class: copyable
 
-   bm replicate add myminio/mybucket \
+   bm replicate add mybuckit/mybucket \
       --remote-bucket https://user:secret@minio.mysite.tld/remotebucket \
       --replicate "existing-objects"
 
-- Replace ``myminio/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and full bucket path for which to create the replication configuration.
+- Replace ``mybuckit/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and full bucket path for which to create the replication configuration.
 
 - Replace the :mc-cmd:`~bm replicate add --remote-bucket` value with the location of the remote target. 
   If using a file path format location, use the ``--path on`` option.
@@ -415,7 +409,7 @@ See :mc:`bm admin user` and :mc:`bm admin policy` for more complete documentatio
 Replication of Existing Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Starting with :mc:`mc` :minio-git:`RELEASE.2021-06-13T17-48-22Z <mc/releases/tag/RELEASE.2021-06-13T17-48-22Z>` and :mc:`minio` :minio-git:`RELEASE.2021-06-07T21-40-51Z <minio/releases/tag/RELEASE.2021-06-07T21-40-51Z>`, Buckit supports automatically replicating existing objects in a bucket. 
+Buckit supports automatically replicating existing objects in a bucket.
 Buckit existing object replication implements functionality similar to `AWS Replicating existing objects between S3 buckets <https://aws.amazon.com/blogs/storage/replicating-existing-objects-between-s3-buckets/>`__ without the overhead of contacting technical support. 
 
 - To enable replication of existing objects when creating a new replication rule, include ``"existing-objects"`` to the list of replication features specified to :mc-cmd:`bm replicate add --replicate`.
@@ -429,7 +423,7 @@ Synchronization of Metadata Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit supports :ref:`two-way active-active <minio-bucket-replication-serverside-twoway>` replication configurations, where Buckit synchronizes new and modified objects between a bucket on two Buckit deployments. 
-Starting with :mc:`mc` :minio-git:`RELEASE.2021-05-18T03-39-44Z <mc/releases/tag/RELEASE.2021-05-18T03-39-44Z>`, Buckit by default synchronizes metadata-only changes to a replicated object back to the "source" deployment. 
+Buckit by default synchronizes metadata-only changes to a replicated object back to the "source" deployment.
 Prior to the this update, Buckit did not support synchronizing metadata-only changes to a replicated object.
 
 With metadata synchronization enabled, Buckit resets the object :ref:`replication status <minio-replication-process>` to indicate replication eligibility. 

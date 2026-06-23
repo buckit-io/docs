@@ -21,15 +21,15 @@ calendar date.
 Requirements
 ------------
 
-Install and Configure ``mc``
+Install and Configure ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install :mc:`mc` on a machine with network access to both source and destination
-clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install :mc:`bm` on a machine with network access to both source and destination
+clusters. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+instructions on downloading and installing ``bm``.
 
-Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
+Use the :mc:`bm alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-gcs-permissions>` for configuring and
@@ -80,7 +80,7 @@ Remote Bucket Must Exist
 
 Create the remote GCS bucket *prior* to configuring lifecycle management tiers or rules using that bucket as the target.
 
-If you set a default GCS :gcs-docs:`storage class <storage-classes>`, Buckit uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+If you set a default GCS :gcs-docs:`storage class <storage-classes>`, Buckit uses that default *if* you do not specify a :mc-cmd:`storage class <bm ilm tier add --storage-class>` when defining the remote tier.
 Ensure you document the settings of both your GCS bucket and Buckit tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
 
 Considerations
@@ -123,13 +123,13 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add a new Google Cloud Storage
+Use the :mc:`bm ilm tier add` command to add a new Google Cloud Storage
 service as the remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier add gcs TARGET TIER_NAME \
+   bm ilm tier add gcs TARGET TIER_NAME \
       --bucket BUCKET \
       --prefix PREFIX \
       --credentials-file CREDENTIALS \
@@ -145,20 +145,20 @@ The example above uses the following arguments:
    * - Argument
      - Description
 
-   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
+   * - :mc-cmd:`TARGET <bm ilm tier add TARGET>`
+     - The :mc:`alias <bm alias>` of the Buckit deployment on which to configure
        the :abbr:`GCS (Google Cloud Storage)` remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <bm ilm tier add TIER_NAME>`
      - The name to associate with the new :abbr:`GCS (Google Cloud Storage)` 
        remote storage tier. Specify the name in all-caps, e.g. ``GCS_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`BUCKET <mc ilm tier add --bucket>`
+   * - :mc-cmd:`BUCKET <bm ilm tier add --bucket>`
      - The name of the bucket on the :abbr:`GCS (Google Cloud Storage)` storage
        backend to which Buckit transitions objects.
 
-   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
+   * - :mc-cmd:`PREFIX <bm ilm tier add --prefix>`
      - The optional bucket prefix within which Buckit transitions objects.
 
        Buckit stores all transitioned objects in the specified ``BUCKET`` under a
@@ -171,7 +171,7 @@ The example above uses the following arguments:
        source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`CREDENTIALS <mc ilm tier add --credentials-file>`
+   * - :mc-cmd:`CREDENTIALS <bm ilm tier add --credentials-file>`
      - The `credential file
        <https://cloud.google.com/docs/authentication/getting-started>`__ for a
        user on the remote GCS tier. The specified user credentials *must*
@@ -179,7 +179,7 @@ The example above uses the following arguments:
        :ref:`permissions 
        <minio-lifecycle-management-transition-to-gcs-permissions-remote>`.
 
-   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <bm ilm tier add --storage-class>`
      - The :abbr:`GCS (Google Cloud Storage)` storage class Buckit applies to objects transitioned to the GCS bucket.
 
        Buckit tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
@@ -205,16 +205,16 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm rule ls` command to review the configured transition
+Use the :mc:`bm ilm rule ls` command to review the configured transition
 rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule ls ALIAS/PATH --transition
+   bm ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <bm ilm rule ls ALIAS>` with the :mc:`alias <bm alias>`
   of the Buckit deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <bm ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

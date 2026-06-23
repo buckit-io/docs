@@ -10,26 +10,15 @@
 
 .. mc:: mc admin bucket remote
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-   - ``mc admin bucket remote add`` replaced by :mc-cmd:`mc replicate add`
-   - ``mc admin bucket remote update`` replaced by :mc-cmd:`mc replicate update`
-   - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
-   - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
-
-.. versionchanged:: RELEASE.2023-02-16T19-20-11Z
-
-   - ``mc admin bucket remote bandwidth`` replaced by :mc-cmd:`mc replicate status`
-    
-     Replication related statistics are moving to the ``mc replicate status`` command.
 
 Description
 -----------
 
 .. start-mc-admin-bucket-remote-desc
 
-The :mc-cmd:`mc admin bucket remote` command manages the ``ARN`` resources
-for use with :mc-cmd:`bucket replication <mc replicate>`.
+The :mc-cmd:`bm admin bucket remote` command manages the ``ARN`` resources
+for use with :mc-cmd:`bucket replication <bm replicate>`.
 
 .. end-mc-admin-bucket-remote-desc
 
@@ -46,28 +35,28 @@ Examples
 Add a New Replication Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket remote add` to create a new replication target 
-ARN for use with :mc:`mc replicate add`:
+Use :mc-cmd:`bm admin bucket remote add` to create a new replication target 
+ARN for use with :mc:`bm replicate add`:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin bucket remote add SOURCE/BUCKET DESTINATION/BUCKET
 
-- Replace :mc-cmd:`SOURCE <mc admin bucket remote add SOURCE>` with the
-  :mc-cmd:`alias <mc alias>` of the Buckit deployment to use as the replication
+- Replace :mc-cmd:`SOURCE <bm admin bucket remote add SOURCE>` with the
+  :mc-cmd:`alias <bm alias>` of the Buckit deployment to use as the replication
   target. Replace ``BUCKET`` with the full path of the bucket into which Buckit
   replicates objects from the ``DESTINATION``.
 
-- Replace :mc-cmd:`DESTINATION <mc admin bucket remote add DESTINATION>` with the
-  :mc-cmd:`alias <mc alias>` of the Buckit deployment to use as the
+- Replace :mc-cmd:`DESTINATION <bm admin bucket remote add DESTINATION>` with the
+  :mc-cmd:`alias <bm alias>` of the Buckit deployment to use as the
   replication source. Replace ``BUCKET`` with the full path of the bucket from
   which Buckit replicates objects into the ``SOURCE``.
 
 Remove an Existing Replication Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc admin bucket remote rm` to remove a replication target from a 
+Use :mc-cmd:`bm admin bucket remote rm` to remove a replication target from a 
 bucket:
 
 .. code-block:: shell
@@ -75,30 +64,30 @@ bucket:
 
    mc admin bucket remote rm SOURCE/BUCKET --arn ARN
 
-- Replace :mc-cmd:`SOURCE <mc admin bucket remote rm SOURCE>` with the
-  :mc-cmd:`alias <mc alias>` of the Buckit deployment being used as the
+- Replace :mc-cmd:`SOURCE <bm admin bucket remote rm SOURCE>` with the
+  :mc-cmd:`alias <bm alias>` of the Buckit deployment being used as the
   replication source. Replace ``BUCKET`` with the full path of the bucket from
   which Buckit replicates objects.
 
-- Replace :mc-cmd:`ARN <mc admin bucket remote rm ARN>` with the 
+- Replace :mc-cmd:`ARN <bm admin bucket remote rm ARN>` with the 
   ARN of the remote target. 
 
 Removing the target halts all in-progress 
-:mc-cmd:`bucket replication <mc replicate>` to the target.
+:mc-cmd:`bucket replication <bm replicate>` to the target.
 
 .. _minio-retrieve-remote-bucket-targets:
 
 Retrieve Configured Replication Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc replicate ls` to list a bucket's configured replication targets:
+Use :mc-cmd:`bm replicate ls` to list a bucket's configured replication targets:
 
 .. code-block:: shell
    :class: copyable
 
    mc replicate ls ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc replicate ls ALIAS>` with the :mc-cmd:`alias <mc alias>` of the Buckit deployment being used as the
+- Replace :mc-cmd:`ALIAS <bm replicate ls ALIAS>` with the :mc-cmd:`alias <bm alias>` of the Buckit deployment being used as the
   replication source. 
   Replace ``PATH`` with the full path of the bucket from  which Buckit replicates objects.
 
@@ -110,7 +99,7 @@ Syntax
 
    .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-      - ``mc admin bucket remote add`` replaced by :mc-cmd:`mc replicate add`
+      - ``mc admin bucket remote add`` replaced by :mc-cmd:`bm replicate add`
 
    Adds a remote target to a bucket on a Buckit deployment. The
    command has the following syntax:
@@ -127,7 +116,7 @@ Syntax
       *Required*
 
       The full path to the bucket to which the command adds the remote target.
-      Specify the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment as
+      Specify the :mc-cmd:`alias <bm alias>` of a configured Buckit deployment as
       the prefix to the bucket path. For example:
 
       .. code-block:: shell
@@ -169,9 +158,9 @@ Syntax
 
    .. mc-cmd:: --region
 
-      The region of the :mc-cmd:`~mc admin bucket remote add DESTINATION`. 
+      The region of the :mc-cmd:`~bm admin bucket remote add DESTINATION`. 
 
-      Mutually exclusive with :mc-cmd:`~mc admin bucket remote add`
+      Mutually exclusive with :mc-cmd:`~bm admin bucket remote add`
 
    .. mc-cmd:: --path
 
@@ -183,7 +172,7 @@ Syntax
       - ``auto`` (Default)
 
       Mutually exclusive with 
-      :mc-cmd:`~mc admin bucket remote add`
+      :mc-cmd:`~bm admin bucket remote add`
 
    .. mc-cmd:: --sync
 
@@ -192,7 +181,7 @@ Syntax
       replication may increase the time spent waiting for PUT operations
       to return successfully.
 
-      By default, :mc-cmd:`mc admin bucket remote add` operates in 
+      By default, :mc-cmd:`bm admin bucket remote add` operates in 
       asynchronous mode, where Buckit attempts replicating objects
       *after* returning the PUT object response.
 
@@ -201,7 +190,7 @@ Syntax
 
    .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-      - ``mc admin bucket remote ls`` replaced by :mc-cmd:`mc replicate ls`
+      - ``mc admin bucket remote ls`` replaced by :mc-cmd:`bm replicate ls`
 
    Lists all remote targets associated to a bucket on the Buckit deployment.
    Use ``mc admin bucket remote ls --help`` for usage syntax.
@@ -212,7 +201,7 @@ Syntax
 
    .. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-      - ``mc admin bucket remote rm`` replaced by :mc-cmd:`mc replicate rm`
+      - ``mc admin bucket remote rm`` replaced by :mc-cmd:`bm replicate rm`
    
    Removes a remote target for a bucket on the Buckit deployment. The
    command has the following syntax:
@@ -230,7 +219,7 @@ Syntax
 
       The full path to the bucket from which the command removes the 
       remote target. Specify the
-      :mc-cmd:`alias <mc alias>` of a configured Buckit deployment as the
+      :mc-cmd:`alias <bm alias>` of a configured Buckit deployment as the
       prefix to the bucket path. For example:
 
       .. code-block:: shell
@@ -244,6 +233,6 @@ Syntax
       *Required*
 
       The ``ARN`` of the remote target for which the command removes from the
-      target bucket. Use :mc-cmd:`mc admin bucket remote ls` to list all remote
+      target bucket. Use :mc-cmd:`bm admin bucket remote ls` to list all remote
       targets and their associated ARNs for a specific bucket.
 

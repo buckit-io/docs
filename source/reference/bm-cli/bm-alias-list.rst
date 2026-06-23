@@ -101,7 +101,7 @@ List a Specific Alias
       .. code-block:: shell
          :class: copyable
 
-         bm alias list myminio
+         bm alias list mybuckit
 
    .. tab-item:: Syntax
 

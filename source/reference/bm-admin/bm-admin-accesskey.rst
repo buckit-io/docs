@@ -12,8 +12,6 @@
 
 .. mc:: bm admin accesskey
 
-.. versionadded:: Buckit Manager CLI RELEASE.2024-10-08T09-37-26Z
-
 These commands replace the Buckit IDP functionality of the :mc:`bm admin user svcacct` command and its subcommands.
 
 Description

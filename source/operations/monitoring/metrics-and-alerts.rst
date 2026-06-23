@@ -16,8 +16,8 @@ Metrics and alerts
 Buckit publishes metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/>`.
 You can use any scraping tool to pull metrics data from Buckit for further analysis and alerting.
 
-Starting with Buckit Server :minio-release:`RELEASE.2024-07-15T19-02-30Z` and Buckit Client :mc-release:`RELEASE.2024-07-11T18-01-28Z`, metrics version 3 provides additional endpoints.
-Buckit recommends version 3 for new deployments.
+The current default metrics API is version 3.
+Version 3 provides additional endpoints and is recommended for new deployments.
 
 .. admonition:: Metrics version 2
    :class: note
@@ -47,7 +47,7 @@ Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` an
 For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
 By default, Buckit requires authentication to scrape the metrics endpoints.
-To generate the needed bearer tokens, use :mc:`mc admin prometheus generate`.
+To generate the needed bearer tokens, use :mc:`bm admin prometheus generate`.
 You can also disable metrics endpoint authentication by setting :envvar:`MINIO_PROMETHEUS_AUTH_TYPE` to ``public``.
 
 Buckit provides the following scraping endpoints, relative to the base URL:

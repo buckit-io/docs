@@ -57,7 +57,7 @@ Run the following command in a terminal or shell to start the Buckit server as a
 .. start-kes-generate-key-desc
 
 Buckit requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
-Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to create a new |EK| for use with |SSE|.
+Use ``kes key create`` *or* :mc-cmd:`bm admin kms key create` to create a new |EK| for use with |SSE|.
 
 The following command uses the ``kes key create`` command to create a new External Key (EK) stored on the root KMS server for use with encrypting the Buckit backend.
 

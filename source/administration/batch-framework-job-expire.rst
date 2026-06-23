@@ -10,8 +10,6 @@ Batch Expiration
    :local:
    :depth: 2
 
-.. versionadded:: Buckit RELEASE.2023-12-02T10-51-33Z
-
 The Buckit Batch Framework allows you to create, manage, monitor, and execute jobs using a YAML-formatted job definition file (a "batch file").
 The batch jobs run directly on the Buckit deployment to take advantage of the server-side processing power without constraints of the local machine where you run the :ref:`Buckit Client <minio-client>`.
 
@@ -180,7 +178,7 @@ Expire Batch Job Reference
 Sample YAML Description for an ``expire`` Job Type
 --------------------------------------------------
        
-Use :mc:`mc batch generate` to create a basic ``expire`` batch job for further customization.
+Use :mc:`bm batch generate` to create a basic ``expire`` batch job for further customization.
 
 .. literalinclude:: /includes/code/expire.yaml
    :language: yaml

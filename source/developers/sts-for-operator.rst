@@ -13,9 +13,6 @@ Security Token Service (STS) for Buckit Operator
 Overview
 --------
 
-.. versionadded:: Operator v5.0.0
-
-   The Buckit Operator supports a set of API calls that allows an application to obtain STS credentials for a Buckit Tenant.
 
 Benefits of STS for Buckit Operator include:
 

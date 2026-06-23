@@ -12,8 +12,6 @@
 
 .. mc:: bm batch describe
 
-.. versionchanged:: Buckit RELEASE.2022-10-08T20-11-00Z or later
-
 Syntax
 ------
 
@@ -35,7 +33,7 @@ To find the job ID, use :mc-cmd:`bm batch list`.
       .. code-block:: shell
          :class: copyable
 
-         bm batch describe myminio KwSysDpxcBU9FNhGkn2dCf
+         bm batch describe mybuckit KwSysDpxcBU9FNhGkn2dCf
 
    .. tab-item:: SYNTAX
 
@@ -78,21 +76,21 @@ Example
 Show the Definition of an In Progress Batch Job
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command provides the full job definition of a specific job at :mc:`alias <bm alias>` ``myminio``:
+The following command provides the full job definition of a specific job at :mc:`alias <bm alias>` ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm batch describe myminio KwSysDpxcBU9FNhGkn2dCf
+   bm batch describe mybuckit KwSysDpxcBU9FNhGkn2dCf
 
-- Replace ``myminio`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
+- Replace ``mybuckit`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
 - Replace ``KwSysDpxcBU9FNhGkn2dCf`` with the ID of the job to define.
 
 The output of the above command is similar to the following:
 
 .. code-block:: shell
 
-   bm batch describe myminio KwSysDpxcBU9FNhGkn2dCf
+   bm batch describe mybuckit KwSysDpxcBU9FNhGkn2dCf
    replicate:
      apiVersion: v1
      ...

@@ -14,7 +14,7 @@
       .. code-block:: shell
          :class: copyable
 
-         mc admin info --json ALIAS
+         bm admin info --json ALIAS
 
    #. In the JSON output, look for the key ``info.sqsARN``.
    
@@ -30,7 +30,7 @@
       .. code-block:: shell
          :class: copyable
 
-         mc admin info --json ALIAS | jq  .info.sqsARN
+         bm admin info --json ALIAS | jq  .info.sqsARN
 
       This returns the ARN to use for notifications, such as |ARN|
 

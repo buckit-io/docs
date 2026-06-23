@@ -80,12 +80,12 @@
          ]
       }
 
-   Use the :mc:`mc admin policy create` command to create a policy for use by an OIDC user:
+   Use the :mc:`bm admin policy create` command to create a policy for use by an OIDC user:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin policy create minio-tenant datareadonly /path/to/datareadonly.json
+      bm admin policy create minio-tenant datareadonly /path/to/datareadonly.json
 
    Buckit attaches the ``datareadonly`` policy to any authenticated OIDC user with ``datareadonly`` included in the configured claim.
 
@@ -105,13 +105,13 @@
    .. code-block:: shell
       :class: copyable
 
-      POST https://minio.example.net?Action=AssumeRoleWithWebIdentity
+      POST https://buckit.example.net?Action=AssumeRoleWithWebIdentity
       &WebIdentityToken=TOKEN
       &Version=2011-06-15
       &DurationSeconds=86400
       &Policy=Policy
 
-   - Replace ``minio.example.net`` with the hostname or URL of the Buckit Tenant service.
+   - Replace ``buckit.example.net`` with the hostname or URL of the Buckit Tenant service.
    - Replace the ``TOKEN`` with the JWT token returned in the previous step.
    - Replace the ``DurationSeconds`` with the duration in seconds until the temporary credentials expire. The example above specifies a period of ``86400`` seconds, or 24 hours.
    - Replace the ``Policy`` with an inline URL-encoded JSON :ref:`policy <minio-policy>` that further restricts the permissions associated to the temporary credentials. 

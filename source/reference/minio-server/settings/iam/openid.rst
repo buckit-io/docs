@@ -40,14 +40,14 @@ Examples
 
       .. mc-conf:: identity_openid
 
-      Use :mc-cmd:`mc admin config set` to set or update the OpenID configuration.
+      Use :mc-cmd:`bm admin config set` to set or update the OpenID configuration.
       The :mc-conf:`~identity_openid.config_url` argument is *required*. 
       Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set identity_openid                                               \
+         bm admin config set identity_openid                                               \
            config_url="https://openid-provider.example.net/.well-known/openid-configuration" \
            [ARGUMENT="VALUE"] ... 
 

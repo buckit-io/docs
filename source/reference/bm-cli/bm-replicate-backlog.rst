@@ -14,10 +14,6 @@
 .. mc:: bm replicate diff
 .. mc:: bm replicate backlog
 
-.. versionchanged:: mc.RELEASE.2023-07-18T21-05-38Z
-
-   ``bm replicate diff`` has been renamed ``bm replicate backlog``.
-   No functionality has changed.
 
 Description
 -----------
@@ -39,13 +35,13 @@ Syntax
 
    .. tab-item:: EXAMPLE
 
-      The following command shows new or deleted objects in the ``notes`` bucket of the ``teamorange/projects`` prefix on the ``myminio`` alias that have not yet replicated to a specific remote target bucket.
+      The following command shows new or deleted objects in the ``notes`` bucket of the ``teamorange/projects`` prefix on the ``mybuckit`` alias that have not yet replicated to a specific remote target bucket.
       The remote target's ARN is ``arn:minio:replication::3bb8c736-4014-42c5-b3cb-d64e3ebaa75e:notes``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate backlog myminio/notes/teamorange/projects --arn arn:minio:replication::3bb8c736-4014-42c5-b3cb-d64e3ebaa75e:notes
+         bm replicate backlog mybuckit/notes/teamorange/projects --arn arn:minio:replication::3bb8c736-4014-42c5-b3cb-d64e3ebaa75e:notes
 
       If any new or deleted objects have not yet replicated, the command outputs something similar to the following:
 
@@ -106,9 +102,9 @@ Display unreplicated ``PUT`` and ``DELETE`` actions for a prefix:
 .. code-block:: shell
    :class: copyable
 
-   bm replicate backlog myminio/mybucket/path/to/prefix
+   bm replicate backlog mybuckit/mybucket/path/to/prefix
 
-- Replace ``myminio/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and
+- Replace ``mybuckit/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and
   full bucket path for which to create the replication configuration.
 
 - Replace ``path/to/prefix`` with the prefix or object to use for the request.
@@ -128,9 +124,9 @@ The following :mc:`bm replicate backlog` command shows unreplicated objects at a
 .. code-block:: shell
    :class: copyable
 
-   bm replicate backlog myminio/mybucket/path/to/prefix --arn <remote-arn>
+   bm replicate backlog mybuckit/mybucket/path/to/prefix --arn <remote-arn>
 
-- Replace ``myminio/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and
+- Replace ``mybuckit/mybucket`` with the :mc-cmd:`~bm replicate add ALIAS` and
   full bucket path for which to show unreplicated objects.
 
 - Replace the ``path/to/prefix`` with the desired prefix or object path.

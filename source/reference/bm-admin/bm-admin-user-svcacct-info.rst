@@ -52,7 +52,7 @@ Use :mc-cmd:`~bm admin user svcacct info --policy` to view the attached policies
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin user svcacct info myminio myuseraccesskey 
+         bm admin user svcacct info mybuckit myuseraccesskey 
 
    .. tab-item:: SYNTAX
 

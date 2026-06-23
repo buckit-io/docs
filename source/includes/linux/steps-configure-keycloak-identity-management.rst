@@ -1,6 +1,6 @@
 .. |KEYCLOAK_URL| replace:: keycloak-url.example.net:8080
-.. |MINIO_S3_URL| replace:: minio-url.example.net:9000
-.. |MINIO_CONSOLE_URL| replace:: minio-url.example.net:9001
+.. |MINIO_S3_URL| replace:: buckit-url.example.net:9000
+.. |MINIO_CONSOLE_URL| replace:: buckit-url.example.net:9001
 
 1) Configure or Create a Client for Accessing Keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@ Set the value to any :ref:`policy <minio-policy>` on the Buckit deployment.
 
 Buckit supports multiple methods for configuring Keycloak authentication:
 
-- Using a terminal/shell and the :mc:`mc idp openid` command
+- Using a terminal/shell and the :mc:`bm idp openid` command
 - Using environment variables set prior to starting Buckit
 
 .. tab-set::
@@ -70,7 +70,6 @@ Next Steps
 
 Applications should implement the :ref:`STS AssumeRoleWithWebIdentity <minio-sts-assumerolewithwebidentity>` flow using their :ref:`SDK <minio-drivers>` of choice.
 When STS credentials expire, applications should have logic in place to regenerate the JWT token, STS token, and Buckit credentials before retrying and continuing operations.
-
 
 
 

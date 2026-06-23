@@ -2,7 +2,7 @@
 -----------------------------
 
 The following tabs provide examples of installing Buckit onto 64-bit Linux operating systems using RPM, DEB, or binary.
-The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``minio`` service for ``systemctl``.
+The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``buckit`` service for ``systemctl``.
 Buckit strongly recommends using the RPM or DEB installation routes.
 To update deployments managed using ``systemctl``, see :ref:`minio-upgrade-systemctl`.
 
@@ -60,28 +60,28 @@ The following example uses the ``~/minio-data`` folder:
    :class: copyable
 
    mkdir ~/minio-data
-   minio server ~/minio-data --console-address ":9001"
+   buckit server ~/minio-data --console-address ":9001"
 
 
-The :mc:`minio server` process prints its output to the system console, similar
+The :mc:`buckit server <buckit server>` process prints its output to the system console, similar
 to the following:
 
 .. code-block:: shell
 
    API: http://192.0.2.10:9000  http://127.0.0.1:9000
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+   RootUser: buckitadmin 
+   RootPass: buckitadmin 
 
    Console: http://192.0.2.10:9001 http://127.0.0.1:9001     
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+   RootUser: buckitadmin 
+   RootPass: buckitadmin 
 
    Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-      $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
+      $ bm alias set mybuckit http://192.0.2.10:9000 buckitadmin buckitadmin
 
    Documentation: https://docs.min.io/community/minio-object-store/index.html
 
-   WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
+   WARNING: Detected default credentials 'buckitadmin:buckitadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
 
 Open your browser to any of the listed :guilabel:`Console` addresses to open the
 :ref:`Buckit Console <minio-console>` and log in with the :guilabel:`RootUser`

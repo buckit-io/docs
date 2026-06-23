@@ -7,9 +7,7 @@ Developers
    :titlesonly:
    :hidden:
 
-   /developers/minio-drivers
+   /developers/file-transfer-protocol
    /developers/security-token-service
    /developers/transforms-with-object-lambda
-   /developers/file-transfer-protocol
-   /integrations/integrations
    /reference/s3-api-compatibility

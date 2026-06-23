@@ -51,9 +51,6 @@ The :mc:`bm pipe` command streams content from `STDIN <https://www.gnu.org/softw
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-.. versionchanged:: RELEASE.2023-01-11T03-14-16Z
-
-   ``bm pipe`` now supports concurrent uploads for better throughput of large streams.
 
 Parameters
 ~~~~~~~~~~
@@ -74,18 +71,6 @@ Parameters
 .. mc-cmd:: --checksum
    :optional:
 
-   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
-
-   Add a checksum to an uploaded object. 
-   
-   Valid values are: 
-   - ``MD5``
-   - ``CRC32``
-   - ``CRC32C``
-   - ``SHA1``
-   - ``SHA256``
-
-   The flag requires server trailing headers and works with AWS or Buckit targets.
 
 .. block include of enc-c , enc-s3, and enc-kms
 
@@ -161,21 +146,21 @@ The following command takes the STDIN stream and creates an object on the Reduce
 Copy a File to a Buckit Deployment with Metadata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command uploads an MP3 file to a Buckit deployment with an ALIAS of ``myminio`` and a ``music`` bucket.
+The following command uploads an MP3 file to a Buckit deployment with an ALIAS of ``mybuckit`` and a ``music`` bucket.
 The object writes with some metadata for ``Cache-Control`` and ``Artist``.
 
 .. code-block:: shell
    :class: copyable
 
-   cat music.mp3 | bm pipe --attr "Cache-Control=max-age=90000,min-fresh=9000;Artist=Unknown" myminio/music/guitar.mp3
+   cat music.mp3 | bm pipe --attr "Cache-Control=max-age=90000,min-fresh=9000;Artist=Unknown" mybuckit/music/guitar.mp3
 
 Set Tags on Uploaded Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates an object on a Buckit deployment with an ALIAS of ``myminio`` in bucket ``mybucket`` with two tags.
+The following command creates an object on a Buckit deployment with an ALIAS of ``mybuckit`` in bucket ``mybucket`` with two tags.
 Buckit supports adding up to 10 custom tags to an object.
 
 .. code-block:: shell
    :class: copyable
 
-   tar cvf - . | bm pipe --tags "category=prod&type=backup" myminio/mybucket/backup.tar
+   tar cvf - . | bm pipe --tags "category=prod&type=backup" mybuckit/mybucket/backup.tar

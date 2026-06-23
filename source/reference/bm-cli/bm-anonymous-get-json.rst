@@ -31,12 +31,12 @@ and perform actions consistent with the specified policy without
    .. tab-item:: EXAMPLE
 
       The following command retrieves the JSON-formatted anonymous 
-      policy for the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      policy for the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm anonymous get-json myminio/mydata
+         bm anonymous get-json mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

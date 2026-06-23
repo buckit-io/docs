@@ -33,7 +33,7 @@ The :mc-cmd:`bm admin user svcacct edit` command modifies the configuration of a
 
    .. tab-item:: EXAMPLE
 
-      The following command applies a new policy and secret key to the ``myuserserviceaccount`` access key on the ``myminio`` deployment:
+      The following command applies a new policy and secret key to the ``myuserserviceaccount`` access key on the ``mybuckit`` deployment:
 
       .. code-block:: shell  
          :class: copyable 
@@ -41,7 +41,7 @@ The :mc-cmd:`bm admin user svcacct edit` command modifies the configuration of a
          bm admin user svcacct edit                                             \  
                                --secret-key "myuserserviceaccountnewsecretkey"  \     
                                --policy "/path/to/new/policy.json"              \  
-                               myminio myuserserviceaccount
+                               mybuckit myuserserviceaccount
 
    .. tab-item:: SYNTAX
 
@@ -77,33 +77,14 @@ Parameters
 .. mc-cmd:: --description
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
-
-   Add a description for the service account.
-   For example, you might specify the reason the service account exists.
 
 .. mc-cmd:: --expiry
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-30T22-41-38Z
-
-   Set an expiration date for the service account.
-   The date must be in the future, you may not set an expiration date that has already passed.
-
-   Allowed date and time formats:
-
-   - ``2023-06-24``
-   - ``2023-06-24T10:00``
-   - ``2023-06-24T10:00:00``
-   - ``2023-06-24T10:00:00Z``
-   - ``2023-06-24T10:00:00-07:00``
 
 .. mc-cmd:: --name
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-18T16-59-00Z
-
-   Add a human-readable name for the service account.
 
 .. mc-cmd:: --policy
    :optional:

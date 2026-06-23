@@ -15,14 +15,8 @@
 .. mc:: bm replicate update
 
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
-
-   ``bm replicate update`` replaces the ``bm admin bucket remote update`` command.
 
 
-.. versionchanged:: RELEASE.2022-11-07T23-47-39Z
-
-   ``bm replicate update`` replaces the ``bm replicate edit`` command.
 
 Syntax
 ------
@@ -43,14 +37,14 @@ The :mc:`bm replicate update` command modifies an existing
    .. tab-item:: EXAMPLE
 
       The following command modifies an existing replication rule for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
          bm replicate update --id "c76um9h4b0t1ijr36mug"           \
             --replicate "delete,delete-marker,existing-objects"  \
-            myminio/mydata
+            mybuckit/mydata
 
       The new replication configuration synchronizes all versioned delete
       operations, delete marker creation, and existing objects to the remote
@@ -219,7 +213,7 @@ Parameters
 
    .. code-block::
 
-      --remote-bucket https://user:secret@myminio.cloudprovider.tld:9001/bucket
+      --remote-bucket https://user:secret@mybuckit.cloudprovider.tld:9001/bucket
 
    An alias based target might look like the following:
 

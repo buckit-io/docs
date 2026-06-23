@@ -26,12 +26,12 @@ The :mc:`bm version enable` command enables versioning on the specified bucket.
 
    .. tab-item:: EXAMPLE
 
-      The following command enables versioning for the ``mybucket`` bucket on the ``myminio`` Buckit deployment:
+      The following command enables versioning for the ``mybucket`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-          bm version enable myminio/mybucket
+          bm version enable mybuckit/mybucket
 
    .. tab-item:: SYNTAX
 
@@ -59,7 +59,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm version enable myminio/mybucket
+      bm version enable mybuckit/mybucket
 
 .. mc-cmd:: --exclude-folders
    :optional:
@@ -78,7 +78,7 @@ Parameters
    .. code-block:: shell
       :class: copyable
 
-      bm version enable --excluded-prefixes "_test, _temp" myminio/mybucket
+      bm version enable --excluded-prefixes "_test, _temp" mybuckit/mybucket
 
 
 Global Flags

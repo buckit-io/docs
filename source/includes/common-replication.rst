@@ -19,7 +19,7 @@ Buckit does *not* support replicating client-side encrypted objects (SSE-C).
 Buckit server-side replication only works between Buckit deployments. 
 Both the source and destination deployments *must* run Buckit Server with matching versions. 
 
-To configure replication between arbitrary S3-compatible services, use :mc:`mc mirror`.
+To configure replication between arbitrary S3-compatible services, use :mc:`bm mirror`.
 
 .. end-replication-minio-only
 
@@ -27,8 +27,8 @@ To configure replication between arbitrary S3-compatible services, use :mc:`mc m
 
 Buckit relies on the immutability protections provided by :ref:`versioning <minio-bucket-versioning>` to support replication and resynchronization.
 
-Use :mc:`mc version info` to validate the versioning status of both the source and remote buckets. 
-Use the :mc:`mc version enable` command to enable versioning as necessary.
+Use :mc:`bm version info` to validate the versioning status of both the source and remote buckets. 
+Use the :mc:`bm version enable` command to enable versioning as necessary.
 
 If you exclude a prefix or folder from versioning within the source bucket, Buckit cannot replicate objects within that folder or prefix.
 
@@ -71,10 +71,45 @@ Bucket replication requires specific permissions on the source and destination d
       .. code-block:: shell
          :class: copyable
 
-         wget -O - https://docs.min.io/community/minio-object-store/examples/ReplicationAdminPolicy.json | \
-         mc admin policy create TARGET ReplicationAdminPolicy /dev/stdin
-         mc admin user add TARGET ReplicationAdmin LongRandomSecretKey
-         mc admin policy attach TARGET ReplicationAdminPolicy --user=ReplicationAdmin
+         cat > /tmp/ReplicationAdminPolicy.json <<'EOF'
+         {
+             "Version": "2012-10-17",
+             "Statement": [
+                 {
+                     "Action": [
+                         "admin:SetBucketTarget",
+                         "admin:GetBucketTarget",
+                         "admin:ListBatchJobs",
+                         "admin:DescribeBatchJob",
+                         "admin:StartBatchJob",
+                         "admin:CancelBatchJob"
+                     ],
+                     "Effect": "Allow",
+                     "Sid": "EnableRemoteBucketConfiguration"
+                 },
+                 {
+                     "Effect": "Allow",
+                     "Action": [
+                         "s3:GetReplicationConfiguration",
+                         "s3:ListBucket",
+                         "s3:ListBucketMultipartUploads",
+                         "s3:GetBucketLocation",
+                         "s3:GetBucketVersioning",
+                         "s3:GetObjectRetention",
+                         "s3:GetObjectLegalHold",
+                         "s3:PutReplicationConfiguration"
+                     ],
+                     "Resource": [
+                         "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicationRuleConfiguration"
+                 }
+             ]
+         }
+         EOF
+         bm admin policy create TARGET ReplicationAdminPolicy /tmp/ReplicationAdminPolicy.json
+         bm admin user add TARGET ReplicationAdmin LongRandomSecretKey
+         bm admin policy attach TARGET ReplicationAdminPolicy --user=ReplicationAdmin
 
       Buckit deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 
@@ -98,14 +133,58 @@ Bucket replication requires specific permissions on the source and destination d
       .. code-block:: shell
          :class: copyable
 
-         wget -O - https://docs.min.io/community/minio-object-store/examples/ReplicationRemoteUserPolicy.json | \
-         mc admin policy create TARGET ReplicationRemoteUserPolicy /dev/stdin
-         mc admin user add TARGET ReplicationRemoteUser LongRandomSecretKey
-         mc admin policy attach TARGET ReplicationRemoteUserPolicy --user=ReplicationRemoteUser
+         cat > /tmp/ReplicationRemoteUserPolicy.json <<'EOF'
+         {
+             "Version": "2012-10-17",
+             "Statement": [
+                 {
+                     "Effect": "Allow",
+                     "Action": [
+                         "s3:GetReplicationConfiguration",
+                         "s3:ListBucket",
+                         "s3:ListBucketMultipartUploads",
+                         "s3:GetBucketLocation",
+                         "s3:GetBucketVersioning",
+                         "s3:GetBucketObjectLockConfiguration",
+                         "s3:GetEncryptionConfiguration"
+                     ],
+                     "Resource": [
+                         "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicationOnBucket"
+                 },
+                 {
+                     "Effect": "Allow",
+                     "Action": [
+                         "s3:GetReplicationConfiguration",
+                         "s3:ReplicateTags",
+                         "s3:AbortMultipartUpload",
+                         "s3:GetObject",
+                         "s3:GetObjectVersion",
+                         "s3:GetObjectVersionTagging",
+                         "s3:PutObject",
+                         "s3:PutObjectRetention",
+                         "s3:PutBucketObjectLockConfiguration",
+                         "s3:PutObjectLegalHold",
+                         "s3:DeleteObject",
+                         "s3:ReplicateObject",
+                         "s3:ReplicateDelete"
+                     ],
+                     "Resource": [
+                         "arn:aws:s3:::*"
+                     ],
+                     "Sid": "EnableReplicatingDataIntoBucket"
+                 }
+             ]
+         }
+         EOF
+         bm admin policy create TARGET ReplicationRemoteUserPolicy /tmp/ReplicationRemoteUserPolicy.json
+         bm admin user add TARGET ReplicationRemoteUser LongRandomSecretKey
+         bm admin policy attach TARGET ReplicationRemoteUserPolicy --user=ReplicationRemoteUser
 
       Buckit deployments configured for :ref:`Active Directory/LDAP <minio-external-identity-management-ad-ldap>` or :ref:`OpenID Connect <minio-external-identity-management-openid>` user management should instead create a dedicated :ref:`access keys <minio-idp-service-account>` for bucket replication.
 
-See :mc:`mc admin user`, :mc:`mc admin user svcacct`, and :mc:`mc admin policy` for more complete documentation on adding users, access keys, and policies to a Buckit deployment.
+See :mc:`bm admin user`, :mc:`bm admin user svcacct`, and :mc:`bm admin policy` for more complete documentation on adding users, access keys, and policies to a Buckit deployment.
 
 .. end-replication-required-permissions
 
@@ -131,7 +210,7 @@ Each Buckit deployment ("peer site") synchronizes the following changes across t
 
   - Bucket and Object Configurations
   - :ref:`Policies <minio-policy>`
-  - :mc:`mc tag set`
+  - :mc:`bm tag set`
   - :ref:`Locks <minio-object-locking>`, including retention and legal hold configurations
   - :ref:`Encryption settings <minio-encryption-overview>`
 
@@ -141,11 +220,9 @@ Each Buckit deployment ("peer site") synchronizes the following changes across t
 
 Site replication enables :ref:`bucket versioning <minio-bucket-versioning>` for all new and existing buckets on all replicated sites.
 
-.. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
 You can choose to replicate ILM expiration rules across peer sites.
-For new site replication configurations, use the :mc-cmd:`mc admin replicate add`  with the :mc-cmd:`~mc admin replicate add --replicate-ilm-expiry` flag. 
-For existing site replication configurations, you can enable or disable the behavior using :mc-cmd:`mc admin replicate update` with either the :mc-cmd:`~mc admin replicate update --enable-ilm-expiry-replication` or :mc-cmd:`~mc admin replicate update --disable-ilm-expiry-replication` flag, as appropriate.
+For new site replication configurations, use the :mc-cmd:`bm admin replicate add`  with the :mc-cmd:`~bm admin replicate add --replicate-ilm-expiry` flag. 
+For existing site replication configurations, you can enable or disable the behavior using :mc-cmd:`bm admin replicate update` with either the :mc-cmd:`~bm admin replicate update --enable-ilm-expiry-replication` or :mc-cmd:`~bm admin replicate update --disable-ilm-expiry-replication` flag, as appropriate.
 
 .. end-mc-admin-replicate-what-replicates
 

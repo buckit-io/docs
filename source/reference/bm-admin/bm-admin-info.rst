@@ -21,10 +21,6 @@ for each Buckit server in the deployment.
 
 .. end-mc-admin-info-desc
 
-.. versionadded:: mc RELEASE.2024-05-03T11-21-07Z
-
-   The command output includes information about the :ref:`erasure code <minio-ec-erasure-set>` setting for the cluster.
-   This displays in the output in the format ``EC:#``.
 
 The output of the command resembles the following:
 

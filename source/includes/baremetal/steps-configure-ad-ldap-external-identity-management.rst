@@ -56,7 +56,7 @@
       .. tab-item:: Environment Variables
 
          Buckit supports specifying the AD/LDAP provider settings using :ref:`environment variables <minio-server-envvar-external-identity-management-ad-ldap>`.
-	      The :mc:`minio server` process applies the specified settings on its next startup.
+	      The :mc:`buckit server <buckit server>` process applies the specified settings on its next startup.
 	      For distributed deployments, specify these settings across all nodes in the deployment using the *same* values.
 	      Any differences in server configurations between nodes will result in startup or configuration failures.
 

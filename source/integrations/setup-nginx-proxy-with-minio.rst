@@ -4,8 +4,6 @@
 Configure NGINX Proxy for Buckit Server
 =======================================
 
-.. default-domain:: minio
-
 .. contents:: Table of Contents
    :local:
    :depth: 2
@@ -17,7 +15,7 @@ Modify the configuration as necessary for your infrastructure.
 This documentation assumes the following:
 
 - An existing `NGINX <http://nginx.org/en/download.html>`__ deployment
-- An existing :ref:`Buckit <minio-installation>` deployment
+- An existing Buckit deployment
 - A DNS hostname which uniquely identifies the Buckit deployment
 
 There are two models for proxying requests to the Buckit Server API and the Buckit Console:
@@ -29,39 +27,39 @@ There are two models for proxying requests to the Buckit Server API and the Buck
       Create or configure a dedicated DNS name for the Buckit service.
 
       For the Buckit Server S3 API, proxy requests to the root of that domain.
-      For the Buckit Console Web GUI, proxy requests to the ``/minio`` subpath.
+      For the Buckit Console Web GUI, proxy requests to the ``/console`` subpath.
 
-      For example, given the hostname ``minio.example.net``: 
+      For example, given the hostname ``buckit.example.net``: 
       
-      - Proxy requests to the root ``https://minio.example.net`` to the Buckit Server listening on ``https://minio.local:9000``.
+      - Proxy requests to the root ``https://buckit.example.net`` to the Buckit Server listening on ``https://buckit.local:9000``.
 
-      - Proxy requests to the subpath ``https://minio.example.net/minio/ui`` to the Buckit Console listening on ``https://minio.local:9001``.
+      - Proxy requests to the subpath ``https://buckit.example.net/console/ui`` to the Buckit Console listening on ``https://buckit.local:9001``.
 
       The following location blocks provide a template for further customization in your unique environment:
 
       .. code-block:: nginx
          :class: copyable
 
-         upstream minio_s3 {
+         upstream buckit_s3 {
             least_conn;
-            server minio-01.internal-domain.com:9000;
-            server minio-02.internal-domain.com:9000;
-            server minio-03.internal-domain.com:9000;
-            server minio-04.internal-domain.com:9000;
+            server buckit-01.internal-domain.com:9000;
+            server buckit-02.internal-domain.com:9000;
+            server buckit-03.internal-domain.com:9000;
+            server buckit-04.internal-domain.com:9000;
          }
 
-         upstream minio_console {
+         upstream buckit_console {
             least_conn;
-            server minio-01.internal-domain.com:9001;
-            server minio-02.internal-domain.com:9001;
-            server minio-03.internal-domain.com:9001;
-            server minio-04.internal-domain.com:9001;
+            server buckit-01.internal-domain.com:9001;
+            server buckit-02.internal-domain.com:9001;
+            server buckit-03.internal-domain.com:9001;
+            server buckit-04.internal-domain.com:9001;
          }
 
          server {
             listen       80;
             listen  [::]:80;
-            server_name  minio.example.net;
+            server_name  buckit.example.net;
 
             # Allow special characters in headers
             ignore_invalid_headers off;
@@ -84,11 +82,11 @@ There are two models for proxying requests to the Buckit Server API and the Buck
                proxy_set_header Connection "";
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio_s3; # This uses the upstream directive definition to load balance
+               proxy_pass https://buckit_s3; # This uses the upstream directive definition to load balance
             }
 
-            location /minio/ui/ {
-               rewrite ^/minio/ui/(.*) /$1 break;
+            location /console/ui/ {
+               rewrite ^/console/ui/(.*) /$1 break;
                proxy_set_header Host $http_host;
                proxy_set_header X-Real-IP $remote_addr;
                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -110,7 +108,7 @@ There are two models for proxying requests to the Buckit Server API and the Buck
                
                chunked_transfer_encoding off;
 
-               proxy_pass https://minio_console; # This uses the upstream directive definition to load balance
+               proxy_pass https://buckit_console; # This uses the upstream directive definition to load balance
             }
          }
 
@@ -118,7 +116,7 @@ There are two models for proxying requests to the Buckit Server API and the Buck
 
       You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://example.net/minio/ui``)
+      - Set the :envvar:`CONSOLE_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://example.net/console/ui``)
 
    .. tab-item:: Subdomain
 
@@ -126,35 +124,35 @@ There are two models for proxying requests to the Buckit Server API and the Buck
 
       For example, given the root domain of ``example.net``:
 
-      - Proxy request to the subdomain ``minio.example.net`` to the Buckit Server listening on ``https://minio.local:9000``
+      - Proxy request to the subdomain ``buckit.example.net`` to the Buckit Server listening on ``https://buckit.local:9000``
 
-      - Proxy requests to the subdomain ``console.example.net`` to the Buckit Console listening on ``https://minio.local:9001``
+      - Proxy requests to the subdomain ``console.example.net`` to the Buckit Console listening on ``https://buckit.local:9001``
 
       The following location blocks provide a template for further customization in your unique environment:
 
       .. code-block:: nginx
          :class: copyable
 
-         upstream minio_s3 {
+         upstream buckit_s3 {
             least_conn;
-            server minio-01.internal-domain.com:9000;
-            server minio-02.internal-domain.com:9000;
-            server minio-03.internal-domain.com:9000;
-            server minio-04.internal-domain.com:9000;
+            server buckit-01.internal-domain.com:9000;
+            server buckit-02.internal-domain.com:9000;
+            server buckit-03.internal-domain.com:9000;
+            server buckit-04.internal-domain.com:9000;
          }
 
-         upstream minio_console {
+         upstream buckit_console {
             least_conn;
-            server minio-01.internal-domain.com:9001;
-            server minio-02.internal-domain.com:9001;
-            server minio-03.internal-domain.com:9001;
-            server minio-04.internal-domain.com:9001;
+            server buckit-01.internal-domain.com:9001;
+            server buckit-02.internal-domain.com:9001;
+            server buckit-03.internal-domain.com:9001;
+            server buckit-04.internal-domain.com:9001;
          }
 
          server {
             listen       80;
             listen  [::]:80;
-            server_name  minio.example.net;
+            server_name  buckit.example.net;
 
             # Allow special characters in headers
             ignore_invalid_headers off;
@@ -177,7 +175,7 @@ There are two models for proxying requests to the Buckit Server API and the Buck
                proxy_set_header Connection "";
                chunked_transfer_encoding off;
 
-               proxy_pass http://minio_s3; # This uses the upstream directive definition to load balance
+               proxy_pass http://buckit_s3; # This uses the upstream directive definition to load balance
             }
          }
 
@@ -215,12 +213,12 @@ There are two models for proxying requests to the Buckit Server API and the Buck
                
                chunked_transfer_encoding off;
 
-               proxy_pass http://minio_console/; # This uses the upstream directive definition to load balance
+               proxy_pass http://buckit_console/; # This uses the upstream directive definition to load balance
             }
          }
 
-      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the Buckit Server API on a subpath, such as ``minio.example.net/s3/``.
+      The S3 API signature calculation algorithm does *not* support proxy schemes where you host the Buckit Server API on a subpath, such as ``buckit.example.net/s3/``.
 
       You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://console.example.net/``)
+      - Set the :envvar:`CONSOLE_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://console.example.net/``)

@@ -15,8 +15,6 @@
 Description
 -----------
 
-.. versionadded:: RELEASE.2022-06-26T18-51-48Z
-
 .. start-mc-admin-cluster-iam-desc
 
 The :mc:`bm admin cluster iam` command and its subcommands provide tools for manually importing and exporting Buckit :ref:`identity and access management (IAM) <minio-authentication-and-identity-management>` metadata.

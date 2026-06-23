@@ -34,12 +34,12 @@ use the :mc-cmd:`bm anonymous get-json` command.
    .. tab-item:: EXAMPLE
 
       The following command retrieves the anonymous access policy for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm anonymous get myminio/mydata
+         bm anonymous get mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

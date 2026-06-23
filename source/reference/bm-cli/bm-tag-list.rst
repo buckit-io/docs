@@ -32,12 +32,12 @@ The :mc:`bm tag list` command lists all tags from a bucket or object.
    .. tab-item:: EXAMPLE
 
       The following command lists tags for the ``mydata`` bucket on the
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm tag list myminio/mydata
+         bm tag list mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -71,14 +71,11 @@ Parameters
 
    .. code-block:: none
 
-      bm tag list myminio/mybucket/object.txt
+      bm tag list mybuckit/mybucket/object.txt
 
 .. mc-cmd:: --recursive, r
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-04T18-10-16Z
-
-   Recursively lists the tags for all objects at the path specified to :mc:`ALIAS <bm tag list ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

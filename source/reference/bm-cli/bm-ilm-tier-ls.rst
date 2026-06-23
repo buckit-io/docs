@@ -13,9 +13,6 @@
 .. mc:: bm ilm tier list
 .. mc:: bm ilm tier ls
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc:`bm ilm tier ls` replaces ``bm admin tier ls``.
 
 Description
 -----------
@@ -37,12 +34,12 @@ The command has the following syntax:
 
    .. tab-item:: EXAMPLE
 
-      The following example outputs a list of the existing remote tiers on the ``myminio`` deployment.
+      The following example outputs a list of the existing remote tiers on the ``mybuckit`` deployment.
       
       .. code-block:: shell
          :class: copyable
 
-          bm ilm tier ls myminio
+          bm ilm tier ls mybuckit
 
 
    .. tab-item:: SYNTAX

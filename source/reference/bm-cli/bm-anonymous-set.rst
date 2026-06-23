@@ -36,19 +36,19 @@ To set anonymous bucket policies using an IAM
    .. tab-item:: EXAMPLE
 
       The following command sets anonymous access policies for several
-      buckets on the ``myminio`` Buckit deployment:
+      buckets on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm anonymous set upload myminio/uploads
-         bm anonymous set download myminio/downloads
-         bm anonymous set public myminio/public
+         bm anonymous set upload mybuckit/uploads
+         bm anonymous set download mybuckit/downloads
+         bm anonymous set public mybuckit/public
 
       Applications can perform the following operations without authentication:
 
-      - ``PUT`` objects to ``myminio/uploads`` and ``myminio/public``.
-      - ``GET`` objects from ``myminio/downloads`` and ``myminio/public``.
+      - ``PUT`` objects to ``mybuckit/uploads`` and ``mybuckit/public``.
+      - ``GET`` objects from ``mybuckit/downloads`` and ``mybuckit/public``.
 
    .. tab-item:: SYNTAX
 

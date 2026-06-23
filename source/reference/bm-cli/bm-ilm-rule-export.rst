@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm rule export
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``bm ilm rule export`` replaces ``bm ilm export``.
 
 Syntax
 ------
@@ -33,13 +30,13 @@ You can output the contents to a ``.json`` file for archival or ingestion using 
    .. tab-item:: EXAMPLE
 
       The following command exports the lifecycle management configuration
-      of the ``mydata`` bucket on the ``myminio`` deployment to the
+      of the ``mydata`` bucket on the ``mybuckit`` deployment to the
       ``mydata-lifecycle-config.json`` file:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule export myminio/mydata > mydata-lifecycle-config.json
+         bm ilm rule export mybuckit/mydata > mydata-lifecycle-config.json
 
    .. tab-item:: SYNTAX
 
@@ -66,7 +63,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule export myminio/mydata > bucket-lifecycle.json
+      bm ilm rule export mybuckit/mydata > bucket-lifecycle.json
 
 Global Flags
 ~~~~~~~~~~~~
@@ -91,7 +88,7 @@ Export the Bucket Lifecycle Management Configuration
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule export myminio/mybucket > bucket-lifecycle.json
+         bm ilm rule export mybuckit/mybucket > bucket-lifecycle.json
 
    .. tab-item:: Syntax
 
@@ -104,7 +101,7 @@ Export the Bucket Lifecycle Management Configuration
         deployment and the bucket for which to export object lifecycle
         management rules:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``file.json`` with the name of the file to which to export the
         lifecycle management rules.

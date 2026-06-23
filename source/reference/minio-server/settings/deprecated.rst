@@ -39,7 +39,7 @@ They are listed here for historical reference only.
 
    .. warning::
 
-      If :envvar:`MINIO_SECRET_KEY` is unset, :mc:`minio` defaults to ``minioadmin``.
+      If :envvar:`MINIO_SECRET_KEY` is unset, Buckit defaults to ``buckitadmin``.
 
       **NEVER** use the default credentials in production environments.
       Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.
@@ -54,7 +54,7 @@ They are listed here for historical reference only.
 
    .. warning::
 
-      If :envvar:`MINIO_ACCESS_KEY` is unset, :mc:`minio` defaults to ``minioadmin``.
+      If :envvar:`MINIO_ACCESS_KEY` is unset, Buckit defaults to ``buckitadmin``.
 
       **NEVER** use the default credentials in production environments.
       Buckit strongly recommends specifying a unique, long, and random :envvar:`MINIO_ACCESS_KEY` value for all environments.

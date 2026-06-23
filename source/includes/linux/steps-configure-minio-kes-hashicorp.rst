@@ -33,12 +33,12 @@
       You must start KES *before* starting Buckit. 
       The Buckit deployment requires access to KES as part of its startup.
 
-   You can use the :mc:`mc admin service restart` command to restart Buckit:
+   You can use the :mc:`bm admin service restart` command to restart Buckit:
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin service restart ALIAS
+      bm admin service restart ALIAS
 
 #. Generate a New Encryption Key
 

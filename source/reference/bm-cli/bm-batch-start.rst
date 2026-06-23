@@ -12,8 +12,6 @@
 
 .. mc:: bm batch start
 
-.. versionchanged:: Buckit RELEASE.2022-10-08T20-11-00Z or later
-
 Syntax
 ------
 
@@ -30,12 +28,12 @@ To run the batch job again after completion, you must start it again.
 
    .. tab-item:: EXAMPLE
 
-      The following command creates a basic YAML file for a replicate job on the ``mybucket`` bucket of the ``myminio`` alias.
+      The following command creates a basic YAML file for a replicate job on the ``mybucket`` bucket of the ``mybuckit`` alias.
 
       .. code-block:: shell
          :class: copyable
 
-         bm batch start myminio jobfile.yaml
+         bm batch start mybuckit jobfile.yaml
 
       The output of the above command is something similar to:
 
@@ -70,7 +68,7 @@ Parameters
 
    .. code-block:: none
 
-      bm batch start myminio replicate.yaml
+      bm batch start mybuckit replicate.yaml
 
 .. mc-cmd:: JOBFILE
    :required:
@@ -91,14 +89,14 @@ Example
 Start a Batch Job
 ~~~~~~~~~~~~~~~~~
 
-The following command starts the batch of job(s) defined in the file ``replication.yaml`` on the deployment at :mc:`alias <bm alias>` ``myminio``:
+The following command starts the batch of job(s) defined in the file ``replication.yaml`` on the deployment at :mc:`alias <bm alias>` ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm batch start myminio ./replication.yaml
+   bm batch start mybuckit ./replication.yaml
 
-- Replace ``myminio`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
+- Replace ``mybuckit`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
 
 - Replace ``./replication.yaml`` with the yaml-formatted file that describes the batch job.
   Use the file path relative to your current location. 

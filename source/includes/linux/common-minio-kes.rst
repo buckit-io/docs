@@ -46,13 +46,13 @@ For example:
 .. start-kes-generate-key-desc
 
 Buckit requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
-Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
+Use ``kes key create`` *or* :mc-cmd:`bm admin kms key create` to add a new |EK| for use with |SSE|.
 
 The following command uses the ``kes key create`` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the Buckit backend.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin kms key create ALIAS KEYNAME
+   bm admin kms key create ALIAS KEYNAME
 
 .. end-kes-generate-key-desc

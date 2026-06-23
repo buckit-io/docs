@@ -24,11 +24,11 @@ Prerequisites
 Access to Buckit Cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster. 
-Install ``mc`` on a machine with network access to the cluster.
-See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster. 
+Install ``bm`` on a machine with network access to the cluster.
+See the ``bm`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``bm``.
 
-This procedure assumes a configured :mc:`alias <mc alias>` for the Buckit cluster. 
+This procedure assumes a configured :mc:`alias <bm alias>` for the Buckit cluster. 
 
 This procedure also assumes SSH or similar shell-level access with administrative permissions to each Buckit host server.
 
@@ -54,37 +54,22 @@ Procedure
 
 The Buckit Server searches for TLS keys and certificates for each node and uses those credentials for enabling TLS.
 Buckit automatically enables TLS upon discovery and validation of certificates.
-The search location depends on your Buckit configuration:
 
-.. tab-set::
+You can specify the path for the Buckit server to search for certificates using
+``buckit server --certs-dir`` or ``-S``.
 
-   .. tab-item:: Default Path
-      :sync: baremetal-default
+For example, the following command fragment directs the Buckit process to use
+the ``/opt/buckit/certs`` directory for TLS certificates.
 
-      By default, the Buckit server looks for the TLS keys and certificates for each node in the following directory:
+.. code-block:: shell
 
-      .. code-block:: shell
+   buckit server --certs-dir /opt/buckit/certs ...
 
-         ${HOME}/.minio/certs
+For systemd-managed deployments, modify ``MINIO_OPTS`` in
+``/etc/default/minio`` to include the ``--certs-dir`` option.
 
-      Where ``${HOME}`` is the home directory of the user running the Buckit Server process.
-      You may need to create the ``${HOME}/.minio/certs`` directory if it does not exist.
-
-      For ``systemd`` managed deployments this must correspond to the ``USER`` running the Buckit process.
-      If that user has no home directory, use the :guilabel:`Custom Path` option instead.
-
-   .. tab-item:: Custom Path
-      :sync: baremetal-custom
-
-      You can specify a path for the Buckit server to search for certificates using ``buckit server --certs-dir`` or ``-S``.
-
-      For example, the following command fragment directs the Buckit process to use the ``/opt/buckit/certs`` directory for TLS certificates.
-
-      .. code-block:: shell
-
-         buckit server --certs-dir /opt/buckit/certs ...
-
-      The user running the Buckit service *must* have read and write permissions to this directory.
+The user running the Buckit service *must* have read and write permissions to
+this directory.
 
 Place the certificates in the ``/certs`` folder, creating a subfolder in ``/certs`` for each additional domain for which Buckit should present TLS certificates.
 While Buckit has no requirements for folder names, consider creating subfolders whose name matches the domain to improve human readability. 

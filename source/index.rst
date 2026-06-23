@@ -4,16 +4,6 @@ Buckit High Performance Object Storage
 
 .. default-domain:: minio
 
-.. cond:: mindocs
-
-   .. container:: extlinks-video
-
-      - `Installing and Running Buckit on Docker: Overview <https://youtu.be/mg9NRR6Js1s?ref=docs>`__
-      - `Installing and Running Buckit on Docker: Installation Lab <https://youtu.be/Z0FtabDUPtU?ref=docs>`__
-      - `Object Storage Essentials <https://www.youtube.com/playlist?list=PLFOIsHSSYIK3WitnqhqfpeZ6fRFKHxIr7>`__
-      
-      - `How to Connect to Buckit with JavaScript <https://www.youtube.com/watch?v=yUR4Fvx0D3E&list=PLFOIsHSSYIK3Dd3Y_x7itJT1NUKT5SxDh&index=5>`__
-
 .. contents:: Table of Contents
    :local:
    :depth: 2
@@ -35,19 +25,19 @@ Quickstart
       Buckit maintains a sandbox instance of the community server at https://play.min.io. 
       You can use this instance for experimenting or evaluating the Buckit product on your local system.
 
-      Follow the :mc:`mc` CLI :ref:`installation guide <mc-install>` to install the utility on your local host.
+      Follow the :mc:`bm` CLI :ref:`installation guide <mc-install>` to install the utility on your local host.
 
-      :mc:`mc` includes a pre-configured ``play`` alias for connecting to the sandbox.
+      :mc:`bm` includes a pre-configured ``play`` alias for connecting to the sandbox.
       For example, you can use the following commands to create a bucket and copy objects to ``play``:
 
       .. code-block:: shell
          :class: copyable
 
-         mc mb play/mynewbucket
+         bm mb play/mynewbucket
 
-         mc cp /path/to/file play/mynewbucket/prefix/filename.extension
+         bm cp /path/to/file play/mynewbucket/prefix/filename.extension
 
-         mc stat play/mynewbucket/prefix/filename.extension
+         bm stat play/mynewbucket/prefix/filename.extension
 
       .. important::
 
@@ -59,7 +49,7 @@ Quickstart
 
       1. Download the Buckit Server Process for your Operating System
 
-         Follow the instructions on the `Buckit Download Page <https://min.io/downloads?ref=docs>`__ for your operating system to download and install the :mc:`minio server` process.
+         Follow the instructions on the `Buckit Download Page <https://min.io/downloads?ref=docs>`__ for your operating system to download and install the :mc:`buckit server <buckit server>` process.
 
       2. Create a folder for use with Buckit
 
@@ -67,15 +57,15 @@ Quickstart
 
       3. Start the Buckit Server
 
-         Run the :mc:`minio server` specifying the path to the directory and the :mc:`~minio server --console-address` parameter to set a static console listen path:
+         Run the :mc:`buckit server <buckit server>` specifying the path to the directory and the :mc:`~buckit server --console-address` parameter to set a static console listen path:
 
          .. code-block:: shell
             :class: copyable
 
-            minio server ~/minio --console-address :9001
+            buckit server ~/minio --console-address :9001
             # For windows, use minio.exe server ~/minio --console-address :9001`
 
-         The output includes connection instructions for both :mc:`mc` and connecting to the Console using your browser.
+         The output includes connection instructions for both :mc:`bm` and connecting to the Console using your browser.
 
    .. tab-item:: Kubernetes
 
@@ -100,6 +90,6 @@ Quickstart
    /installation-and-upgrade
    /cluster-management
    /object-and-bucket-operations
-   /developers
+   Developers </reference/s3-api-compatibility>
    /reference/baremetal
    /glossary

@@ -42,13 +42,13 @@ The examples here represent the minimum required settings.
 
       .. mc-conf:: identity_plugin
 
-      Use :mc:`mc admin config set` to create or update the identity plugin configuration. 
+      Use :mc:`bm admin config set` to create or update the identity plugin configuration. 
       The ``identity_plugin url`` argument is required. 
       Specify additional optional arguments as a whitespace (" ")-delimited list.
 
       .. code-block:: shell
 
-         mc admin config set identity_plugin                  \
+         bm admin config set identity_plugin                  \
             url="https://external-auth.example.net:8080/auth" \
             role_policy="consoleAdmin"                        \
             [ARGUMENT=VALUE] ... 

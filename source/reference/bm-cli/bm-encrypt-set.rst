@@ -32,12 +32,12 @@ and :ref:`SSE-S3 <minio-encryption-sse-s3>`.
 
       The following command sets the default 
       :ref:`SSE-KMS encryption key <minio-encryption-sse-kms>` for the bucket
-      ``mydata`` on the ``myminio`` Buckit deployment:
+      ``mydata`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm encrypt set sse-kms "minio-encryption-key" myminio/mydata
+         bm encrypt set sse-kms "minio-encryption-key" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -116,7 +116,7 @@ Enable Automatic Server-Side Bucket Encryption
       .. code-block:: shell
          :class: copyable
 
-          bm encrypt set sse-kms minio-encryption-key myminio/data
+          bm encrypt set sse-kms minio-encryption-key mybuckit/data
 
    .. tab-item:: Syntax
 

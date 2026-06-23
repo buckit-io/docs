@@ -26,13 +26,13 @@ The :mc:`bm idp ldap info` command outputs the current configuration for an AD/L
 
    .. tab-item:: EXAMPLE
 
-      The following example outputs the AD/LDAP configuration settings on the ``myminio`` deployment.
+      The following example outputs the AD/LDAP configuration settings on the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap info     \
-                     myminio
+                     mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -62,7 +62,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap info myminio
+      bm idp ldap info mybuckit
 
 
 

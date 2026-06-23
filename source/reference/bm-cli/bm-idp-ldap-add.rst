@@ -28,13 +28,13 @@ Buckit supports no more than *one* (1) AD/LDAP provider per deployment.
 
    .. tab-item:: EXAMPLE
 
-      The following example sets the AD/LDAP configuration settings for the ``myminio`` deployment.
+      The following example sets the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap add                                                            \
-                     myminio                                                        \
+                     mybuckit                                                        \
                      server_addr=myldapserver:636                                   \
                      lookup_bind_dn=cn=admin,dc=min,dc=io                           \
                      lookup_bind_password=somesecret                                \
@@ -74,7 +74,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap add myminio                               \
+      bm idp ldap add mybuckit                               \
                       server_addr=myldapserver:636          \
                       lookup_bind_dn=cn=admin,dc=min,dc=io  \
                       lookup_bind_password=somesecret       \

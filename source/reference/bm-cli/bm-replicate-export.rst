@@ -28,12 +28,12 @@ Buckit bucket to ``STDOUT``.
    .. tab-item:: EXAMPLE
 
       The following command exports the replication configuration for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate export myminio/mydata > mydata-replication.json
+         bm replicate export mybuckit/mydata > mydata-replication.json
 
    .. tab-item:: SYNTAX
 
@@ -59,7 +59,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate export myminio/mybucket
+      bm replicate export mybuckit/mybucket
 
 Global Flags
 ~~~~~~~~~~~~

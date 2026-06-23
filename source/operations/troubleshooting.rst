@@ -21,11 +21,11 @@ Tools
 
 The :ref:`Buckit Client <minio-client>` provides several functions to display information about your Buckit deployment or monitor its activity.
 
-- For basic information about your Buckit deployment, use :mc-cmd:`mc admin info`.
+- For basic information about your Buckit deployment, use :mc-cmd:`bm admin info`.
 
-- For deeper investigation of S3 calls and responses, use :mc-cmd:`mc admin trace`.
+- For deeper investigation of S3 calls and responses, use :mc-cmd:`bm admin trace`.
 
-- Use :mc:`mc admin logs` to display logs from the command line.
+- Use :mc:`bm admin logs` to display logs from the command line.
   The command supports type and quantity filters for further limiting logs output.
 
 Upgrades and version support
@@ -52,7 +52,7 @@ Buckit
    Update to the latest release or a release no older than six months.
 
 Buckit Client
-   Update to the `mc` release that occurs immediately after the Buckit release, within one or two weeks.
+   Update to the `bm` release that occurs immediately after the Buckit release, within one or two weeks.
 
 Buckit Operator
    Use a Buckit version no earlier than the latest at the time of the Operator release.

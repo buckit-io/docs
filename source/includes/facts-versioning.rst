@@ -11,7 +11,7 @@ existed at specified point-in-time.
 
 |rewind| requires that the specified |alias| be an S3-compatible service
 that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
-:mc:`mc version` to enable or disable bucket versioning.
+:mc:`bm version` to enable or disable bucket versioning.
 
 .. end-rewind-desc
 
@@ -22,7 +22,7 @@ bucket.
 
 |versions| requires that the specified |alias| be an S3-compatible service
 that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
-:mc:`mc version` to enable or disable bucket versioning.
+:mc:`bm version` to enable or disable bucket versioning.
 
 .. end-versions-desc
 
@@ -32,7 +32,7 @@ Directs |command| to operate only on the specified object version.
 
 |versionid| requires that the specified |alias| be an S3-compatible service
 that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
-:mc:`mc version` to enable or disable bucket versioning.
+:mc:`bm version` to enable or disable bucket versioning.
 
 .. end-version-id-desc
 
@@ -42,6 +42,6 @@ that supports :ref:`minio-bucket-versioning`. For Buckit deployments, use
    :class: note
 
    |command| requires :ref:`bucket versioning <minio-bucket-versioning>` to
-   use this feature. Use :mc:`mc version` to enable versioning on a bucket.
+   use this feature. Use :mc:`bm version` to enable versioning on a bucket.
 
 .. end-versioning-admonition

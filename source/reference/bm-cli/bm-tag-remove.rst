@@ -32,12 +32,12 @@ The :mc:`bm tag remove` command removes all tags from a bucket or object.
    .. tab-item:: EXAMPLE
  
       The following command removes tags for the ``mydata`` bucket on the
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm tag remove myminio/mydata
+         bm tag remove mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -70,14 +70,11 @@ Parameters
 
    .. code-block:: none
 
-      bm tag remove myminio/mybucket/object.txt
+      bm tag remove mybuckit/mybucket/object.txt
 
 .. mc-cmd:: --recursive, r
    :optional:
 
-   .. versionadded:: RELEASE.2023-05-04T18-10-16Z
-
-   Recursively removes all tags from all objects at the specified :mc:`ALIAS <bm tag remove ALIAS>`.
 
 .. mc-cmd:: --rewind
    :optional:

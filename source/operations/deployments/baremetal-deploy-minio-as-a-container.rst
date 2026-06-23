@@ -89,7 +89,7 @@ For all other container runtimes, follow the documentation for that runtime and 
       You can modify the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` variables to change the root login as needed.
 
       For multi-drive deployments, bind each local drive or folder to a sequentially numbered path in the container.
-      You can then modify the :mc:`minio server` startup to specify those paths:
+      You can then modify the :mc:`buckit server <buckit server>` startup to specify those paths:
 
       .. code-block:: shell
          :class: copyable
@@ -134,7 +134,7 @@ For all other container runtimes, follow the documentation for that runtime and 
       You can modify the :envvar:`MINIO_ROOT_USER` and :envvar:`MINIO_ROOT_PASSWORD` variables to change the root login as needed.
 
       For multi-drive deployments, bind each local drive or folder to a sequentially numbered path in the container.
-      You can then modify the :mc:`minio server` startup to specify those paths:
+      You can then modify the :mc:`buckit server <buckit server>` startup to specify those paths:
 
       .. code-block:: shell
          :class: copyable

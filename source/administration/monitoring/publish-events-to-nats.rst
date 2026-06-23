@@ -31,11 +31,11 @@ The following procedure adds a new NATS service endpoint for supporting :ref:`bu
 Prerequisites
 ~~~~~~~~~~~~~
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the NATS Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,7 +47,7 @@ You can configure a new NATS service endpoint using either environment variables
    .. tab-item:: Environment Variables
 
       Buckit supports specifying the NATS service endpoint and associated configuration settings using :ref:`environment variables <minio-server-envvar-bucket-notification-nats>`. 
-      The :mc:`minio server` process applies the specified settings on its next startup.
+      The :mc:`buckit server <buckit server>` process applies the specified settings on its next startup.
       
       The following example code sets *all*  environment variables related to configuring an NATS service endpoint. 
       The minimum *required* variables are :envvar:`MINIO_NOTIFY_NATS_ADDRESS` and :envvar:`MINIO_NOTIFY_NATS_SUBJECT`:
@@ -101,7 +101,7 @@ You can configure a new NATS service endpoint using either environment variables
         The following examples assume an identifier of ``PRIMARY``.
 
         If the specified ``<IDENTIFIER>`` matches an existing NATS service endpoint on the Buckit deployment, the new settings *override* any existing settings for that endpoint. 
-        Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the Buckit deployment.
+        Use :mc-cmd:`bm admin config get notify_nats <bm admin config get>` to review the currently configured NATS endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the hostname and port of the NATS service endpoint.
         For example: ``nats-endpoint.example.com:4222``
@@ -111,9 +111,9 @@ You can configure a new NATS service endpoint using either environment variables
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating NATS endpoints on a running 
-      :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
+      :mc:`buckit server <buckit server>` process using the :mc-cmd:`bm admin config set` command 
       and the :mc-conf:`notify_nats` configuration key. You must restart the 
-      :mc:`minio server` process to apply any new or updated configuration
+      :mc:`buckit server <buckit server>` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
@@ -124,7 +124,7 @@ You can configure a new NATS service endpoint using either environment variables
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_nats:IDENTIFIER \
+         bm admin config set ALIAS/ notify_nats:IDENTIFIER \
             address="HOSTNAME" \
             subject="<string>" \
             username="<string>" \
@@ -146,7 +146,7 @@ You can configure a new NATS service endpoint using either environment variables
         The following examples in this procedure assume an identifier of ``PRIMARY``.
 
         If the specified ``IDENTIFIER`` matches an existing NATS service endpoint on the Buckit deployment, the new settings *override* any existing settings for that endpoint. 
-        Use :mc-cmd:`mc admin config get notify_nats <mc admin config get>` to review the currently configured NATS endpoints on the Buckit deployment.
+        Use :mc-cmd:`bm admin config get notify_nats <bm admin config get>` to review the currently configured NATS endpoints on the Buckit deployment.
 
       - Replace ``ENDPOINT`` with the hostname and port of the NATS service endpoint.
         For example: ``nats-endpoint.example.com:4222``.
@@ -157,17 +157,17 @@ You can configure a new NATS service endpoint using either environment variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured NATS
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured NATS
 target similar to the following:
 
 .. code-block:: shell
@@ -184,13 +184,13 @@ the associated NATS deployment as a target.
 3) Configure Bucket Notifications using the NATS Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc event add` command to add a new bucket notification 
+Use the :mc:`bm event add` command to add a new bucket notification 
 event with the configured NATS service as a target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event add ALIAS/BUCKET arn:minio:sqs::primary:nats \
+   bm event add ALIAS/BUCKET arn:minio:sqs::primary:nats \
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
@@ -199,31 +199,31 @@ event with the configured NATS service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which Buckit triggers notifications.
 
-Use :mc:`mc event ls` to view all configured bucket events for 
+Use :mc:`bm event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:nats
+   bm event ls ALIAS/BUCKET arn:minio:sqs::primary:nats
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on the bucket for which you configured the new event and 
 check the NATS service for the notification data. The action required
-depends on which :mc-cmd:`events <mc event add --event>` were specified
+depends on which :mc-cmd:`events <bm event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update an NATS Endpoint in a Buckit Deployment
 ----------------------------------------------
@@ -235,22 +235,22 @@ deployment.
 Prerequisites
 ~~~~~~~~~~~~~~
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 
 1) List Configured NATS Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently configured NATS service endpoints in the deployment:
+Use the :mc-cmd:`bm admin config get` command to list the currently configured NATS service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_nats
+   bm admin config get ALIAS/ notify_nats
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
@@ -270,12 +270,12 @@ Note the identifier for the NATS service endpoint you want to update for the nex
 2) Update the NATS Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration for the NATS service endpoint:
+Use the :mc-cmd:`bm admin config set` command to set the new configuration for the NATS service endpoint:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_nats:IDENTIFIER \
+   bm admin config set ALIAS/ notify_nats:IDENTIFIER \
       address="HOSTNAME" \
       subject="<string>" \
       username="<string>" \
@@ -300,16 +300,16 @@ See :ref:`minio-server-config-bucket-notification-nats` for a complete list of N
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to restart.
 
-The :mc:`minio server` process prints a line on startup for each configured NATS target similar to the following:
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured NATS target similar to the following:
 
 .. code-block:: shell
 
@@ -319,11 +319,11 @@ The :mc:`minio server` process prints a line on startup for each configured NATS
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on a bucket which has an event configuration using the updated NATS service endpoint and check the NATS service for the notification data. 
-The action required depends on which :mc-cmd:`events <mc event add --event>` were specified when configuring the bucket notification.
+The action required depends on which :mc-cmd:`events <bm event add --event>` were specified when configuring the bucket notification.
 
-For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc:`mc cp` command to create a new object in the bucket and trigger a notification.
+For example, if the bucket notification configuration includes the ``s3:ObjectCreated:Put`` event, you can use the :mc:`bm cp` command to create a new object in the bucket and trigger a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET

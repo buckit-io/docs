@@ -31,7 +31,7 @@ The :mc-cmd:`bm admin accesskey enable` command enables an existing access key.
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin accesskey enable myminio myuserserviceaccount  
+         bm admin accesskey enable mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

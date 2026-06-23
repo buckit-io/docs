@@ -10,8 +10,6 @@
 
 .. mc:: bm get
 
-.. versionadded:: mc RELEASE.2024-02-24T01-33-20Z
-
 Syntax
 ------
 
@@ -91,12 +89,12 @@ Examples
 Retrieve an object from Buckit to the local file system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command retrieves the file ``myobject.csv`` from the bucket ``mybucket`` at the alias ``myminio`` and places it on the local file system at the path ``/my/local/folder``.
+The following command retrieves the file ``myobject.csv`` from the bucket ``mybucket`` at the alias ``mybuckit`` and places it on the local file system at the path ``/my/local/folder``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm get myminio/mybucket/myobject.csv /my/local/folder 
+   bm get mybuckit/mybucket/myobject.csv /my/local/folder 
 
 Retrieve an encrypted object from Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

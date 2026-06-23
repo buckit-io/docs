@@ -22,7 +22,7 @@ and destination buckets.
 
 Client-side Bucket Replication
   Use the command process to synchronize objects between buckets within the same S3-compatible cluster *or* between two independent S3-compatible clusters. 
-  Client-side replication using :mc:`mc mirror` supports Buckit-to-S3 and similar replication configurations.
+  Client-side replication using :mc:`bm mirror` supports Buckit-to-S3 and similar replication configurations.
 
 .. admonition:: Bucket vs Site Replication
    :class: note
@@ -68,8 +68,8 @@ Resynchronization (Disaster Recovery)
 
 Resynchronization primarily supports recovery after partial or total loss of the
 data on a Buckit deployment using a healthy deployment in the replica
-configuration. Use the :mc:`mc replicate resync` command completely
-resynchronize the remote target (:mc:`mc admin bucket remote`) using the
+configuration. Use the :mc:`bm replicate resync` command completely
+resynchronize the remote target (:mc:`bm admin bucket remote`) using the
 specified source bucket. 
 
 The resynchronization process checks all objects in the source bucket against
@@ -83,7 +83,7 @@ Buckit skips synchronizing those objects whose remote copy exactly match the
 source, including object metadata. Buckit otherwise does not prioritize or modify
 the queue with regards to the existing contents of the target.
 
-:mc:`mc replicate resync` operates at the bucket level and does
+:mc:`bm replicate resync` operates at the bucket level and does
 *not* support prefix-level granularity. Initiating resynchronization on a large
 bucket may result in a significant increase in replication-related load
 and traffic. Use this command with caution and only when necessary.
@@ -109,7 +109,7 @@ replication uses the same :ref:`replication process <minio-replication-process>`
 as all other replication operations. 
 
 Buckit requires explicitly enabling versioned deletes and delete marker
-replication . Use the :mc-cmd:`mc replicate add --replicate` field to
+replication . Use the :mc-cmd:`bm replicate add --replicate` field to
 specify both or either ``delete`` and ``delete-marker`` to enable versioned
 deletes and delete marker replication respectively. To enable both, specify both
 strings using a comma separator ``delete,delete-marker``.
@@ -146,7 +146,7 @@ application of object expiration.
    recursively removes each empty part of the prefix up to the bucket root.
    Buckit only applies the recursive removal to prefixes created *implicitly* as
    part of object write operations - that is, the prefix was not created using
-   an explicit directory creation command such as :mc:`mc mb`.
+   an explicit directory creation command such as :mc:`bm mb`.
 
    If a replication rule enables replication delete operations, the replication
    process *also* applies the implicit prefix trimming behavior on the
@@ -158,7 +158,7 @@ application of object expiration.
    - ``photos/2021/february/myotherphoto.jpg``
    - ``photos/NYE21/NewYears.jpg``
 
-   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`mc mb`.
+   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`bm mb`.
    All other prefixes were *implicitly* created as part of writing the object
    located at that prefix. 
    
@@ -184,9 +184,9 @@ Buckit only excludes those objects without a version ID, such as those objects w
 You can disable existing object replication while configuring or modifying the bucket replication rule.
 You must specify *all* desired replication features during creation or modification:
 
-- For new replication rules, exclude ``"existing-objects"`` from the list of replication features specified to :mc-cmd:`mc replicate add --replicate`.
+- For new replication rules, exclude ``"existing-objects"`` from the list of replication features specified to :mc-cmd:`bm replicate add --replicate`.
 
-- For existing replication rules, remove ``"existing-objects"`` from the list of existing replication features using :mc-cmd:`mc replicate update --replicate`. 
+- For existing replication rules, remove ``"existing-objects"`` from the list of existing replication features using :mc-cmd:`bm replicate update --replicate`. 
   The new rule **replaces** the previous rule.
 
 Disabling existing object replication does not remove any objects already replicated to the remote bucket.
@@ -200,8 +200,8 @@ Synchronous vs Asynchronous Replication
    :end-before: end-replication-sync-vs-async
 
 You must explicitly enable synchronous replication when configuring the remote
-target target using the :mc-cmd:`mc admin bucket remote add` command with the
-:mc-cmd:`~mc admin bucket remote add` flag.
+target target using the :mc-cmd:`bm admin bucket remote add` command with the
+:mc-cmd:`~bm admin bucket remote add` flag.
 
 Replication Internals
 ~~~~~~~~~~~~~~~~~~~~~
@@ -221,17 +221,6 @@ remove objects from the queue while scanning for new unreplicated objects to
 add to the queue. 
 
 
-.. versionchanged:: RELEASE.2022-07-18T17-49-40Z
-
-   Buckit queues failed replication operations and retries those operations up to three (3) times.
-   
-   Buckit dequeues replication operations that fail to replicate after three attempts.
-   The scanner can pick up those affected objects at a later time and requeue them for replication.
-  
-.. versionchanged:: RELEASE.2022-08-11T04-37-28Z
-
-   Failed or pending replications requeue automatically when performing a list or any ``GET`` or ``HEAD`` API method. 
-   For example, using :mc:`mc stat`, :mc:`mc cat`,  or :mc:`mc ls` after a remote location comes back online requeues replication.
 
 Buckit sets the ``X-Amz-Replication-Status`` metadata field according to the
 replication state of the object:

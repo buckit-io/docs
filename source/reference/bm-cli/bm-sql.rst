@@ -25,12 +25,12 @@ See :s3-docs:`Selecting content from objects <selecting-content-from-objects>` f
 
    .. tab-item:: EXAMPLE
 
-      The following command queries all objects in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      The following command queries all objects in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm sql --recursive --query "select * from S3Object" myminio/mydata
+         bm sql --recursive --query "select * from S3Object" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

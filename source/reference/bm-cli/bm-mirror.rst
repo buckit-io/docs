@@ -30,12 +30,12 @@ The :mc:`bm mirror` command synchronizes content to Buckit deployment, similar t
 
    .. tab-item:: EXAMPLE
 
-      The following command synchronizes content from a local filesystem directory to the ``mydata`` bucket on the ``myminio`` Buckit deployment.
+      The following command synchronizes content from a local filesystem directory to the ``mydata`` bucket on the ``mybuckit`` Buckit deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         bm mirror --watch ~/mydata myminio/mydata
+         bm mirror --watch ~/mydata mybuckit/mydata
 
       The command "watches" for files added or removed on the local filesystem and synchronizes those operations to Buckit until explicitly terminated. 
 
@@ -99,13 +99,13 @@ Parameters
 
    .. code-block:: shell
 
-      bm mirror [FLAGS] play/mybucket/ myminio/mybucket
+      bm mirror [FLAGS] play/mybucket/ mybuckit/mybucket
 
    For files on a filesystem, specify the full filesystem path to the file or directory :
 
    .. code-block:: shell
 
-      bm mirror [FLAGS] ~/data/ myminio/mybucket
+      bm mirror [FLAGS] ~/data/ mybuckit/mybucket
 
    If specifying a directory, :mc:`bm mirror` synchronizes all files in the directory.
 
@@ -155,18 +155,6 @@ Parameters
 .. mc-cmd:: --checksum
    :optional:
 
-   .. versionadded:: RELEASE.2024-10-02T08-27-28Z
-
-   Add a checksum to an uploaded object. 
-   
-   Valid values are: 
-   - ``MD5``
-   - ``CRC32``
-   - ``CRC32C``
-   - ``SHA1``
-   - ``SHA256``
-
-   The flag requires server trailing headers and works with AWS or Buckit targets.
 
 .. mc-cmd:: --disable-multipart
    :optional:
@@ -193,9 +181,6 @@ Parameters
 .. mc-cmd:: --exclude-bucket
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-03-03T00-13-08Z
-
-   Exclude bucket(s) in the :mc-cmd:`~bm mirror SOURCE` path that match the specified bucket :ref:`name pattern <minio-wildcard-matching>`.
 
 .. mc-cmd:: --exclude-storageclass
    :optional:
@@ -302,9 +287,6 @@ Parameters
 .. mc-cmd:: --skip-errors
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-01-28T16-23-14Z
-
-   Skip any objects that produce errors while mirroring.
 
 .. mc-cmd:: --summary
    :optional:

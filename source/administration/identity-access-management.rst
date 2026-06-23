@@ -75,7 +75,7 @@ assigning a policy to a user or group depends on the configured
 
 Buckit deployments using the :ref:`Buckit Internal IDP <minio-internal-idp>`
 require explicitly associating a user to a policy or policies using the
-:mc:`mc admin policy attach` command. A user can also inherit the policies
+:mc:`bm admin policy attach` command. A user can also inherit the policies
 attached to the :ref:`groups <minio-groups>` in which they have membership.
 
 By default, Buckit *denies* access to actions or resources not explicitly allowed

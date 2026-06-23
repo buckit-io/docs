@@ -73,7 +73,7 @@ Run the following command in a terminal or shell to start the Buckit server as a
    :substitutions:
 
    export MINIO_CONFIG_ENV_FILE=|minioconfigpath|/minio
-   minio server --console-address :9001
+   buckit server --console-address :9001
 
 .. end-kes-minio-start-server-desc
 
@@ -108,14 +108,14 @@ If you run |KES| without tying it to the current shell session (for example, wit
 .. start-kes-generate-key-desc
 
 Buckit requires that the |EK| exist on the KMS *before* performing |SSE| operations using that key. 
-Use ``kes key create`` *or* :mc-cmd:`mc admin kms key create` to add a new |EK| for use with |SSE|.
+Use ``kes key create`` *or* :mc-cmd:`bm admin kms key create` to add a new |EK| for use with |SSE|.
 
-The following command uses the :mc-cmd:`mc admin kms key create` command to add a new External Key (EK) stored on the KMS server for use with encrypting the Buckit backend.
+The following command uses the :mc-cmd:`bm admin kms key create` command to add a new External Key (EK) stored on the KMS server for use with encrypting the Buckit backend.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin kms key create ALIAS KEYNAME
+   bm admin kms key create ALIAS KEYNAME
 
 .. end-kes-generate-key-desc
 
@@ -156,7 +156,7 @@ Buckit uses the :envvar:`MINIO_KMS_KES_KEY_NAME` key for the following cryptogra
 
 .. start-kes-enable-sse-kms-desc
 
-Use the Buckit :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+Use the Buckit :mc:`bm` CLI to enable bucket-default SSE-KMS with the generated key:
 
 The following commands:
 
@@ -167,13 +167,13 @@ The following commands:
 .. code-block:: shell
    :class: copyable
 
-   mc alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
+   bm alias set local http://127.0.0.1:9000 ROOTUSER ROOTPASSWORD
 
-   mc mb local/encryptedbucket
-   mc encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
+   bm mb local/encryptedbucket
+   bm encrypt set SSE-KMS encrypted-bucket-key ALIAS/encryptedbucket
 
-Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
-You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
+Write a file to the bucket using :mc:`bm cp` or any S3-compatible SDK with a ``PutObject`` function. 
+You can then run :mc:`bm stat` on the file to confirm the associated encryption metadata.
 
 .. end-kes-enable-sse-kms-desc
 

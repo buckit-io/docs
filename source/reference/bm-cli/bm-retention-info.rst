@@ -41,12 +41,12 @@ object locking enabled.
    .. tab-item:: EXAMPLE
 
       The following command returns the default object lock configuration for 
-      the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm retention info --default myminio/mydata
+         bm retention info --default mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

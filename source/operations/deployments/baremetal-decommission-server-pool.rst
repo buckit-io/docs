@@ -13,7 +13,7 @@ Decommission Server Pools
 Buckit supports decommissioning and removing :ref:`server pools <minio-intro-server-pool>` from a deployment with two or more pools.
 To decommission, there must be at least one remaining pool with sufficient available space to receive the objects from the decommissioned pools.
 
-Starting with ``RELEASE.2023-01-18T04-36-38Z``, Buckit supports queueing  :ref:`multiple pools <minio-decommission-multiple-pools>` in a single decommission command.
+Buckit supports queueing :ref:`multiple pools <minio-decommission-multiple-pools>` in a single decommission command.
 Each listed pool immediately enters a read-only status, but draining occurs one pool at a time.
 
 Decommissioning is designed for removing an older server pool whose hardware is no longer sufficient or performant compared to the pools in the deployment. 
@@ -34,8 +34,6 @@ The procedures on this page decommission and remove one or more server pools fro
 
    Decommissioning is a major administrative operation that requires care in planning and execution, and is not a trivial or 'daily' task. 
 
-   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
-   Community Support is best-effort only and has no SLAs around responsiveness.
 
 
 .. _minio-decommissioning-prereqs:
@@ -46,7 +44,7 @@ Prerequisites
 Back Up Cluster Settings First
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
+Use the :mc:`bm admin cluster bucket export` and :mc:`bm admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to starting decommissioning.
 You can use these snapshots to restore bucket/IAM settings to recover from user or process errors as necessary.
 
 Networking and Firewalls
@@ -153,14 +151,14 @@ nodes in the deployment at around the same time.
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
-Decommissioning Ignores Expired Objects and Trailing ``DeleteMarker``
+Decommissioning Ignores Expired Objects and Trailing DeleteMarker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Starting with :minio-release:`RELEASE.2023-05-27T05-56-19Z`, decommissioning ignores objects where the only remaining version is a ``DeleteMarker``.
+Decommissioning ignores objects where the only remaining version is a ``DeleteMarker``.
 This avoids creating empty metadata on the remaining server pool(s) for objects that are effectively fully deleted.
 
-Starting with :minio-release:`RELEASE.2023-06-23T20-26-00Z`, decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
-Starting with :minio-release:`RELEASE.2023-06-29T05-12-28Z`, you can monitor ignored delete markers and expired objects during the decommission process with :mc-cmd:`mc admin trace --call decommission <mc admin trace --call>`.
+Decommissioning also ignores object versions which have expired based on the configured :ref:`lifecycle rules <minio-lifecycle-management-expiration>` for the parent bucket.
+You can monitor ignored delete markers and expired objects during the decommission process with :mc-cmd:`bm admin trace --call decommission <bm admin trace --call>`.
 
 Once the decommissioning process completes, you can safely shut down that pool.
 Since the only remaining data was scheduled for deletion *or* was only a ``DeleteMarker``, you can safely clear or destroy those drives as per your internal procedures.
@@ -176,13 +174,9 @@ If the list returns empty, Buckit marks the decommission as successfully complet
 If any objects return, Buckit returns an error that the decommission process failed.
 
 If the decommission fails, review the failure details before retrying the decommission.
-You can also seek additional support through the `Buckit Community Slack <https://slack.min.io/>`__.
-Buckit provides Community Support at best-effort only and provides no :abbr:`SLA (Service Level Agreement)` around responsiveness.
 
 Decommissioning a Server with Tiering Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionchanged:: RELEASE.2023-03-20T20-16-18Z
 
 For deployments with tiering enabled and active, decommissioning moves the object references to a new active pool.
 Applications can continue issuing GET requests against those objects where Buckit handles transparently retrieving them from the remote tier.
@@ -197,13 +191,13 @@ Decommission a Server Pool
 1) Review the Buckit Deployment Topology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :mc:`mc admin decommission` command returns a list of all
+The :mc:`bm admin decommission` command returns a list of all
 pools in the Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio
+   bm admin decommission status mybuckit
 
 The command returns output similar to the following:
 
@@ -211,9 +205,9 @@ The command returns output similar to the following:
 
    ┌─────┬────────────────────────────────────────────────────────────────┬──────────────────────────────────┬────────┐
    │ ID  │ Pools                                                          │ Capacity                         │ Status │
-   │ 1st │ https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio │  10 TiB (used) / 10  TiB (total) │ Active │
-   │ 2nd │ https://minio-{05...08}.example.com:9000/mnt/disk{1...4}/minio │  60 TiB (used) / 100 TiB (total) │ Active │
-   │ 3rd │ https://minio-{09...12}.example.com:9000/mnt/disk{1...4}/minio │  40 TiB (used) / 100 TiB (total) │ Active │
+   │ 1st │ https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit │  10 TiB (used) / 10  TiB (total) │ Active │
+   │ 2nd │ https://buckit-{05...08}.example.com:9000/mnt/disk{1...4}/buckit │  60 TiB (used) / 100 TiB (total) │ Active │
+   │ 3rd │ https://buckit-{09...12}.example.com:9000/mnt/disk{1...4}/buckit │  40 TiB (used) / 100 TiB (total) │ Active │
    └─────┴────────────────────────────────────────────────────────────────┴──────────────────────────────────┴────────┘
 
 The example deployment above has three pools. Each pool has four servers
@@ -224,7 +218,7 @@ The remaining pools in the deployment *must* have sufficient total
 capacity to migrate all object stored in the decommissioned pool.
 
 In the example above, the deployment has 210TiB total storage with 110TiB used.
-The first pool (``minio-{01...04}``) is the decommissioning target, as it was
+The first pool (``buckit-{01...04}``) is the decommissioning target, as it was
 provisioned when the Buckit deployment was created and is completely full. The
 remaining newer pools can absorb all objects stored on the first pool without
 significantly impacting total available storage.
@@ -243,17 +237,17 @@ significantly impacting total available storage.
    Review and validate that you are decommissioning the correct pool
    *before* running the following command.
 
-Use the :mc-cmd:`mc admin decommission start` command to begin decommissioning
+Use the :mc-cmd:`bm admin decommission start` command to begin decommissioning
 the target pool. Specify the :ref:`alias <alias>` of the deployment and the
 full description of the pool to decommission, including all hosts, disks, and file paths.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission start myminio/ https://minio-{01...04}.example.net:9000/mnt/disk{1...4}/minio
+   bm admin decommission start mybuckit/ https://buckit-{01...04}.example.net:9000/mnt/disk{1...4}/buckit
 
 The example command begins decommissioning the matching server pool on the
-``myminio`` deployment.
+``mybuckit`` deployment.
 
 During the decommissioning process, Buckit continues routing read operations
 (``GET``, ``LIST``, ``HEAD``) to the pool for those objects not
@@ -267,13 +261,13 @@ at this time.
 3) Monitor the Decommissioning Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin decommission status` command to monitor the 
+Use the :mc-cmd:`bm admin decommission status` command to monitor the 
 decommissioning process. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio
+   bm admin decommission status mybuckit
 
 The command returns output similar to the following:
 
@@ -281,9 +275,9 @@ The command returns output similar to the following:
 
    ┌─────┬────────────────────────────────────────────────────────────────┬──────────────────────────────────┬──────────┐
    │ ID  │ Pools                                                          │ Capacity                         │ Status   │
-   │ 1st │ https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio │  10 TiB (used) / 10  TiB (total) │ Draining │
-   │ 2nd │ https://minio-{05...08}.example.com:9000/mnt/disk{1...4}/minio │  60 TiB (used) / 100 TiB (total) │ Active   │
-   │ 3rd │ https://minio-{09...12}.example.com:9000/mnt/disk{1...4}/minio │  40 TiB (used) / 100 TiB (total) │ Active   │
+   │ 1st │ https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit │  10 TiB (used) / 10  TiB (total) │ Draining │
+   │ 2nd │ https://buckit-{05...08}.example.com:9000/mnt/disk{1...4}/buckit │  60 TiB (used) / 100 TiB (total) │ Active   │
+   │ 3rd │ https://buckit-{09...12}.example.com:9000/mnt/disk{1...4}/buckit │  40 TiB (used) / 100 TiB (total) │ Active   │
    └─────┴────────────────────────────────────────────────────────────────┴──────────────────────────────────┴──────────┘
 
 You can retrieve more detailed information by specifying the description of
@@ -292,7 +286,7 @@ the server pool to the command:
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio
+   bm admin decommission status mybuckit https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit
 
 The command returns output similar to the following:
 
@@ -301,14 +295,14 @@ The command returns output similar to the following:
    Decommissioning rate at 100MiB/sec [1TiB/10TiB]
    Started: 30 minutes ago
 
-:mc-cmd:`mc admin decommission status` marks the :guilabel:`Status` as
+:mc-cmd:`bm admin decommission status` marks the :guilabel:`Status` as
 :guilabel:`Complete` once decommissioning is completed. You can move on to
 the next step once decommissioning is completed.
 
 If :guilabel:`Status` reads as failed, you can re-run the
-:mc-cmd:`mc admin decommission start` command to resume the process. 
-For persistent failures, use :mc:`mc admin logs` or review
-the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific
+:mc-cmd:`bm admin decommission start` command to resume the process. 
+For persistent failures, use :mc:`bm admin logs` or review
+the systemd logs (e.g. ``journalctl -u minio``) to identify more specific
 errors.
 
 4) Remove the Decommissioned Pool from the Deployment Configuration
@@ -320,11 +314,11 @@ server in the deployment and remove the decommissioned pool.
 
 The ``.deb`` or ``.rpm`` packages install a 
 `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to 
-``/lib/systemd/system/minio.service``. For binary installations, this
+``/usr/lib/systemd/system/buckit.service``. For binary installations, this
 procedure assumes the file was created manually as per the 
 :ref:`deploy-minio-distributed` procedure.
 
-The ``minio.service`` file uses an environment file located at 
+The ``buckit.service`` file uses an environment file located at 
 ``/etc/default/minio`` for sourcing configuration settings, including the
 startup. Specifically, the ``MINIO_VOLUMES`` variable sets the startup
 command:
@@ -338,7 +332,7 @@ The command returns output similar to the following:
 
 .. code-block:: shell
 
-   MINIO_VOLUMES="https://minio-{1...4}.example.net:9000/mnt/disk{1...4}/minio https://minio-{5...8}.example.net:9000/mnt/disk{1...4}/minio https://minio-{9...12}.example.net:9000/mnt/disk{1...4}/minio"
+   MINIO_VOLUMES="https://buckit-{1...4}.example.net:9000/mnt/disk{1...4}/buckit https://buckit-{5...8}.example.net:9000/mnt/disk{1...4}/buckit https://buckit-{9...12}.example.net:9000/mnt/disk{1...4}/buckit"
 
 Edit the environment file and remove the decommissioned pool from the 
 ``MINIO_VOLUMES`` value.
@@ -367,15 +361,13 @@ to restart the Buckit service:
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
-Once the deployment is online, use :mc:`mc admin info` to confirm the
+Once the deployment is online, use :mc:`bm admin info` to confirm the
 uptime of all remaining servers in the deployment.
 
 .. _minio-decommission-multiple-pools:
 
 Decommission Multiple Server Pools
 ----------------------------------
-
-.. versionchanged:: RELEASE.2023-01-18T04-36-38Z
 
 You can start the decommission process for multiple server pools when issuing a decommission command.
 
@@ -396,12 +388,12 @@ All other considerations about decommissioning apply when performing the process
 1) Review the Buckit Deployment Topology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :mc:`mc admin decommission` command returns a list of all pools in the Buckit deployment:
+The :mc:`bm admin decommission` command returns a list of all pools in the Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio
+   bm admin decommission status mybuckit
 
 The command returns output similar to the following:
 
@@ -409,10 +401,10 @@ The command returns output similar to the following:
 
    ┌─────┬────────────────────────────────────────────────────────────────┬──────────────────────────────────┬────────┐
    │ ID  │ Pools                                                          │ Capacity                         │ Status │
-   │ 1st │ https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio │  10 TiB (used) / 10  TiB (total) │ Active │
-   │ 2nd │ https://minio-{05...08}.example.com:9000/mnt/disk{1...4}/minio │  95 TiB (used) / 100 TiB (total) │ Active │
-   │ 3rd │ https://minio-{09...12}.example.com:9000/mnt/disk{1...4}/minio │  40 TiB (used) / 500 TiB (total) │ Active │
-   │ 4th │ https://minio-{13...16}.example.com:9000/mnt/disk{1...4}/minio │  0  TiB (used) / 500 TiB (total) │ Active │
+   │ 1st │ https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit │  10 TiB (used) / 10  TiB (total) │ Active │
+   │ 2nd │ https://buckit-{05...08}.example.com:9000/mnt/disk{1...4}/buckit │  95 TiB (used) / 100 TiB (total) │ Active │
+   │ 3rd │ https://buckit-{09...12}.example.com:9000/mnt/disk{1...4}/buckit │  40 TiB (used) / 500 TiB (total) │ Active │
+   │ 4th │ https://buckit-{13...16}.example.com:9000/mnt/disk{1...4}/buckit │  0  TiB (used) / 500 TiB (total) │ Active │
    └─────┴────────────────────────────────────────────────────────────────┴──────────────────────────────────┴────────┘
 
 The example deployment above has three pools. 
@@ -423,9 +415,9 @@ The remaining pools in the deployment *must* have sufficient total capacity to m
 
 In the example above, the deployment has 1110TiB total storage with 145TiB used.
 
-- The first pool (``minio-{01...04}``) is the first decommissioning target, as it was provisioned when the Buckit deployment was created and is completely full.
-- The second pool (``minio-{05...08}``) is the second decommissioning target, as it was also provisioned when the Buckit deployment was created and is nearly full.
-- The fourth pool (``minio-{13...16}``) is a newly added pool with new hardware from a completed server expansion.
+- The first pool (``buckit-{01...04}``) is the first decommissioning target, as it was provisioned when the Buckit deployment was created and is completely full.
+- The second pool (``buckit-{05...08}``) is the second decommissioning target, as it was also provisioned when the Buckit deployment was created and is nearly full.
+- The fourth pool (``buckit-{13...16}``) is a newly added pool with new hardware from a completed server expansion.
 
 The third and fourth pools can absorb all objects stored on the first pool without significantly impacting total available storage.
 
@@ -444,15 +436,15 @@ The third and fourth pools can absorb all objects stored on the first pool witho
 
    Review and validate that you are decommissioning the correct pools *before* running the following command.
 
-Use the :mc-cmd:`mc admin decommission start` command to begin decommissioning the target pool. 
+Use the :mc-cmd:`bm admin decommission start` command to begin decommissioning the target pool. 
 Specify the :ref:`alias <alias>` of the deployment and a comma-separated list of the full description of each pool to decommission, including all hosts, disks, and file paths.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission start myminio/ https://minio-{01...04}.example.net:9000/mnt/disk{1...4}/minio,https://minio-{05...08}.example.net:9000/mnt/disk{1...4}/minio
+   bm admin decommission start mybuckit/ https://buckit-{01...04}.example.net:9000/mnt/disk{1...4}/buckit,https://buckit-{05...08}.example.net:9000/mnt/disk{1...4}/buckit
 
-The example command begins decommissioning the two listed matching server pools on the ``myminio`` deployment.
+The example command begins decommissioning the two listed matching server pools on the ``mybuckit`` deployment.
 
 During the decommissioning process, Buckit continues routing read operations (``GET``, ``LIST``, ``HEAD``) operations to the pools for those objects not yet migrated. 
 Buckit routes all new write operations (``PUT``) to the remaining pools in the deployment not scheduled for decommissioning.
@@ -465,12 +457,12 @@ Load balancers, reverse proxy, or other network control components which manage 
 3) Monitor the Decommissioning Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin decommission status` command to monitor the decommissioning process. 
+Use the :mc-cmd:`bm admin decommission status` command to monitor the decommissioning process. 
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio
+   bm admin decommission status mybuckit
 
 The command returns output similar to the following:
 
@@ -478,10 +470,10 @@ The command returns output similar to the following:
 
    ┌─────┬────────────────────────────────────────────────────────────────┬──────────────────────────────────┬──────────┐
    │ ID  │ Pools                                                          │ Capacity                         │ Status   │
-   │ 1st │ https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio │  10 TiB (used) / 10  TiB (total) │ Draining │
-   │ 2nd │ https://minio-{05...08}.example.com:9000/mnt/disk{1...4}/minio │  95 TiB (used) / 100 TiB (total) │ Pending  │
-   │ 3rd │ https://minio-{09...12}.example.com:9000/mnt/disk{1...4}/minio │  40 TiB (used) / 500 TiB (total) │ Active   │
-   │ 4th │ https://minio-{13...16}.example.com:9000/mnt/disk{1...4}/minio │  0  TiB (used) / 500 TiB (total) │ Active   │
+   │ 1st │ https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit │  10 TiB (used) / 10  TiB (total) │ Draining │
+   │ 2nd │ https://buckit-{05...08}.example.com:9000/mnt/disk{1...4}/buckit │  95 TiB (used) / 100 TiB (total) │ Pending  │
+   │ 3rd │ https://buckit-{09...12}.example.com:9000/mnt/disk{1...4}/buckit │  40 TiB (used) / 500 TiB (total) │ Active   │
+   │ 4th │ https://buckit-{13...16}.example.com:9000/mnt/disk{1...4}/buckit │  0  TiB (used) / 500 TiB (total) │ Active   │
    └─────┴────────────────────────────────────────────────────────────────┴──────────────────────────────────┴──────────┘
 
 You can retrieve more detailed information by specifying the description of the server pool to the command:
@@ -489,7 +481,7 @@ You can retrieve more detailed information by specifying the description of the 
 .. code-block:: shell
    :class: copyable
 
-   mc admin decommission status myminio https://minio-{01...04}.example.com:9000/mnt/disk{1...4}/minio
+   bm admin decommission status mybuckit https://buckit-{01...04}.example.com:9000/mnt/disk{1...4}/buckit
 
 The command returns output similar to the following:
 
@@ -498,11 +490,11 @@ The command returns output similar to the following:
    Decommissioning rate at 100MiB/sec [1TiB/10TiB]
    Started: 30 minutes ago
 
-:mc-cmd:`mc admin decommission status` marks the :guilabel:`Status` as :guilabel:`Complete` once decommissioning is completed. 
+:mc-cmd:`bm admin decommission status` marks the :guilabel:`Status` as :guilabel:`Complete` once decommissioning is completed. 
 You can move on to the next step once Buckit completes decommissioning for all pools.
 
-If :guilabel:`Status` reads as failed, you can re-run the :mc-cmd:`mc admin decommission start` command to resume the process. 
-For persistent failures, use :mc:`mc admin logs` or review the ``systemd`` logs (e.g. ``journalctl -u minio``) to identify more specific errors.
+If :guilabel:`Status` reads as failed, you can re-run the :mc-cmd:`bm admin decommission start` command to resume the process. 
+For persistent failures, use :mc:`bm admin logs` or review the systemd logs (e.g. ``journalctl -u minio``) to identify more specific errors.
 
 4) Remove the Decommissioned Pools from the Deployment Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -510,10 +502,9 @@ For persistent failures, use :mc:`mc admin logs` or review the ``systemd`` logs 
 Once decommissioning completes, you can safely remove the pools from the deployment configuration. 
 Modify the startup command for each remaining Buckit server in the deployment and remove the decommissioned pool.
 
-The ``.deb`` or ``.rpm`` packages install a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/lib/systemd/system/minio.service``. 
-For binary installations, this procedure assumes the file was created manually as per the :ref:`deploy-minio-distributed` procedure.
+The ``.deb`` or ``.rpm`` packages install a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/usr/lib/systemd/system/buckit.service``.
 
-The ``minio.service`` file uses an environment file located at ``/etc/default/minio`` for sourcing configuration settings, including the startup. 
+The ``buckit.service`` file uses an environment file located at ``/etc/default/minio`` for sourcing configuration settings, including the startup. 
 Specifically, the ``MINIO_VOLUMES`` variable sets the startup command:
 
 .. code-block:: shell
@@ -525,7 +516,7 @@ The command returns output similar to the following:
 
 .. code-block:: shell
 
-   MINIO_VOLUMES="https://minio-{1...4}.example.net:9000/mnt/disk{1...4}/minio https://minio-{5...8}.example.net:9000/mnt/disk{1...4}/minio https://minio-{9...12}.example.net:9000/mnt/disk{1...4}/minio"
+   MINIO_VOLUMES="https://buckit-{1...4}.example.net:9000/mnt/disk{1...4}/buckit https://buckit-{5...8}.example.net:9000/mnt/disk{1...4}/buckit https://buckit-{9...12}.example.net:9000/mnt/disk{1...4}/buckit"
 
 Edit the environment file and remove the decommissioned pools from the ``MINIO_VOLUMES`` value.
 
@@ -549,4 +540,4 @@ Issue the following commands on each node **simultaneously** in the deployment t
    :start-after: start-nondisruptive-upgrade-desc
    :end-before: end-nondisruptive-upgrade-desc
 
-Once the deployment is online, use :mc:`mc admin info` to confirm the uptime of all remaining servers in the deployment.
+Once the deployment is online, use :mc:`bm admin info` to confirm the uptime of all remaining servers in the deployment.

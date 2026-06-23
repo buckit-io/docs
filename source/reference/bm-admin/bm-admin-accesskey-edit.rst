@@ -29,13 +29,13 @@ Otherwise, the command exits with an error message.
 
    .. tab-item:: EXAMPLE
 
-      The following command applies a new policy and secret key to the ``myuserserviceaccount`` access key on the ``myminio`` deployment:
+      The following command applies a new policy and secret key to the ``myuserserviceaccount`` access key on the ``mybuckit`` deployment:
 
       .. code-block:: shell  
          :class: copyable 
 
          bm admin accesskey edit                                             \  
-                            myminio myuserserviceaccount                     \
+                            mybuckit myuserserviceaccount                     \
                             --secret-key "myuserserviceaccountnewsecretkey"  \     
                             --policy "/path/to/new/policy.json"    
 
@@ -144,22 +144,22 @@ Examples
 Change the secret key for an access key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command modifies the secret key for the access key ``myuseraccesskey`` on the ``myminio`` deployment.
+The following command modifies the secret key for the access key ``myuseraccesskey`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey edit myminio/ myuseraccesskey --secret-key 'new-secret-key-change-me'
+   bm admin accesskey edit mybuckit/ myuseraccesskey --secret-key 'new-secret-key-change-me'
 
 Change the expiration for an access key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command changes the expiration value for the access key ``myuseraccesskey`` on the ``myminio`` deployment.
+The following command changes the expiration value for the access key ``myuseraccesskey`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey edit myminio/ myuseraccesskey --expiry-duration 24h
+   bm admin accesskey edit mybuckit/ myuseraccesskey --expiry-duration 24h
 
 The :mc-cmd:`~bm admin accesskey edit --expiry-duration` cannot be added if the access key already has a value set for :mc-cmd:`~bm admin accesskey edit --expiry`.
 

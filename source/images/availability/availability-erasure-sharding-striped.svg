@@ -390,6 +390,20 @@
    id="path24675" />
 	</g>
 </g>
+<rect
+   id="command-label-mask-buckit"
+   x="82"
+   y="72"
+   width="480"
+   height="18"
+   style="fill:#ffffff;stroke:none" />
+<text
+   id="command-label-buckit"
+   x="100"
+   y="84.8"
+   fill="#1b1717"
+   font-family="Menlo, Consolas, Monaco, monospace"
+   font-size="11px">buckit server https://buckit-{1...16}.example.net:9000/mnt/disk{1...8}</text>
 <path
    id="rect24681"
    class="st21"

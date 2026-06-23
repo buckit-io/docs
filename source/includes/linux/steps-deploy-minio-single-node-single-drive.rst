@@ -5,7 +5,7 @@
    :start-after: start-install-minio-binary-desc
    :end-before: end-install-minio-binary-desc
 
-2) Create the ``systemd`` Service File
+2) Create the systemd Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``.deb`` or ``.rpm`` packages install the following `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`__ service file to ``/usr/lib/systemd/system/minio.service``. 
@@ -13,7 +13,7 @@ For binary installations, create this file manually on all Buckit hosts.
 
 .. note::
    
-   ``systemd`` checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path and uses the first file it finds.
+   systemd checks the ``/etc/systemd/...`` path before checking the ``/usr/lib/systemd/...`` path and uses the first file it finds.
    To avoid conflicting or unexpected configuration options, check that the file exists only at the ``/usr/lib/systemd/system/minio.service`` path.
 
    Refer to the `man page for systemd.unit <https://www.man7.org/linux/man-pages/man5/systemd.unit.5.html>`__ for details on the file path search order.
@@ -100,11 +100,11 @@ The following example provides a starting environment file:
 
    # MINIO_ROOT_USER and MINIO_ROOT_PASSWORD sets the root account for the Buckit server.
    # This user has unrestricted permissions to perform S3 and administrative API operations on any resource in the deployment.
-   # Omit to use the default values 'minioadmin:minioadmin'.
+   # Omit to use the default values 'buckitadmin:buckitadmin'.
    # Buckit recommends setting non-default values as a best practice, regardless of environment
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ROOT_USER=mybuckitadmin
+   MINIO_ROOT_PASSWORD=buckit-secret-key-change-me
 
    # MINIO_VOLUMES sets the storage volume or path to use for the Buckit server.
 
@@ -115,8 +115,6 @@ The following example provides a starting environment file:
    MINIO_OPTS="--console-address :9001"
 
 Include any other environment variables as required for your deployment.
-
-.. versionadded:: Server RELEASE.2024-03-03T17-50-39Z
 
 Buckit automatically generates unique root credentials if all of the following conditions are true:
 
@@ -155,14 +153,14 @@ The ``journalctl`` output should resemble the following:
 
    Status:         1 Online, 0 Offline. 
    API: http://192.168.2.100:9000  http://127.0.0.1:9000       
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
    Console: http://192.168.2.100:9001 http://127.0.0.1:9001    
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
 
    Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-      $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
+      $ bm alias set mybuckit http://10.0.2.100:9000 mybuckitadmin buckit-secret-key-change-me
 
    Documentation: https://docs.min.io/community/minio-object-store/index.html
 

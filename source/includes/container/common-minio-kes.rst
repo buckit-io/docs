@@ -92,8 +92,8 @@ This command assumes the ``minio-kes.cert``, ``minio-kes.key``, and ``kes-server
 .. code-block:: shell
    :class: copyable
 
-   MINIO_ROOT_USER=myminioadmin
-   MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+   MINIO_ROOT_USER=mybuckitadmin
+   MINIO_ROOT_PASSWORD=buckit-secret-key-change-me
    MINIO_VOLUMES="/mnt/data"
 
    # KES Configurations
@@ -136,7 +136,7 @@ KES automatically creates this key if it does not already exist on the root KMS.
    Refer to the documentation for your chosen KMS solution for more information.
 
 Buckit requires that the |EK| exist on the root KMS *before* performing |SSE| operations using that key. 
-Use :kes-docs:`kes key create <cli/kes-key/create/>` *or* :mc-cmd:`mc admin kms key create` to create a new |EK| for use with |SSE|.
+Use :kes-docs:`kes key create <cli/kes-key/create/>` *or* :mc-cmd:`bm admin kms key create` to create a new |EK| for use with |SSE|.
 
 The following command uses the :kes-docs:`kes key create <cli/kes-key/create/>` command to add a new External Key (EK) stored on the root KMS server for use with encrypting the Buckit backend.
 

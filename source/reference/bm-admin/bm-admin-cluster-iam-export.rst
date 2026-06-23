@@ -11,8 +11,6 @@
 Description
 -----------
 
-.. versionadded:: RELEASE.2022-06-26T18-51-48Z
-
 .. start-mc-admin-cluster-iam-export-desc
 
 The :mc:`bm admin cluster iam export` command exports :ref:`IAM <minio-authentication-and-identity-management>` metadata for use with the :mc:`bm admin cluster iam import` command.
@@ -25,12 +23,12 @@ The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is t
 
    .. tab-item:: EXAMPLE
 
-      The following command exports all IAM metadata for the ``myminio`` deployment.
+      The following command exports all IAM metadata for the ``mybuckit`` deployment.
   
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin cluster iam export myminio
+         bm admin cluster iam export mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -46,7 +44,7 @@ The command saves the output as ``ALIAS-iam-metadata.zip``, where ``ALIAS`` is t
          :start-after: start-minio-syntax
          :end-before: end-minio-syntax
 
-Starting with :mc-release:`RELEASE.2023-05-04T18-10-16Z`, :mc:`bm admin cluster iam export` adds support for aliases ending with a trailing forward slash ``ALIAS/``.
+:mc:`bm admin cluster iam export` adds support for aliases ending with a trailing forward slash ``ALIAS/``.
 Prior to this release, the command would fail when provided a trailing forward slash.
 
 Parameters
@@ -76,22 +74,22 @@ Examples
 Download all IAM metadata for a cluster to a ZIP file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command downloads all IAM metadata for the cluster at alias ``myminio``, then stores the metadata to a ZIP file.
+The following command downloads all IAM metadata for the cluster at alias ``mybuckit``, then stores the metadata to a ZIP file.
 
 .. code-block:: shell
 
-   bm admin cluster iam export myminio
+   bm admin cluster iam export mybuckit
 
 The ZIP file is named ``<alias>-iam-info.zip`` where ``<alias>`` is the alias of the cluster.
-For the above example, the file is named ``myminio-iam-info.zip``.
+For the above example, the file is named ``mybuckit-iam-info.zip``.
 
 The file is placed in the current active directory path.
 
 Download all IAM metadata for a cluster and specify the name and path of the ZIP file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command downloads all IAM metadata for the cluster at alias ``myminio``, then stores the metadata to a ZIP file at ``/tmp/myminio-iam.zip``.
+The following command downloads all IAM metadata for the cluster at alias ``mybuckit``, then stores the metadata to a ZIP file at ``/tmp/mybuckit-iam.zip``.
 
 .. code-block:: shell
 
-   bm admin cluster iam export myminio --output /tmp/myminio-iam.zip
+   bm admin cluster iam export mybuckit --output /tmp/mybuckit-iam.zip

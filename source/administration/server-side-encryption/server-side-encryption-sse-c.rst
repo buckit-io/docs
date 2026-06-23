@@ -58,10 +58,6 @@ Considerations
 SSE-C with Replication
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. versionchanged:: Server RELEASE.2024-03-30T09-41-56Z
-
-   Objects encrypted with SSE-C can replicate through both site replication or bucket replication.
-   Previous versions of Buckit Object Store did not replicate SSE-C encrypted objects.
 
 SSE-C encrypted objects that are compressed are not compatible with Buckit :ref:`bucket replication <minio-bucket-replication>` or :ref:`site replication <minio-site-replication-overview>`. 
 Use :ref:`SSE-KMS <minio-encryption-sse-kms>` or :ref:`SSE-S3 <minio-encryption-sse-s3>` to ensure encrypted objects are compatible with replication.
@@ -78,9 +74,9 @@ Quickstart
 
 Buckit SSE-C requires the client to perform all key creation and storage operations.
 
-This procedure uses :mc:`mc` for performing operations on the source Buckit deployment. 
-Install :mc:`mc` on a machine with network access to the source deployment. 
-See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the source Buckit deployment. 
+Install :mc:`bm` on a machine with network access to the source deployment. 
+See the ``bm`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``bm``.
 
 The SSE-C key *must* be a 256-bit raw encoded string or a hex encoded string. 
 The client application is responsible for generation and storage of the encryption key.
@@ -118,21 +114,21 @@ Buckit supports the following AWS S3 headers for specifying SSE-C encryption:
 
 - ``X-Amz-Server-Side-Encryption-Customer-Key-MD5`` to the 128-bit MD5 digest of the encryption key.
 
-The Buckit :mc:`mc` commandline tool S3-compatible SDKs include specific syntax
-for setting headers. Certain :mc:`mc` commands like :mc:`mc cp` include specific
+The Buckit :mc:`bm` commandline tool S3-compatible SDKs include specific syntax
+for setting headers. Certain :mc:`bm` commands like :mc:`bm cp` include specific
 arguments for enabling SSE-S3 encryption:
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/mydata.json ALIAS/BUCKET/mydata.json \
+   bm cp ~/data/mydata.json ALIAS/BUCKET/mydata.json \
       --encrypt-key "ALIAS/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
 
-- Replace :mc-cmd:`ALIAS <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the Buckit deployment on which you want to write
+- Replace :mc-cmd:`ALIAS <bm encrypt set ALIAS>` with the 
+  :mc:`alias <bm alias>` of the Buckit deployment on which you want to write
   the SSE-C encrypted object.
 
-- Replace :mc-cmd:`BUCKET <mc encrypt set ALIAS>`  with the full path to the
+- Replace :mc-cmd:`BUCKET <bm encrypt set ALIAS>`  with the full path to the
   bucket or bucket prefix to which you want to write the SSE-C encrypted object.
 
 3) Copy an SSE-C Encrypted Object
@@ -150,24 +146,24 @@ object to another S3-compatible service:
 - ``X-Amz-Copy-Source-Server-Side-Encryption-Key-MD5`` set to the 128-bit MD5
   digest of the encryption key.
 
-The Buckit :mc:`mc` commandline tool S3-compatible SDKs include specific syntax
-for setting headers. Certain :mc:`mc` commands like :mc:`mc cp` include specific
+The Buckit :mc:`bm` commandline tool S3-compatible SDKs include specific syntax
+for setting headers. Certain :mc:`bm` commands like :mc:`bm cp` include specific
 arguments for enabling SSE-S3 encryption:
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp SOURCE/BUCKET/mydata.json TARGET/BUCKET/mydata.json  \
+   bm cp SOURCE/BUCKET/mydata.json TARGET/BUCKET/mydata.json  \
    --encrypt-key "SOURCE/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo=,TARGET/BUCKET/=c2VjcmV0ZW5jcnlwdGlvbmtleWNoYW5nZW1lMTIzNAo="
 
-- Replace :mc-cmd:`SOURCE/BUCKET <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the Buckit deployment from which you are reading the
+- Replace :mc-cmd:`SOURCE/BUCKET <bm encrypt set ALIAS>` with the 
+  :mc:`alias <bm alias>` of the Buckit deployment from which you are reading the
   encrypted object and the full path to the
   bucket or bucket prefix from which you want to read the SSE-C encrypted
   object.
 
-- Replace :mc-cmd:`TARGET/BUCKET <mc encrypt set ALIAS>` with the 
-  :mc:`alias <mc alias>` of the Buckit deployment from which you are writing the
+- Replace :mc-cmd:`TARGET/BUCKET <bm encrypt set ALIAS>` with the 
+  :mc:`alias <bm alias>` of the Buckit deployment from which you are writing the
   encrypted object and the full path to the
   bucket or bucket prefix to which you want to write the SSE-C encrypted
   object.

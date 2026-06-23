@@ -14,4 +14,3 @@ Cluster Management
    /operations/data-recovery
    /operations/deployments/baremetal-expand-minio-deployment
    /operations/deployments/baremetal-decommission-server-pool
-   /operations/troubleshooting

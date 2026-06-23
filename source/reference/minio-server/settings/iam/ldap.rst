@@ -16,13 +16,6 @@ See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using thes
 
 .. important:: 
 
-   New in version ``RELEASE.2023-05-26T23-31-54Z``: 
-
-   :mc:`mc idp ldap` commands are preferred over using configuration settings to configure Buckit to use Active Directory or LDAP for identity management.
-
-   Buckit recommends using the :mc:`mc idp ldap` commands for LDAP management operations. 
-   These commands offer better validation and additional features, while providing the same settings as the ``identity_ldap`` configuration key. 
-   See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using :mc:`mc idp ldap`.
 
 The ``identity_ldap`` configuration settings remains available for existing scripts and other tools.
 
@@ -59,7 +52,7 @@ Examples
 
       .. mc-conf:: identity_ldap
          
-      The following settings are required when defining LDAP using :mc:`mc admin config set`:
+      The following settings are required when defining LDAP using :mc:`bm admin config set`:
 
       - ``enabled``
       - ``server_addr``
@@ -71,7 +64,7 @@ Examples
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set identity_ldap                        \
+         bm admin config set identity_ldap                        \
             enabled="true"                                        \
             server_addr="ad-ldap.example.net/"                    \
             lookup_bind_dn="cn=miniolookupuser,dc=example,dc=net" \
@@ -363,8 +356,6 @@ SRV Record Name
 ~~~~~~~~~~~~~~~
 
 *Optional*
-
-.. versionadded:: RELEASE.2022-12-12T19-27-27Z
 
 .. tab-set::
 

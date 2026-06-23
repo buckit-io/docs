@@ -31,16 +31,16 @@ The :mc:`bm alias set` command adds or updates an alias to the local
    .. tab-item:: EXAMPLE
 
       The following command adds an :ref:`alias <alias>` for a Buckit
-      deployment ``myminio`` running at the URL
-      ``https://myminio.example.net``. :program:`bm` uses the specified 
+      deployment ``mybuckit`` running at the URL
+      ``https://mybuckit.example.net``. :program:`bm` uses the specified 
       username and password for authenticating to the Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
          
-         bm alias set myminio https://myminio.example.net minioadminuser minioadminpassword
+         bm alias set mybuckit https://mybuckit.example.net buckitadminuser buckitadminpassword
 
-      If the ``myminio`` alias already exists, the command overwrites that
+      If the ``mybuckit`` alias already exists, the command overwrites that
       alias with the new URL, access key, and secret key.
 
    .. tab-item:: SYNTAX
@@ -80,7 +80,7 @@ Parameters
 
    Examples of some valid alias values include:
 
-   - ``myminio``
+   - ``mybuckit``
    - ``Test-1``
    - ``A``
    - ``a``
@@ -89,7 +89,7 @@ Parameters
 
    *Required* The URL to the S3-compatible service endpoint. For example:
 
-   ``https://minio.example.net``
+   ``https://buckit.example.net``
 
 .. mc-cmd:: ACCESSKEY
    
@@ -157,17 +157,17 @@ Use :mc:`bm alias set` to add an S3-compatible service for use with
 
    .. tab-item:: Example
 
-      The following command creates a new alias ``myminio`` pointing at a
-      Buckit deployment at ``https://minio.example.net``. The
-      alias uses the ``miniouser`` and ``miniopassword`` credentials for
+      The following command creates a new alias ``mybuckit`` pointing at a
+      Buckit deployment at ``https://buckit.example.net``. The
+      alias uses the ``buckituser`` and ``buckitpassword`` credentials for
       performing operations against the deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         bm alias set myminio https://minio.example.net miniouser miniopassword
+         bm alias set mybuckit https://buckit.example.net buckituser buckitpassword
 
-      If the ``myminio`` alias already exists, the 
+      If the ``mybuckit`` alias already exists, the 
       :mc:`bm alias set` command overwrites that alias with the specified
       arguments.
 

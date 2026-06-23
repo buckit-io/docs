@@ -1,13 +1,13 @@
 .. start-create-transition-rule-desc
 
-Use the :mc:`mc ilm rule add` command to create a new transition rule
+Use the :mc:`bm ilm rule add` command to create a new transition rule
 for the bucket. The following example configures transition after the
 specified number of calendar days:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add ALIAS/BUCKET \
+   bm ilm rule add ALIAS/BUCKET \
    --transition-tier TIERNAME \
    --transition-days DAYS \
    --noncurrent-transition-days NONCURRENT_DAYS
@@ -23,28 +23,28 @@ The example above specifies the following arguments:
    * - Argument
      - Description
 
-   * - :mc-cmd:`ALIAS <mc ilm rule add ALIAS>`
-     - Specify the :mc:`alias <mc alias>` of the Buckit deployment for which
+   * - :mc-cmd:`ALIAS <bm ilm rule add ALIAS>`
+     - Specify the :mc:`alias <bm alias>` of the Buckit deployment for which
        you are creating the lifecycle management rule.
 
-   * - :mc-cmd:`BUCKET <mc ilm rule add ALIAS>`
+   * - :mc-cmd:`BUCKET <bm ilm rule add ALIAS>`
      - Specify the full path to the bucket for which you are
        creating the lifecycle management rule.
 
-   * - :mc-cmd:`TIERNAME <mc ilm rule add --transition-tier>`
+   * - :mc-cmd:`TIERNAME <bm ilm rule add --transition-tier>`
      - The remote storage tier to which Buckit transitions objects. 
        Specify the remote storage tier name created in the previous step.
 
        If you want to transition noncurrent object versions to a distinct
        remote tier, specify a different tier name for 
-       :mc-cmd:`~mc ilm rule add --noncurrent-transition-tier`.
+       :mc-cmd:`~bm ilm rule add --noncurrent-transition-tier`.
 
-   * - :mc-cmd:`DAYS <mc ilm rule add --transition-days>`
+   * - :mc-cmd:`DAYS <bm ilm rule add --transition-days>`
      - The number of calendar days after which Buckit marks an object as 
        eligible for transition. Specify the number of days as an integer,
        e.g. ``30`` for 30 days.
 
-   * - :mc-cmd:`NONCURRENT_DAYS <mc ilm rule add --noncurrent-transition-days>`
+   * - :mc-cmd:`NONCURRENT_DAYS <bm ilm rule add --noncurrent-transition-days>`
      - The number of calendar days after which Buckit marks a noncurrent
        object version as eligible for transition. Buckit specifically measures
        the time since an object *became* non-current instead of the object
@@ -64,7 +64,7 @@ This step creates users and policies on the Buckit deployment for supporting
 lifecycle management operations. You can skip this step if the deployment
 already has users with the necessary |permissions|.
 
-The following example uses ``Alpha`` as a placeholder :mc:`alias <mc alias>` for
+The following example uses ``Alpha`` as a placeholder :mc:`alias <bm alias>` for
 the Buckit deployment. Replace this value with the appropriate alias for the
 Buckit deployment on which you are configuring lifecycle management rules.
 Replace the password ``LongRandomSecretKey`` with a long, random, and secure
@@ -73,10 +73,35 @@ secret key as per your organizations best practices for password generation.
 .. code-block:: shell
    :class: copyable
 
-   wget -O - https://docs.min.io/community/minio-object-store/examples/LifecycleManagementAdmin.json | \
-   mc admin policy create Alpha LifecycleAdminPolicy /dev/stdin
-   mc admin user add Alpha alphaLifecycleAdmin LongRandomSecretKey
-   mc admin policy attach Alpha LifecycleAdminPolicy --user=alphaLifecycleAdmin
+   cat > /tmp/LifecycleManagementAdmin.json <<'EOF'
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Action": [
+                   "admin:SetTier",
+                   "admin:ListTier"
+               ],
+               "Effect": "Allow",
+               "Sid": "EnableRemoteTierManagement"
+           },
+           {
+               "Action": [
+                   "s3:PutLifecycleConfiguration",
+                   "s3:GetLifecycleConfiguration"
+               ],
+               "Effect": "Allow",
+               "Resource": [
+                   "arn:aws:s3:::*"
+               ],
+               "Sid": "EnableLifecycleRuleManagement"
+           }
+       ]
+   }
+   EOF
+   bm admin policy create Alpha LifecycleAdminPolicy /tmp/LifecycleManagementAdmin.json
+   bm admin user add Alpha alphaLifecycleAdmin LongRandomSecretKey
+   bm admin policy attach Alpha LifecycleAdminPolicy --user=alphaLifecycleAdmin
 
 This example assumes that the specified
 aliases have the necessary permissions for creating policies and users

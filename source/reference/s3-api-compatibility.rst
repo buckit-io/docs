@@ -1,22 +1,217 @@
-====================
-S3 API Compatibility
-====================
+=========================
+Access Buckit with AWS SDK
+=========================
 
 .. default-domain:: minio
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   self
+   /integrations/aws-cli-with-minio.md
+   /integrations/setup-nginx-proxy-with-minio
+   /integrations/presigned-put-upload-via-browser.md
+   /developers/file-transfer-protocol
+   /developers/security-token-service
+   /developers/transforms-with-object-lambda
 
 .. contents:: Table of Contents
    :local:
    :depth: 2
 
-This page documents S3 APIs supported by Buckit Object Storage.
-For reference documentation on any given API, see the corresponding documentation for Amazon S3.
+This page shows how to access Buckit using the AWS SDK and documents the
+S3 APIs supported by Buckit Object Storage.
+For reference documentation on any given API, see the corresponding
+documentation for Amazon S3.
 
-.. important::
+Use AWS SDK
+-----------
 
-   Buckit strongly recommends using an :ref:`S3-Compatible SDK <minio-drivers>` for performing object storage operations.
+The following examples connect to a Buckit deployment using an S3-compatible
+endpoint and perform basic ``PUT`` and ``GET`` object operations.
+
+Replace the following placeholders before running the examples:
+
+- ``https://buckit.example.net``
+- ``ACCESS_KEY``
+- ``SECRET_KEY``
+- ``my-bucket``
+- ``hello.txt``
+
+For local or non-TLS test environments, you can use an ``http://`` endpoint.
+For TLS-enabled deployments, use ``https://``.
+
+AWS SDK for Java
+~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+   import java.net.URI;
+   import java.nio.file.Path;
+   import java.nio.charset.StandardCharsets;
+
+   import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+   import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+   import software.amazon.awssdk.core.ResponseBytes;
+   import software.amazon.awssdk.core.sync.RequestBody;
+   import software.amazon.awssdk.regions.Region;
+   import software.amazon.awssdk.services.s3.S3Client;
+   import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+   import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+   import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+   import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
+   public class BuckitAwsJavaExample {
+       public static void main(String[] args) {
+           S3Client s3 = S3Client.builder()
+               // Point the AWS SDK to the Buckit S3 endpoint.
+               .endpointOverride(URI.create("https://buckit.example.net"))
+               // Required by the AWS SDK for SigV4 request signing.
+               // If Buckit has a server region configured, this value must match it.
+               // If no server region is configured, us-east-1 is a common default.
+               .region(Region.US_EAST_1)
+               // Use path-style requests for broad S3-compatible compatibility.
+               .forcePathStyle(true)
+               .credentialsProvider(
+                   StaticCredentialsProvider.create(
+                       AwsBasicCredentials.create("ACCESS_KEY", "SECRET_KEY")
+                   )
+               )
+               .build();
+
+           PutObjectRequest putRequest = PutObjectRequest.builder()
+               .bucket("my-bucket")
+               .key("hello.txt")
+               .build();
+
+           // Upload a local file to Buckit.
+           s3.putObject(
+               putRequest,
+               RequestBody.fromFile(Path.of("/path/to/hello.txt"))
+           );
+
+           GetObjectRequest getRequest = GetObjectRequest.builder()
+               .bucket("my-bucket")
+               .key("hello.txt")
+               .build();
+
+           // Read the same object back from Buckit.
+           ResponseBytes<GetObjectResponse> object = s3.getObjectAsBytes(getRequest);
+
+           System.out.println(object.asString(StandardCharsets.UTF_8));
+
+           DeleteObjectRequest deleteRequest = DeleteObjectRequest.builder()
+               .bucket("my-bucket")
+               .key("hello.txt")
+               .build();
+
+           // Delete the object from Buckit.
+           s3.deleteObject(deleteRequest);
+           s3.close();
+       }
+   }
+
+AWS SDK for JavaScript
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: javascript
+
+   import { readFile } from "node:fs/promises";
+   import {
+     S3Client,
+     PutObjectCommand,
+     GetObjectCommand,
+     DeleteObjectCommand,
+   } from "@aws-sdk/client-s3";
+
+   const client = new S3Client({
+     // Required by the AWS SDK for SigV4 request signing.
+     // If Buckit has a server region configured, this value must match it.
+     // If no server region is configured, us-east-1 is a common default.
+     region: "us-east-1",
+     // Point the AWS SDK to the Buckit S3 endpoint.
+     endpoint: "https://buckit.example.net",
+     // Use path-style requests for broad S3-compatible compatibility.
+     forcePathStyle: true,
+     credentials: {
+       accessKeyId: "ACCESS_KEY",
+       secretAccessKey: "SECRET_KEY",
+     },
+   });
+
+   const fileBody = await readFile("/path/to/hello.txt");
+
+   // Upload a local file to Buckit.
+   await client.send(
+     new PutObjectCommand({
+       Bucket: "my-bucket",
+       Key: "hello.txt",
+       Body: fileBody,
+     })
+   );
+
+   // Read the same object back from Buckit.
+   const response = await client.send(
+     new GetObjectCommand({
+       Bucket: "my-bucket",
+       Key: "hello.txt",
+     })
+   );
+
+   const body = await response.Body.transformToString();
+   console.log(body);
+
+   // Delete the object from Buckit.
+   await client.send(
+     new DeleteObjectCommand({
+       Bucket: "my-bucket",
+       Key: "hello.txt",
+     })
+   );
+
+AWS SDK for Python
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   from pathlib import Path
+
+   import boto3
+
+   client = boto3.client(
+       "s3",
+       endpoint_url="https://buckit.example.net",
+       aws_access_key_id="ACCESS_KEY",
+       aws_secret_access_key="SECRET_KEY",
+       # Required by the AWS SDK for SigV4 request signing.
+       # If Buckit has a server region configured, this value must match it.
+       # If no server region is configured, us-east-1 is a common default.
+       region_name="us-east-1",
+       # Use path-style requests for broad S3-compatible compatibility.
+       config=boto3.session.Config(s3={"addressing_style": "path"}),
+   )
+
+   # Upload a local file to Buckit.
+   client.put_object(
+       Bucket="my-bucket",
+       Key="hello.txt",
+       Body=Path("/path/to/hello.txt").read_bytes(),
+   )
+
+   # Read the same object back from Buckit.
+   response = client.get_object(Bucket="my-bucket", Key="hello.txt")
+   body = response["Body"].read().decode("utf-8")
+   print(body)
+
+   # Delete the object from Buckit.
+   client.delete_object(Bucket="my-bucket", Key="hello.txt")
+
+Supported S3 APIs
+-----------------
 
 Object APIs
------------
+~~~~~~~~~~~
 
 - :s3-api:`CopyObject <API_CopyObject.html>`
 - :s3-api:`DeleteObject <API_DeleteObject.html>`
@@ -70,7 +265,7 @@ Differences from S3 APIs for Multipart Uploads
 - The ``AbortIncompleteMultipartUpload`` lifecycle action is not supported with ``PutBucketLifecycle``.
 
 Bucket APIs
------------
+~~~~~~~~~~~
 
 
 - :s3-api:`CreateBucket <API_CreateBucket.html>`

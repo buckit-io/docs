@@ -26,12 +26,12 @@ Exactly one :mc-cmd:`~bm admin policy detach --user` or one :mc-cmd:`~bm admin p
 
    .. tab-item:: EXAMPLE
 
-      The following command detaches the policy ``readonly`` from the user ``james`` on the deployment at alias ``myminio``.
+      The following command detaches the policy ``readonly`` from the user ``james`` on the deployment at alias ``mybuckit``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin policy detach myminio readonly --user james   
+         bm admin policy detach mybuckit readonly --user james   
 
    .. tab-item:: SYNTAX
 
@@ -112,16 +112,16 @@ Global Flags
 Examples
 --------
 
-Detach the policy ``readonly`` from the user ``james`` on the deployment at alias ``myminio``.
+Detach the policy ``readonly`` from the user ``james`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy detach myminio readonly --user james
+   bm admin policy detach mybuckit readonly --user james
 
-Detach the ``audit-policy`` and ``acct-policy`` policies from group ``legal`` on the deployment at alias ``myminio``.
+Detach the ``audit-policy`` and ``acct-policy`` policies from group ``legal`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy detach myminio audit-policy acct-policy --group legal
+   bm admin policy detach mybuckit audit-policy acct-policy --group legal

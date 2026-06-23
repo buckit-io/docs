@@ -34,12 +34,12 @@ The :mc:`bm idp ldap accesskey ls` displays a list of LDAP access key pairs.
 
    .. tab-item:: EXAMPLE
 
-         The following example returns a list of access keys associated with the authenticated user on the ``minio`` :ref:`alias <alias>`:
+         The following example returns a list of access keys associated with the authenticated user on the ``buckit`` :ref:`alias <alias>`:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey ls minio/
+         bm idp ldap accesskey ls buckit/
 
       If the authenticated user has the ``admin:ListUsers`` permission, the example command returns a list of all users and their associated access keys.
 
@@ -81,21 +81,15 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey ls minio
+         bm idp ldap accesskey ls buckit
 
 .. mc-cmd:: --all
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-07-31T15-58-33Z
-
-   List all access keys for all LDAP users.
 
 .. mc-cmd:: --self
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-07-31T15-58-33Z
-      
-   List access keys for the currently authenticated user.
 
 .. mc-cmd:: --svcacc-only
    :optional:
@@ -123,12 +117,12 @@ List All Access Keys
 ++++++++++++++++++++
 
 To return a list of all access keys, you must first authenticate as the ``admin`` user.
-Once authenticated, the following command returns all AD/LDAP access keys on the ``minio`` deployment.
+Once authenticated, the following command returns all AD/LDAP access keys on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey ls minio
+   bm idp ldap accesskey ls buckit
 
 .. note::
 
@@ -138,12 +132,12 @@ List User Distinguished Names
 +++++++++++++++++++++++++++++
 
 To return a list of DNs for a deployment, you must first authenticate as a user with the ``admin:ListUsers`` permission.
-Once authenticated, the following command outputs the AD/LDAP distinguished names on the ``minio`` deployment.
+Once authenticated, the following command outputs the AD/LDAP distinguished names on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey ls minio --users-only
+   bm idp ldap accesskey ls buckit --users-only
 
 List Temporary Access Keys
 ++++++++++++++++++++++++++
@@ -154,37 +148,37 @@ Once authenticated, the following command outputs a list of distinguished names 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey ls minio --temp-only
+   bm idp ldap accesskey ls buckit --temp-only
 
 List a User's Access Keys
 +++++++++++++++++++++++++
 
-The following command returns the AD/LDAP access keys for the user ``bobfisher`` on the ``minio`` deployment.
+The following command returns the AD/LDAP access keys for the user ``bobfisher`` on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey list minio/ uid=bobfisher,dc=min,dc=io
+   bm idp ldap accesskey list buckit/ uid=bobfisher,dc=min,dc=io
 
 List Access Keys for Multiple Users
 +++++++++++++++++++++++++++++++++++
 
-The following command returns the AD/LDAP access keys for the users ``bobfisher`` and ``cody3`` on the ``minio`` deployment.
+The following command returns the AD/LDAP access keys for the users ``bobfisher`` and ``cody3`` on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey list minio/ uid=bobfisher,dc=min,dc=io uid=cody3,dc=min,dc=io
+   bm idp ldap accesskey list buckit/ uid=bobfisher,dc=min,dc=io uid=cody3,dc=min,dc=io
 
 List Access Keys for Authenticated User
 +++++++++++++++++++++++++++++++++++++++
 
-The following command returns the AD/LDAP access keys for the currently authenticated user on the ``minio`` deployment.
+The following command returns the AD/LDAP access keys for the currently authenticated user on the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey list minio/ 
+   bm idp ldap accesskey list buckit/ 
 
 .. note:: 
 

@@ -38,7 +38,7 @@ This ensures upgrades are non-disruptive to ongoing operations.
 Update systemctl-Managed Buckit Deployments
 -----------------------------------------------
 
-Choose one of the following options to upgrade a Buckit deployment where the Buckit server process is managed by ``systemctl``, such as those created using the Buckit :ref:`DEB/RPM packages <deploy-minio-distributed-baremetal>`.
+Choose one of the following options to upgrade a Buckit deployment where the :mc:`buckit server <buckit server>` process is managed by ``systemctl``, such as those created using the Buckit :ref:`DEB/RPM packages <deploy-minio-distributed-baremetal>`.
 
 Option 1 (Recommended): Using Buckit Manager Web UI (bm web)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +64,7 @@ Use the CLI procedure below if you prefer to perform the upgrade directly from t
 
 2. Restart the Deployment
 
-   Run the :mc-cmd:`bm admin service restart` command to restart all Buckit server processes in the deployment simultaneously.
+   Run the :mc-cmd:`bm admin service restart` command to restart all :mc:`buckit server <buckit server>` processes in the deployment simultaneously.
 
    .. code-block:: shell
       :class: copyable
@@ -94,7 +94,7 @@ Use the CLI procedure below if you prefer to perform the upgrade directly from t
 Update Non-System Managed Buckit Deployments
 --------------------------------------------
 
-Choose one of the following options to upgrade a Buckit deployment where the Buckit server process is managed outside of the system (``systemd``, ``systemctl``), such as by a user, an automated script, or some other process management tool.
+Choose one of the following options to upgrade a Buckit deployment where the :mc:`buckit server <buckit server>` process is managed outside of the system (systemd, ``systemctl``), such as by a user, an automated script, or some other process management tool.
 This procedure only works for systems where the user running the Buckit process has write permissions for the path to the Buckit binary.
 For deployments managed using ``systemctl``, see :ref:`minio-upgrade-systemctl`.
 
@@ -127,7 +127,7 @@ Airgapped or internet-isolated deployments may utilize this feature for updating
 .. code-block:: shell
    :class: copyable
 
-   bm admin update ALIAS https://minio-mirror.example.com/minio.sha256sum
+   bm admin update ALIAS https://buckit-mirror.example.com/minio.sha256sum
 
 You should upgrade your :mc:`bm` binary to match or closely follow the Buckit server release.
 You can use the :mc:`bm update` command to update the binary to the latest stable release:

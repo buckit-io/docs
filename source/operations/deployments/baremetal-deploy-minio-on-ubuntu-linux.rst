@@ -76,7 +76,7 @@ for your Linux host.
    curl -fsSL https://buckit-io.github.io/buckit/install-linux.sh | sh
    sudo apt install ./buckit.deb
 
-2. Review the ``systemd`` Service File
+2. Review the systemd Service File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The DEB installs the Buckit binary at ``/usr/local/bin/buckit`` and the
@@ -220,14 +220,14 @@ Modify the example to reflect your deployment topology.
          #
          # Defer to your organizations requirements for superadmin user name.
 
-         MINIO_ROOT_USER=minioadmin
+         MINIO_ROOT_USER=buckitadmin
 
          # Set the root password
          #
          # Use a long, random, unique string that meets your organizations
          # requirements for passwords.
 
-         MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+         MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
    .. tab-item:: Single-Node Multi-Drive
 
@@ -263,14 +263,14 @@ Modify the example to reflect your deployment topology.
          #
          # Defer to your organizations requirements for superadmin user name.
 
-         MINIO_ROOT_USER=minioadmin
+         MINIO_ROOT_USER=buckitadmin
 
          # Set the root password
          #
          # Use a long, random, unique string that meets your organizations
          # requirements for passwords.
 
-         MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+         MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
    .. tab-item:: Single-Node Single-Drive
 
@@ -304,14 +304,14 @@ Modify the example to reflect your deployment topology.
          #
          # Defer to your organizations requirements for superadmin user name.
 
-         MINIO_ROOT_USER=minioadmin
+         MINIO_ROOT_USER=buckitadmin
 
          # Set the root password
          #
          # Use a long, random, unique string that meets your organizations
          # requirements for passwords.
 
-         MINIO_ROOT_PASSWORD=minio-secret-key-CHANGE-ME
+         MINIO_ROOT_PASSWORD=buckit-secret-key-CHANGE-ME
 
 Specify any other :ref:`environment variables <minio-server-environment-variables>` or server command-line options as required by your deployment. 
 

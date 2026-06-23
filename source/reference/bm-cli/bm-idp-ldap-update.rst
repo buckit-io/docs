@@ -26,13 +26,13 @@ The :mc:`bm idp ldap update` command modifies an existing set of configurations 
 
    .. tab-item:: EXAMPLE
 
-      The following example changes two of the AD/LDAP configuration settings for the ``myminio`` deployment.
+      The following example changes two of the AD/LDAP configuration settings for the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap update                                \
-                     myminio                               \
+                     mybuckit                               \
                      lookup_bind_dn=cn=admin,dc=min,dc=io  \
                      lookup_bind_password=somesecret
 
@@ -67,7 +67,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap update myminio                               \
+      bm idp ldap update mybuckit                               \
                          lookup_bind_dn=cn=admin,dc=min,dc=io  \
 
 .. include:: /includes/common-minio-ad-ldap-params.rst

@@ -33,7 +33,7 @@ You can also use :mc:`~bm du` against the local filesystem to produce similar re
 
    .. tab-item:: EXAMPLE
 
-      The following command prints the disk usage of the ``mybucket`` bucket on the ``myminio`` Buckit deployment:
+      The following command prints the disk usage of the ``mybucket`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
@@ -75,13 +75,13 @@ Parameters
 
    .. code-block:: shell
 
-      bm du myminio/mybucket
+      bm du mybuckit/mybucket
 
    You can specify multiple buckets and folders on the same or different Buckit deployment. For example:
 
    .. code-block:: shell
 
-      bm du myminio/mybucket myminio/myotherbucket/myfolder
+      bm du mybuckit/mybucket mybuckit/myotherbucket/myfolder
 
    For a folder on a local filesystem, specify the full path to that folder. For example:
 

@@ -21,15 +21,15 @@ certain time period or calendar date.
 Requirements
 ------------
 
-Install and Configure ``mc``
+Install and Configure ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install :mc:`mc` on a machine with network access to both source and destination
-clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install :mc:`bm` on a machine with network access to both source and destination
+clusters. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+instructions on downloading and installing ``bm``.
 
-Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster.
+Use the :mc:`bm alias set` command to create an alias for the source Buckit cluster.
 Alias creation requires specifying an access key for a user on the source and
 destination clusters. The specified users must have :ref:`permissions
 <minio-lifecycle-management-transition-to-azure-permissions>` for configuring
@@ -82,7 +82,7 @@ Create the remote :azure-docs:`Azure storage account <storage/common/storage-acc
 When :azure-docs:`creating the Azure storage account <storage/common/storage-account-create>`, ensure the storage account corresponds to either Standard or Premium blob storage with the locally redundant storage (LRS) redundancy option.
 The Azure Go SDK API used by Buckit does not support any other redundancy options.
 
-If you set a Storage Account :azure-docs:`default access tier <storage/blobs/access-tiers-online-manage>`, Buckit uses that default *if* you do not specify a :mc-cmd:`storage class <mc ilm tier add --storage-class>` when defining the remote tier.
+If you set a Storage Account :azure-docs:`default access tier <storage/blobs/access-tiers-online-manage>`, Buckit uses that default *if* you do not specify a :mc-cmd:`storage class <bm ilm tier add --storage-class>` when defining the remote tier.
 Ensure you document the settings of both your Azure storage account and Buckit tiering configuration to avoid any potential confusion, misconfiguration, or other unexpected outcomes.
 
 For more information on Azure storage accounts, see :azure-docs:`Storage accounts <storage/common/storage-account-overview#types-of-storage-accounts>`.
@@ -129,12 +129,12 @@ Procedure
 2) Configure the Remote Storage Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm tier add` command to add a new remote storage tier:
+Use the :mc:`bm ilm tier add` command to add a new remote storage tier:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm tier add azure TARGET TIER_NAME \
+   bm ilm tier add azure TARGET TIER_NAME \
       --account-name ACCOUNT \
       --account-key KEY \
       --bucket CONTAINER \
@@ -153,21 +153,21 @@ The example above uses the following arguments:
    * - Argument
      - Description
    
-   * - :mc-cmd:`TARGET <mc ilm tier add TARGET>`
-     - The :mc:`alias <mc alias>` of the Buckit deployment on which to configure
+   * - :mc-cmd:`TARGET <bm ilm tier add TARGET>`
+     - The :mc:`alias <bm alias>` of the Buckit deployment on which to configure
        the remote tier.
    
-   * - :mc-cmd:`TIER_NAME <mc ilm tier add TIER_NAME>`
+   * - :mc-cmd:`TIER_NAME <bm ilm tier add TIER_NAME>`
      - The name to associate with the new :abbr:`Azure (Microsoft Azure)` blob
        remote storage tier. Specify the name in all-caps, e.g. ``AZURE_TIER``.
        This value is required in the next step.
 
-   * - :mc-cmd:`ACCOUNT <mc ilm tier add --account-name>`
+   * - :mc-cmd:`ACCOUNT <bm ilm tier add --account-name>`
      - The :azure-docs:`Storage Account <storage/common/storage-account-overview>` to use as the remote storage resource.
 
        You cannot change this account name after creating the tier.
 
-   * - :mc-cmd:`KEY <mc ilm tier add --account-key>`
+   * - :mc-cmd:`KEY <bm ilm tier add --account-key>`
      - The corresponding shared account key for the specified ``ACCOUNT``.
 
        The account key must have an assigned Azure policy with the required :ref:`permissions
@@ -175,15 +175,15 @@ The example above uses the following arguments:
 
        See :azure-docs:`Managing storage account access keys <storage/common/storage-account-keys-manage>` for more information.
 
-   * - :mc-cmd:`CONTAINER <mc ilm tier add --bucket>`
+   * - :mc-cmd:`CONTAINER <bm ilm tier add --bucket>`
      - The name of the container on the :abbr:`Azure (Microsoft Azure)` storage
        backend to which Buckit transitions objects.
 
-   * - :mc-cmd:`ENDPOINT <mc ilm tier add --endpoint>`
+   * - :mc-cmd:`ENDPOINT <bm ilm tier add --endpoint>`
      - (Optional) The full URL of the Azure blob storage backend to which Buckit transitions objects.  Defaults
        to ``https://ACCOUNT.blob.core.windows.net`` if not specified.
 
-   * - :mc-cmd:`PREFIX <mc ilm tier add --prefix>`
+   * - :mc-cmd:`PREFIX <bm ilm tier add --prefix>`
      - The optional container prefix within which Buckit transitions objects.
 
        Buckit stores all transitioned objects in the specified ``BUCKET`` under a
@@ -196,7 +196,7 @@ The example above uses the following arguments:
        source Buckit deployment to facilitate ease of operations related to
        diagnostics, maintenance, or disaster recovery.
 
-   * - :mc-cmd:`STORAGE_CLASS <mc ilm tier add --storage-class>`
+   * - :mc-cmd:`STORAGE_CLASS <bm ilm tier add --storage-class>`
      - The Azure access tier Buckit applies to objects transitioned to the Azure container.
 
        Buckit tiering behavior depends on the remote storage returning objects immediately (milliseconds to seconds) upon request.
@@ -220,15 +220,15 @@ The example above uses the following arguments:
 4) Verify the Transition Rule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc ilm rule ls` command to review the configured transition rules:
+Use the :mc:`bm ilm rule ls` command to review the configured transition rules:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule ls ALIAS/PATH --transition
+   bm ilm rule ls ALIAS/PATH --transition
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule ls ALIAS>` with the :mc:`alias <mc alias>`
+- Replace :mc-cmd:`ALIAS <bm ilm rule ls ALIAS>` with the :mc:`alias <bm alias>`
   of the Buckit deployment.
 
-- Replace :mc-cmd:`PATH <mc ilm rule ls ALIAS>` with the name of the bucket for
+- Replace :mc-cmd:`PATH <bm ilm rule ls ALIAS>` with the name of the bucket for
   which to retrieve the configured lifecycle management rules.

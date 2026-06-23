@@ -86,11 +86,11 @@ Access to Buckit Cluster
    .. tab-item:: Baremetal
       :sync: baremetal
 
-      This procedure uses :mc:`mc` for performing operations on the Buckit cluster. 
-      Install ``mc`` on a machine with network access to the cluster.
-      See the ``mc`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``mc``.
+      This procedure uses :mc:`bm` for performing operations on the Buckit cluster. 
+      Install ``bm`` on a machine with network access to the cluster.
+      See the ``bm`` :ref:`Installation Quickstart <mc-install>` for instructions on downloading and installing ``bm``.
 
-      This procedure assumes a configured :mc:`alias <mc alias>` for the Buckit cluster. 
+      This procedure assumes a configured :mc:`alias <bm alias>` for the Buckit cluster. 
 
 .. _minio-sse-vault-prereq-vault:
 

@@ -24,18 +24,18 @@ The :mc:`bm admin user rm` command removes a :ref:`Buckit user <minio-internal-i
 
 The :mc:`bm admin user remove` command has equivalent functionality to :mc:`bm admin user rm`.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command removes user ``myuser`` on the ``myminio`` Buckit deployment:
+      The following command removes user ``myuser`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user rm myminio myuser
+         bm admin user rm mybuckit myuser
 
    .. tab-item:: SYNTAX
 

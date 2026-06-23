@@ -19,12 +19,6 @@ You can use the Buckit Console to perform many of the deployment monitoring and 
 - Configure alerts by adding or managing a :ref:`notification target <minio-console-notifications>`.
 - Configure deployment :ref:`settings <minio-console-settings>`.
 
-.. important::
-
-   The Buckit Console is a web-based interface for the Buckit Server.
-
-   It is distinct and independent from the Buckit Kubernetes Operator Console which was deprecated and removed as of Operator 6.0.0.
-
 .. _minio-console-monitoring:
 
 Monitoring
@@ -72,7 +66,7 @@ Trace
 ~~~~~
 
 The :guilabel:`Trace` section provides HTTP trace functionality for a bucket or buckets on the deployment. 
-This section provides similar functionality to :mc:`mc admin trace`.
+This section provides similar functionality to :mc:`bm admin trace`.
 
 You can modify the trace to show only specific trace calls.
 The default is to show only :guilabel:`S3` related HTTP traces.
@@ -83,7 +77,7 @@ Watch
 ~~~~~
 
 The :guilabel:`Watch` section displays S3 events as they occur on the selected bucket. 
-This section provides similar functionality to :mc:`mc watch`.
+This section provides similar functionality to :mc:`bm watch`.
 
 Encryption
 ~~~~~~~~~~
@@ -95,9 +89,6 @@ The :guilabel:`Encryption` section allows you to view the status and metrics for
 Events
 ------
 
-.. versionchanged:: Console 0.23.1
-
-   Notifications section renamed to Events.
 
 The :guilabel:`Events` section provides an interface to view, add, or remove :ref:`Event Notification <minio-bucket-notifications>` targets.
 
@@ -142,14 +133,10 @@ This section contains the following subsections.
 - Audit :ref:`Webhook <minio-bucket-notifications-publish-webhook>`
 - Audit :ref:`Kafka <minio-bucket-notifications-publish-kafka>`
 
-.. versionadded:: Console v0.24.0
-
-   Environment variable configuration settings override any customizations added in the Buckit Console.
-   Hover your mouse cover over a configuration field to display a tooltip that indicates whether an environment variable controls the setting.
 
 Some subsections may not be visible if the authenticated user does not have the :ref:`required administrative permissions <minio-policy-mc-admin-actions>`.
 
-The interface functionality mimics that of using :mc-cmd:`mc admin config get` or :mc-cmd:`mc admin config set`.
+The interface functionality mimics that of using :mc-cmd:`bm admin config get` or :mc-cmd:`bm admin config set`.
 Refer to those commands for details on how to define the many options.
 
 Some configuration settings may require restarting the Buckit deployment to apply changes.

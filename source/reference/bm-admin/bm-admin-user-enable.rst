@@ -25,18 +25,18 @@ The :mc:`bm admin user enable` command enables a :ref:`Buckit user <minio-intern
 Clients can only use enabled users to authenticate to the Buckit deployment.
 Users created using :mc-cmd:`bm admin user add` are enabled by default.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command enables user ``myuser`` on the ``myminio`` Buckit deployment:
+      The following command enables user ``myuser`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user enable myminio myuser
+         bm admin user enable mybuckit myuser
 
    .. tab-item:: SYNTAX
 

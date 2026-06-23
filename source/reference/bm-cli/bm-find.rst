@@ -27,12 +27,12 @@ You can also use the command to search for files on a filesystem.
    .. tab-item:: EXAMPLE
 
       The following command searches for all objects matching the specified
-      pattern in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      pattern in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm find myminio/mydata --name "*.jpg"
+         bm find mybuckit/mydata --name "*.jpg"
 
    .. tab-item:: SYNTAX
 
@@ -111,18 +111,6 @@ Parameters
 .. mc-cmd:: --metadata
    :optional:
 
-   .. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
-
-   **For use with Buckit deployments only.**
-
-   Return objects with metadata that matches a specified ``key=value``.
-   Use the format ``--metadata="KEY=value"``.
-
-   You can pass a key with an empty value.
-   In that case, ``bm find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
-
-   You can use the flag multiple times to match objects for additional metadata keys.
-   To return, an object must have matching values for all metadata keys.
 
 .. mc-cmd:: --name
    :optional:
@@ -173,18 +161,6 @@ Parameters
 .. mc-cmd:: --tags
    :optional:
 
-   .. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
-
-   **For use with Buckit deployments only.**
-
-   Return objects with a tag that matches a specified `RE2 RegEx pattern <https://github.com/google/re2/wiki/Syntax>`__.
-   Use the format ``--tag="KEY=regexValue"``.
-
-   You can pass a key with an empty value.
-   In that case, ``bm find`` matches objects that do not have the metadata key or where the metadata key's value is empty.
-
-   You can use the flag multiple times to match objects for additional tags.
-   To return, an object must have matching values for all tags.
 
 .. mc-cmd:: --smaller
    :optional:

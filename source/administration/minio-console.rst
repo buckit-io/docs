@@ -18,13 +18,8 @@ This page provides an overview of the Buckit Console and describes configuration
 Overview
 --------
 
-.. versionchanged:: RELEASE.2025-05-24T17-08-30Z
 
-   The Console now presents only object browser capabilities similar to those available through the :mc:`mc` tool.
-   For administrative interactions, such as user management, use the :mc:`mc admin` command.
-
-The Buckit Console is embedded as part of the Buckit Server. 
-You can also deploy a standalone Buckit Console using the instructions in the :minio-git:`github repository <console>`.
+The Buckit Console is embedded as part of the Buckit Server.
 
 Supported Browsers
 ~~~~~~~~~~~~~~~~~~
@@ -95,7 +90,7 @@ the risk of a port collision on systems which were running Buckit *before* the
 embedded Console update.
 
 You can select an explicit static port by passing the 
-:mc-cmd:`minio server --console-address` commandline option when starting 
+:mc-cmd:`buckit server --console-address <buckit server --console-address>` commandline option when starting 
 each Buckit Server in the deployment. 
 
 For example, the following command starts a distributed Buckit deployment using
@@ -106,7 +101,7 @@ and browser access on the Buckit Console port ``:9001``.
 .. code-block:: shell
    :class: copyable
 
-   minio server https://minio-{1...4}.example.net/mnt/drive-{1...4} \
+   buckit server https://buckit-{1...4}.example.net/mnt/drive-{1...4} \
          --console-address ":9001"
 
 Deployments behind network routing components which require static ports for 
@@ -123,18 +118,6 @@ Logging In
 
 The Buckit Console displays a login screen for unauthenticated users.
 The Console defaults to providing a username and password prompt for a :ref:`Buckit-managed user <minio-internal-idp>`.
-
-.. admonition:: Try out the Console using Buckit's Play testing environment
-   :class: note
-
-   You can explore the Console using https://play.min.io:9443. 
-   Log in with the following credentials:
-
-   - Username: ``Q3AM3UQ867SPQQA43P2F``
-   - Password: ``zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG``
-
-   The Play Console connects to the Buckit Play deployment at https://play.min.io.
-   You can also access this deployment using :mc:`mc` and using the ``play`` alias.
 
 Documentation
 -------------

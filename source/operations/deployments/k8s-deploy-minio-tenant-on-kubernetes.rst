@@ -179,7 +179,7 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
 
    #. Expose the Tenant Buckit S3 API port
 
-      To test the Buckit Client :mc:`mc` from your local machine, forward the Buckit port and create an alias.
+      To test the Buckit Client :mc:`bm` from your local machine, forward the Buckit port and create an alias.
 
       * Forward the Tenant's Buckit port:
 
@@ -193,14 +193,14 @@ It provides a baseline from which you can modify and tailor the Tenant to your r
       .. code-block:: shell
          :class: copyable
 
-         mc alias set myminio https://localhost:9000 minio minio123 --insecure
+         bm alias set mybuckit https://localhost:9000 minio minio123 --insecure
 
-      You can use :mc:`mc mb` to create a bucket on the Tenant:
+      You can use :mc:`bm mb` to create a bucket on the Tenant:
       
       .. code-block:: shell
          :class: copyable
 
-         mc mb myminio/mybucket --insecure
+         bm mb mybuckit/mybucket --insecure
 
       If you deployed your Buckit Tenant using TLS certificates minted by a trusted Certificate Authority (CA) you can omit the ``--insecure`` flag.
       

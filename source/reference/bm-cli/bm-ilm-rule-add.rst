@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm rule add
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``bm ilm rule rm`` replaces ``bm ilm add``.
 
 
 Syntax
@@ -32,16 +29,16 @@ The command supports adding both :ref:`Transition (Tiering) <minio-lifecycle-man
 
    .. tab-item:: EXAMPLE
 
-      The following command adds new lifecycle management rules to the ``mydata`` bucket on the ``myminio`` deployment:
+      The following command adds new lifecycle management rules to the ``mydata`` bucket on the ``mybuckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule add --expire-days 90 --noncurrent-expire-days 30  myminio/mydata
+         bm ilm rule add --expire-days 90 --noncurrent-expire-days 30  mybuckit/mydata
          
-         bm ilm rule add --expire-delete-marker myminio/mydata
+         bm ilm rule add --expire-delete-marker mybuckit/mydata
 
-         bm ilm rule add --transition-days 30 --transition-tier "COLDTIER" myminio/mydata
+         bm ilm rule add --transition-days 30 --transition-tier "COLDTIER" mybuckit/mydata
          
          bm ilm rule add --noncurrent-transition-days 7 --noncurrent-transition-tier "COLDTIER" 
 
@@ -92,7 +89,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule add myminio/mydata
+      bm ilm rule add mybuckit/mydata
 
 .. mc-cmd:: --prefix
    :optional:
@@ -103,9 +100,9 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule add --prefix "meetingnotes/" myminio/mydata --expire-days "90"
+      bm ilm rule add --prefix "meetingnotes/" mybuckit/mydata --expire-days "90"
 
-   The command creates a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
+   The command creates a rule that expires objects in the ``mydata`` bucket of the ``mybuckit`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
 .. mc-cmd:: --tags
    :optional:
@@ -119,16 +116,6 @@ Parameters
 .. mc-cmd:: --expire-all-object-versions
    :optional:   
 
-   .. versionadded:: mc RELEASE.2024-02-24T01-33-20Z
-
-   Expire all current **and** noncurrent versions of an object.
-   Use with the :mc-cmd:`~bm ilm rule add --expire-days` option to specify the number of days after which all versions of an object should be deleted by the scanner process.
-
-   After the :ref:`scanner <minio-concepts-scanner>` processes this command, no versions of the object remain on the deployment.
-
-   .. versionchanged:: Buckit RELEASE.2024-05-01T01-11-10Z
-
-   This flag *only* applies to objects that do **not** have a delete marker as the latest version.
 
 .. mc-cmd:: --expire-days
    :optional:   
@@ -268,86 +255,10 @@ Parameters
 .. mc-cmd:: --size-gt
    :optional:
 
-   .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z 
-
-   Select objects larger than the specified value.
-   Enter the value as a number and a unit, such as ``5GiB`` for 5 gibibytes.
-
-   Valid units include:
-
-   .. list-table::
-      :header-rows: 1
-      :widths: 20 80
-      :width: 100%
-   
-      * - Suffix
-        - Unit Size
-   
-      * - ``k``
-        - KB (Kilobyte, 1000 Bytes)
-   
-      * - ``m``
-        - MB (Megabyte, 1000 Kilobytes)
-   
-      * - ``g``
-        - GB (Gigabyte, 1000 Megabytes)
-   
-      * - ``t``
-        - TB (Terrabyte, 1000 Gigabytes)
-   
-      * - ``ki``
-        - KiB (Kibibyte, 1024 Bites)
-   
-      * - ``mi``
-        - MiB (Mebibyte, 1024 Kibibytes)
-   
-      * - ``gi``
-        - GiB (Gibibyte, 1024 Mebibytes)
-   
-      * - ``ti``
-        - TiB (Tebibyte, 1024 Gibibytes)
 
 .. mc-cmd:: --size-lt
    :optional:
   
-   .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-   Select objects smaller than the specified value.
-   Enter the value as a number and a unit, such as ``1M`` for 1 megabyte.
-
-   Valid units include:
-
-   .. list-table::
-      :header-rows: 1
-      :widths: 20 80
-      :width: 100%
-   
-      * - Suffix
-        - Unit Size
-   
-      * - ``k``
-        - KB (Kilobyte, 1000 Bytes)
-   
-      * - ``m``
-        - MB (Megabyte, 1000 Kilobytes)
-   
-      * - ``g``
-        - GB (Gigabyte, 1000 Megabytes)
-   
-      * - ``t``
-        - TB (Terrabyte, 1000 Gigabytes)
-   
-      * - ``ki``
-        - KiB (Kibibyte, 1024 Bites)
-   
-      * - ``mi``
-        - MiB (Mebibyte, 1024 Kibibytes)
-   
-      * - ``gi``
-        - GiB (Gibibyte, 1024 Mebibytes)
-   
-      * - ``ti``
-        - TiB (Tebibyte, 1024 Gibibytes)
 
 Global Flags
 ~~~~~~~~~~~~
@@ -386,9 +297,9 @@ Use the :mc:`bm ilm rule add` with :mc-cmd:`~bm ilm rule add --prefix` and :mc-c
 
    bm ilm rule add --prefix "doc/" --transition-days "90" --transition-tier "MINIOTIER-1"  \
           --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-2"    \
-          myminio/mybucket
+          mybuckit/mybucket
 
-This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
+This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``mybuckit`` deployment.
 
 - Current objects in the prefix older than 90 days move to the ``MINIOTIER-1`` storage tier.
 - Non-current objects in the prefix older than 45 days move to the ``MINIOTIER-2`` storage tier.
@@ -402,9 +313,9 @@ Use the :mc:`bm ilm rule add` command with :mc-cmd:`~bm ilm rule add --prefix`, 
 .. code-block:: shell
    :class: copyable
 
-   bm ilm rule add --prefix "doc/" --expire-days "300" --noncurrent-expire-days "100" myminio/mybucket
+   bm ilm rule add --prefix "doc/" --expire-days "300" --noncurrent-expire-days "100" mybuckit/mybucket
 
-This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
+This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``mybuckit`` deployment.
 
 - Current objects expire after 300 days.
 - Non-current objects expire after 100 days.
@@ -419,9 +330,9 @@ Use the :mc:`bm ilm rule add` command with :mc-cmd:`~bm ilm rule add --prefix`, 
 
    bm ilm rule add --prefix "doc/" --size-gt 1MiB --transition-days "90" --transition-tier "MINIOTIER-1" \
          --noncurrent-transition-days "45" --noncurrent-transition-tier "MINIOTIER-1" \
-         myminio/mybucket/
+         mybuckit/mybucket/
 
-This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``myminio`` deployment.
+This command looks at the contents with the ``doc/`` prefix in the ``mybucket`` bucket on the ``mybuckit`` deployment.
 
 The command selects the following objects:
 

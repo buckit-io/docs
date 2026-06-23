@@ -51,11 +51,11 @@ For example, the following commands set two distinct Kafka service endpoints as 
 
       .. code-block:: shell
 
-         mc admin config set notify_kafka:primary \ 
+         bm admin config set notify_kafka:primary \ 
             brokers="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
             [ARGUMENT=VALUE ...]
 
-         mc admin config set notify_kafka:secondary \
+         bm admin config set notify_kafka:secondary \
             brokers="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
             [ARGUMENT=VALUE ...]
 
@@ -87,14 +87,14 @@ Enable
 
       The top-level configuration key for defining an Kafka service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
 
-      Use :mc-cmd:`mc admin config set` to set or update an Kafka service endpoint.
+      Use :mc-cmd:`bm admin config set` to set or update an Kafka service endpoint.
       The :mc-conf:`~notify_kafka.brokers` argument is *required* for each target.
       Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set notify_kafka \ 
+         bm admin config set notify_kafka \ 
            brokers="https://kafka1.example.net:9200, https://kafka2.example.net:9200"
            [ARGUMENT="VALUE"] ... \
 
@@ -205,9 +205,6 @@ SASL Password
 
 Specify the password for performing SASL/PLAIN or SASL/SCRAM authentication to the Kafka broker(s).
 
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
 
 SASL Mechanism
 ~~~~~~~~~~~~~~
@@ -404,9 +401,6 @@ Batch Size
 
 Specify the integer value to use as the `batch size <https://kafka.apache.org/documentation/#producerconfigs_batch.size>`__ for sending records to Kafka.
 
-.. versionchanged:: RELEASE.2023-12-02T10-51-33Z
-
-   Buckit previously limited this value to ``100``.
 
 Queue Directory
 ~~~~~~~~~~~~~~~
@@ -474,8 +468,6 @@ Specify a comment to associate with the Kafka configuration.
 Compression Codec
 ~~~~~~~~~~~~~~~~~
 
-.. versionadded:: Buckit Server RELEASE.2023-12-09T18-17-51Z
-
 *Optional*
 
 .. tab-set::
@@ -503,8 +495,6 @@ Supports the following values:
 
 Compression Level
 ~~~~~~~~~~~~~~~~~
-
-.. versionadded:: Buckit Server RELEASE.2023-12-09T18-17-51Z
 
 *Optional*
 

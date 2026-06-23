@@ -26,12 +26,12 @@ The :mc:`bm version info` command returns the versioning status for the specifie
 
    .. tab-item:: EXAMPLE
 
-      The following command returns the versioning status for the ``mybucket`` bucket on the ``myminio`` Buckit deployment:
+      The following command returns the versioning status for the ``mybucket`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm version info myminio/mybucket
+         bm version info mybuckit/mybucket
 
    .. tab-item:: SYNTAX
 
@@ -57,7 +57,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm version info myminio/mybucket
+      bm version info mybuckit/mybucket
 
 
 Global Flags

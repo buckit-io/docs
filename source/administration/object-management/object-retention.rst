@@ -11,11 +11,6 @@ Buckit Object Locking
    :local:
    :depth: 2
 
-.. container:: extlinks-video
-
-   - `Object locking and retention overview <https://youtu.be/Hk9Z-sltUu8?ref=docs>`__
-   - `Object locking and retention lab <https://youtu.be/thNus-DL1u4?ref=docs>`__
-
 Overview
 --------
 
@@ -113,7 +108,7 @@ For example, consider the following bucket with
 
 .. code-block:: shell
 
-   $ mc ls --versions play/locking-guide
+   $ bm ls --versions play/locking-guide
 
      [DATETIME]    29B 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 v3 PUT data.csv
      [DATETIME]    32B 78b3105a-02a1-4763-8054-e66add087710 v2 PUT data.csv
@@ -124,7 +119,7 @@ due to the object locking settings:
 
 .. code-block:: shell
 
-   $ mc rm --version-id 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 play/data.csv
+   $ bm rm --version-id 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 play/data.csv
 
      Removing `play/locking-guide/data.csv` (versionId=62429eb1-9cb7-4dc5-b507-9cc23d0cc691).
      mc: <ERROR> Failed to remove `play/locking-guide/data.csv`. 
@@ -136,7 +131,7 @@ a new ``DeleteMarker`` for the object:
 
 .. code-block:: shell
 
-   $ mc rm play/locking-guide/data.csv
+   $ bm rm play/locking-guide/data.csv
 
      [DATETIME]     0B acce329f-ad32-46d9-8649-5fe8bf4ec6e0 v4 DEL data.csv
      [DATETIME]    29B 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 v3 PUT data.csv
@@ -162,7 +157,7 @@ For example, consider the following bucket with
 
 .. code-block:: shell
 
-   $ mc ls --versions play/locking-guide
+   $ bm ls --versions play/locking-guide
 
      [7D]    29B 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 v3 PUT data.csv
      [30D]    32B 78b3105a-02a1-4763-8054-e66add087710 v2 PUT data.csv
@@ -173,7 +168,7 @@ a Delete Marker for the object:
 
 .. code-block:: shell
 
-   $ mc ls --versions play/locking-guide
+   $ bm ls --versions play/locking-guide
 
      [0D]     0B acce329f-ad32-46d9-8649-5fe8bf4ec6e0 v4 DEL data.csv
      [7D]    29B 62429eb1-9cb7-4dc5-b507-9cc23d0cc691 v3 PUT data.csv
@@ -192,26 +187,26 @@ Create Bucket with Object Locking Enabled
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must enable object locking during bucket creation as per S3 behavior.
-You can create a bucket with object locking enabled using the Buckit :mc:`mc` CLI or using an S3-compatible SDK.
+You can create a bucket with object locking enabled using the Buckit :mc:`bm` CLI or using an S3-compatible SDK.
 
-Use the :mc:`mc mb` command with the :mc-cmd:`~mc mb --with-lock`
+Use the :mc:`bm mb` command with the :mc-cmd:`~bm mb --with-lock`
 option to create a bucket with object locking enabled:
 
 .. code-block:: shell
    :class: copyable
 
-   mc mb --with-lock ALIAS/BUCKET
+   bm mb --with-lock ALIAS/BUCKET
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured 
   Buckit deployment.
 
 - Replace ``BUCKET`` with the 
-  :mc-cmd:`name <mc mb ALIAS>` of the bucket to create.
+  :mc-cmd:`name <bm mb ALIAS>` of the bucket to create.
 
 Configure Bucket-Default Object Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can configure object locking rules ("object retention") using the Buckit :mc:`mc` CLI, or using an S3-compatible SDK. 
+You can configure object locking rules ("object retention") using the Buckit :mc:`bm` CLI, or using an S3-compatible SDK. 
 
 Buckit supports setting both bucket-default *and* per-object retention rules. 
 The following examples set bucket-default retention. For per-object retention
@@ -219,28 +214,28 @@ settings, defer to the documentation for the ``PUT`` operation used by your
 preferred SDK.
 
 
-Use the :mc:`mc retention set` command with the
-:mc-cmd:`--recursive <mc retention set --recursive>` and
-:mc-cmd:`--default <mc retention set --default>` options to set the
+Use the :mc:`bm retention set` command with the
+:mc-cmd:`--recursive <bm retention set --recursive>` and
+:mc-cmd:`--default <bm retention set --default>` options to set the
 default retention mode for a bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc retention set --recursive --default MODE DURATION ALIAS/BUCKET
+   bm retention set --recursive --default MODE DURATION ALIAS/BUCKET
 
-- Replace :mc-cmd:`MODE <mc retention set MODE>` with either either :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>`.
+- Replace :mc-cmd:`MODE <bm retention set MODE>` with either either :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>`.
 
-- Replace :mc-cmd:`DURATION <mc retention set VALIDITY>` with the duration for which the object lock remains in effect.
+- Replace :mc-cmd:`DURATION <bm retention set VALIDITY>` with the duration for which the object lock remains in effect.
 
-- Replace :mc-cmd:`ALIAS <mc retention set ALIAS>` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace :mc-cmd:`ALIAS <bm retention set ALIAS>` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
-- Replace :mc-cmd:`BUCKET <mc retention set ALIAS>` with the name of the bucket on which to set the default retention rule.
+- Replace :mc-cmd:`BUCKET <bm retention set ALIAS>` with the name of the bucket on which to set the default retention rule.
 
 Enable Legal Hold Retention
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable or disable indefinite legal hold retention for an object using the Buckit :mc:`mc` CLI or using an S3-compatible SDK. 
+You can enable or disable indefinite legal hold retention for an object using the Buckit :mc:`bm` CLI or using an S3-compatible SDK. 
 
 You can place a legal hold on an object already held under a :ref:`COMPLIANCE <minio-object-locking-compliance>` or :ref:`GOVERNANCE <minio-object-locking-governance>` lock. 
 The object remains WORM locked under the legal hold even when the retention lock expires. 
@@ -251,11 +246,11 @@ Use the :guilabel:`mc legalhold set` command to toggle the legal hold status on 
 .. code-block:: shell
    :class: copyable
 
-   mc legalhold set ALIAS/PATH
+   bm legalhold set ALIAS/PATH
 
-- Replace :mc-cmd:`ALIAS <mc legalhold set ALIAS>` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+- Replace :mc-cmd:`ALIAS <bm legalhold set ALIAS>` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
-- Replace :mc-cmd:`PATH <mc legalhold set ALIAS>` with the path to the object for which to enable the legal hold. 
+- Replace :mc-cmd:`PATH <bm legalhold set ALIAS>` with the path to the object for which to enable the legal hold. 
 
 .. _minio-object-locking-retention-modes:
 

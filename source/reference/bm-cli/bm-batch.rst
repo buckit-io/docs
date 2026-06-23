@@ -11,9 +11,6 @@
 .. mc:: bm batch
 
 
-.. versionadded:: mc RELEASE.2023-03-20T17-17-53Z
-
-   Added the ability to cancel jobs with the :mc:`bm batch cancel` command.
 
 
 Description

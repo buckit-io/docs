@@ -71,7 +71,7 @@ Post Install Tasks
    :width: 100%
 
    * - :octicon:`circle` 
-     - (optional) Create an :mc:`mc alias` for each server with :mc:`mc alias set` from your local machine for command line access to work with the Buckit deployment from a local machine
+     - (optional) Create an :mc:`bm alias` for each server with :mc:`bm alias set` from your local machine for command line access to work with the Buckit deployment from a local machine
 
    * - :octicon:`circle`
      - Configure :ref:`Bucket replication <minio-bucket-replication-requirements>` to duplicate contents of a bucket to another bucket location

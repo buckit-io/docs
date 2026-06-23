@@ -38,12 +38,12 @@ similar results to the ``rm --rf`` commandline tool.
    .. tab-item:: EXAMPLE
 
       The following command removes the ``mydata`` bucket on the 
-      ``myminio`` Buckit deployment:
+      ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm rb --force myminio/mydata
+         bm rb --force mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -72,7 +72,7 @@ Parameters
 
    .. code-block:: none
 
-      bm rb --force myminio/mydata
+      bm rb --force mybuckit/mydata
 
    Omit the bucket path to perform a site-wide removal of buckets on the Buckit
    deployment. This operation *requires* specifying 
@@ -81,7 +81,7 @@ Parameters
 
    .. code-block:: none
 
-      bm rb --force --dangerous myminio
+      bm rb --force --dangerous mybuckit
 
    For removing a directory and its contents on a local filesystem, specify
    the full path to that directory. The 
@@ -97,7 +97,7 @@ Parameters
 
    .. code-block:: none
 
-      bm rb --force myminio/mydata ~/data/myolddata
+      bm rb --force mybuckit/mydata ~/data/myolddata
 
 .. mc-cmd:: --force
    
@@ -108,7 +108,7 @@ Parameters
    
 
    *Optional* Directs :mc:`bm rb` to perform a site-wide removal of all
-   buckets on each specified :mc-cmd:`~bm rb ALIAS` (e.g. ``myminio/``).
+   buckets on each specified :mc-cmd:`~bm rb ALIAS` (e.g. ``mybuckit/``).
 
    If any ``ALIAS`` specifies a filesystem directory, this option
    results in the removal of all subdirectories and files at that directory

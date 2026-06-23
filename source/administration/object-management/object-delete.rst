@@ -55,9 +55,9 @@ All existing versions of the object remain available to access by specifying the
 When a ``DeleteMarker`` is the head for the object, Buckit does not serve the object for ``GET`` requests that do not specify a version ID.
 Instead, Buckit returns a ``404``-like response. 
 
-You can find the UUID of object versions with :mc-cmd:`mc ls --versions`.
+You can find the UUID of object versions with :mc-cmd:`bm ls --versions`.
 
-To remove the current version of the object from the drive, find the UUID of the version, and then use :mc-cmd:`mc rm --version-id=UUID ... <mc rm --version-id>` to delete the current version.
+To remove the current version of the object from the drive, find the UUID of the version, and then use :mc-cmd:`bm rm --version-id=UUID ... <bm rm --version-id>` to delete the current version.
 In this scenario, the immediately preceding version of the object then becomes the current version of the object served for ``GET`` requests of the object with no UUID specified.
 
 .. warning::
@@ -69,7 +69,7 @@ Delete operations on a prior version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To delete prior versions of an object, specify the version's UUID.
-You can retrieve the version UUID with :mc-cmd:`mc ls --versions`. 
+You can retrieve the version UUID with :mc-cmd:`bm ls --versions`. 
 When the ``DELETE`` request specifies a ``version-id`` and the user has the correct permissions to delete the object version`, Buckit permanently removes the specified version from the drive.
 
 .. warning::
@@ -80,7 +80,7 @@ When the ``DELETE`` request specifies a ``version-id`` and the user has the corr
 Delete all versions
 ~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc rm --versions` to delete *all* versions of an object.
+Use :mc-cmd:`bm rm --versions` to delete *all* versions of an object.
 This is irreversible.
 
 Lifecycle Management Expiration
@@ -97,8 +97,6 @@ See the :ref:`scanner <minio-concepts-scanner>` page for more details on how the
 
 ``DeleteMarkers`` are their own objects.
 Lifecycle rules can remove ``DeleteMarkers`` that are the only remaining versions of their objects.
-
-.. versionchanged:: Buckit RELEASE.2024-05-01T01-11-10Z
 
 With ``JSON``, lifecycle rules can remove all versions of a deleted object after a specified number of days.
 
@@ -137,7 +135,7 @@ Buckit synchronizes deleting specific object versions *and* new  :s3-docs:`delet
 Delete operation replication uses the same :ref:`replication process <minio-replication-process>` as all other replication operations. 
 
 Buckit requires *explicitly enabling* versioned deletes and delete marker replication. 
-Use the :mc-cmd:`mc replicate add --replicate` field to specify either ``delete`` and ``delete-marker`` or both to enable versioned deletes and delete marker replication, respectively. 
+Use the :mc-cmd:`bm replicate add --replicate` field to specify either ``delete`` and ``delete-marker`` or both to enable versioned deletes and delete marker replication, respectively. 
 To enable both, specify both strings using a comma separator: ``delete,delete-marker``.
 
 For delete marker replication, Buckit begins the replication process after a delete operation creates the delete marker. 
@@ -158,7 +156,7 @@ For :ref:`active-active <minio-bucket-replication-serverside-twoway>` configurat
 
    If a delete operation removes the last object in a bucket prefix, Buckit recursively removes each empty part of the prefix up to the bucket root.
    Buckit only applies the recursive removal to prefixes created *implicitly* as part of object write operations.
-   Buckit does not recursively remove prefixes created using an explicit directory creation command, such as :mc:`mc mb`.
+   Buckit does not recursively remove prefixes created using an explicit directory creation command, such as :mc:`bm mb`.
 
    If a replication rule enables replication delete operations, the replication process *also* applies the implicit prefix trimming behavior on the destination Buckit cluster.
 
@@ -168,7 +166,7 @@ For :ref:`active-active <minio-bucket-replication-serverside-twoway>` configurat
    - ``photos/2021/february/myotherphoto.jpg``  // ``2021/february/`` created implicitly based on the object name
    - ``photos/NYE21/NewYears.jpg``  // ``NYE21/`` explicitly created in the bucket
 
-   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`mc mb`.
+   ``photos/NYE21`` is the *only* prefix explicitly created using :mc:`bm mb`.
    All other prefixes were *implicitly* created as part of writing the object located at that prefix. 
    
    - A command removes ``myphoto.jpg``. 

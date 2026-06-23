@@ -43,7 +43,7 @@ Host Requirements
 
 The migration workflow expects the following on the source cluster:
 
-- MinIO installed on Linux hosts with ``minio.service`` managed by ``systemd``.
+- MinIO installed on Linux hosts with ``minio.service`` managed by systemd.
 - SSH access as ``root`` or with passwordless ``sudo`` from the ``bm`` host to the MinIO cluster hosts.
 
 Procedure
@@ -67,7 +67,7 @@ Buckit Manager loads this version list from the available Buckit releases.
 Provide the SSH credentials Buckit Manager should use for the migration.
 
 - Use ``root`` directly, or a non-root SSH user with passwordless ``sudo``.
-- The SSH user must be able to install packages, write ``/etc`` configuration, and manage ``systemd`` services.
+- The SSH user must be able to install packages, write ``/etc`` configuration, and manage systemd services.
 - You can test SSH connectivity from the wizard before continuing.
 - You can optionally save the SSH credentials for future cluster operations.
 
@@ -104,9 +104,9 @@ Click :guilabel:`Start migration` to begin cutover.
 Buckit Manager performs the migration in the following phases:
 
 1. Pre-stage:
-   Download the Buckit package, verify its checksum, install it, and write a ``systemd`` drop-in so ``buckit.service`` uses the same user and environment file as MinIO.
+   Download the Buckit package, verify its checksum, install it, and write a systemd drop-in so ``buckit.service`` uses the same user and environment file as MinIO.
 2. Cutover:
-   Stop ``minio.service``, reload ``systemd``, disable ``minio.service``, and enable ``buckit.service``.
+   Stop ``minio.service``, reload systemd, disable ``minio.service``, and enable ``buckit.service``.
 3. Verify:
    Wait for the migrated hosts to report healthy, compare the Buckit cluster against the pre-migration snapshot, and run a smoke test.
 

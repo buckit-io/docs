@@ -34,14 +34,14 @@ documentation on :aws-docs:`Pre-Signed URLs
    .. tab-item:: EXAMPLE
 
       The following command lists all upload and download presigned URLs
-      respectively for the ``mydata`` bucket on the ``myminio`` Buckit
+      respectively for the ``mydata`` bucket on the ``mybuckit`` Buckit
       deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm share ls upload myminio/mydata
-         bm share ls download myminio/mydata
+         bm share ls upload mybuckit/mydata
+         bm share ls download mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

@@ -12,7 +12,7 @@ In this recipe, we will generate a Let's Encypt certificate using Certbot. This 
 ## 2. Dependencies
 - Port 443 for https needs to be open and available at time of executing `certbot`.
 - Certbot needs root access while executing because only root is allowed to bind to any port below 1024.
-- We will be using our own domain ``myminio.com``  as an example in this recipe. Replace with your own domain under your setup.
+- We will be using our own domain ``mybuckit.com``  as an example in this recipe. Replace with your own domain under your setup.
 
 ## 3. Recipe Steps
 
@@ -21,26 +21,26 @@ Install Certbot by following the documentation at https://certbot.eff.org/
 
 ### Step 2: Generate Let's Encrypt cert
 ```sh
-# certbot certonly --standalone -d myminio.com --staple-ocsp -m test@yourdomain.io --agree-tos
+# certbot certonly --standalone -d mybuckit.com --staple-ocsp -m test@yourdomain.io --agree-tos
 ```
 
 ### Step 3: Verify Certificates
-List your certs saved in `/etc/letsencrypt/live/myminio.com` directory.
+List your certs saved in `/etc/letsencrypt/live/mybuckit.com` directory.
 ```sh
-$ ls -l /etc/letsencrypt/live/myminio.com
+$ ls -l /etc/letsencrypt/live/mybuckit.com
 total 4
-lrwxrwxrwx 1 root root  37 Aug  2 09:58 cert.pem -> ../../archive/myminio.com/cert4.pem
-lrwxrwxrwx 1 root root  38 Aug  2 09:58 chain.pem -> ../../archive/myminio.com/chain4.pem
-lrwxrwxrwx 1 root root  42 Aug  2 09:58 fullchain.pem -> ../../archive/myminio.com/fullchain4.pem
-lrwxrwxrwx 1 root root  40 Aug  2 09:58 privkey.pem -> ../../archive/myminio.com/privkey4.pem
+lrwxrwxrwx 1 root root  37 Aug  2 09:58 cert.pem -> ../../archive/mybuckit.com/cert4.pem
+lrwxrwxrwx 1 root root  38 Aug  2 09:58 chain.pem -> ../../archive/mybuckit.com/chain4.pem
+lrwxrwxrwx 1 root root  42 Aug  2 09:58 fullchain.pem -> ../../archive/mybuckit.com/fullchain4.pem
+lrwxrwxrwx 1 root root  40 Aug  2 09:58 privkey.pem -> ../../archive/mybuckit.com/privkey4.pem
 -rw-r--r-- 1 root root 543 May 10 22:07 README
 ```
 
 ### Step 4: Set up SSL on Buckit Server with the certificates.
 The certificate and key generated via Certbot needs to be placed inside user's home directory.
 ```sh
-$ cp /etc/letsencrypt/live/myminio.com/fullchain.pem /home/user/.minio/certs/public.crt
-$ cp /etc/letsencrypt/live/myminio.com/privkey.pem /home/user/.minio/certs/private.key
+$ cp /etc/letsencrypt/live/mybuckit.com/fullchain.pem /home/user/.minio/certs/public.crt
+$ cp /etc/letsencrypt/live/mybuckit.com/privkey.pem /home/user/.minio/certs/private.key
 ```
 
 ### Step 5: Change ownership of certificates.
@@ -68,5 +68,5 @@ If you are using dockerized version of Buckit then you would need to
 $ sudo docker run -p 443:443 -v /home/user/.minio:/root/.minio/ -v /home/user/data:/data minio/minio server --address ":443" /data
 ```
 
-### Step 7: Visit <https://myminio.com> in the browser.
+### Step 7: Visit <https://mybuckit.com> in the browser.
 ![Letsencrypt](https://github.com/minio/cookbook/blob/master/docs/screenshots/letsencrypt-certbot-minio.jpg?raw=true)

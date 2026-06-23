@@ -12,8 +12,6 @@
 
 .. mc:: bm batch status
 
-.. versionchanged:: Buckit RELEASE.2022-10-08T20-11-00Z or later
-
 Syntax
 ------
 
@@ -21,9 +19,6 @@ Syntax
 
 The :mc:`bm batch status` command outputs summaries of job events on a Buckit server.
 
-.. versionchanged:: mc RELEASE.2024-07-03T20-17-25Z
-
-   Batch status displays summaries for active, in-progress jobs or any batch job completed in the previous three (3) days.
 
 .. end-mc-batch-status-desc
 
@@ -32,12 +27,12 @@ The :mc:`bm batch status` command outputs summaries of job events on a Buckit se
 
    .. tab-item:: EXAMPLE
 
-      The following command outputs the status of the specified job with JobID ``KwSysDpxcBU9FNhGkn2dCf`` currently in progress on the ``myminio`` alias.
+      The following command outputs the status of the specified job with JobID ``KwSysDpxcBU9FNhGkn2dCf`` currently in progress on the ``mybuckit`` alias.
 
       .. code-block:: shell
          :class: copyable
 
-         bm batch status myminio "KwSysDpxcBU9FNhGkn2dCf"
+         bm batch status mybuckit "KwSysDpxcBU9FNhGkn2dCf"
 
    .. tab-item:: SYNTAX
 
@@ -82,14 +77,14 @@ Example
 Summarize the Events of an Active Replicate Job
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command provides the real-time summary of an active job on the deployment at :mc:`alias <bm alias>` ``myminio``:
+The following command provides the real-time summary of an active job on the deployment at :mc:`alias <bm alias>` ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm batch status myminio "KwSysDpxcBU9FNhGkn2dCf"
+   bm batch status mybuckit "KwSysDpxcBU9FNhGkn2dCf"
 
-- Replace ``myminio`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
+- Replace ``mybuckit`` with the :mc:`alias <bm alias>` of the Buckit deployment that should run the job.
 
 The output of the above command is similar to the following:
 

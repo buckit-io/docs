@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm rule import
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``bm ilm rule import`` replaces ``bm ilm import``.
 
 Syntax
 ------
@@ -34,12 +31,12 @@ You can input the contents from a ``.json`` file, such as one produced by :mc:`b
    .. tab-item:: EXAMPLE
 
       The following command imports the lifecycle management configuration from
-      ``mydata-lifecycle-config.json`` and applies it to the ``mydata`` bucket on the ``myminio`` deployment:
+      ``mydata-lifecycle-config.json`` and applies it to the ``mydata`` bucket on the ``mybuckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule import myminio/mydata < mydata-lifecycle-config.json
+         bm ilm rule import mybuckit/mydata < mydata-lifecycle-config.json
 
    .. tab-item:: SYNTAX
 
@@ -65,7 +62,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule import myminio/mydata < bucket-lifecycle.json
+      bm ilm rule import mybuckit/mydata < bucket-lifecycle.json
 
 
 
@@ -92,7 +89,7 @@ Import the Bucket Lifecycle Management Configuration
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule import myminio/mybucket < bucket-lifecycle.json
+         bm ilm rule import mybuckit/mybucket < bucket-lifecycle.json
 
    .. tab-item:: Syntax
 
@@ -105,7 +102,7 @@ Import the Bucket Lifecycle Management Configuration
         deployment and the bucket into which to import object lifecycle
         management rules:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``file.json`` with the name of the file from which to import the
         lifecycle management rules.

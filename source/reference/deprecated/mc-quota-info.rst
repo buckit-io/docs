@@ -10,20 +10,14 @@
 
 .. mc:: mc quota info
 
-.. versionchanged:: RELEASE.2022-12-13T00-23-28Z
 
-   ``mc quota info`` replaced ``mc admin bucket quota``.
-
-.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
-
-   ``mc quota info`` is deprecated.
 
 Description
 -----------
 
 .. start-mc-quota-info-desc
 
-The :mc-cmd:`mc quota info` command displays the currently configured quota for a bucket.
+The :mc-cmd:`bm quota info` command displays the currently configured quota for a bucket.
 
 .. end-mc-quota-info-desc
 
@@ -34,33 +28,33 @@ Examples
 Retrieve Bucket Quota Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc quota info` to retrieve the current quota configuration for a bucket:
+Use :mc-cmd:`bm quota info` to retrieve the current quota configuration for a bucket:
 
 .. code-block:: shell
    :class: copyable
 
    mc quota info TARGET/BUCKET
 
-Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment. 
+Replace ``TARGET`` with the :mc-cmd:`alias <bm alias>` of a configured Buckit deployment. 
 Replace ``BUCKET`` with the name of the bucket on which to retrieve the quota.
 
 Syntax
 ------
 
-:mc-cmd:`mc quota info` has the following syntax:
+:mc-cmd:`bm quota info` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc quota info TARGET
 
-:mc-cmd:`mc quota info` supports the following arguments:
+:mc-cmd:`bm quota info` supports the following arguments:
 
 .. mc-cmd:: TARGET
    :required:
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a prefix to the path. 
+   Specify the :mc-cmd:`alias <bm alias>` of the Buckit deployment as a prefix to the path. 
    For example:
 
    .. code-block:: shell

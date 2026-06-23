@@ -60,13 +60,13 @@ The command has the following syntax:
 
    .. tab-item:: EXAMPLE
 
-      The following example removes an existing remote tier called ``WARM-TIER`` on the ``myminio`` deployment.
+      The following example removes an existing remote tier called ``WARM-TIER`` on the ``mybuckit`` deployment.
       No objects have transitioned to the ``WARM-TIER`` tier.
       
       .. code-block:: shell
          :class: copyable
 
-          bm ilm tier rm myminio WARM-TIER
+          bm ilm tier rm mybuckit WARM-TIER
 
 
    .. tab-item:: SYNTAX

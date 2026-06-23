@@ -116,13 +116,6 @@
 .. mc-cmd:: srv_record_name
    :optional:
 
-   .. versionadded:: RELEASE.2022-12-12T19-27-27Z
-
-   .. include:: /includes/common-minio-external-auth.rst
-      :start-after: start-minio-ad-ldap-srv_record_name
-      :end-before: end-minio-ad-ldap-srv_record_name
-
-   This parameter corresponds with the :envvar:`MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable.
 
 .. mc-cmd:: tls_skip_verify
    :optional:

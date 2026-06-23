@@ -48,11 +48,11 @@ For example, the following commands set two distinct Webhook service endpoints a
 
       .. code-block:: shell
    
-         mc admin config set notify_webhook:primary \ 
+         bm admin config set notify_webhook:primary \ 
             endpoint="https://webhook1.example.net"
             [ARGUMENT=VALUE ...]
    
-         mc admin config set notify_webhook:secondary \
+         bm admin config set notify_webhook:secondary \
             endpoint="https://webhook2.example.net
             [ARGUMENT=VALUE ...]
 
@@ -82,14 +82,14 @@ Enable
 
       The top-level configuration key for defining an Webhook service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an Webhook service endpoint.
+      Use :mc-cmd:`bm admin config set` to set or update an Webhook service endpoint.
       The :mc-conf:`~notify_webhook.endpoint` argument is *required* for each target.
       Specify additional optional arguments as a whitespace (``" "``)-delimited list.
    
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_webhook \ 
+         bm admin config set notify_webhook \ 
            endpoint="https://webhook.example.net"
            [ARGUMENT="VALUE"] ... \
 
@@ -169,7 +169,7 @@ Auth Token
          .. code-block:: shell
             :class: copyable
    
-               mc admin config set myminio notify_webhook   \
+               bm admin config set mybuckit notify_webhook   \
    	       endpoint="https://webhook-1.example.net"  \
                   auth_token="Bearer 1a2b3c4f5e"
    
@@ -179,7 +179,7 @@ Auth Token
          .. code-block:: shell
             :class: copyable
    
-               mc admin config set myminio notify_webhook   \
+               bm admin config set mybuckit notify_webhook   \
                   endpoint="https://webhook-1.example.net"  \
                   auth_token="ServiceXYZ 1a2b3c4f5e"
    
@@ -187,7 +187,7 @@ Auth Token
    
          .. versionchanged:: RELEASE.2023-06-23T20-26-00Z
    
-         Buckit redacts this value when returned as part of :mc-cmd:`mc admin config get`.
+         Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
 Queue Directory
 ~~~~~~~~~~~~~~~

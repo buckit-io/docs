@@ -12,10 +12,6 @@
 
 .. mc:: bm admin replicate
 
-.. versionchanged:: RELEASE.2023-01-11T03-14-16Z
-
-   - ``bm admin replicate edit`` renamed to :mc-cmd:`bm admin replicate update`
-   - ``bm admin replicate remove`` renamed to :mc-cmd:`bm admin replicate rm`
 
 Description
 -----------
@@ -145,9 +141,6 @@ Syntax
    .. mc-cmd:: --replicate-ilm-expiry
       :optional:
 
-      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-      Replicate :ref:`ILM expiration <minio-lifecycle-management-expiration>` rules across peers.
 
 .. mc-cmd:: update
    :fullpath:
@@ -205,12 +198,12 @@ Syntax
       - ``Gi`` for gibibytes
       - ``Ti`` for tebibytes
 
-      For example, the following command limits the replication on the ``myminio`` deployment to no more than 2 Gigabytes per second.
+      For example, the following command limits the replication on the ``mybuckit`` deployment to no more than 2 Gigabytes per second.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin replicate update myminio --deployment-id c1758167-4426-454f-9aae-5c3dfdf6df64 --bucket-bandwidth "2G"
+         bm admin replicate update mybuckit --deployment-id c1758167-4426-454f-9aae-5c3dfdf6df64 --bucket-bandwidth "2G"
 
    .. mc-cmd:: --deployment-id
       :required:
@@ -222,42 +215,6 @@ Syntax
    .. mc-cmd:: --disable-ilm-expiry-replication
       :optional:
 
-      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-      Stops the replication of ILM expiration rules between peer sites.
-      Existing rules already synchronized across peers are not removed from any peer site.
-
-   .. mc-cmd:: --enable-ilm-expiry-replication
-      :optional:
-
-      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-      Start replication of ILM expiration rules between peer sites.
-
-   .. mc-cmd:: --endpoint
-      :required:
-      
-      The new endpoint or URL to associate with the peer site.
-
-   .. mc-cmd:: --mode
-      :optional:
-
-      Specify whether Buckit performs replication operations to the peer synchronously or asynchronously.
-      Available values are ``sync`` and ``async``.
-      
-      Defaults to ``async``.
-
-   .. mc-cmd:: --sync
-      :optional:
-
-      .. important::
-
-         The ``--sync`` flag has been deprecated as of ``RELEASE.2023-07-07T05-25-51Z``.
-         Use :mc-cmd:`~bm admin replicate update --mode` instead.
-
-      Enable or disable synchronous site replication.
-      Available values are ``enable`` and ``disable``.
-      If not defined, MInIO uses asynchronous site replication.
 
 .. mc-cmd:: rm, remove
    :fullpath:
@@ -489,40 +446,6 @@ Syntax
    .. mc-cmd:: --ilm-expiry-rules
       :optional:
 
-      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-      Display sync information about ILM expiration rules.
-
-      Mutually exclusive with :mc-cmd:`~bm admin replicate status --ilm-expiry-rule`
-
-   .. mc-cmd:: --ilm-expiry-rule
-      :optional:
-
-      .. versionadded:: mc RELEASE.2023-12-02T02-03-28Z
-
-      Display replication status information about the specified ILM expiration rule.
-
-      Mutually exclusive with :mc-cmd:`~bm admin replicate status --ilm-expiry-rules`
-
-   .. mc-cmd:: --policies
-      :optional:
-
-      Display the replication status of all policies.
-
-   .. mc-cmd:: --policy
-      :optional:
-
-      Display the replication status of a specific policy by including the policy name after the flag.
-
-   .. mc-cmd:: --users
-      :optional:
- 
-      Display the replication status of all users.
-  
-   .. mc-cmd:: --user
-      :optional:
-
-      Display the replication status of a specific user by including the user name after the flag.
 
 .. mc-cmd:: resync
    :fullpath:

@@ -32,7 +32,7 @@ Use the :mc:`bm od` to mimic the functionality of the Linux ``dd`` command.
       .. code-block:: shell
          :class: copyable
 
-         bm od if=file.zip of=myminio/mybucket/file.zip size=40MiB parts=5
+         bm od if=file.zip of=mybuckit/mybucket/file.zip size=40MiB parts=5
 
       If passing the ``--json`` :ref:`global flag <minio-mc-global-options>`, the output of the command resembles the following:
 
@@ -40,7 +40,7 @@ Use the :mc:`bm od` to mimic the functionality of the Linux ``dd`` command.
 
          {
            "source": "home/user/file.zip"
-           "target": "myminio/mybucket/file.zip"
+           "target": "mybuckit/mybucket/file.zip"
            "partSize": 41943040
            "totalSize": 209715200
            "parts": 5
@@ -77,7 +77,7 @@ Parameters
 
    .. code-block:: none
 
-      bm od if=file.zip of=myminio/mybucket/file.zip
+      bm od if=file.zip of=mybuckit/mybucket/file.zip
 
 .. mc-cmd:: of
    :required:
@@ -121,9 +121,9 @@ The :mc-cmd:`~bm od size` option allows you to specify the desired part size.
 .. code-block:: shell
    :class: copyable
 
-   bm od if=file.zip of=myminio/mybucket/file.zip size=40MiB
+   bm od if=file.zip of=mybuckit/mybucket/file.zip size=40MiB
 
-- Replace ``myminio/mybucket/file.zip`` with the path of the object or file stream to upload.
+- Replace ``mybuckit/mybucket/file.zip`` with the path of the object or file stream to upload.
 
 - Replace :mc-cmd:`size <bm od size>` with the desired size of the object parts.
 
@@ -139,9 +139,9 @@ The :mc-cmd:`~bm od parts` option allows you to specify the total number of part
 .. code-block:: shell
    :class: copyable
 
-   bm od if=file.zip of=myminio/mybucket/file.zip size=40MiB parts=5
+   bm od if=file.zip of=mybuckit/mybucket/file.zip size=40MiB parts=5
 
-- Replace ``myminio/mybucket/file.zip`` with the path of the object or file stream to upload.
+- Replace ``mybuckit/mybucket/file.zip`` with the path of the object or file stream to upload.
 - Replace :mc-cmd:`size <bm od size>` with the desired size of the object parts.
 - Replace :mc-cmd:`parts <bm od parts>` with the number of desired parts to use for the object.
 
@@ -159,7 +159,7 @@ Take a source file, divide the file into a specified number of parts, then uploa
 .. code-block:: shell
    :class: copyable
 
-   bm od if=file.zip of=myminio/mybucket/file.zip parts=5
+   bm od if=file.zip of=mybuckit/mybucket/file.zip parts=5
 
 The above command divides the source file into five equal parts, then uploads those parts.
 

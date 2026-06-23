@@ -51,12 +51,12 @@ Buckit deployments include the following :ref:`built-in policies <minio-policy-b
             ]
          }
 
-      The following command creates a new policy called ``listmybuckets`` on the :term:`alias` ``myminio`` using the policy found at the file ``/tmp/listmybuckets.json``.
+      The following command creates a new policy called ``listmybuckets`` on the :term:`alias` ``mybuckit`` using the policy found at the file ``/tmp/listmybuckets.json``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin policy create myminio listmybuckets /tmp/listmybuckets.json  
+         bm admin policy create mybuckit listmybuckets /tmp/listmybuckets.json  
 
    .. tab-item:: SYNTAX
 
@@ -106,9 +106,9 @@ Global Flags
 Examples
 --------
 
-Create a new policy called ``writeonly`` from the JSON file at ``/tmp/writeonly.json`` on the deployment at the alias ``myminio``.
+Create a new policy called ``writeonly`` from the JSON file at ``/tmp/writeonly.json`` on the deployment at the alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy create myminio writeonly /tmp/writeonly.json
+   bm admin policy create mybuckit writeonly /tmp/writeonly.json

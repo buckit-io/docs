@@ -104,17 +104,6 @@ You can modify the default Kustomization file or apply your own `patches <https:
 Kubernetes TLS Certificate API
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. versionchanged:: Operator v.5.0.0
-
-   The Buckit Operator manages TLS Certificate Signing Requests (CSR) using the Kubernetes ``certificates.k8s.io`` :kube-docs:`TLS certificate management API <tasks/tls/managing-tls-in-a-cluster/>` to create signed TLS certificates in the following circumstances:
-   
-   - When ``autoCert`` is enabled.
-   - For the Buckit Tenant Console when the :envvar:`MINIO_CONSOLE_TLS_ENABLE` environment variable is set to ``on``.
-   - For :ref:`STS service <minio-security-token-service>` when :envvar:`OPERATOR_STS_ENABLED` environment variable is set to ``on``.
-   - For retrieving the health of the cluster.
-   
-   Beginning with Operator 6.0.0, the Buckit Operator reads certificates inside the ``operator-ca-tls`` secret to trust private certificate authorities throughout the Kubernetes cluster, such as when using cert-manager.
-   Previous versions of the Operator sync the ``operator-ca-tls`` certificates to each tenant.
 
 For any of these circumstances, the Buckit Operator *requires* that the Kubernetes ``kube-controller-manager`` configuration include the following :kube-docs:`configuration settings <reference/command-line-tools-reference/kube-controller-manager/#options>`:
 

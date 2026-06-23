@@ -47,12 +47,12 @@ object locking enabled.
 
       The following command sets a default 30 day 
       :ref:`GOVERNANCE <minio-object-locking-governance>` object lock on the 
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm retention set --default GOVERNANCE "30d" myminio/mydata
+         bm retention set --default GOVERNANCE "30d" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

@@ -51,13 +51,13 @@ For example, the following commands set two distinct PostgreSQL service endpoint
 
       .. code-block:: shell
    
-         mc admin config set notify_postgres:primary \ 
+         bm admin config set notify_postgres:primary \ 
             connection_string="host=postgresql.example.com port=5432..."
             table="minioevents" \
             format="namespace" \
             [ARGUMENT=VALUE ...]
    
-         mc admin config set notify_postgres:secondary \
+         bm admin config set notify_postgres:secondary \
             connection_string="host=postgresql.example.com port=5432..."
             table="minioevents" \
             format="namespace" \
@@ -97,7 +97,7 @@ Enable
 
       The top-level configuration key for defining an PostgreSQL service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an PostgreSQL service endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an PostgreSQL service endpoint. 
       The following arguments are *required* for each target: 
       
       - :mc-conf:`~notify_postgres.connection_string`
@@ -109,7 +109,7 @@ Enable
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_postgres                            \ 
+         bm admin config set notify_postgres                            \ 
            connection_string="host=postgresql.example.com port=5432..." \
            table="minioevents"                                          \
            format="namespace"                                           \

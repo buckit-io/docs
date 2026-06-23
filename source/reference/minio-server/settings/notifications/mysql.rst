@@ -57,13 +57,13 @@ The following commands set two distinct MySQL service endpoints as ``PRIMARY`` a
 
       .. code-block:: shell
 
-         mc admin config set notify_mysql:primary \ 
+         bm admin config set notify_mysql:primary \ 
             dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
             table="minioevents" \
             format="namespace" \
             [ARGUMENT=VALUE ...]
    
-         mc admin config set notify_mysql:secondary \
+         bm admin config set notify_mysql:secondary \
             dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
             table="minioevents" \
             format="namespace" \
@@ -101,7 +101,7 @@ Enable
    
       The top-level configuration key for defining an MySQL service endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an MySQL service endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an MySQL service endpoint. 
       The following arguments are *required* for each target: 
       
       - :mc-conf:`~notify_mysql.dsn_string`
@@ -113,7 +113,7 @@ Enable
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_mysql \ 
+         bm admin config set notify_mysql \ 
            dsn_string="username:password@tcp(mysql.example.com:3306)/miniodb"
            table="minioevents" \
            format="namespace" \

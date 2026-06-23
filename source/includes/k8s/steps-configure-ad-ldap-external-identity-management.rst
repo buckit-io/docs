@@ -61,13 +61,13 @@
 
    The following example assumes an existing :ref:`alias <alias>` configured for the Buckit Tenant.
 
-   Use the :mc:`mc idp ldap policy attach` command to assign a user or group DN to an existing Buckit Policy:
+   Use the :mc:`bm idp ldap policy attach` command to assign a user or group DN to an existing Buckit Policy:
 
    .. code-block:: shell
      :class: copyable
 
-     mc idp ldap policy attach minio-tenant POLICY --user='uid=primary,cn=applications,dc=domain,dc=com'
-     mc idp ldap policy attach minio-tenant POLICY --group='cn=applications,ou=groups,dc=domain,dc=com'
+     bm idp ldap policy attach minio-tenant POLICY --user='uid=primary,cn=applications,dc=domain,dc=com'
+     bm idp ldap policy attach minio-tenant POLICY --group='cn=applications,ou=groups,dc=domain,dc=com'
 
    Replace ``POLICY`` with the name of the Buckit policy to assign to the user or group DN.
 
@@ -80,13 +80,13 @@
 
    .. code-block:: shell
 
-     POST https://minio.example.net?Action=AssumeRoleWithLDAPIdentity
+     POST https://buckit.example.net?Action=AssumeRoleWithLDAPIdentity
      &LDAPUsername=USERNAME
      &LDAPPassword=PASSWORD
      &Version=2011-06-15
      &Policy={}
 
-   - Replace ``minio.example.net`` with the hostname or URL for the Buckit Tenant service.
+   - Replace ``buckit.example.net`` with the hostname or URL for the Buckit Tenant service.
 
    - Replace the ``LDAPUsername`` with the username of the AD/LDAP user.
 

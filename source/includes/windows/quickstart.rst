@@ -38,7 +38,7 @@ Procedure
    You cannot run the executable from the Explorer or by double clicking the file.
    Instead, you call the executable to launch the server.
 
-#. Launch the :mc:`minio server`
+#. Launch the :mc:`buckit server <buckit server>`
 
    In PowerShell or the Command Prompt, navigate to the location of the executable or add the path of the ``minio.exe`` file to the system ``$PATH``.
    
@@ -50,37 +50,37 @@ Procedure
 
       .\minio.exe server C:\minio --console-address :9001
 
-   The :mc:`minio server` process prints its output to the system console, similar to the following:
+   The :mc:`buckit server <buckit server>` process prints its output to the system console, similar to the following:
 
    .. code-block:: shell
 
       API: http://192.0.2.10:9000  http://127.0.0.1:9000
-      RootUser: minioadmin
-      RootPass: minioadmin
+      RootUser: buckitadmin
+      RootPass: buckitadmin
 
       Console: http://192.0.2.10:9001 http://127.0.0.1:9001
-      RootUser: minioadmin
-      RootPass: minioadmin
+      RootUser: buckitadmin
+      RootPass: buckitadmin
 
       Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-         $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
+         $ bm alias set mybuckit http://192.0.2.10:9000 buckitadmin buckitadmin
 
       Documentation: https://docs.min.io/community/minio-object-store/
 
-      WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
+      WARNING: Detected default credentials 'buckitadmin:buckitadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
    
    The process is tied to the current PowerShell or Command Prompt window.
    Closing the window stops the server and ends the process.
 
 #. Connect your Browser to the Buckit Server
 
-   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9001`` or one of the Console addresses specified in the :mc:`minio server` command's output.
+   Access the :ref:`minio-console` by going to a browser (such as Microsoft Edge) and going to ``http://127.0.0.1:9001`` or one of the Console addresses specified in the :mc:`buckit server <buckit server>` command's output.
    For example, ``Console: http://192.0.2.10:9001 http://127.0.0.1:9001`` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
 
    Log in to the Console with the ``RootUser`` and ``RootPass`` user credentials displayed in the output.
-   These default to ``minioadmin | minioadmin``.
+   These default to ``buckitadmin | buckitadmin``.
 
 #. `(Optional)` Install the Buckit Client
 
@@ -88,7 +88,7 @@ Procedure
 
    Download the standalone Buckit server for Windows from the following link:
 
-   https://dl.min.io/client/mc/release/windows-amd64/mc.exe
+   https://dl.min.io/client/mc/release/windows-amd64/bm.exe
 
    Double click on the file to run it.
    Or, run the following in the Command Prompt or PowerShell.
@@ -96,17 +96,17 @@ Procedure
    .. code-block::
       :class: copyable
 
-      \path\to\mc.exe --help
+      \path\to\bm.exe --help
       
-   Use :mc:`mc.exe alias set <mc alias set>` to quickly authenticate and connect to the Buckit deployment.
+   Use :mc:`bm.exe alias set <bm alias set>` to quickly authenticate and connect to the Buckit deployment.
 
    .. code-block:: shell
       :class: copyable
 
-      mc.exe alias set local http://127.0.0.1:9000 minioadmin minioadmin
-      mc.exe admin info local
+      bm.exe alias set local http://127.0.0.1:9000 buckitadmin buckitadmin
+      bm.exe admin info local
 
-   The :mc:`mc.exe alias set <mc alias set>` takes four arguments:
+   The :mc:`bm.exe alias set <bm alias set>` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the Buckit server

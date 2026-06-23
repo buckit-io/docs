@@ -27,7 +27,6 @@ Resynchronization is a per-bucket process. You must repeat resynchronization for
 .. admonition:: Professional Support during BC/DR Operations
    :class: important
 
-   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. _minio-bucket-replication-serverside-resynchronize-requirements:
 
@@ -46,7 +45,7 @@ Resynchronization Requires Existing Replication Configuration
 
 Resynchronization requires the healthy source deployment have an existing replication configuration for the unhealthy target bucket. Additionally, resynchronization only applies to those replication rules created with the :ref:`existing object replication <minio-replication-behavior-existing-objects>` option. 
 
-Use :mc:`mc replicate ls` to review the configured replication rules and targets for the healthy source bucket.
+Use :mc:`bm replicate ls` to review the configured replication rules and targets for the healthy source bucket.
 
 Replication Requires Matching Object Encryption Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,9 +85,9 @@ Resynchronization is a background processes that continually checks objects in t
 
 Buckit recommends configuring load balancers or proxies to direct traffic only to the healthy cluster until synchronization completes. The following commands can provide insight into the resynchronization status:
 
-- :mc-cmd:`mc replicate resync status` on the source to track the resynchronization progress.
+- :mc-cmd:`bm replicate resync status` on the source to track the resynchronization progress.
 
-- :mc:`mc replicate status` on the source and remote to track normal replication data.
+- :mc:`bm replicate status` on the source and remote to track normal replication data.
 
 - Run ``mc ls -r --versions ALIAS/BUCKET | wc -l`` against both source and remote to validate the total number of objects and object versions on each.
 
@@ -104,12 +103,12 @@ You can repeat this procedure for each bucket that requires resynchronization. Y
 1) List the Configured Replication Targets on the Healthy Source
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc:`mc replicate ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
+Run the :mc:`bm replicate ls` command to list the configured remote targets on the healthy ``SOURCE`` deployment for the ``BUCKET`` that requires resynchronization.
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate ls SOURCE/BUCKET --json
+   bm replicate ls SOURCE/BUCKET --json
 
 - Replace ``SOURCE`` with the :ref:`alias <alias>` of the source Buckit deployment.
 
@@ -159,12 +158,12 @@ Identify the correct ARN for the Bucket from which you want to resynchronize obj
 2) Start the Resynchronization Procedure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run the :mc-cmd:`mc replicate resync start` command to begin the resynchronization process:
+Run the :mc-cmd:`bm replicate resync start` command to begin the resynchronization process:
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate resync start --remote-bucket "arn:minio:replication::UUID:BUCKET" SOURCE/BUCKET
+   bm replicate resync start --remote-bucket "arn:minio:replication::UUID:BUCKET" SOURCE/BUCKET
 
 - Replace the ``--remote-bucket`` value with the ARN of the unhealthy ``BUCKET`` on the ``TARGET`` Buckit deployment. 
 
@@ -178,18 +177,18 @@ The command returns a resynchronization job ID indicating that the process has b
 3) Monitor Resynchronization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc replicate resync status` command on the source deployment to track the received replication data:
+Use the :mc-cmd:`bm replicate resync status` command on the source deployment to track the received replication data:
 
 .. code-block:: shell
    :class: copyable
 
-   mc replicate resync status ALIAS/BUCKET
+   bm replicate resync status ALIAS/BUCKET
 
 The output resembles the following:
 
 .. code-block:: shell
 
-   mc replicate resync status /data
+   bm replicate resync status /data
    Resync status summary:
    ● arn:minio:replication::6593d572-4dc3-4bb9-8d90-7f79cc612f01:data                                           
       Status: Ongoing
@@ -205,6 +204,6 @@ process completes.
 
 - If the ``TARGET`` bucket damage extends to replication rules, you must recreate those rules to match the previous replication configuration. See :ref:`minio-bucket-replication-serverside-twoway` for additional guidance.
 
-- Perform basic validation that all buckets in the replication configuration show similar results for commands such as :mc:`mc ls` and :mc:`mc stat`. 
+- Perform basic validation that all buckets in the replication configuration show similar results for commands such as :mc:`bm ls` and :mc:`bm stat`. 
 
 - After restoring any replication rules and verifying replication between sites, you can configure the reverse proxy, load balancer, or other network control plane managing connections to resume sending traffic to the resynchronized deployment.

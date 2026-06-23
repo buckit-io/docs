@@ -84,7 +84,7 @@ In PowerShell or the Command Prompt, navigate to the location of the
 
          .\buckit.exe server {D...G}:\buckit --console-address :9001
 
-      The Buckit server process prints its output to the system console, similar to the following:
+      The :mc:`buckit server <buckit server>` process prints its output to the system console, similar to the following:
 
       .. code-block:: shell
 
@@ -111,7 +111,7 @@ In PowerShell or the Command Prompt, navigate to the location of the
 
          .\buckit.exe server C:\buckit --console-address :9001
 
-      The Buckit server process prints its output to the system console, similar to the following:
+      The :mc:`buckit server <buckit server>` process prints its output to the system console, similar to the following:
 
       .. code-block:: shell
 
@@ -161,7 +161,7 @@ The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit depl
 
 Download the standalone Buckit client for Windows from the following link:
 
-https://dl.min.io/client/mc/release/windows-amd64/mc.exe
+https://dl.min.io/client/mc/release/windows-amd64/bm.exe
 
 Double click on the file to run it.
 Or, run the following in the Command Prompt or PowerShell.
@@ -169,17 +169,17 @@ Or, run the following in the Command Prompt or PowerShell.
 .. code-block::
    :class: copyable
 
-   \path\to\mc.exe --help
+   \path\to\bm.exe --help
    
-Use :mc:`mc.exe alias set <mc alias set>` to quickly authenticate and connect to the Buckit deployment.
+Use :mc:`bm.exe alias set <bm alias set>` to quickly authenticate and connect to the Buckit deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc.exe alias set local http://127.0.0.1:9000 minioadmin minioadmin
-   mc.exe admin info local
+   bm.exe alias set local http://127.0.0.1:9000 buckitadmin buckitadmin
+   bm.exe admin info local
 
-The :mc:`mc.exe alias set <mc alias set>` takes four arguments:
+The :mc:`bm.exe alias set <bm alias set>` takes four arguments:
 
 - The name of the alias
 - The hostname or IP address and port of the Buckit server

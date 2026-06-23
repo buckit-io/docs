@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm tier add
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc:`bm ilm tier add` replaces ``bm admin tier add``.
 
 Description
 -----------
@@ -58,20 +55,20 @@ Syntax
 
    .. tab-item:: EXAMPLE
 
-      The following example creates a new remote tier called ``WARM-MINIO-TIER`` on the ``myminio`` deployment.
-      The command creates a tier for a remote Buckit deployment located at the hostname ``https://warm-minio.com``.
+      The following example creates a new remote tier called ``WARM-BUCKIT-TIER`` on the ``mybuckit`` deployment.
+      The command creates a tier for a remote Buckit deployment located at the hostname ``https://warm-buckit.com``.
       
       .. code-block:: shell
          :class: copyable
 
-          bm ilm tier add minio myminio WARM-MINIO-TIER                     \
-                                        --endpoint https://warm-minio.com   \                       
+          bm ilm tier add minio mybuckit WARM-BUCKIT-TIER                    \
+                                       --endpoint https://warm-buckit.com  \                       
                                         --access-key ACCESSKEY              \
                                         --secret-key SECRETKEY              \
                                         --bucket mybucket                   \
                                         --prefix myprefix/ 
 
-      Lifecycle management rules on the ``myminio`` deployment can use the new tier to transition objects into the remote location's ``myprefix/`` prefix in the ``mybucket`` bucket.
+      Lifecycle management rules on the ``mybuckit`` deployment can use the new tier to transition objects into the remote location's ``myprefix/`` prefix in the ``mybucket`` bucket.
 
    .. tab-item:: SYNTAX
    
@@ -357,12 +354,12 @@ The following example creates a new tier on a local deployment that a configured
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier add minio myminio WARM-MINIO-TIER --endpoint https://warm-minio.com \                       
+   bm ilm tier add minio mybuckit WARM-BUCKIT-TIER --endpoint https://warm-buckit.com \
         --access-key ACCESSKEY --secret-key SECRETKEY --bucket mybucket --prefix myprefix/  
 
-This command creates a new tier called ``WARM-MINIO-TIER`` for a ``minio`` type of remote storage on the ``myminio`` deployment.
+This command creates a new tier called ``WARM-BUCKIT-TIER`` for a ``minio`` type of remote storage on the ``mybuckit`` deployment.
 
-- The remote Buckit storage is located at ``https://warm-minio.com``.
+- The remote Buckit storage is located at ``https://warm-buckit.com``.
 - The command includes credentials for a user with read, write, list, and delete privileges to the bucket and prefix.
 - The tier transitions objects to the ``mybucket`` bucket and the ``myprefix`` prefix on the remote Buckit storage.
 
@@ -374,11 +371,11 @@ The following example creates a new tier on a local deployment that a configured
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier add azure myminio AZTIER --account-name ACCOUNT-NAME --account-key ACCOUNT-KEY \            
+   bm ilm tier add azure mybuckit AZTIER --account-name ACCOUNT-NAME --account-key ACCOUNT-KEY \            
         --bucket myazurebucket --prefix myazureprefix/                                                         
                                                         
 
-This command creates a new tier called ``AZTIER`` for an ``azure`` type of remote storage on the ``myminio`` deployment.
+This command creates a new tier called ``AZTIER`` for an ``azure`` type of remote storage on the ``mybuckit`` deployment.
 
 - The remote Azure storage is accessed by the provided account name and key.
 - The tier transitions objects to the ``myazurebucket`` bucket and the ``myazureprefix`` prefix on the Azure storage.
@@ -391,10 +388,10 @@ The following example creates a new tier on a local deployment that a configured
 .. code-block:: shell
    :class: copyable
 
-    bm ilm tier add gcs myminio GCSTIER --credentials-file /path/to/credentials.json \                      
+    bm ilm tier add gcs mybuckit GCSTIER --credentials-file /path/to/credentials.json \                      
         --bucket mygcsbucket  --prefix mygcsprefix/                                                            
 
-This command creates a new tier called ``GCSTIER`` for a ``gcs`` type of remote storage on the ``myminio`` deployment.
+This command creates a new tier called ``GCSTIER`` for a ``gcs`` type of remote storage on the ``mybuckit`` deployment.
 
 - The remote GCS storage is accessed by the provided credentials file.
 - The tier transitions objects to the ``mygcsbucket`` bucket and the ``mygcsprefix`` prefix on the GCS storage.
@@ -407,11 +404,11 @@ The following example creates a new tier on a local deployment that a configured
 .. code-block:: shell
    :class: copyable
 
-    bm ilm tier add s3 myminio S3TIER --endpoint https://s3.amazonaws.com \                                 
+    bm ilm tier add s3 mybuckit S3TIER --endpoint https://s3.amazonaws.com \                                 
         --access-key ACCESSKEY --secret-key SECRETKEY --bucket mys3bucket --prefix mys3prefix/ \               
         --storage-class "STANDARD" --region us-west-2                                                             
 
-This command creates a new tier called ``S3TIER`` for a ``s3`` type of remote storage on the ``myminio`` deployment.
+This command creates a new tier called ``S3TIER`` for a ``s3`` type of remote storage on the ``mybuckit`` deployment.
 
 - The S3 storage is located at the provided endpoint.
 - The remotes S3 storage is accessed by the provided access key and secret key.

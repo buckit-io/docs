@@ -29,12 +29,12 @@ The alias :mc:`bm admin accesskey list` has equivalent functionality to :mc:`bm 
 
    .. tab-item:: EXAMPLE
 
-      The following command lists all access keys associated to the user with username ``admin1`` on the deployment at alias ``myminio``:
+      The following command lists all access keys associated to the user with username ``admin1`` on the deployment at alias ``mybuckit``:
 
       .. code-block:: shell  
          :class: copyable 
 
-         bm admin accesskey ls myminio admin1
+         bm admin accesskey ls mybuckit admin1
 
       The output resembles the following:
    
@@ -132,22 +132,22 @@ Examples
 List all built-in users and associated access keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all users managed by the Buckit deployment at alias ``myminio`` and any associated access keys or temporary STS tokens.
+The following command lists all users managed by the Buckit deployment at alias ``mybuckit`` and any associated access keys or temporary STS tokens.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey list myminio/ --all
+   bm admin accesskey list mybuckit/ --all
 
 Return a list of access keys for the current authenticated user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists the access keys or temporary STS tokens associated with the currently authenticated user for the ``myminio`` deployment.
+The following command lists the access keys or temporary STS tokens associated with the currently authenticated user for the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey list myminio/ --self
+   bm admin accesskey list mybuckit/ --self
 
 List all users created and managed by the deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -158,17 +158,17 @@ The list only includes Buckit IDP managed users, not users managed by a third pa
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey ls myminio/ --all --users-only
+   bm admin accesskey ls mybuckit/ --all --users-only
 
 Return a list of access keys associated with the users ``miniouser1`` and ``miniouser2``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command returns a list of access keys for two users on the ``myminio`` deployment.
+The following command returns a list of access keys for two users on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey ls myminio/ miniouser1 miniouser2
+   bm admin accesskey ls mybuckit/ miniouser1 miniouser2
 
 Behavior
 --------

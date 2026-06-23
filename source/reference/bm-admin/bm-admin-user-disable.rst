@@ -26,18 +26,18 @@ Clients cannot use the user credentials to authenticate to the Buckit deployment
 Disabling a user does *not* remove that user from the deployment.
 Use :mc-cmd:`bm admin user enable` to enable a disabled user on a Buckit deployment.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command disables user ``myuser`` on the ``myminio`` Buckit deployment:
+      The following command disables user ``myuser`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user disable myminio myuser
+         bm admin user disable mybuckit myuser
 
    .. tab-item:: SYNTAX
 

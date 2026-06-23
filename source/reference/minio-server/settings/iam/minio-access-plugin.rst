@@ -41,14 +41,14 @@ The examples here represent the minimum required setting.
 
       .. mc-conf:: policy_plugin
 
-      Use the :mc:`mc admin config set` command to create or update the access management plugin configuration.
+      Use the :mc:`bm admin config set` command to create or update the access management plugin configuration.
       The ``policy_plugin url`` argument is required.
       Specify additional optional arguments as a whitespace (" ")-delimited list.
       
 
       .. code-block:: shell
 
-         mc admin config set policy_plugin                     \
+         bm admin config set policy_plugin                     \
             url="https://authzservice.example.net:8080/authz"  \
             [ARGUMENT=VALUE] ...
 

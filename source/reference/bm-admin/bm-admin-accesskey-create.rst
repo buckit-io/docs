@@ -39,7 +39,7 @@ The :mc-cmd:`bm admin accesskey create` command adds a new access key and secret
          :class: copyable
 
          bm admin accesskey create        \
-            myminio/ myuser               \                                                  
+            mybuckit/ myuser               \                                                  
             --access-key myuseraccesskey  \                                  
             --secret-key myusersecretkey  \
             --policy /path/to/policy.json 
@@ -160,49 +160,49 @@ Examples
 Create access key / secret key pair for the authenticated user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command generates a new, random access key and secret key pair for the user currently logged in to Buckit deployment at the alias ``myminio``.
+The following command generates a new, random access key and secret key pair for the user currently logged in to Buckit deployment at the alias ``mybuckit``.
 The access key and secret key have the same access policies as the authenticated user.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey create myminio/
+   bm admin accesskey create mybuckit/
 
 Create a custom access key / secret key pair for the authenticated user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key and secret key pair for the user currently logged in to Buckit at the alias ``myminio``.
+The following command creates a new access key and secret key pair for the user currently logged in to Buckit at the alias ``mybuckit``.
 The access key and secret key have the same access policies as the authenticated user.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey create myminio/ --access-key myaccesskey --secret-key mysecretkey 
+   bm admin accesskey create mybuckit/ --access-key myaccesskey --secret-key mysecretkey 
 
 Create an access key / secret key pair for another user with limited duration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key and secret key pair for a user, ``miniouser`` on the alias ``myminio``.
+The following command creates a new access key and secret key pair for a user, ``miniouser`` on the alias ``mybuckit``.
 The access key and secret key have the same access policies as ``miniouser``.
 The credentials remain valid for 24 hours after creation.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey create myminio/ miniouser --expiry-duration 24h
+   bm admin accesskey create mybuckit/ miniouser --expiry-duration 24h
 
 
 Create access key / secret key pair for the authenticated user that expires
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command generates a new and random access key and random secret key pair for the user currently logged in to Buckit deployment at the alias ``myminio``.
+The following command generates a new and random access key and random secret key pair for the user currently logged in to Buckit deployment at the alias ``mybuckit``.
 The access key and secret key have the same access policies as the authenticated user.
 The credentials expire on the fifteenth day of January, 2025.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey create myminio/ --expiry 2025-01-15
+   bm admin accesskey create mybuckit/ --expiry 2025-01-15
 
 The date specified **must** be a future date.
 For valid datetime formats, see the :mc-cmd:`~bm admin accesskey create --expiry` flag.
@@ -210,13 +210,13 @@ For valid datetime formats, see the :mc-cmd:`~bm admin accesskey create --expiry
 Create access key / secret key pair for a different user with custom access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command creates a new access key and secret key pair for the user, ``miniouser`` on the alias ``myminio``.
+The following command creates a new access key and secret key pair for the user, ``miniouser`` on the alias ``mybuckit``.
 The access key and secret key have a more limited set of access than ``miniouser``, as specified in the policy JSON file.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin accesskey create myminio/ miniouser --policy /path/to/policy.json 
+   bm admin accesskey create mybuckit/ miniouser --policy /path/to/policy.json 
 
 The specified policy file **must not** grant access to anything to which ``miniouser`` does not already have access.
 

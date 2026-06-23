@@ -10,9 +10,6 @@
 
 .. mc:: bm ilm tier
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc-cmd:`bm ilm tier` replaces ``bm admin tier``.
 
 Description
 -----------

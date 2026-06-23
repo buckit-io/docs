@@ -10,11 +10,6 @@ Monitoring and Alerting using Prometheus
    :local:
    :depth: 1
 
-.. container:: extlinks-video
-
-   - `Monitoring with Buckit and Prometheus: Overview <https://youtu.be/A3vCDaFWNNs?ref=docs>`__
-   - `Monitoring with Buckit and Prometheus: Lab <https://youtu.be/Oix9iXndSUY?ref=docs>`__
-
 Buckit publishes cluster, node, bucket, and resource metrics using the :prometheus-docs:`Prometheus Data Model <concepts/data_model/#data-model>`.
 The procedure on this page documents the following:
 
@@ -33,7 +28,7 @@ For more about metrics API versions, see :ref:`Metrics and alerts. <minio-metric
 
    - An existing Buckit deployment with network access to the Prometheus deployment
 
-   - An :mc:`mc` installation on your local host configured to :ref:`access <alias>` the Buckit deployment
+   - An :mc:`bm` installation on your local host configured to :ref:`access <alias>` the Buckit deployment
 
 
 Configure Prometheus to Collect and Alert using Buckit Metrics
@@ -42,7 +37,7 @@ Configure Prometheus to Collect and Alert using Buckit Metrics
 1) Generate the Scrape Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
+Use the :mc:`bm admin prometheus generate` command to generate the scrape configuration for use by Prometheus in making scraping requests:
 
 .. tab-set::
 
@@ -53,9 +48,9 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
       .. code-block:: shell
          :class: copyable
       
-         mc admin prometheus generate ALIAS
+         bm admin prometheus generate ALIAS
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
+      Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
 	 
       The command returns output similar to the following:
 
@@ -71,7 +66,7 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
               metrics_path: /minio/v2/metrics/cluster
               scheme: https
               static_configs:
-              - targets: [minio.example.net]
+              - targets: [buckit.example.net]
 		      
    .. tab-item:: Nodes
 
@@ -80,9 +75,9 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
       .. code-block:: shell
          :class: copyable
       
-         mc admin prometheus generate ALIAS node
+         bm admin prometheus generate ALIAS node
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
+      Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -96,7 +91,7 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
               metrics_path: /minio/v2/metrics/node
               scheme: https
               static_configs:
-              - targets: [minio-1.example.net, minio-2.example.net, minio-N.example.net]
+              - targets: [buckit-1.example.net, buckit-2.example.net, buckit-N.example.net]
 		      
    .. tab-item:: Buckets
 
@@ -105,9 +100,9 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
       .. code-block:: shell
          :class: copyable
       
-         mc admin prometheus generate ALIAS bucket
+         bm admin prometheus generate ALIAS bucket
 
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
+      Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
@@ -121,35 +116,10 @@ Use the :mc:`mc admin prometheus generate` command to generate the scrape config
               metrics_path: /minio/v2/metrics/bucket
               scheme: https
               static_configs:
-              - targets: [minio.example.net]
+              - targets: [buckit.example.net]
       
    .. tab-item:: Resources
 
-      .. versionadded:: RELEASE.2023-10-07T15-07-38Z
-
-      The following command scrapes metrics for resources on the Buckit Server.
-
-      .. code-block:: shell
-         :class: copyable
-
-         mc admin prometheus generate ALIAS resource
-
-      Replace :mc-cmd:`ALIAS <mc admin prometheus generate ALIAS>` with the :mc:`alias <mc alias>` of the Buckit deployment.
-
-      .. code-block:: yaml
-         :class: copyable
-
-         global:
-            scrape_interval: 60s
-
-         scrape_configs:
-            - job_name: minio-job-resource
-              bearer_token: TOKEN
-              metrics_path: /minio/v2/metrics/resource
-              scheme: https
-              static_configs:
-              - targets: [minio.example.net]
-      
 - Set an appropriate ``scrape_interval`` value to ensure each scraping operation completes before the next one begins.
   The recommended value is 60 seconds.
 
@@ -194,7 +164,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               metrics_path: /minio/v2/metrics/cluster
               scheme: https
               static_configs:
-              - targets: [minio.example.net]
+              - targets: [buckit.example.net]
 
 
    .. tab-item:: Nodes
@@ -213,7 +183,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               metrics_path: /minio/v2/metrics/node
               scheme: https
               static_configs:
-              - targets: [minio-1.example.net, minio-2.example.net, minio-N.example.net]
+              - targets: [buckit-1.example.net, buckit-2.example.net, buckit-N.example.net]
 
 	      
    .. tab-item:: Bucket
@@ -230,7 +200,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               metrics_path: /minio/v2/metrics/bucket
               scheme: https
               static_configs:
-              - targets: [minio.example.net]
+              - targets: [buckit.example.net]
 
    .. tab-item:: Resource
 
@@ -246,7 +216,7 @@ Append the desired ``scrape_configs`` job generated in the previous step to the 
               metrics_path: /minio/v2/metrics/resource
               scheme: https
               static_configs:
-              - targets: [minio.example.net]
+              - targets: [buckit.example.net]
 
 Start the Prometheus cluster using the configuration file:
 

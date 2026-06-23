@@ -60,8 +60,6 @@ Manage Tenant Pools
 Specify Runtime Class
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. versionadded:: Console 0.23.1
-
 When adding a new pool or modifying an existing pool for a tenant, you can specify the :kube-docs:`Runtime Class Name <concepts/containers/runtime-class/>` for pools to use.
 
 .. Following link is intended for K8s only

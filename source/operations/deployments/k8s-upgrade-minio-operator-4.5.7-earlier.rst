@@ -86,7 +86,7 @@ The following steps back up the existing yaml files, perform some clean up, and 
    .. code-block:: shell
       :class: copyable
 
-      export TENANT_NAME=myminio
+      export TENANT_NAME=mybuckit
       export NAMESPACE=mynamespace
       kubectl -n $NAMESPACE get secret $TENANT_NAME-log-secret -o yaml > $TENANT_NAME-log-secret.yaml
       kubectl -n $NAMESPACE get cm $TENANT_NAME-prometheus-config-map -o yaml > $TENANT_NAME-prometheus-config-map.yaml
@@ -97,7 +97,7 @@ The following steps back up the existing yaml files, perform some clean up, and 
       kubectl -n $NAMESPACE get svc $TENANT_NAME-log-search-api -o yaml > $TENANT_NAME-log-search-api-svc.yaml
       kubectl -n $NAMESPACE get svc $TENANT_NAME-prometheus-hl-svc -o yaml > $TENANT_NAME-prometheus-hl-svc.yaml
 
-   - Replace ``myminio`` with the name of the tenant on the operator deployment you are upgrading.
+   - Replace ``mybuckit`` with the name of the tenant on the operator deployment you are upgrading.
    - Replace ``mynamespace`` with the namespace for the tenant on the operator deployment you are upgrading.
 
    Repeat for each tenant.

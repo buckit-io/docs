@@ -54,7 +54,7 @@ users with common access patterns and workloads. Client's *cannot* authenticate
 to a Buckit deployment using a group as an identity. 
 
 
-The :mc:`mc admin group` command supports the creation and management of
+The :mc:`bm admin group` command supports the creation and management of
 groups on the Buckit deployment. See the command reference for examples of
 usage.
 

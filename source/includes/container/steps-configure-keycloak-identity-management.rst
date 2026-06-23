@@ -84,14 +84,14 @@ The following command starts the Buckit Container and attaches it to the ``minio
           quay.io/minio/minio:RELEASE.2023-02-22T18-23-45Z server /mnt/data --console-address :9001
 
 Go to ``localhost:9001`` to access the Buckit Console.
-Log in using the default credentials ``minioadmin:minioadmin``.
+Log in using the default credentials ``buckitadmin:buckitadmin``.
 
 7) Configure Buckit for Keycloak Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Buckit supports multiple methods for configuring Keycloak authentication:
 
-- Using a terminal/shell and the :mc:`mc idp openid` command
+- Using a terminal/shell and the :mc:`bm idp openid` command
 - Using environment variables set prior to starting Buckit
 
 .. tab-set::
@@ -111,7 +111,7 @@ Buckit supports multiple methods for configuring Keycloak authentication:
 
 You must restart the Buckit deployment for the changes to apply.
 
-Check the :ref:`Buckit server logs <minio-logging>` and verify that startup succeeded with no errors related to the Keycloak configuration.
+Check the :ref:`:mc:`buckit server <buckit server>` logs <minio-logging>` and verify that startup succeeded with no errors related to the Keycloak configuration.
 
 
 8) Generate Application Credentials using the Security Token Service (STS)

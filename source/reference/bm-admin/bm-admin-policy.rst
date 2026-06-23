@@ -10,18 +10,6 @@
 
 .. mc:: bm admin policy
 
-.. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
-
-   The following commands are deprecated:
-   
-   - ``bm admin policy add`` use :mc:`bm admin policy create` instead
-   - ``bm admin policy set`` use :mc:`bm admin policy attach` instead
-   - ``bm admin policy unset`` use :mc:`bm admin policy detach` instead
-   - ``bm admin policy update`` use :mc:`~bm admin policy attach` or :mc:`~bm admin policy detach` instead
-
-   The following command is added:
-
-   - :mc-cmd:`bm admin policy entities`
 
 Description
 -----------

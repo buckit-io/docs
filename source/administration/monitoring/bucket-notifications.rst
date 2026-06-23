@@ -82,9 +82,6 @@ Buckit supports publishing event notifications to the following targets:
 Asynchronous vs synchronous bucket notifications
 ------------------------------------------------
 
-.. versionadded:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit supports either asynchronous (default) or synchronous bucket notifications for *all* remote targets.
 
 With asynchronous delivery, Buckit fires the event at the configured remote and does *not* wait for a response before continuing to the next event.
 Asynchronous bucket notification prioritizes sending events with the risk of some events being lost if the remote target has a transient issue during transit or processing.

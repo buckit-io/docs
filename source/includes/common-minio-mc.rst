@@ -17,7 +17,7 @@ This command supports any of the :ref:`global flags <minio-mc-global-options>`.
    .. code-block:: shell
       :class: copyable
 
-      mc --json COMMAND
+      bm --json COMMAND
 
 .. end-minio-mc-json-globals
 
@@ -29,11 +29,11 @@ This command supports only global flags
 
 .. start-minio-mc-s3-compatibility
 
-The :program:`mc` commandline tool is built for compatibility with the AWS S3
+The :program:`bm` commandline tool is built for compatibility with the AWS S3
 API and is tested with Buckit and AWS S3 for expected functionality and behavior.
 
 Buckit provides no guarantees for other S3-compatible services, as their S3 API
-implementation is unknown and therefore unsupported. While :program:`mc`
+implementation is unknown and therefore unsupported. While :program:`bm`
 commands *may* work as documented, any such usage is at your own risk.
 
 .. end-minio-mc-s3-compatibility

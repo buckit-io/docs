@@ -23,27 +23,27 @@ The :mc:`bm ready` command checks the status of a cluster and whether the cluste
 
    .. tab-item:: EXAMPLE
 
-      The following sends a ``GET`` request to the cluster at alias ``myminio`` and returns its status.
+      The following sends a ``GET`` request to the cluster at alias ``mybuckit`` and returns its status.
 
       .. code-block:: shell
          :class: copyable
 
-         bm ready myminio
+         bm ready mybuckit
 
-      The command sends a ``GET`` request to the deployment at the :mc:`~bm alias` ``myminio``.'
+      The command sends a ``GET`` request to the deployment at the :mc:`~bm alias` ``mybuckit``.'
       The command repeats the request until it is successful.
 
-      The output before the cluster at alias ``myminio`` is ready resembles the following:
+      The output before the cluster at alias ``mybuckit`` is ready resembles the following:
 
       .. code-block:: text
 
-         The cluster `myminio` is unreachable: Get "http://myminio.example.com:9000/minio/health/cluster": dial tcp 198.51.100.0:9000: connect: connection refused
+         The cluster `mybuckit` is unreachable: Get "http://mybuckit.example.com:9000/minio/health/cluster": dial tcp 198.51.100.0:9000: connect: connection refused
 
-      Once the request succeeds in connecting to the ``myminio`` deployment, the output resembles the following:
+      Once the request succeeds in connecting to the ``mybuckit`` deployment, the output resembles the following:
      
       .. code-block:: text
 
-         The cluster `myminio` is ready
+         The cluster `mybuckit` is ready
 
    .. tab-item:: SYNTAX
 
@@ -99,14 +99,14 @@ The following command checks that a deployment has sufficient drives available f
 .. code-block:: shell
    :class: copyable
 
-   bm read myminio --cluster-read
+   bm read mybuckit --cluster-read
 
 Check if a cluster is down for maintenance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command checks whether the cluster can maintain read and write quorum during maintenance when the node at alias ``myminio`` is taken down.
+The following command checks whether the cluster can maintain read and write quorum during maintenance when the node at alias ``mybuckit`` is taken down.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ready myminio --maintenance
+   bm ready mybuckit --maintenance

@@ -12,9 +12,6 @@
 
 .. mc:: bm idp ldap
 
-.. versionadded:: RELEASE.2023-05-26T23-31-54Z
-
-   :mc-cmd:`bm idp ldap` and its subcommands replace ``bm admin idp ldap``.
 
 Description
 -----------

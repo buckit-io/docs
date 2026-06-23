@@ -96,7 +96,7 @@ The JSON object **must** have the following format:
    }
 
 You can use the :mc:`bm alias export` command to export an existing alias from the local host configuration.
-Alternatively, you can manually extract the necessary JSOn fields from the :mc:`mc` :ref:`configuration file <mc-configuration>`.
+Alternatively, you can manually extract the necessary JSOn fields from the :mc:`bm` :ref:`configuration file <mc-configuration>`.
 
 Examples
 --------
@@ -113,11 +113,11 @@ You can modify this example to use user credentials you have already created or 
    echo '
    {
     "url": "https://play.min.io",
-    "accessKey": "minioadmin",
-    "secretKey": "minioadmin",
+    "accessKey": "buckitadmin",
+    "secretKey": "buckitadmin",
     "api": "s3v4",
     "path": "auto"
-   }' | bm alias import play-minioadmin
+   }' | bm alias import play-buckitadmin
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

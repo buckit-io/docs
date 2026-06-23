@@ -12,23 +12,20 @@
 
 .. mc:: mc admin idp openid
 
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``mc admin idp openid`` and its subcommands replaced by :mc-cmd:`mc idp openid`.
 
 Description
 -----------
 
 .. start-mc-admin-idp-openid-desc
 
-The :mc-cmd:`mc admin idp openid` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`OpenID Identity and Access Management (IAM) integrations <minio-external-identity-management-openid>`.
+The :mc-cmd:`bm admin idp openid` commands allow you to add, modify, review, list, remove, enable, and disable server configurations to 3rd party :ref:`OpenID Identity and Access Management (IAM) integrations <minio-external-identity-management-openid>`.
 
 .. end-mc-admin-idp-openid-desc
 
 Define configuration settings as an alternative to using environment variables when :ref:`setting up an OpenID connection <minio-external-identity-management-openid-configure>`.
 
 
-The :mc-cmd:`mc admin idp openid` command has the following subcommands:
+The :mc-cmd:`bm admin idp openid` command has the following subcommands:
 
 .. list-table::
    :header-rows: 1
@@ -37,31 +34,31 @@ The :mc-cmd:`mc admin idp openid` command has the following subcommands:
    * - Subcommand
      - Description
 
-   * - :mc-cmd:`mc admin idp openid add`
+   * - :mc-cmd:`bm admin idp openid add`
      - Create an OpenID IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp openid update`
+   * - :mc-cmd:`bm admin idp openid update`
      - Modify an existing OpenID IDP server configuration.
 
-   * - :mc-cmd:`mc admin idp openid rm`
+   * - :mc-cmd:`bm admin idp openid rm`
      - Remove an OpenID IDP server configuration from a deployment.
 
-   * - :mc-cmd:`mc admin idp openid ls`
+   * - :mc-cmd:`bm admin idp openid ls`
      - Outputs a list of the existing OpenID server configurations for a deployment.
 
-   * - :mc-cmd:`mc admin idp openid info`
+   * - :mc-cmd:`bm admin idp openid info`
      - Displays details for a specific OpenID server configuration.
 
-   * - :mc-cmd:`mc admin idp openid enable`
+   * - :mc-cmd:`bm admin idp openid enable`
      - Enables an OpenID server configuration.
 
-   * - :mc-cmd:`mc admin idp openid disable`
+   * - :mc-cmd:`bm admin idp openid disable`
      - Disables an OpenID server configuration.
 
 Configuration Parameters
 ------------------------
 
-The :mc-cmd:`mc admin idp openid` subcommands support configuration parameters.
+The :mc-cmd:`bm admin idp openid` subcommands support configuration parameters.
 The parameters define the server's interaction with the IAM provider.
 
 For a more detailed explanation of the configuration parameters, refer to the :ref:`config setting documentation <minio-open-id-config-settings>`.
@@ -82,12 +79,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example creates the configuration settings for the ``myminio`` deployment as defined in a new ``test-config`` setup for Dex integration.
+         The following example creates the configuration settings for the ``mybuckit`` deployment as defined in a new ``test-config`` setup for Dex integration.
 
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp openid add myminio test-config                                  \                                                
+             mc admin idp openid add mybuckit test-config                                  \                                                
                 client_id=minio-client-app                                                \
                 client_secret=minio-client-app-secret                                     \           
                 config_url="http://localhost:5556/dex/.well-known/openid-configuration"   \
@@ -121,13 +118,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example changes two of the configuration settings for the ``myminio`` deployment as defined in the ``test-config`` setup for Dex integration.
+         The following example changes two of the configuration settings for the ``mybuckit`` deployment as defined in the ``test-config`` setup for Dex integration.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp openid update                      \
-                                myminio                     \
+                                mybuckit                     \
                                 test_config                 \
                                 scopes="openid,groups"      \
                                 role_policy="consoleAdmin"                                                              
@@ -158,12 +155,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example removes the ``test-config`` settings for the ``myminio`` deployment.
+         The following example removes the ``test-config`` settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid rm myminio test_config                                                              
+            mc admin idp openid rm mybuckit test_config                                                              
                                     
       .. tab-item:: SYNTAX
 
@@ -188,12 +185,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs a list of all OpenID configuration sets defined for the ``myminio`` deployment.
+         The following example outputs a list of all OpenID configuration sets defined for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid ls myminio                                                            
+            mc admin idp openid ls mybuckit                                                            
                                     
       .. tab-item:: SYNTAX
 
@@ -215,12 +212,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs the configuration settings defined for the ``test_config`` set of OpenID settings on the ``myminio`` deployment.
+         The following example outputs the configuration settings defined for the ``test_config`` set of OpenID settings on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            mc admin idp openid info myminio test_config
+            mc admin idp openid info mybuckit test_config
                                     
       .. tab-item:: SYNTAX
 
@@ -245,13 +242,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example enables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example enables the server configurations defined as ``test_config`` on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp openid enable       \
-                                myminio      \
+                                mybuckit      \
                                 test_config
 
       .. tab-item:: SYNTAX
@@ -277,13 +274,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example disables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example disables the server configurations defined as ``test_config`` on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             mc admin idp openid disable      \
-                                myminio      \
+                                mybuckit      \
                                 test_config
 
       .. tab-item:: SYNTAX

@@ -18,7 +18,7 @@ If more than one type of environment variable sets is defined, Buckit returns an
 
 .. note::
 
-   These settings do not have configuration setting options for use with :mc:`mc admin config set`.
+   These settings do not have configuration setting options for use with :mc:`bm admin config set`.
 
 Define any one set of these environment variables in the host system prior to starting or restarting the Buckit process.
 Refer to your operating system's documentation for how to define an environment variable.

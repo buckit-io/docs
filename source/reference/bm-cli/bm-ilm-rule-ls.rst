@@ -13,14 +13,7 @@
 .. mc:: bm ilm rule list
 .. mc:: bm ilm rule ls
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
 
-   ``bm ilm rule ls`` replaces ``bm ilm ls``.
-
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``bm ilm rule ls --json`` output includes the policy modification time in ``updateAt``.
-   
 Syntax
 ------
 
@@ -36,12 +29,12 @@ The :mc:`bm ilm rule list` command has equivalent functionality to :mc:`bm ilm r
 
    .. tab-item:: EXAMPLE
 
-      The following command lists all lifecycle management rules for the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      The following command lists all lifecycle management rules for the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule ls myminio/mydata
+         bm ilm rule ls mybuckit/mydata
 
       The output of the command might resemble the following:
 
@@ -103,7 +96,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule ls myminio/mydata
+      bm ilm rule ls mybuckit/mydata
 
 
 .. mc-cmd:: --expiry
@@ -167,7 +160,7 @@ The output resembles the following:
 
    {
     "status": "success",
-    "target": "myminio/mybucket",
+    "target": "mybuckit/mybucket",
     "config": {
      "Rules": [
       {

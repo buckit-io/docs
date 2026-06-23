@@ -8,13 +8,6 @@ Object Management
    :local:
    :depth: 1
 
-.. container:: extlinks-video
-
-   - `Versioning overview <https://youtu.be/XGOiwV6Cbuk?ref=docs>`__
-   - `Object locking and retention overview <https://youtu.be/Hk9Z-sltUu8?ref=docs>`__
-   - `Buckit Object Lifecycle Management Part I <https://youtu.be/Exg2KsfzHzI?ref=docs>`__
-   - `Buckit Object Lifecycle Management Part II <https://youtu.be/5fz3rE3wjGg?ref=docs>`__
-
 .. _objects:
 
 An :ref:`object <objects>` is binary data, such as images, audio files, spreadsheets, or even binary executable code. 
@@ -66,10 +59,10 @@ Path vs Virtual Host Bucket Access
 
 Buckit supports both :s3-docs:`path-style <VirtualHosting.html#path-style-access>` (default) or :s3-docs:`virtual-host bucket lookups <VirtualHosting.html>`.
 
-For example, consider a Buckit deployment with an assigned Fully Qualified Domain Name (FQDN) of ``minio.example.net``:
+For example, consider a Buckit deployment with an assigned Fully Qualified Domain Name (FQDN) of ``buckit.example.net``:
 
-- With path-style lookups, applications specify the full path to a bucket, such as ``minio.example.net/mybucket``.
-- With virtual-host lookups, applications specify the bucket as a subdomain, such as ``mybucket.minio.example.net/``.
+- With path-style lookups, applications specify the full path to a bucket, such as ``buckit.example.net/mybucket``.
+- With virtual-host lookups, applications specify the bucket as a subdomain, such as ``mybucket.buckit.example.net/``.
 
 Some applications may require or expect virtual-host lookup support when performing S3 operations against Buckit.
 To enable virtual-host bucket lookup, you must set the :envvar:`MINIO_DOMAIN` environment variable to a :abbr:`FQDN(Fully Qualified Domain Name)` that resolves to the Buckit Deployment.
@@ -77,17 +70,17 @@ To enable virtual-host bucket lookup, you must set the :envvar:`MINIO_DOMAIN` en
 If you configure ``MINIO_DOMAIN``, you **must** consider all subdomains of the specified FQDN as exclusively assigned for use as bucket names.
 Any Buckit services which conflict with those domains, such as replication targets, may exhibit unexpected or undesired behavior as a result of the collision. 
 
-For example, if setting ``MINIO_DOMAIN=minio.example.net``, you **cannot** assign any subdomains of ``minio.example.net`` (in the form of ``*.minio.example.net``) to any Buckit service or target. 
+For example, if setting ``MINIO_DOMAIN=buckit.example.net``, you **cannot** assign any subdomains of ``buckit.example.net`` (in the form of ``*.buckit.example.net``) to any Buckit service or target. 
 This includes hostnames for use with :ref:`bucket <minio-bucket-replication>`, :ref:`batch <minio-batch-framework-replicate-job>`, or :ref:`site replication <minio-site-replication-overview>`.
 
 .. important::
 
    For deployments with :ref:`TLS enabled <minio-tls>`, you **must** ensure your TLS certificate SANs cover all subdomains of the leftmost domain specified to :envvar:`MINIO_DOMAIN`.
 
-   For example, the example of ``MINIO_DOMAIN=minio.example.net`` requires a TLS SAN that covers the subdomains of ``minio.example.net``.
-   You can set an additional TLS SAN of ``*.minio.example.net`` to appropriately cover the subdomain namespace.
+   For example, the example of ``MINIO_DOMAIN=buckit.example.net`` requires a TLS SAN that covers the subdomains of ``buckit.example.net``.
+   You can set an additional TLS SAN of ``*.buckit.example.net`` to appropriately cover the subdomain namespace.
 
-   TLS Wildcard rules prevent chaining to additional subdomain levels, such that a TLS certificate with a wildcard SAN of ``*.example.net`` would **not** cover the virtual host lookups at ``*.minio.example.net``.
+   TLS Wildcard rules prevent chaining to additional subdomain levels, such that a TLS certificate with a wildcard SAN of ``*.example.net`` would **not** cover the virtual host lookups at ``*.buckit.example.net``.
 
 
 Object Organization and Planning
@@ -168,11 +161,11 @@ Object Tagging
 
 Buckit supports adding custom tags to an object.
 A tag is a key-value pair included in the metadata of an object.
-Tags can be used to control access with policies or locate an object with :mc-cmd:`mc find --tags`.
+Tags can be used to control access with policies or locate an object with :mc-cmd:`bm find --tags`.
 
 Buckit supports adding up to 10 custom tags to an object.
 
-For more on setting tags, refer to :mc:`mc tag set`.
+For more on setting tags, refer to :mc:`bm tag set`.
 
 Object Retention
 ----------------

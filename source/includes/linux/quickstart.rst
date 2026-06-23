@@ -31,31 +31,31 @@ Procedure
       :class: copyable
 
       mkdir ~/minio
-      minio server ~/minio --console-address :9001
+      buckit server ~/minio --console-address :9001
 
    The ``mkdir`` command creates the folder explicitly at the specified path.
 
    The ``minio server`` command starts the Buckit server. The path argument
    ``~/minio`` identifies the folder in which the server operates.
 
-   The :mc:`minio server` process prints its output to the system console, similar to the following:
+   The :mc:`buckit server <buckit server>` process prints its output to the system console, similar to the following:
 
    .. code-block:: shell
 
       API: http://192.0.2.10:9000  http://127.0.0.1:9000
-      RootUser: minioadmin
-      RootPass: minioadmin
+      RootUser: buckitadmin
+      RootPass: buckitadmin
 
       Console: http://192.0.2.10:9001 http://127.0.0.1:9001
-      RootUser: minioadmin
-      RootPass: minioadmin
+      RootUser: buckitadmin
+      RootPass: buckitadmin
 
       Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-         $ mc alias set myminio http://192.0.2.10:9000 minioadmin minioadmin
+         $ bm alias set mybuckit http://192.0.2.10:9000 buckitadmin buckitadmin
 
       Documentation: https://docs.min.io/community/minio-object-store/index.html
 
-      WARNING: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
+      WARNING: Detected default credentials 'buckitadmin:buckitadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables.
 
 #. **Connect Your Browser to the Buckit Server**
 
@@ -66,13 +66,13 @@ Procedure
    While the port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
 
    Log in to the Console with the ``RootUser`` and ``RootPass`` user credentials displayed in the output.
-   These default to ``minioadmin | minioadmin``.
+   These default to ``buckitadmin | buckitadmin``.
 
 #. `(Optional)` **Install the Buckit Client**
 
    The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit server from the commandline.
 
-   Download the :mc:`mc` client and install it to a location on your system ``PATH`` such as 
+   Download the :mc:`bm` client and install it to a location on your system ``PATH`` such as 
    ``/usr/local/bin``. You can alternatively run the binary from the download location.
 
    .. code-block:: shell
@@ -82,16 +82,16 @@ Procedure
       chmod +x mc
       sudo mv mc /usr/local/bin/mc
 
-   Use :mc:`mc alias set` to create a new alias associated to your local deployment.
-   You can run :mc-cmd:`mc` commands against this alias:
+   Use :mc:`bm alias set` to create a new alias associated to your local deployment.
+   You can run :mc-cmd:`bm` commands against this alias:
 
    .. code-block:: shell
       :class: copyable
 
-      mc alias set local http://127.0.0.1:9000 minioadmin minioadmin
-      mc admin info local
+      bm alias set local http://127.0.0.1:9000 buckitadmin buckitadmin
+      bm admin info local
 
-   The :mc:`mc alias set` takes four arguments:
+   The :mc:`bm alias set` takes four arguments:
 
    - The name of the alias
    - The hostname or IP address and port of the Buckit server

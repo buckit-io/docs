@@ -26,7 +26,7 @@ Glossary
 
    alias
      A locally defined reference to a Buckit Deployment used in most command line interface operations.
-     See :mc:`mc alias set`.
+     See :mc:`bm alias set`.
 
    audit logs
      Granular descriptions of each operation on a Buckit deployment.
@@ -48,7 +48,7 @@ Glossary
      A grouping of :term:`objects` and associated configurations.
 
    cluster
-     A group of drives and one or more Buckit server processes pooled into a single storage resource.
+     A group of drives and one or more :mc:`buckit server <buckit server>` processes pooled into a single storage resource.
      
      See also: :term:`tenant`.
 
@@ -232,14 +232,14 @@ Glossary
      These types of certificates do not expire or require periodic review, and they cannot be revoked.
 
    server logs
-     Records the ``minio server`` operations logged to the system console.
+     Records the :mc:`buckit server <buckit server>` operations logged to the system console.
      :ref:`Server logs <minio-logging>` support general monitoring and troubleshooting of operations.
 
      For more detailed logging information, see :term:`audit logs`.
 
    server pool
    pool
-     A set of ``minio server`` nodes which combine their drives and resources to support object storage and retrieval requests.
+     A set of :mc:`buckit server <buckit server>` nodes which combine their drives and resources to support object storage and retrieval requests.
     
      For more information, see :ref:`minio-intro-server-pool`.
 

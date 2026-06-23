@@ -56,7 +56,7 @@ A Buckit user can generate any number of access keys.
 This allows application owners to generate arbitrary access keys for their applications without requiring action from the Buckit administrators. 
 Since the generated access keys have the same or fewer permissions as the parents, administrators can focus on managing the top-level parent users without micro-managing generated access keys.
 
-You can create access keys by using the :mc:`mc admin user svcacct add` command.
+You can create access keys by using the :mc:`bm admin user svcacct add` command.
 Identities created by these methods do not expire until you remove the access key or the parent account.
 
 You can also create :ref:`security token service <minio-security-token-service>` accounts programmatically with the ``AssumeRole`` STS API endpoint.
@@ -96,8 +96,8 @@ credentials.
   the minimal set of actions and resources required to perform their assigned
   workloads. 
 
-If these variables are unset, :mc:`minio` defaults to ``minioadmin`` and
-``minioadmin`` as the access key and secret key respectively. Buckit *strongly
+If these variables are unset, Buckit defaults to ``buckitadmin`` and
+``buckitadmin`` as the access key and secret key respectively. Buckit *strongly
 discourages* use of the default credentials regardless of deployment
 environment.
 
@@ -119,22 +119,22 @@ User Management
 Create a User
 ~~~~~~~~~~~~~
 
-Use the :mc:`mc admin user add` command to create a new user on the
+Use the :mc:`bm admin user add` command to create a new user on the
 Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user add ALIAS ACCESSKEY SECRETKEY
+   bm admin user add ALIAS ACCESSKEY SECRETKEY
 
-- Replace :mc-cmd:`ALIAS <mc admin user add ALIAS>` with the
-  :mc:`alias <mc alias>` of the Buckit deployment.
+- Replace :mc-cmd:`ALIAS <bm admin user add ALIAS>` with the
+  :mc:`alias <bm alias>` of the Buckit deployment.
 
-- Replace :mc-cmd:`ACCESSKEY <mc admin user add ACCESSKEY>` with the 
+- Replace :mc-cmd:`ACCESSKEY <bm admin user add ACCESSKEY>` with the 
   access key for the user. Buckit allows retrieving the access key after
-  user creation through the :mc:`mc admin user info` command.
+  user creation through the :mc:`bm admin user info` command.
 
-- Replace :mc-cmd:`SECRETKEY <mc admin user add SECRETKEY>` with the
+- Replace :mc-cmd:`SECRETKEY <bm admin user add SECRETKEY>` with the
   secret key for the user. Buckit *does not* provide any method for retrieving
   the secret key once set.
 
@@ -142,30 +142,30 @@ Specify a unique, random, and long string for both the ``ACCESSKEY`` and
 ``SECRETKEY``. Your organization may have specific internal or regulatory
 requirements around generating values for use with access or secret keys. 
 
-After creating the user, use :mc:`mc admin policy attach` to associate a
+After creating the user, use :mc:`bm admin policy attach` to associate a
 :ref:`Buckit Policy Based Access Control <minio-policy>` to the new user. 
 The following command assigns the built-in :userpolicy:`readwrite` policy:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin policy attach ALIAS readwrite --user=USERNAME
+   bm admin policy attach ALIAS readwrite --user=USERNAME
 
 Replace ``USERNAME`` with the ``ACCESSKEY`` created in the previous step.
 
 Delete a User
 ~~~~~~~~~~~~~
 
-Use the :mc:`mc admin user rm` command to remove a user on a 
+Use the :mc:`bm admin user rm` command to remove a user on a 
 Buckit deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin user rm ALIAS USERNAME
+   bm admin user rm ALIAS USERNAME
 
-- Replace :mc-cmd:`ALIAS <mc admin user rm ALIAS>` with the
-  :mc:`alias <mc alias>` of the Buckit deployment.
+- Replace :mc-cmd:`ALIAS <bm admin user rm ALIAS>` with the
+  :mc:`alias <bm alias>` of the Buckit deployment.
 
-- Replace :mc-cmd:`USERNAME <mc admin user rm USERNAME>` with the name of
+- Replace :mc-cmd:`USERNAME <bm admin user rm USERNAME>` with the name of
   the user to remove.

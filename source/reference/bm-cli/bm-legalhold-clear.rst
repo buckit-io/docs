@@ -37,12 +37,12 @@ the object(s)
    .. tab-item:: EXAMPLE
 
       The following command removes the legal hold on all objects in the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm legalhold clear --recursive myminio/mydata
+         bm legalhold clear --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

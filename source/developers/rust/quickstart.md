@@ -27,7 +27,7 @@ use minio::s3::response::BucketExistsResponse;
 #[tokio::main]
 async fn main() {
     let base_url = "http://localhost:9000".parse::<BaseUrl>().unwrap();
-    let static_provider = StaticProvider::new("minioadmin", "minioadmin", None);
+    let static_provider = StaticProvider::new("buckitadmin", "buckitadmin", None);
     let client = MinioClient::new(base_url, Some(static_provider), None, None).unwrap();
 
     let exists: BucketExistsResponse = client

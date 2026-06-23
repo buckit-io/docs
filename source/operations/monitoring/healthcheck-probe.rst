@@ -24,9 +24,9 @@ Use the following endpoint to test if a Buckit server is online:
 .. code-block:: shell
    :class: copyable
 
-   curl -I https://minio.example.net:9000/minio/health/live
+   curl -I https://buckit.example.net:9000/minio/health/live
 
-Replace ``https://minio.example.net:9000`` with the DNS hostname of the
+Replace ``https://buckit.example.net:9000`` with the DNS hostname of the
 Buckit server to check.
 
 A response code of ``200 OK`` indicates the Buckit server is 
@@ -48,9 +48,9 @@ Use the following endpoint to test if a Buckit cluster has
 .. code-block:: shell
    :class: copyable
 
-   curl -I https://minio.example.net:9000/minio/health/cluster
+   curl -I https://buckit.example.net:9000/minio/health/cluster
 
-Replace ``https://minio.example.net:9000`` with the DNS hostname of a node
+Replace ``https://buckit.example.net:9000`` with the DNS hostname of a node
 in the Buckit cluster to check. For clusters using a load balancer to manage
 incoming connections, specify the hostname for the load balancer.
 
@@ -81,9 +81,9 @@ Use the following endpoint to test if a Buckit cluster has
 .. code-block:: shell
    :class: copyable
 
-   curl -I https://minio.example.net:9000/minio/health/cluster/read
+   curl -I https://buckit.example.net:9000/minio/health/cluster/read
 
-Replace ``https://minio.example.net:9000`` with the DNS hostname of a node
+Replace ``https://buckit.example.net:9000`` with the DNS hostname of a node
 in the Buckit cluster to check. For clusters using a load balancer to manage
 incoming connections, specify the hostname for the load balancer.
 
@@ -110,9 +110,9 @@ if the specified Buckit server is taken down for maintenance:
 .. code-block:: shell
    :class: copyable
 
-   curl -I https://minio.example.net:9000/minio/health/cluster?maintenance=true
+   curl -I https://buckit.example.net:9000/minio/health/cluster?maintenance=true
 
-Replace ``https://minio.example.net:9000`` with the DNS hostname of a node
+Replace ``https://buckit.example.net:9000`` with the DNS hostname of a node
 in the Buckit cluster to check. For clusters using a load balancer to manage
 incoming connections, specify the hostname for the load balancer.
 

@@ -26,13 +26,13 @@ The :mc:`bm idp ldap enable` command enables the currently configured AD/LDAP pr
 
    .. tab-item:: EXAMPLE
 
-      The following example enables the AD/LDAP configurations on the ``myminio`` deployment.
+      The following example enables the AD/LDAP configurations on the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
          bm idp ldap enable   \
-                     myminio
+                     mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -62,7 +62,7 @@ Parameters
 
    .. code-block:: none
 
-      bm idp ldap enable myminio
+      bm idp ldap enable mybuckit
 
 
 

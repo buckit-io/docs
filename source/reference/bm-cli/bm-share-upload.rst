@@ -32,12 +32,12 @@ documentation on :aws-docs:`Pre-Signed URLs
    .. tab-item:: EXAMPLE
 
       The following command generates a new presigned upload URL for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm share upload --recursive myminio/mydata
+         bm share upload --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

@@ -40,7 +40,7 @@ The description output includes the following details, as available:
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin accesskey info myminio myuseraccesskey 
+         bm admin accesskey info mybuckit myuseraccesskey 
 
    .. tab-item:: SYNTAX
 
@@ -91,9 +91,9 @@ Use :mc-cmd:`bm admin accesskey info` to display details of an access key on a B
 .. code-block:: shell
    :class: copyable
 
-      bm admin accesskey info myminio myaccesskey
+      bm admin accesskey info mybuckit myaccesskey
 
-- Replace ``myminio`` with the :mc-cmd:`alias <bm alias>` of the Buckit deployment.
+- Replace ``mybuckit`` with the :mc-cmd:`alias <bm alias>` of the Buckit deployment.
 
 - Replace :mc-cmd:`myaccesskey <bm admin user svcacct info ACCESSKEY>` with the access key for which to display information.
   List multiple keys by separating each with a space.

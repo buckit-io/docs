@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm tier update
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc-cmd:`bm ilm tier update` replaces ``bm admin tier edit``.
 
 Description
 -----------
@@ -97,14 +94,14 @@ Syntax
 
    .. tab-item:: EXAMPLE
 
-      The following example updates the credentials for an existing remote tier called ``S3TIER`` on the ``myminio`` deployment.
+      The following example updates the credentials for an existing remote tier called ``S3TIER`` on the ``mybuckit`` deployment.
       
       .. code-block:: shell
          :class: copyable
 
-          bm ilm tier update myminio S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY  
+          bm ilm tier update mybuckit S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY  
 
-      After running this command, lifecycle management rules on the ``myminio`` deployment use the tier's new credentials to transition objects into the remote location.
+      After running this command, lifecycle management rules on the ``mybuckit`` deployment use the tier's new credentials to transition objects into the remote location.
       Options not modified in the command maintain their existing configurations.
 
    .. tab-item:: SYNTAX
@@ -185,36 +182,14 @@ The command accepts the following arguments:
 .. mc-cmd:: --az-sp-tenant-id
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
-
-   Directory ID for the Azure service principal account.
-
-   This option only applies to remote storage tiers with :mc-cmd:`~bm ilm tier add TIER_TYPE` is ``azure``. 
-   This option has no effect for any other type of login.
 
 .. mc-cmd:: --az-sp-client-id
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
-
-   Client ID of the Azure service principal account.
-
-   Requires :mc-cmd:`~bm ilm tier update --az-sp-client-secret`.
-
-   This option only applies to remote storage tiers with :mc-cmd:`~bm ilm tier add TIER_TYPE` is ``azure``. 
-   This option has no effect for any other type of login.
 
 .. mc-cmd:: --az-sp-client-secret
    :optional:
 
-   .. versionadded:: mc RELEASE.2024-07-03T20-17-25Z 
-
-   The secret for the Azure service principal account.
-
-   Requires :mc-cmd:`~bm ilm tier update --az-sp-client-id`.
-
-   This option only applies to remote storage tiers with :mc-cmd:`~bm ilm tier add TIER_TYPE` is ``azure``. 
-   This option has no effect for any other type of login.
 
 .. mc-cmd:: --credentials-file
    :optional:
@@ -240,12 +215,12 @@ Examples
 Rotate Credentials for an S3 Remote Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example updates the credentials for an S3 remote tier called ``S3TIER`` on the ``myminio`` deployment.
+The following example updates the credentials for an S3 remote tier called ``S3TIER`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier update myminio S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY   
+   bm ilm tier update mybuckit S3TIER --access-key ACCESS_KEY --secret-key SECRET_KEY   
 
 - Replace ``S3TIER`` with the name for your Amazon Simple Storage Solution tier.
 - Replace ``ACCESS_KEY`` with the updated access key for your S3 storage.
@@ -254,12 +229,12 @@ The following example updates the credentials for an S3 remote tier called ``S3T
 Rotate Credentials for an Azure Blob Storage Remote Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example updates the credentials for an Azure remote tier called ``AXTIER`` on the ``myminio`` deployment.
+The following example updates the credentials for an Azure remote tier called ``AXTIER`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm ilm tier update myminio AZTIER --account-key ACCOUNT-KEY  
+   bm ilm tier update mybuckit AZTIER --account-key ACCOUNT-KEY  
 
 - Replace ``AZTIER`` with the name for your Azure tier.
 - Replace ``ACCOUNT-KEY`` with the updated key for your Azure storage.
@@ -267,12 +242,12 @@ The following example updates the credentials for an Azure remote tier called ``
 Rotate Credentials for a Google Cloud Storage Remote Tier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example updates the credentials for a Google Cloud Storage remote tier called ``GCSTIER`` on the ``myminio`` deployment.
+The following example updates the credentials for a Google Cloud Storage remote tier called ``GCSTIER`` on the ``mybuckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-    bm ilm tier update myminio GCSTIER --credentials-file /path/to/credentials.json    
+    bm ilm tier update mybuckit GCSTIER --credentials-file /path/to/credentials.json    
 
 
 - Replace ``GCSTIER`` with the name for your Google Cloud Storage tier.

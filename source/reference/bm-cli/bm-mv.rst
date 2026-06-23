@@ -29,12 +29,12 @@ similar results to the ``mv`` commandline tool.
    .. tab-item:: EXAMPLE
 
       The following command moves objects from the ``mydata`` bucket to the
-      ``archive`` bucket on the ``myminio`` Buckit deployment:
+      ``archive`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm mv --recursive myminio/mydata myminio/archive
+         bm mv --recursive mybuckit/mydata mybuckit/archive
 
    .. tab-item:: SYNTAX
 
@@ -92,7 +92,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm mv ~/mydata/object.txt play/mydata/otherobject.txt myminio/mydata
+      bm mv ~/mydata/object.txt play/mydata/otherobject.txt mybuckit/mydata
 
    If you specify a directory or bucket to :mc-cmd:`~bm mv SOURCE`, you must
    also specify :mc-cmd:`~bm mv --recursive` to recursively move the

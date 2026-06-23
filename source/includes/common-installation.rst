@@ -1,7 +1,7 @@
 .. start-install-minio-binary-desc
 
 The following tabs provide examples of installing Buckit onto 64-bit Linux operating systems using RPM, DEB, or binary.
-The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``minio`` service for ``systemctl``.
+The RPM and DEB packages automatically install Buckit to the necessary system paths and create a ``buckit`` service for ``systemctl``.
 Buckit strongly recommends using the RPM or DEB installation routes.
 To update deployments managed using ``systemctl``, see :ref:`minio-upgrade`.
 
@@ -105,36 +105,31 @@ You can validate the upgrade by computing the ``SHA256`` checksum of each binary
 
    shasum -a 256 /usr/local/bin/minio
 
-The output of :mc-cmd:`minio --version <minio server>` should also match across all hosts.
+The output of :mc-cmd:`buckit --version <buckit server>` should also match across all hosts.
 
 .. end-upgrade-minio-binary-desc
 
 .. start-install-minio-tls-desc
 
-Buckit enables :ref:`Transport Layer Security (TLS) <minio-tls>` 1.2+ 
+Buckit enables :ref:`Transport Layer Security (TLS) <minio-tls>` 1.2+
 automatically upon detecting a valid x.509 certificate (``.crt``) and
-private key (``.key``) in the Buckit ``${HOME}/.minio/certs`` directory.
+private key (``.key``) in the configured certificate directory.
 
-For ``systemd``-managed deployments, use the ``$HOME`` directory for the
-user which runs the Buckit server process. The provided ``minio.service``
-file runs the process as ``minio-user``. The previous step includes instructions
-for creating this user with a home directory ``/home/minio-user``.
+Specify the certificate directory using the
+:mc-cmd:`buckit server --certs-dir <buckit server --certs-dir>` commandline
+argument. For systemd-managed deployments, modify the ``MINIO_OPTS`` variable
+in ``/etc/default/minio`` to set this option.
 
-- Place TLS certificates into ``/home/minio-user/.minio/certs`` on each host.
+The systemd user which runs the :mc:`buckit server <buckit server>` process
+*must* have read and listing permissions for the specified directory.
+
+- Place TLS certificates into the configured certificate directory on each host.
 
 - If *any* Buckit server or client uses certificates signed by an unknown
   Certificate Authority (self-signed or internal CA), you *must* place the CA
-  certs in the ``/home/minio-user/.minio/certs/CAs`` on all Buckit hosts in the
-  deployment. Buckit rejects invalid certificates (untrusted, expired, or
-  malformed).
-
-If the ``minio.service`` file specifies a different user account, use the
-``$HOME`` directory for that account. Alternatively, specify a custom
-certificate directory using the :mc-cmd:`minio server --certs-dir`
-commandline argument. Modify the ``MINIO_OPTS`` variable in
-``/etc/default/minio`` to set this option. The ``systemd`` user which runs the
-Buckit server process *must* have read and listing permissions for the specified
-directory.
+  certs in the ``CAs`` subdirectory under the configured certificate directory
+  on all Buckit hosts in the deployment. Buckit rejects invalid certificates
+  (untrusted, expired, or malformed).
 
 For more specific guidance on configuring Buckit for TLS, including multi-domain
 support via Server Name Indication (SNI), see :ref:`minio-tls`. You can
@@ -147,7 +142,7 @@ recommends *against* non-TLS deployments outside of early development.
 
 Open your browser and access any of the Buckit hostnames at port ``:9001`` to
 open the :ref:`Buckit Console <minio-console>` login page. For example,
-``https://minio1.example.com:9001``.
+``https://buckit1.example.com:9001``.
 
 Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
 from the previous step.
@@ -269,17 +264,17 @@ Do **not** perform "rolling" (e.g. one node at a time) restarts.
 
    .. code-block::
 
-      https://minio-{1...4}.example.net/mnt/drive-{1...4}
-      https://minio-{5...8}.example.net/mnt/drive-{1...4}
-      https://minio-{9...12}.example.net/mnt/drive-{1...4}
+      https://buckit-{1...4}.example.net/mnt/drive-{1...4}
+      https://buckit-{5...8}.example.net/mnt/drive-{1...4}
+      https://buckit-{9...12}.example.net/mnt/drive-{1...4}
 
-   If you decommission the ``minio-{5...8}`` pool, you cannot add a new pool with the same node numbering.
-   You must add the new pool *after* ``minio-{9...12}``:
+   If you decommission the ``buckit-{5...8}`` pool, you cannot add a new pool with the same node numbering.
+   You must add the new pool *after* ``buckit-{9...12}``:
 
    .. code-block::
 
-      https://minio-{1...4}.example.net/mnt/drive-{1...4}
-      https://minio-{9...12}.example.net/mnt/drive-{1...4}
-      https://minio-{13...16}.example.net/mnt/drive-{1...4}
+      https://buckit-{1...4}.example.net/mnt/drive-{1...4}
+      https://buckit-{9...12}.example.net/mnt/drive-{1...4}
+      https://buckit-{13...16}.example.net/mnt/drive-{1...4}
 
 .. end-pool-order-must-not-change

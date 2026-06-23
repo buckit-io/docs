@@ -19,15 +19,15 @@ removing "old" objects after a certain time period or calendar date.
 Requirements
 ------------
 
-Install and Configure ``mc``
+Install and Configure ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This procedure uses :mc:`mc` for performing operations on the Buckit cluster.
-Install :mc:`mc` on a machine with network access to both source and destination
-clusters. See the ``mc`` :ref:`Installation Quickstart <mc-install>` for
-instructions on downloading and installing ``mc``.
+This procedure uses :mc:`bm` for performing operations on the Buckit cluster.
+Install :mc:`bm` on a machine with network access to both source and destination
+clusters. See the ``bm`` :ref:`Installation Quickstart <mc-install>` for
+instructions on downloading and installing ``bm``.
 
-Use the :mc:`mc alias set` command to create an alias for the source Buckit cluster
+Use the :mc:`bm alias set` command to create an alias for the source Buckit cluster
 and the destination S3-compatible service. Alias creation requires specifying an
 access key for a user on the source and destination clusters. The specified
 users must have :ref:`permissions
@@ -62,59 +62,59 @@ transition lifecycle management rules on any bucket in the cluster:.
 Expire Objects after Number of Days
 -----------------------------------
 
-Use :mc:`mc ilm rule add` with :mc-cmd:`~mc ilm rule add --expire-days` to
+Use :mc:`bm ilm rule add` with :mc-cmd:`~bm ilm rule add --expire-days` to
 expire bucket contents a number of days after object creation:
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add ALIAS/PATH --expire-days "DAYS" 
+   bm ilm rule add ALIAS/PATH --expire-days "DAYS" 
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule add ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <bm ilm rule add ALIAS>` with the 
+  :mc:`alias <bm alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm rule add ALIAS>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <bm ilm rule add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
-- Replace :mc-cmd:`DAYS <mc ilm rule add --expire-days>` with the number of days after
+- Replace :mc-cmd:`DAYS <bm ilm rule add --expire-days>` with the number of days after
   which to expire the object. For example, specify ``30`` to expire the
   object 30 days after creation.
 
 Expire Versioned Objects
 ------------------------
 
-Use :mc:`mc ilm rule add` to expiring noncurrent object versions and object
+Use :mc:`bm ilm rule add` to expiring noncurrent object versions and object
 delete markers: 
 
 - To expire noncurrent object versions after a specific duration in days,
-  include :mc-cmd:`~mc ilm rule add --noncurrent-expire-days`.
+  include :mc-cmd:`~bm ilm rule add --noncurrent-expire-days`.
 
 - To expire delete markers for objects with no remaining versions, 
-  include :mc-cmd:`~mc ilm rule add --expire-delete-marker`.
+  include :mc-cmd:`~bm ilm rule add --expire-delete-marker`.
 
 .. code-block:: shell
    :class: copyable
 
-   mc ilm rule add ALIAS/PATH \ 
+   bm ilm rule add ALIAS/PATH \ 
       --noncurrent-expire-days NONCURRENT_DAYS \
       --expire-delete-marker
 
-- To expire all versions of an object, include :mc-cmd:`~mc ilm rule add --expire-all-object-versions`.
+- To expire all versions of an object, include :mc-cmd:`~bm ilm rule add --expire-all-object-versions`.
   This expiration only applies to objects without a ``DeleteMarker`` as the latest or current version.
 
   .. code-block:: shell
      :class: copyable
   
-     mc ilm rule add ALIAS/PATH \ 
+     bm ilm rule add ALIAS/PATH \ 
         --expire-all-object-versions
 
-- Replace :mc-cmd:`ALIAS <mc ilm rule add ALIAS>` with the 
-  :mc:`alias <mc alias>` of the S3-compatible host.
+- Replace :mc-cmd:`ALIAS <bm ilm rule add ALIAS>` with the 
+  :mc:`alias <bm alias>` of the S3-compatible host.
 
-- Replace :mc-cmd:`PATH <mc ilm rule add ALIAS>` with the path to the bucket on the
+- Replace :mc-cmd:`PATH <bm ilm rule add ALIAS>` with the path to the bucket on the
   S3-compatible host.
 
 - Replace :mc-cmd:`NONCURRENT_DAYS 
-  <mc ilm rule add --noncurrent-expire-days>` with the number of days after
+  <bm ilm rule add --noncurrent-expire-days>` with the number of days after
   which to expire noncurrent object versions. For example, specify ``30d`` to
   expire a version after it has been noncurrent for at least 30 days.

@@ -8,25 +8,20 @@
    :local:
    :depth: 1
 
-.. mc:: mc support logs show
+.. mc:: bm support logs show
 .. mc:: bm admin logs
 
 .. include:: /includes/common-mc-support.rst
    :start-after: start-minio-only
    :end-before: end-minio-only
 
-.. versionchanged:: RELEASE.2022-12-02T23-48-47Z
-
-   ``mc support logs`` moved to ``bm admin logs`` and provide a simpler command interface for displaying server logs for the Buckit deployment.
-
-   The output is similar to what is available via ``journalctl -uf minio`` for systemd-controlled deployments.
 
 Description
 -----------
 
 .. start-mc-admin-logs-desc
 
-Use the :mc-cmd:`bm admin logs` command to show Buckit server logs.
+Use the :mc-cmd:`bm admin logs` command to show :mc:`buckit server <buckit server>` logs.
 
 .. end-mc-admin-logs-desc
 
@@ -55,7 +50,7 @@ The following command shows the most recent five log entries for a ``node1`` on 
 .. code-block:: shell
    :class: copyable
 
-   bm admin logs --last 5 myminio node1
+   bm admin logs --last 5 mybuckit node1
 
 Show Application Type Log Entires for a Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

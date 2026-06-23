@@ -31,12 +31,12 @@ The :mc:`bm idp ldap accesskey info` outputs information about the specified acc
 
    .. tab-item:: EXAMPLE
 
-         The following example outputs details for the access key ``mykey`` from the ``minio`` deployment:
+         The following example outputs details for the access key ``mykey`` from the ``buckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm idp ldap accesskey info minio/ mykey
+         bm idp ldap accesskey info buckit/ mykey
 
    .. tab-item:: SYNTAX
 
@@ -72,7 +72,7 @@ Parameters
 
    .. code-block:: none
 
-         bm idp ldap accesskey ls minio
+         bm idp ldap accesskey ls buckit
 
 .. mc-cmd:: KEY
    :required:
@@ -85,12 +85,12 @@ Parameters
 Example
 ~~~~~~~
 
-Output information about the access keys ``mykey`` and ``mykey2`` from the ``minio`` deployment.
+Output information about the access keys ``mykey`` and ``mykey2`` from the ``buckit`` deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   bm idp ldap accesskey info minio/ mykey mykey2
+   bm idp ldap accesskey info buckit/ mykey mykey2
 
 Global Flags
 ~~~~~~~~~~~~

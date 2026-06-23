@@ -266,8 +266,8 @@ The output resembles the following:
    
    Status:         1 Online, 0 Offline. 
    API: http://192.168.64.21:9000  http://127.0.0.1:9000       
-   RootUser: minioadmin 
-   RootPass: minioadmin 
+   RootUser: buckitadmin 
+   RootPass: buckitadmin 
    Object Lambda ARNs: arn:minio:s3-object-lambda::myfunction:webhook 
 
 
@@ -282,16 +282,16 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
    .. code-block:: shell
       :class: copyable
 
-      mc alias set myminio/ http://localhost:9000 minioadmin minioadmin
-      mc mb myminio/myfunctionbucket
+      bm alias set mybuckit/ http://localhost:9000 buckitadmin buckitadmin
+      bm mb mybuckit/myfunctionbucket
       cat > testobject << EOF
       Hello, World!
       EOF
-      mc cp testobject myminio/myfunctionbucket/
+      bm cp testobject mybuckit/myfunctionbucket/
 
 #. Invoke the Handler
 
-   The following Go code uses the :doc:`The Buckit Go SDK </developers/go/minio-go>` to generate a presigned URL and print it to ``stdout``.
+   The following Go code uses the AWS SDK for Go v2 to generate a presigned URL and print it to ``stdout``.
 
    .. code-block:: go
       :class: copyable
@@ -300,39 +300,71 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
 
       import (
          "context"
+         "fmt"
          "log"
+         "net/http"
          "net/url"
          "time"
-         "fmt"
 
-         "github.com/minio/minio-go/v7"
-         "github.com/minio/minio-go/v7/pkg/credentials"
+         "github.com/aws/aws-sdk-go-v2/aws"
+         "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+         "github.com/aws/aws-sdk-go-v2/config"
+         "github.com/aws/aws-sdk-go-v2/credentials"
       )
 
       func main() {
+         ctx := context.Background()
 
-         // Connect to the Buckit deployment
-         s3Client, err := minio.New("localhost:9000", &minio.Options{
-            Creds:  credentials.NewStaticV4("my_admin_user", "my_admin_password", ""),
-            Secure: false,
-         })
+         cfg, err := config.LoadDefaultConfig(
+            ctx,
+            config.WithRegion("us-east-1"),
+            config.WithCredentialsProvider(
+               credentials.NewStaticCredentialsProvider("my_admin_user", "my_admin_password", ""),
+            ),
+         )
          if err != nil {
             log.Fatalln(err)
          }
 
-         // Set the Lambda function target using its ARN
-         reqParams := make(url.Values)
-         reqParams.Set("lambdaArn", "arn:minio:s3-object-lambda::myfunction:webhook")
-
-         // Generate a presigned url to access the original object
-         presignedURL, err := s3Client.PresignedGetObject(context.Background(), "myfunctionbucket", "testobject", time.Duration(1000)*time.Second, reqParams)
+         reqURL, err := url.Parse("http://localhost:9000/myfunctionbucket/testobject")
          if err != nil {
             log.Fatalln(err)
          }
-	 
+
+         query := reqURL.Query()
+         query.Set("lambdaArn", "arn:minio:s3-object-lambda::myfunction:webhook")
+         reqURL.RawQuery = query.Encode()
+
+         req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL.String(), nil)
+         if err != nil {
+            log.Fatalln(err)
+         }
+
+         signer := v4.NewSigner()
+         creds, err := cfg.Credentials.Retrieve(ctx)
+         if err != nil {
+            log.Fatalln(err)
+         }
+
+         signedReq, _, err := signer.PresignHTTP(
+            ctx,
+            creds,
+            req,
+            "UNSIGNED-PAYLOAD",
+            "s3",
+            cfg.Region,
+            time.Now(),
+            func(options *v4.SignerOptions) {
+               options.Expires = 1000 * time.Second
+            },
+         )
+         if err != nil {
+            log.Fatalln(err)
+         }
+
          // Print the URL to stdout
-         fmt.Println(presignedURL)
-      }      
+         fmt.Println(signedReq.URL.String())
+      }
 
    In the code above, replace the following values:
 
@@ -353,7 +385,7 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
 
       *   Trying 127.0.0.1:9000...
       * Connected to localhost (127.0.0.1) port 9000 (#0)
-      > GET /myfunctionbucket/testobject?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230406%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230406T184749Z&X-Amz-Expires=1000&X-Amz-SignedHeaders=host&lambdaArn=arn%3Aminio%3As3-object-lambda%3A%3Amyfunction%3Awebhook&X-Amz-Signature=68fe7e03929a7c0da38255121b2ae09c302840c06654d1b79d7907d942f69915 HTTP/1.1
+      > GET /myfunctionbucket/testobject?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=buckitadmin%2F20230406%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230406T184749Z&X-Amz-Expires=1000&X-Amz-SignedHeaders=host&lambdaArn=arn%3Aminio%3As3-object-lambda%3A%3Amyfunction%3Awebhook&X-Amz-Signature=68fe7e03929a7c0da38255121b2ae09c302840c06654d1b79d7907d942f69915 HTTP/1.1
       > Host: localhost:9000
       > User-Agent: curl/7.81.0
       > Accept: */*
@@ -374,5 +406,3 @@ Then invoke the handler, in this case with ``curl``, using the presigned URL fro
       ...
       hELLO, wORLD!
       * Connection #0 to host localhost left intact
-
-

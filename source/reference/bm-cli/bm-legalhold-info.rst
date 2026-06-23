@@ -37,12 +37,12 @@ object locking enabled.
    .. tab-item:: EXAMPLE
 
       The following command retrieves the current legalhold status for objects
-      in the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      in the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm legalhold info --recursive myminio/mydata
+         bm legalhold info --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

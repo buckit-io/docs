@@ -20,8 +20,6 @@ This page provides an overview of Buckit's availability and resiliency design an
 
    The contents of this page are intended as a best-effort guide to understanding Buckit's intended design and philosophy behind availability and resiliency. 
 
-   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
-   Community Support is best-effort only and has no SLAs around responsiveness.
 
 Distributed Buckit Deployments
 ------------------------------
@@ -206,5 +204,4 @@ Sites can continue processing operations during resynchronization by proxying ``
 
    ``PUT`` and ``DELETE`` operations synchronize using the regular replication process.
    ``LIST`` operations do not proxy and require clients to issue them exclusively against healthy peers.
-
 

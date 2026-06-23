@@ -40,9 +40,6 @@ decommissioning a server pool.
    Decommissioning is a major administrative operation that requires care
    in planning and execution, and is not a trivial or 'daily' task. 
 
-   Community users can seek support on the `Buckit Community Slack
-   <https://slack.min.io>`__. Community Support is best-effort only and has
-   no SLAs around responsiveness.
 
 .. code-block:: shell
 
@@ -102,7 +99,7 @@ Parameters
 
    .. code-block:: shell
 
-      https://minio-{01...04}.example.net:9000/mnt/disk{1...4}
+      https://buckit-{01...04}.example.net:9000/mnt/disk{1...4}
 
 
 

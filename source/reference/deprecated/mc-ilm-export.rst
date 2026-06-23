@@ -12,9 +12,6 @@
 
 .. mc:: mc ilm export
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``mc ilm export`` replaced by :mc-cmd:`mc ilm rule export`.
 
 
 Syntax
@@ -22,27 +19,27 @@ Syntax
 
 .. start-mc-ilm-export-desc
 
-The :mc:`mc ilm export` command exports the object lifecycle management
+The :mc:`bm ilm export` command exports the object lifecycle management
 configuration for a Buckit bucket.
 
 .. end-mc-ilm-export-desc
 
-The :mc:`mc ilm export` command outputs to ``STDOUT`` by default. You can
+The :mc:`bm ilm export` command outputs to ``STDOUT`` by default. You can
 output the contents to a ``.json`` file for archival or ingestion using
-:mc:`mc ilm import`.
+:mc:`bm ilm import`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
       The following command exports the lifecycle management configuration
-      of the ``mydata`` bucket on the ``myminio`` deployment to the
+      of the ``mydata`` bucket on the ``mybuckit`` deployment to the
       ``mydata-lifecycle-config.json`` file:
 
       .. code-block:: shell
          :class: copyable
 
-         mc ilm export myminio/mydata > mydata-lifecycle-config.json
+         mc ilm export mybuckit/mydata > mydata-lifecycle-config.json
 
    .. tab-item:: SYNTAX
 
@@ -69,7 +66,7 @@ Parameters
 
    .. code-block:: none
 
-      mc ilm export myminio/mydata > bucket-lifecycle.json
+      mc ilm export mybuckit/mydata > bucket-lifecycle.json
 
 Global Flags
 ~~~~~~~~~~~~
@@ -94,7 +91,7 @@ Export the Bucket Lifecycle Management Configuration
       .. code-block:: shell
          :class: copyable
 
-         mc ilm export myminio/mybucket > bucket-lifecycle.json
+         mc ilm export mybuckit/mybucket > bucket-lifecycle.json
 
    .. tab-item:: Syntax
 
@@ -107,7 +104,7 @@ Export the Bucket Lifecycle Management Configuration
         deployment and the bucket for which to export object lifecycle
         management rules:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``file.json`` with the name of the file to which to export the
         lifecycle management rules.

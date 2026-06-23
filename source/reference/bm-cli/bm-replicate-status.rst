@@ -27,12 +27,12 @@ The status also lists the remote target path or location.
    .. tab-item:: EXAMPLE
 
       The following command displays the current replication status of the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate status myminio/mydata
+         bm replicate status mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -61,7 +61,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate status myminio/mybucket
+      bm replicate status mybuckit/mybucket
 
 .. mc-cmd:: --limit-download
    :optional:
@@ -137,8 +137,6 @@ Behavior
 
 Removed and Re-added ARNs
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionchanged:: mc RELEASE.2023-03-20T17-17-53Z
 
 The standard output of this command does not display ARNs previously removed from a replication configuration.
 

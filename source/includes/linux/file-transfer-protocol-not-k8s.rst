@@ -10,7 +10,7 @@
          .. code-block:: shell
             :class: copyable
 
-            minio server http://server{1...4}/disk{1...4} \
+            buckit server http://server{1...4}/disk{1...4} \
             --ftp="address=:8021"                         \
             --ftp="passive-port-range=30000-40000"        \
             --ftp="tls-private-key=path/to/private.key"   \
@@ -28,14 +28,14 @@
          .. code-block:: shell
             :class: copyable
 
-            minio server http://server{1...4}/disk{1...4}        \
+            buckit server http://server{1...4}/disk{1...4}        \
             --ftp="address=:8021"                                \
             --ftp="passive-port-range=30000-40000"               \
             --sftp="address=:8022"                               \
-            --sftp="ssh-private-key=/home/miniouser/.ssh/id_rsa" \
+            --sftp="ssh-private-key=/home/buckituser/.ssh/id_rsa" \
             ...
     
-         See the :mc-cmd:`minio server --ftp` and :mc-cmd:`minio server --sftp` for details on using these flags to start the Buckit service.
+         See the :mc-cmd:`buckit server --ftp <buckit server --ftp>` and :mc-cmd:`buckit server --sftp <buckit server --sftp>` for details on using these flags to start the Buckit service.
          To connect to the an FTP port with TLS (FTPS), pass the ``tls-private-key`` and ``tls-public-cert`` keys and values, as well, unless using the Buckit default TLS keys.
 
          The output of the command should return a response that resembles the following:
@@ -61,13 +61,14 @@
          :sync: sftp
 
 
-         The following example connects to an SFTP server, and lists the contents of a bucket named ``runner``.
+         The following example connects to an SFTP server as a Buckit user named ``buckituser``
+         and lists the contents of a bucket named ``runner``.
 
          .. code-block:: console
 
-            > sftp -P 8022 minio@localhost
-            minio@localhost's password:
-            Connected to localhost.
+            > sftp -P 8022 buckituser@buckit.example.net
+            buckituser@buckit.example.net's password:
+            Connected to buckit.example.net.
             sftp> ls runner/
             chunkdocs  testdir
 
@@ -75,14 +76,16 @@
       .. tab-item:: FTPS
          :sync: ftps
 
-         The following uses the Linux uses the `FTP CLI client <https://linux.die.net/man/1/ftp>`__ to connect to the Buckit server using ``minio`` credentials to list contents in a bucket named ``runner``
+         The following example uses the Linux `FTP CLI client <https://linux.die.net/man/1/ftp>`__
+         to connect to the Buckit server using a Buckit user named ``buckituser`` and list
+         contents in a bucket named ``runner``.
 
          .. code-block:: shell
 
-            > ftp localhost -P 8021
-            Connected to localhost.
+            > ftp buckit.example.net -P 8021
+            Connected to buckit.example.net.
             220 Welcome to Buckit FTP Server
-            Name (localhost:user): minio
+            Name (buckit.example.net:user): buckituser
             331 User name ok, password required
             Password:
             230 Password ok, continue
@@ -107,9 +110,9 @@
 
          .. code-block:: console
 
-            > sftp -P 8022 minio@localhost
-            minio@localhost's password:
-            Connected to localhost.
+            > sftp -P 8022 buckituser@buckit.example.net
+            buckituser@buckit.example.net's password:
+            Connected to buckit.example.net.
             sftp> ls runner/
             chunkdocs  testdir
             sftp> get runner/chunkdocs/metadata metadata
@@ -124,10 +127,10 @@
 
          .. code-block:: console
 
-            > ftp localhost -P 8021
-            Connected to localhost.
+            > ftp buckit.example.net -P 8021
+            Connected to buckit.example.net.
             220 Welcome to Buckit FTP Server
-            Name (localhost:user): minio
+            Name (buckit.example.net:user): buckituser
             331 User name ok, password required
             Password:
             230 Password ok, continue

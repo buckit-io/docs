@@ -10,11 +10,6 @@ Bucket Versioning
    :local:
    :depth: 2
 
-.. container:: extlinks-video
-
-   - `Versioning overview <https://youtu.be/XGOiwV6Cbuk?ref=docs>`__
-   - `Versioning lab <https://youtu.be/nFUI2N5zH34?ref=docs>`__
-
 Overview
 --------
 
@@ -72,10 +67,6 @@ Use the arrows on either side of the images to navigate from one to the next.
 
       Include the version ID to retrieve a specific version of an object during a read operation.
 
-.. versionchanged:: Buckit Server RELEASE.2023-05-04T21-44-30Z
-
-   Buckit does not create versions for creation, mutation, or deletion of explicit directory objects ("prefixes").
-   Objects created within that explicit directory object retain normal versioning behavior.
 
 Buckit implicitly determines prefixes from object paths.
 Explicit prefix creation typically only occurs with Spark and similar workloads which apply legacy POSIX/HDFS directory creation behavior within the S3 context.
@@ -123,13 +114,10 @@ more information.
 You can alternatively perform manual removal of object versions using the 
 following commands:
 
-- :mc-cmd:`mc rm --versions` - Removes all versions of an object.
-- :mc-cmd:`mc rm --versions --older-than <mc rm --older-than>` -
+- :mc-cmd:`bm rm --versions` - Removes all versions of an object.
+- :mc-cmd:`bm rm --versions --older-than <bm rm --older-than>` -
    Removes all versions of an object older than the specified calendar date.
 
-.. versionadded:: RELEASE.2024-04-18T19-09-19Z
-
-   Buckit emits a warning if the cumulative size of versions for any single object exceeds 1TiB.
 
 .. _minio-bucket-versioning-id:
 
@@ -149,7 +137,7 @@ process and authority to guarantee uniqueness.
    :align: center
 
 Buckit does not support client-managed version ID allocation. All version ID
-generation is handled by the Buckit server process.
+generation is handled by the :mc:`buckit server <buckit server>` process.
 
 For objects created while versioning is disabled or suspended, Buckit 
 uses a ``null`` version ID. You can access or remove these objects by specifying
@@ -222,19 +210,19 @@ are **irreversible**.
       as part of the ``DELETE`` operation. Deleting a specific version is 
       **permanent** and does not result in the creation of a ``DeleteMarker``.
 
-The following :mc:`mc` commands operate on ``DeleteMarkers`` or versioned 
+The following :mc:`bm` commands operate on ``DeleteMarkers`` or versioned 
 objects:
 
-- Use :mc-cmd:`mc ls --versions` to view all versions of an object,
+- Use :mc-cmd:`bm ls --versions` to view all versions of an object,
   including delete markers.
 
-- Use :mc-cmd:`mc cp --version-id=UUID ... <mc cp --version-id>` to 
+- Use :mc-cmd:`bm cp --version-id=UUID ... <bm cp --version-id>` to 
   retrieve the version of the "deleted" object with matching ``UUID``.
 
-- Use :mc-cmd:`mc rm --version-id=UUID ... <mc rm --version-id>` to delete
+- Use :mc-cmd:`bm rm --version-id=UUID ... <bm rm --version-id>` to delete
   the version of the object with matching ``UUID``.
 
-- Use :mc-cmd:`mc rm --versions` to delete *all* versions of an object.
+- Use :mc-cmd:`bm rm --versions` to delete *all* versions of an object.
 
 Tutorials
 ---------
@@ -242,22 +230,22 @@ Tutorials
 Enable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable versioning using the Buckit Console, the Buckit :mc:`mc` CLI, or
+You can enable versioning using the Buckit Console, the Buckit :mc:`bm` CLI, or
 using an S3-compatible SDK.
 
-Use the :mc:`mc version enable` command to enable versioning on an 
+Use the :mc:`bm version enable` command to enable versioning on an 
 existing bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc version enable ALIAS/BUCKET
+   bm version enable ALIAS/BUCKET
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured 
   Buckit deployment.
 
 - Replace ``BUCKET`` with the 
-  :mc-cmd:`target bucket <mc version enable ALIAS>` on which to enable
+  :mc-cmd:`target bucket <bm version enable ALIAS>` on which to enable
   versioning.
 
 Objects created prior to enabling versioning have a ``null`` :ref:`version ID <minio-bucket-versioning-id>`.
@@ -276,18 +264,18 @@ This is useful for Spark/Hadoop workloads or others that initially create object
 
    Buckit does not support excluding prefixes from versioning on buckets with :ref:`object locking enabled <minio-object-locking>`.
 
-- Use :mc:`mc version enable` with the :mc-cmd:`~mc version enable --excluded-prefixes` option:
+- Use :mc:`bm version enable` with the :mc-cmd:`~bm version enable --excluded-prefixes` option:
 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable --excluded-prefixes "prefix1, prefix2" ALIAS/BUCKET
+     bm version enable --excluded-prefixes "prefix1, prefix2" ALIAS/BUCKET
 
-  - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+  - Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
   - Replace ``BUCKET`` with the name of the :s3-docs:`bucket <UsingBucket.html>` you want to exclude :ref:`prefixes <minio-admin-concepts-organize-objects>` for.
 
-The list of :mc-cmd:`~mc version enable --excluded-prefixes` prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``prefix*``.
+The list of :mc-cmd:`~bm version enable --excluded-prefixes` prefixes match all objects containing the specified strings in their prefix or name, similar to a regular expression of the form ``prefix*``.
 To match objects by prefix only, use ``prefix/*``.
 
 For example, the following command excludes any objects containing ``_test`` or ``_temp`` in their prefix or name from versioning:
@@ -295,24 +283,24 @@ For example, the following command excludes any objects containing ``_test`` or 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable --excluded-prefixes "_test, _temp" local/my-bucket
+     bm version enable --excluded-prefixes "_test, _temp" local/my-bucket
 
 You can exclude up to 10 prefixes for each bucket.
-To add or remove prefixes, repeat the :mc:`mc version enable` command with an updated list.
+To add or remove prefixes, repeat the :mc:`bm version enable` command with an updated list.
 The new list of prefixes replaces the previous one.
 
-To view the currently excluded prefixes, use :mc:`mc version info` with the ``--json`` option:
+To view the currently excluded prefixes, use :mc:`bm version info` with the ``--json`` option:
 
   .. code-block:: shell
      :class: copyable
 
-     mc version info ALIAS/BUCKET --json
+     bm version info ALIAS/BUCKET --json
 
 The command output resembles the following, with the list of excluded prefixes in the ``ExcludedPrefixes`` property:
 
 .. code-block:: shell
 
-     $ mc version info local/my-bucket --json
+     $ bm version info local/my-bucket --json
      {
       "Op": "info",
       "status": "success",
@@ -326,12 +314,12 @@ The command output resembles the following, with the list of excluded prefixes i
       }
      }
 
-To disable prefix exclusion and resume versioning all prefixes, repeat the :mc:`mc version enable` command without :mc-cmd:`~mc version enable --excluded-prefixes`:
+To disable prefix exclusion and resume versioning all prefixes, repeat the :mc:`bm version enable` command without :mc-cmd:`~bm version enable --excluded-prefixes`:
 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable ALIAS/BUCKET
+     bm version enable ALIAS/BUCKET
 
      
 Exclude Folders from Versioning
@@ -352,30 +340,30 @@ You can exclude folders from versioning using the :ref:`Buckit Client <minio-cli
 
    Buckets with :ref:`object locking enabled <minio-object-locking>` require versioning and do not support excluding folders.
 
-- Use :mc:`mc version enable` with the :mc-cmd:`~mc version enable --exclude-folders` option to exclude objects with names ending in ``/`` from versioning:
+- Use :mc:`bm version enable` with the :mc-cmd:`~bm version enable --exclude-folders` option to exclude objects with names ending in ``/`` from versioning:
 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable --exclude-folders ALIAS/BUCKET
+     bm version enable --exclude-folders ALIAS/BUCKET
 
-  - Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured Buckit deployment.
+  - Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured Buckit deployment.
 
   - Replace ``BUCKET`` with the :s3-docs:`bucket <UsingBucket.html>` you want to exclude :ref:`folders <minio-admin-concepts-organize-objects>` for.
 
-To check whether folders are versioned for a bucket, use the :mc:`mc version enable` command with the ``--json`` option.
+To check whether folders are versioned for a bucket, use the :mc:`bm version enable` command with the ``--json`` option.
 If the ``ExcludeFolders`` property is ``true``, folders in that bucket are not versioned.
 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable --excluded-prefixes ALIAS/BUCKET --json
+     bm version info ALIAS/BUCKET --json
 
 The command output resembles the following:
 
 .. code-block:: shell
 
-     $ mc version info local/my-bucket --json
+     $ bm version info local/my-bucket --json
      {
       "Op": "info",
       "status": "success",
@@ -387,31 +375,31 @@ The command output resembles the following:
       }
      }
 
-To disable folder exclusion and resume versioning all folders, repeat the :mc:`mc version enable` command without :mc-cmd:`~mc version enable --exclude-folders`:
+To disable folder exclusion and resume versioning all folders, repeat the :mc:`bm version enable` command without :mc-cmd:`~bm version enable --exclude-folders`:
 
   .. code-block:: shell
      :class: copyable
 
-     mc version enable ALIAS/BUCKET
+     bm version enable ALIAS/BUCKET
 
 
 Suspend Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can suspend bucket versioning at any time using he Buckit :mc:`mc` CLI or using an S3-compatible SDK.
+You can suspend bucket versioning at any time using he Buckit :mc:`bm` CLI or using an S3-compatible SDK.
 
-Use the :mc:`mc version suspend` command to enable versioning on an existing bucket:
+Use the :mc:`bm version suspend` command to enable versioning on an existing bucket:
 
 .. code-block:: shell
    :class: copyable
 
-   mc version suspend ALIAS/BUCKET
+   bm version suspend ALIAS/BUCKET
 
-- Replace ``ALIAS`` with the :mc:`alias <mc alias>` of a configured 
+- Replace ``ALIAS`` with the :mc:`alias <bm alias>` of a configured 
   Buckit deployment.
 
 - Replace ``BUCKET`` with the 
-  :mc-cmd:`target bucket <mc mb ALIAS>` on which to disable
+  :mc-cmd:`target bucket <bm mb ALIAS>` on which to disable
   versioning.
 
 Objects created while versioning is suspended are assigned a ``null`` :ref:`version ID <minio-bucket-versioning-id>`. 

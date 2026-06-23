@@ -18,9 +18,6 @@ Specify the client secret Buckit uses when authenticating user credentials
 against the :abbr:`OIDC (OpenID Connect)` compatible provider. This field
 may be optional depending on the provider.
 
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
 .. end-minio-openid-client-secret
 
@@ -108,7 +105,7 @@ Include the Console hostname, port, and ``/oauth_callback``:
 
    http://buckit.example.net:consoleport/oauth_callback
 
-Ensure you start the Buckit Server with the :mc-cmd:`~minio server --console-address` option to set a static Console listen port.
+Ensure you start the Buckit Server with the :mc-cmd:`~buckit server --console-address` option to set a static Console listen port.
 The default behavior with that option omitted is to select a random port number at startup.
 
 The specified URI *must* match one of the approved redirect / callback URIs on the provider. 
@@ -205,15 +202,10 @@ privileges to support querying performing user and group lookups.
 Specify the password for the :ref:`Lookup-Bind 
 <minio-external-identity-management-ad-ldap-lookup-bind>` user account.
 
-.. versionchanged:: RELEASE.2023-06-23T20-26-00Z
-
-   Buckit redacts this value when returned as part of :mc-cmd:`bm admin config get`.
 
 .. end-minio-ad-ldap-lookup-bind-password
 
 .. start-minio-ad-ldap-user-dn-attributes
-
-.. versionadded:: RELEASE.2024-06-06T09-36-42Z
 
 Comma-separated list of user DN attributes.
 

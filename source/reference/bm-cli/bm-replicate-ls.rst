@@ -13,9 +13,6 @@
 .. mc:: bm replicate list
 .. mc:: bm replicate ls
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z 
-
-   ``bm replicate ls`` replaces the ``bm admin bucket remote ls`` command.
 
 Syntax
 ------
@@ -35,12 +32,12 @@ The :mc:`bm replicate list` command has equivalent functionality to :mc:`bm repl
    .. tab-item:: EXAMPLE
 
       The following command lists all enabled replication rules for the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm replicate ls --status "enabled" myminio/mydata
+         bm replicate ls --status "enabled" mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -69,7 +66,7 @@ Parameters
 
    .. code-block:: none
 
-      bm replicate ls myminio/mybucket
+      bm replicate ls mybuckit/mybucket
 
 
 .. mc-cmd:: --status

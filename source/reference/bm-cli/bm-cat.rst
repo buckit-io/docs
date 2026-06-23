@@ -78,14 +78,14 @@ Parameters
 
    .. code-block:: shell
 
-      bm cat myminio/mybucket/myobject.txt
+      bm cat mybuckit/mybucket/myobject.txt
 
    You can specify multiple objects on the same or different Buckit
    deployment. For example:
 
    .. code-block:: shell
 
-      bm cat myminio/mybucket/object.txt myminio/myotherbucket/object.txt
+      bm cat mybuckit/mybucket/object.txt mybuckit/myotherbucket/object.txt
 
    For an object on a local filesystem, specify the full path to that
    object. For example:

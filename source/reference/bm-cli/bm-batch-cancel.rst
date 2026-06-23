@@ -12,8 +12,6 @@
 
 .. mc:: bm batch cancel
 
-.. versionadded:: mc RELEASE.2023-03-20T17-17-53Z
-
 Syntax
 ------
 
@@ -35,7 +33,7 @@ To find the job ID, use :mc-cmd:`bm batch list`.
       .. code-block:: shell
          :class: copyable
 
-         bm batch cancel myminio KwSysDpxcBU9FNhGkn2dCf
+         bm batch cancel mybuckit KwSysDpxcBU9FNhGkn2dCf
 
    .. tab-item:: SYNTAX
 
@@ -77,12 +75,12 @@ Example
 Cancel an ongoing batch job
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command cancels the job with ID ``KwSysDpxcBU9FNhGkn2dCf`` on the deployment at alias ``myminio``:
+The following command cancels the job with ID ``KwSysDpxcBU9FNhGkn2dCf`` on the deployment at alias ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm batch cancel myminio KwSysDpxcBU9FNhGkn2dCf
+   bm batch cancel mybuckit KwSysDpxcBU9FNhGkn2dCf
 
 S3 Compatibility
 ~~~~~~~~~~~~~~~~

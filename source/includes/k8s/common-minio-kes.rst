@@ -13,7 +13,7 @@ Defer to the documentation for your chosen KMS solution for guidance on deployme
 
 .. start-kes-enable-sse-kms-desc
 
-You can use either the Buckit Tenant Console or the Buckit :mc:`mc` CLI to enable bucket-default SSE-KMS with the generated key:
+You can use either the Buckit Tenant Console or the Buckit :mc:`bm` CLI to enable bucket-default SSE-KMS with the generated key:
 
 .. tab-set::
 
@@ -37,20 +37,20 @@ You can use either the Buckit Tenant Console or the Buckit :mc:`mc` CLI to enabl
    .. tab-item:: Buckit CLI
 
       Use the :ref:`Buckit API Service <create-tenant-connect-tenant>` to create a new :ref:`alias <alias>` for the Buckit deployment.
-      You can then use the :mc:`mc encrypt set` command to enable SSE-KMS encryption for a bucket:
+      You can then use the :mc:`bm encrypt set` command to enable SSE-KMS encryption for a bucket:
 
       .. code-block:: shell
          :class: copyable
 
-         mc alias set k8s https://minio.minio-tenant-1.svc.cluster-domain.example:443 ROOTUSER ROOTPASSWORD
+         bm alias set k8s https://minio.minio-tenant-1.svc.cluster-domain.example:443 ROOTUSER ROOTPASSWORD
 
-         mc mb k8s/encryptedbucket
-         mc encrypt set SSE-KMS encrypted-bucket-key k8s/encryptedbucket
+         bm mb k8s/encryptedbucket
+         bm encrypt set SSE-KMS encrypted-bucket-key k8s/encryptedbucket
 
       For clients external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
-      Write a file to the bucket using :mc:`mc cp` or any S3-compatible SDK with a ``PutObject`` function. 
-      You can then run :mc:`mc stat` on the file to confirm the associated encryption metadata.
+      Write a file to the bucket using :mc:`bm cp` or any S3-compatible SDK with a ``PutObject`` function. 
+      You can then run :mc:`bm stat` on the file to confirm the associated encryption metadata.
 
 .. end-kes-enable-sse-kms-desc
 
@@ -63,9 +63,9 @@ You can use either the Buckit Tenant Console or the Buckit :mc:`mc` CLI to enabl
    See the documentation for your chosen KMS solution for more information.
 
 Buckit requires that the |EK| for a given bucket or object exist on the root KMS *before* performing |SSE| operations using that key.
-You can use the :mc-cmd:`mc admin kms key create` command against the Buckit Tenant.
+You can use the :mc-cmd:`bm admin kms key create` command against the Buckit Tenant.
 
-You must ensure your local host can access the Buckit Tenant pods and services before using :mc:`mc` to manage the Tenant.
+You must ensure your local host can access the Buckit Tenant pods and services before using :mc:`bm` to manage the Tenant.
 For hosts internal to the Kubernetes cluster, you can use the :kube-docs:`service DNS name <concepts/services-networking/dns-pod-service/#a-aaaa-records>`.
 For hosts external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
@@ -84,11 +84,11 @@ Run this command in a separate Terminal or Shell:
 
 The following commands in a new Terminal or Shell window:
 
-- Connect a local :mc:`mc` client to the Tenant.
+- Connect a local :mc:`bm` client to the Tenant.
 
 - Create the encryption key.
 
-See :ref:`mc-install` for instructions on installing ``mc`` on your local host.
+See :ref:`mc-install` for instructions on installing ``bm`` on your local host.
 
 .. code-block:: shell
    :class: copyable
@@ -96,9 +96,9 @@ See :ref:`mc-install` for instructions on installing ``mc`` on your local host.
    # Replace USERNAME and PASSWORD with a user on the tenant with administrative permissions
    # such as the root user
 
-   mc alias add k8s https://localhost:443 ROOTUSER ROOTPASSWORD
+   bm alias add k8s https://localhost:443 ROOTUSER ROOTPASSWORD
 
    # Replace my-new-key with the name of the key you want to use for SSE-KMS
-   mc admin kms key create k8s encrypted-bucket-key
+   bm admin kms key create k8s encrypted-bucket-key
 
 .. end-kes-generate-key-desc

@@ -10,12 +10,6 @@ Buckit Console Settings
    :local:
    :depth: 2
 
-.. versionchanged:: RELEASE.2025-05-24T17-08-30Z
-
-   The Console now presents only object browser capabilities similar to those available through the :mc:`mc` tool.
-   For administrative interactions, such as user management, use the :mc:`mc admin` command.
-
-   Some of the settings on this page may no longer be relevant for newer deployments.
 
 This page covers settings that manage access and behavior for the Buckit Console. 
 
@@ -61,14 +55,6 @@ Animation
 
       .. envvar:: MINIO_BROWSER_LOGIN_ANIMATION
 
-         .. versionadded:: Buckit Server RELEASE.2023-05-04T21-44-30Z
-
-         Specify ``off`` to disable the animated login screen for the Buckit Console. 
-         Defaults to ``on``.
-   .. tab-item:: Configuration Setting
-
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
 
 Browser Redirect
 ~~~~~~~~~~~~~~~~
@@ -81,15 +67,6 @@ Browser Redirect
 
       .. envvar:: MINIO_BROWSER_REDIRECT
 
-         .. versionadded:: Buckit Server RELEASE.2023-09-16T01-01-47Z
-
-        Specify whether requests from a web browser automatically redirect to the Console address.
-        Defaults to ``true``.
-
-   .. tab-item:: Configuration Setting
-
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
 
 Browser Redirect URL
 ~~~~~~~~~~~~~~~~~~~~
@@ -127,23 +104,6 @@ Session Duration
 
       .. envvar:: MINIO_BROWSER_SESSION_DURATION
 
-         .. versionadded:: Buckit Server RELEASE.2023-08-23T10-07-06Z
-
-         Specify the duration of a browser session for working with the Buckit Console.
-
-         Buckit supports the following units of time measurement:
-
-         - ``s`` - seconds, "60s"
-         - ``m`` - minutes, "60m"
-         - ``h`` - hours, "24h"
-         - ``d`` - days, "7d"
-      
-         Defaults to ``12h``.
-
-   .. tab-item:: Configuration Setting
-
-      This setting does not have a configuration variable setting.
-      Use the Environment Variable instead.
 
 Log Query URL
 ~~~~~~~~~~~~~
@@ -194,7 +154,7 @@ Defaults to ``default-src 'self' 'unsafe-eval' 'unsafe-inline';``
          .. code-block:: shell
             :class: copyable
 		 
-            mc admin config set browser \
+            bm admin config set browser \
                csp_policy="default-src 'self' 'unsafe-eval' 'unsafe-inline';" \
                [ARGUMENT=VALUE ...]
 
@@ -249,7 +209,7 @@ Other HSTS settings are optional.
       :sync: config
 
       The following configuration settings require a service restart to take effect.
-      To restart the service, use :mc-cmd:`mc admin service restart`.
+      To restart the service, use :mc-cmd:`bm admin service restart`.
 
       .. mc-conf:: browser hsts_seconds
          :delimiter: " "
@@ -261,7 +221,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            mc admin config set browser \
+            bm admin config set browser \
                hsts_seconds="31536000" \
                [ARGUMENT=VALUE ...]
 
@@ -274,7 +234,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            mc admin config set browser \
+            bm admin config set browser \
                hsts_include_subdomains="on" \
                hsts_seconds="31536000" \
                [ARGUMENT=VALUE ...]
@@ -288,7 +248,7 @@ Other HSTS settings are optional.
          .. code-block:: shell
             :class: copyable
 
-            mc admin config set browser \
+            bm admin config set browser \
                hsts_preload="on" \
                hsts_seconds="31536000" \
                [ARGUMENT=VALUE ...]
@@ -306,7 +266,7 @@ All examples use a value of ``31536000``, which is the number of seconds in a ca
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=31536000
+     bm admin config set ALIAS browser hsts_seconds=31536000
 
   .. code-block:: shell
      :class: copyable
@@ -318,7 +278,7 @@ All examples use a value of ``31536000``, which is the number of seconds in a ca
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on
+     bm admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on
 
   .. code-block:: shell
      :class: copyable
@@ -330,7 +290,7 @@ All examples use a value of ``31536000``, which is the number of seconds in a ca
   .. code-block:: shell
      :class: copyable
 
-     mc admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on hsts_preload=on
+     bm admin config set ALIAS browser hsts_seconds=31536000 hsts_include_subdomains=on hsts_preload=on
 
   .. code-block:: shell
      :class: copyable
@@ -366,7 +326,7 @@ Defaults to ``strict-origin-when-cross-origin``.
 
          .. code-block:: shell
 
-            mc admin config set browser \
+            bm admin config set browser \
                referrer_policy="strict-origin-when-cross-origin" \
                [ARGUMENT=VALUE ...]
 

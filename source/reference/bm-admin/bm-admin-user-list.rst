@@ -28,18 +28,18 @@ The :mc:`bm admin user list` command has equivalent functionality to :mc:`bm adm
 :mc-cmd:`bm admin user ls` does *not* return the access key or secret key associated to a user.
 Use :mc-cmd:`bm admin user info` to retrieve detailed user information, including the user access key.
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command lists all users on the ``myminio`` Buckit deployment:
+      The following command lists all users on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user ls myminio
+         bm admin user ls mybuckit
 
    .. tab-item:: SYNTAX
 

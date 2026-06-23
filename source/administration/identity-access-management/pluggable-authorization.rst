@@ -42,12 +42,12 @@ You can configure the Buckit External Access Management Plugin using the followi
 
    .. tab-item:: Configuration Settings
 
-      Set the following configuration settings using the :mc-cmd:`mc admin config set` command:
+      Set the following configuration settings using the :mc-cmd:`bm admin config set` command:
 
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set policy_plugin \
+         bm admin config set policy_plugin \
             url="https://external-authz.example.net:8080/authz" \
 
             # All other config settings are optional

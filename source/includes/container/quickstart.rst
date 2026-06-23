@@ -207,7 +207,7 @@ Procedure
 
 #. Connect your Browser to the Buckit Server
 
-   Access the :ref:`minio-console` by going to a browser and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`minio server` command's output.
+   Access the :ref:`minio-console` by going to a browser and going to ``http://127.0.0.1:9000`` or one of the Console addresses specified in the :mc:`buckit server <buckit server>` command's output.
    For example, :guilabel:`Console: http://192.0.2.10:9001 http://127.0.0.1:9001` in the example output indicates two possible addresses to use for connecting to the Console.
 
    While port ``9000`` is used for connecting to the API, Buckit automatically redirects browser access to the Buckit Console.
@@ -225,7 +225,7 @@ Procedure
 
       The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit server from the commandline.
 
-      Download the :mc:`mc` client and install it to a location on your system ``PATH`` such as 
+      Download the :mc:`bm` client and install it to a location on your system ``PATH`` such as 
       ``/usr/local/bin``. You can alternatively run the binary from the download location.
 
       .. code-block:: shell
@@ -235,18 +235,18 @@ Procedure
          chmod +x mc
          sudo mv mc /usr/local/bin/mc
    
-      Use :mc:`mc alias set` to create a new alias associated to your local deployment.
-      You can run :mc:`mc` commands against this alias:
+      Use :mc:`bm alias set` to create a new alias associated to your local deployment.
+      You can run :mc:`bm` commands against this alias:
 
       .. code-block:: shell
          :class: copyable
       
-         mc alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
-         mc admin info local
+         bm alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
+         bm admin info local
 
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
       
-      The :mc:`mc alias set` takes four arguments:
+      The :mc:`bm alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the Buckit server
@@ -292,17 +292,17 @@ Procedure
                chmod +x mc
                sudo mv mc /usr/local/bin/mc
       
-      Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
+      Use :mc:`bm alias set` to quickly authenticate and connect to the Buckit deployment.
       
       .. code-block:: shell
          :class: copyable
       
-         mc alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
-         mc admin info local
+         bm alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
+         bm admin info local
       
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
 
-      The :mc:`mc alias set` takes four arguments:
+      The :mc:`bm alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the Buckit server
@@ -315,7 +315,7 @@ Procedure
    
       Download the standalone Buckit server for Windows from the following link:
    
-      https://dl.min.io/client/mc/release/windows-amd64/mc.exe
+      https://dl.min.io/client/mc/release/windows-amd64/bm.exe
    
       Double click on the file to run it.
       Or, run the following in the Command Prompt or PowerShell.
@@ -323,19 +323,19 @@ Procedure
       .. code-block::
          :class: copyable
    
-         \path\to\mc.exe --help
+         \path\to\bm.exe --help
          
-      Use :mc:`mc alias set` to quickly authenticate and connect to the Buckit deployment.
+      Use :mc:`bm alias set` to quickly authenticate and connect to the Buckit deployment.
    
       .. code-block:: shell
          :class: copyable
    
-         mc.exe alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
-         mc.exe admin info local
+         bm.exe alias set local http://127.0.0.1:9000 {MINIO_ROOT_USER} {MINIO_ROOT_PASSWORD}
+         bm.exe admin info local
    
       Replace ``{MINIO_ROOT_USER}`` and ``{MINIO_ROOT_PASSWORD}`` with the credentials you defined for the container with the ``-e`` flags.
       
-      The :mc:`mc alias set` takes four arguments:
+      The :mc:`bm alias set` takes four arguments:
    
       - The name of the alias
       - The hostname or IP address and port of the Buckit server

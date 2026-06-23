@@ -58,21 +58,21 @@ Access Keys are long-lived credentials which inherit their privileges from the p
 The parent user can further restrict those privileges while creating the access keys. 
 Use either of the following methods to create a new access key:
 
-Use the :mc:`mc admin user svcacct add` command to create the access keys. 
+Use the :mc:`bm admin user svcacct add` command to create the access keys. 
 Specify the user Distinguished Name as the username to which to associate the access keys.
 
 
 Mapping Policies to User DN
 ---------------------------
 
-The following commands use :mc:`mc idp ldap policy attach` to associate an existing Buckit :ref:`policy <minio-policy>` to an AD/LDAP User DN.
+The following commands use :mc:`bm idp ldap policy attach` to associate an existing Buckit :ref:`policy <minio-policy>` to an AD/LDAP User DN.
 
 .. code-block:: shell
 
-   mc idp ldap policy attach myminio consoleAdmin \ 
+   bm idp ldap policy attach mybuckit consoleAdmin \ 
      --user='cn=sisko,cn=users,dc=example,dc=com'
    
-   mc idp ldap policy attach myminio readwrite,diagnostics \
+   bm idp ldap policy attach mybuckit readwrite,diagnostics \
      --user='cn=dax,cn=users,dc=example,dc=com'
 
 - Buckit would assign an authenticated user with DN matching 
@@ -90,14 +90,14 @@ The following commands use :mc:`mc idp ldap policy attach` to associate an exist
 Mapping Policies to Group DN
 ----------------------------
 
-The following commands use :mc:`mc idp ldap policy attach` to associate an existing Buckit :ref:`policy <minio-policy>` to an AD/LDAP Group DN.
+The following commands use :mc:`bm idp ldap policy attach` to associate an existing Buckit :ref:`policy <minio-policy>` to an AD/LDAP Group DN.
 
 .. code-block:: shell
 
-   mc idp ldap policy attach myminio consoleAdmin \
+   bm idp ldap policy attach mybuckit consoleAdmin \
      --group='cn=ops,cn=groups,dc=example,dc=com'
 
-   mc idp ldap policy attach myminio diagnostics \
+   bm idp ldap policy attach mybuckit diagnostics \
      --group='cn=engineering,cn=groups,dc=example,dc=com'
 
 - Buckit would assign any authenticating user with membership in the

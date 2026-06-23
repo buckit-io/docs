@@ -10,25 +10,22 @@
 
 .. mc:: mc admin speedtest
 
-.. versionchanged:: RELEASE.2022-07-24T02-25-13Z
-
-   ``mc admin speedtest`` replaced by :mc:`mc support perf`.
 
 Description
 -----------
 
 .. start-mc-admin-speedtest-desc
 
-The :mc-cmd:`mc admin speedtest` command tests throughputs per host with ``PUT`` 
+The :mc-cmd:`bm admin speedtest` command tests throughputs per host with ``PUT`` 
 and ``GET`` operations. 
 
 .. end-mc-admin-speedtest-desc
 
-:mc-cmd:`~mc admin speedtest` is available starting with ``mc``
+:mc-cmd:`~bm admin speedtest` is available starting with ``mc``
 :mc-release:`RELEASE.2021-09-02T09-21-27Z` and supports distributed Buckit
 deployments running :minio-release:`RELEASE.2021-07-30T00-02-00Z` or later.
 
-:mc-cmd:`~mc admin speedtest` does not support standalone or Buckit Gateway
+:mc-cmd:`~bm admin speedtest` does not support standalone or Buckit Gateway
 deployments.
 
 .. admonition:: Use ``mc admin`` on Buckit Deployments Only
@@ -41,20 +38,20 @@ deployments.
 Syntax
 ------
 
-:mc-cmd:`mc admin speedtest` has the following syntax:
+:mc-cmd:`bm admin speedtest` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc admin speedtest [FLAGS] TARGET
 
-:mc-cmd:`mc admin speedtest` supports the following arguments:
+:mc-cmd:`bm admin speedtest` supports the following arguments:
 
 .. mc-cmd:: TARGET
 
    *Required*
 
-   The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment to run the speedtest against.
+   The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment to run the speedtest against.
 
 .. mc-cmd:: --duration
    

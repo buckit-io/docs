@@ -19,9 +19,6 @@ List the entities associated with a policy, user, or group on a target Buckit de
 
 .. end-mc-admin-policy-entities-desc
 
-.. versionchanged:: RELEASE.2023-05-27T05-56-19Z
-
-   This command only returns :ref:`minio-managed users and groups <minio-users>`.
 
 To list entities associated with an Active Directory or LDAP (AD/LDAP) configuration, use :mc-cmd:`bm idp ldap policy entities`.
 
@@ -32,12 +29,12 @@ For example, you can list all of the users and groups attached to a policy or li
 
    .. tab-item:: EXAMPLE
 
-      The following command returns a list of the policies associated with the user ``bob`` on the deployment at alias ``myminio``.
+      The following command returns a list of the policies associated with the user ``bob`` on the deployment at alias ``mybuckit``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin policy entities myminio/ --user bob  
+         bm admin policy entities mybuckit/ --user bob  
 
    .. tab-item:: SYNTAX
 
@@ -112,41 +109,41 @@ Examples
 List all entities and policy associations for a deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all policies and the entity mappings associated with them on the deployment at alias ``myminio``.
+The following command lists all policies and the entity mappings associated with them on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy entities myminio/
+   bm admin policy entities mybuckit/
 
 List entities associated with two different policies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all entities associated with the policies ``inteam-policy`` and ``mlteam-policy`` on the deployment at alias ``myminio``.
+The following command lists all entities associated with the policies ``inteam-policy`` and ``mlteam-policy`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy entities myminio/ --policy finteam-policy --policy mlteam-policy
+   bm admin policy entities mybuckit/ --policy finteam-policy --policy mlteam-policy
 
 List policies associated with two different users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all policies associated with the users ``bob`` and ``james`` on the deployment at alias ``myminio``.
+The following command lists all policies associated with the users ``bob`` and ``james`` on the deployment at alias ``mybuckit``.
 
-The command outputs the list of policies associated with ``bob`` then the list of policies associated with ``james`` on the deployment at alias ``myminio``.
+The command outputs the list of policies associated with ``bob`` then the list of policies associated with ``james`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy entities myminio/ --user bob --user james 
+   bm admin policy entities mybuckit/ --user bob --user james 
 
 List policies associated with two different groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all policies associated with the groups ``auditors`` and ``accounting`` on the deployment at alias ``myminio``.
+The following command lists all policies associated with the groups ``auditors`` and ``accounting`` on the deployment at alias ``mybuckit``.
 
-The command outputs the list of policies associated with the group ``auditors`` then the list of policies associated with the group ``accounting`` on the deployment at alias ``myminio``.
+The command outputs the list of policies associated with the group ``auditors`` then the list of policies associated with the group ``accounting`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
@@ -156,9 +153,9 @@ The command outputs the list of policies associated with the group ``auditors`` 
 List policies associated with a policy, a group, and a user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following command lists all policies associated with the policy ``finteam-policy``, the user ``bobfisher``, and the group ``consulting`` on the deployment at alias ``myminio``.
+The following command lists all policies associated with the policy ``finteam-policy``, the user ``bobfisher``, and the group ``consulting`` on the deployment at alias ``mybuckit``.
 
-The command outputs the list of groups and users associated with the policy ``finteam-policy``, then lists the policies associated with the user ``bobfisher``, and finally lists the policies associated with the group ``consulting`` on the deployment at alias ``myminio``.
+The command outputs the list of groups and users associated with the policy ``finteam-policy``, then lists the policies associated with the user ``bobfisher``, and finally lists the policies associated with the group ``consulting`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable

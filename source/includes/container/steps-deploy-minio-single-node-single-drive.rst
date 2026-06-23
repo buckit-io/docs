@@ -36,7 +36,7 @@ Select the container management interface of your choice for the relevant comman
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \
-           minio server --console-address ":9001"
+           buckit server --console-address ":9001"
 
       Specify any other :podman-docs:`options <markdown/podman-run.1.html>` to ``podman run`` as necessary for your local environment.
 
@@ -53,7 +53,7 @@ Select the container management interface of your choice for the relevant comman
            -v /etc/default/minio:/etc/config.env         \
            -e "MINIO_CONFIG_ENV_FILE=/etc/config.env"    \
            --name "minio_local"                          \
-           minio server --console-address ":9001"
+           buckit server --console-address ":9001"
 
       Specify any other `options <https://docs.docker.com/engine/reference/commandline/run/>`__ to ``docker run`` as necessary for your local environment.
 
@@ -111,7 +111,7 @@ The following table describes each line of the command and provides additional c
 
    * - ``minio server --console-address ":9001"``
      - Starts the Buckit server using the ``minio:minio`` image pulled from an earlier step.
-       The :mc-cmd:`minio server --console-address ":9001" <minio server --console-address>` option directs the server to set a static port for the Buckit Console Web Interface.
+       The :mc-cmd:`buckit server --console-address ":9001" <buckit server --console-address>` option directs the server to set a static port for the Buckit Console Web Interface.
        This option is *required* for containerized environments.
 
        If you modify this value, ensure you set the proper port mapping using the ``-p`` flag to Podman/Docker to ensure traffic forwarding between the local host and the container.
@@ -130,14 +130,14 @@ The command should return a unique ID for the created container.
 
    Status:         1 Online, 0 Offline. 
    API: http://10.0.2.100:9000  http://127.0.0.1:9000       
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
    Console: http://10.0.2.100:9001 http://127.0.0.1:9001    
-   RootUser: myminioadmin 
-   RootPass: minio-secret-key-change-me 
+   RootUser: mybuckitadmin 
+   RootPass: buckit-secret-key-change-me 
 
    Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
-      $ mc alias set myminio http://10.0.2.100:9000 myminioadmin minio-secret-key-change-me
+      $ bm alias set mybuckit http://10.0.2.100:9000 mybuckitadmin buckit-secret-key-change-me
 
    Documentation: https://docs.min.io/community/minio-object-store/operations/deployments/baremetal-deploy-minio-as-a-container.html
 

@@ -57,8 +57,6 @@ write errors.
 .. admonition:: Buckit Professional Support
    :class: note
 
-   Community users can seek support on the `Buckit Community Slack <https://slack.min.io>`__. 
-   Community Support is best-effort only and has no SLAs around responsiveness.
 
 .. toctree::
    :titlesonly:

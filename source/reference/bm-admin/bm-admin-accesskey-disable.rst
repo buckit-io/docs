@@ -31,7 +31,7 @@ The :mc-cmd:`bm admin accesskey disable` command disables an existing access key
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin accesskey disable myminio myuserserviceaccount  
+         bm admin accesskey disable mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

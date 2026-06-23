@@ -25,7 +25,7 @@ The buckets can be on the same Buckit deployment or on separate Buckit deploymen
 
 .. note::
 
-   To configure replication between arbitrary S3-compatible services (not necessarily Buckit), use :mc:`mc mirror`.
+   To configure replication between arbitrary S3-compatible services (not necessarily Buckit), use :mc:`bm mirror`.
 
 
 Requirements
@@ -48,7 +48,7 @@ Click to expand any of the following:
 
    Buckit supports automatically replicating existing objects in a bucket.
 
-   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
+   Buckit requires explicitly enabling replication of existing objects using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate` and including the ``existing-objects`` replication feature flag. 
    This procedure includes the required flags for enabling replication of existing objects.
 
 .. dropdown:: Replication of Delete Operations
@@ -61,7 +61,7 @@ Click to expand any of the following:
 
    - For delete operations on versions of an object, Buckit replication also deletes those versions on the target bucket.
 
-   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`mc replicate add --replicate` or :mc-cmd:`mc replicate update --replicate`. 
+   Buckit requires explicitly enabling replication of delete operations using the :mc-cmd:`bm replicate add --replicate` or :mc-cmd:`bm replicate update --replicate`. 
    This procedure includes the required flags for enabling replication of delete operations and delete markers.
 
    Buckit does *not* replicate delete operations resulting from the application of :ref:`lifecycle management expiration rules <minio-lifecycle-management-expiration>`.
@@ -88,7 +88,7 @@ Procedure
 
 .. _minio-bucket-replication-one-way-minio-cli-procedure:
 
-Configure One-Way Bucket Replication Using the Command Line ``mc``
+Configure One-Way Bucket Replication Using the Command Line ``bm``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure uses the :ref:`aliases <alias>` ``SOURCE`` and ``REMOTE`` to reference each Buckit deployment being configured for replication. 
@@ -96,10 +96,6 @@ Replace these values with the appropriate alias for your target Buckit deploymen
 
 This procedure assumes each alias corresponds to a user with the :ref:`necessary replication permissions <minio-bucket-replication-serverside-oneway-permissions>`.
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   :mc:`mc replicate add` automatically creates the necessary replication targets, removing the need for using the deprecated ``mc admin remote bucket add`` command.
-   This procedure only documents the procedure as of that release.
 
 .. _minio-bucket-replication-one-way-minio-cli-create-remote-targets:
 
@@ -123,8 +119,8 @@ This procedure assumes each alias corresponds to a user with the :ref:`necessary
 
 .. seealso::
 
-   - Use the :mc:`mc replicate update` command to modify an existing replication rule.
+   - Use the :mc:`bm replicate update` command to modify an existing replication rule.
 
-   - Use the :mc:`mc replicate update` command with the :mc-cmd:`--state "disable" <mc replicate update --state>` flag to disable an existing replication rule.
+   - Use the :mc:`bm replicate update` command with the :mc-cmd:`--state "disable" <bm replicate update --state>` flag to disable an existing replication rule.
 
-   - Use the :mc:`mc replicate rm` command to remove an existing replication rule.
+   - Use the :mc:`bm replicate rm` command to remove an existing replication rule.

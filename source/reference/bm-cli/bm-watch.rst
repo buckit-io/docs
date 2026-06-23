@@ -31,12 +31,12 @@ the ``inotify -e modify,create,delete,move`` command.
 
       The following command watches for 
       :ref:`events <mc-event-supported-events>` on any object or prefix in the 
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm watch --recursive myminio/mydata
+         bm watch --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 
@@ -66,7 +66,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm watch myminio/mybucket
+      bm watch mybuckit/mybucket
 
 .. mc-cmd:: --event
    

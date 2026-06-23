@@ -90,17 +90,6 @@ The following sections describe the version 2 endpoints and metrics.
 
    .. tab-item:: Resource Metrics
 
-      .. versionadded:: RELEASE.2023-10-07T15-07-38Z 
-
-      You can scrape :ref:`resource metrics <minio-available-resource-metrics>` using the following URL endpoint:
-
-      .. code-block:: shell
-         :class: copyable
-
-         http://HOSTNAME:PORT/minio/v2/metrics/resource
-
-      Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
-      For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
 
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`

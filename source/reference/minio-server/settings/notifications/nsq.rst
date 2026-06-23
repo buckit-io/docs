@@ -49,12 +49,12 @@ For example, the following commands set two distinct NSQ service endpoints as ``
 
       .. code-block:: shell
 
-         mc admin config set notify_nsq:primary \ 
+         bm admin config set notify_nsq:primary \ 
             nsqd_address="ENDPOINT" \
             topic="<string>" \
             [ARGUMENT="VALUE"] ... \
    
-         mc admin config set notify_nsq:secondary \
+         bm admin config set notify_nsq:secondary \
             nsqd_address="ENDPOINT" \
             topic="<string>" \
             [ARGUMENT="VALUE"] ... \
@@ -83,7 +83,7 @@ Enable
 
       The top-level configuration key for defining an NSQ server/broker endpoint for use with :ref:`Buckit bucket notifications <minio-bucket-notifications>`.
    
-      Use :mc-cmd:`mc admin config set` to set or update an NSQ server/broker endpoint. 
+      Use :mc-cmd:`bm admin config set` to set or update an NSQ server/broker endpoint. 
       The following arguments are *required* for each endpoint: 
       
       - :mc-conf:`~notify_nsq.nsqd_address`
@@ -94,7 +94,7 @@ Enable
       .. code-block:: shell
          :class: copyable
    
-         mc admin config set notify_nsq                          \ 
+         bm admin config set notify_nsq                          \ 
             nsqd_address="https://nsq-endpoint.example.net:4150" \
             topic="<string>"                                     \
             [ARGUMENT="VALUE"] ...

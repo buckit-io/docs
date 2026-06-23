@@ -10,27 +10,21 @@
 
 .. mc:: mc quota set
 
-.. versionchanged:: RELEASE.2022-12-13T00-23-28Z
 
-   ``mc quota set`` replaced ``mc admin bucket quota --hard``.
-
-.. versionchanged:: RELEASE.2024-07-31T15-58-33Z
-
-   ``mc quota set`` is deprecated.
 
 Description
 -----------
 
 .. start-mc-quota-set-desc
 
-The :mc-cmd:`mc quota set` assigns a hard quota limit to a bucket beyond which Buckit does not allow writes.
+The :mc-cmd:`bm quota set` assigns a hard quota limit to a bucket beyond which Buckit does not allow writes.
 
 .. end-mc-quota-set-desc
 
 Units of Measurement
 ~~~~~~~~~~~~~~~~~~~~
 
-The :mc-cmd:`mc quota set --size` flag accepts the following **case-insensitive** suffixes to represent the unit of the specified size value:
+The :mc-cmd:`bm quota set --size` flag accepts the following **case-insensitive** suffixes to represent the unit of the specified size value:
 
 .. list-table::
    :header-rows: 1
@@ -72,7 +66,7 @@ Examples
 Configure a Hard Quota on a Bucket
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`mc quota set` with the :mc-cmd:`~mc quota set --size` flag to specify a hard quota on a bucket. 
+Use :mc-cmd:`bm quota set` with the :mc-cmd:`~bm quota set --size` flag to specify a hard quota on a bucket. 
 Hard quotas prevent the bucket size from growing past the specified limit.
 
 .. code-block:: shell
@@ -80,7 +74,7 @@ Hard quotas prevent the bucket size from growing past the specified limit.
 
    mc quota set TARGET/BUCKET --size LIMIT
 
-- Replace ``TARGET`` with the :mc-cmd:`alias <mc alias>` of a configured Buckit deployment. 
+- Replace ``TARGET`` with the :mc-cmd:`alias <bm alias>` of a configured Buckit deployment. 
   Replace ``BUCKET`` with the name of the bucket on which to set the hard quota.
 
 - Replace ``LIMIT`` with the maximum size to which the bucket can grow as an integer and, as desired, a suffix. 
@@ -89,20 +83,20 @@ Hard quotas prevent the bucket size from growing past the specified limit.
 Syntax
 ------
 
-:mc-cmd:`mc quota set` has the following syntax:
+:mc-cmd:`bm quota set` has the following syntax:
 
 .. code-block:: shell
    :class: copyable
 
    mc quota set TARGET --size LIMIT
 
-:mc-cmd:`mc quota set` supports the following arguments:
+:mc-cmd:`bm quota set` supports the following arguments:
 
 .. mc-cmd:: TARGET
    :required:
 
    The full path to the bucket for which the command creates the quota. 
-   Specify the :mc-cmd:`alias <mc alias>` of the Buckit deployment as a prefix to the path. 
+   Specify the :mc-cmd:`alias <bm alias>` of the Buckit deployment as a prefix to the path. 
    For example:
 
    .. code-block:: shell

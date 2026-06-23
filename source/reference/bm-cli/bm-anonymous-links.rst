@@ -31,12 +31,12 @@ and perform actions consistent with the specified policy without
    .. tab-item:: EXAMPLE
 
       The following command retrieves HTTP URLs for the ``mydata`` bucket
-      on the ``myminio`` Buckit deployment:
+      on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm anonymous links --recursive myminio/mydata
+         bm anonymous links --recursive mybuckit/mydata
 
    .. tab-item:: SYNTAX
 

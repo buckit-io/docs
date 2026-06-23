@@ -76,7 +76,7 @@ This can be an expensive operation to perform and the risk of bit rot across mul
 Healing by manual request
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Administrators can use :mc:`mc admin heal` to initiate a full system healing.
+Administrators can use :mc:`bm admin heal` to initiate a full system healing.
 The procedure is very resource intensive and not typically needed.
 
 Consult with Buckit Engineers before manually starting a healing process on a deployment.

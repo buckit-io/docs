@@ -12,9 +12,6 @@
 
 .. mc:: bm idp openid
 
-.. versionadded:: RELEASE.2023-05-26T23-31-54Z
-
-   :mc-cmd:`bm idp openid` and its subcommands replace ``bm admin idp openid``.
 
 Description
 -----------
@@ -86,12 +83,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example creates the configuration settings for the ``myminio`` deployment as defined in a new ``test-config`` setup for Dex integration.
+         The following example creates the configuration settings for the ``mybuckit`` deployment as defined in a new ``test-config`` setup for Dex integration.
 
          .. code-block:: shell
             :class: copyable
 
-             bm idp openid add myminio test-config                                        \
+             bm idp openid add mybuckit test-config                                        \
                 client_id=minio-client-app                                                \
                 client_secret=minio-client-app-secret                                     \
                 config_url="http://localhost:5556/dex/.well-known/openid-configuration"   \
@@ -125,13 +122,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example changes two of the configuration settings for the ``myminio`` deployment as defined in the ``test-config`` setup for Dex integration.
+         The following example changes two of the configuration settings for the ``mybuckit`` deployment as defined in the ``test-config`` setup for Dex integration.
 
          .. code-block:: shell
             :class: copyable
 
             bm idp openid update                      \
-                          myminio                     \
+                          mybuckit                     \
                           test_config                 \
                           scopes="openid,groups"      \
                           role_policy="consoleAdmin"
@@ -162,12 +159,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example removes the ``test-config`` settings for the ``myminio`` deployment.
+         The following example removes the ``test-config`` settings for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            bm idp openid rm myminio test_config
+            bm idp openid rm mybuckit test_config
 
       .. tab-item:: SYNTAX
 
@@ -192,12 +189,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs a list of all OpenID configuration sets defined for the ``myminio`` deployment.
+         The following example outputs a list of all OpenID configuration sets defined for the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            bm idp openid ls myminio
+            bm idp openid ls mybuckit
 
       .. tab-item:: SYNTAX
 
@@ -219,12 +216,12 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example outputs the configuration settings defined for the ``test_config`` set of OpenID settings on the ``myminio`` deployment.
+         The following example outputs the configuration settings defined for the ``test_config`` set of OpenID settings on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
-            bm idp openid info myminio test_config
+            bm idp openid info mybuckit test_config
 
       .. tab-item:: SYNTAX
 
@@ -249,13 +246,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example enables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example enables the server configurations defined as ``test_config`` on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             bm idp openid enable       \
-                          myminio      \
+                          mybuckit      \
                           test_config
 
       .. tab-item:: SYNTAX
@@ -281,13 +278,13 @@ Syntax
 
       .. tab-item:: EXAMPLE
 
-         The following example disables the server configurations defined as ``test_config`` on the ``myminio`` deployment.
+         The following example disables the server configurations defined as ``test_config`` on the ``mybuckit`` deployment.
 
          .. code-block:: shell
             :class: copyable
 
             bm idp openid disable      \
-                          myminio      \
+                          mybuckit      \
                           test_config
 
       .. tab-item:: SYNTAX

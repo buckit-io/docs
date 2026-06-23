@@ -44,7 +44,7 @@ Applications can no longer authenticate using that access key after removal.
       .. code-block:: shell  
          :class: copyable 
   
-         bm admin user svcacct rm myminio myuserserviceaccount  
+         bm admin user svcacct rm mybuckit myuserserviceaccount  
 
    .. tab-item:: SYNTAX
 

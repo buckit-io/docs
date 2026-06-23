@@ -13,7 +13,7 @@ Metrics and Logging Settings
 This page covers settings that control behavior related to Buckit metrics and logging. 
 See :ref:`minio-metrics-and-alerts` for more information.
 
-These settings configure publishing regular :mc:`minio server` logs and audit logs to an HTTP webhook. 
+These settings configure publishing regular :mc:`buckit server <buckit server>` logs and audit logs to an HTTP webhook. 
 See :ref:`minio-logging` for more complete documentation.
 
 .. include:: /includes/common-mc-admin-config.rst
@@ -49,7 +49,7 @@ This setting controls how Buckit authenticates to Prometheus.
 Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <minio-metrics-and-alerts>`.
 
 - ``jwt`` - *Default* Buckit requires that the scraping client specify a JWT token for authenticating requests. 
-   Use :mc-cmd:`mc admin prometheus generate` to generate the necessary JWT bearer tokens.
+   Use :mc-cmd:`bm admin prometheus generate` to generate the necessary JWT bearer tokens.
 
 - ``public`` Buckit does not require that scraping clients authenticate their requests.
 
@@ -59,7 +59,7 @@ Specifies the authentication mode for the Prometheus :ref:`scraping endpoints <m
 Server Logs
 -----------
 
-The following section documents settings for configuring Buckit to publish :mc:`minio server` logs to an HTTP webhook endpoint. 
+The following section documents settings for configuring Buckit to publish :mc:`buckit server <buckit server>` logs to an HTTP webhook endpoint. 
 See :ref:`minio-logging-publish-server-logs` for more complete documentation and tutorials on using these settings.
 
 Defining Multiple Endpoints
@@ -90,10 +90,10 @@ For example, the following settings define two distinct server logs webhook endp
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set logger_webhook:primary \
+         bm admin config set logger_webhook:primary \
             endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
 
-         mc admin config set logger_webhook:secondary \
+         bm admin config set logger_webhook:secondary \
             endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
 
 Settings
@@ -109,7 +109,7 @@ Enable
 
       .. envvar:: MINIO_LOGGER_WEBHOOK_ENABLE
 
-      Specify ``"on"`` to enable publishing :mc:`minio server` logs to the HTTP webhook endpoint.
+      Specify ``"on"`` to enable publishing :mc:`buckit server <buckit server>` logs to the HTTP webhook endpoint.
       
       Requires specifying :envvar:`MINIO_LOGGER_WEBHOOK_ENDPOINT`.
    
@@ -194,7 +194,7 @@ Auth Token
          .. code-block:: shell
             :class: copyable
    
-               mc admin config set myminio logger_webhook   \
+               bm admin config set mybuckit logger_webhook   \
                   endpoint="https://webhook-1.example.net"  \
                   auth_token="Bearer 1a2b3c4f5e"
    
@@ -204,7 +204,7 @@ Auth Token
          .. code-block:: shell
             :class: copyable
    
-               mc admin config set myminio logger_webhook   \
+               bm admin config set mybuckit logger_webhook   \
    	            endpoint="https://webhook-1.example.net"  \
                   auth_token="ServiceXYZ 1a2b3c4f5e"
    
@@ -212,8 +212,6 @@ Auth Token
 
 Batch Size
 ++++++++++
-
-.. versionadded:: Buckit Server RELEASE.2024-03-10T02-53-48Z
 
 *Optional*
 
@@ -295,16 +293,12 @@ Proxy
       .. mc-conf:: logger_webhook proxy
          :delimiter: " "
 
-      .. versionadded:: Buckit RELEASE.2023-02-22T18-23-45Z 
-
 Define a proxy to use for the webhook logger when communicating from Buckit to external webhooks.
 
 Queue Directory
 +++++++++++++++
 
 *Optional*
-
-.. versionadded:: RELEASE.2023-05-18T00-05-36Z
 
 .. tab-set::
 
@@ -388,14 +382,14 @@ For example, the following commands set two distinct audit log webhook endpoints
          The top-level configuration key for defining an HTTP webhook target for
          publishing :ref:`Buckit audit logs <minio-logging>`. 
       
-         Use :mc-cmd:`mc admin config set` to set or update an HTTP webhook target.
+         Use :mc-cmd:`bm admin config set` to set or update an HTTP webhook target.
          Specify additional optional arguments as a whitespace (``" "``)-delimited 
          list.
       
          .. code-block:: shell
             :class: copyable
       
-            mc admin config set audit_webhook \
+            bm admin config set audit_webhook \
                endpoint="http://webhook.example.net" [ARGUMENTS=VALUE ...]
       
          You can specify multiple HTTP webhook targets by appending 
@@ -406,11 +400,11 @@ For example, the following commands set two distinct audit log webhook endpoints
          .. code-block:: shell
             :class: copyable
       
-            mc admin config set audit_webhook:primary \
+            bm admin config set audit_webhook:primary \
                endpoint="http://webhook-01.example.net" [ARGUMENTS=VALUE ...]
       
       
-            mc admin config set audit_webhook:secondary \
+            bm admin config set audit_webhook:secondary \
                endpoint="http://webhook-02.example.net" [ARGUMENTS=VALUE ...]
 
 Settings
@@ -506,7 +500,7 @@ Depending on the endpoint, you may need to include additional information.
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set myminio audit_webhook       \
+         bm admin config set mybuckit audit_webhook       \
                   endpoint="http://webhook.example.net"  \
                   auth_token="Bearer 1a2b3c4f5e"
 
@@ -517,7 +511,7 @@ Depending on the endpoint, you may need to include additional information.
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set myminio audit_webhook       \
+         bm admin config set mybuckit audit_webhook       \
                   endpoint="http://webhook.example.net"  \
                   auth_token="ServiceXYZ 1a2b3c4f5e"
 
@@ -525,8 +519,6 @@ Consult the documentation for the desired service for more details.
 
 Batch Size
 ++++++++++
-
-.. versionadded:: Buckit Server RELEASE.2024-03-10T02-53-48Z
 
 *Optional*
 
@@ -616,8 +608,6 @@ Queue Directory
       .. mc-conf:: audit_webhook queue_dir
          :delimiter: " "
 
-.. versionadded:: RELEASE.2023-05-18T00-05-36Z
-
 Specify the directory path, such as ``/opt/minio/events``, to enable Buckit's persistent event store for undelivered messages.
 The Buckit process must have read, write, and list access on the specified directory.
 
@@ -657,13 +647,13 @@ The following section documents environment variables for configuring Buckit to 
 
    The top-level configuration key for defining a Kafka broker target for publishing :ref:`Buckit audit logs <minio-logging>`.
 
-   Use :mc-cmd:`mc admin config set` to set or update a Kafka audit target.
+   Use :mc-cmd:`bm admin config set` to set or update a Kafka audit target.
    Specify additional optional arguments as a whitespace (``" "``)-delimited list.
 
    .. code-block:: shell
       :class: copyable
 
-      mc admin config set audit_kafka \
+      bm admin config set audit_kafka \
          brokers="https://kafka-endpoint.example.net:9092" [ARGUMENTS=VALUE ...]
 
 

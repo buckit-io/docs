@@ -12,21 +12,18 @@
 
 .. mc:: mc admin idp ldap policy
 
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``mc admin idp ldap policy`` and its subcommands replaced by :mc-cmd:`mc idp ldap policy`.
 
 Description
 -----------
 
 .. start-mc-admin-idp-ldap-policy-desc
 
-The :mc-cmd:`mc admin idp ldap policy` command allows you to view the mapping relationships between policies and the associated groups or users.
+The :mc-cmd:`bm admin idp ldap policy` command allows you to view the mapping relationships between policies and the associated groups or users.
 
 .. end-mc-admin-idp-ldap-policy-desc
 
 
-The :mc-cmd:`mc admin idp ldap policy` command has the following subcommands:
+The :mc-cmd:`bm admin idp ldap policy` command has the following subcommands:
 
 .. list-table::
    :header-rows: 1
@@ -35,13 +32,13 @@ The :mc-cmd:`mc admin idp ldap policy` command has the following subcommands:
    * - Subcommand
      - Description
 
-   * - :mc-cmd:`mc admin idp ldap policy attach`
+   * - :mc-cmd:`bm admin idp ldap policy attach`
      - Attach a policy to an entity
 
-   * - :mc-cmd:`mc admin idp ldap policy detach`
+   * - :mc-cmd:`bm admin idp ldap policy detach`
      - Detach a policy from an entity
 
-   * - :mc-cmd:`mc admin idp ldap policy entities`
+   * - :mc-cmd:`bm admin idp ldap policy entities`
      - List policy entity mappings
 
 Syntax
@@ -55,23 +52,23 @@ Syntax
 
       .. tab-item:: EXAMPLES
 
-         The following example attaches two policies, ``policy1`` and ``policy2``, to the ``projectb`` group on the ``myminio`` deployment. 
+         The following example attaches two policies, ``policy1`` and ``policy2``, to the ``projectb`` group on the ``mybuckit`` deployment. 
 
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp ldap policy attach myminio/                                               \
+             mc admin idp ldap policy attach mybuckit/                                               \
                                              policy1                                                \
                                              policy2                                                \
                                              --group='cn=projectb,ou=groups,ou=swengg,dc=min,dc=io'
 
 
-         The following example attaches the policy, ``userpolicy``, to the user ``bobfisher`` on the ``myminio`` deployment. 
+         The following example attaches the policy, ``userpolicy``, to the user ``bobfisher`` on the ``mybuckit`` deployment. 
 
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp ldap policy attach myminio/                                               \
+             mc admin idp ldap policy attach mybuckit/                                               \
                                              mypolicy                                               \
                                              policy2                                                \
                                              --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'
@@ -105,23 +102,23 @@ Syntax
 
       .. tab-item:: EXAMPLES
 
-         The following example detaches two policies, ``policy1`` and ``policy2``, from the ``projectb`` group on the ``myminio`` deployment. 
+         The following example detaches two policies, ``policy1`` and ``policy2``, from the ``projectb`` group on the ``mybuckit`` deployment. 
 
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp ldap policy detach myminio/                                               \
+             mc admin idp ldap policy detach mybuckit/                                               \
                                              policy1                                                \
                                              policy2                                                \
                                              --group='cn=projectb,ou=groups,ou=swengg,dc=min,dc=io'
 
 
-         The following example detaches the policy, ``userpolicy``, from the user ``bobfisher`` on the ``myminio`` deployment. 
+         The following example detaches the policy, ``userpolicy``, from the user ``bobfisher`` on the ``mybuckit`` deployment. 
 
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp ldap policy detach myminio/                                               \
+             mc admin idp ldap policy detach mybuckit/                                               \
                                              mypolicy                                               \
                                              policy2                                                \
                                              --user='uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'
@@ -154,7 +151,7 @@ Syntax
 
       .. tab-item:: EXAMPLES
 
-         The following example lists all mappings for a specific policy, a set of groups, and a selection of users on the ``myminio`` deployment.
+         The following example lists all mappings for a specific policy, a set of groups, and a selection of users on the ``mybuckit`` deployment.
 
          Specifically, it lists 
          - Users mapped to the ``finteam-policy`` policy.
@@ -164,7 +161,7 @@ Syntax
          .. code-block:: shell
             :class: copyable
 
-             mc admin idp ldap policy entities myminio/                                            \
+             mc admin idp ldap policy entities mybuckit/                                            \
                                           --policy finteam-policy                                  \
                                           --user 'uid=bobfisher,ou=people,ou=hwengg,dc=min,dc=io'  \
                                           --group 'cn=projectb,ou=groups,ou=swengg,dc=min,dc=io' 

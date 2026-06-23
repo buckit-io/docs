@@ -26,22 +26,18 @@ Use this command to allow applications to access a tiered object through the
 Buckit deployment (e.g. "hot tier"). The archived object remains on the remote
 tier, while the temporary copy becomes ``HEAD`` for that object.
 
-.. versionadded:: mc RELEASE.2023-04-12T02-21-51Z
-
-   Use :mc:`bm stat` to display whether a restored object reads from the local temporary copy or the remote tier.
-   Objects currently in the process of restoration from the remote tier show a status of ``Ongoing : true``.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
       The following command restores a copy of a transitioned object from the
-      remote tier back to the ``myminio`` Buckit deployment:
+      remote tier back to the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm restore myminio/mybucket/object.txt
+         bm ilm restore mybuckit/mybucket/object.txt
 
    .. tab-item:: SYNTAX
 
@@ -73,7 +69,7 @@ Parameters
 
    .. code-block:: shell
 
-      bm ilm restore myminio/mybucket/object.txt
+      bm ilm restore mybuckit/mybucket/object.txt
 
 .. mc-cmd:: --days                     
    :optional:
@@ -119,7 +115,7 @@ The following command restores an object archived to a remote tier:
 .. code-block:: shell
    :class: copyable
 
-   bm ilm restore myminio/mybucket/object.txt
+   bm ilm restore mybuckit/mybucket/object.txt
 
 
 Restore a Specific Archived Object Version
@@ -131,7 +127,7 @@ remote tier:
 .. code-block:: shell
    :class: copyable
 
-   bm ilm restore --vid "VERSIONID" myminio/mybucket/object.txt
+   bm ilm restore --vid "VERSIONID" mybuckit/mybucket/object.txt
 
 Restore All Archived Objects at a Bucket Prefix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,7 +138,7 @@ the remote tier:
 .. code-block:: shell
    :class: copyable
 
-   bm ilm restore --recursive myminio/mybucket/data/
+   bm ilm restore --recursive mybuckit/mybucket/data/
 
 Behavior
 --------

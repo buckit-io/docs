@@ -90,22 +90,8 @@ Site Healing
 
 Any Buckit deployment in the site replication configuration can resynchronize damaged :ref:`replica-eligible data <minio-site-replication-what-replicates>` from the peer with the most updated ("latest") version of that data.
 
-.. versionchanged:: RELEASE.2023-07-18T17-49-40Z
 
-   Site replication operations retry up to three (3) times.
-   
-   Buckit dequeues replication operations that fail to replicate after three attempts.
-   The :ref:`scanner <minio-concepts-scanner>` picks up those affected objects at a later time and requeues them for replication.
 
-.. versionchanged:: RELEASE.2022-08-11T04-37-28Z
-
-   Failed or pending replications requeue automatically when performing any ``GET`` or ``HEAD`` API method. 
-   For example, using :mc:`mc stat`, :mc:`mc cat`, or :mc:`mc ls` commands after a site comes back online prompts healing to requeue.
-
-.. versionchanged:: RELEASE.2022-12-02T23-48-47Z
-
-   If one site loses data for any reason, resynchronize the data from another healthy site with :mc-cmd:`mc admin replicate resync`.
-   This launches an active process that resynchronizes the data without waiting for the passive :ref:`Buckit scanner <minio-concepts-scanner>` to recognize the missing data.
 
 .. include:: /includes/common/scanner.rst
    :start-after: start-scanner-speed-config
@@ -120,7 +106,7 @@ Synchronous vs Asynchronous Replication
 
 Buckit strongly recommends using the default asynchronous site replication.
 Synchronous site replication performance depends strongly on latency between sites, where higher latency can result in lower PUT performance and replication lag.
-To configure synchronous site replication use :mc-cmd:`mc admin replicate update` with the :mc-cmd:`~mc admin replicate update --mode` option.
+To configure synchronous site replication use :mc-cmd:`bm admin replicate update` with the :mc-cmd:`~bm admin replicate update --mode` option.
 
 Proxy to Other Sites
 ~~~~~~~~~~~~~~~~~~~~
@@ -147,7 +133,7 @@ Prerequisites
 Back Up Cluster Settings First
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc admin cluster bucket export` and :mc:`mc admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to configuring Site Replication.
+Use the :mc:`bm admin cluster bucket export` and :mc:`bm admin cluster iam export` commands to take a snapshot of the bucket metadata and IAM configurations respectively prior to configuring Site Replication.
 You can use these snapshots to restore bucket/IAM settings in the event of misconfiguration during site replication configuration.
 
 One Site with Data at Setup
@@ -170,7 +156,7 @@ All Sites Must use the Same Buckit Server Version
 All sites must have a matching and consistent Buckit Server version. 
 Configuring replication between sites with mismatched Buckit Server versions may result in unexpected or undesired replication behavior.
 
-You should also ensure the :mc:`mc` version used to configure replication closely matches the server version.
+You should also ensure the :mc:`bm` version used to configure replication closely matches the server version.
 
 Access to the Same Encryption Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -201,7 +187,7 @@ Switch to Site Replication from Bucket Replication
 You cannot use both replication methods on the same deployments.
 
 If you previously set up bucket replication and wish to now use site replication, you must first delete all of the bucket replication rules on the deployment that has data when initializing site replication.
-Use :mc:`mc replicate rm` on the command line to remove bucket replication rules.
+Use :mc:`bm replicate rm` on the command line to remove bucket replication rules.
 
 Only one site can have data when setting up site replication.
 All other sites must be empty.
@@ -217,7 +203,7 @@ Configure Site Replication
 The following steps create a new site replication configuration for three :ref:`distributed deployments <deploy-minio-distributed>`.
 One of the sites contains :ref:`replicable data <minio-site-replication-what-replicates>`.
 
-The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``minio1`` contains any data.
+The three sites use aliases, ``buckit1``, ``buckit2``, and ``buckit3``, and only ``buckit1`` contains any data.
 
 #. :ref:`Deploy <deploy-minio-distributed>` three or more separate Buckit sites, using the same :ref:`IDP <minio-authentication-and-identity-management>`
 
@@ -229,29 +215,21 @@ The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``
       :start-after: start-mc-admin-replicate-load-balancing
       :end-before: end-mc-admin-replicate-load-balancing
 
-   For example, for three Buckit sites, you might create aliases ``minio1``, ``minio2``, and ``minio3``.
+   For example, for three Buckit sites, you might create aliases ``buckit1``, ``buckit2``, and ``buckit3``.
    
-   Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the site.
+   Use :mc:`bm alias set` to define the hostname or IP of the load balancer managing connections to the site.
 
    .. code-block:: shell
 
-      mc alias set minio1 https://minio1.example.com:9000 adminuser adminpassword
-      mc alias set minio2 https://minio2.example.com:9000 adminuser adminpassword
-      mc alias set minio3 https://minio3.example.com:9000 adminuser adminpassword
-      
-   or define environment variables
-
-   .. code-block:: shell
-   
-      export MC_HOST_minio1=https://adminuser:adminpassword@minio1.example.com
-      export MC_HOST_minio2=https://adminuser:adminpassword@minio2.example.com
-      export MC_HOST_minio3=https://adminuser:adminpassword@minio3.example.com
+      bm alias set buckit1 https://buckit1.example.com:9000 adminuser adminpassword
+      bm alias set buckit2 https://buckit2.example.com:9000 adminuser adminpassword
+      bm alias set buckit3 https://buckit3.example.com:9000 adminuser adminpassword
 
 #. Add site replication configuration
 
    .. code-block:: shell
    
-      mc admin replicate add minio1 minio2 minio3
+      bm admin replicate add buckit1 buckit2 buckit3
 
    If all sites are empty, the order of the aliases does not matter.
    If one of the sites contains any :ref:`replicable data <minio-site-replication-what-replicates>`, you must list it first.
@@ -262,7 +240,7 @@ The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``
 
    .. code-block:: shell
    
-      mc admin replicate info minio1
+      bm admin replicate info buckit1
 
    You can use the alias for any peer site in the site replication configuration.
 
@@ -270,7 +248,7 @@ The three sites use aliases, ``minio1``, ``minio2``, and ``minio3``, and only ``
 
    .. code-block:: shell
 
-      mc admin replicate status minio1
+      bm admin replicate status buckit1
 
    You can use the alias for any of the peer sites in the site replication configuration.
    The output should say that all :ref:`replicable data <minio-site-replication-what-replicates>` is in sync.
@@ -316,58 +294,52 @@ The new site must meet the following requirements:
       :start-after: start-mc-admin-replicate-load-balancing
       :end-before: end-mc-admin-replicate-load-balancing
 
-   To check the existing aliases, use :mc:`mc alias list`.
+   To check the existing aliases, use :mc:`bm alias list`.
 
-   Use :mc:`mc alias set` to define the hostname or IP of the load balancer managing connections to the new site(s).
-
-   .. code-block:: shell
-
-      mc alias set minio4 https://minio4.example.com:9000 adminuser adminpassword
-
-   or define environment variables
+   Use :mc:`bm alias set` to define the hostname or IP of the load balancer managing connections to the new site(s).
 
    .. code-block:: shell
-   
-      export MC_HOST_minio4=https://adminuser:adminpassword@minio4.example.com
+
+      bm alias set buckit4 https://buckit4.example.com:9000 adminuser adminpassword
 
 #. Add site replication configuration
 
-   Use the :mc-cmd:`mc admin replicate add` command to expand the site replication configuration with the new peer site.
+   Use the :mc-cmd:`bm admin replicate add` command to expand the site replication configuration with the new peer site.
    Specify the alias of *all* existing peer sites, then the alias of the new site to add.
 
-   For example, the following command adds the new peer site ``minio4`` to an existing site replication configuration that includes the existing sites ``minio1``, ``minio2``, and ``minio3``.
+   For example, the following command adds the new peer site ``buckit4`` to an existing site replication configuration that includes the existing sites ``buckit1``, ``buckit2``, and ``buckit3``.
 
    .. code-block:: shell
    
-      mc admin replicate add minio1 minio2 minio3 minio4
+      bm admin replicate add buckit1 buckit2 buckit3 buckit4
 
    .. note::
 
-      If any of the sites are unreachable or permanently lost, you **must** first remove the unreachable site(s) with :mc-cmd:`mc admin replicate rm` before expanding with the new site.
+      If any of the sites are unreachable or permanently lost, you **must** first remove the unreachable site(s) with :mc-cmd:`bm admin replicate rm` before expanding with the new site.
 
 #. Query the site replication configuration to verify
 
    .. code-block:: shell
    
-      mc admin replicate info minio1
+      bm admin replicate info buckit1
 
 Modify a Site's Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a peer site changes its hostname, you can modify the replication configuration to reflect the new hostname.
 
-#. Obtain the site's Deployment ID with :mc-cmd:`mc admin replicate info`
+#. Obtain the site's Deployment ID with :mc-cmd:`bm admin replicate info`
 
    .. code-block:: shell
 
-      mc admin replicate info <ALIAS>
+      bm admin replicate info <ALIAS>
    
 
-#. Update the site's endpoint with :mc-cmd:`mc admin replicate update`
+#. Update the site's endpoint with :mc-cmd:`bm admin replicate update`
 
    .. code-block:: shell
 
-      mc admin replicate update ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
+      bm admin replicate update ALIAS --deployment-id [DEPLOYMENT-ID] --endpoint [NEW-ENDPOINT]
 
    Replace [DEPLOYMENT-ID] with the deployment ID of the site to update.
    
@@ -383,11 +355,11 @@ Remove a Site from Replication
 You can remove a site from replication at any time.
 You can re-add the site at a later date, but you must first completely wipe bucket and object data from the site.
 
-Use :mc-cmd:`mc admin replicate rm`:
+Use :mc-cmd:`bm admin replicate rm`:
 
 .. code-block:: shell
 
-   mc admin replicate rm ALIAS PEER_TO_REMOVE --force
+   bm admin replicate rm ALIAS PEER_TO_REMOVE --force
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of any peer site in the replication configuration.
 
@@ -406,17 +378,17 @@ Buckit provides information on replication across the sites for users, groups, p
 
 The summary information includes the number of **Synced** and **Failed** items for each category.
 
-Use :mc-cmd:`mc admin replicate status`:
+Use :mc-cmd:`bm admin replicate status`:
 
 .. code-block:: shell
 
-   mc admin replicate status <ALIAS> --<flag> <value>
+   bm admin replicate status <ALIAS> --<flag> <value>
 
 For example:
 
-- ``mc admin replicate status minio3 --bucket images``
+- ``bm admin replicate status buckit3 --bucket images``
 
-  Displays the replication status for the ``images`` bucket on the ``minio3`` site.
+  Displays the replication status for the ``images`` bucket on the ``buckit3`` site.
   
   The output resembles the following:
 
@@ -424,7 +396,7 @@ For example:
  
      ●  Bucket config replication summary for: images
  
-     Bucket          | MINIO2          | MINIO3          | MINIO4         
+     Bucket          | BUCKIT2         | BUCKIT3         | BUCKIT4        
      Tags            |                 |                 |                
      Policy          |                 |                 |                
      Quota           |                 |                 |                
@@ -432,9 +404,9 @@ For example:
      Encryption      |                 |                 |                
      Replication     | ✔               | ✔               | ✔        
 
-- ``mc admin replicate status minio3 --all``
+- ``bm admin replicate status buckit3 --all``
 
-  Displays the replication status summary for all replication sites of which ``minio3`` is part. 
+  Displays the replication status summary for all replication sites of which ``buckit3`` is part. 
 
   The output resembles the following:
 
@@ -452,7 +424,7 @@ For example:
      Group replication status:
      ●  0/2 Groups in sync
     
-     Group           | MINIO2          | MINIO3          | MINIO4         
+     Group           | BUCKIT2         | BUCKIT3         | BUCKIT4        
      ittechs         | ✗  in-sync      |                 | ✗  in-sync    
      managers        | ✗  in-sync      |                 | ✗  in-sync    
  

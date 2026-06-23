@@ -12,9 +12,6 @@
 
 .. mc:: bm ilm rule edit
 
-.. versionchanged:: RELEASE.2022-12-24T15-21-38Z
-
-   ``bm ilm rule edit`` replaces ``bm ilm edit``.
 
 Syntax
 ------
@@ -31,14 +28,14 @@ rule on a Buckit bucket.
    .. tab-item:: EXAMPLE
 
       The following command modifies existing lifecycle management rules for
-      the ``mydata`` bucket on the ``myminio`` deployment:
+      the ``mydata`` bucket on the ``mybuckit`` deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm ilm rule edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  myminio/mydata
+         bm ilm rule edit --id "c79ntj94b0t6rukh6lr0" --expiry-days 90  mybuckit/mydata
          
-         bm ilm rule edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker myminio/mydata
+         bm ilm rule edit --id "c79nu2p4b0t6qko19rgg" --expired-object-delete-marker mybuckit/mydata
 
          bm ilm rule edit --id "c79n19dn10dnab109fg1" --transition-days 30 --tier "COLDTIER"
          
@@ -88,7 +85,7 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule edit myminio/mydata
+      bm ilm rule edit mybuckit/mydata
 
 .. mc-cmd:: --id
    :required:
@@ -116,24 +113,14 @@ Parameters
 
    .. code-block:: none
 
-      bm ilm rule edit --prefix "meetingnotes/" myminio/mydata --expire-days "90"
+      bm ilm rule edit --prefix "meetingnotes/" mybuckit/mydata --expire-days "90"
 
-   The command modifies a rule that expires objects in the ``mydata`` bucket of the ``myminio`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
+   The command modifies a rule that expires objects in the ``mydata`` bucket of the ``mybuckit`` ALIAS after 90 days for any object with the ``meetingnotes/`` prefix.
 
 
 .. mc-cmd:: --expire-all-object-versions
    :optional:   
 
-   .. versionadded:: mc RELEASE.2024-02-24T01-33-20Z
-
-   Expire all current **and** noncurrent versions of an object.
-   Use with the :mc-cmd:`~bm ilm rule add --expire-days` option to specify the number of days after which all versions of an object should be deleted by the scanner process.
-
-   After the :ref:`scanner <minio-concepts-scanner>` processes this command, no versions of the object remain on the deployment.
-
-   .. versionadded:: Buckit RELEASE.2024-05-01T01-11-10Z
-
-   This flag *only* applies to objects that do **not** have a delete marker as the latest version.
 
 
 .. mc-cmd:: --expire-days
@@ -328,11 +315,11 @@ Use :mc:`bm ilm rule edit` with :mc-cmd:`~bm ilm rule edit --disable` to stop us
 .. code-block:: shell
    :class: copyable
    
-   bm ilm rule edit --id "RULEID" --disable myminio/mybucket
+   bm ilm rule edit --id "RULEID" --disable mybuckit/mybucket
 
 - Replace ``RULEID`` with the unique ID of the object lifecycle management rule.
   Use :mc:`bm ilm rule ls` to find the ``RULEID``.
-- Replace ``myminio`` with the ALIAS of the deployment where the rule exists.
+- Replace ``mybuckit`` with the ALIAS of the deployment where the rule exists.
 - Replace ``mybucket`` with the bucket for the rule.
 
 Required Permissions

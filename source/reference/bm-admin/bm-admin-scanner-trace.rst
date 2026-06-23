@@ -30,12 +30,12 @@ The :mc-cmd:`bm admin scanner trace` command displays :ref:`scanner <minio-conce
 
    .. tab-item:: EXAMPLE
 
-      The following example returns a list of API operations related to the scanner on the ``myminio`` deployment.
+      The following example returns a list of API operations related to the scanner on the ``mybuckit`` deployment.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin scanner trace myminio
+         bm admin scanner trace mybuckit
 
    .. tab-item:: SYNTAX
 
@@ -161,42 +161,42 @@ Examples
 Monitor all scanner API operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`bm admin scanner trace` to monitor :ref:`scanner <minio-concepts-scanner>` API operations on the Buckit deployment at the alias ``myminio``:
+Use :mc-cmd:`bm admin scanner trace` to monitor :ref:`scanner <minio-concepts-scanner>` API operations on the Buckit deployment at the alias ``mybuckit``:
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin scanner trace myminio
+   bm admin scanner trace mybuckit
 
 Show scanner trace for a specific path
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`bm admin scanner trace` to monitor API operations for a the path ``my-bucket/my-prefix/*`` on the deployment at the ``myminio`` alias:
+Use :mc-cmd:`bm admin scanner trace` to monitor API operations for a the path ``my-bucket/my-prefix/*`` on the deployment at the ``mybuckit`` alias:
 
 .. code-block:: shell
    :class: copyable
    
-    bm admin scanner trace --path my-bucket/my-prefix/* myminio
+    bm admin scanner trace --path my-bucket/my-prefix/* mybuckit
 
 Show scanner API operations for the ``scanObject`` function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Monitor scanner activity for the ``scanObject function`` on the ``myminio`` deployment:
+Monitor scanner activity for the ``scanObject function`` on the ``mybuckit`` deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin scanner trace --funcname=scanner.ScanObject myminio 
+   bm admin scanner trace --funcname=scanner.ScanObject mybuckit 
 
 Show scanner operation requests greater than ``1MB`` in size
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use :mc-cmd:`bm admin scanner trace` to monitor requests larger than a ``1MB`` on the ``myminio`` deployment:
+Use :mc-cmd:`bm admin scanner trace` to monitor requests larger than a ``1MB`` on the ``mybuckit`` deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin scanner trace --filter-request --filter-size 1MB myminio
+   bm admin scanner trace --filter-request --filter-size 1MB mybuckit
 
 Show scanner operation responses greater than ``1MB`` in size
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,7 +206,7 @@ Use :mc-cmd:`bm admin scanner trace` to monitor large response sizes:
 .. code-block:: shell
    :class: copyable
 
-    bm admin scanner trace --filter-response --filter-size 1MB myminio 
+    bm admin scanner trace --filter-response --filter-size 1MB mybuckit 
 
 Show scanner operations that last longer than five milliseconds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -216,4 +216,4 @@ Use :mc-cmd:`bm admin scanner trace` to monitor long operations:
 .. code-block:: shell
    :class: copyable
 
-    bm admin scanner trace --response-duration 5ms myminio
+    bm admin scanner trace --response-duration 5ms mybuckit

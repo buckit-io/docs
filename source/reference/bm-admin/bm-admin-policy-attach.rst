@@ -19,9 +19,6 @@ Attaches one or more IAM policies to either a :ref:`Buckit-managed user or a gro
 
 .. end-mc-admin-policy-attach-desc
 
-.. versionchanged:: RELEASE.2023-05-27T05-56-19Z
-
-   To successfully attach a policy, the referenced user or group must exist.
 
 Exactly one :mc-cmd:`~bm admin policy attach --user` or one :mc-cmd:`~bm admin policy attach --group` is required.
 
@@ -30,12 +27,12 @@ Exactly one :mc-cmd:`~bm admin policy attach --user` or one :mc-cmd:`~bm admin p
 
    .. tab-item:: EXAMPLE
 
-      The following command attaches the ``readonly`` policy to the user ``james`` on the deployment at :term:`alias` ``myminio``.
+      The following command attaches the ``readonly`` policy to the user ``james`` on the deployment at :term:`alias` ``mybuckit``.
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin policy attach myminio readonly --user james  
+         bm admin policy attach mybuckit readonly --user james  
 
    .. tab-item:: SYNTAX
 
@@ -117,16 +114,16 @@ Global Flags
 Examples
 --------
 
-Attach the ``readonly`` policy to user ``james`` on the deployment at alias ``myminio``.
+Attach the ``readonly`` policy to user ``james`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy attach myminio readonly --user james
+   bm admin policy attach mybuckit readonly --user james
 
-Attach the ``audit-policy`` and ``acct-policy`` policies to group ``legal`` on the deployment at alias ``myminio``.
+Attach the ``audit-policy`` and ``acct-policy`` policies to group ``legal`` on the deployment at alias ``mybuckit``.
 
 .. code-block:: shell
    :class: copyable
 
-   bm admin policy attach myminio audit-policy acct-policy --group legal
+   bm admin policy attach mybuckit audit-policy acct-policy --group legal

@@ -30,12 +30,12 @@ The :mc:`bm event remove` command has equivalent functionality to :mc:`bm event 
 
       The following command removes a configured event notifications for the
       specified :ref:`bucket notification target <minio-bucket-notifications>`
-      for the ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      for the ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm event rm myminio/mydata arn:aws:sqs::primary:target
+         bm event rm mybuckit/mydata arn:aws:sqs::primary:target
 
    .. tab-item:: SYNTAX
 
@@ -180,7 +180,7 @@ Remove Event Notifications from a Bucket
       .. code-block:: shell
          :class: copyable
 
-         bm event rm myminio/mydata arn:minio:sqs::primary:webhook
+         bm event rm mybuckit/mydata arn:minio:sqs::primary:webhook
 
    .. tab-item:: Syntax
 
@@ -192,7 +192,7 @@ Remove Event Notifications from a Bucket
       - Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit
         deployment on which to add the bucket notification event. For example:
 
-        ``myminio/mydata``
+        ``mybuckit/mydata``
 
       - Replace ``ARN`` with the notification target
         :mc-cmd:`ARN <bm event add ARN>`.

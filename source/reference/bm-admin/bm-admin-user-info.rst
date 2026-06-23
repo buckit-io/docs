@@ -21,18 +21,18 @@ The :mc:`bm admin user info` command returns detailed information of a :ref:`Buc
 
 .. end-mc-admin-user-info-desc
 
-To manage external Identity Provider users, see :mc:`OIDC <mc idp openid>` or :mc:`AD/LDAP <mc idp ldap>`.
+To manage external Identity Provider users, see :mc:`OIDC <bm idp openid>` or :mc:`AD/LDAP <bm idp ldap>`.
 
 .. tab-set::
 
    .. tab-item:: EXAMPLE
 
-      The following command returns details of user ``myuser`` on the ``myminio`` Buckit deployment:
+      The following command returns details of user ``myuser`` on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm admin user info myminio myuser
+         bm admin user info mybuckit myuser
 
    .. tab-item:: SYNTAX
 
@@ -70,9 +70,6 @@ Global Flags
    :start-after: start-minio-mc-globals
    :end-before: end-minio-mc-globals
 
-.. versionchanged:: RELEASE.2023-05-26T23-31-54Z
-
-   ``bm admin user info --json`` output includes policies inherited from a user's group memberships in ``memberOf``.
 
 Examples
 --------

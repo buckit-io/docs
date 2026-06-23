@@ -10,16 +10,13 @@
 
 .. mc:: mc admin top
 
-.. versionchanged:: RELEASE.2022-08-11T00-30-48Z
-
-   ``mc admin top`` replaced by :mc-cmd:`mc support top`.
 
 Description
 -----------
 
 .. start-mc-admin-top-desc
 
-The :mc-cmd:`mc admin top` command returns statistics for distributed
+The :mc-cmd:`bm admin top` command returns statistics for distributed
 Buckit deployments, similar to the output of the ``top`` command. 
 
 .. end-mc-admin-top-desc
@@ -50,7 +47,7 @@ Syntax
 
    .. mc-cmd:: TARGET
 
-      The :mc-cmd:`alias <mc alias>` of a configured Buckit deployment from which
+      The :mc-cmd:`alias <bm alias>` of a configured Buckit deployment from which
       the command retrieves statistics.
 
       The alias *must* correspond to a distributed (multi-node) Buckit deployment.

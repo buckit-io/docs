@@ -34,11 +34,11 @@ PostgreSQL 9.5 and later
 
 Buckit relies on features introduced with PostgreSQL 9.5.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 1) Add the PostgreSQL Endpoint to Buckit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +54,7 @@ variables *or* by setting runtime configuration settings.
       configuration settings using 
       :ref:`environment variables 
       <minio-server-envvar-bucket-notification-postgresql>`. The 
-      :mc:`minio server` process applies the specified settings on its 
+      :mc:`buckit server <buckit server>` process applies the specified settings on its 
       next startup.
       
       The following example code sets *all*  environment variables
@@ -101,7 +101,7 @@ variables *or* by setting runtime configuration settings.
         If the specified ``<IDENTIFIER>`` matches an existing PostgreSQL service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_postgres <bm admin config get>` to
         review the currently configured PostgreSQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the |postgresql-uri-reference|
@@ -120,9 +120,9 @@ variables *or* by setting runtime configuration settings.
    .. tab-item:: Configuration Settings
 
       Buckit supports adding or updating PostgreSQL endpoints on a running 
-      :mc:`minio server` process using the :mc-cmd:`mc admin config set` command 
+      :mc:`buckit server <buckit server>` process using the :mc-cmd:`bm admin config set` command 
       and the :mc-conf:`notify_postgres` configuration key. You must restart the 
-      :mc:`minio server` process to apply any new or updated configuration
+      :mc:`buckit server <buckit server>` process to apply any new or updated configuration
       settings.
 
       The following example code sets *all*  settings related to configuring an
@@ -136,7 +136,7 @@ variables *or* by setting runtime configuration settings.
       .. code-block:: shell
          :class: copyable
 
-         mc admin config set ALIAS/ notify_postgres:IDENTIFIER \
+         bm admin config set ALIAS/ notify_postgres:IDENTIFIER \
             connection_string="ENDPOINT" \
             table="<string>" \
             format="<string>" \
@@ -152,7 +152,7 @@ variables *or* by setting runtime configuration settings.
         If the specified ``IDENTIFIER`` matches an existing PostgreSQL service
         endpoint on the Buckit deployment, the new settings *override* 
         any existing settings for that endpoint. Use 
-        :mc-cmd:`mc admin config get notify_postgres <mc admin config get>` to
+        :mc-cmd:`bm admin config get notify_postgres <bm admin config get>` to
         review the currently configured PostgreSQL endpoints on the Buckit deployment.
 
       - Replace ``<ENDPOINT>`` with the `PostgreSQL URI connection string 
@@ -173,17 +173,17 @@ variables *or* by setting runtime configuration settings.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured PostgreSQL
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured PostgreSQL
 target similar to the following:
 
 .. code-block:: shell
@@ -200,13 +200,13 @@ the associated PostgreSQL deployment as a target.
 3) Configure Bucket Notifications using the PostgreSQL Endpoint as a Target
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc:`mc event add` command to add a new bucket notification 
+Use the :mc:`bm event add` command to add a new bucket notification 
 event with the configured PostgreSQL service as a target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event add ALIAS/BUCKET arn:minio:sqs::primary:postgresql \
+   bm event add ALIAS/BUCKET arn:minio:sqs::primary:postgresql \
      --event EVENTS
 
 - Replace ``ALIAS`` with the :ref:`alias <alias>` of a Buckit deployment.
@@ -214,31 +214,31 @@ event with the configured PostgreSQL service as a target:
 - Replace ``EVENTS`` with a comma-separated list of :ref:`events 
   <mc-event-supported-events>` for which Buckit triggers notifications.
 
-Use :mc:`mc event ls` to view all configured bucket events for 
+Use :mc:`bm event ls` to view all configured bucket events for 
 a given notification target:
 
 .. code-block:: shell
    :class: copyable
 
-   mc event ls ALIAS/BUCKET arn:minio:sqs::primary:postgresql
+   bm event ls ALIAS/BUCKET arn:minio:sqs::primary:postgresql
 
 4) Validate the Configured Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform an action on the bucket for which you configured the new event and 
 check the PostgreSQL service for the notification data. The action required
-depends on which :mc-cmd:`events <mc event add --event>` were specified
+depends on which :mc-cmd:`events <bm event add --event>` were specified
 when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET
 
 Update a PostgreSQL Endpoint in a Buckit Deployment
 ---------------------------------------------------
@@ -255,23 +255,23 @@ PostgreSQL 9.5 and later
 
 Buckit relies on features introduced with PostgreSQL 9.5.
 
-Buckit ``mc`` Command Line Tool
+Buckit ``bm`` Command Line Tool
 +++++++++++++++++++++++++++++++
 
-This procedure uses the :mc:`mc` command line tool for certain actions. 
-See the ``mc`` :ref:`Quickstart <mc-install>` for installation instructions.
+This procedure uses the :mc:`bm` command line tool for certain actions. 
+See the ``bm`` :ref:`Quickstart <mc-install>` for installation instructions.
 
 
 1) List Configured PostgreSQL Endpoints In The Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config get` command to list the currently
+Use the :mc-cmd:`bm admin config get` command to list the currently
 configured PostgreSQL service endpoints in the deployment:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config get ALIAS/ notify_postgres
+   bm admin config get ALIAS/ notify_postgres
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the Buckit deployment.
 
@@ -295,13 +295,13 @@ the next step.
 2) Update the PostgreSQL Endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the :mc-cmd:`mc admin config set` command to set the new configuration
+Use the :mc-cmd:`bm admin config set` command to set the new configuration
 for the PostgreSQL service endpoint:
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin config set ALIAS/ notify_postgres:IDENTIFIER \
+   bm admin config set ALIAS/ notify_postgres:IDENTIFIER \
       connection_string="ENDPOINT" \
       table="<string>" \
       format="<string>" \
@@ -326,17 +326,17 @@ PostgreSQL configuration settings.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You must restart the Buckit deployment to apply the configuration changes. 
-Use the :mc-cmd:`mc admin service restart` command to restart the deployment.
+Use the :mc-cmd:`bm admin service restart` command to restart the deployment.
 
 .. code-block:: shell
    :class: copyable
 
-   mc admin service restart ALIAS
+   bm admin service restart ALIAS
 
 Replace ``ALIAS`` with the :ref:`alias <alias>` of the deployment to 
 restart.
 
-The :mc:`minio server` process prints a line on startup for each configured PostgreSQL
+The :mc:`buckit server <buckit server>` process prints a line on startup for each configured PostgreSQL
 target similar to the following:
 
 .. code-block:: shell
@@ -348,15 +348,15 @@ target similar to the following:
 
 Perform an action on a bucket which has an event configuration using the updated
 PostgreSQL service endpoint and check the PostgreSQL service for the notification data. The
-action required depends on which :mc-cmd:`events <mc event add --event>` were
+action required depends on which :mc-cmd:`events <bm event add --event>` were
 specified when configuring the bucket notification.
 
 For example, if the bucket notification configuration includes the 
 ``s3:ObjectCreated:Put`` event, you can use the 
-:mc:`mc cp` command to create a new object in the bucket and trigger 
+:mc:`bm cp` command to create a new object in the bucket and trigger 
 a notification.
 
 .. code-block:: shell
    :class: copyable
 
-   mc cp ~/data/new-object.txt ALIAS/BUCKET
+   bm cp ~/data/new-object.txt ALIAS/BUCKET

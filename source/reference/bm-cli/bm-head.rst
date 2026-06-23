@@ -38,12 +38,12 @@ tool.
    .. tab-item:: EXAMPLE
 
       The following command returns the first 10 lines of an object in the
-      ``mydata`` bucket on the ``myminio`` Buckit deployment:
+      ``mydata`` bucket on the ``mybuckit`` Buckit deployment:
 
       .. code-block:: shell
          :class: copyable
 
-         bm head myminio/mydata/myobject.txt
+         bm head mybuckit/mydata/myobject.txt
 
    .. tab-item:: SYNTAX
 
@@ -83,7 +83,7 @@ Parameters
 
    .. code-block:: none
 
-      bm head ~/mydata/object.txt myminio/mydata/object.txt
+      bm head ~/mydata/object.txt mybuckit/mydata/object.txt
 
    For an object on a local filesystem, specify the full path to that object.
    For example:
