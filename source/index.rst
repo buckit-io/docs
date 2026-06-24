@@ -11,7 +11,9 @@ Buckit High Performance Object Storage
 Buckit is a Kubernetes-native S3-compatible object storage solution designed to deploy wherever your applications are - on premises, in the private cloud, in the public cloud, and edge infrastructure.
 Buckit is designed to support modern application workload patterns where high performance distributed computing meets petabyte-scale storage requirements.
 
-This site documents Operations, Administration, and Development of Buckit Community Object Storage deployments on supported platforms. 
+This site documents Operations, Administration, and Development of Buckit Community Object Storage deployments on supported platforms.
+
+Production documentation is published at https://buckit.sh/docs/.
 
 .. todo: More marketing/SEO below?
 
