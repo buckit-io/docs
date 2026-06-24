@@ -12,15 +12,21 @@ Add to **buckit-io/docs** → Settings → Secrets and variables → Actions:
 
 ### Fine-grained PAT (recommended)
 
+`XD-Builder/xdevbase-nx` is a **private** repository. The token must have explicit access to it.
+
 1. GitHub → Settings → Developer settings → Fine-grained tokens → Generate
-2. Resource owner: your user or org that can access `XD-Builder/xdevbase-nx`
+2. Resource owner: user or org that can access `XD-Builder/xdevbase-nx`
 3. Repository access: **Only select repositories** → `XD-Builder/xdevbase-nx`
-4. Permissions: **Actions** → Read and write (or **Contents** → Read if Actions write is unavailable; repository dispatch requires sufficient repo access)
-5. Copy token → add as `XDEVBASE_DISPATCH_TOKEN` on `buckit-io/docs`
+4. Permissions on that repository:
+   - **Actions** → Read and write (required for `repository_dispatch`)
+   - **Metadata** → Read (automatic)
+5. Copy token → add as `XDEVBASE_DISPATCH_TOKEN` on **buckit-io/docs** (not another repo)
+
+If dispatch returns HTTP 403, the token is missing **Actions: Read and write** on `xdevbase-nx` or was saved on the wrong repository.
 
 ### Classic PAT
 
-Scope: `repo` (if xdevbase-nx is private) or a token with access to dispatch on the target repo.
+Scope: **`repo`** (required because `xdevbase-nx` is private).
 
 ## Verify
 
