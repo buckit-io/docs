@@ -139,11 +139,6 @@ While port ``9000`` is used for connecting to the API, Buckit automatically redi
 Log in to the Console with the ``MINIO_ROOT_USER`` and
 ``MINIO_ROOT_PASSWORD`` credentials you configured before starting the server.
 
-.. image:: /images/minio-console/console-login.png
-   :width: 600px
-   :alt: Buckit Console displaying login screen
-   :align: center
-
 You can use the Buckit Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
 Each Buckit server includes its own embedded Buckit Console.
 
@@ -154,26 +149,37 @@ Each Buckit server includes its own embedded Buckit Console.
 
 For more information, see the :ref:`minio-console` documentation.
 
-4. `(Optional)` Install the Buckit Client
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4. `(Optional)` Install Buckit Manager for Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :ref:`Buckit Client <minio-client>` allows you to work with your Buckit deployment from PowerShell.
+Buckit Manager (``bm``) is the deployment and management tool for Buckit. It
+includes both a web UI and a command line.
 
-Download the standalone Buckit client for Windows from the following link:
+Use the following command in Windows PowerShell to install ``bm``:
 
-https://dl.min.io/client/mc/release/windows-amd64/bm.exe
-
-Double click on the file to run it.
-Or, run the following in the Command Prompt or PowerShell.
-
-.. code-block::
+.. code-block:: powershell
    :class: copyable
 
-   \path\to\bm.exe --help
-   
-Use :mc:`bm.exe alias set <bm alias set>` to quickly authenticate and connect to the Buckit deployment.
+   irm https://buckit-io.github.io/bm/install.ps1 | iex
 
-.. code-block:: shell
+The installer downloads the latest stable Windows build, verifies its SHA-256
+checksum, installs it into your user account, and adds it to your user
+``PATH``.
+
+By default, the installer places ``bm`` in
+``%LOCALAPPDATA%\Programs\bm``.
+
+Run the following command to verify the installation:
+
+.. code-block:: powershell
+   :class: copyable
+
+   bm --version
+
+Use :mc:`bm.exe alias set <bm alias set>` to quickly authenticate and connect
+to the Buckit deployment.
+
+.. code-block:: powershell
    :class: copyable
 
    bm.exe alias set local http://127.0.0.1:9000 buckitadmin buckitadmin
@@ -186,4 +192,5 @@ The :mc:`bm.exe alias set <bm alias set>` takes four arguments:
 - The Access Key for a Buckit :ref:`user <minio-users>`
 - The Secret Key for a Buckit :ref:`user <minio-users>`
 
-For additional details about this command, see :ref:`alias`.
+You can then use ``bm web`` to open the Buckit Manager web interface, or use
+the CLI to manage Buckit deployments from PowerShell.

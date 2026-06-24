@@ -101,52 +101,73 @@ The following examples of network throughput constraints assume spinning disks w
 Memory
 ~~~~~~
 
-Memory primarily constrains the number of concurrent simultaneous connections per node.
+Memory primarily constrains the number of concurrent simultaneous object API requests per node.
 
-You can calculate the maximum number of concurrent requests per node with this formula:
+Buckit automatically admits requests based on an estimated in-flight request memory budget when ``api requests_max`` is unset.
+The request memory budget is calculated as:
 
-   :math:`totalRam / ramPerRequest`
+   :math:`freeSystemRam * 0.90 * 0.75`
 
-To calculate the amount of RAM used for each request, use this formula:
+Buckit uses the following request memory estimates for object reads and writes:
 
-   :math:`((2MiB + 128KiB) * driveCount) + (2 * 10MiB) + (2 * 1 MiB)`
+.. list-table::
+   :header-rows: 1
+   :width: 100%
+   :widths: 40 60
 
-   10MiB is the default erasure block size v1.
-   1 MiB is the default erasure block size v2.
+   * - Request Type
+     - Estimated Request Cost
 
-The following table lists the maximum concurrent requests on a node based on the number of host drives and the *free* system RAM:
+   * - GET
+     - ``2 MiB``
+
+   * - PUT
+     - ``(erasureSetDriveCount + 3) * 2 MiB``
+
+``erasureSetDriveCount`` is the number of drives in the largest erasure set.
+
+The following table lists example maximum concurrent requests on a node based on *free* system RAM.
+GET capacity is independent of erasure set width.
+PUT capacity depends on the largest erasure set drive count:
 
 .. list-table::
    :header-rows: 1
    :width: 100%
 
-   * - Number of Drives
+   * - Request Type
      - 32 GiB of RAM
      - 64 GiB of RAM
      - 128 GiB of RAM
      - 256 GiB of RAM
      - 512 GiB of RAM
 
-   * - 4 Drives
-     - 1,074 
-     - 2,149 
-     - 4,297 
-     - 8,595 
-     - 17,190 
+   * - GET
+     - 11,059
+     - 22,118
+     - 44,236
+     - 88,473
+     - 176,947
 
-   * - 8 Drives
-     - 840 
-     - 1,680 
-     - 3,361 
-     - 6,722 
-     - 13,443 
+   * - PUT, 4-drive erasure set
+     - 1,579
+     - 3,159
+     - 6,319
+     - 12,639
+     - 25,278
 
-   * - 16 Drives
-     - 585 
-     - 1,170 
-     - 2.341 
-     - 4,681 
-     - 9,362 
+   * - PUT, 8-drive erasure set
+     - 1,005
+     - 2,010
+     - 4,021
+     - 8,043
+     - 16,086
+
+   * - PUT, 16-drive erasure set
+     - 582
+     - 1,164
+     - 2,328
+     - 4,656
+     - 9,313
 
 The following table provides general guidelines for allocating memory for use by Buckit based on the total amount of local storage on the node:
 
@@ -263,8 +284,13 @@ Buckit **strongly recommends** disabling `retry-on-error <https://docs.kernel.or
 - ``default`` All other errors
 
 The default ``max_retries`` setting typically directs the filesystem to retry-on-error indefinitely instead of propagating the error.
-Buckit can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation. 
+Buckit can handle XFS errors appropriately, such that the retry-on-error behavior introduces at most unnecessary latency or performance degradation.
 
+.. note::
+
+   Buckit installed from the official ``.deb`` or ``.rpm`` package — including clusters deployed, migrated, or upgraded with the :ref:`Buckit Manager <install-buckit-manager>` — applies these settings automatically through the ``buckit-xfs-retry.timer`` systemd timer.
+   The timer also re-applies the settings after a :ref:`drive hot-swap <minio-restore-hardware-failure-drive>`, whose fresh mount otherwise resets them to the kernel default.
+   The manual script and cron job below are only required for non-packaged installations, such as a tarball deployment.
 
 The following script iterates through all drives at the specified mount path and sets the XFS ``max_retries`` setting to ``0`` or "fail immediately on error" for the recommended error classes.
 The script ignores any drives not mounted, either manually or through ``/etc/fstab``.
@@ -285,7 +311,7 @@ Modify the ``/mnt/drive`` line to match the pattern used for your Buckit drives.
    done
    exit 0
 
-You must run this script on all Buckit nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
+For non-packaged installations, you must run this script on all Buckit nodes and configure the script to re-run on reboot, as Linux Operating Systems do not typically persist these changes.
 You can use a ``cron`` job with the ``@reboot`` timing to run the above script whenever the node restarts and ensure all drives have retry-on-error disabled.
 Use ``crontab -e`` to create the following job, modifying the script path to match that on each node:
 

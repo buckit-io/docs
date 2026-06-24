@@ -360,11 +360,6 @@ Following our checklists typically mitigates the risk of encountering those or s
       Log in with the :guilabel:`MINIO_ROOT_USER` and :guilabel:`MINIO_ROOT_PASSWORD`
       from the previous step.
 
-      .. image:: /images/minio-console/console-login.png
-         :width: 600px
-         :alt: Buckit Console Login Page
-         :align: center
-
       You can use the Buckit Console for general administration tasks like Identity and Access Management, Metrics and Log Monitoring, or Server Configuration. 
       Each Buckit server includes its own embedded Buckit Console.
 

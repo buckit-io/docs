@@ -108,6 +108,12 @@ procedure:
 
 The command should result in remounting of all of the replaced drives.
 
+.. note::
+
+   Mounting the replacement drive resets its XFS error-handling settings to the kernel default.
+   Buckit installed from the official ``.deb`` or ``.rpm`` package re-applies the recommended :ref:`retry-on-error settings <minio-hardware-checklist-storage>` automatically within a couple of minutes through the ``buckit-xfs-retry.timer`` systemd timer — no restart required.
+   For non-packaged installations, re-run your XFS ``max_retries`` script after remounting.
+
 5) Monitor Buckit for Drive Detection and Healing Status
 --------------------------------------------------------
 
