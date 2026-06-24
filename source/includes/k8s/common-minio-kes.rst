@@ -19,7 +19,7 @@ You can use either the Buckit Tenant Console or the Buckit :mc:`bm` CLI to enabl
 
    .. tab-item:: Buckit Tenant Console
 
-      Connect to the :ref:`Buckit Tenant Console service <create-tenant-connect-tenant>` and log in.
+      Connect to the Buckit Tenant Console service and log in.
       For clients internal to the Kubernetes cluster, you can specify the :kube-docs:`service DNS name <concepts/services-networking/dns-pod-service/#a-aaaa-records>`.
       For clients external to the Kubernetes cluster, specify the hostname of the service exposed by Ingress, Load Balancer, or similar Kubernetes network control component.
 
@@ -36,7 +36,7 @@ You can use either the Buckit Tenant Console or the Buckit :mc:`bm` CLI to enabl
 
    .. tab-item:: Buckit CLI
 
-      Use the :ref:`Buckit API Service <create-tenant-connect-tenant>` to create a new :ref:`alias <alias>` for the Buckit deployment.
+      Use the Buckit API service to create a new :ref:`alias <alias>` for the Buckit deployment.
       You can then use the :mc:`bm encrypt set` command to enable SSE-KMS encryption for a bucket:
 
       .. code-block:: shell

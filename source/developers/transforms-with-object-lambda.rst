@@ -154,7 +154,6 @@ Prerequisites:
 
 - An existing :ref:`Buckit <minio-installation>` deployment
 - Working Python (3.8+) and Golang development environments
-- :doc:`The Buckit Go SDK </developers/go/minio-go>`
 
 
 Create a Handler

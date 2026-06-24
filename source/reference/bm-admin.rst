@@ -196,4 +196,5 @@ See :ref:`minio-mc-global-options`.
    /reference/bm-admin/bm-admin-trace
    /reference/bm-admin/bm-admin-update
    /reference/bm-admin/bm-admin-user
+   /reference/deprecated/mc-admin-bucket-remote
  

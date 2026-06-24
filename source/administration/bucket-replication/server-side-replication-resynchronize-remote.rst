@@ -27,6 +27,10 @@ Resynchronization is a per-bucket process. You must repeat resynchronization for
 .. admonition:: Professional Support during BC/DR Operations
    :class: important
 
+   For business continuity and disaster recovery operations, coordinate the
+   procedure with your Buckit support team before modifying a production
+   replication deployment.
+
 
 .. _minio-bucket-replication-serverside-resynchronize-requirements:
 

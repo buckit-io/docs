@@ -22,7 +22,7 @@ The :mc:`buckit server <buckit server>` command starts the :mc:`buckit server <b
 
 For examples of deploying :mc:`buckit server <buckit server>` on a bare metal environment, see :ref:`minio-installation`.
 
-For examples of deploying :mc:`buckit server <buckit server>` on a Kubernetes environment, see :ref:`Deploying a Buckit Tenant <minio-k8s-deploy-minio-tenant>`.
+Buckit does not support Kubernetes deployment guidance in this documentation set.
 
 
 .. _minio-server-parameters:

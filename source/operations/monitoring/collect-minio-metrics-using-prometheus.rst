@@ -51,15 +51,15 @@ Use the :mc:`bm admin prometheus generate` command to generate the scrape config
          bm admin prometheus generate ALIAS
 
       Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
-	 
+
       The command returns output similar to the following:
 
       .. code-block:: yaml
          :class: copyable
-      
+
          global:
             scrape_interval: 60s
-         
+
          scrape_configs:
             - job_name: minio-job
               bearer_token: TOKEN
@@ -67,24 +67,24 @@ Use the :mc:`bm admin prometheus generate` command to generate the scrape config
               scheme: https
               static_configs:
               - targets: [buckit.example.net]
-		      
+
    .. tab-item:: Nodes
 
       The following command scrapes metrics for a node on the Buckit Server.
 
       .. code-block:: shell
          :class: copyable
-      
+
          bm admin prometheus generate ALIAS node
 
       Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
-      
+
          global:
             scrape_interval: 60s
-         
+
          scrape_configs:
             - job_name: minio-job-node
               bearer_token: TOKEN
@@ -92,24 +92,24 @@ Use the :mc:`bm admin prometheus generate` command to generate the scrape config
               scheme: https
               static_configs:
               - targets: [buckit-1.example.net, buckit-2.example.net, buckit-N.example.net]
-		      
+
    .. tab-item:: Buckets
 
       The following command scrapes metrics for buckets on the Buckit Server.
 
       .. code-block:: shell
          :class: copyable
-      
+
          bm admin prometheus generate ALIAS bucket
 
       Replace :mc-cmd:`ALIAS <bm admin prometheus generate ALIAS>` with the :mc:`alias <bm alias>` of the Buckit deployment.
 
       .. code-block:: yaml
          :class: copyable
-      
+
          global:
             scrape_interval: 60s
-         
+
          scrape_configs:
             - job_name: minio-job-bucket
               bearer_token: TOKEN
@@ -117,8 +117,6 @@ Use the :mc:`bm admin prometheus generate` command to generate the scrape config
               scheme: https
               static_configs:
               - targets: [buckit.example.net]
-      
-   .. tab-item:: Resources
 
 - Set an appropriate ``scrape_interval`` value to ensure each scraping operation completes before the next one begins.
   The recommended value is 60 seconds.

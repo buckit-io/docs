@@ -201,7 +201,7 @@ Synchronous vs Asynchronous Replication
 
 You must explicitly enable synchronous replication when configuring the remote
 target target using the :mc-cmd:`bm admin bucket remote add` command with the
-:mc-cmd:`~bm admin bucket remote add` flag.
+appropriate synchronous replication option.
 
 Replication Internals
 ~~~~~~~~~~~~~~~~~~~~~

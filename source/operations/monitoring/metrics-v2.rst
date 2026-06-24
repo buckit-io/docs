@@ -87,11 +87,6 @@ The following sections describe the version 2 endpoints and metrics.
       Replace ``HOSTNAME:PORT`` with the :abbr:`FQDN (Fully Qualified Domain Name)` and port of the Buckit deployment.
       For deployments with a load balancer managing connections between Buckit nodes, specify the address of the load balancer.
 
-
-   .. tab-item:: Resource Metrics
-
-
-
 - :ref:`Cluster Metrics <minio-available-cluster-metrics>`
 - :ref:`Bucket Metrics <minio-available-bucket-metrics>`
 - :ref:`Resource Metrics <minio-available-resource-metrics>`
@@ -116,4 +111,3 @@ The following sections describe the version 2 endpoints and metrics.
 
 .. include:: /includes/common-metrics-resource.md
    :parser: myst_parser.sphinx_
-

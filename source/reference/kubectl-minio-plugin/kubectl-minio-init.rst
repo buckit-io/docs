@@ -24,7 +24,7 @@ The :mc:`kubectl minio init` command initialize the Buckit Operator.
 .. end-kubectl-minio-init-desc
 
 If the Kubernetes cluster has an existing Buckit Operator installation, this command upgrades the Operator to match the Buckit plugin version.
-For more information on upgrading the Buckit Operator, see :ref:`minio-k8s-upgrade-minio-operator`.
+For more information on upgrading the Buckit Operator, see the Operator upgrade documentation.
 
 Syntax
 ------
@@ -149,4 +149,3 @@ The command supports the following flags:
    :optional:
 
    Enable Operator sts (v1alpha1)
-

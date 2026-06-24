@@ -264,7 +264,7 @@ If the current deployment does not have TLS enabled, you can skip this step.
    :end-before: end-install-minio-tls-desc
 
 3) Create the systemd Service File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: /includes/linux/common-installation.rst
    :start-after: start-install-minio-systemd-desc

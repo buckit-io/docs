@@ -87,7 +87,7 @@ The replacement host must be clean before starting this workflow:
 - No existing Buckit or MinIO configuration files on the target host.
 - Data drives mounted at the intended mount points with no remaining data.
 
-Option 2: Use the CLI
+Option 2: Use CLI
 ++++++++++++++++++++
 
 Follow the :ref:`deployment procedure <minio-installation>` to install and

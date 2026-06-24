@@ -290,7 +290,7 @@ Glossary
 
    standalone deployment
      A :term:`single-node single-drive` (SNSD) Buckit deployment.
-     This term previously referred to the deprecated :ref:`Gateway or Filesystem Mode <minio-gateway-migration>` deployment types.
+     This term previously referred to the deprecated Gateway or Filesystem Mode deployment types.
 
    tenant
    tenants

@@ -4,8 +4,8 @@ Introduction
 
 .. default-domain:: minio
 
-Buckit is an open source, S3-compatible object storage platform built for
-high-throughput workloads and large-scale unstructured data. Use it to store
+Buckit is an high-performance open source, S3-compatible object storage
+platform built for high-throughput workloads and large-scale unstructured data. Use it to store
 and retrieve backups, logs, media, analytics data, AI datasets, and application
 artifacts across local infrastructure or cloud environments.
 

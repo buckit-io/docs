@@ -79,7 +79,7 @@ Syntax
    The configuration uses asynchronous site replication by default, as Buckit recommends.
 
    To enable synchronous site replication, create the replication using this command *first*.
-   Then use :mc-cmd:`bm admin replicate update --mode sync <bm admin replicate update --mode>` to update the configuration.
+   Then use ``bm admin replicate update --mode sync`` to update the configuration.
 
    .. tab-set::
 
@@ -212,8 +212,24 @@ Syntax
 
       The deployment ID can be found by running :mc-cmd:`bm admin replicate info ALIAS`
 
+   .. mc-cmd:: --mode
+      :optional:
+
+      Sets the site replication mode for the specified peer site.
+      Specify ``sync`` for synchronous replication or ``async`` for asynchronous
+      replication.
+
+   .. mc-cmd:: --enable-ilm-expiry-replication
+      :optional:
+
+      Enables replication of ILM expiration rules across peer sites for an
+      existing site replication configuration.
+
    .. mc-cmd:: --disable-ilm-expiry-replication
       :optional:
+
+      Disables replication of ILM expiration rules across peer sites for an
+      existing site replication configuration.
 
 
 .. mc-cmd:: rm, remove

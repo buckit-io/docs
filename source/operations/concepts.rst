@@ -105,7 +105,7 @@ Expansion consists of adding one or more :ref:`server pools <minio-intro-server-
 Each server pool consists of dedicated nodes and storage that contribute to the overall capacity of the deployment.
 Once you create a server pool you cannot change its size, but you can add or remove capacity at any time by adding or decommissioning pools.
 
-See :ref:`Baremetal: Expand a Buckit deployment <expand-minio-distributed>` and :ref:`Kubernetes: Expand a Buckit Tenant <minio-k8s-expand-minio-tenant>` for more information on expansion in Baremetal and Kubernetes infrastructures respectively.
+See :ref:`Baremetal: Expand a Buckit deployment <expand-minio-distributed>` for more information on expansion.
 
 For deployments which have multiple server pools, you can :ref:`decommission <minio-decommissioning>` the older pools and migrate that data to the newer pools in the deployment.
 Once started, decommissioning cannot be stopped.

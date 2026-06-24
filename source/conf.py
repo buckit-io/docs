@@ -132,14 +132,12 @@ images_config = {
 redirects = {
     "reference/minio-mc": "bm-cli.html",
     "reference/minio-mc-admin": "bm-admin.html",
-    "reference/minio-mc-deprecated": "bm-cli-deprecated.html",
-    "reference/bm-admin/bm-admin-top": "../deprecated/mc-admin-top.html",
     # Content-less section landing pages redirect to their first child so that
     # clicking the parent in the nav opens real content instead of a blank page.
     "installation-and-upgrade": "operations/checklists.html",
     "cluster-management": "administration/concepts.html",
     "object-and-bucket-operations": "operations/concepts.html",
-    "developers": "developers/minio-drivers.html",
+    "developers": "reference/s3-api-compatibility.html",
 }
 
 for name in os.listdir("reference/bm-cli"):
@@ -213,7 +211,7 @@ html_baseurl = 'https://buckit.github.io/docs/'
 project = 'Documentation for Buckit Object Storage'
 copyright = '2020-Present, Buckit, Inc. '
 author = 'Buckit Documentation Team'
-html_title = 'Buckit Object Storage (AGPLv3)'
+html_title = 'Buckit Object Storage'
 html_short_title = 'Buckit Object Storage User Guide'
 
 html_permalinks_icon = ''

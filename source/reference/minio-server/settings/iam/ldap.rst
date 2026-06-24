@@ -16,6 +16,9 @@ See :ref:`minio-authenticate-using-ad-ldap-generic` for a tutorial on using thes
 
 .. important:: 
 
+   Validate LDAP configuration changes in a non-production environment before
+   applying them to a production Buckit deployment.
+
 
 The ``identity_ldap`` configuration settings remains available for existing scripts and other tools.
 

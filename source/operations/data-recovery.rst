@@ -57,6 +57,10 @@ write errors.
 .. admonition:: Buckit Professional Support
    :class: note
 
+   Engage Buckit support when planning or executing recovery for critical
+   hardware failures, especially when multiple drives, nodes, or an entire site
+   are affected.
+
 
 .. toctree::
    :titlesonly:

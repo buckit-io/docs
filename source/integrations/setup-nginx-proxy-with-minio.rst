@@ -116,7 +116,7 @@ There are two models for proxying requests to the Buckit Server API and the Buck
 
       You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`CONSOLE_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://example.net/console/ui``)
+      - Set :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://example.net/console/ui``)
 
    .. tab-item:: Subdomain
 
@@ -221,4 +221,4 @@ There are two models for proxying requests to the Buckit Server API and the Buck
 
       You must also set the following environment variables for the Buckit deployment:
 
-      - Set the :envvar:`CONSOLE_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://console.example.net/``)
+      - Set :envvar:`MINIO_BROWSER_REDIRECT_URL` to the proxy host FQDN of the Buckit Console (``https://console.example.net/``)

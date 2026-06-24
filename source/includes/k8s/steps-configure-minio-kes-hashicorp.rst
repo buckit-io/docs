@@ -1,6 +1,6 @@
 #. Review the Tenant CRD
 
-   Review the :ref:`Tenant CRD <minio-operator-crd>` ``TenantSpec.kes`` object, the ``TenantSpec.configuration`` object, and the :minio-docs:`KES Configuration reference</kes/tutorials/configuration>`.
+   Review the ``TenantSpec.kes`` object, the ``TenantSpec.configuration`` object, and the :minio-docs:`KES Configuration reference</kes/tutorials/configuration>`.
 
    You must prepare all necessary configurations associated to your external Key Management Service of choice before proceeding.
 

@@ -26,7 +26,7 @@ The :mc:`bm replicate backlog` shows a list of unreplicated new or deleted objec
 
 You can list the replication status of objects for a particular remote target.
 To do so, you must have the ARN of the remote target.
-You can use :ref:`retrieve the remote targets configured for a bucket <minio-retrieve-remote-bucket-targets>` to find the ARN.
+You can list the remote targets configured for a bucket to find the ARN.
 
 Syntax
 ------

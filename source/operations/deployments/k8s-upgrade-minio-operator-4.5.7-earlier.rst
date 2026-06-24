@@ -39,7 +39,7 @@ Buckit supports the following upgrade paths for older versions of the Buckit Ope
 To upgrade from Operator to |operator-version-stable| from version 4.5.7 or earlier, you must first upgrade to version 4.5.8, then upgrade to 5.0.15.
 Depending on your current version, you may need to do one or more intermediate upgrades to reach v4.5.8.
 
-After upgrading to 5.0.15, see :ref:`minio-k8s-upgrade-minio-operator` to upgrade to the latest version.
+After upgrading to 5.0.15, upgrade to the latest supported version using the current Buckit Operator upgrade procedure.
 
 .. _minio-k8s-upgrade-minio-operator-to-5.0.15:
 
@@ -145,13 +145,12 @@ Procedure
       The following procedure upgrades the Buckit Operator using Kustomize.
 
       For Operator versions 5.0.1 to 5.0.14 installed with the Buckit Kubernetes Plugin, follow the Kustomize instructions below to upgrade to 5.0.15 or later.
-      If you installed the Operator using :ref:`Helm <minio-k8s-deploy-operator-helm>`, use the :guilabel:`Upgrade using Helm` instructions instead.
+      If you installed the Operator using Helm, use the :guilabel:`Upgrade using Helm` instructions instead.
 
       #. *(Optional)* Update each Buckit Tenant to the latest stable Buckit Version.
 
          Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
       #. Verify the existing Operator installation.
          Use ``kubectl get all -n minio-operator`` to verify the health and status of all Operator pods and services.
@@ -239,7 +238,6 @@ Procedure
 
          Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
          Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
-         See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
       #. Verify the existing Operator installation.
 
@@ -368,7 +366,6 @@ You can then upgrade from release 4.5.8 to 5.0.15.
 
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Verify the existing Operator installation.
 
@@ -436,7 +433,7 @@ Procedure
 ~~~~~~~~~
 
 This procedure covers the necessary steps to upgrade a Buckit Operator deployment running any release from 4.0.0 through 4.2.2 to 4.2.3.
-You can then perform :ref:`minio-k8s-upgrade-minio-operator-procedure` to complete the upgrade to |operator-version-stable|.
+You can then continue with the later Operator upgrade procedure to reach |operator-version-stable|.
 
 There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-version-stable|.
 
@@ -445,7 +442,6 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
    Upgrading Buckit regularly ensures your Tenants have the latest features and performance improvements.
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Check the Security Context for each Tenant Pool
 
@@ -508,7 +504,7 @@ There is no direct upgrade path for 4.0.0 - 4.2.2 installations to |operator-ver
 
 #. Upgrade to |operator-version-stable|
 
-   Follow the :ref:`minio-k8s-upgrade-minio-operator-procedure` procedure to upgrade to the latest stable Operator version.
+   Follow the current Buckit Operator upgrade procedure to upgrade to the latest stable Operator version.
 
 Upgrade Buckit Operator 3.0.0 through 3.0.29 to 4.2.2
 -----------------------------------------------------
@@ -526,7 +522,7 @@ Procedure
 ~~~~~~~~~
 
 This procedure covers the necessary steps to upgrade a Buckit Operator deployment running any release from 3.0.0 through 3.2.9 to 4.2.2.
-You can then perform :ref:`minio-k8s-upgrade-minio-operator-4.2.2-procedure`, followed by :ref:`minio-k8s-upgrade-minio-operator-procedure`.
+You can then continue through the later intermediate Operator upgrade procedures.
 
 There is no direct upgrade path from a 3.X.X series installation to |operator-version-stable|.
 
@@ -536,7 +532,6 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
 
    Test upgrades in a lower environment such as a Dev or QA Tenant, before applying to your production Tenants.
 
-   See :ref:`minio-k8s-upgrade-minio-tenant` for a procedure on upgrading Buckit Tenants.
 
 #. Validate the Tenant ``tenant.spec.zones`` values
 
