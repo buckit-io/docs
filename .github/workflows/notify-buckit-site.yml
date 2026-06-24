@@ -1,0 +1,49 @@
+name: Notify buckit.sh deploy
+
+on:
+  workflow_run:
+    workflows: [Validate docs build]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    if: >-
+      github.event.workflow_run.conclusion == 'success'
+      && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger buckit.sh docs deploy
+        env:
+          DISPATCH_TOKEN: ${{ secrets.XDEVBASE_DISPATCH_TOKEN }}
+          DOCS_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [[ -z "${DISPATCH_TOKEN}" ]]; then
+            echo "XDEVBASE_DISPATCH_TOKEN is not set; skipping dispatch."
+            exit 1
+          fi
+
+          payload=$(jq -n \
+            --arg docs_ref "$DOCS_SHA" \
+            --arg triggered_by "${{ github.repository }}@main" \
+            '{
+              event_type: "docs-updated",
+              client_payload: {
+                docs_ref: $docs_ref,
+                docs_repo: "buckit-io/docs",
+                triggered_by: $triggered_by
+              }
+            }')
+
+          echo "Dispatching docs-updated for docs ref ${DOCS_SHA}"
+          curl -sf -X POST \
+            -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/XD-Builder/xdevbase-nx/dispatches" \
+            -d "$payload"
+
+          echo "Dispatched successfully."
