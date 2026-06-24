@@ -18,7 +18,6 @@ This page provides an overview of Buckit deployment architectures from a product
 For information on specific hardware or software configurations, see:
 
 - :ref:`Hardware Checklist <minio-hardware-checklist>`
-- :ref:`Security Checklist <minio-security-checklist>`
 - :ref:`Software Checklist <minio-software-checklists>`
 - :ref:`Thresholds and Limits <minio-server-limits>`
 
