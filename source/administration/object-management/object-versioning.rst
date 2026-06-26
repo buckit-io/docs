@@ -230,7 +230,7 @@ Tutorials
 Enable Bucket Versioning
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can enable versioning using the Buckit Console, the Buckit :mc:`bm` CLI, or
+You can enable versioning using the Admin Console, the Buckit :mc:`bm` CLI, or
 using an S3-compatible SDK.
 
 Use the :mc:`bm version enable` command to enable versioning on an 

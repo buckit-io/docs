@@ -26,7 +26,7 @@ you run it on your own Mac, Windows, or Linux machine to manage one or more
 Buckit clusters. It is closer in spirit to tools like ``gh`` or
 ``jupyter notebook`` than to a centralized, always-on cluster console.
 
-Unlike the :ref:`Buckit Console <minio-console>`, which is embedded in each
+Unlike the :ref:`Admin Console <minio-console>`, which is embedded in each
 Buckit Server and serves bucket and object browsing for a single deployment,
 the Buckit Manager web interface runs as a client on your workstation and
 manages the lifecycle and health of entire clusters: deploying new clusters

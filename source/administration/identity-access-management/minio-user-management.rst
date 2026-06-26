@@ -66,7 +66,7 @@ STS tokens default to expire in 1 hour, but you set expiration for up to 7 days 
    :class: dropdown, note
 
    Access Keys support programmatic access by applications. 
-   You cannot use an access key to log into the Buckit Console.
+   You cannot use an access key to log into the Admin Console.
 
 .. _minio-users-root:
 

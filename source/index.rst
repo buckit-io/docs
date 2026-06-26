@@ -16,7 +16,7 @@ Buckit consists of a few core components:
 
 - :doc:`Buckit Server </operations/concepts>`, the object storage server that
   stores data and serves the S3-compatible API.
-- :ref:`Buckit Console <minio-console>`, the web interface embedded in each
+- :ref:`Admin Console <minio-console>`, the web interface embedded in each
   Buckit Server for working with buckets, objects, users, access policies, and
   server settings on a deployment.
 - :doc:`Buckit Manager web UI </administration/buckit-manager>`, a desktop

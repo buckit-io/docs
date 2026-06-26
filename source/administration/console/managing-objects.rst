@@ -11,7 +11,7 @@ Managing Objects
    :local:
    :depth: 2
 
-You can use the Buckit Console to perform several of the bucket and object interaction functions available in Buckit.
+You can use the Admin Console to perform several of the bucket and object interaction functions available in Buckit.
 Depending on the permissions and IAM policies for the authenticated user, you can:
 
 - :ref:`Browse, upload, revert, manage, and interact with objects <minio-console-object-browser>`.

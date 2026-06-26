@@ -12,7 +12,7 @@ Security and Access
    :local:
    :depth: 2
 
-You can use the Buckit Console to perform several of the identity and access management functions available in Buckit, such as:
+You can use the Admin Console to perform several of the identity and access management functions available in Buckit, such as:
 
 - Create child :ref:`access keys <minio-console-user-access-keys>` that inherit the parent's permissions.
 - View, manage, and create access :ref:`policies <minio-console-admin-policies>`.

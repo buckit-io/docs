@@ -123,7 +123,7 @@ There are several options to manage your Buckit deployments and clusters:
 - Use the command line with :mc:`bm` and :mc:`bm admin`
 - Use the :ref:`Buckit Manager <install-buckit-manager>` web UI (``bm web``)
   for managing clusters and individual instances
-- The :ref:`Buckit Console <minio-console>` graphical user interface for individual instances
+- The :ref:`Admin Console <minio-console>` graphical user interface for individual instances
 
 .. Reference Enterprise Operator Console eventually
 

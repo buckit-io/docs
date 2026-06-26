@@ -13,7 +13,7 @@ Managing Your Deployment
    :local:
    :depth: 2
 
-You can use the Buckit Console to perform many of the deployment monitoring and management functions available in Buckit, such as:
+You can use the Admin Console to perform many of the deployment monitoring and management functions available in Buckit, such as:
 
 - :ref:`Monitor <minio-console-monitoring>` the deployment activity and health by viewing a dashboard of metrics, server or audit logs, trace history, S3 events, or drive health.
 - Configure alerts by adding or managing a :ref:`notification target <minio-console-notifications>`.
@@ -36,7 +36,7 @@ The Console :guilabel:`Dashboard` section displays metrics for the Buckit deploy
 The default view provides a high-level overview of the deployment status, including the uptime and availability of individual servers and drives.
 
 The Console also supports displaying time-series and historical data by querying a :prometheus-docs:`Prometheus <prometheus/latest/getting_started/>` service configured to scrape data from the Buckit deployment. 
-Specifically, the Buckit Console uses the :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display historical metrics
+Specifically, the Admin Console uses the :prometheus-docs:`Prometheus query API <prometheus/latest/querying/api/>` to retrieve stored metrics data and display historical metrics
 See :ref:`minio-metrics-collect-using-prometheus` for more information on scraping Buckit metrics into Prometheus.
 
 Logs
