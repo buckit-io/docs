@@ -39,13 +39,17 @@ Provision the necessary TLS certificates with a :ref:`supported cipher suite <mi
 
 Provision certificate susing your preferred path, such as through your organizations internal Certificate Authority or by using a well-known global provider such as Digicert or Verisign.
 
-You can create self-signed certificates using ``openssl`` or the Buckit :minio-git:`certgen <certgen>` tool.
+You can create self-signed certificates using ``openssl``.
 
-For example, the following command generates a self-signed certificate with a set of IP and DNS Subject Alternate Names (SANs) associated to the Buckit Server hosts:
+For example, the following command generates a self-signed certificate with DNS Subject Alternative Names (SANs) associated to the Buckit Server hosts:
 
 .. code-block:: shell
 
-   certgen -host "localhost,buckit-*.example.net"
+   openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+     -keyout private.key \
+     -out public.crt \
+     -subj "/CN=localhost" \
+     -addext "subjectAltName = DNS:localhost,DNS:*.example.net"
 
 See :ref:`minio-tls-baremetal` for more complete guidance on certificate generation and placement.
 

@@ -157,15 +157,18 @@ Place the certificates in a directory accessible by the ``buckit`` user/group:
    cp private.key /opt/buckit/certs
    cp public.crt /opt/buckit/certs
 
-For local testing or development environments, you can use the Buckit :minio-git:`certgen <certgen>` to mint self-signed certificates.
-For example, the following command generates a self-signed certificate with a set of IP and DNS Subject Alternate Names (SANs) associated to the Buckit Server hosts:
+For local testing or development environments, you can use ``openssl`` to mint self-signed certificates.
+For example, the following command generates a self-signed certificate with DNS Subject Alternative Names (SANs) associated to the Buckit Server hosts:
 
 .. code-block:: shell
 
-   certgen -host "localhost,buckit-*.example.net"
+   openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+     -keyout private.key \
+     -out public.crt \
+     -subj "/CN=localhost" \
+     -addext "subjectAltName = DNS:localhost,DNS:*.example.net"
 
 Place the generated ``public.crt`` and ``private.key`` into the ``/path/to/certs`` directory to enable TLS for the Buckit deployment.
-Applications can use the ``public.crt`` as a trusted Certificate Authority to allow connections to the Buckit deployment without disabling certificate validation.
 
 When Buckit runs with TLS enabled, it also verifies connecting client certificates against the OS list of trusted Certificate Authorities.
 To enable verification of third-party or internally-signed certificates, place the CA file in the ``/opt/buckit/certs/CAs`` folder.
