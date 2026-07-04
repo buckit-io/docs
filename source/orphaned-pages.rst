@@ -16,10 +16,10 @@ Administration
 Operations
 ----------
 
-- `Upgrade Buckit Operator 4.5.7 and Earlier </operations/deployments/k8s-upgrade-minio-operator-4.5.7-earlier.html>`_
+- `Upgrade Buckit Operator 4.5.7 and Earlier </operations/deployments/k8s-upgrade-operator-4.5.7-earlier.html>`_
 
 Reference
 ---------
 
-- `kubectl minio init </reference/kubectl-minio-plugin/kubectl-minio-init.html>`_
+- `kubectl minio init </reference/kubectl-plugin/kubectl-init.html>`_
 - `mc template </reference/bm-cli/bm-template.html>`_

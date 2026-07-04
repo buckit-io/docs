@@ -52,5 +52,5 @@ user's authorized actions and resources *or* assign the user to :ref:`groups
    :titlesonly:
    :hidden:
 
-   /administration/identity-access-management/minio-user-management.rst
-   /administration/identity-access-management/minio-group-management.rst
+   /administration/identity-access-management/user-management.rst
+   /administration/identity-access-management/group-management.rst

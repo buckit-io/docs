@@ -76,10 +76,10 @@ to the following:
    RootUser: buckitadmin 
    RootPass: buckitadmin 
 
-   Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
+   Command-line: /reference/bm-cli.html
       $ bm alias set mybuckit http://192.0.2.10:9000 buckitadmin buckitadmin
 
-   Documentation: https://docs.min.io/community/minio-object-store/index.html
+   Documentation: /index.html
 
    WARNING: Detected default credentials 'buckitadmin:buckitadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
 

@@ -130,8 +130,6 @@ images_config = {
 # `.rst` for source assumed in the rules
 # `.html` for target must be included
 redirects = {
-    "reference/minio-mc": "bm-cli.html",
-    "reference/minio-mc-admin": "bm-admin.html",
     # Content-less section landing pages redirect to their first child so that
     # clicking the parent in the nav opens real content instead of a blank page.
     "installation-and-upgrade": "operations/checklists.html",
@@ -139,27 +137,6 @@ redirects = {
     "object-and-bucket-operations": "operations/concepts.html",
     "developers": "reference/s3-api-compatibility.html",
 }
-
-for name in os.listdir("reference/bm-cli"):
-    if not name.endswith(".rst"):
-        continue
-    stem = name[:-4]
-    if stem == "bm-cli-settings":
-        old_stem = "minio-client-settings"
-    elif stem.startswith("bm-"):
-        old_stem = "mc-" + stem[3:]
-    else:
-        continue
-    redirects[f"reference/minio-mc/{old_stem}"] = f"../bm-cli/{stem}.html"
-
-for name in os.listdir("reference/bm-admin"):
-    if not name.endswith(".rst"):
-        continue
-    stem = name[:-4]
-    if not stem.startswith("bm-admin-"):
-        continue
-    old_stem = "mc-admin-" + stem[9:]
-    redirects[f"reference/minio-mc-admin/{old_stem}"] = f"../bm-admin/{stem}.html"
 
 
 # sphinxcontrib-autoyaml customization

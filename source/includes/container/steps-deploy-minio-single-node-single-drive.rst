@@ -136,10 +136,10 @@ The command should return a unique ID for the created container.
    RootUser: mybuckitadmin 
    RootPass: buckit-secret-key-change-me 
 
-   Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
+   Command-line: /reference/bm-cli.html
       $ bm alias set mybuckit http://10.0.2.100:9000 mybuckitadmin buckit-secret-key-change-me
 
-   Documentation: https://docs.min.io/community/minio-object-store/operations/deployments/baremetal-deploy-minio-as-a-container.html
+   Documentation: https://buckit.github.io/docs/operations/deployments/baremetal-deploy-as-a-container.html
 
 .. admonition:: Container Networks May Not Be Accessible Outside of the Host
 

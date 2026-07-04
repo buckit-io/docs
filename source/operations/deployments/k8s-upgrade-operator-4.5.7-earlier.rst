@@ -41,7 +41,7 @@ Depending on your current version, you may need to do one or more intermediate u
 
 After upgrading to 5.0.15, upgrade to the latest supported version using the current Buckit Operator upgrade procedure.
 
-.. _minio-k8s-upgrade-minio-operator-to-5.0.15:
+.. _k8s-upgrade-operator-to-5.0.15:
 
 Upgrade Buckit Operator 4.5.8 and Later to 5.0.15
 -------------------------------------------------
@@ -340,7 +340,7 @@ Procedure
             kubectl get pod -l 'name=minio-operator' -n minio-operator -o json | jq '.items[0].spec.containers'
 
 
-.. _minio-k8s-upgrade-minio-operator-to-4.5.8:
+.. _k8s-upgrade-operator-to-4.5.8:
 
 Upgrade Buckit Operator 4.2.3 through 4.5.7 to 4.5.8
 ----------------------------------------------------
@@ -415,7 +415,7 @@ You can then upgrade from release 4.5.8 to 5.0.15.
 
    You can check the Operator version by reviewing the object specification for an Operator Pod using a previous step.
 
-.. _minio-k8s-upgrade-minio-operator-4.2.2-procedure:
+.. _k8s-upgrade-operator-4.2.2-procedure:
 
 Upgrade Buckit Operator 4.0.0 through 4.2.2 to 4.2.3
 ----------------------------------------------------
@@ -624,5 +624,5 @@ There is no direct upgrade path from a 3.X.X series installation to |operator-ve
 
 #. Upgrade to 4.2.3
 
-   Follow the :ref:`minio-k8s-upgrade-minio-operator-4.2.2-procedure` procedure to upgrade to Operator 4.2.3.
+   Follow the :ref:`k8s-upgrade-operator-4.2.2-procedure` procedure to upgrade to Operator 4.2.3.
    You can then upgrade to |operator-version-stable|.

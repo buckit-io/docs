@@ -95,4 +95,4 @@ supports the following encryption strategies:
    :titlesonly:
    :hidden:
 
-   /operations/server-side-encryption/configure-minio-kes
+   /operations/server-side-encryption/configure-kes

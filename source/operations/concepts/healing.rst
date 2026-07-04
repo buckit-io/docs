@@ -84,6 +84,6 @@ Consult with Buckit Engineers before manually starting a healing process on a de
 Healing metrics
 ---------------
 
-Buckit provides several `healing metrics <https://docs.min.io/community/minio-object-store/operations/monitoring/metrics-v2.html#healing-metrics>`__ to monitor the status of healing processes on a deployment.
+Buckit provides several `healing metrics </operations/monitoring/metrics-v2.html#healing-metrics>`__ to monitor the status of healing processes on a deployment.
 
 Refer to the :ref:`minio-metrics-and-alerts` for more information on available endpoints and configuration.

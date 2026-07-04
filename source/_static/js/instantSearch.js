@@ -356,7 +356,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (searchInputEl.value && document.activeElement === searchInputEl) {
           var environment = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "dev" : "prod";
 
-          var pathname = environment === "dev" ? "/search.html" : `/docs/minio/search.html`;
+          var pathname = environment === "dev" ? "/search.html" : `/docs/search.html`;
 
           setTimeout(() => {
             window.location.pathname = pathname;

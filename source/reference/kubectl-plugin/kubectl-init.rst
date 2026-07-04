@@ -1,6 +1,6 @@
 :orphan:
 
-.. _kubectl-minio-init:
+.. _kubectl-init:
 
 =========================
 ``kubectl minio init``
@@ -17,11 +17,11 @@
 Description
 -----------
 
-.. start-kubectl-minio-init-desc
+.. start-kubectl-init-desc
 
 The :mc:`kubectl minio init` command initialize the Buckit Operator.
 
-.. end-kubectl-minio-init-desc
+.. end-kubectl-init-desc
 
 If the Kubernetes cluster has an existing Buckit Operator installation, this command upgrades the Operator to match the Buckit plugin version.
 For more information on upgrading the Buckit Operator, see the Operator upgrade documentation.

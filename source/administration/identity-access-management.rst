@@ -141,7 +141,7 @@ JSON syntax.
    :titlesonly:
    :hidden:
 
-   /administration/identity-access-management/minio-identity-management
+   /administration/identity-access-management/identity-management
    /administration/identity-access-management/oidc-access-management
    /administration/identity-access-management/ad-ldap-access-management
    /administration/identity-access-management/pluggable-authentication.rst

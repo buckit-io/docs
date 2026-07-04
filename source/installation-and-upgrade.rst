@@ -8,9 +8,9 @@ Installation and Upgrade
    :hidden:
 
    /operations/checklists
-   /operations/deployments/baremetal-deploy-minio-server
+   /operations/deployments/baremetal-deploy-server
    /operations/deployments/install-buckit-manager
    /operations/network-encryption
    /operations/external-iam
-   /operations/deployments/baremetal-upgrade-minio-deployment
-   /operations/deployments/baremetal-migrate-minio-community-edition
+   /operations/deployments/baremetal-upgrade-deployment
+   /operations/deployments/baremetal-migrate-community-edition

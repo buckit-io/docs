@@ -142,5 +142,5 @@ Buckit supports the following TLS 1.2 and 1.3 cipher suites as supported by `Go 
 .. toctree::
    :hidden:
 
-   /operations/network-encryption/enable-minio-tls
-   /operations/network-encryption/enable-multiple-domain-minio-tls
+   /operations/network-encryption/enable-tls
+   /operations/network-encryption/enable-multiple-domain-tls

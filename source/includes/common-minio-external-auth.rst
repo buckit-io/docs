@@ -1,6 +1,6 @@
 .. Descriptions for External Identity Management using an OpenID Connect-compatible Provider
    Used in the following files:
-   - /source/reference/minio-server/minio-server.rst
+   - /source/reference/server/server.rst
    - /source/reference/minio-cli/minio-mc-admin/mc-admin-config.rst
    - /source/security/identity-management/external-identity-management-openid/*
 
@@ -164,7 +164,7 @@ provider configuration.
 
 .. Descriptions for External Identity Management using an AD/LDAP Provider
    Used in the following files:
-   - /source/reference/minio-server/minio-server.rst
+   - /source/reference/server/server.rst
    - /source/reference/minio-cli/minio-mc-admin/mc-admin-config.rst
    - /source/security/identity-management/ad-ldap-external-identity-management/*
 

@@ -260,7 +260,7 @@ tenant:
     #    The Buckit Operator may output TLS connectivity errors if it cannot trust the Certificate Authority (CA) which minted the custom certificates.
     #
     #    You can pass the CA to the Operator to allow it to trust that cert.
-    #    See `Self-Signed, Internal, and Private Certificates <https://docs.min.io/community/minio-object-store/operations/network-encryption.html#self-signed-internal-private-certificates-and-public-cas-with-intermediate-certificates>`__ for more information.
+    #    See `Self-Signed, Internal, and Private Certificates </operations/network-encryption.html#self-signed-internal-private-certificates-and-public-cas-with-intermediate-certificates>`__ for more information.
     #    This step may also be necessary for globally trusted CAs where you must provide intermediate certificates to the Operator to help build the full chain of trust.
     externalCertSecret: [ ]
     ###

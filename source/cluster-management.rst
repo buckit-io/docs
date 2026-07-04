@@ -10,8 +10,8 @@ Cluster Management
    /administration/concepts
    /administration/identity-access-management
    /operations/monitoring
-   /administration/minio-console
+   /administration/console
    /administration/buckit-manager
    /operations/data-recovery
-   /operations/deployments/baremetal-expand-minio-deployment
+   /operations/deployments/baremetal-expand-deployment
    /operations/deployments/baremetal-decommission-server-pool

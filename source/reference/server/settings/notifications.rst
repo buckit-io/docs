@@ -65,14 +65,14 @@ Select the appropriate link below for the type of target you use for notificatio
    :titlesonly:
    :hidden:
    
-   /reference/minio-server/settings/notifications/amqp
-   /reference/minio-server/settings/notifications/elasticsearch
-   /reference/minio-server/settings/notifications/kafka
-   /reference/minio-server/settings/notifications/mqtt
-   /reference/minio-server/settings/notifications/mysql
-   /reference/minio-server/settings/notifications/nats
-   /reference/minio-server/settings/notifications/nsq
-   /reference/minio-server/settings/notifications/postgresql
-   /reference/minio-server/settings/notifications/redis
-   /reference/minio-server/settings/notifications/webhook-service
+   /reference/server/settings/notifications/amqp
+   /reference/server/settings/notifications/elasticsearch
+   /reference/server/settings/notifications/kafka
+   /reference/server/settings/notifications/mqtt
+   /reference/server/settings/notifications/mysql
+   /reference/server/settings/notifications/nats
+   /reference/server/settings/notifications/nsq
+   /reference/server/settings/notifications/postgresql
+   /reference/server/settings/notifications/redis
+   /reference/server/settings/notifications/webhook-service
    

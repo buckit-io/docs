@@ -44,10 +44,10 @@ The ``journalctl`` output should resemble the following:
    RootUser: mybuckitadmin 
    RootPass: buckit-secret-key-change-me 
 
-   Command-line: https://docs.min.io/community/minio-object-store/reference/bm-cli.html
+   Command-line: /reference/bm-cli.html
       $ bm alias set mybuckit http://10.0.2.100:9000 mybuckitadmin buckit-secret-key-change-me
 
-   Documentation: https://docs.min.io/community/minio-object-store/index.html
+   Documentation: /index.html
 
 The ``API`` block lists the network interfaces and port on which clients can access the Buckit S3 API.
 The ``Console`` block lists the network interfaces and port on which clients can access the Buckit Web Console.

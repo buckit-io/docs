@@ -15,8 +15,8 @@ this section if your environment requires a manual setup process.
    :titlesonly:
    :hidden:
 
-   /operations/deployments/baremetal-deploy-minio-on-redhat-linux
-   /operations/deployments/baremetal-deploy-minio-on-ubuntu-linux
-   /operations/deployments/baremetal-deploy-minio-as-a-container
-   /operations/deployments/baremetal-deploy-minio-on-macos
-   /operations/deployments/baremetal-deploy-minio-on-windows
+   /operations/deployments/baremetal-deploy-on-redhat-linux
+   /operations/deployments/baremetal-deploy-on-ubuntu-linux
+   /operations/deployments/baremetal-deploy-as-a-container
+   /operations/deployments/baremetal-deploy-on-macos
+   /operations/deployments/baremetal-deploy-on-windows

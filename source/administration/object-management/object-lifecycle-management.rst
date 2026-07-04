@@ -132,7 +132,7 @@ The scanner may therefore not detect an object as eligible for a configured tran
 .. toctree::
    :hidden:
 
-   /administration/object-management/transition-objects-to-minio.rst
+   /administration/object-management/transition-objects-to-buckit.rst
    /administration/object-management/transition-objects-to-s3.rst
    /administration/object-management/transition-objects-to-gcs.rst
    /administration/object-management/transition-objects-to-azure.rst

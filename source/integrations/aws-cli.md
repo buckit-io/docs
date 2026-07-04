@@ -6,7 +6,7 @@ In this recipe we will learn how to configure and use AWS CLI to manage data wit
 
 ## 1. Prerequisites
 
-Install Buckit Server from [here](https://docs.min.io/community/minio-object-store/operations/deployments/installation.html).
+Install Buckit Server from [here](/operations/deployments/installation.html).
 
 ## 2. Installation
 

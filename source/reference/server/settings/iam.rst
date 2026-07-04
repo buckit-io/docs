@@ -22,7 +22,7 @@ There is a page of settings for each of the IAM methods Buckit supports.
    :titlesonly:
    :hidden:
    
-   /reference/minio-server/settings/iam/ldap
-   /reference/minio-server/settings/iam/openid
-   /reference/minio-server/settings/iam/minio-identity-plugin
-   /reference/minio-server/settings/iam/minio-access-plugin
+   /reference/server/settings/iam/ldap
+   /reference/server/settings/iam/openid
+   /reference/server/settings/iam/identity-plugin
+   /reference/server/settings/iam/access-plugin

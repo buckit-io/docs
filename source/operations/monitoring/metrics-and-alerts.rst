@@ -195,6 +195,6 @@ Many metrics include labels identifying the resource which generated that metric
    :titlesonly:
    :hidden:
 
-   /operations/monitoring/collect-minio-metrics-using-prometheus
+   /operations/monitoring/collect-metrics-using-prometheus
    /operations/monitoring/monitor-and-alert-using-influxdb
    /operations/monitoring/metrics-v2

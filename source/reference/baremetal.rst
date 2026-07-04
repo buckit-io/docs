@@ -11,4 +11,4 @@ This page acts as an index for Buckit Baremetal references.
 
    /reference/bm-cli
    /reference/bm-admin
-   /reference/minio-server/minio-server
+   /reference/server/server

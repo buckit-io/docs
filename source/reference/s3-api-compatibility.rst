@@ -11,8 +11,8 @@ Access Buckit with AWS SDK
    :hidden:
 
    self
-   /integrations/aws-cli-with-minio.md
-   /integrations/setup-nginx-proxy-with-minio
+   /integrations/aws-cli.md
+   /integrations/setup-nginx-proxy
    /integrations/presigned-put-upload-via-browser.md
    /developers/file-transfer-protocol
    /developers/security-token-service

@@ -59,6 +59,6 @@ See :ref:`minio-healthcheck-api` for more information.
    :hidden:
 
    /operations/monitoring/metrics-and-alerts
-   /operations/monitoring/minio-logging
+   /operations/monitoring/logging
    /operations/monitoring/healthcheck-probe
    /operations/monitoring/grafana
