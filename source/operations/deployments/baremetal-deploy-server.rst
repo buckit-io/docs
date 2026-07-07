@@ -14,8 +14,8 @@ Buckit supports deploying onto baremetal infrastructure - physical machines or v
 
 You can deploy Buckit in one of two ways:
 
-- Guided Deployment using Buckit Manager: use the ``bm web`` wizard to deploy
-  Buckit to Linux servers over SSH.
+- Guided Deployment using Buckit Manager: use the ``bm web`` wizard to prepare
+  Buckit on this computer only, or deploy Buckit to Linux servers over SSH.
 - Manual deployment of Buckit: follow the platform-specific installation steps
   for Linux, containers, MacOS, or Windows.
 

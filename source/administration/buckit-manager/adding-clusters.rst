@@ -26,9 +26,21 @@ that offers the deploy and import flows directly.
 Deploy a New Cluster
 --------------------
 
-The :guilabel:`Deploy a new cluster` wizard installs Buckit on fresh Linux
-hosts you can reach over SSH and forms them into a new cluster. The wizard
-guides you through these steps:
+The :guilabel:`Deploy a new cluster` flow can prepare a local single-node
+deployment on this computer, or install Buckit on fresh Linux hosts you can
+reach over SSH and form them into a new cluster.
+
+If Buckit Manager runs on macOS or Windows, it first asks where Buckit should
+be deployed:
+
+- :guilabel:`This computer only` — download and configure Buckit to run on this
+  computer only as a single-node cluster.
+- :guilabel:`Remote servers` — deploy Buckit as a managed cluster on one or
+  more Linux servers over SSH.
+
+If Buckit Manager runs on Linux, it opens the remote servers wizard directly.
+
+The remote servers wizard guides you through these steps:
 
 #. :guilabel:`Basics` — name the cluster and choose the Buckit version, root
    credentials, S3 API and console ports, region, and optional TLS certificate
@@ -50,7 +62,9 @@ guides you through these steps:
 
 .. note::
 
-   The guided deployment wizard installs Buckit only on Linux target hosts.
+   Remote server deployment installs Buckit only on Linux target hosts.
+   Local single-node deployment is available when Buckit Manager runs on macOS
+   or Windows.
 
 For a step-by-step walkthrough of this wizard, see
 :ref:`deploy-buckit-guided-bm`.
