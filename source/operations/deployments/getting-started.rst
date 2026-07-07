@@ -18,10 +18,10 @@ Manager.
 
 Choose the path that matches where you want Buckit to run:
 
-- :ref:`Local computer <buckit-getting-started-local>`: prepare a local
-  single-node Buckit server on a macOS or Windows computer.
-- :ref:`Remote servers <buckit-getting-started-remote>`: deploy Buckit as a
-  managed cluster on one or more Linux servers over SSH.
+- :ref:`Local computer (macOS/Windows) <buckit-getting-started-local>`:
+  prepare a local single-node Buckit server.
+- :ref:`Remote servers (Linux) <buckit-getting-started-remote>`: deploy Buckit
+  as a managed cluster on one or more Linux servers over SSH.
 
 These pages are for evaluation and first-time setup, not for production
 planning. For production deployment guidance, see :doc:`/operations/checklists`.

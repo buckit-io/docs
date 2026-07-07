@@ -15,11 +15,10 @@ This page explains the deployment choices available from the Buckit Manager
 
 Buckit Manager can prepare two kinds of new deployments:
 
-- :ref:`Local computer <deploy-buckit-guided-bm-local>`: download and
-  configure Buckit to run on the same macOS or Windows computer where you run
-  ``bm web``.
-- :ref:`Remote servers <deploy-buckit-guided-bm-remote>`: deploy Buckit as a
-  managed cluster on one or more Linux servers over SSH.
+- :ref:`Local computer (macOS/Windows) <deploy-buckit-guided-bm-local>`:
+  download and configure Buckit to run as a local single-node server.
+- :ref:`Remote servers (Linux) <deploy-buckit-guided-bm-remote>`: deploy
+  Buckit as a managed cluster on one or more Linux servers over SSH.
 
 Install Buckit Manager
 ----------------------
