@@ -30,12 +30,6 @@ When creating a new issue, please consider the following:
 
 - Keep it simple - the larger or more complex a request, the less likely it can be addressed in the short-term. We reserve the right to close feature requests if we cannot action them in a reasonable time frame. 
 
-## Not a Support Channel
-
-If you need support for your MinIO deployment, please check out our 
-[community Slack Channel](https://slack.min.io/). 
-
-We provide help with documentation-related issues on a best effort basis. Users who require help on a strict time frame can join the [MinIO Subscription Network (SUBNET)](https://min.io/pricing).
 
 
 # Contributors License Agreement

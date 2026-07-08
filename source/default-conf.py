@@ -210,33 +210,36 @@ rst_prolog = """
 
 .. |podman| replace:: `Podman <https://podman.io/>`__
 
-.. |kes-tag| replace:: `KESLATEST <https://github.com/minio/kes/releases/tag/KESLATEST>`__
-.. |kes-stable| replace:: KESLATEST
-.. |minio-tag| replace:: `MINIOLATEST <https://github.com/minio/minio/releases/tag/MINIOLATEST>`__
-.. |minio-latest| replace:: MINIOLATEST
-.. |minio-rpm| replace:: RPMURL
-.. |minio-deb| replace:: DEBURL
-.. |minio-binary| replace:: MINIOURL
-.. |minio-rpm-arm64| replace:: RPMARM64URL
-.. |minio-deb-arm64| replace:: DEBARM64URL
-.. |minio-binary-arm64| replace:: MINIOARM64URL
-.. |minio-rpm-ppc64le| replace:: RPMPPC64LEURL
-.. |minio-deb-ppc64le| replace:: DEBPPC64LEURL
-.. |minio-binary-ppc64le| replace:: MINIOPPC64LEURL
-.. |minio-rpms-390x| replace:: RPMS390XURL
-.. |minio-debs-390x| replace:: DEBS390XURL
-.. |minio-binarys-390x| replace:: MINIOS390XURL
+.. |kes-tag| replace:: `2025-03-12T09-35-18Z <https://github.com/minio/kes/releases/tag/2025-03-12T09-35-18Z>`__
+.. |kes-stable| replace:: 2025-03-12T09-35-18Z
+.. |minio-tag| replace:: `latest <https://github.com/minio/minio/releases/latest>`__
+.. |minio-latest| replace:: latest
+.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio.rpm
+.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio.deb
+.. |minio-binary| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio
+.. |minio-rpm-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.rpm
+.. |minio-deb-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.deb
+.. |minio-binary-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio
+.. |minio-rpmarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.rpm
+.. |minio-debarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.deb
+.. |minio-binaryarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio
+.. |minio-rpm-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio.rpm
+.. |minio-deb-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio.deb
+.. |minio-binary-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio
+.. |minio-rpms-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio.rpm
+.. |minio-debs-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio.deb
+.. |minio-binarys-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio
 .. |subnet| replace:: `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
 .. |SNMD| replace:: :abbr:`SNMD (Single-Node Multi-Drive)`
 .. |MNMD| replace:: :abbr:`MNMD (Multi-Node Multi-Drive)`
 
-.. |operator-version-stable| replace:: OPERATOR
-.. |helm-charts| replace:: `Helm Charts <https://github.com/minio/operator/tree/vOPERATOR/helm>`__
-.. |helm-operator-chart| replace:: `Helm Operator Charts <https://github.com/minio/operator/blob/vOPERATOR/helm/operator>`__
-.. |helm-tenant-chart| replace:: `Helm Tenant Charts <https://github.com/minio/operator/tree/vOPERATOR/helm/tenant>`__
-.. |k8s-floor| replace:: K8SFLOOR
+.. |operator-version-stable| replace:: 7.1.1
+.. |helm-charts| replace:: `Helm Charts <https://github.com/minio/operator/tree/v7.1.1/helm>`__
+.. |helm-operator-chart| replace:: `Helm Operator Charts <https://github.com/minio/operator/blob/v7.1.1/helm/operator>`__
+.. |helm-tenant-chart| replace:: `Helm Tenant Charts <https://github.com/minio/operator/tree/v7.1.1/helm/tenant>`__
+.. |k8s-floor| replace:: v1.30.10
 
 .. |cpp-sdk-version| replace:: CPPVERSION
 .. |dotnet-sdk-version| replace:: DOTNETVERSION
