@@ -39,9 +39,9 @@ jobs:
 
       - name: Build docs
         run: |
-          make mindocs GITDIR=main
+          make docs GITDIR=main
           mkdir -p _site
-          cp -r build/main/mindocs/html/* _site/
+          cp -r build/main/docs/html/* _site/
           touch _site/.nojekyll
 
       - name: Upload Pages artifact
