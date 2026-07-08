@@ -58,75 +58,23 @@ stage-%:
 # Platform build commands
 # All platforms follow the same general pattern:
 #   - Rebuild source/conf.py
-#   - Synchronize relevant versions
-#   - If built with make SYNC_SDK=TRUE <platform>, synchronize SDK content from github
 #   - Compile SCSS
 #   - Build docs via Sphinx
 
-mindocs:
+docs:
 	@echo "--------------------------------------"
-	@echo "         Building for MinIO           "
+	@echo "         Building for Buckit          "
 	@echo "--------------------------------------"
 	@cp source/default-conf.py source/conf.py
-	@make sync-deps
-	@make sync-operator-version
-	@make sync-deps
-ifeq ($(SYNC_SDK),TRUE)
-	@make sync-sdks
-else
-	@echo "Not synchronizing SDKs, pass SYNC_SDK=TRUE to synchronize SDK content"
-endif
 	@npm run build
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)/$(GITDIR)/$@" $(SPHINXOPTS) $(O) -t $@
 	@echo -e "Building $@ Complete\n--------------------------------------\n"
-
-# Synchronization targets
-# Cross-platform compatibility is handled by the SED_INPLACE variable defined at the top
-
-sync-operator-version:
-	@echo "Retrieving latest Operator version"
-	@$(eval OPERATOR = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/operator/releases/latest | sed "s/https:\/\/github.com\/minio\/operator\/releases\/tag\///" | sed "s/v//"))
-	@$(eval K8SFLOOR = $(shell curl -sL https://raw.githubusercontent.com/minio/operator/master/testing/kind-config-floor.yaml | grep -F -m 1 'node:v' | awk 'BEGIN { FS = ":" } ; {print $$3}'))
-
-	@echo "Updating Operator to ${OPERATOR}"
-	@$(SED_INPLACE) "s|OPERATOR|${OPERATOR}|g" source/conf.py
-	@$(SED_INPLACE) "s|K8SFLOOR|${K8SFLOOR}|g" source/conf.py
-
-	@echo "Updating Helm Charts"
-#	@$(shell curl --retry 10 -Ls -o source/includes/k8s/operator-values.yaml https://raw.githubusercontent.com/minio/operator/v${OPERATOR}/helm/operator/values.yaml)
-
-sync-kes-version:
-	@echo "Retrieving latest stable KES version"
-	@$(eval KES = $(shell curl --retry 10 -Ls -o /dev/null -w "%{url_effective}" https://github.com/minio/kes/releases/latest | sed "s/https:\/\/github.com\/minio\/kes\/releases\/tag\///"))
-	@$(SED_INPLACE) "s|KESLATEST|${KES}|g" source/conf.py
-
-sync-minio-server-docs:
-	@echo "Retrieving select docs from github.com/minio/minio/docs"
-	@(./sync-minio-server-docs.sh)
-
-sync-minio-version:
-	@echo "Retrieving MinIO latest version and download URLs"
-	@(./sync-minio-version.sh)
-
-sync-sdks:
-	@(./sync-docs.sh)
-
-sync-operator-crd:
-	@(./sync-minio-operator-crd.sh)
-
-# Can probably safely remove this at some point
-sync-deps:
-# C++ and Rust repos do not have any releases yet.
-	@echo "Synchronizing all external dependencies"
-#	@make sync-minio-version
-	@make sync-kes-version
-	@make sync-minio-server-docs
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@echo -e "----------------------------------------"
-	@echo -e "make mindocs"
+	@echo -e "make docs"
 	@echo -e "Clean targets with 'make clean-<target>'"
 	@echo -e "Clean all targets with 'make clean'"
 	@echo -e "----------------------------------------"

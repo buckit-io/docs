@@ -1,7 +1,7 @@
 {
-  "name": "minio-documentation",
+  "name": "buckit-documentation",
   "version": "1.0.0",
-  "description": "Official MinIO documentation",
+  "description": "Buckit object storage documentation",
   "main": "index.rst",
   "scripts": {
     "watch": "gulp watch",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/minio/docs.git"
+    "url": "git+https://github.com/buckit-io/docs.git"
   },
-  "author": "MinIO Documentation Team",
+  "author": "Buckit Documentation Team",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/minio/docs/issues"
+    "url": "https://github.com/buckit-io/docs/issues"
   },
-  "homepage": "https://github.com/minio/docs#readme",
+  "homepage": "https://github.com/buckit-io/docs#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",

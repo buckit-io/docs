@@ -212,20 +212,23 @@ rst_prolog = """
 
 .. |kes-tag| replace:: `2025-03-12T09-35-18Z <https://github.com/minio/kes/releases/tag/2025-03-12T09-35-18Z>`__
 .. |kes-stable| replace:: 2025-03-12T09-35-18Z
-.. |minio-tag| replace:: `MINIOLATEST <https://github.com/minio/minio/releases/tag/MINIOLATEST>`__
-.. |minio-latest| replace:: MINIOLATEST
-.. |minio-rpm| replace:: RPMURL
-.. |minio-deb| replace:: DEBURL
-.. |minio-binary| replace:: MINIOURL
-.. |minio-rpm-arm64| replace:: RPMARM64URL
-.. |minio-deb-arm64| replace:: DEBARM64URL
-.. |minio-binary-arm64| replace:: MINIOARM64URL
-.. |minio-rpm-ppc64le| replace:: RPMPPC64LEURL
-.. |minio-deb-ppc64le| replace:: DEBPPC64LEURL
-.. |minio-binary-ppc64le| replace:: MINIOPPC64LEURL
-.. |minio-rpms-390x| replace:: RPMS390XURL
-.. |minio-debs-390x| replace:: DEBS390XURL
-.. |minio-binarys-390x| replace:: MINIOS390XURL
+.. |minio-tag| replace:: `latest <https://github.com/minio/minio/releases/latest>`__
+.. |minio-latest| replace:: latest
+.. |minio-rpm| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio.rpm
+.. |minio-deb| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio.deb
+.. |minio-binary| replace:: https://dl.min.io/server/minio/release/linux-amd64/minio
+.. |minio-rpm-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.rpm
+.. |minio-deb-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.deb
+.. |minio-binary-arm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio
+.. |minio-rpmarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.rpm
+.. |minio-debarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio.deb
+.. |minio-binaryarm64| replace:: https://dl.min.io/server/minio/release/linux-arm64/minio
+.. |minio-rpm-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio.rpm
+.. |minio-deb-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio.deb
+.. |minio-binary-ppc64le| replace:: https://dl.min.io/server/minio/release/linux-ppc64le/minio
+.. |minio-rpms-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio.rpm
+.. |minio-debs-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio.deb
+.. |minio-binarys-390x| replace:: https://dl.min.io/server/minio/release/linux-s390x/minio
 .. |subnet| replace:: `Buckit SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |subnet-short| replace:: `SUBNET <https://min.io/pricing?jmp=docs>`__
 .. |SNSD| replace:: :abbr:`SNSD (Single-Node Single-Drive)`
