@@ -1,15 +1,15 @@
 # Cluster Metrics
 
-MinIO collects the following metrics at the cluster level.
+Buckit collects the following metrics at the cluster level.
 Metrics may include one or more labels, such as the server that calculated that metric.
 
-These metrics can be obtained from any MinIO server once per collection by using the following URL:
+These metrics can be obtained from any Buckit server once per collection by using the following URL:
 
 ```shell
 https://HOSTNAME:PORT/minio/v2/metrics/cluster
 ```
 
-Replace ``HOSTNAME:PORT`` with the hostname of your MinIO deployment.
+Replace ``HOSTNAME:PORT`` with the hostname of your Buckit deployment.
 For deployments behind a load balancer, use the load balancer hostname instead of a single node hostname.
 
 ## Audit Metrics
@@ -66,8 +66,8 @@ For deployments behind a load balancer, use the load balancer hostname instead o
 
 | Name                                              | Description                                    |
 |:--------------------------------------------------|:-----------------------------------------------|
-| `minio_cluster_nodes_offline_total`               | Total number of MinIO nodes offline.           |
-| `minio_cluster_nodes_online_total`                | Total number of MinIO nodes online.            |
+| `minio_cluster_nodes_offline_total`               | Total number of Buckit nodes offline.           |
+| `minio_cluster_nodes_online_total`                | Total number of Buckit nodes online.            |
 | `minio_cluster_write_quorum`                      | Maximum write quorum across all pools and sets |
 | `minio_cluster_health_status`                     | Get current cluster health status              |
 | `minio_cluster_health_erasure_set_healing_drives` | Count of healing drives in the erasure set     |
@@ -188,8 +188,8 @@ For deployments with [bucket](https://docs.min.io/community/minio-object-store/a
 
 | Name                          | Description                            |
 |:------------------------------|:---------------------------------------|
-| `minio_software_commit_info`  | Git commit hash for the MinIO release. |
-| `minio_software_version_info` | MinIO Release tag for the server.      |
+| `minio_software_commit_info`  | Git commit hash for the Buckit release. |
+| `minio_software_version_info` | Buckit Release tag for the server.      |
 
 ## Drive Metrics
 
@@ -246,8 +246,8 @@ For deployments with [bucket](https://docs.min.io/community/minio-object-store/a
 
 | Name                                       | Description                                                                                                     |
 |:-------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| `minio_node_file_descriptor_limit_total`   | Limit on total number of open file descriptors for the MinIO Server process.                                    |
-| `minio_node_file_descriptor_open_total`    | Total number of open file descriptors by the MinIO Server process.                                              |
+| `minio_node_file_descriptor_limit_total`   | Limit on total number of open file descriptors for the Buckit Server process.                                    |
+| `minio_node_file_descriptor_open_total`    | Total number of open file descriptors by the Buckit Server process.                                              |
 | `minio_node_go_routine_total`              | Total number of go routines running.                                                                            |
 | `minio_node_io_rchar_bytes`                | Total bytes read by the process from the underlying storage system including cache, /proc/[pid]/io rchar.       |
 | `minio_node_io_read_bytes`                 | Total bytes read by the process from the underlying storage system, /proc/[pid]/io read_bytes.                  |
@@ -256,8 +256,8 @@ For deployments with [bucket](https://docs.min.io/community/minio-object-store/a
 | `minio_node_process_cpu_total_seconds`     | Total user and system CPU time spent in seconds by the process.                                                |
 | `minio_node_process_resident_memory_bytes` | Resident memory size in bytes.                                                                                  |
 | `minio_node_process_virtual_memory_bytes`  | Virtual memory size in bytes.                                                                                   |
-| `minio_node_process_starttime_seconds`     | Start time for MinIO process per node, time in seconds since Unix epoc.                                         |
-| `minio_node_process_uptime_seconds`        | Uptime for MinIO process per node in seconds.                                                                   |
+| `minio_node_process_starttime_seconds`     | Start time for Buckit process per node, time in seconds since Unix epoc.                                         |
+| `minio_node_process_uptime_seconds`        | Uptime for Buckit process per node in seconds.                                                                   |
 
 ## Scanner Metrics
 
