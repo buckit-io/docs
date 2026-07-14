@@ -1,16 +1,16 @@
 # Resource Metrics
 
-MinIO collects the following resource metrics at the node level.
+Buckit collects the following resource metrics at the node level.
 Each metric includes the `server` label to identify the corresponding node.
 Metrics may include one or more additional labels, such as the drive path, interface name, etc.
 
-These metrics can be obtained from any MinIO server once per collection by using the following URL:
+These metrics can be obtained from any Buckit server once per collection by using the following URL:
 
 ```shell
 https://HOSTNAME:PORT/minio/v2/metrics/resource
 ```
 
-Replace `HOSTNAME:PORT` with the hostname of your MinIO deployment.
+Replace `HOSTNAME:PORT` with the hostname of your Buckit deployment.
 For deployments behind a load balancer, use the load balancer hostname instead of a single node hostname.
 
 ## Drive Resource Metrics

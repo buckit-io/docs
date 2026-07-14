@@ -1,16 +1,16 @@
 # Bucket Metrics
 
-MinIO collects the following metrics at the bucket level.
+Buckit collects the following metrics at the bucket level.
 Each metric includes the ``bucket`` label to identify the corresponding bucket.
 Metrics may include one or more additional labels, such as the server that calculated that metric.
 
-These metrics can be obtained from any MinIO server once per collection by using the following URL:
+These metrics can be obtained from any Buckit server once per collection by using the following URL:
 
 ```shell
 https://HOSTNAME:PORT/minio/v2/metrics/bucket
 ```
 
-Replace ``HOSTNAME:PORT`` with the hostname of your MinIO deployment.
+Replace ``HOSTNAME:PORT`` with the hostname of your Buckit deployment.
 For deployments behind a load balancer, use the load balancer hostname instead of a single node hostname.
 
 ## Distribution Metrics
