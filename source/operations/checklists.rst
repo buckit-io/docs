@@ -23,4 +23,3 @@ Checklists:
 
    /operations/checklists/hardware
    /operations/checklists/software
-   Erasure Code Calculator <https://buckit.sh/docs/_static/ec-calculator>
