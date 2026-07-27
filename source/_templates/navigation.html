@@ -58,6 +58,12 @@
     });
     root.querySelectorAll("li.current.has-children").forEach(expand);
 
+    // Open the calculator tool in a separate tab from the documentation menu.
+    root.querySelectorAll('a[href="https://buckit.sh/docs/_static/ec-calculator"]').forEach(function (link) {
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+    });
+
     // Also expand the chain of ancestors of the active link, in case a
     // build variant only marks the link rather than every ancestor li.
     var active = root.querySelector("a.current");

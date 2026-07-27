@@ -574,7 +574,7 @@
       <div class="command-section">
         <h4>Startup Command</h4>
         <div class="command-box" id="commandLine" onclick="copyCommand()">
-          minio server /mnt/drive{1...4}
+          buckit server /mnt/drive{1...4}
         </div>
       </div>
     </div>
@@ -725,7 +725,7 @@ function populateParityOptions() {
 
 function computeCommand(rackHA, racks, servers, drivesPerServer) {
   const totalServers = racks * servers;
-  let cmd = 'minio server';
+  let cmd = 'buckit server';
 
   if (totalServers === 1 && drivesPerServer === 1) {
     cmd += ' /mnt/drive1';
