@@ -93,12 +93,19 @@ the following:
 
          ~/buckit/local/start-buckit.sh
 
+   .. tab-item:: Windows Command Prompt
+
+      .. code-block:: batch
+         :class: copyable
+
+         "%USERPROFILE%\buckit\local\Start-Buckit.cmd"
+
    .. tab-item:: Windows PowerShell
 
       .. code-block:: powershell
          :class: copyable
 
-         powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\buckit\local\Start-Buckit.ps1"
+         & "$env:USERPROFILE\buckit\local\Start-Buckit.ps1"
 
 Run the command in a terminal. The Buckit server runs in that terminal session.
 Stop it with ``Ctrl+C``.
