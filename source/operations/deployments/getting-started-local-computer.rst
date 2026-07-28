@@ -139,8 +139,25 @@ List the configured aliases:
 
    bm alias list
 
-Inspect the deployment. Replace ``{CLUSTER-ALIAS}`` with the alias shown in the
-last step:
+If the list is empty, create an alias manually. Replace ``{CLUSTER-ALIAS}``
+with a name for this local deployment, ``{API-URL}`` with the API address you
+configured (for example, ``http://127.0.0.1:9000``), and the credentials with
+the root user and password you set during preparation:
+
+.. code-block:: shell
+   :class: copyable
+
+   bm alias set {CLUSTER-ALIAS} {API-URL} {ROOT-USER} {ROOT-PASSWORD}
+
+For example, for a local deployment using the default API port:
+
+.. code-block:: shell
+   :class: copyable
+
+   bm alias set local http://127.0.0.1:9000 ROOT-USER ROOT-PASSWORD
+
+Inspect the deployment. Replace ``{CLUSTER-ALIAS}`` with an alias from the
+list, or the alias you created in the preceding step:
 
 .. code-block:: shell
    :class: copyable
