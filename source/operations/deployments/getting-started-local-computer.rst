@@ -101,7 +101,7 @@ the following:
       .. code-block:: powershell
          :class: copyable
 
-         & "C:\Users\YOUR-USER-NAME\buckit\local\Start-Buckit.cmd"
+         C:\Users\YOUR-USER-NAME\buckit\local\Start-Buckit.cmd
 
 The Buckit server runs in that terminal session. Stop it with ``Ctrl+C``.
 
