@@ -93,15 +93,10 @@ the following:
 
          ~/buckit/local/start-buckit.sh
 
-   .. tab-item:: Windows
+   .. tab-item:: Windows PowerShell
 
-      Open the local Buckit folder and double-click ``Start-Buckit.cmd``. The
-      launcher starts the accompanying PowerShell configuration script with an
-      execution-policy bypass that applies only to this launch; it does not
-      change your Windows PowerShell policy.
-
-      To start it from PowerShell instead, press the Windows key, type
-      ``PowerShell``, select Windows PowerShell, and run:
+      Run this command in PowerShell. Press the Windows key, type
+      ``PowerShell``, then select Windows PowerShell:
 
       .. code-block:: powershell
          :class: copyable
