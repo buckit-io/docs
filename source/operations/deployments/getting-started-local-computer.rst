@@ -93,22 +93,17 @@ the following:
 
          ~/buckit/local/start-buckit.sh
 
-   .. tab-item:: Windows Command Prompt
-
-      .. code-block:: batch
-         :class: copyable
-
-         "%USERPROFILE%\buckit\local\Start-Buckit.cmd"
-
    .. tab-item:: Windows PowerShell
+
+      Run the command from the Ready page in PowerShell (press the Windows key,
+      type ``PowerShell``, then select Windows PowerShell):
 
       .. code-block:: powershell
          :class: copyable
 
-         & "$env:USERPROFILE\buckit\local\Start-Buckit.ps1"
+         C:\Users\YOUR-USER-NAME\buckit\local\Start-Buckit.ps1
 
-Run the command in a terminal. The Buckit server runs in that terminal session.
-Stop it with ``Ctrl+C``.
+The Buckit server runs in that terminal session. Stop it with ``Ctrl+C``.
 
 Import the Local Deployment
 ---------------------------
