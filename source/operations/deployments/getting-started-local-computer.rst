@@ -95,8 +95,8 @@ the following:
 
    .. tab-item:: Windows PowerShell
 
-      Run this command in PowerShell. Press the Windows key, type
-      ``PowerShell``, then select Windows PowerShell:
+      Run this command in PowerShell (press the Windows key, type
+      ``PowerShell``, then select Windows PowerShell):
 
       .. code-block:: powershell
          :class: copyable
