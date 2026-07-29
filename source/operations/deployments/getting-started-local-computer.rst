@@ -13,8 +13,8 @@ Getting Started on a Local Computer
 Use this page to try Buckit on the same macOS or Windows computer where you run
 Buckit Manager.
 
-Buckit Manager downloads Buckit, creates the local files, and shows a command
-you run in a terminal to start the server. It does not install Buckit as a
+Buckit Manager downloads Buckit, creates the local files, and provides a
+launcher you use to start the server. It does not install Buckit as a
 background system service.
 
 What You Need
@@ -93,15 +93,20 @@ the following:
 
          ~/buckit/local/start-buckit.sh
 
-   .. tab-item:: Windows PowerShell
+   .. tab-item:: Windows
 
-      Run the command from the Ready page in PowerShell (press the Windows key,
-      type ``PowerShell``, then select Windows PowerShell):
+      Open the local Buckit folder and double-click ``Start-Buckit.cmd``. The
+      launcher starts the accompanying PowerShell configuration script with an
+      execution-policy bypass that applies only to this launch; it does not
+      change your Windows PowerShell policy.
+
+      To start it from PowerShell instead, press the Windows key, type
+      ``PowerShell``, select Windows PowerShell, and run:
 
       .. code-block:: powershell
          :class: copyable
 
-         C:\Users\YOUR-USER-NAME\buckit\local\Start-Buckit.ps1
+         & "C:\Users\YOUR-USER-NAME\buckit\local\Start-Buckit.cmd"
 
 The Buckit server runs in that terminal session. Stop it with ``Ctrl+C``.
 
