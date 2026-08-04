@@ -136,6 +136,10 @@ redirects = {
     "cluster-management": "administration/concepts.html",
     "object-and-bucket-operations": "operations/concepts.html",
     "developers": "reference/s3-api-compatibility.html",
+    # The MinIO migration docs were split into a guided and a manual path.
+    # The original single-page URL now lands on the entry page that chooses
+    # between them.
+    "operations/deployments/baremetal-migrate-community-edition": "baremetal-migrate-from-minio.html",
 }
 
 
