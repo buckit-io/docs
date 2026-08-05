@@ -33,21 +33,14 @@ The following command downloads the ``buckit`` binary for this host into the cur
 
 .. tab-set::
 
-   .. tab-item:: Linux
+   .. tab-item:: Linux / macOS
 
       .. code-block:: shell
          :class: copyable
 
-         curl -fsSL https://buckit-io.github.io/buckit/install-linux-binary.sh | sh
+         curl -fsSL https://buckit-io.github.io/buckit/install-binary.sh | sh
 
-   .. tab-item:: macOS
-
-      .. code-block:: shell
-         :class: copyable
-
-         curl -fsSL https://buckit-io.github.io/buckit/install-mac.sh | sh
-
-      Only Apple Silicon is supported.
+      On macOS, only Apple Silicon is supported.
 
    .. tab-item:: Windows PowerShell
 
