@@ -54,7 +54,7 @@ Buckit binary for macOS:
 .. code-block:: shell
    :class: copyable
 
-   curl -fsSL https://buckit-io.github.io/buckit/install-mac.sh | sh
+   curl -fsSL https://buckit-io.github.io/buckit/install-binary.sh | sh
    chmod +x ./buckit
    sudo mv ./buckit /usr/local/bin/
 
